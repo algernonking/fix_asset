@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 车辆信息 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-01 21:16:00
+ * @since 2022-04-02 13:04:04
 */
 
 public interface IInfoService extends ISuperService<Info> {

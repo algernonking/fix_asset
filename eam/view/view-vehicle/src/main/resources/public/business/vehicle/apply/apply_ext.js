@@ -1,7 +1,7 @@
 /**
  * 车辆申请 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 05:35:38
+ * @since 2022-04-02 19:49:06
  */
 
 layui.config({
@@ -25,6 +25,94 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         /**
          * 列表页初始化前调用
          * */
+        billOper:function(url,btnClass,ps,successMessage){
+            var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
+            var api=moduleURL+"/"+url;
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, ps, function (r) {
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+        },
+        confirmData:function (item){
+            list.billOper("confirm","confirm-data-button",{id:item.id},"已确认");
+        },
+        cancelData:function (item){
+            list.billOper("cancel","cancel-data-button",{id:item.id},"已取消");
+        },
+        returnData:function (item){
+
+
+            layer.open({
+                id:1,
+                type:1,
+                title:"归还",
+                style:"width:50%:height:auto;",
+                content:"<div style='display:flex;justify-content:center;'><input id='area'  style='width:100%;height:30px;margin-left:5px;margin-right:5px'></input></div>",
+                btn:['保存','取消'],
+                yes:function(index,layero){
+                    var closeContent=top.$("#area").val()||$("#area").val();
+                    if(closeContent){
+
+                        var url="action-return";
+                        var btnClass="return-data-button";
+                        var btn=$('.'+btnClass).filter("[data-id='" +item.id + "']");
+                        var api=moduleURL+"/"+url;
+                        top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                            top.layer.close(i);
+                            var ps={};
+                            ps.id=item.id;
+                            ps.notes=closeContent;
+                            var successMessage="归还成功"
+                            admin.post(api, ps, function (r) {
+                                if (r.success) {
+                                    layer.close(index);
+                                    top.layer.msg(successMessage, {time: 1000});
+                                    window.module.refreshTableData();
+                                } else {
+                                    var errs = [];
+                                    if (r.errors) {
+                                        for (var i = 0; i < r.errors.length; i++) {
+                                            if (errs.indexOf(r.errors[i].message) == -1) {
+                                                errs.push(r.errors[i].message);
+                                            }
+                                        }
+                                        top.layer.msg(errs.join("<br>"), {time: 2000});
+                                    } else {
+                                        top.layer.msg(r.message, {time: 2000});
+                                    }
+                                }
+                            }, {delayLoading: 1000, elms: [btn]});
+                        });
+
+                    }else{
+                        alert("请输入归还备注");
+                    }
+                },
+                no:function(index,layer){
+                    layer.close(index);
+                }
+            })
+
+           // list.billOper("action-return","return-data-button",{id:item.id},"已归还");
+        },
+
         beforeInit:function () {
             console.log("list:beforeInit");
         },
@@ -83,7 +171,33 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
+            for (var i = 0; i < data.length; i++) {
 
+
+                if(data[i].status=="complete") {
+                    if(data[i].ifReturn=="Y"){
+                        fox.disableButton($('.return-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    }
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.cancel-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+                 else if (data[i].status=="incomplete"){
+                    fox.disableButton($('.return-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                   //  fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                   // fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                   // fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.cancel-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                 }
+                 else {
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.cancel-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+
+            }
         },
         /**
          * 进一步转换 list 数据
@@ -180,6 +294,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
+
             console.log('beforeDataFill',data);
         },
         /**
@@ -217,6 +332,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
+            var dataListSize=$(".form-iframe")[0].contentWindow.module.getCheckedData();
+            if(dataListSize==0){
+                layer.msg("请选择车辆", {icon: 2, time: 1000});
+                return false;
+            }
+            data.vehicleInfoIds=dataListSize;
             console.log("beforeSubmit",data);
             return true;
         },
@@ -234,6 +355,29 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
+        /**
+         *  加载 车辆列表
+         */
+        vehicleSelectList:function (ifr,win,data) {
+            // debugger
+            console.log("vehicleSelectList ifr",ifr);
+            console.log("vehicleSelectList data",data);
+            //设置 iframe 高度
+            ifr.height("300px");
+            var ids="";
+            if(data&&data.vehicleInfoList){
+                for(var i=0;i<data.vehicleInfoList.length;i++){
+                    if(i==0){
+                        ids=ids+data.vehicleInfoList[i].id;
+                    }else{
+                        ids=ids+","+data.vehicleInfoList[i].id;
+                    }
+                }
+            }
+            var tAction=admin.getTempData('vehicle-apply-form-data-form-action');
+            //设置地址 JSON.parse(string);
+            win.location="/business/vehicle/info/selected_info_list.html?action="+tAction+"&type=vehicle_apply&ids="+ids
+        },
         /**
          * 文件上传组件回调
          *  event 类型包括：

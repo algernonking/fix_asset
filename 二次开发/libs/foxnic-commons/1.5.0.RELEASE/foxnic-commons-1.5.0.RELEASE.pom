@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">  
+    <modelVersion>4.0.0</modelVersion>  
+    <parent> 
+        <groupId>com.github.foxnic</groupId>  
+        <artifactId>parent</artifactId>  
+        <version>1.5.0.RELEASE</version> 
+    </parent>  
+    <artifactId>foxnic-commons</artifactId>  
+    <packaging>jar</packaging>  
+    <dependencies> 
+        <dependency> 
+            <groupId>com.github.foxnic</groupId>  
+            <artifactId>foxnic-api</artifactId>  
+            <version>${foxnic.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.codehaus.groovy</groupId>  
+            <artifactId>groovy-all</artifactId>  
+            <version>2.4.21</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->  
+        <dependency> 
+            <groupId>commons-codec</groupId>  
+            <artifactId>commons-codec</artifactId>  
+            <version>1.15</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->  
+        <dependency> 
+            <groupId>org.apache.commons</groupId>  
+            <artifactId>commons-compress</artifactId>  
+            <version>1.21</version> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/org.tukaani/xz -->  
+        <dependency> 
+            <groupId>org.tukaani</groupId>  
+            <artifactId>xz</artifactId>  
+            <version>1.9</version> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->  
+        <dependency> 
+            <groupId>org.yaml</groupId>  
+            <artifactId>snakeyaml</artifactId>  
+            <version>1.26</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/javassist/javassist -->  
+        <dependency> 
+            <groupId>javassist</groupId>  
+            <artifactId>javassist</artifactId>  
+            <version>3.3</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/com.github.oshi/oshi-core -->  
+        <dependency> 
+            <groupId>com.github.oshi</groupId>  
+            <artifactId>oshi-core</artifactId>  
+            <version>${oshi.core.version}</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->  
+        <dependency> 
+            <groupId>org.apache.httpcomponents</groupId>  
+            <artifactId>httpclient</artifactId>  
+            <version>4.5.13</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->  
+        <dependency> 
+            <groupId>commons-io</groupId>  
+            <artifactId>commons-io</artifactId>  
+            <version>${common.io.version}</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->  
+        <dependency> 
+            <groupId>dom4j</groupId>  
+            <artifactId>dom4j</artifactId>  
+            <version>1.6.1</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/com.esotericsoftware/reflectasm -->  
+        <dependency> 
+            <groupId>com.esotericsoftware</groupId>  
+            <artifactId>reflectasm</artifactId>  
+            <version>${reflectasm.version}</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.ben-manes.caffeine</groupId>  
+            <artifactId>caffeine</artifactId>  
+            <version>2.8.8</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->  
+        <dependency> 
+            <groupId>com.alibaba</groupId>  
+            <artifactId>fastjson</artifactId>  
+            <version>${fastjson.version}</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/jaxen/jaxen -->  
+        <dependency> 
+            <groupId>jaxen</groupId>  
+            <artifactId>jaxen</artifactId>  
+            <version>1.2.0</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->  
+        <dependency> 
+            <groupId>org.quartz-scheduler</groupId>  
+            <artifactId>quartz</artifactId>  
+            <version>2.3.2</version>  
+            <exclusions> 
+                <exclusion> 
+                    <groupId>com.zaxxer</groupId>  
+                    <artifactId>HikariCP-java6</artifactId> 
+                </exclusion> 
+            </exclusions>  
+            <scope>provided</scope> 
+        </dependency> 
+    </dependencies> 
+</project>

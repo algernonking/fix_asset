@@ -7,6 +7,10 @@ import com.dt.platform.constants.db.VehicleTables.VEHICLE_APPLY;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 车辆申请
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 05:35:38
- * @sign 787028ECC19EA0011A14B3C6406EB0D9
+ * @since 2022-04-03 20:12:59
+ * @sign 0903384BBEDC6837BE810C8A5EC35568
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,10 +40,22 @@ public class Apply extends Entity {
 	private String id;
 	
 	/**
+	 * 业务编号：业务编号
+	*/
+	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
+	private String businessCode;
+	
+	/**
 	 * 办理状态：办理状态
 	*/
 	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
+	
+	/**
+	 * 是否归还：是否归还
+	*/
+	@ApiModelProperty(required = false,value="是否归还" , notes = "是否归还")
+	private String ifReturn;
 	
 	/**
 	 * 名称：名称
@@ -66,10 +82,10 @@ public class Apply extends Entity {
 	private String driver;
 	
 	/**
-	 * 业务编号：业务编号
+	 * 联系方式：联系方式
 	*/
-	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
-	private String businessCode;
+	@ApiModelProperty(required = false,value="联系方式" , notes = "联系方式")
+	private String contact;
 	
 	/**
 	 * 领用时间：领用时间
@@ -174,6 +190,42 @@ public class Apply extends Entity {
 	private String tenantId;
 	
 	/**
+	 * 选择：选择
+	*/
+	@ApiModelProperty(required = false,value="选择" , notes = "选择")
+	private String selectedCode;
+	
+	/**
+	 * 车辆：车辆
+	*/
+	@ApiModelProperty(required = false,value="车辆" , notes = "车辆")
+	private List<Info> vehicleInfoList;
+	
+	/**
+	 * 车辆列表：车辆列表
+	*/
+	@ApiModelProperty(required = false,value="车辆列表" , notes = "车辆列表")
+	private List<String> vehicleInfoIds;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
+	
+	/**
+	 * 领用人：领用人
+	*/
+	@ApiModelProperty(required = false,value="领用人" , notes = "领用人")
+	private Employee receiver;
+	
+	/**
+	 * 使用公司/部门：使用公司/部门
+	*/
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
+	private Organization useOrganization;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -193,6 +245,25 @@ public class Apply extends Entity {
 	}
 	
 	/**
+	 * 获得 业务编号<br>
+	 * 业务编号
+	 * @return 业务编号
+	*/
+	public String getBusinessCode() {
+		return businessCode;
+	}
+	
+	/**
+	 * 设置 业务编号
+	 * @param businessCode 业务编号
+	 * @return 当前对象
+	*/
+	public Apply setBusinessCode(String businessCode) {
+		this.businessCode=businessCode;
+		return this;
+	}
+	
+	/**
 	 * 获得 办理状态<br>
 	 * 办理状态
 	 * @return 办理状态
@@ -208,6 +279,25 @@ public class Apply extends Entity {
 	*/
 	public Apply setStatus(String status) {
 		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 是否归还<br>
+	 * 是否归还
+	 * @return 是否归还
+	*/
+	public String getIfReturn() {
+		return ifReturn;
+	}
+	
+	/**
+	 * 设置 是否归还
+	 * @param ifReturn 是否归还
+	 * @return 当前对象
+	*/
+	public Apply setIfReturn(String ifReturn) {
+		this.ifReturn=ifReturn;
 		return this;
 	}
 	
@@ -288,21 +378,21 @@ public class Apply extends Entity {
 	}
 	
 	/**
-	 * 获得 业务编号<br>
-	 * 业务编号
-	 * @return 业务编号
+	 * 获得 联系方式<br>
+	 * 联系方式
+	 * @return 联系方式
 	*/
-	public String getBusinessCode() {
-		return businessCode;
+	public String getContact() {
+		return contact;
 	}
 	
 	/**
-	 * 设置 业务编号
-	 * @param businessCode 业务编号
+	 * 设置 联系方式
+	 * @param contact 联系方式
 	 * @return 当前对象
 	*/
-	public Apply setBusinessCode(String businessCode) {
-		this.businessCode=businessCode;
+	public Apply setContact(String contact) {
+		this.contact=contact;
 		return this;
 	}
 	
@@ -626,6 +716,142 @@ public class Apply extends Entity {
 	*/
 	public Apply setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择<br>
+	 * 选择
+	 * @return 选择
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择
+	 * @param selectedCode 选择
+	 * @return 当前对象
+	*/
+	public Apply setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 车辆<br>
+	 * 车辆
+	 * @return 车辆
+	*/
+	public List<Info> getVehicleInfoList() {
+		return vehicleInfoList;
+	}
+	
+	/**
+	 * 设置 车辆
+	 * @param vehicleInfoList 车辆
+	 * @return 当前对象
+	*/
+	public Apply setVehicleInfoList(List<Info> vehicleInfoList) {
+		this.vehicleInfoList=vehicleInfoList;
+		return this;
+	}
+	
+	/**
+	 * 添加 车辆
+	 * @param vehicleInfo 车辆
+	 * @return 当前对象
+	*/
+	public Apply addVehicleInfo(Info vehicleInfo) {
+		if(this.vehicleInfoList==null) vehicleInfoList=new ArrayList<>();
+		this.vehicleInfoList.add(vehicleInfo);
+		return this;
+	}
+	
+	/**
+	 * 获得 车辆列表<br>
+	 * 车辆列表
+	 * @return 车辆列表
+	*/
+	public List<String> getVehicleInfoIds() {
+		return vehicleInfoIds;
+	}
+	
+	/**
+	 * 设置 车辆列表
+	 * @param vehicleInfoIds 车辆列表
+	 * @return 当前对象
+	*/
+	public Apply setVehicleInfoIds(List<String> vehicleInfoIds) {
+		this.vehicleInfoIds=vehicleInfoIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 车辆列表
+	 * @param vehicleInfoId 车辆列表
+	 * @return 当前对象
+	*/
+	public Apply addVehicleInfoId(String vehicleInfoId) {
+		if(this.vehicleInfoIds==null) vehicleInfoIds=new ArrayList<>();
+		this.vehicleInfoIds.add(vehicleInfoId);
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Employee getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public Apply setOriginator(Employee originator) {
+		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 领用人<br>
+	 * 领用人
+	 * @return 领用人
+	*/
+	public Employee getReceiver() {
+		return receiver;
+	}
+	
+	/**
+	 * 设置 领用人
+	 * @param receiver 领用人
+	 * @return 当前对象
+	*/
+	public Apply setReceiver(Employee receiver) {
+		this.receiver=receiver;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
+	*/
+	public Organization getUseOrganization() {
+		return useOrganization;
+	}
+	
+	/**
+	 * 设置 使用公司/部门
+	 * @param useOrganization 使用公司/部门
+	 * @return 当前对象
+	*/
+	public Apply setUseOrganization(Organization useOrganization) {
+		this.useOrganization=useOrganization;
 		return this;
 	}
 

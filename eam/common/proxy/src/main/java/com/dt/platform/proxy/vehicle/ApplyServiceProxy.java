@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 车辆申请  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 05:35:38
+ * @since 2022-04-02 19:49:05
 */
 
 @FeignClient(value = ServiceNames.VEHICLE, contextId = ApplyServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -39,6 +39,25 @@ public interface ApplyServiceProxy {
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
+
+
+
+	/**
+	 * 取消
+	 */
+	public static final String CANCEL = API_PREFIX + "cancel";
+
+	/**
+	 * 取消
+	 */
+	public static final String CONFIRM = API_PREFIX + "confirm";
+
+
+	/**
+	 * 取消
+	 */
+	public static final String ACTION_RETURN = API_PREFIX + "action-return";
+
 
 	/**
 	 * 添加车辆申请

@@ -62,6 +62,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"ownerCompany","所属公司","所属公司");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");
+
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"equipmentEnvironment","设备运行环境","设备运行环境");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"safetyLevel","安全等级","安全等级");
@@ -209,7 +210,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_STATUS).form().
                 label("设备状态").selectBox().enumType(AssetEquipmentStatusEnum.class);
 
-
         cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_ID)
                 .basic().label("资产分类")
                 .form().selectBox().queryApi(CatalogServiceProxy.QUERY_NODES)
@@ -286,7 +286,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.USE_ORGANIZATION_ID)
                 .form().button().chooseOrganization(true);
         cfg.view().field(EAMTables.EAM_ASSET.USE_ORGANIZATION_ID).table().fillBy("useOrganization","fullName");
-
 
 
         cfg.view().field(EAMTables.EAM_ASSET.MANAGER_ID).table().fillBy("manager","name");

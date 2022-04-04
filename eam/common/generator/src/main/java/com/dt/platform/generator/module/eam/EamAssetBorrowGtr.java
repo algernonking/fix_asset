@@ -152,7 +152,6 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
         cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");
 
-
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口

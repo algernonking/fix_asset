@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 车辆维修保养  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 06:02:07
+ * @since 2022-04-02 19:58:39
 */
 
 @FeignClient(value = ServiceNames.VEHICLE, contextId = MaintenanceServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -39,6 +39,21 @@ public interface MaintenanceServiceProxy {
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
+
+	/**
+	 * 取消
+	 */
+	public static final String CANCEL = API_PREFIX + "cancel";
+
+	/**
+	 * 取消
+	 */
+	public static final String CONFIRM = API_PREFIX + "confirm";
+
+	/**
+	 * 取消
+	 */
+	public static final String FINISH = API_PREFIX + "finish";
 
 	/**
 	 * 添加车辆维修保养

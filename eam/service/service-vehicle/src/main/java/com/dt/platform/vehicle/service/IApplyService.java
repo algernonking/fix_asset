@@ -21,10 +21,16 @@ import com.github.foxnic.dao.data.SaveMode;
  * 车辆申请 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 05:35:38
+ * @since 2022-04-02 19:49:05
 */
 
 public interface IApplyService extends ISuperService<Apply> {
+
+	Result confirm(String id);
+
+	Result cancel(String id);
+
+	Result actionReturn(String id,String notes);
 
 	/**
 	 * 添加，如果语句错误，则抛出异常

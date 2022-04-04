@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">  
+    <modelVersion>4.0.0</modelVersion>  
+    <parent> 
+        <groupId>com.github.foxnic.web</groupId>  
+        <artifactId>parent</artifactId>  
+        <version>1.0.0.RELEASE</version>  
+        <relativePath>../../pom.xml</relativePath>  
+        <!-- lookup parent from repository --> 
+    </parent>  
+    <artifactId>framework-cloud</artifactId>  
+    <name>web-framework-cloud</name>  
+    <description>framework cloud</description>  
+    <packaging>jar</packaging>  
+    <dependencies> 
+        <dependency> 
+            <groupId>com.github.foxnic.web</groupId>  
+            <artifactId>domain</artifactId>  
+            <version>${platform.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.foxnic.web</groupId>  
+            <artifactId>framework-boot</artifactId>  
+            <version>${platform.version}</version> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-micro-spring-boot-starter -->  
+        <dependency> 
+            <groupId>com.github.xiaoymin</groupId>  
+            <artifactId>knife4j-micro-spring-boot-starter</artifactId>  
+            <version>3.0.2</version> 
+        </dependency>  
+        <!-- 微服务相关 -->  
+        <dependency> 
+            <groupId>org.springframework.cloud</groupId>  
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.springframework.cloud</groupId>  
+            <artifactId>spring-cloud-starter-openfeign</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.alibaba.cloud</groupId>  
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>  
+            <version>${alibaba.cloud.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.alibaba.cloud</groupId>  
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>  
+            <version>${alibaba.cloud.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.alibaba.csp</groupId>  
+            <artifactId>sentinel-datasource-nacos</artifactId>  
+            <version>${sentinel.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.springframework.cloud</groupId>  
+            <artifactId>spring-cloud-context</artifactId> 
+        </dependency> 
+    </dependencies>  
+    <dependencyManagement> 
+        <dependencies> 
+            <dependency> 
+                <groupId>org.springframework.cloud</groupId>  
+                <artifactId>spring-cloud-dependencies</artifactId>  
+                <version>${spring.cloud.version}</version>  
+                <type>pom</type>  
+                <scope>import</scope> 
+            </dependency> 
+        </dependencies> 
+    </dependencyManagement> 
+</project>

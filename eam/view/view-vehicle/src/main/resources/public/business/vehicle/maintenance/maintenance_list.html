@@ -2,7 +2,7 @@
 /**
  * 车辆维修保养 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 06:01:08
+ * @since 2022-04-03 20:21:38
  */
  -->
  <!DOCTYPE html>
@@ -39,80 +39,37 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 办理状态 , status ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 维修状态 , repairStatus ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 报修类型 , type ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 维修状态 , repairStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('报修类型')}" class="search-label type-label">报修类型</span><span class="search-colon">:</span></div>
-                        <input id="type" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('维修状态')}" class="search-label repairStatus-label">维修状态</span><span class="search-colon">:</span></div>
+                        <div id="repairStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.vehicle.VehicleRepairStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
+                    <!-- 报修类型 , type ,typeName=select_box, isHideInSearch=true -->
                     <!-- 计划完成日期 , planFinishDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 实际完成日期 , actualFinishDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 费用 , cost ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 报修内容 , content ,typeName=text_input, isHideInSearch=true -->
                     <!-- 报修人 , reportUserId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 报修人 , reportUserName ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 图片 , pictureId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 图片 , pictureId ,typeName=upload, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- code , code ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('code')}" class="search-label code-label">code</span><span class="search-colon">:</span></div>
-                        <input id="code" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
-                    <!-- model , model ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 报修人 , reportUserName ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('model')}" class="search-label model-label">model</span><span class="search-colon">:</span></div>
-                        <input id="model" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('报修人')}" class="search-label reportUserName-label">报修人</span><span class="search-colon">:</span></div>
+                        <input id="reportUserName" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
-
-
-                </div>
-                <!-- 搜索输入区域 -->
-                <div class="layui-form toolbar search-inputs">
-                    <!-- engine_number , engineNumber ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 报修内容 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('engine_number')}" class="search-label engineNumber-label">engine_number</span><span class="search-colon">:</span></div>
-                        <input id="engineNumber" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- frame_number , frameNumber ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('frame_number')}" class="search-label frameNumber-label">frame_number</span><span class="search-colon">:</span></div>
-                        <input id="frameNumber" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- driving_license , drivingLicense ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('driving_license')}" class="search-label drivingLicense-label">driving_license</span><span class="search-colon">:</span></div>
-                        <input id="drivingLicense" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- registrant , registrant ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('registrant')}" class="search-label registrant-label">registrant</span><span class="search-colon">:</span></div>
-                        <input id="registrant" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-
-
-                </div>
-                <!-- 搜索输入区域 -->
-                <div class="layui-form toolbar search-inputs">
-                    <!-- insurance_company , insuranceCompany ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('insurance_company')}" class="search-label insuranceCompany-label">insurance_company</span><span class="search-colon">:</span></div>
-                        <input id="insuranceCompany" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- notes , notes ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('notes')}" class="search-label notes-label">notes</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- licensing_time , licensingTime ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('licensing_time')}" class="search-label licensingTime-label">licensing_time</span><span class="search-colon">:</span></div>
-                        <input id="licensingTime" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('报修内容')}" class="search-label content-label">报修内容</span><span class="search-colon">:</span></div>
+                        <input id="content" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 
@@ -123,11 +80,10 @@
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
-                <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
             </div>
         </div>
 
-        <div style="margin-top: 84px ">
+        <div style="margin-top: 42px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 
@@ -144,7 +100,6 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('vehicle_maintenance:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('vehicle_maintenance:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
@@ -157,12 +112,17 @@
 
     <button th:if="${perm.checkAuth('vehicle_maintenance:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
+    <button th:if="${perm.checkAuth('vehicle_maintenance:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认维修')}">确认维修</span></button>
+    <button th:if="${perm.checkAuth('vehicle_maintenance:finish')}"class="layui-btn layui-btn-xs  finish-data-button " lay-event="finish-data" data-id="{{d.id}}"><span th:text="${lang.translate('结束维修')}">结束维修</span></button>
+    <button th:if="${perm.checkAuth('vehicle_maintenance:cancel')}"class="layui-btn layui-btn-xs  cancel-data-button " lay-event="cancel-data" data-id="{{d.id}}"><span th:text="${lang.translate('取消')}">取消</span></button>
 
 </script>
 
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.vehicle.VehicleHandleStatusEnum')}]];
+    var SELECT_REPAIRSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.vehicle.VehicleRepairStatusEnum')}]];
     var AUTH_PREFIX="vehicle_maintenance";
 
 

@@ -5,12 +5,15 @@ import com.dt.platform.domain.vehicle.ApplyVO;
 import java.util.List;
 import com.dt.platform.domain.vehicle.Apply;
 import java.util.Date;
+import com.dt.platform.domain.vehicle.Info;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 05:35:38
+ * @since 2022-04-03 20:12:59
  * @sign 8F0559E2A1DBE17163932366447DABB4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -118,6 +121,16 @@ public class ApplyVOMeta extends ApplyMeta {
 	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
+	 * 业务编号 , 类型: java.lang.String
+	*/
+	public static final String BUSINESS_CODE="businessCode";
+	
+	/**
+	 * 业务编号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
+	
+	/**
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
@@ -126,6 +139,16 @@ public class ApplyVOMeta extends ApplyMeta {
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
+	
+	/**
+	 * 是否归还 , 类型: java.lang.String
+	*/
+	public static final String IF_RETURN="ifReturn";
+	
+	/**
+	 * 是否归还 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> IF_RETURN_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,IF_RETURN, java.lang.String.class, "是否归还", "是否归还", java.lang.String.class, null);
 	
 	/**
 	 * 名称 , 类型: java.lang.String
@@ -168,14 +191,14 @@ public class ApplyVOMeta extends ApplyMeta {
 	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> DRIVER_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,DRIVER, java.lang.String.class, "驾驶员", "驾驶员", java.lang.String.class, null);
 	
 	/**
-	 * 业务编号 , 类型: java.lang.String
+	 * 联系方式 , 类型: java.lang.String
 	*/
-	public static final String BUSINESS_CODE="businessCode";
+	public static final String CONTACT="contact";
 	
 	/**
-	 * 业务编号 , 类型: java.lang.String
+	 * 联系方式 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> CONTACT_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,CONTACT, java.lang.String.class, "联系方式", "联系方式", java.lang.String.class, null);
 	
 	/**
 	 * 领用时间 , 类型: java.util.Date
@@ -348,9 +371,69 @@ public class ApplyVOMeta extends ApplyMeta {
 	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * 选择 , 类型: java.lang.String
+	*/
+	public static final String SELECTED_CODE="selectedCode";
+	
+	/**
+	 * 选择 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,SELECTED_CODE, java.lang.String.class, "选择", "选择", java.lang.String.class, null);
+	
+	/**
+	 * 车辆 , 集合类型: LIST , 类型: com.dt.platform.domain.vehicle.Info
+	*/
+	public static final String VEHICLE_INFO_LIST="vehicleInfoList";
+	
+	/**
+	 * 车辆 , 集合类型: LIST , 类型: com.dt.platform.domain.vehicle.Info
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,com.dt.platform.domain.vehicle.Info> VEHICLE_INFO_LIST_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,VEHICLE_INFO_LIST, java.util.List.class, "车辆", "车辆", com.dt.platform.domain.vehicle.Info.class, null);
+	
+	/**
+	 * 车辆列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String VEHICLE_INFO_IDS="vehicleInfoIds";
+	
+	/**
+	 * 车辆列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,java.lang.String> VEHICLE_INFO_IDS_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,VEHICLE_INFO_IDS, java.util.List.class, "车辆列表", "车辆列表", java.lang.String.class, null);
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String ORIGINATOR="originator";
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
+	 * 领用人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String RECEIVER="receiver";
+	
+	/**
+	 * 领用人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,org.github.foxnic.web.domain.hrm.Employee> RECEIVER_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,RECEIVER, org.github.foxnic.web.domain.hrm.Employee.class, "领用人", "领用人", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
+	 * 使用公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String USE_ORGANIZATION="useOrganization";
+	
+	/**
+	 * 使用公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.ApplyVO,org.github.foxnic.web.domain.hrm.Organization> USE_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.vehicle.ApplyVO.class ,USE_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "使用公司/部门", "使用公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , STATUS , NAME , ORG_ID , RECEIVER_ID , DRIVER , BUSINESS_CODE , COLLECTION_DATE , PLAN_RETURN_DATE , ACT_RETURN_DATE , CONTENT , ATTACH , NOTES , RETURN_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , BUSINESS_CODE , STATUS , IF_RETURN , NAME , ORG_ID , RECEIVER_ID , DRIVER , CONTACT , COLLECTION_DATE , PLAN_RETURN_DATE , ACT_RETURN_DATE , CONTENT , ATTACH , NOTES , RETURN_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , VEHICLE_INFO_LIST , VEHICLE_INFO_IDS , ORIGINATOR , RECEIVER , USE_ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -471,6 +554,17 @@ public class ApplyVOMeta extends ApplyMeta {
 		}
 		
 		/**
+		 * 设置 业务编号
+		 * @param businessCode 业务编号
+		 * @return 当前对象
+		*/
+		public Apply setBusinessCode(String businessCode) {
+			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
+			super.setBusinessCode(businessCode);
+			return this;
+		}
+		
+		/**
 		 * 设置 办理状态
 		 * @param status 办理状态
 		 * @return 当前对象
@@ -478,6 +572,17 @@ public class ApplyVOMeta extends ApplyMeta {
 		public Apply setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
+			return this;
+		}
+		
+		/**
+		 * 设置 是否归还
+		 * @param ifReturn 是否归还
+		 * @return 当前对象
+		*/
+		public Apply setIfReturn(String ifReturn) {
+			super.change(IF_RETURN,super.getIfReturn(),ifReturn);
+			super.setIfReturn(ifReturn);
 			return this;
 		}
 		
@@ -526,13 +631,13 @@ public class ApplyVOMeta extends ApplyMeta {
 		}
 		
 		/**
-		 * 设置 业务编号
-		 * @param businessCode 业务编号
+		 * 设置 联系方式
+		 * @param contact 联系方式
 		 * @return 当前对象
 		*/
-		public Apply setBusinessCode(String businessCode) {
-			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
-			super.setBusinessCode(businessCode);
+		public Apply setContact(String contact) {
+			super.change(CONTACT,super.getContact(),contact);
+			super.setContact(contact);
 			return this;
 		}
 		
@@ -720,6 +825,72 @@ public class ApplyVOMeta extends ApplyMeta {
 		public Apply setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
+			return this;
+		}
+		
+		/**
+		 * 设置 选择
+		 * @param selectedCode 选择
+		 * @return 当前对象
+		*/
+		public Apply setSelectedCode(String selectedCode) {
+			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
+			super.setSelectedCode(selectedCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 车辆
+		 * @param vehicleInfoList 车辆
+		 * @return 当前对象
+		*/
+		public Apply setVehicleInfoList(List<Info> vehicleInfoList) {
+			super.change(VEHICLE_INFO_LIST,super.getVehicleInfoList(),vehicleInfoList);
+			super.setVehicleInfoList(vehicleInfoList);
+			return this;
+		}
+		
+		/**
+		 * 设置 车辆列表
+		 * @param vehicleInfoIds 车辆列表
+		 * @return 当前对象
+		*/
+		public Apply setVehicleInfoIds(List<String> vehicleInfoIds) {
+			super.change(VEHICLE_INFO_IDS,super.getVehicleInfoIds(),vehicleInfoIds);
+			super.setVehicleInfoIds(vehicleInfoIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originator 制单人
+		 * @return 当前对象
+		*/
+		public Apply setOriginator(Employee originator) {
+			super.change(ORIGINATOR,super.getOriginator(),originator);
+			super.setOriginator(originator);
+			return this;
+		}
+		
+		/**
+		 * 设置 领用人
+		 * @param receiver 领用人
+		 * @return 当前对象
+		*/
+		public Apply setReceiver(Employee receiver) {
+			super.change(RECEIVER,super.getReceiver(),receiver);
+			super.setReceiver(receiver);
+			return this;
+		}
+		
+		/**
+		 * 设置 使用公司/部门
+		 * @param useOrganization 使用公司/部门
+		 * @return 当前对象
+		*/
+		public Apply setUseOrganization(Organization useOrganization) {
+			super.change(USE_ORGANIZATION,super.getUseOrganization(),useOrganization);
+			super.setUseOrganization(useOrganization);
 			return this;
 		}
 	}

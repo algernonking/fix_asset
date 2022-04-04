@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">  
+    <modelVersion>4.0.0</modelVersion>  
+    <parent> 
+        <groupId>com.github.foxnic.web</groupId>  
+        <artifactId>parent</artifactId>  
+        <version>1.0.0.RELEASE</version>  
+        <relativePath>../../pom.xml</relativePath>  
+        <!-- lookup parent from repository --> 
+    </parent>  
+    <artifactId>framework-view</artifactId>  
+    <name>web-framework-view</name>  
+    <description>framework-view</description>  
+    <packaging>jar</packaging>  
+    <dependencies> 
+        <dependency> 
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-web</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-thymeleaf</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.foxnic.web</groupId>  
+            <artifactId>proxy</artifactId>  
+            <version>${platform.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.foxnic.web</groupId>  
+            <artifactId>domain</artifactId>  
+            <version>${platform.version}</version>  
+            <exclusions> 
+                <exclusion> 
+                    <groupId>com.github.xiaoymin</groupId>  
+                    <artifactId>knife4j-micro-spring-boot-starter</artifactId> 
+                </exclusion> 
+            </exclusions> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.ben-manes.caffeine</groupId>  
+            <artifactId>caffeine</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.foxnic</groupId>  
+            <artifactId>foxnic-commons</artifactId>  
+            <version>${foxnic.version}</version> 
+        </dependency> 
+    </dependencies> 
+</project>

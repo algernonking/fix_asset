@@ -2,6 +2,19 @@ package com.dt.platform.vehicle.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.vehicle.VehicleApplyReturnEnum;
+import com.dt.platform.constants.enums.vehicle.VehicleHandleStatusEnum;
+import com.dt.platform.constants.enums.vehicle.VehicleOperationEnum;
+import com.dt.platform.constants.enums.vehicle.VehicleStatusEnum;
+import com.dt.platform.domain.vehicle.Info;
+import com.dt.platform.domain.vehicle.meta.ApplyMeta;
+import com.dt.platform.domain.vehicle.meta.MaintenanceMeta;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.dt.platform.vehicle.service.IInfoService;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +39,8 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import com.dt.platform.vehicle.service.IApplyService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
@@ -35,13 +50,16 @@ import java.util.Date;
  * 车辆申请 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 05:35:38
+ * @since 2022-04-02 19:49:05
 */
 
 
 @Service("VehicleApplyService")
 public class ApplyServiceImpl extends SuperService<Apply> implements IApplyService {
 
+
+	@Autowired
+	private IInfoService infoService;
 	/**
 	 * 注入DAO对象
 	 * */
@@ -53,11 +71,84 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 	 * */
 	public DAO dao() { return dao; }
 
+	@Autowired 
+	private ASelectItemServiceImpl aSelectItemServiceImpl;
 
 
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
+	}
+
+
+
+	@Override
+	public Result actionReturn(String id,String notes) {
+		Apply data=this.getById(id);
+		if(VehicleApplyReturnEnum.Y.code().equals(data.getIfReturn())){
+			return  ErrorDesc.failureMessage("不需重复归还");
+		}
+		this.dao().fill(data)
+				.with(ApplyMeta.VEHICLE_INFO_LIST)
+				.execute();
+		List<Info> list=data.getVehicleInfoList();
+		if(list==null||list.size()==0){
+			return ErrorDesc.failureMessage("当前清单为空");
+		}
+		for(int i=0;i<list.size();i++){
+			Info info=list.get(i);
+			info.setVehicleStatus(VehicleStatusEnum.IDLE.code());
+			infoService.save(info,SaveMode.NOT_NULL_FIELDS);
+		}
+		data.setIfReturn(VehicleApplyReturnEnum.Y.code());
+		data.setReturnNotes(notes);
+		data.setActReturnDate(new Date());
+		return super.update(data,SaveMode.NOT_NULL_FIELDS,false);
+
+	}
+
+
+	@Override
+	public Result confirm(String id) {
+		Apply data=this.getById(id);
+		this.dao().fill(data)
+				.with(ApplyMeta.VEHICLE_INFO_LIST)
+				.execute();
+		List<Info> list=data.getVehicleInfoList();
+		if(list==null||list.size()==0){
+			return ErrorDesc.failureMessage("当前清单为空");
+		}
+		for(int i=0;i<list.size();i++){
+			Info info=list.get(i);
+			info.setVehicleStatus(VehicleStatusEnum.INUSE.code());
+			infoService.save(info,SaveMode.NOT_NULL_FIELDS);
+		}
+		data.setStatus(VehicleHandleStatusEnum.COMPLETE.code());
+		return super.update(data,SaveMode.NOT_NULL_FIELDS,false);
+
+	}
+
+	@Override
+	public Result cancel(String id) {
+		Apply data=this.getById(id);
+		this.dao().fill(data)
+				.with(ApplyMeta.VEHICLE_INFO_LIST)
+				.execute();
+		List<Info> list=data.getVehicleInfoList();
+		if(list==null||list.size()==0){
+			return ErrorDesc.failureMessage("当前清单为空");
+		}
+		if(VehicleHandleStatusEnum.INCOMPLETE.code().equals(data.getStatus())){
+			for(int i=0;i<list.size();i++){
+				Info info=list.get(i);
+				info.setVehicleStatus(VehicleStatusEnum.IDLE.code());
+				infoService.save(info,SaveMode.NOT_NULL_FIELDS);
+			}
+			data.setStatus(VehicleHandleStatusEnum.CANCEL.code());
+			return super.update(data,SaveMode.NOT_NULL_FIELDS,false);
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能进行该操作");
+		}
 	}
 
 	/**
@@ -68,10 +159,50 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 	 * @return 结果 , 如果失败返回 false，成功返回 true
 	 */
 	@Override
+	@Transactional
 	public Result insert(Apply apply,boolean throwsException) {
+
+
+		//校验数据资产
+		if(apply.getVehicleInfoIds()==null||apply.getVehicleInfoIds().size()==0){
+			return ErrorDesc.failure().message("请选择车辆");
+		}else{
+			//修改为预定
+			for(int i=0;i<apply.getVehicleInfoIds().size();i++){
+				Info info=new Info();
+				info.setVehicleStatus(VehicleStatusEnum.ORDER.code());
+				info.setId(apply.getVehicleInfoIds().get(i));
+				infoService.update(info,SaveMode.NOT_NULL_FIELDS);
+			}
+		}
+
+		//制单人
+		if(StringUtil.isBlank(apply.getOriginatorId())){
+			apply.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		//办理状态
+		if(StringUtil.isBlank(apply.getStatus())){
+			apply.setStatus(VehicleHandleStatusEnum.INCOMPLETE.code());
+		}
+
+		//生成编码规则
+		if(StringUtil.isBlank(apply.getBusinessCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(VehicleOperationEnum.VEHICLE_APPLY.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				apply.setBusinessCode(codeResult.getData().toString());
+			}
+		}
 		Result r=super.insert(apply,throwsException);
+		//保存关系
+		if(r.success()) {
+			aSelectItemServiceImpl.saveRelation(apply.getId(), apply.getVehicleInfoIds());
+		}
 		return r;
 	}
+
 
 	/**
 	 * 添加，如果语句错误，则抛出异常
@@ -79,6 +210,7 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 	 * @return 插入是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result insert(Apply apply) {
 		return this.insert(apply,true);
 	}
@@ -101,6 +233,8 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
+
+
 		Apply apply = new Apply();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		apply.setId(id);
@@ -122,8 +256,25 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		Apply apply = new Apply();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
+		Apply data=this.getById(id);
+		this.dao().fill(data)
+				.with(ApplyMeta.VEHICLE_INFO_LIST)
+				.execute();
+		List<Info> list=data.getVehicleInfoList();
+		if(VehicleHandleStatusEnum.INCOMPLETE.code().equals(data.getStatus())){
+			if(list!=null&&list.size()>0){
+				for(int i=0;i<list.size();i++){
+					Info info=list.get(i);
+					info.setVehicleStatus(VehicleStatusEnum.IDLE.code());
+					infoService.save(info,SaveMode.NOT_NULL_FIELDS);
+				}
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能进行该操作");
+		}
+
+		Apply apply=new Apply();
 		apply.setId(id);
 		apply.setDeleted(dao.getDBTreaty().getTrueValue());
 		apply.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
@@ -146,6 +297,7 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(Apply apply , SaveMode mode) {
 		return this.update(apply,mode,true);
 	}
@@ -158,8 +310,39 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(Apply apply , SaveMode mode,boolean throwsException) {
+		//校验数据资产
+
+		if(apply.getVehicleInfoIds()==null||apply.getVehicleInfoIds().size()==0){
+			return ErrorDesc.failure().message("请选择车辆");
+		}else{
+			this.dao().fill(apply)
+				.with(ApplyMeta.VEHICLE_INFO_LIST)
+				.execute();
+			//修改为闲置
+			for(int i=0;i<apply.getVehicleInfoList().size();i++){
+				Info info=new Info();
+				info.setVehicleStatus(VehicleStatusEnum.IDLE.code());
+				info.setId(apply.getVehicleInfoList().get(i).getId());
+				infoService.update(info,SaveMode.NOT_NULL_FIELDS);
+			}
+
+			//修改为预定
+
+			for(int i=0;i<apply.getVehicleInfoIds().size();i++){
+				Info info=new Info();
+				info.setVehicleStatus(VehicleStatusEnum.ORDER.code());
+				info.setId(apply.getVehicleInfoIds().get(i));
+				infoService.update(info,SaveMode.NOT_NULL_FIELDS);
+			}
+		}
+
 		Result r=super.update(apply , mode , throwsException);
+		//保存关系
+		if(r.success()) {
+			aSelectItemServiceImpl.saveRelation(apply.getId(), apply.getVehicleInfoIds());
+		}
 		return r;
 	}
 

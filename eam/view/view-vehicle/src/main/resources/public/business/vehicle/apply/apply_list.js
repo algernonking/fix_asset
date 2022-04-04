@@ -1,7 +1,7 @@
 /**
  * 车辆申请 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 05:35:38
+ * @since 2022-04-03 20:13:01
  */
 
 
@@ -75,21 +75,19 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('办理状态') , templet: function (d) { return templet('status',d.status,d);}  }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'orgId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('部门') , templet: function (d) { return templet('orgId',d.orgId,d);}  }
-					,{ field: 'receiverId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('领用人') , templet: function (d) { return templet('receiverId',d.receiverId,d);}  }
-					,{ field: 'driver', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('驾驶员') , templet: function (d) { return templet('driver',d.driver,d);}  }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
-					,{ field: 'collectionDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('领用时间') ,templet: function (d) { return templet('collectionDate',fox.dateFormat(d.collectionDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'planReturnDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('预计归还时间') ,templet: function (d) { return templet('planReturnDate',fox.dateFormat(d.planReturnDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'actReturnDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('实际归还时间') ,templet: function (d) { return templet('actReturnDate',fox.dateFormat(d.actReturnDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('内容') , templet: function (d) { return templet('content',d.content,d);}  }
-					,{ field: 'attach', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('附件') , templet: function (d) { return templet('attach',d.attach,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+					,{ field: 'ifReturn', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('是否归还'), templet:function (d){ return templet('ifReturn',fox.getEnumText(SELECT_IFRETURN_DATA,d.ifReturn),d);}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
+					,{ field: 'orgId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('部门') , templet: function (d) { return templet('orgId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
+					,{ field: 'receiverId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('领用人') , templet: function (d) { return templet('receiverId',fox.getProperty(d,["receiver","name"]),d);} }
+					,{ field: 'driver', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('驾驶员') , templet: function (d) { return templet('driver',d.driver,d);}  }
+					,{ field: 'contact', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('联系方式') , templet: function (d) { return templet('contact',d.contact,d);}  }
+					,{ field: 'collectionDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('领用时间') ,templet: function (d) { return templet('collectionDate',fox.dateFormat(d.collectionDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'planReturnDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('预计归还时间') ,templet: function (d) { return templet('planReturnDate',fox.dateFormat(d.planReturnDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'actReturnDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('实际归还时间') ,templet: function (d) { return templet('actReturnDate',fox.dateFormat(d.actReturnDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'returnNotes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('归还备注') , templet: function (d) { return templet('returnNotes',d.returnNotes,d);}  }
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -148,21 +146,24 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.id={ inputType:"button",value: $("#id").val()};
-		value.status={ inputType:"button",value: $("#status").val()};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
+		value.ifReturn={ inputType:"select_box", value: getSelectedValue("#ifReturn","value"), label:getSelectedValue("#ifReturn","nameStr") };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.orgId={ inputType:"button",value: $("#orgId").val()};
-		value.receiverId={ inputType:"button",value: $("#receiverId").val()};
-		value.driver={ inputType:"button",value: $("#driver").val()};
-		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
-		value.collectionDate={ inputType:"date_input", value: $("#collectionDate").val() ,matchType:"auto"};
-		value.planReturnDate={ inputType:"date_input", value: $("#planReturnDate").val() ,matchType:"auto"};
-		value.actReturnDate={ inputType:"date_input", value: $("#actReturnDate").val() ,matchType:"auto"};
-		value.content={ inputType:"button",value: $("#content").val()};
+		value.orgId={ inputType:"button",value: $("#orgId").val(),fillBy:["useOrganization","fullName"] ,label:$("#orgId-button").text() };
+		value.receiverId={ inputType:"button",value: $("#receiverId").val(),fillBy:["receiver","name"] ,label:$("#receiverId-button").text() };
+		value.driver={ inputType:"button",value: $("#driver").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.contact={ inputType:"button",value: $("#contact").val()};
+		value.collectionDate={ inputType:"date_input", begin: $("#collectionDate-begin").val(), end: $("#collectionDate-end").val() ,matchType:"auto" };
+		value.planReturnDate={ inputType:"date_input", begin: $("#planReturnDate-begin").val(), end: $("#planReturnDate-end").val() ,matchType:"auto" };
+		value.actReturnDate={ inputType:"date_input", begin: $("#actReturnDate-begin").val(), end: $("#actReturnDate-end").val() ,matchType:"auto" };
+		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.attach={ inputType:"button",value: $("#attach").val()};
-		value.notes={ inputType:"button",value: $("#notes").val()};
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.returnNotes={ inputType:"button",value: $("#returnNotes").val()};
 		value.originatorId={ inputType:"button",value: $("#originatorId").val()};
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
+		value.selectedCode={ inputType:"button",value: $("#selectedCode").val()};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -208,8 +209,48 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(1);
+		fox.switchSearchRow(2);
 
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#collectionDate-begin',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("collectionDate",value, date, endDate);
+				},1);
+			}
+		});
+		laydate.render({
+			elem: '#collectionDate-end',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("collectionDate",value, date, endDate);
+				},1);
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -231,7 +272,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(1,function (ex){
+			fox.switchSearchRow(2,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -240,6 +281,21 @@ function ListPage() {
 			});
 		});
 
+		// 请选择人员对话框
+		$("#receiverId-button").click(function(){
+				var receiverIdDialogOptions={
+				field:"receiverId",
+				inputEl:$("#receiverId"),
+				buttonEl:$(this),
+				single:false,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
+			};
+			fox.chooseEmployee(receiverIdDialogOptions);
+		});
 	}
 
 	/**
@@ -369,6 +425,15 @@ function ListPage() {
 					});
 				});
 			}
+			else if (layEvent === 'confirm-data') { // 确认
+				window.pageExt.list.confirmData(data);
+			}
+			else if (layEvent === 'cancel-data') { // 取消
+				window.pageExt.list.cancelData(data);
+			}
+			else if (layEvent === 'return-data') { // 归还
+				window.pageExt.list.returnData(data);
+			}
 			
 		});
 
@@ -401,7 +466,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["98%",height+"px"],
 			type: 2,
 			id:"vehicle-apply-form-data-win",
 			content: '/business/vehicle/apply/apply_form.html' + (queryString?("?"+queryString):""),

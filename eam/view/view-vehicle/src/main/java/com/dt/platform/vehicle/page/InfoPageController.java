@@ -1,10 +1,13 @@
 package com.dt.platform.vehicle.page;
 
+
+import com.alibaba.fastjson.JSONArray;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.ui.Model;
 import com.dt.platform.proxy.vehicle.InfoServiceProxy;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * 车辆信息 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-01 21:16:00
+ * @since 2022-04-02 17:59:08
 */
 
 @Controller("VehicleInfoPageController")
@@ -43,6 +46,43 @@ public class InfoPageController extends ViewController {
 	@RequestMapping("/info_list.html")
 	public String list(Model model,HttpServletRequest request) {
 		return prefix+"/info_list";
+	}
+
+
+	/**
+	 * 车辆信息 功能主页面
+	 */
+	@RequestMapping("/select_info_list.html")
+	public String selectInfoList(Model model,HttpServletRequest request,String ids,String type) {
+		JSONArray idsArr=new JSONArray();
+		if(!StringUtil.isBlank(ids)){
+			String[] idsStrArr=ids.split(",");
+			for(int i=0;i<idsStrArr.length;i++){
+				idsArr.add(idsStrArr[i]);
+			}
+		}
+		model.addAttribute("ids",idsArr);
+		model.addAttribute("type",type);
+		return prefix+"/select_info_list";
+	}
+
+
+	/**
+	 * 车辆信息 功能主页面
+	 */
+	@RequestMapping("/selected_info_list.html")
+	public String selectedInfoList(Model model,HttpServletRequest request,String ids,String type,String action) {
+		JSONArray idsArr=new JSONArray();
+		if(!StringUtil.isBlank(ids)){
+			String[] idsStrArr=ids.split(",");
+			for(int i=0;i<idsStrArr.length;i++){
+				idsArr.add(idsStrArr[i]);
+			}
+		}
+		model.addAttribute("ids",idsArr);
+		model.addAttribute("type",type);
+		model.addAttribute("action",action);
+		return prefix+"/selected_info_list";
 	}
 
 	/**

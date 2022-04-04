@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.hrm.Employee;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 车辆信息
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-01 21:16:00
- * @sign 901DAB5D06A563BDA9424D014DC1CD75
+ * @since 2022-04-03 17:20:51
+ * @sign 3C54D3B4D2D6E97220F0C081308626A7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,10 +40,16 @@ public class Info extends Entity {
 	private String id;
 	
 	/**
-	 * 车牌号：车牌号
+	 * 名称：名称
 	*/
-	@ApiModelProperty(required = false,value="车牌号" , notes = "车牌号")
-	private String registrant;
+	@ApiModelProperty(required = false,value="名称" , notes = "名称")
+	private String name;
+	
+	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private String vehicleStatus;
 	
 	/**
 	 * 车辆类型：车辆类型
@@ -49,22 +58,40 @@ public class Info extends Entity {
 	private String type;
 	
 	/**
-	 * 登记人：登记人
+	 * 车牌号：车牌号
 	*/
-	@ApiModelProperty(required = false,value="登记人" , notes = "登记人")
+	@ApiModelProperty(required = false,value="车牌号" , notes = "车牌号")
 	private String code;
-	
-	/**
-	 * 名称：名称
-	*/
-	@ApiModelProperty(required = false,value="名称" , notes = "名称")
-	private String name;
 	
 	/**
 	 * 品牌型号：品牌型号
 	*/
 	@ApiModelProperty(required = false,value="品牌型号" , notes = "品牌型号")
 	private String model;
+	
+	/**
+	 * 登记人：登记人
+	*/
+	@ApiModelProperty(required = false,value="登记人" , notes = "登记人")
+	private String registrant;
+	
+	/**
+	 * 所属组织：所属组织
+	*/
+	@ApiModelProperty(required = false,value="所属组织" , notes = "所属组织")
+	private String ownerOrgId;
+	
+	/**
+	 * 使用部门：使用部门
+	*/
+	@ApiModelProperty(required = false,value="使用部门" , notes = "使用部门")
+	private String useOrgId;
+	
+	/**
+	 * 使用人：使用人
+	*/
+	@ApiModelProperty(required = false,value="使用人" , notes = "使用人")
+	private String useUserId;
 	
 	/**
 	 * 颜色：颜色
@@ -121,15 +148,21 @@ public class Info extends Entity {
 	private Date licensingTime;
 	
 	/**
+	 * 保险到期：保险到期
+	*/
+	@ApiModelProperty(required = false,value="保险到期" , notes = "保险到期")
+	private Date insuranceExpireDate;
+	
+	/**
 	 * 报废时间：报废时间
 	*/
 	@ApiModelProperty(required = false,value="报废时间" , notes = "报废时间")
 	private Date scrapTime;
 	
 	/**
-	 * 位置：位置
+	 * 存放位置：存放位置
 	*/
-	@ApiModelProperty(required = false,value="位置" , notes = "位置")
+	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
 	private String positionDetail;
 	
 	/**
@@ -137,6 +170,12 @@ public class Info extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="图片" , notes = "图片")
 	private String pictures;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 备注：备注
@@ -199,6 +238,48 @@ public class Info extends Entity {
 	private String tenantId;
 	
 	/**
+	 * 所属公司：所属公司
+	*/
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private Organization ownerCompany;
+	
+	/**
+	 * 使用公司/部门：使用公司/部门
+	*/
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
+	private Organization useOrganization;
+	
+	/**
+	 * 类型：类型
+	*/
+	@ApiModelProperty(required = false,value="类型" , notes = "类型")
+	private DictItem vehicleTypeDict;
+	
+	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private DictItem vehicleStatusDict;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
+	
+	/**
+	 * 使用人：使用人
+	*/
+	@ApiModelProperty(required = false,value="使用人" , notes = "使用人")
+	private Employee useUser;
+	
+	/**
+	 * 车辆列表：车辆列表
+	*/
+	@ApiModelProperty(required = false,value="车辆列表" , notes = "车辆列表")
+	private String selectIds;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -214,63 +295,6 @@ public class Info extends Entity {
 	*/
 	public Info setId(String id) {
 		this.id=id;
-		return this;
-	}
-	
-	/**
-	 * 获得 车牌号<br>
-	 * 车牌号
-	 * @return 车牌号
-	*/
-	public String getRegistrant() {
-		return registrant;
-	}
-	
-	/**
-	 * 设置 车牌号
-	 * @param registrant 车牌号
-	 * @return 当前对象
-	*/
-	public Info setRegistrant(String registrant) {
-		this.registrant=registrant;
-		return this;
-	}
-	
-	/**
-	 * 获得 车辆类型<br>
-	 * 车辆类型
-	 * @return 车辆类型
-	*/
-	public String getType() {
-		return type;
-	}
-	
-	/**
-	 * 设置 车辆类型
-	 * @param type 车辆类型
-	 * @return 当前对象
-	*/
-	public Info setType(String type) {
-		this.type=type;
-		return this;
-	}
-	
-	/**
-	 * 获得 登记人<br>
-	 * 登记人
-	 * @return 登记人
-	*/
-	public String getCode() {
-		return code;
-	}
-	
-	/**
-	 * 设置 登记人
-	 * @param code 登记人
-	 * @return 当前对象
-	*/
-	public Info setCode(String code) {
-		this.code=code;
 		return this;
 	}
 	
@@ -294,6 +318,63 @@ public class Info extends Entity {
 	}
 	
 	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public String getVehicleStatus() {
+		return vehicleStatus;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param vehicleStatus 状态
+	 * @return 当前对象
+	*/
+	public Info setVehicleStatus(String vehicleStatus) {
+		this.vehicleStatus=vehicleStatus;
+		return this;
+	}
+	
+	/**
+	 * 获得 车辆类型<br>
+	 * 车辆类型
+	 * @return 车辆类型
+	*/
+	public String getType() {
+		return type;
+	}
+	
+	/**
+	 * 设置 车辆类型
+	 * @param type 车辆类型
+	 * @return 当前对象
+	*/
+	public Info setType(String type) {
+		this.type=type;
+		return this;
+	}
+	
+	/**
+	 * 获得 车牌号<br>
+	 * 车牌号
+	 * @return 车牌号
+	*/
+	public String getCode() {
+		return code;
+	}
+	
+	/**
+	 * 设置 车牌号
+	 * @param code 车牌号
+	 * @return 当前对象
+	*/
+	public Info setCode(String code) {
+		this.code=code;
+		return this;
+	}
+	
+	/**
 	 * 获得 品牌型号<br>
 	 * 品牌型号
 	 * @return 品牌型号
@@ -309,6 +390,82 @@ public class Info extends Entity {
 	*/
 	public Info setModel(String model) {
 		this.model=model;
+		return this;
+	}
+	
+	/**
+	 * 获得 登记人<br>
+	 * 登记人
+	 * @return 登记人
+	*/
+	public String getRegistrant() {
+		return registrant;
+	}
+	
+	/**
+	 * 设置 登记人
+	 * @param registrant 登记人
+	 * @return 当前对象
+	*/
+	public Info setRegistrant(String registrant) {
+		this.registrant=registrant;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属组织<br>
+	 * 所属组织
+	 * @return 所属组织
+	*/
+	public String getOwnerOrgId() {
+		return ownerOrgId;
+	}
+	
+	/**
+	 * 设置 所属组织
+	 * @param ownerOrgId 所属组织
+	 * @return 当前对象
+	*/
+	public Info setOwnerOrgId(String ownerOrgId) {
+		this.ownerOrgId=ownerOrgId;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用部门<br>
+	 * 使用部门
+	 * @return 使用部门
+	*/
+	public String getUseOrgId() {
+		return useOrgId;
+	}
+	
+	/**
+	 * 设置 使用部门
+	 * @param useOrgId 使用部门
+	 * @return 当前对象
+	*/
+	public Info setUseOrgId(String useOrgId) {
+		this.useOrgId=useOrgId;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用人<br>
+	 * 使用人
+	 * @return 使用人
+	*/
+	public String getUseUserId() {
+		return useUserId;
+	}
+	
+	/**
+	 * 设置 使用人
+	 * @param useUserId 使用人
+	 * @return 当前对象
+	*/
+	public Info setUseUserId(String useUserId) {
+		this.useUserId=useUserId;
 		return this;
 	}
 	
@@ -484,6 +641,25 @@ public class Info extends Entity {
 	}
 	
 	/**
+	 * 获得 保险到期<br>
+	 * 保险到期
+	 * @return 保险到期
+	*/
+	public Date getInsuranceExpireDate() {
+		return insuranceExpireDate;
+	}
+	
+	/**
+	 * 设置 保险到期
+	 * @param insuranceExpireDate 保险到期
+	 * @return 当前对象
+	*/
+	public Info setInsuranceExpireDate(Date insuranceExpireDate) {
+		this.insuranceExpireDate=insuranceExpireDate;
+		return this;
+	}
+	
+	/**
 	 * 获得 报废时间<br>
 	 * 报废时间
 	 * @return 报废时间
@@ -503,17 +679,17 @@ public class Info extends Entity {
 	}
 	
 	/**
-	 * 获得 位置<br>
-	 * 位置
-	 * @return 位置
+	 * 获得 存放位置<br>
+	 * 存放位置
+	 * @return 存放位置
 	*/
 	public String getPositionDetail() {
 		return positionDetail;
 	}
 	
 	/**
-	 * 设置 位置
-	 * @param positionDetail 位置
+	 * 设置 存放位置
+	 * @param positionDetail 存放位置
 	 * @return 当前对象
 	*/
 	public Info setPositionDetail(String positionDetail) {
@@ -537,6 +713,25 @@ public class Info extends Entity {
 	*/
 	public Info setPictures(String pictures) {
 		this.pictures=pictures;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public Info setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	
@@ -727,6 +922,139 @@ public class Info extends Entity {
 	*/
 	public Info setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
+	*/
+	public Organization getOwnerCompany() {
+		return ownerCompany;
+	}
+	
+	/**
+	 * 设置 所属公司
+	 * @param ownerCompany 所属公司
+	 * @return 当前对象
+	*/
+	public Info setOwnerCompany(Organization ownerCompany) {
+		this.ownerCompany=ownerCompany;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
+	*/
+	public Organization getUseOrganization() {
+		return useOrganization;
+	}
+	
+	/**
+	 * 设置 使用公司/部门
+	 * @param useOrganization 使用公司/部门
+	 * @return 当前对象
+	*/
+	public Info setUseOrganization(Organization useOrganization) {
+		this.useOrganization=useOrganization;
+		return this;
+	}
+	
+	/**
+	 * 获得 类型<br>
+	 * 类型
+	 * @return 类型
+	*/
+	public DictItem getVehicleTypeDict() {
+		return vehicleTypeDict;
+	}
+	
+	/**
+	 * 设置 类型
+	 * @param vehicleTypeDict 类型
+	 * @return 当前对象
+	*/
+	public Info setVehicleTypeDict(DictItem vehicleTypeDict) {
+		this.vehicleTypeDict=vehicleTypeDict;
+		return this;
+	}
+	
+	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public DictItem getVehicleStatusDict() {
+		return vehicleStatusDict;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param vehicleStatusDict 状态
+	 * @return 当前对象
+	*/
+	public Info setVehicleStatusDict(DictItem vehicleStatusDict) {
+		this.vehicleStatusDict=vehicleStatusDict;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Employee getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public Info setOriginator(Employee originator) {
+		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用人<br>
+	 * 使用人
+	 * @return 使用人
+	*/
+	public Employee getUseUser() {
+		return useUser;
+	}
+	
+	/**
+	 * 设置 使用人
+	 * @param useUser 使用人
+	 * @return 当前对象
+	*/
+	public Info setUseUser(Employee useUser) {
+		this.useUser=useUser;
+		return this;
+	}
+	
+	/**
+	 * 获得 车辆列表<br>
+	 * 车辆列表
+	 * @return 车辆列表
+	*/
+	public String getSelectIds() {
+		return selectIds;
+	}
+	
+	/**
+	 * 设置 车辆列表
+	 * @param selectIds 车辆列表
+	 * @return 当前对象
+	*/
+	public Info setSelectIds(String selectIds) {
+		this.selectIds=selectIds;
 		return this;
 	}
 

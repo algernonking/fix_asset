@@ -1,7 +1,7 @@
 /**
  * 车辆信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-01 21:16:00
+ * @since 2022-04-02 17:59:08
  */
 
 layui.config({
@@ -27,6 +27,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeInit:function () {
             console.log("list:beforeInit");
+
+
         },
         /**
          * 表格渲染前调用

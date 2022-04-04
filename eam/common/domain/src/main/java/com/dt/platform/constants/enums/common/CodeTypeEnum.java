@@ -18,7 +18,8 @@ public enum CodeTypeEnum implements CodeTextEnum {
 
 	EAM("eam" , "固定资产"),
 	OPS("ops" , "运维服务"),
-	CONT("cont" , "合同"),
+	CONT("cont" , "合同服务"),
+	OTHER("other" , "其他服务"),
 
 	;
 

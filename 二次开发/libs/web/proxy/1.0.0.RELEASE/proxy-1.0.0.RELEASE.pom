@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">  
+    <modelVersion>4.0.0</modelVersion>  
+    <parent> 
+        <groupId>com.github.foxnic.web</groupId>  
+        <artifactId>parent</artifactId>  
+        <version>1.0.0.RELEASE</version>  
+        <relativePath>../../pom.xml</relativePath>  
+        <!-- lookup parent from repository --> 
+    </parent>  
+    <artifactId>proxy</artifactId>  
+    <name>web-proxy</name>  
+    <description>proxy</description>  
+    <packaging>jar</packaging>  
+    <dependencies> 
+        <dependency> 
+            <groupId>javax.servlet</groupId>  
+            <artifactId>javax.servlet-api</artifactId>  
+            <version>${servlet.api.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.foxnic</groupId>  
+            <artifactId>foxnic-api</artifactId>  
+            <version>${foxnic.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.foxnic.web</groupId>  
+            <artifactId>domain</artifactId>  
+            <version>${platform.version}</version>  
+            <exclusions> 
+                <exclusion> 
+                    <groupId>com.github.xiaoymin</groupId>  
+                    <artifactId>knife4j-micro-spring-boot-starter</artifactId> 
+                </exclusion> 
+            </exclusions> 
+        </dependency>  
+        <!--
+	 	此处的 spring-cloud-openfeign-core、feign-core  版本号需与 framework-cloud 项目的 spring-cloud-starter-openfeign 依赖的对应 pom 版本号一致
+	 	 -->  
+        <dependency> 
+            <groupId>org.springframework.cloud</groupId>  
+            <artifactId>spring-cloud-openfeign-core</artifactId>  
+            <version>2.2.0.RELEASE</version>  
+            <exclusions> 
+                <exclusion> 
+                    <groupId>org.apache.logging.log4j</groupId>  
+                    <artifactId>log4j-api</artifactId> 
+                </exclusion>  
+                <exclusion> 
+                    <groupId>org.apache.logging.log4j</groupId>  
+                    <artifactId>log4j-to-slf4j</artifactId> 
+                </exclusion> 
+            </exclusions> 
+        </dependency>  
+        <dependency> 
+            <groupId>io.github.openfeign</groupId>  
+            <artifactId>feign-core</artifactId>  
+            <version>10.4.0</version> 
+        </dependency> 
+    </dependencies> 
+</project>

@@ -52,6 +52,10 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_CHANGE_FINANCIAL("eam_asset_change_financial" , "EAM_资产变更-财务"),
 	EAM_ASSET_CHANGE_EQUIPMENT("eam_asset_change_equipment" , "EAM_资产变更-设备"),
 
+
+
+	VEHICLE_APPLY("vehicle_apply" , "申请领用"),
+	VEHICLE_MAINTENANCE("vehicle_maintenance" , "报修保险"),
 ;
 
 	private String code;

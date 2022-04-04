@@ -2,6 +2,14 @@ package com.dt.platform.vehicle.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.vehicle.VehicleHandleStatusEnum;
+import com.dt.platform.constants.enums.vehicle.VehicleOperationEnum;
+import com.dt.platform.constants.enums.vehicle.VehicleRepairStatusEnum;
+import com.dt.platform.domain.vehicle.Apply;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +34,8 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import com.dt.platform.vehicle.service.IMaintenanceService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
@@ -35,7 +45,7 @@ import java.util.Date;
  * 车辆维修保养 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 06:02:07
+ * @since 2022-04-02 19:58:38
 */
 
 
@@ -53,12 +63,51 @@ public class MaintenanceServiceImpl extends SuperService<Maintenance> implements
 	 * */
 	public DAO dao() { return dao; }
 
+	@Autowired 
+	private MSelectItemServiceImpl mSelectItemServiceImpl;
 
 
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
+
+
+	@Override
+	public Result confirm(String id) {
+		Maintenance data=this.getById(id);
+		if(VehicleRepairStatusEnum.WAIT_REPAIR.code().equals(data.getRepairStatus())){
+			data.setRepairStatus(VehicleRepairStatusEnum.REPAIRING.code());
+			return super.update(data,SaveMode.NOT_NULL_FIELDS,true);
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能进行该操作");
+		}
+	}
+
+	@Override
+	public Result cancel(String id) {
+		Maintenance data=this.getById(id);
+		if(VehicleRepairStatusEnum.REPAIRING.code().equals(data.getRepairStatus())){
+			data.setRepairStatus(VehicleRepairStatusEnum.CANCEL.code());
+			return super.update(data,SaveMode.NOT_NULL_FIELDS,true);
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能进行该操作");
+		}
+	}
+
+	@Override
+	public Result finish(String id) {
+		Maintenance data=this.getById(id);
+		if(VehicleRepairStatusEnum.REPAIRING.code().equals(data.getRepairStatus())){
+			data.setRepairStatus(VehicleRepairStatusEnum.FINISH.code());
+			return super.update(data,SaveMode.NOT_NULL_FIELDS,true);
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能进行该操作");
+		}
+	}
+
+
+
 
 	/**
 	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
@@ -68,10 +117,50 @@ public class MaintenanceServiceImpl extends SuperService<Maintenance> implements
 	 * @return 结果 , 如果失败返回 false，成功返回 true
 	 */
 	@Override
+	@Transactional
 	public Result insert(Maintenance maintenance,boolean throwsException) {
+
+		//校验数据资产
+//		if(maintenance.getVehicleInfoIds().size()==0){
+//			return ErrorDesc.failure().message("请选择车辆");
+//		}
+
+		//制单人
+		if(StringUtil.isBlank(maintenance.getOriginatorId())){
+			maintenance.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		//办理状态
+		if(StringUtil.isBlank(maintenance.getStatus())){
+			maintenance.setStatus(VehicleHandleStatusEnum.INCOMPLETE.code());
+		}
+
+		//维修状态
+		if(StringUtil.isBlank(maintenance.getRepairStatus())){
+			maintenance.setRepairStatus(VehicleRepairStatusEnum.WAIT_REPAIR.code());
+		}
+
+
+		//生成编码规则
+		if(StringUtil.isBlank(maintenance.getBusinessCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(VehicleOperationEnum.VEHICLE_MAINTENANCE.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				maintenance.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
+
 		Result r=super.insert(maintenance,throwsException);
+		//保存关系
+
+		if(r.success()) {
+			mSelectItemServiceImpl.saveRelation(maintenance.getId(), maintenance.getVehicleInfoIds());
+		}
 		return r;
 	}
+
 
 	/**
 	 * 添加，如果语句错误，则抛出异常
@@ -79,6 +168,7 @@ public class MaintenanceServiceImpl extends SuperService<Maintenance> implements
 	 * @return 插入是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result insert(Maintenance maintenance) {
 		return this.insert(maintenance,true);
 	}
@@ -146,6 +236,7 @@ public class MaintenanceServiceImpl extends SuperService<Maintenance> implements
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(Maintenance maintenance , SaveMode mode) {
 		return this.update(maintenance,mode,true);
 	}
@@ -158,8 +249,13 @@ public class MaintenanceServiceImpl extends SuperService<Maintenance> implements
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(Maintenance maintenance , SaveMode mode,boolean throwsException) {
 		Result r=super.update(maintenance , mode , throwsException);
+		//保存关系
+		if(r.success()) {
+			mSelectItemServiceImpl.saveRelation(maintenance.getId(), maintenance.getVehicleInfoIds());
+		}
 		return r;
 	}
 

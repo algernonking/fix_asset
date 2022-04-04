@@ -1,7 +1,7 @@
 /**
  * 车辆维修保养 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 06:01:08
+ * @since 2022-04-03 20:21:38
  */
 
 
@@ -74,33 +74,16 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
-					,{ field: 'procId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('流程') , templet: function (d) { return templet('procId',d.procId,d);}  }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('办理状态') , templet: function (d) { return templet('status',d.status,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'repairStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('维修状态') , templet: function (d) { return templet('repairStatus',d.repairStatus,d);}  }
-					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('报修类型') , templet: function (d) { return templet('type',d.type,d);}  }
-					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('计划完成日期') ,templet: function (d) { return templet('planFinishDate',fox.dateFormat(d.planFinishDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('实际完成日期') ,templet: function (d) { return templet('actualFinishDate',fox.dateFormat(d.actualFinishDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'repairStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('维修状态'), templet:function (d){ return templet('repairStatus',fox.getEnumText(SELECT_REPAIRSTATUS_DATA,d.repairStatus),d);}}
+					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('报修类型'), templet: function (d) { return templet('type' ,fox.joinLabel(d.maintenanceDict,"label"),d);}}
+					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('计划完成日期') ,templet: function (d) { return templet('planFinishDate',fox.dateFormat(d.planFinishDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('实际完成日期') ,templet: function (d) { return templet('actualFinishDate',fox.dateFormat(d.actualFinishDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'cost', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('费用') , templet: function (d) { return templet('cost',d.cost,d);}  }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('报修内容') , templet: function (d) { return templet('content',d.content,d);}  }
-					,{ field: 'reportUserId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('报修人') , templet: function (d) { return templet('reportUserId',d.reportUserId,d);}  }
 					,{ field: 'reportUserName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('报修人') , templet: function (d) { return templet('reportUserName',d.reportUserName,d);}  }
-					,{ field: 'pictureId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('图片') , templet: function (d) { return templet('pictureId',d.pictureId,d);}  }
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('业务日期') ,templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'selectedCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('选择数据') , templet: function (d) { return templet('selectedCode',d.selectedCode,d);}  }
-					,{ field: 'code', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('code') , templet: function (d) { return templet('code',d.code,d);}  }
-					,{ field: 'registrant', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('registrant') , templet: function (d) { return templet('registrant',d.registrant,d);}  }
-					,{ field: 'engineNumber', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('engine_number') , templet: function (d) { return templet('engineNumber',d.engineNumber,d);}  }
-					,{ field: 'frameNumber', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('frame_number') , templet: function (d) { return templet('frameNumber',d.frameNumber,d);}  }
-					,{ field: 'drivingLicense', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('driving_license') , templet: function (d) { return templet('drivingLicense',d.drivingLicense,d);}  }
-					,{ field: 'notes', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('notes') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'insuranceCompany', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('insurance_company') , templet: function (d) { return templet('insuranceCompany',d.insuranceCompany,d);}  }
-					,{ field: 'licensingTime', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('licensing_time') , templet: function (d) { return templet('licensingTime',d.licensingTime,d);}  }
-					,{ field: 'model', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('model') , templet: function (d) { return templet('model',d.model,d);}  }
+					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('业务日期') ,templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -159,32 +142,23 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.id={ inputType:"button",value: $("#id").val()};
-		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		value.procId={ inputType:"button",value: $("#procId").val()};
-		value.status={ inputType:"button",value: $("#status").val()};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.repairStatus={ inputType:"button",value: $("#repairStatus").val()};
-		value.type={ inputType:"button",value: $("#type").val()};
-		value.planFinishDate={ inputType:"date_input", value: $("#planFinishDate").val() ,matchType:"auto"};
-		value.actualFinishDate={ inputType:"date_input", value: $("#actualFinishDate").val() ,matchType:"auto"};
+		value.repairStatus={ inputType:"select_box", value: getSelectedValue("#repairStatus","value"), label:getSelectedValue("#repairStatus","nameStr") };
+		value.type={ inputType:"select_box", value: getSelectedValue("#type","value") ,fillBy:["maintenanceDict"]  , label:getSelectedValue("#type","nameStr") };
+		value.planFinishDate={ inputType:"date_input", begin: $("#planFinishDate-begin").val(), end: $("#planFinishDate-end").val() ,matchType:"auto" };
+		value.actualFinishDate={ inputType:"date_input", begin: $("#actualFinishDate-begin").val(), end: $("#actualFinishDate-end").val() ,matchType:"auto" };
 		value.cost={ inputType:"number_input", value: $("#cost").val() };
-		value.content={ inputType:"button",value: $("#content").val()};
+		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.reportUserId={ inputType:"button",value: $("#reportUserId").val()};
 		value.reportUserName={ inputType:"button",value: $("#reportUserName").val()};
 		value.pictureId={ inputType:"button",value: $("#pictureId").val()};
 		value.originatorId={ inputType:"button",value: $("#originatorId").val()};
-		value.businessDate={ inputType:"date_input", value: $("#businessDate").val() ,matchType:"auto"};
+		value.businessDate={ inputType:"date_input", begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() ,matchType:"auto" };
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		value.selectedCode={ inputType:"button",value: $("#selectedCode").val()};
-		value.code={ inputType:"button",value: $("#code").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.registrant={ inputType:"button",value: $("#registrant").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.engineNumber={ inputType:"button",value: $("#engineNumber").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.frameNumber={ inputType:"button",value: $("#frameNumber").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.drivingLicense={ inputType:"button",value: $("#drivingLicense").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.insuranceCompany={ inputType:"button",value: $("#insuranceCompany").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.licensingTime={ inputType:"button",value: $("#licensingTime").val()};
-		value.model={ inputType:"button",value: $("#model").val()};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -230,8 +204,30 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(2);
+		fox.switchSearchRow(1);
 
+		//渲染 repairStatus 下拉字段
+		fox.renderSelectBox({
+			el: "repairStatus",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("repairStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -253,7 +249,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(2,function (ex){
+			fox.switchSearchRow(1,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -390,6 +386,15 @@ function ListPage() {
 						}
 					});
 				});
+			}
+			else if (layEvent === 'confirm-data') { // 确认维修
+				window.pageExt.list.confirmData(data);
+			}
+			else if (layEvent === 'finish-data') { // 结束维修
+				window.pageExt.list.finishData(data);
+			}
+			else if (layEvent === 'cancel-data') { // 取消
+				window.pageExt.list.cancelData(data);
 			}
 			
 		});

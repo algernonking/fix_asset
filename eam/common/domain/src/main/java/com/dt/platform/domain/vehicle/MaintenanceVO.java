@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 车辆维修保养
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 06:02:07
+ * @since 2022-04-03 20:21:37
  * @sign 533A33F45997D57C6B1B07CA8F6E172F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

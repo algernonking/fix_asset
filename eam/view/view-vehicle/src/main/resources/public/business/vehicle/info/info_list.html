@@ -2,7 +2,7 @@
 /**
  * 车辆信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-01 21:16:01
+ * @since 2022-04-03 17:20:52
  */
  -->
  <!DOCTYPE html>
@@ -39,28 +39,82 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 车牌号 , registrant ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 车辆类型 , type ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 登记人 , code ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 名称 , name ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 车辆状态 , vehicleStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('车辆状态')}" class="search-label vehicleStatus-label">车辆状态</span><span class="search-colon">:</span></div>
+                        <div id="vehicleStatus" th:data="${'/service-system/sys-dict-item/query-list?dictCode=vehicle_status'}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 品牌型号 , model ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 所属组织 , ownerOrgId ,typeName=button, isHideInSearch=true -->
+                    <!-- 使用部门 , useOrgId ,typeName=button, isHideInSearch=true -->
+                    <!-- 使用人 , useUserId ,typeName=button, isHideInSearch=true -->
                     <!-- 颜色 , color ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 发动机号 , engineNumber ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 车架号 , frameNumber ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 行驶证 , drivingLicense ,typeName=text_input, isHideInSearch=true -->
                     <!-- 公里数 , kilometers ,typeName=number_input, isHideInSearch=true -->
                     <!-- 抢险(元) , rescueMoney ,typeName=number_input, isHideInSearch=true -->
                     <!-- 商业险(元) , commercialInsuranceMoney ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 保险公司 , insuranceCompany ,typeName=text_input, isHideInSearch=true -->
                     <!-- 上牌时间 , licensingTime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 报废时间 , scrapTime ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 位置 , positionDetail ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 图片 , pictures ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 存放位置 , positionDetail ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 图片 , pictures ,typeName=upload, isHideInSearch=true -->
+                    <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 车辆类型 , type ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('车辆类型')}" class="search-label type-label">车辆类型</span><span class="search-colon">:</span></div>
+                        <div id="type" th:data="${'/service-system/sys-dict-item/query-list?dictCode=vehicle_type'}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 车牌号 , code ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('车牌号')}" class="search-label code-label">车牌号</span><span class="search-colon">:</span></div>
+                        <input id="code" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 品牌型号 , model ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('品牌型号')}" class="search-label model-label">品牌型号</span><span class="search-colon">:</span></div>
+                        <input id="model" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 发动机号 , engineNumber ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('发动机号')}" class="search-label engineNumber-label">发动机号</span><span class="search-colon">:</span></div>
+                        <input id="engineNumber" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 车架号 , frameNumber ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('车架号')}" class="search-label frameNumber-label">车架号</span><span class="search-colon">:</span></div>
+                        <input id="frameNumber" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 行驶证 , drivingLicense ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('行驶证')}" class="search-label drivingLicense-label">行驶证</span><span class="search-colon">:</span></div>
+                        <input id="drivingLicense" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 登记人 , registrant ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('登记人')}" class="search-label registrant-label">登记人</span><span class="search-colon">:</span></div>
+                        <input id="registrant" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 保险到期 , insuranceExpireDate ,typeName=date_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('保险到期')}" class="search-label insuranceExpireDate-label">保险到期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="insuranceExpireDate-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="insuranceExpireDate-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                    </div>
+                    <!-- 保险公司 , insuranceCompany ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('保险公司')}" class="search-label insuranceCompany-label">保险公司</span><span class="search-colon">:</span></div>
+                        <input id="insuranceCompany" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
 
 
                 </div>
@@ -70,10 +124,11 @@
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+                <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

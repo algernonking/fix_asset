@@ -35,7 +35,7 @@ import java.util.Date;
  * 车辆信息 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-01 21:16:00
+ * @since 2022-04-02 13:04:04
 */
 
 
@@ -90,6 +90,7 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 	 * */
 	@Override
 	public Result insertList(List<Info> infoList) {
+
 		return super.insertList(infoList);
 	}
 

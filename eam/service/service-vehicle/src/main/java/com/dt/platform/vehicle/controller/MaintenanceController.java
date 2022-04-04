@@ -3,6 +3,9 @@ package com.dt.platform.vehicle.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.vehicle.meta.ApplyMeta;
+import com.dt.platform.domain.vehicle.meta.ApplyVOMeta;
+import com.dt.platform.proxy.vehicle.ApplyServiceProxy;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +37,9 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.vehicle.meta.MaintenanceMeta;
 import java.math.BigDecimal;
+import com.dt.platform.domain.vehicle.Info;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.system.DictItem;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +55,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 车辆维修保养 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 06:02:08
+ * @since 2022-04-02 19:58:39
 */
 
 @Api(tags = "车辆维修保养")
@@ -66,20 +72,20 @@ public class MaintenanceController extends SuperController {
 	*/
 	@ApiOperation(value = "添加车辆维修保养")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562630687803314176"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPAIR_STATUS , value = "维修状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class , example = "Insurance"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class , example = "2022-03-29 12:00:00"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class , example = "562630674318626816"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -99,7 +105,7 @@ public class MaintenanceController extends SuperController {
 	*/
 	@ApiOperation(value = "删除车辆维修保养")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562630687803314176")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MaintenanceVOMeta.ID)
@@ -133,20 +139,20 @@ public class MaintenanceController extends SuperController {
 	*/
 	@ApiOperation(value = "更新车辆维修保养")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562630687803314176"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPAIR_STATUS , value = "维修状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class , example = "Insurance"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class , example = "2022-03-29 12:00:00"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class , example = "562630674318626816"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -166,20 +172,20 @@ public class MaintenanceController extends SuperController {
 	*/
 	@ApiOperation(value = "保存车辆维修保养")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562630687803314176"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPAIR_STATUS , value = "维修状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class , example = "Insurance"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class , example = "2022-03-29 12:00:00"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class , example = "562630674318626816"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -208,6 +214,11 @@ public class MaintenanceController extends SuperController {
 	public Result<Maintenance> getById(String id) {
 		Result<Maintenance> result=new Result<>();
 		Maintenance maintenance=maintenanceService.getById(id);
+		// join 关联的对象
+		maintenanceService.dao().fill(maintenance)
+			.with(MaintenanceMeta.MAINTENANCE_DICT)
+				.with(ApplyMeta.VEHICLE_INFO_LIST)
+			.execute();
 		result.success(true).data(maintenance);
 		return result;
 	}
@@ -238,20 +249,20 @@ public class MaintenanceController extends SuperController {
 	*/
 	@ApiOperation(value = "查询车辆维修保养")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562630687803314176"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPAIR_STATUS , value = "维修状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class , example = "Insurance"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class , example = "2022-03-29 12:00:00"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class , example = "562630674318626816"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -272,20 +283,20 @@ public class MaintenanceController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询车辆维修保养")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562630687803314176"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPAIR_STATUS , value = "维修状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.TYPE , value = "报修类型" , required = false , dataTypeClass=String.class , example = "Insurance"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class , example = "2022-03-29 12:00:00"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.COST , value = "费用" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintenanceVOMeta.REPORT_USER_NAME , value = "报修人" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = MaintenanceVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class , example = "562630674318626816"),
 		@ApiImplicitParam(name = MaintenanceVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = MaintenanceVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -296,10 +307,64 @@ public class MaintenanceController extends SuperController {
 	public Result<PagedList<Maintenance>> queryPagedList(MaintenanceVO sample) {
 		Result<PagedList<Maintenance>> result=new Result<>();
 		PagedList<Maintenance> list=maintenanceService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// join 关联的对象
+		maintenanceService.dao().fill(list)
+			.with(MaintenanceMeta.MAINTENANCE_DICT)
+				.with(ApplyMeta.VEHICLE_INFO_LIST)
+			.execute();
 		result.success(true).data(list);
 		return result;
 	}
 
+
+	/**
+	 * 确认车辆申请
+	 */
+	@ApiOperation(value = "确认车辆申请")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688")
+	})
+	@ApiOperationSupport(order=9)
+	@NotNull(name = MaintenanceVOMeta.ID)
+	@SentinelResource(value = MaintenanceServiceProxy.CONFIRM , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(MaintenanceServiceProxy.CONFIRM)
+	public Result confirm(String id) {
+		Result result=maintenanceService.confirm(id);
+		return result;
+	}
+
+	/**
+	 * 取消车辆申请
+	 */
+	@ApiOperation(value = "取消车辆申请")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688")
+	})
+	@ApiOperationSupport(order=10)
+	@NotNull(name = MaintenanceVOMeta.ID)
+	@SentinelResource(value = MaintenanceServiceProxy.CANCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(MaintenanceServiceProxy.CANCEL)
+	public Result cancel(String id) {
+		Result result=maintenanceService.cancel(id);
+		return result;
+	}
+
+
+	/**
+	 * 取消车辆申请
+	 */
+	@ApiOperation(value = "取消车辆申请")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = MaintenanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688")
+	})
+	@ApiOperationSupport(order=10)
+	@NotNull(name = MaintenanceVOMeta.ID)
+	@SentinelResource(value = MaintenanceServiceProxy.FINISH , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(MaintenanceServiceProxy.FINISH)
+	public Result finish(String id) {
+		Result result=maintenanceService.finish(id);
+		return result;
+	}
 
 
 	/**

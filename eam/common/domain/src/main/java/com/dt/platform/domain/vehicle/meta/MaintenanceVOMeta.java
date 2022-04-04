@@ -6,12 +6,15 @@ import java.util.List;
 import com.dt.platform.domain.vehicle.Maintenance;
 import java.util.Date;
 import java.math.BigDecimal;
+import com.dt.platform.domain.vehicle.Info;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.system.DictItem;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 06:02:07
+ * @since 2022-04-03 20:21:37
  * @sign 533A33F45997D57C6B1B07CA8F6E172F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -129,16 +132,6 @@ public class MaintenanceVOMeta extends MaintenanceMeta {
 	public static final BeanProperty<com.dt.platform.domain.vehicle.MaintenanceVO,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.vehicle.MaintenanceVO.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
 	
 	/**
-	 * 流程 , 类型: java.lang.String
-	*/
-	public static final String PROC_ID="procId";
-	
-	/**
-	 * 流程 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.vehicle.MaintenanceVO,java.lang.String> PROC_ID_PROP = new BeanProperty(com.dt.platform.domain.vehicle.MaintenanceVO.class ,PROC_ID, java.lang.String.class, "流程", "流程", java.lang.String.class, null);
-	
-	/**
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
@@ -147,6 +140,16 @@ public class MaintenanceVOMeta extends MaintenanceMeta {
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.vehicle.MaintenanceVO,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.vehicle.MaintenanceVO.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
+	
+	/**
+	 * 流程 , 类型: java.lang.String
+	*/
+	public static final String PROC_ID="procId";
+	
+	/**
+	 * 流程 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.MaintenanceVO,java.lang.String> PROC_ID_PROP = new BeanProperty(com.dt.platform.domain.vehicle.MaintenanceVO.class ,PROC_ID, java.lang.String.class, "流程", "流程", java.lang.String.class, null);
 	
 	/**
 	 * 业务名称 , 类型: java.lang.String
@@ -369,9 +372,49 @@ public class MaintenanceVOMeta extends MaintenanceMeta {
 	public static final BeanProperty<com.dt.platform.domain.vehicle.MaintenanceVO,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.vehicle.MaintenanceVO.class ,SELECTED_CODE, java.lang.String.class, "选择数据", "选择数据", java.lang.String.class, null);
 	
 	/**
+	 * 车辆 , 集合类型: LIST , 类型: com.dt.platform.domain.vehicle.Info
+	*/
+	public static final String VEHICLE_INFO_LIST="vehicleInfoList";
+	
+	/**
+	 * 车辆 , 集合类型: LIST , 类型: com.dt.platform.domain.vehicle.Info
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.MaintenanceVO,com.dt.platform.domain.vehicle.Info> VEHICLE_INFO_LIST_PROP = new BeanProperty(com.dt.platform.domain.vehicle.MaintenanceVO.class ,VEHICLE_INFO_LIST, java.util.List.class, "车辆", "车辆", com.dt.platform.domain.vehicle.Info.class, null);
+	
+	/**
+	 * 车辆列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String VEHICLE_INFO_IDS="vehicleInfoIds";
+	
+	/**
+	 * 车辆列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.MaintenanceVO,java.lang.String> VEHICLE_INFO_IDS_PROP = new BeanProperty(com.dt.platform.domain.vehicle.MaintenanceVO.class ,VEHICLE_INFO_IDS, java.util.List.class, "车辆列表", "车辆列表", java.lang.String.class, null);
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String ORIGINATOR="originator";
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.MaintenanceVO,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.vehicle.MaintenanceVO.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
+	 * 报修类型 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String MAINTENANCE_DICT="maintenanceDict";
+	
+	/**
+	 * 报修类型 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.MaintenanceVO,org.github.foxnic.web.domain.system.DictItem> MAINTENANCE_DICT_PROP = new BeanProperty(com.dt.platform.domain.vehicle.MaintenanceVO.class ,MAINTENANCE_DICT, org.github.foxnic.web.domain.system.DictItem.class, "报修类型", "报修类型", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , COST , CONTENT , REPORT_USER_ID , REPORT_USER_NAME , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , BUSINESS_CODE , STATUS , PROC_ID , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , COST , CONTENT , REPORT_USER_ID , REPORT_USER_NAME , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , VEHICLE_INFO_LIST , VEHICLE_INFO_IDS , ORIGINATOR , MAINTENANCE_DICT };
 	
 	/**
 	 * 代理类
@@ -503,17 +546,6 @@ public class MaintenanceVOMeta extends MaintenanceMeta {
 		}
 		
 		/**
-		 * 设置 流程
-		 * @param procId 流程
-		 * @return 当前对象
-		*/
-		public Maintenance setProcId(String procId) {
-			super.change(PROC_ID,super.getProcId(),procId);
-			super.setProcId(procId);
-			return this;
-		}
-		
-		/**
 		 * 设置 办理状态
 		 * @param status 办理状态
 		 * @return 当前对象
@@ -521,6 +553,17 @@ public class MaintenanceVOMeta extends MaintenanceMeta {
 		public Maintenance setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
+			return this;
+		}
+		
+		/**
+		 * 设置 流程
+		 * @param procId 流程
+		 * @return 当前对象
+		*/
+		public Maintenance setProcId(String procId) {
+			super.change(PROC_ID,super.getProcId(),procId);
+			super.setProcId(procId);
 			return this;
 		}
 		
@@ -763,6 +806,50 @@ public class MaintenanceVOMeta extends MaintenanceMeta {
 		public Maintenance setSelectedCode(String selectedCode) {
 			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
 			super.setSelectedCode(selectedCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 车辆
+		 * @param vehicleInfoList 车辆
+		 * @return 当前对象
+		*/
+		public Maintenance setVehicleInfoList(List<Info> vehicleInfoList) {
+			super.change(VEHICLE_INFO_LIST,super.getVehicleInfoList(),vehicleInfoList);
+			super.setVehicleInfoList(vehicleInfoList);
+			return this;
+		}
+		
+		/**
+		 * 设置 车辆列表
+		 * @param vehicleInfoIds 车辆列表
+		 * @return 当前对象
+		*/
+		public Maintenance setVehicleInfoIds(List<String> vehicleInfoIds) {
+			super.change(VEHICLE_INFO_IDS,super.getVehicleInfoIds(),vehicleInfoIds);
+			super.setVehicleInfoIds(vehicleInfoIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originator 制单人
+		 * @return 当前对象
+		*/
+		public Maintenance setOriginator(Employee originator) {
+			super.change(ORIGINATOR,super.getOriginator(),originator);
+			super.setOriginator(originator);
+			return this;
+		}
+		
+		/**
+		 * 设置 报修类型
+		 * @param maintenanceDict 报修类型
+		 * @return 当前对象
+		*/
+		public Maintenance setMaintenanceDict(DictItem maintenanceDict) {
+			super.change(MAINTENANCE_DICT,super.getMaintenanceDict(),maintenanceDict);
+			super.setMaintenanceDict(maintenanceDict);
 			return this;
 		}
 	}

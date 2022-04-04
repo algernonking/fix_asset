@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">  
+    <modelVersion>4.0.0</modelVersion>  
+    <parent> 
+        <groupId>com.github.foxnic</groupId>  
+        <artifactId>parent</artifactId>  
+        <version>1.5.0.RELEASE</version> 
+    </parent>  
+    <artifactId>foxnic-springboot</artifactId>  
+    <packaging>jar</packaging>  
+    <properties> 
+        <springboot.version>2.3.3.RELEASE</springboot.version>  
+        <spring.version>5.2.8.RELEASE</spring.version> 
+    </properties>  
+    <dependencies> 
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->  
+        <dependency> 
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot</artifactId>  
+            <version>${springboot.version}</version> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->  
+        <dependency> 
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-autoconfigure</artifactId>  
+            <version>${springboot.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-aop</artifactId>  
+            <version>${springboot.version}</version> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->  
+        <dependency> 
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-webmvc</artifactId>  
+            <version>${spring.version}</version> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->  
+        <dependency> 
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-web</artifactId>  
+            <version>${spring.version}</version> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-micro-spring-boot-starter -->  
+        <dependency> 
+            <groupId>com.github.xiaoymin</groupId>  
+            <artifactId>knife4j-micro-spring-boot-starter</artifactId>  
+            <version>${knife4j.version}</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->  
+        <dependency> 
+            <groupId>javax.servlet</groupId>  
+            <artifactId>javax.servlet-api</artifactId>  
+            <version>4.0.1</version>  
+            <scope>provided</scope> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.foxnic</groupId>  
+            <artifactId>foxnic-commons</artifactId>  
+            <version>${foxnic.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.foxnic</groupId>  
+            <artifactId>foxnic-sql</artifactId>  
+            <version>${foxnic.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.github.foxnic</groupId>  
+            <artifactId>foxnic-dao</artifactId>  
+            <version>${foxnic.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>commons-io</groupId>  
+            <artifactId>commons-io</artifactId>  
+            <version>${common.io.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.alibaba</groupId>  
+            <artifactId>fastjson</artifactId>  
+            <version>${fastjson.version}</version> 
+        </dependency>  
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->  
+        <dependency> 
+            <groupId>org.apache.poi</groupId>  
+            <artifactId>poi</artifactId>  
+            <version>${poi.version}</version>  
+            <scope>provided</scope> 
+        </dependency> 
+    </dependencies> 
+</project>

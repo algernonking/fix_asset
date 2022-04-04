@@ -1,7 +1,7 @@
 /**
  * 车辆信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-01 21:16:01
+ * @since 2022-04-03 17:20:53
  */
 
 function FormPage() {
@@ -42,8 +42,6 @@ function FormPage() {
 		//绑定提交事件
 		bindButtonEvent();
 
-		//调整窗口的高度与位置
-		adjustPopup();
 	}
 
 	/**
@@ -85,22 +83,110 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 vehicleStatus 下拉字段
+		fox.renderSelectBox({
+			el: "vehicleStatus",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("vehicleStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 type 下拉字段
+		fox.renderSelectBox({
+			el: "type",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("type",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
 			elem: '#licensingTime',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click",
 			done: function(value, date, endDate){
 				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("licensingTime",value, date, endDate);
 			}
 		});
 		laydate.render({
+			elem: '#insuranceExpireDate',
+			format:"yyyy-MM-dd",
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("insuranceExpireDate",value, date, endDate);
+			}
+		});
+		laydate.render({
 			elem: '#scrapTime',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click",
 			done: function(value, date, endDate){
 				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("scrapTime",value, date, endDate);
 			}
 		});
+	    //渲染图片字段
+		foxup.render({
+			el:"pictures",
+			maxFileCount: 3,
+			displayFileName: false,
+			accept: "file",
+			afterPreview:function(elId,index,fileId,upload,fileName,fileType){
+				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterPreview",elId:elId,index:index,fileId:fileId,upload:upload,fileName:fileName,fileType:fileType});
+			},
+			afterUpload:function (elId,result,index,upload) {
+				console.log("文件上传后回调");
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterUpload",elId:elId,index:index,upload:upload});
+			},
+			beforeRemove:function (elId,fileId,index,upload) {
+				console.log("文件删除前回调");
+				if(window.pageExt.form.onUploadEvent) {
+					return window.pageExt.form.onUploadEvent({event:"beforeRemove",elId:elId,index:index,fileId:fileId,upload:upload});
+				}
+				return true;
+			},
+			afterRemove:function (elId,fileId,index,upload) {
+				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterRemove",elId:elId,index:index,upload:upload});
+			}
+	    });
 	}
 
 	/**
@@ -124,19 +210,33 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+			//设置 图片 显示附件
+		    if($("#pictures").val()) {
+				foxup.fill("pictures",$("#pictures").val());
+		    } else {
+				adjustPopup();
+			}
 
 
 
 			//设置 上牌时间 显示复选框勾选
 			if(formData["licensingTime"]) {
-				$("#licensingTime").val(fox.dateFormat(formData["licensingTime"],"yyyy-MM-dd HH:mm:ss"));
+				$("#licensingTime").val(fox.dateFormat(formData["licensingTime"],"yyyy-MM-dd"));
+			}
+			//设置 保险到期 显示复选框勾选
+			if(formData["insuranceExpireDate"]) {
+				$("#insuranceExpireDate").val(fox.dateFormat(formData["insuranceExpireDate"],"yyyy-MM-dd"));
 			}
 			//设置 报废时间 显示复选框勾选
 			if(formData["scrapTime"]) {
-				$("#scrapTime").val(fox.dateFormat(formData["scrapTime"],"yyyy-MM-dd HH:mm:ss"));
+				$("#scrapTime").val(fox.dateFormat(formData["scrapTime"],"yyyy-MM-dd"));
 			}
 
 
+			//设置  车辆状态 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#vehicleStatus",formData.vehicleStatusDict);
+			//设置  车辆类型 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#type",formData.vehicleTypeDict);
 
 			//处理fillBy
 
@@ -187,6 +287,10 @@ function FormPage() {
 
 
 
+		//获取 车辆状态 下拉框的值
+		data["vehicleStatus"]=fox.getSelectedValue("vehicleStatus",false);
+		//获取 车辆类型 下拉框的值
+		data["type"]=fox.getSelectedValue("type",false);
 
 		return data;
 	}
@@ -234,6 +338,54 @@ function FormPage() {
 	        return false;
 	    });
 
+		// 请选择公司对话框
+		$("#ownerOrgId-button").click(function(){
+			var ownerOrgIdDialogOptions={
+				field:"ownerOrgId",
+				formData:getFormData(),
+				inputEl:$("#ownerOrgId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"com",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseOrgNode(ownerOrgIdDialogOptions);
+		});
+		// 请选择组织节点对话框
+		$("#useOrgId-button").click(function(){
+			var useOrgIdDialogOptions={
+				field:"useOrgId",
+				formData:getFormData(),
+				inputEl:$("#useOrgId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"org",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseOrgNode(useOrgIdDialogOptions);
+		});
+		// 请选择人员对话框
+		$("#useUserId-button").click(function(){
+				var useUserIdDialogOptions={
+				field:"useUserId",
+				formData:getFormData(),
+				inputEl:$("#useUserId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseEmployee(useUserIdDialogOptions);
+		});
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('vehicle-info-form-data-win'); });

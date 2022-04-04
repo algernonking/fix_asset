@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.math.BigDecimal;
+import java.util.List;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.system.DictItem;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 车辆维修保养
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 06:02:07
- * @sign C2825775E28F9177E3A8B4AA27D41AFF
+ * @since 2022-04-03 20:21:37
+ * @sign 3A4E966C5C87E2DC30091249F5F50F93
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -43,16 +47,16 @@ public class Maintenance extends Entity {
 	private String businessCode;
 	
 	/**
-	 * 流程：流程
-	*/
-	@ApiModelProperty(required = false,value="流程" , notes = "流程")
-	private String procId;
-	
-	/**
 	 * 办理状态：办理状态
 	*/
 	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
+	
+	/**
+	 * 流程：流程
+	*/
+	@ApiModelProperty(required = false,value="流程" , notes = "流程")
+	private String procId;
 	
 	/**
 	 * 业务名称：业务名称
@@ -187,6 +191,30 @@ public class Maintenance extends Entity {
 	private String selectedCode;
 	
 	/**
+	 * 车辆：车辆
+	*/
+	@ApiModelProperty(required = false,value="车辆" , notes = "车辆")
+	private List<Info> vehicleInfoList;
+	
+	/**
+	 * 车辆列表：车辆列表
+	*/
+	@ApiModelProperty(required = false,value="车辆列表" , notes = "车辆列表")
+	private List<String> vehicleInfoIds;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
+	
+	/**
+	 * 报修类型：报修类型
+	*/
+	@ApiModelProperty(required = false,value="报修类型" , notes = "报修类型")
+	private DictItem maintenanceDict;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -225,25 +253,6 @@ public class Maintenance extends Entity {
 	}
 	
 	/**
-	 * 获得 流程<br>
-	 * 流程
-	 * @return 流程
-	*/
-	public String getProcId() {
-		return procId;
-	}
-	
-	/**
-	 * 设置 流程
-	 * @param procId 流程
-	 * @return 当前对象
-	*/
-	public Maintenance setProcId(String procId) {
-		this.procId=procId;
-		return this;
-	}
-	
-	/**
 	 * 获得 办理状态<br>
 	 * 办理状态
 	 * @return 办理状态
@@ -259,6 +268,25 @@ public class Maintenance extends Entity {
 	*/
 	public Maintenance setStatus(String status) {
 		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 流程<br>
+	 * 流程
+	 * @return 流程
+	*/
+	public String getProcId() {
+		return procId;
+	}
+	
+	/**
+	 * 设置 流程
+	 * @param procId 流程
+	 * @return 当前对象
+	*/
+	public Maintenance setProcId(String procId) {
+		this.procId=procId;
 		return this;
 	}
 	
@@ -677,6 +705,104 @@ public class Maintenance extends Entity {
 	*/
 	public Maintenance setSelectedCode(String selectedCode) {
 		this.selectedCode=selectedCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 车辆<br>
+	 * 车辆
+	 * @return 车辆
+	*/
+	public List<Info> getVehicleInfoList() {
+		return vehicleInfoList;
+	}
+	
+	/**
+	 * 设置 车辆
+	 * @param vehicleInfoList 车辆
+	 * @return 当前对象
+	*/
+	public Maintenance setVehicleInfoList(List<Info> vehicleInfoList) {
+		this.vehicleInfoList=vehicleInfoList;
+		return this;
+	}
+	
+	/**
+	 * 添加 车辆
+	 * @param vehicleInfo 车辆
+	 * @return 当前对象
+	*/
+	public Maintenance addVehicleInfo(Info vehicleInfo) {
+		if(this.vehicleInfoList==null) vehicleInfoList=new ArrayList<>();
+		this.vehicleInfoList.add(vehicleInfo);
+		return this;
+	}
+	
+	/**
+	 * 获得 车辆列表<br>
+	 * 车辆列表
+	 * @return 车辆列表
+	*/
+	public List<String> getVehicleInfoIds() {
+		return vehicleInfoIds;
+	}
+	
+	/**
+	 * 设置 车辆列表
+	 * @param vehicleInfoIds 车辆列表
+	 * @return 当前对象
+	*/
+	public Maintenance setVehicleInfoIds(List<String> vehicleInfoIds) {
+		this.vehicleInfoIds=vehicleInfoIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 车辆列表
+	 * @param vehicleInfoId 车辆列表
+	 * @return 当前对象
+	*/
+	public Maintenance addVehicleInfoId(String vehicleInfoId) {
+		if(this.vehicleInfoIds==null) vehicleInfoIds=new ArrayList<>();
+		this.vehicleInfoIds.add(vehicleInfoId);
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Employee getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public Maintenance setOriginator(Employee originator) {
+		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 报修类型<br>
+	 * 报修类型
+	 * @return 报修类型
+	*/
+	public DictItem getMaintenanceDict() {
+		return maintenanceDict;
+	}
+	
+	/**
+	 * 设置 报修类型
+	 * @param maintenanceDict 报修类型
+	 * @return 当前对象
+	*/
+	public Maintenance setMaintenanceDict(DictItem maintenanceDict) {
+		this.maintenanceDict=maintenanceDict;
 		return this;
 	}
 

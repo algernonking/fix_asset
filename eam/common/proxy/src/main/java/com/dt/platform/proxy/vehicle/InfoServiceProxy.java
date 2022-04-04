@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 车辆信息  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-01 21:16:00
+ * @since 2022-04-02 17:59:08
 */
 
 @FeignClient(value = ServiceNames.VEHICLE, contextId = InfoServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -86,6 +86,11 @@ public interface InfoServiceProxy {
 	 * 分页查询车辆信息
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
+
+	/**
+	 * 分页查询车辆信息
+	 */
+	public static final String QUERY_PAGED_SELECT_LIST = API_PREFIX + "query-paged-select-list";
 
 	/**
 	 * 导出车辆信息数据(Excel)

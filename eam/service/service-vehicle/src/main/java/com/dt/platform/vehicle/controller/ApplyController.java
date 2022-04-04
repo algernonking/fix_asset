@@ -33,6 +33,9 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.vehicle.meta.ApplyMeta;
+import com.dt.platform.domain.vehicle.Info;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 车辆申请 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 05:35:38
+ * @since 2022-04-02 19:49:06
 */
 
 @Api(tags = "车辆申请")
@@ -65,14 +68,15 @@ public class ApplyController extends SuperController {
 	*/
 	@ApiOperation(value = "添加车辆申请")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688"),
 		@ApiImplicitParam(name = ApplyVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class , example = "500994919175819264"),
+		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.CONTACT , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class , example = "2022-04-06 12:00:00"),
 		@ApiImplicitParam(name = ApplyVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ACT_RETURN_DATE , value = "实际归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
@@ -80,6 +84,7 @@ public class ApplyController extends SuperController {
 		@ApiImplicitParam(name = ApplyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.RETURN_NOTES , value = "归还备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = ApplyServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -96,7 +101,7 @@ public class ApplyController extends SuperController {
 	*/
 	@ApiOperation(value = "删除车辆申请")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = ApplyVOMeta.ID)
@@ -130,14 +135,15 @@ public class ApplyController extends SuperController {
 	*/
 	@ApiOperation(value = "更新车辆申请")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688"),
 		@ApiImplicitParam(name = ApplyVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class , example = "500994919175819264"),
+		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.CONTACT , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class , example = "2022-04-06 12:00:00"),
 		@ApiImplicitParam(name = ApplyVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ACT_RETURN_DATE , value = "实际归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
@@ -145,6 +151,7 @@ public class ApplyController extends SuperController {
 		@ApiImplicitParam(name = ApplyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.RETURN_NOTES , value = "归还备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { ApplyVOMeta.PAGE_INDEX , ApplyVOMeta.PAGE_SIZE , ApplyVOMeta.SEARCH_FIELD , ApplyVOMeta.FUZZY_FIELD , ApplyVOMeta.SEARCH_VALUE , ApplyVOMeta.DIRTY_FIELDS , ApplyVOMeta.SORT_FIELD , ApplyVOMeta.SORT_TYPE , ApplyVOMeta.IDS } )
 	@NotNull(name = ApplyVOMeta.ID)
@@ -161,14 +168,15 @@ public class ApplyController extends SuperController {
 	*/
 	@ApiOperation(value = "保存车辆申请")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688"),
 		@ApiImplicitParam(name = ApplyVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class , example = "500994919175819264"),
+		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.CONTACT , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class , example = "2022-04-06 12:00:00"),
 		@ApiImplicitParam(name = ApplyVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ACT_RETURN_DATE , value = "实际归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
@@ -176,6 +184,7 @@ public class ApplyController extends SuperController {
 		@ApiImplicitParam(name = ApplyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.RETURN_NOTES , value = "归还备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { ApplyVOMeta.PAGE_INDEX , ApplyVOMeta.PAGE_SIZE , ApplyVOMeta.SEARCH_FIELD , ApplyVOMeta.FUZZY_FIELD , ApplyVOMeta.SEARCH_VALUE , ApplyVOMeta.DIRTY_FIELDS , ApplyVOMeta.SORT_FIELD , ApplyVOMeta.SORT_TYPE , ApplyVOMeta.IDS } )
 	@NotNull(name = ApplyVOMeta.ID)
@@ -201,6 +210,12 @@ public class ApplyController extends SuperController {
 	public Result<Apply> getById(String id) {
 		Result<Apply> result=new Result<>();
 		Apply apply=applyService.getById(id);
+		// join 关联的对象
+		applyService.dao().fill(apply)
+			.with("useOrganization")
+			.with("receiver")
+			.with(ApplyMeta.VEHICLE_INFO_LIST)
+			.execute();
 		result.success(true).data(apply);
 		return result;
 	}
@@ -231,14 +246,15 @@ public class ApplyController extends SuperController {
 	*/
 	@ApiOperation(value = "查询车辆申请")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688"),
 		@ApiImplicitParam(name = ApplyVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class , example = "500994919175819264"),
+		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.CONTACT , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class , example = "2022-04-06 12:00:00"),
 		@ApiImplicitParam(name = ApplyVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ACT_RETURN_DATE , value = "实际归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
@@ -246,6 +262,7 @@ public class ApplyController extends SuperController {
 		@ApiImplicitParam(name = ApplyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.RETURN_NOTES , value = "归还备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { ApplyVOMeta.PAGE_INDEX , ApplyVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = ApplyServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -263,14 +280,15 @@ public class ApplyController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询车辆申请")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688"),
 		@ApiImplicitParam(name = ApplyVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ApplyVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ApplyVOMeta.ORG_ID , value = "部门" , required = false , dataTypeClass=String.class , example = "500994919175819264"),
+		@ApiImplicitParam(name = ApplyVOMeta.RECEIVER_ID , value = "领用人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = ApplyVOMeta.DRIVER , value = "驾驶员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.CONTACT , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.COLLECTION_DATE , value = "领用时间" , required = false , dataTypeClass=Date.class , example = "2022-04-06 12:00:00"),
 		@ApiImplicitParam(name = ApplyVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ACT_RETURN_DATE , value = "实际归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = ApplyVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
@@ -278,6 +296,7 @@ public class ApplyController extends SuperController {
 		@ApiImplicitParam(name = ApplyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.RETURN_NOTES , value = "归还备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ApplyVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ApplyVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = ApplyServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -285,7 +304,63 @@ public class ApplyController extends SuperController {
 	public Result<PagedList<Apply>> queryPagedList(ApplyVO sample) {
 		Result<PagedList<Apply>> result=new Result<>();
 		PagedList<Apply> list=applyService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// join 关联的对象
+		applyService.dao().fill(list)
+			.with("useOrganization")
+			.with("receiver")
+			.with(ApplyMeta.VEHICLE_INFO_LIST)
+			.execute();
 		result.success(true).data(list);
+		return result;
+	}
+
+
+	/**
+	 * 确认车辆申请
+	 */
+	@ApiOperation(value = "确认车辆申请")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688")
+	})
+	@ApiOperationSupport(order=9)
+	@NotNull(name = ApplyVOMeta.ID)
+	@SentinelResource(value = ApplyServiceProxy.CONFIRM , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(ApplyServiceProxy.CONFIRM)
+	public Result confirm(String id) {
+		Result result=applyService.confirm(id);
+		return result;
+	}
+
+	/**
+	 * 取消车辆申请
+	 */
+	@ApiOperation(value = "取消车辆申请")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688")
+	})
+	@ApiOperationSupport(order=10)
+	@NotNull(name = ApplyVOMeta.ID)
+	@SentinelResource(value = ApplyServiceProxy.CANCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(ApplyServiceProxy.CANCEL)
+	public Result cancel(String id) {
+		Result result=applyService.cancel(id);
+		return result;
+	}
+
+
+	/**
+	 * 取消车辆申请
+	 */
+	@ApiOperation(value = "取消车辆申请")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = ApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "562620443333234688")
+	})
+	@ApiOperationSupport(order=10)
+	@NotNull(name = ApplyVOMeta.ID)
+	@SentinelResource(value = ApplyServiceProxy.ACTION_RETURN , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(ApplyServiceProxy.ACTION_RETURN)
+	public Result actionReturn(String id,String notes) {
+		Result result=applyService.actionReturn(id,notes);
 		return result;
 	}
 

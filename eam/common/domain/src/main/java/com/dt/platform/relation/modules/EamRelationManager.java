@@ -25,14 +25,9 @@ public class EamRelationManager extends RelationManager {
     protected void config() {
         this.setupRelations();
         this.setupProperties();
-
         this.setupAssetDataPermissions();
-
         this.setupGoods();
-
         this.setupAsset();
-
-
         this.setupAlloction();
         this.setupAssetBorrow();
         this.setupAssetCollection();
@@ -40,30 +35,18 @@ public class EamRelationManager extends RelationManager {
         this.setupAssetHandle();
         this.setupAssetRepair();
         this.setupAssetTranfer();
-
-
         this.setupScrap();
-
         this.setupAssetAttributeItem();
-
         this.setupInventoryPlan();
         this.setupInventory();
         this.setupInventoryUser();
         this.setupInventoryDirecotor();
         this.setupInventoryAsset();
         this.setupInventoryManager();
-
-
         this.setupTplFile();
-
         this.setupAssetDataChange();
-
-
         this.setupStockAsset();
         this.setupStockAssetCollection();
-
-
-
 
     }
 

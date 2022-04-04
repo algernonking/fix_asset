@@ -21,11 +21,17 @@ import com.github.foxnic.dao.data.SaveMode;
  * 车辆维修保养 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-02 06:02:07
+ * @since 2022-04-02 19:58:38
 */
 
 public interface IMaintenanceService extends ISuperService<Maintenance> {
 
+
+	Result confirm(String id);
+
+	Result cancel(String id);
+
+	Result finish(String id);
 	/**
 	 * 添加，如果语句错误，则抛出异常
 	 * @param maintenance 数据对象

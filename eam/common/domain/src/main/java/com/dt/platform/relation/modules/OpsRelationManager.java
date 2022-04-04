@@ -19,25 +19,18 @@ import java.util.Iterator;
 public class OpsRelationManager extends RelationManager {
     @Override
     protected void config() {
+
         this.setupRelations();
         this.setupProperties();
-
         this.setupOpsHost();
         this.setupOpsDbInstance();
-
         this.setupOpsServiceCategory();
         this.setupOpsServiceInfo();
-
         this.setupVoucherOwner();
-
         this.setupVoucher();
         this.setupVoucherPriv();
-
         this.setupInfoSystem();
-
         this.setupTplFile();
-
-
 
     }
 

@@ -2,7 +2,7 @@
 /**
  * 车辆信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-01 21:16:01
+ * @since 2022-04-03 17:20:53
  */
  -->
  <!DOCTYPE html>
@@ -32,100 +32,114 @@
 
     <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
 
+        <input name="id" id="id"  type="hidden"/>
 
          <!--开始：group 循环-->
 
 
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-9753-fieldset">
+            <legend>基本信息</legend>
+        </fieldset>
 
-        <div class="layui-row form-row" id="default-content">
+        <div class="layui-row form-row" id="random-9753-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs12 form-column" >
+            <div class="layui-col-xs3 form-column" >
 
-                    <div class="layui-form-item" style="display: none">
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('主键')}">主键</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="id" id="id" name="id" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主键') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('车牌号')}">车牌号</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="registrant" id="registrant" name="registrant" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('车牌号') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('车辆类型')}">车辆类型</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="type" id="type" name="type" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('车辆类型') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('登记人')}">登记人</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('登记人') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('品牌型号')}">品牌型号</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="model" id="model" name="model" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('品牌型号') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('颜色')}">颜色</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="color" id="color" name="color" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('颜色') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('发动机号')}">发动机号</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="engineNumber" id="engineNumber" name="engineNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('发动机号') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('车架号')}">车架号</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="frameNumber" id="frameNumber" name="frameNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('车架号') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('行驶证')}">行驶证</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="drivingLicense" id="drivingLicense" name="drivingLicense" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('行驶证') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('公里数')}">公里数</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="kilometers" id="kilometers" name="kilometers" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('公里数') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                        <div class="layui-form-label "><div th:text="${lang.translate('车辆状态')}">车辆状态</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="vehicleStatus" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=vehicle_status'}" extraParam="{}"></div>
                         </div>
                     </div>
 
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('抢险(元)')}">抢险(元)</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('车辆类型')}">车辆类型</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="type" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=vehicle_type'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('登记人')}">登记人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="registrant" id="registrant" name="registrant" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('登记人') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs3 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('所属组织')}">所属组织</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="ownerOrgId" id="ownerOrgId" name="ownerOrgId"  type="hidden" class="layui-input"   />
+                            <button id="ownerOrgId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择公司')}" th:default-label="${lang.translate('请选择公司')}">按钮文本</span></button>
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('使用部门')}">使用部门</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="useOrgId" id="useOrgId" name="useOrgId"  type="hidden" class="layui-input"   />
+                            <button id="useOrgId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('使用人')}">使用人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="useUserId" id="useUserId" name="useUserId"  type="hidden" class="layui-input"   />
+                            <button id="useUserId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs3 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('保险公司')}">保险公司</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="insuranceCompany" id="insuranceCompany" name="insuranceCompany" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('保险公司') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('保险到期')}">保险到期</div></div>
+                        <div class="layui-input-block ">
+                            <input input-type="date" lay-filter="insuranceExpireDate" id="insuranceExpireDate" name="insuranceExpireDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('保险到期') }" type="text" class="layui-input"    lay-verify=""   />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('存放位置') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs3 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('抢险(元)')}">抢险(元)</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="rescueMoney" id="rescueMoney" name="rescueMoney" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('抢险(元)') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
@@ -133,60 +147,154 @@
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('商业险(元)')}">商业险(元)</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('商业险(元)')}">商业险(元)</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="commercialInsuranceMoney" id="commercialInsuranceMoney" name="commercialInsuranceMoney" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('商业险(元)') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('保险公司')}">保险公司</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="insuranceCompany" id="insuranceCompany" name="insuranceCompany" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('保险公司') }" type="text" class="layui-input"  />
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-4319-fieldset">
+            <legend>车辆信息</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-4319-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs3 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('上牌时间')}">上牌时间</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="licensingTime" id="licensingTime" name="licensingTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('上牌时间') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('报废时间')}">报废时间</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="scrapTime" id="scrapTime" name="scrapTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('报废时间') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-                
-                    <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('位置')}">位置</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <textarea lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('位置') }" class="layui-textarea" style="height: 120px" ></textarea>
-                    </div>
-                </div>
-
-
-                
-                    <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('图片')}">图片</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <textarea lay-filter="pictures" id="pictures" name="pictures" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('图片') }" class="layui-textarea" style="height: 120px" ></textarea>
-                    </div>
-                </div>
-
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('品牌型号')}">品牌型号</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="model" id="model" name="model" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('品牌型号') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('颜色')}">颜色</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="color" id="color" name="color" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('颜色') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs3 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('车牌号')}">车牌号</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('车牌号') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('行驶证')}">行驶证</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="drivingLicense" id="drivingLicense" name="drivingLicense" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('行驶证') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('公里数')}">公里数</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="kilometers" id="kilometers" name="kilometers" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('公里数') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs3 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('发动机号')}">发动机号</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="engineNumber" id="engineNumber" name="engineNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('发动机号') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('车架号')}">车架号</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="frameNumber" id="frameNumber" name="frameNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('车架号') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs3 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('上牌时间')}">上牌时间</div></div>
+                        <div class="layui-input-block ">
+                            <input input-type="date" lay-filter="licensingTime" id="licensingTime" name="licensingTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('上牌时间') }" type="text" class="layui-input"    lay-verify=""   />
+                        </div>
+                    </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('报废时间')}">报废时间</div></div>
+                        <div class="layui-input-block ">
+                            <input input-type="date" lay-filter="scrapTime" id="scrapTime" name="scrapTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('报废时间') }" type="text" class="layui-input"    lay-verify=""   />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+
+        <div class="layui-row form-row" id="random-8528-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
                         </div>
                     </div>
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('图片')}">图片</div></div>
+                    <div class="layui-upload layui-input-block ">
+                        <input input-type="upload" id="pictures"  name="pictures" lay-filter="pictures" style="display: none">
+                        <button type="button" class="layui-btn" id="pictures-button" th:text="${lang.translate('选择图片')}">选择图片</button>
+                        <div class="layui-upload-list" id="pictures-file-list"></div>
+                    </div>
+                </div>
+
+
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -195,6 +303,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
+        <div style="height: 120px"></div>
 
 
     </form>
@@ -213,7 +322,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"name":{"labelInForm":"名称","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"code":{"labelInForm":"车牌号","inputType":"text_input","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"licensingTime":{"date":true,"labelInForm":"上牌时间","inputType":"date_input"},"model":{"labelInForm":"品牌型号","inputType":"text_input","required":true},"insuranceExpireDate":{"date":true,"labelInForm":"保险到期","inputType":"date_input"},"type":{"labelInForm":"车辆类型","inputType":"select_box","required":true},"scrapTime":{"date":true,"labelInForm":"报废时间","inputType":"date_input"},"vehicleStatus":{"labelInForm":"车辆状态","inputType":"select_box","required":true}};
     var AUTH_PREFIX="vehicle_info";
 
 
