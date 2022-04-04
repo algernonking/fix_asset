@@ -16,7 +16,6 @@ sh bin/updateApp.sh
 
 
 
-
 #更新EAM版本
 sh bin/runSql.sh bin/sql/app_updateVersion.sql
 
