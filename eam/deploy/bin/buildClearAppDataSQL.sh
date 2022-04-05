@@ -81,6 +81,21 @@ echo "-- dc"                                                          >>$clear_s
 #echo "delete from dc_layer where 1=1 $tenant_sql;"                    >>$clear_sql
 #echo "delete from dc_rack where 1=1 $tenant_sql;"                     >>$clear_sql
 
+
+echo "-- vehicle "                                                     >>$clear_sql
+echo "delete from vehicle_a_select_item where 1=1 ;"                   >>$clear_sql
+echo "delete from vehicle_m_select_item  where 1=1;"                   >>$clear_sql
+echo "delete from vehicle_select_item  where 1=1;"                     >>$clear_sql
+echo "delete from vehicle_apply  where 1=1 $tenant_sql;"               >>$clear_sql
+echo "delete from vehicle_info  where 1=1 $tenant_sql;"                >>$clear_sql
+echo "delete from vehicle_insurance_company  where 1=1 $tenant_sql;"   >>$clear_sql
+echo "delete from vehicle_insurance_record  where 1=1 $tenant_sql;"    >>$clear_sql
+echo "delete from vehicle_maintenance  where 1=1 $tenant_sql;"         >>$clear_sql
+echo "delete from vehicle_position  where 1=1 $tenant_sql;"            >>$clear_sql
+
+
+
+
 echo "-- cont"                                                        >>$clear_sql
 echo "delete from cont_company where 1=1 $tenant_sql; "               >>$clear_sql
 echo "delete from cont_contract where 1=1 $tenant_sql; "              >>$clear_sql
@@ -91,6 +106,8 @@ echo "delete from cont_contract_invoice where 1=1 $tenant_sql; "      >>$clear_s
 echo "delete from hrm_person where deleted='1';" >>$clear_sql
 echo "delete from hrm_employee where deleted='1';" >>$clear_sql
 echo "delete from sys_user where deleted='1';" >>$clear_sql
+
+
 
 
 echo "-- logic delete"
