@@ -26,6 +26,8 @@
 #### 前端技术栈
 - 前端框架:LayUI
 
+#### 系统架构图
+![输入图片说明](https://images.gitee.com/uploads/images/2022/0407/143343_0a8f4947_448530.png "EAM.png")
 
 ### EAM系统使用方式
 #### 使用前需知
