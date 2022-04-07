@@ -2,6 +2,15 @@ package com.dt.platform.vehicle.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.github.foxnic.commons.lang.DateUtil;
+import com.github.foxnic.commons.log.Logger;
+import com.github.foxnic.dao.data.RcdSet;
+import com.github.foxnic.dao.entity.QuerySQLBuilder;
+import com.github.foxnic.dao.meta.DBTableMeta;
+import com.github.foxnic.sql.expr.Expr;
+import com.github.foxnic.sql.expr.OrderBy;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -263,8 +272,42 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 	}
 
 	@Override
-	public ExcelWriter exportExcel(Info sample) {
-		return super.exportExcel(sample);
+	public ExcelWriter exportExcel(Info sample){
+	DBTableMeta tm=this.dao().getTableMeta(this.table());
+
+
+	String tableAlais="t";
+	OrderBy orderBy=this.buildOrderBy(sample);
+		if(orderBy==null) {
+		DBColumnMeta cm=dao().getTableColumnMeta(table(), dao().getDBTreaty().getCreateTimeField());
+		if(cm!=null) {
+			orderBy=OrderBy.byDesc(tableAlais+"."+cm.getColumn());
+		}
+	}
+
+	Expr select=buildQuerySQL(sample,tableAlais,null,orderBy);
+
+	String subsql=" id ,  name ," +
+			"  (select label from sys_dict_item a where dict_code='vehicle_status' and a.code=t.vehicle_status) vehicle_status," +
+			"  (select label from sys_dict_item a where dict_code='vehicle_type' and a.code=t.type) type , " +
+			" code ,  model ,  registrant ," +
+			"  (select full_name from hrm_organization where id=t.owner_org_id) owner_org_id , " +
+			" (select full_name from hrm_organization where id=t.use_org_id) use_org_id, " +
+			" (select name from hrm_person where id in (select person_id from hrm_employee  where id=t.use_user_id) )use_user_id , " +
+			" color ,  engine_number ,  frame_number ,  driving_license ,  kilometers ,  rescue_money ,  commercial_insurance_money ,  insurance_company ,  licensing_time ,  insurance_expire_date ,  version ,  scrap_time ,  position_detail ,  pictures ,  originator_id ,  technical_parameter ,  vehicle_count ,  notes ,  create_by ,  create_time ,  update_by ,  update_time ,  deleted ,  delete_by ,  delete_time ,  tenant_id ";
+	String sql="select "+subsql+" from vehicle_info t WHERE ( ( t.deleted= 0 AND t.tenant_id= 'T001' )) ORDER BY t.create_time DESC";
+	//查询数据
+		System.out.println("#########SQL:\n"+sql);
+	RcdSet rs=this.dao().query(sql);
+	//写入
+	ExcelWriter ew=new ExcelWriter();
+	ExcelStructure es=buildExcelStructure(true);
+	//ExcelStructure es1=ExcelStructure.parse(rs,true);
+	Sheet sheet=ew.fillSheet(rs, tm.getShortTopic()+"清单",es);
+	ew.setWorkBookName(tm.getShortTopic()+"清单-"+ DateUtil.format(new Date(),"yyyyMMdd-HHmmss") +".xlsx");
+	Logger.info("导出 "+this.table()+" 数据 "+rs.size() +" 行");
+		return ew;
+
 	}
 
 	@Override

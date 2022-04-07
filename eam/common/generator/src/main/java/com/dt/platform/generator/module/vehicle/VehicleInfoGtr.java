@@ -99,6 +99,7 @@ public class VehicleInfoGtr extends BaseCodeGenerator {
         cfg.view().field(VehicleTables.VEHICLE_INFO.SCRAP_TIME).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(VehicleTables.VEHICLE_INFO.INSURANCE_EXPIRE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
+        cfg.view().field(VehicleTables.VEHICLE_INFO.TECHNICAL_PARAMETER).form().textArea().height(30);
 
 
 
@@ -161,6 +162,7 @@ public class VehicleInfoGtr extends BaseCodeGenerator {
                 new Object[] {
                         VehicleTables.VEHICLE_INFO.RESCUE_MONEY,
                         VehicleTables.VEHICLE_INFO.COMMERCIAL_INSURANCE_MONEY,
+                        VehicleTables.VEHICLE_INFO.VEHICLE_COUNT,
                 }
 
         );
@@ -187,6 +189,7 @@ public class VehicleInfoGtr extends BaseCodeGenerator {
         );
         cfg.view().form().addGroup(null ,
                 new Object[] {
+                        VehicleTables.VEHICLE_INFO.TECHNICAL_PARAMETER,
                         VehicleTables.VEHICLE_INFO.NOTES,
                         VehicleTables.VEHICLE_INFO.PICTURES,
                 }

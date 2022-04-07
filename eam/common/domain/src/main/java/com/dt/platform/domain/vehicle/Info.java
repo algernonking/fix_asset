@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 车辆信息
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-03 17:20:51
- * @sign 3C54D3B4D2D6E97220F0C081308626A7
+ * @since 2022-04-07 10:46:16
+ * @sign 65F9DAD00050139567C4AE0CD802E3CC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -154,6 +154,12 @@ public class Info extends Entity {
 	private Date insuranceExpireDate;
 	
 	/**
+	 * 版本：版本
+	*/
+	@ApiModelProperty(required = true,value="版本" , notes = "版本")
+	private Integer version;
+	
+	/**
 	 * 报废时间：报废时间
 	*/
 	@ApiModelProperty(required = false,value="报废时间" , notes = "报废时间")
@@ -176,6 +182,18 @@ public class Info extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private String originatorId;
+	
+	/**
+	 * 技术参数：技术参数
+	*/
+	@ApiModelProperty(required = false,value="技术参数" , notes = "技术参数")
+	private String technicalParameter;
+	
+	/**
+	 * 数量：数量
+	*/
+	@ApiModelProperty(required = false,value="数量" , notes = "数量")
+	private Integer vehicleCount;
 	
 	/**
 	 * 备注：备注
@@ -224,12 +242,6 @@ public class Info extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="删除时间" , notes = "删除时间")
 	private Date deleteTime;
-	
-	/**
-	 * 版本：版本
-	*/
-	@ApiModelProperty(required = true,value="版本" , notes = "版本")
-	private Integer version;
 	
 	/**
 	 * 租户：租户
@@ -660,6 +672,25 @@ public class Info extends Entity {
 	}
 	
 	/**
+	 * 获得 版本<br>
+	 * 版本
+	 * @return 版本
+	*/
+	public Integer getVersion() {
+		return version;
+	}
+	
+	/**
+	 * 设置 版本
+	 * @param version 版本
+	 * @return 当前对象
+	*/
+	public Info setVersion(Integer version) {
+		this.version=version;
+		return this;
+	}
+	
+	/**
 	 * 获得 报废时间<br>
 	 * 报废时间
 	 * @return 报废时间
@@ -732,6 +763,44 @@ public class Info extends Entity {
 	*/
 	public Info setOriginatorId(String originatorId) {
 		this.originatorId=originatorId;
+		return this;
+	}
+	
+	/**
+	 * 获得 技术参数<br>
+	 * 技术参数
+	 * @return 技术参数
+	*/
+	public String getTechnicalParameter() {
+		return technicalParameter;
+	}
+	
+	/**
+	 * 设置 技术参数
+	 * @param technicalParameter 技术参数
+	 * @return 当前对象
+	*/
+	public Info setTechnicalParameter(String technicalParameter) {
+		this.technicalParameter=technicalParameter;
+		return this;
+	}
+	
+	/**
+	 * 获得 数量<br>
+	 * 数量
+	 * @return 数量
+	*/
+	public Integer getVehicleCount() {
+		return vehicleCount;
+	}
+	
+	/**
+	 * 设置 数量
+	 * @param vehicleCount 数量
+	 * @return 当前对象
+	*/
+	public Info setVehicleCount(Integer vehicleCount) {
+		this.vehicleCount=vehicleCount;
 		return this;
 	}
 	
@@ -884,25 +953,6 @@ public class Info extends Entity {
 	*/
 	public Info setDeleteTime(Date deleteTime) {
 		this.deleteTime=deleteTime;
-		return this;
-	}
-	
-	/**
-	 * 获得 版本<br>
-	 * 版本
-	 * @return 版本
-	*/
-	public Integer getVersion() {
-		return version;
-	}
-	
-	/**
-	 * 设置 版本
-	 * @param version 版本
-	 * @return 当前对象
-	*/
-	public Info setVersion(Integer version) {
-		this.version=version;
 		return this;
 	}
 	

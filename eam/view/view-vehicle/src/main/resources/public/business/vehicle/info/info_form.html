@@ -2,7 +2,7 @@
 /**
  * 车辆信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-03 17:20:53
+ * @since 2022-04-07 10:46:17
  */
  -->
  <!DOCTYPE html>
@@ -37,11 +37,11 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-9753-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-3387-fieldset">
             <legend>基本信息</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-9753-content">
+        <div class="layui-row form-row" id="random-3387-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -154,6 +154,15 @@
                     </div>
 
 
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('数量')}">数量</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="vehicleCount" id="vehicleCount" name="vehicleCount" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
                 <!--结束：栏次内字段循环-->
             </div>
             <!--结束：栏次输入框循环-->
@@ -161,11 +170,11 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-4319-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-5256-fieldset">
             <legend>车辆信息</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-4319-content">
+        <div class="layui-row form-row" id="random-5256-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -271,13 +280,22 @@
 
 
 
-        <div class="layui-row form-row" id="random-8528-content">
+        <div class="layui-row form-row" id="random-5580-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
 
+
                     <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('技术参数')}">技术参数</div></div>
+                    <div class="layui-input-block ">
+                        <textarea lay-filter="technicalParameter" id="technicalParameter" name="technicalParameter" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('技术参数') }" class="layui-textarea" style="height: 30px" ></textarea>
+                    </div>
+                </div>
+
+
+                                    <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />

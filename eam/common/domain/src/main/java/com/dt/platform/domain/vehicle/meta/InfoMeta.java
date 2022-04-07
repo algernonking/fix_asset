@@ -12,8 +12,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-03 17:20:51
- * @sign 3C54D3B4D2D6E97220F0C081308626A7
+ * @since 2022-04-07 10:46:16
+ * @sign 65F9DAD00050139567C4AE0CD802E3CC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -220,6 +220,16 @@ public class InfoMeta {
 	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.util.Date> INSURANCE_EXPIRE_DATE_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,INSURANCE_EXPIRE_DATE, java.util.Date.class, "保险到期", "保险到期", java.util.Date.class, null);
 	
 	/**
+	 * 版本 , 类型: java.lang.Integer
+	*/
+	public static final String VERSION="version";
+	
+	/**
+	 * 版本 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
+	
+	/**
 	 * 报废时间 , 类型: java.util.Date
 	*/
 	public static final String SCRAP_TIME="scrapTime";
@@ -258,6 +268,26 @@ public class InfoMeta {
 	 * 制单人 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
+	
+	/**
+	 * 技术参数 , 类型: java.lang.String
+	*/
+	public static final String TECHNICAL_PARAMETER="technicalParameter";
+	
+	/**
+	 * 技术参数 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> TECHNICAL_PARAMETER_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,TECHNICAL_PARAMETER, java.lang.String.class, "技术参数", "技术参数", java.lang.String.class, null);
+	
+	/**
+	 * 数量 , 类型: java.lang.Integer
+	*/
+	public static final String VEHICLE_COUNT="vehicleCount";
+	
+	/**
+	 * 数量 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.Integer> VEHICLE_COUNT_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,VEHICLE_COUNT, java.lang.Integer.class, "数量", "数量", java.lang.Integer.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -338,16 +368,6 @@ public class InfoMeta {
 	 * 删除时间 , 类型: java.util.Date
 	*/
 	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
-	
-	/**
-	 * 版本 , 类型: java.lang.Integer
-	*/
-	public static final String VERSION="version";
-	
-	/**
-	 * 版本 , 类型: java.lang.Integer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
 	
 	/**
 	 * 租户 , 类型: java.lang.String
@@ -432,7 +452,7 @@ public class InfoMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , VEHICLE_STATUS , TYPE , CODE , MODEL , REGISTRANT , OWNER_ORG_ID , USE_ORG_ID , USE_USER_ID , COLOR , ENGINE_NUMBER , FRAME_NUMBER , DRIVING_LICENSE , KILOMETERS , RESCUE_MONEY , COMMERCIAL_INSURANCE_MONEY , INSURANCE_COMPANY , LICENSING_TIME , INSURANCE_EXPIRE_DATE , SCRAP_TIME , POSITION_DETAIL , PICTURES , ORIGINATOR_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER_COMPANY , USE_ORGANIZATION , VEHICLE_TYPE_DICT , VEHICLE_STATUS_DICT , ORIGINATOR , USE_USER , SELECT_IDS };
+	public static final String[] $PROPS={ ID , NAME , VEHICLE_STATUS , TYPE , CODE , MODEL , REGISTRANT , OWNER_ORG_ID , USE_ORG_ID , USE_USER_ID , COLOR , ENGINE_NUMBER , FRAME_NUMBER , DRIVING_LICENSE , KILOMETERS , RESCUE_MONEY , COMMERCIAL_INSURANCE_MONEY , INSURANCE_COMPANY , LICENSING_TIME , INSURANCE_EXPIRE_DATE , VERSION , SCRAP_TIME , POSITION_DETAIL , PICTURES , ORIGINATOR_ID , TECHNICAL_PARAMETER , VEHICLE_COUNT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , OWNER_COMPANY , USE_ORGANIZATION , VEHICLE_TYPE_DICT , VEHICLE_STATUS_DICT , ORIGINATOR , USE_USER , SELECT_IDS };
 	
 	/**
 	 * 代理类
@@ -663,6 +683,17 @@ public class InfoMeta {
 		}
 		
 		/**
+		 * 设置 版本
+		 * @param version 版本
+		 * @return 当前对象
+		*/
+		public Info setVersion(Integer version) {
+			super.change(VERSION,super.getVersion(),version);
+			super.setVersion(version);
+			return this;
+		}
+		
+		/**
 		 * 设置 报废时间
 		 * @param scrapTime 报废时间
 		 * @return 当前对象
@@ -703,6 +734,28 @@ public class InfoMeta {
 		public Info setOriginatorId(String originatorId) {
 			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
 			super.setOriginatorId(originatorId);
+			return this;
+		}
+		
+		/**
+		 * 设置 技术参数
+		 * @param technicalParameter 技术参数
+		 * @return 当前对象
+		*/
+		public Info setTechnicalParameter(String technicalParameter) {
+			super.change(TECHNICAL_PARAMETER,super.getTechnicalParameter(),technicalParameter);
+			super.setTechnicalParameter(technicalParameter);
+			return this;
+		}
+		
+		/**
+		 * 设置 数量
+		 * @param vehicleCount 数量
+		 * @return 当前对象
+		*/
+		public Info setVehicleCount(Integer vehicleCount) {
+			super.change(VEHICLE_COUNT,super.getVehicleCount(),vehicleCount);
+			super.setVehicleCount(vehicleCount);
 			return this;
 		}
 		
@@ -791,17 +844,6 @@ public class InfoMeta {
 		public Info setDeleteTime(Date deleteTime) {
 			super.change(DELETE_TIME,super.getDeleteTime(),deleteTime);
 			super.setDeleteTime(deleteTime);
-			return this;
-		}
-		
-		/**
-		 * 设置 版本
-		 * @param version 版本
-		 * @return 当前对象
-		*/
-		public Info setVersion(Integer version) {
-			super.change(VERSION,super.getVersion(),version);
-			super.setVersion(version);
 			return this;
 		}
 		

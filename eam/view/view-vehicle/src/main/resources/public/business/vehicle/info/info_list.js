@@ -1,7 +1,7 @@
 /**
  * 车辆信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-03 17:20:53
+ * @since 2022-04-07 10:46:17
  */
 
 
@@ -93,6 +93,8 @@ function ListPage() {
 					,{ field: 'insuranceExpireDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('保险到期') ,templet: function (d) { return templet('insuranceExpireDate',fox.dateFormat(d.insuranceExpireDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'scrapTime', align:"right", fixed:false, hide:true, sort: true   ,title: fox.translate('报废时间') ,templet: function (d) { return templet('scrapTime',fox.dateFormat(d.scrapTime,"yyyy-MM-dd"),d); }  }
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('存放位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
+					,{ field: 'technicalParameter', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('技术参数') , templet: function (d) { return templet('technicalParameter',d.technicalParameter,d);}  }
+					,{ field: 'vehicleCount', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('数量') , templet: function (d) { return templet('vehicleCount',d.vehicleCount,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -175,6 +177,8 @@ function ListPage() {
 		value.positionDetail={ inputType:"button",value: $("#positionDetail").val()};
 		value.pictures={ inputType:"button",value: $("#pictures").val()};
 		value.originatorId={ inputType:"button",value: $("#originatorId").val()};
+		value.technicalParameter={ inputType:"button",value: $("#technicalParameter").val()};
+		value.vehicleCount={ inputType:"number_input", value: $("#vehicleCount").val() };
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};

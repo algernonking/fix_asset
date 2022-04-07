@@ -112,8 +112,8 @@
 
     <button th:if="${perm.checkAuth('vehicle_maintenance:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
-    <button th:if="${perm.checkAuth('vehicle_maintenance:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认维修')}">确认维修</span></button>
-    <button th:if="${perm.checkAuth('vehicle_maintenance:finish')}"class="layui-btn layui-btn-xs  finish-data-button " lay-event="finish-data" data-id="{{d.id}}"><span th:text="${lang.translate('结束维修')}">结束维修</span></button>
+    <button th:if="${perm.checkAuth('vehicle_maintenance:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认')}">确认</span></button>
+    <button th:if="${perm.checkAuth('vehicle_maintenance:finish')}"class="layui-btn layui-btn-xs  finish-data-button " lay-event="finish-data" data-id="{{d.id}}"><span th:text="${lang.translate('结束')}">结束</span></button>
     <button th:if="${perm.checkAuth('vehicle_maintenance:cancel')}"class="layui-btn layui-btn-xs  cancel-data-button " lay-event="cancel-data" data-id="{{d.id}}"><span th:text="${lang.translate('取消')}">取消</span></button>
 
 </script>
