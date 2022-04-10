@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.system.DictItem;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 机柜
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:51
- * @sign 4C7BDAB4EDC150A967F0AEC8B221515A
+ * @since 2022-04-10 09:17:35
+ * @sign 5BC9AB8545BB4B4FEB7B4C0F5C7D297B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -43,10 +44,46 @@ public class Rack extends Entity {
 	private String rackCode;
 	
 	/**
+	 * 类型：类型
+	*/
+	@ApiModelProperty(required = false,value="类型" , notes = "类型")
+	private String rackType;
+	
+	/**
 	 * 名称：名称
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
 	private String rackName;
+	
+	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private String status;
+	
+	/**
+	 * 环境：环境
+	*/
+	@ApiModelProperty(required = false,value="环境" , notes = "环境")
+	private String environment;
+	
+	/**
+	 * 使用分类：使用分类
+	*/
+	@ApiModelProperty(required = false,value="使用分类" , notes = "使用分类")
+	private String rackUsedType;
+	
+	/**
+	 * 区域：区域
+	*/
+	@ApiModelProperty(required = false,value="区域" , notes = "区域")
+	private String areaId;
+	
+	/**
+	 * 层级：层级
+	*/
+	@ApiModelProperty(required = false,value="层级" , notes = "层级")
+	private String layerId;
 	
 	/**
 	 * 容量：容量
@@ -55,16 +92,52 @@ public class Rack extends Entity {
 	private BigDecimal rackCaptical;
 	
 	/**
+	 * U位数量：U位数量
+	*/
+	@ApiModelProperty(required = false,value="U位数量" , notes = "U位数量")
+	private Integer uPostionNumber;
+	
+	/**
 	 * PDU数量：PDU数量
 	*/
 	@ApiModelProperty(required = false,value="PDU数量" , notes = "PDU数量")
 	private Integer pduNumber;
 	
 	/**
-	 * 标签：标签
+	 * 跳线数：跳线数
 	*/
-	@ApiModelProperty(required = false,value="标签" , notes = "标签")
-	private String rackLabels;
+	@ApiModelProperty(required = false,value="跳线数" , notes = "跳线数")
+	private Integer jumperNumber;
+	
+	/**
+	 * 合同电力：合同电力
+	*/
+	@ApiModelProperty(required = false,value="合同电力" , notes = "合同电力")
+	private Integer contractPower;
+	
+	/**
+	 * 设备数量：设备数量
+	*/
+	@ApiModelProperty(required = false,value="设备数量" , notes = "设备数量")
+	private Integer equipmentNumber;
+	
+	/**
+	 * 到期日期：到期日期
+	*/
+	@ApiModelProperty(required = false,value="到期日期" , notes = "到期日期")
+	private Date expireDate;
+	
+	/**
+	 * 标签1：标签1
+	*/
+	@ApiModelProperty(required = false,value="标签1" , notes = "标签1")
+	private String rackLabel1;
+	
+	/**
+	 * 标签2：标签2
+	*/
+	@ApiModelProperty(required = false,value="标签2" , notes = "标签2")
+	private String rackLabel2;
 	
 	/**
 	 * 备注：备注
@@ -127,6 +200,42 @@ public class Rack extends Entity {
 	private String tenantId;
 	
 	/**
+	 * 区域
+	*/
+	@ApiModelProperty(required = false,value="区域" , notes = "")
+	private Area area;
+	
+	/**
+	 * 层级
+	*/
+	@ApiModelProperty(required = false,value="层级" , notes = "")
+	private Layer layer;
+	
+	/**
+	 * 状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "")
+	private DictItem statusDict;
+	
+	/**
+	 * 类型
+	*/
+	@ApiModelProperty(required = false,value="类型" , notes = "")
+	private DictItem typeDict;
+	
+	/**
+	 * 使用类型
+	*/
+	@ApiModelProperty(required = false,value="使用类型" , notes = "")
+	private DictItem usedTypeDict;
+	
+	/**
+	 * 环境
+	*/
+	@ApiModelProperty(required = false,value="环境" , notes = "")
+	private DictItem environmentDict;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -165,6 +274,25 @@ public class Rack extends Entity {
 	}
 	
 	/**
+	 * 获得 类型<br>
+	 * 类型
+	 * @return 类型
+	*/
+	public String getRackType() {
+		return rackType;
+	}
+	
+	/**
+	 * 设置 类型
+	 * @param rackType 类型
+	 * @return 当前对象
+	*/
+	public Rack setRackType(String rackType) {
+		this.rackType=rackType;
+		return this;
+	}
+	
+	/**
 	 * 获得 名称<br>
 	 * 名称
 	 * @return 名称
@@ -180,6 +308,101 @@ public class Rack extends Entity {
 	*/
 	public Rack setRackName(String rackName) {
 		this.rackName=rackName;
+		return this;
+	}
+	
+	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param status 状态
+	 * @return 当前对象
+	*/
+	public Rack setStatus(String status) {
+		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 环境<br>
+	 * 环境
+	 * @return 环境
+	*/
+	public String getEnvironment() {
+		return environment;
+	}
+	
+	/**
+	 * 设置 环境
+	 * @param environment 环境
+	 * @return 当前对象
+	*/
+	public Rack setEnvironment(String environment) {
+		this.environment=environment;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用分类<br>
+	 * 使用分类
+	 * @return 使用分类
+	*/
+	public String getRackUsedType() {
+		return rackUsedType;
+	}
+	
+	/**
+	 * 设置 使用分类
+	 * @param rackUsedType 使用分类
+	 * @return 当前对象
+	*/
+	public Rack setRackUsedType(String rackUsedType) {
+		this.rackUsedType=rackUsedType;
+		return this;
+	}
+	
+	/**
+	 * 获得 区域<br>
+	 * 区域
+	 * @return 区域
+	*/
+	public String getAreaId() {
+		return areaId;
+	}
+	
+	/**
+	 * 设置 区域
+	 * @param areaId 区域
+	 * @return 当前对象
+	*/
+	public Rack setAreaId(String areaId) {
+		this.areaId=areaId;
+		return this;
+	}
+	
+	/**
+	 * 获得 层级<br>
+	 * 层级
+	 * @return 层级
+	*/
+	public String getLayerId() {
+		return layerId;
+	}
+	
+	/**
+	 * 设置 层级
+	 * @param layerId 层级
+	 * @return 当前对象
+	*/
+	public Rack setLayerId(String layerId) {
+		this.layerId=layerId;
 		return this;
 	}
 	
@@ -203,6 +426,25 @@ public class Rack extends Entity {
 	}
 	
 	/**
+	 * 获得 U位数量<br>
+	 * U位数量
+	 * @return U位数量
+	*/
+	public Integer getUPostionNumber() {
+		return uPostionNumber;
+	}
+	
+	/**
+	 * 设置 U位数量
+	 * @param uPostionNumber U位数量
+	 * @return 当前对象
+	*/
+	public Rack setUPostionNumber(Integer uPostionNumber) {
+		this.uPostionNumber=uPostionNumber;
+		return this;
+	}
+	
+	/**
 	 * 获得 PDU数量<br>
 	 * PDU数量
 	 * @return PDU数量
@@ -222,21 +464,116 @@ public class Rack extends Entity {
 	}
 	
 	/**
-	 * 获得 标签<br>
-	 * 标签
-	 * @return 标签
+	 * 获得 跳线数<br>
+	 * 跳线数
+	 * @return 跳线数
 	*/
-	public String getRackLabels() {
-		return rackLabels;
+	public Integer getJumperNumber() {
+		return jumperNumber;
 	}
 	
 	/**
-	 * 设置 标签
-	 * @param rackLabels 标签
+	 * 设置 跳线数
+	 * @param jumperNumber 跳线数
 	 * @return 当前对象
 	*/
-	public Rack setRackLabels(String rackLabels) {
-		this.rackLabels=rackLabels;
+	public Rack setJumperNumber(Integer jumperNumber) {
+		this.jumperNumber=jumperNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 合同电力<br>
+	 * 合同电力
+	 * @return 合同电力
+	*/
+	public Integer getContractPower() {
+		return contractPower;
+	}
+	
+	/**
+	 * 设置 合同电力
+	 * @param contractPower 合同电力
+	 * @return 当前对象
+	*/
+	public Rack setContractPower(Integer contractPower) {
+		this.contractPower=contractPower;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备数量<br>
+	 * 设备数量
+	 * @return 设备数量
+	*/
+	public Integer getEquipmentNumber() {
+		return equipmentNumber;
+	}
+	
+	/**
+	 * 设置 设备数量
+	 * @param equipmentNumber 设备数量
+	 * @return 当前对象
+	*/
+	public Rack setEquipmentNumber(Integer equipmentNumber) {
+		this.equipmentNumber=equipmentNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 到期日期<br>
+	 * 到期日期
+	 * @return 到期日期
+	*/
+	public Date getExpireDate() {
+		return expireDate;
+	}
+	
+	/**
+	 * 设置 到期日期
+	 * @param expireDate 到期日期
+	 * @return 当前对象
+	*/
+	public Rack setExpireDate(Date expireDate) {
+		this.expireDate=expireDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签1<br>
+	 * 标签1
+	 * @return 标签1
+	*/
+	public String getRackLabel1() {
+		return rackLabel1;
+	}
+	
+	/**
+	 * 设置 标签1
+	 * @param rackLabel1 标签1
+	 * @return 当前对象
+	*/
+	public Rack setRackLabel1(String rackLabel1) {
+		this.rackLabel1=rackLabel1;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签2<br>
+	 * 标签2
+	 * @return 标签2
+	*/
+	public String getRackLabel2() {
+		return rackLabel2;
+	}
+	
+	/**
+	 * 设置 标签2
+	 * @param rackLabel2 标签2
+	 * @return 当前对象
+	*/
+	public Rack setRackLabel2(String rackLabel2) {
+		this.rackLabel2=rackLabel2;
 		return this;
 	}
 	
@@ -427,6 +764,114 @@ public class Rack extends Entity {
 	*/
 	public Rack setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 区域<br>
+	 * @return 区域
+	*/
+	public Area getArea() {
+		return area;
+	}
+	
+	/**
+	 * 设置 区域
+	 * @param area 区域
+	 * @return 当前对象
+	*/
+	public Rack setArea(Area area) {
+		this.area=area;
+		return this;
+	}
+	
+	/**
+	 * 获得 层级<br>
+	 * @return 层级
+	*/
+	public Layer getLayer() {
+		return layer;
+	}
+	
+	/**
+	 * 设置 层级
+	 * @param layer 层级
+	 * @return 当前对象
+	*/
+	public Rack setLayer(Layer layer) {
+		this.layer=layer;
+		return this;
+	}
+	
+	/**
+	 * 获得 状态<br>
+	 * @return 状态
+	*/
+	public DictItem getStatusDict() {
+		return statusDict;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param statusDict 状态
+	 * @return 当前对象
+	*/
+	public Rack setStatusDict(DictItem statusDict) {
+		this.statusDict=statusDict;
+		return this;
+	}
+	
+	/**
+	 * 获得 类型<br>
+	 * @return 类型
+	*/
+	public DictItem getTypeDict() {
+		return typeDict;
+	}
+	
+	/**
+	 * 设置 类型
+	 * @param typeDict 类型
+	 * @return 当前对象
+	*/
+	public Rack setTypeDict(DictItem typeDict) {
+		this.typeDict=typeDict;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用类型<br>
+	 * @return 使用类型
+	*/
+	public DictItem getUsedTypeDict() {
+		return usedTypeDict;
+	}
+	
+	/**
+	 * 设置 使用类型
+	 * @param usedTypeDict 使用类型
+	 * @return 当前对象
+	*/
+	public Rack setUsedTypeDict(DictItem usedTypeDict) {
+		this.usedTypeDict=usedTypeDict;
+		return this;
+	}
+	
+	/**
+	 * 获得 环境<br>
+	 * @return 环境
+	*/
+	public DictItem getEnvironmentDict() {
+		return environmentDict;
+	}
+	
+	/**
+	 * 设置 环境
+	 * @param environmentDict 环境
+	 * @return 当前对象
+	*/
+	public Rack setEnvironmentDict(DictItem environmentDict) {
+		this.environmentDict=environmentDict;
 		return this;
 	}
 

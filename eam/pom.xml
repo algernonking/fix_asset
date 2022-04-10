@@ -49,7 +49,7 @@
 		<module>./service/service-contract</module>
 		<module>./service/service-customer</module>
 		<module>./service/service-vehicle</module>
-
+		<module>./service/service-cms</module>
 
 		<!-- 界面视图 -->
 		<module>./view/view-console</module>
@@ -62,7 +62,7 @@
 		<module>./view/view-contract</module>
 		<module>./view/view-customer</module>
 		<module>./view/view-vehicle</module>
-
+		<module>./view/view-cms</module>
 
 		<!-- 聚合 -->
 		<module>./wrapper/wrapper-all</module>

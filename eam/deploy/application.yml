@@ -38,7 +38,7 @@ spring:
         #        url: ai+mCm8asbK9SNrQDk7ac29neidjdgHp2jFU7HYbZZOmvbR4OKNXb877AJzdYToBGLgN+etaRMM4wzovFLMULMH6brIo3zgsyub026w4Il4Oqg9jzyYsLaa6LNyznmYm5kKoS17K9XHBX8e0lDuik9pcc/DfdjaUkhm0MmOALUM86dHiyURHUP5hfQ4otf/kE9gVP+GO1G7fUdc4JBLDYylfBzmp9SNKQcTLQ/5AkWcnbm89+5pAz4JNnCJILF0B
         #        username: tD5wkJAfnCt04A+Y+QN5GA==
         #        password: ODGx5F84xpWJgfRFnzAaYhViHJqrTO3uxxDZ2lRlZNk=
-        url: jdbc:mysql://121.43.103.102:3306/eam_dh?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
+        url: jdbc:mysql://127.0.0.1:3306/eam?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
         username: root
         password: 123456
         # 启动程序时，在连接池中初始化多少个连接

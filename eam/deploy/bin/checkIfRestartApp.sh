@@ -1,6 +1,6 @@
 #!/bin/sh
 #cron:
-#   0 */1 * * * sh /opt/eam/bin/checkRunning.sh
+#   0 */1 * * * sh /opt/eam/bin/checkIfRestartApp.sh
 checkfile="/tmp/checkEamRunning.log"
 cur_dir=$(cd `dirname $0`; pwd)
 d=`date`
@@ -11,6 +11,7 @@ if [[ $c -lt 30 ]];then
   echo "check failed,go to restart!">>$checkfile
   sh eamRestart.sh
 else
+  echo "check success!"
   echo "check success!">>$checkfile
 fi
 exit 0

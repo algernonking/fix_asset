@@ -25,16 +25,16 @@ echo "cur_dir:$cur_dir";
 echo "conf_file:$conf_file";
 
 cd $jar_dir
-if [[ -f eam.jar ]];then
-  rm -rf eam.jar
+if [[ -f app.jar ]];then
+  rm -rf app.jar
 fi
 
-cp wrapper-all-0.0.2.RELEASE.jar eam.jar
+cp wrapper-all-0.0.2.RELEASE.jar app.jar
 
 ####################### Check #######################################
 #default full
 type=incr
-full_content="./lib/* ./eam.jar"
+full_content="./lib/* ./app.jar"
 incr_content="./lib/service*.jar  ./lib/view*.jar ./lib/*nic*.jar"
 content=$full_content
 

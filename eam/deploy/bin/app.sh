@@ -12,6 +12,8 @@ app_log=$app_dir/logs
 app_log_file=$app_log/app.log
 
 app_name=`cat $app_conf|grep -v "#"|grep APP_NAME=|awk -F "=" '{print $2}'`
+app_uid=`cat $app_conf|grep -v "#"|grep APP_UID=|awk -F "=" '{print $2}'`
+
 ####################### Java Environment ############################
 JAVA=`cat $app_conf|grep -v "#"|grep JAVA=|awk -F "=" '{print $2}'`
 #java_Xmx="-Xmx1024m"
@@ -37,7 +39,7 @@ do
   fi
 done
 ####################### Parameter ####################################
-app_process_mark="wctuihw_$app_name"
+app_process_mark="wctuihw_${app_name}_${app_uid}"
 action=start
 if [[ -n $1 ]];then
   action=$1

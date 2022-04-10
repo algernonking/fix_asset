@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 机柜  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:51
+ * @since 2022-04-10 09:17:35
 */
 
 @FeignClient(value = ServiceNames.DATACENTER, contextId = RackServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -139,7 +139,7 @@ public interface RackServiceProxy {
 	Result<Rack> getById(String id);
 
 	/**
-	 * 批量删除机柜
+	 * 获取多个机柜
 	*/
 	@RequestMapping(RackServiceProxy.GET_BY_IDS)
 	Result<List<Rack>> getByIds(List<String> ids);

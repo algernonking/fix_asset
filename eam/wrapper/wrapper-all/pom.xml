@@ -152,6 +152,11 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>service-cms</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.dt.platform</groupId>
@@ -216,14 +221,16 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>view-cms</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.github.foxnic.web</groupId>
 			<artifactId>view-console</artifactId>
 			<version>${foxnic-web.version}</version>
 		</dependency>
-
-
-
-
 
 
 		<dependency>

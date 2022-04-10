@@ -127,4 +127,14 @@ applications:
     viewProjectPath: /view/view-vehicle
     viewPrefixPath: public/business/vehicle
     wrapperProjectPath: /wrapper/wrapper-all
-    
+  #CMS
+  service-cms:
+    nacosGroup: service
+    nacosDataId: service-cms.yml
+    serviceProjectPath: /service/service-cms
+    packageName: com.dt.platform.cms
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: CMS
+    viewProjectPath: /view/view-cms
+    viewPrefixPath: public/business/cms
+    wrapperProjectPath: /wrapper/wrapper-all

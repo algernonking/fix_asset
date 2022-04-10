@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-03-17 15:10:38
+ * @since 2022-04-10 11:43:58
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -198,9 +198,39 @@ public class EAMTables {
 		public static final DBField RACK_CODE = new DBField(DBDataType.STRING , "rack_code","rackCode","编码","编码",false,false,true);
 		
 		/**
+		 * 类型
+		*/
+		public static final DBField RACK_TYPE = new DBField(DBDataType.STRING , "rack_type","rackType","类型","类型",false,false,true);
+		
+		/**
 		 * 名称
 		*/
 		public static final DBField RACK_NAME = new DBField(DBDataType.STRING , "rack_name","rackName","名称","名称",false,false,true);
+		
+		/**
+		 * 状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","状态",false,false,true);
+		
+		/**
+		 * 环境
+		*/
+		public static final DBField ENVIRONMENT = new DBField(DBDataType.STRING , "environment","environment","环境","环境",false,false,true);
+		
+		/**
+		 * 使用分类
+		*/
+		public static final DBField RACK_USED_TYPE = new DBField(DBDataType.STRING , "rack_used_type","rackUsedType","使用分类","使用分类",false,false,true);
+		
+		/**
+		 * 区域
+		*/
+		public static final DBField AREA_ID = new DBField(DBDataType.STRING , "area_id","areaId","区域","区域",false,false,true);
+		
+		/**
+		 * 层级
+		*/
+		public static final DBField LAYER_ID = new DBField(DBDataType.STRING , "layer_id","layerId","层级","层级",false,false,true);
 		
 		/**
 		 * 容量
@@ -208,14 +238,44 @@ public class EAMTables {
 		public static final DBField RACK_CAPTICAL = new DBField(DBDataType.DECIMAL , "rack_captical","rackCaptical","容量","容量",false,false,true);
 		
 		/**
+		 * U位数量
+		*/
+		public static final DBField U_POSTION_NUMBER = new DBField(DBDataType.INTEGER , "u_postion_number","uPostionNumber","U位数量","U位数量",false,false,true);
+		
+		/**
 		 * PDU数量
 		*/
 		public static final DBField PDU_NUMBER = new DBField(DBDataType.INTEGER , "pdu_number","pduNumber","PDU数量","PDU数量",false,false,true);
 		
 		/**
-		 * 标签
+		 * 跳线数
 		*/
-		public static final DBField RACK_LABELS = new DBField(DBDataType.STRING , "rack_labels","rackLabels","标签","标签",false,false,true);
+		public static final DBField JUMPER_NUMBER = new DBField(DBDataType.INTEGER , "jumper_number","jumperNumber","跳线数","跳线数",false,false,true);
+		
+		/**
+		 * 合同电力
+		*/
+		public static final DBField CONTRACT_POWER = new DBField(DBDataType.INTEGER , "contract_power","contractPower","合同电力","合同电力",false,false,true);
+		
+		/**
+		 * 设备数量
+		*/
+		public static final DBField EQUIPMENT_NUMBER = new DBField(DBDataType.INTEGER , "equipment_number","equipmentNumber","设备数量","设备数量",false,false,true);
+		
+		/**
+		 * 到期日期
+		*/
+		public static final DBField EXPIRE_DATE = new DBField(DBDataType.DATE , "expire_date","expireDate","到期日期","到期日期",false,false,true);
+		
+		/**
+		 * 标签1
+		*/
+		public static final DBField RACK_LABEL1 = new DBField(DBDataType.STRING , "rack_label1","rackLabel1","标签1","标签1",false,false,true);
+		
+		/**
+		 * 标签2
+		*/
+		public static final DBField RACK_LABEL2 = new DBField(DBDataType.STRING , "rack_label2","rackLabel2","标签2","标签2",false,false,true);
 		
 		/**
 		 * 备注
@@ -267,7 +327,7 @@ public class EAMTables {
 		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
 		
 		public DC_RACK() {
-			this.init($NAME,"机柜" , ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , PDU_NUMBER , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+			this.init($NAME,"机柜" , ID , RACK_CODE , RACK_TYPE , RACK_NAME , STATUS , ENVIRONMENT , RACK_USED_TYPE , AREA_ID , LAYER_ID , RACK_CAPTICAL , U_POSTION_NUMBER , PDU_NUMBER , JUMPER_NUMBER , CONTRACT_POWER , EQUIPMENT_NUMBER , EXPIRE_DATE , RACK_LABEL1 , RACK_LABEL2 , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
 		}
 		public static final DC_RACK $TABLE=new DC_RACK();
 	}
@@ -2742,6 +2802,11 @@ public class EAMTables {
 		public static final DBField REPORT_USER_ID = new DBField(DBDataType.STRING , "report_user_id","reportUserId","报修人","报修人",false,false,true);
 		
 		/**
+		 * 报修人
+		*/
+		public static final DBField REPORT_USER_NAME = new DBField(DBDataType.STRING , "report_user_name","reportUserName","报修人","报修人",false,false,true);
+		
+		/**
 		 * 图片
 		*/
 		public static final DBField PICTURE_ID = new DBField(DBDataType.STRING , "picture_id","pictureId","图片","图片",false,false,true);
@@ -2806,7 +2871,7 @@ public class EAMTables {
 		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","选择数据","选择数据",false,false,true);
 		
 		public EAM_ASSET_REPAIR() {
-			this.init($NAME,"资产报修" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , REPORT_USER_ID , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE);
+			this.init($NAME,"资产报修" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , REPORT_USER_ID , REPORT_USER_NAME , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE);
 		}
 		public static final EAM_ASSET_REPAIR $TABLE=new EAM_ASSET_REPAIR();
 	}

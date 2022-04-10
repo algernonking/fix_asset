@@ -16,8 +16,6 @@ public class ContContractPerformanceConfig extends CodeStarter.BaseCodeConfig<CO
         super(PREFIX_CONTRACT, CONT_CONTRACT_PERFORMANCE.$TABLE,"cont_", 4);
     }
 
-
-
     @Override
     public void configService(ServiceOptions service) {
 
@@ -26,10 +24,7 @@ public class ContContractPerformanceConfig extends CodeStarter.BaseCodeConfig<CO
     @Override
     public void configModel(PoClassFile poType, VoClassFile voType) {
 
-
-
     }
-
     @Override
     public void configFields(ViewOptions view) {
 

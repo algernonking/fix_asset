@@ -3,8 +3,11 @@ package com.dt.platform.relation.modules;
 
 import com.dt.platform.constants.db.EAMTables;
 
+import com.dt.platform.constants.db.VehicleTables;
 import com.dt.platform.domain.datacenter.meta.RackMeta;
+import com.dt.platform.domain.vehicle.meta.MaintenanceMeta;
 import com.github.foxnic.dao.relation.RelationManager;
+import org.github.foxnic.web.constants.db.FoxnicWeb;
 
 public class DatacenterRelationManager extends RelationManager {
     @Override
@@ -24,13 +27,33 @@ public class DatacenterRelationManager extends RelationManager {
     private void setupDcRack() {
 
         // 配置关联关系
-//        this.property(RackMeta.AREA_PROP)
-//                .using(EAMTables.DC_RACK.AREA_ID).join(EAMTables.DC_AREA.ID);
-//
-//        // 配置关联关系
-//        this.property(RackMeta.LAYER_PROP)
-//                .using(EAMTables.DC_RACK.LAYER_ID).join(EAMTables.DC_LAYER.ID);
-//
+        this.property(RackMeta.AREA_PROP)
+                .using(EAMTables.DC_RACK.AREA_ID).join(EAMTables.DC_AREA.ID);
+
+        // 配置关联关系
+        this.property(RackMeta.LAYER_PROP)
+                .using(EAMTables.DC_RACK.LAYER_ID).join(EAMTables.DC_LAYER.ID);
+
+
+        this.property(RackMeta.TYPE_DICT_PROP)
+                .using(EAMTables.DC_RACK.RACK_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_dc_rack_type'");
+
+
+        this.property(RackMeta.STATUS_DICT_PROP)
+                .using(EAMTables.DC_RACK.STATUS).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_dc_rack_status'");
+
+        this.property(RackMeta.USED_TYPE_DICT_PROP)
+                .using(EAMTables.DC_RACK.RACK_USED_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_dc_rack_used_type'");
+
+        this.property(RackMeta.ENVIRONMENT_DICT_PROP)
+                .using(EAMTables.DC_RACK.ENVIRONMENT).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_dc_rack_environment'");
+
+
+
 
     }
 

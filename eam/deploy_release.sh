@@ -1,7 +1,7 @@
 #!/bin.sh
 #
 
-release_dir="/tmp/eam_deploy"
+release_dir="/tmp/app_deploy"
 
 hostname=`hostname`
 cur_dir=$(cd `dirname $0`; pwd)
@@ -22,11 +22,11 @@ mkdir -p $release_dir/lib
 cd $release_dir
 cp -r $deploy_dir/* .
 cp -r $jar_dir/lib/* $release_dir/lib/
-cp $jar_dir/wrapper-all-0.0.2.RELEASE.jar  $release_dir/eam.jar
+cp $jar_dir/wrapper-all-0.0.2.RELEASE.jar  $release_dir/app.jar
 
 
 
-tar -zcvf eam_release.tar.gz ./*
+tar -zcvf app_release.tar.gz ./*
 open .
 exit 0
 

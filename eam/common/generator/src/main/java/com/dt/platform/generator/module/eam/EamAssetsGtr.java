@@ -391,8 +391,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         //生成代码
         g.generateCode();
 
-
-
         //生成菜单
         //g.removeByBatchId("");
         // g.generateMenu(AssetServiceProxy.class, AssetPageController.class);

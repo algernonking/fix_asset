@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:51
+ * @since 2022-04-10 09:17:36
  */
  -->
  <!DOCTYPE html>
@@ -12,16 +12,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
 	<title th:text="${lang.translate('机柜')}">机柜</title>
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
-    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
-    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon"> <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
-    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
     <style>
     </style>
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 </head>
 
 <body style="overflow-y: hidden;">
@@ -34,11 +37,15 @@
          <!--开始：group 循环-->
 
 
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-3555-fieldset">
+            <legend>基本信息</legend>
+        </fieldset>
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="random-3555-content">
 
-             <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('编码')}">编码</div><div class="layui-required">*</div></div>
@@ -54,16 +61,76 @@
                         </div>
                     </div>
 
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('到期日期')}">到期日期</div></div>
+                        <div class="layui-input-block ">
+                            <input input-type="date" lay-filter="expireDate" id="expireDate" name="expireDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('到期日期') }" type="text" class="layui-input"   />
+                        </div>
+                    </div>
+
                 <!--结束：栏次内字段循环-->
             </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('容量')}">容量</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="rackCaptical" id="rackCaptical" name="rackCaptical" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('容量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   min-value="0.0"  max-value="100.0"  scale="0" />
+                            <div id="status" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_dc_rack_status'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('类型')}">类型</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="rackType" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_dc_rack_type'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('使用分类')}">使用分类</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="rackUsedType" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_dc_rack_used_type'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('环境')}">环境</div></div>
+                        <div class="layui-input-block ">
+                            <div id="environment" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_dc_rack_environment'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('区域')}">区域</div></div>
+                        <div class="layui-input-block ">
+                            <div id="areaId" input-type="select" th:data="${'/service-datacenter/dc-area/query-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('层级')}">层级</div></div>
+                        <div class="layui-input-block ">
+                            <div id="layerId" input-type="select" th:data="${'/service-datacenter/dc-layer/query-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -75,11 +142,100 @@
          <!--开始：group 循环-->
 
 
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-2779-fieldset">
+            <legend>属性信息</legend>
+        </fieldset>
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="random-2779-content">
 
-             <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('U位数量')}">U位数量</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="uPostionNumber" id="uPostionNumber" name="uPostionNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('U位数量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('容量')}">容量</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="rackCaptical" id="rackCaptical" name="rackCaptical" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('容量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   min-value="0.0"  max-value="100.0"  scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('合同电力')}">合同电力</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="contractPower" id="contractPower" name="contractPower" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同电力') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('PDU数量')}">PDU数量</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="pduNumber" id="pduNumber" name="pduNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('PDU数量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('跳线数')}">跳线数</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="jumperNumber" id="jumperNumber" name="jumperNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('跳线数') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('标签1')}">标签1</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="rackLabel1" id="rackLabel1" name="rackLabel1" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签1') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('标签2')}">标签2</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="rackLabel2" id="rackLabel2" name="rackLabel2" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签2') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+
+        <div class="layui-row form-row" id="random-3069-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
 
 
                     <div class="layui-form-item" >
@@ -116,7 +272,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"rackCode":{"labelInForm":"编码","inputType":"text_input","required":true},"rackName":{"labelInForm":"名称","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"rackCode":{"labelInForm":"编码","inputType":"text_input","required":true},"rackName":{"labelInForm":"名称","inputType":"text_input","required":true},"rackUsedType":{"labelInForm":"使用分类","inputType":"select_box","required":true},"rackType":{"labelInForm":"类型","inputType":"select_box","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
     var AUTH_PREFIX="dc_rack";
 
 

@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:51
+ * @since 2022-04-10 09:17:36
  */
 
 
@@ -74,14 +74,26 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'rackCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码') , templet: function (d) { return templet('rackCode',d.rackCode,d);}  }
-					,{ field: 'rackName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('rackName',d.rackName,d);}  }
-					,{ field: 'rackCaptical', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('容量') , templet: function (d) { return templet('rackCaptical',d.rackCaptical,d);}  }
-					,{ field: 'pduNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('PDU数量') , templet: function (d) { return templet('pduNumber',d.pduNumber,d);}  }
-					,{ field: 'rackLabels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') , templet: function (d) { return templet('rackLabels',d.rackLabels,d);}  }
-					,{ field: 'rackNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('rackNotes',d.rackNotes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
+					,{ field: 'rackCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('编码') , templet: function (d) { return templet('rackCode',d.rackCode,d);}  }
+					,{ field: 'rackType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('类型'), templet: function (d) { return templet('rackType' ,fox.joinLabel(d.typeDict,"label"),d);}}
+					,{ field: 'rackName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('rackName',d.rackName,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet: function (d) { return templet('status' ,fox.joinLabel(d.statusDict,"label"),d);}}
+					,{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('环境'), templet: function (d) { return templet('environment' ,fox.joinLabel(d.environmentDict,"label"),d);}}
+					,{ field: 'rackUsedType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('使用分类'), templet: function (d) { return templet('rackUsedType' ,fox.joinLabel(d.usedTypeDict,"label"),d);}}
+					,{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('区域'), templet: function (d) { return templet('areaId' ,fox.joinLabel(d.area,"name"),d);}}
+					,{ field: 'layerId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('层级'), templet: function (d) { return templet('layerId' ,fox.joinLabel(d.layer,"name"),d);}}
+					,{ field: 'rackCaptical', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('容量') , templet: function (d) { return templet('rackCaptical',d.rackCaptical,d);}  }
+					,{ field: 'uPostionNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('U位数量') , templet: function (d) { return templet('uPostionNumber',d.uPostionNumber,d);}  }
+					,{ field: 'pduNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('PDU数量') , templet: function (d) { return templet('pduNumber',d.pduNumber,d);}  }
+					,{ field: 'jumperNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('跳线数') , templet: function (d) { return templet('jumperNumber',d.jumperNumber,d);}  }
+					,{ field: 'contractPower', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('合同电力') , templet: function (d) { return templet('contractPower',d.contractPower,d);}  }
+					,{ field: 'equipmentNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('设备数量') , templet: function (d) { return templet('equipmentNumber',d.equipmentNumber,d);}  }
+					,{ field: 'expireDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('到期日期') ,templet: function (d) { return templet('expireDate',fox.dateFormat(d.expireDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'rackLabel1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签1') , templet: function (d) { return templet('rackLabel1',d.rackLabel1,d);}  }
+					,{ field: 'rackLabel2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签2') , templet: function (d) { return templet('rackLabel2',d.rackLabel2,d);}  }
+					,{ field: 'rackNotes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('rackNotes',d.rackNotes,d);}  }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -96,6 +108,8 @@ function ListPage() {
 							} else {
 								layer.msg(fox.translate('数据导入失败')+"!");
 							}
+							// 是否执行后续逻辑：错误提示
+							return false;
 						}
 					}:false
 				}
@@ -104,7 +118,7 @@ function ListPage() {
 			dataTable=fox.renderTable(tableConfig);
 			//绑定排序事件
 			table.on('sort(data-table)', function(obj){
-			  refreshTableData(obj.field,obj.type);
+			  refreshTableData(obj.sortField,obj.type);
 			});
 			window.pageExt.list.afterTableRender && window.pageExt.list.afterTableRender();
 		}
@@ -112,15 +126,51 @@ function ListPage() {
     };
 
 	/**
+	 * 刷新单号数据
+	 * */
+	function refreshRowData(data,remote) {
+		var context=dataTable.getDataRowContext( { id : data.id } );
+		if(context==null) return;
+		if(remote) {
+			admin.post(moduleURL+"/get-by-id", { id : data.id }, function (r) {
+				if (r.success) {
+					data = r.data;
+					context.update(data);
+				} else {
+					fox.showMessage(data);
+				}
+			});
+		} else {
+			context.update(data);
+		}
+	}
+
+	/**
       * 刷新表格数据
       */
 	function refreshTableData(sortField,sortType,reset) {
+		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.rackCode={ inputType:"button",value: $("#rackCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.id={ inputType:"button",value: $("#id").val()};
+		value.rackCode={ inputType:"button",value: $("#rackCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.rackType={ inputType:"select_box", value: getSelectedValue("#rackType","value") ,fillBy:["typeDict"]  , label:getSelectedValue("#rackType","nameStr") };
 		value.rackName={ inputType:"button",value: $("#rackName").val()};
+		value.status={ inputType:"select_box", value: getSelectedValue("#status","value") ,fillBy:["statusDict"]  , label:getSelectedValue("#status","nameStr") };
+		value.environment={ inputType:"select_box", value: getSelectedValue("#environment","value") ,fillBy:["environmentDict"]  , label:getSelectedValue("#environment","nameStr") };
+		value.rackUsedType={ inputType:"select_box", value: getSelectedValue("#rackUsedType","value") ,fillBy:["usedTypeDict"]  , label:getSelectedValue("#rackUsedType","nameStr") };
+		value.areaId={ inputType:"select_box", value: getSelectedValue("#areaId","value") ,fillBy:["area"]  , label:getSelectedValue("#areaId","nameStr") };
+		value.layerId={ inputType:"select_box", value: getSelectedValue("#layerId","value") ,fillBy:["layer"]  , label:getSelectedValue("#layerId","nameStr") };
+		value.rackCaptical={ inputType:"number_input", value: $("#rackCaptical").val() };
+		value.uPostionNumber={ inputType:"number_input", value: $("#uPostionNumber").val() };
 		value.pduNumber={ inputType:"number_input", value: $("#pduNumber").val() };
-		value.rackLabels={ inputType:"button",value: $("#rackLabels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.rackNotes={ inputType:"button",value: $("#rackNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.jumperNumber={ inputType:"number_input", value: $("#jumperNumber").val() };
+		value.contractPower={ inputType:"number_input", value: $("#contractPower").val() };
+		value.equipmentNumber={ inputType:"number_input", value: $("#equipmentNumber").val() };
+		value.expireDate={ inputType:"date_input", begin: $("#expireDate-begin").val(), end: $("#expireDate-end").val() ,matchType:"auto" };
+		value.rackLabel1={ inputType:"button",value: $("#rackLabel1").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.rackLabel2={ inputType:"button",value: $("#rackLabel2").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.rackNotes={ inputType:"button",value: $("#rackNotes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -166,8 +216,168 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(1);
+		fox.switchSearchRow(2);
 
+		//渲染 rackType 下拉字段
+		fox.renderSelectBox({
+			el: "rackType",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("rackType",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 environment 下拉字段
+		fox.renderSelectBox({
+			el: "environment",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("environment",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 rackUsedType 下拉字段
+		fox.renderSelectBox({
+			el: "rackUsedType",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("rackUsedType",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 areaId 下拉字段
+		fox.renderSelectBox({
+			el: "areaId",
+			radio: true,
+			size: "small",
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("areaId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 layerId 下拉字段
+		fox.renderSelectBox({
+			el: "layerId",
+			radio: true,
+			size: "small",
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("layerId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#expireDate-begin',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("expireDate",value, date, endDate);
+				},1);
+			}
+		});
+		laydate.render({
+			elem: '#expireDate-end',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("expireDate",value, date, endDate);
+				},1);
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -189,7 +399,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(1,function (ex){
+			fox.switchSearchRow(2,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -252,22 +462,18 @@ function ListPage() {
             }
             //调用批量删除接口
 			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('机柜')+fox.translate('吗？'), function (i) {
-				top.layer.close(i);
-				top.layer.load(2);
-                admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
-					top.layer.closeAll('loading');
+                admin.post(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     if (data.success) {
 						if(window.pageExt.list.afterBatchDelete) {
 							var doNext=window.pageExt.list.afterBatchDelete(data);
 							if(!doNext) return;
 						}
-                    	top.layer.msg(data.message, {icon: 1, time: 500});
+						fox.showMessage(data);
                         refreshTableData();
                     } else {
-						top.layer.msg(data.message, {icon: 2, time: 1500});
+						fox.showMessage(data);
                     }
                 });
-
 			});
         }
 	}
@@ -288,29 +494,21 @@ function ListPage() {
 
 			admin.putTempData('dc-rack-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('dc-rack-form-data-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
-						 layer.msg(data.message, {icon: 1, time: 1500});
+						 fox.showMessage(data);
 					}
 				});
 			} else if (layEvent === 'view') { // 查看
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('dc-rack-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
-						layer.msg(data.message, {icon: 1, time: 1500});
+						fox.showMessage(data);
 					}
 				});
 			}
@@ -320,7 +518,6 @@ function ListPage() {
 					var doNext=window.pageExt.list.beforeSingleDelete(data);
 					if(!doNext) return;
 				}
-
 				top.layer.confirm(fox.translate('确定删除此')+fox.translate('机柜')+fox.translate('吗？'), function (i) {
 					top.layer.close(i);
 
@@ -332,14 +529,13 @@ function ListPage() {
 								var doNext=window.pageExt.list.afterSingleDelete(data);
 								if(!doNext) return;
 							}
-							top.layer.msg(data.message, {icon: 1, time: 500});
+							fox.showMessage(data);
 							refreshTableData();
 						} else {
-							top.layer.msg(data.message, {icon: 2, time: 1500});
+							fox.showMessage(data);
 						}
 					});
 				});
-
 			}
 			
 		});
@@ -356,7 +552,10 @@ function ListPage() {
 		}
 		var action=admin.getTempData('dc-rack-form-data-form-action');
 		var queryString="";
-		if(data && data.id) queryString="?" + 'id=' + data.id;
+		if(data && data.id) queryString='id=' + data.id;
+		if(window.pageExt.list.makeFormQueryString) {
+			queryString=window.pageExt.list.makeFormQueryString(data,queryString,action);
+		}
 		admin.putTempData('dc-rack-form-data', data);
 		var area=admin.getTempData('dc-rack-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
@@ -366,23 +565,28 @@ function ListPage() {
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
 
-		var index=admin.popupCenter({
+		admin.popupCenter({
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["90%",height+"px"],
+			area: ["98%",height+"px"],
 			type: 2,
 			id:"dc-rack-form-data-win",
-			content: '/business/datacenter/rack/rack_form.html' + queryString,
+			content: '/business/datacenter/rack/rack_form.html' + (queryString?("?"+queryString):""),
 			finish: function () {
-				refreshTableData();
+				if(action=="create") {
+					refreshTableData();
+				}
+				if(action=="edit") {
+					false?refreshTableData():refreshRowData(data,true);
+				}
 			}
 		});
-		admin.putTempData('dc-rack-form-data-popup-index', index);
 	};
 
 	window.module={
 		refreshTableData: refreshTableData,
+		refreshRowData: refreshRowData,
 		getCheckedList: getCheckedList
 	};
 

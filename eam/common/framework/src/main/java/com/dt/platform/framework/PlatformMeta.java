@@ -78,6 +78,10 @@ public class PlatformMeta {
 	 * */
 	public static final String VEHICLE_PACKAGE=BASE_PACKAGE+".vehicle";
 
+	/**
+	 * CMS
+	 * */
+	public static final String CMS_PACKAGE=BASE_PACKAGE+".cms";
 
 
 

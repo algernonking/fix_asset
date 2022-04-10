@@ -21,6 +21,7 @@ import org.springframework.context.annotation.ComponentScan;
 		PlatformMeta.SERVICE_EAM_PACKAGE,
 		PlatformMeta.SERVICE_HRM_PACKAGE,
 		PlatformMeta.DATACENTER_PACKAGE,
+		PlatformMeta.CMS_PACKAGE,
 		PlatformMeta.OPS_PACKAGE,
 		PlatformMeta.COMMON_PACKAGE,
 		PlatformMeta.KNOWLEDGEBASE_PACKAGE,

@@ -21,10 +21,17 @@
 - 日志管理:Logback
 - 流程引擎:Camunda
 - 任务调度:Quartz
-- 缓存:Redis 5
+- 项目管理框架: Maven 3.6
 
 #### 前端技术栈
-- 前端框架:LayUI
+- 前端组件:LayUI
+
+#### 开发环境
+- IDE： IntelliJ IDEA 2020.2
+- JDK:JDK1.8
+- 数据库:Mysql 5.7.X
+- Redis：5.1(可选)
+
 
 #### 系统架构图
 ![输入图片说明](https://images.gitee.com/uploads/images/2022/0407/143343_0a8f4947_448530.png "EAM.png")
