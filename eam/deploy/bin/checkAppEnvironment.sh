@@ -1,4 +1,5 @@
 #!/bin/sh
+
 cur_dir=$(cd `dirname $0`; pwd)
 app_conf="${cur_dir}/app.conf"
 app_dir=$cur_dir/..
