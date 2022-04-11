@@ -49,6 +49,15 @@ else
   echo -e "   \033[33m check java $jpath success! \033[0m"
 fi
 
+echo "###start to check java version 1.8"
+java_version_cnt=`$JAVA -version 2>&1|grep 1.8 |wc -l`
+java_version_cnt_ct=`$JAVA -version 2>&1|grep 1.8|head -1`
+if [[ $java_version_cnt -gt 0 ]];then
+   echo -e "   \033[31m java version [ $java_version_cnt_ct ] sucess! \033[0m"
+else
+   echo -e "   \033[31m java version [ $java_version_cnt_ct ] failed! \033[0m"
+fi
+
 echo "###start to check mysql command"
 mysqlpath=`which $MYSQL 2>&1`
 mysql_result="$?"
@@ -56,6 +65,23 @@ if [[ mysql_result -eq "1" ]];then
   echo -e "   \033[31m check mysql failed! \033[0m"
 else
   echo -e "   \033[33m check mysql $mysqlpath success! \033[0m"
+fi
+
+echo "###start to check mysql version"
+mysql_version_cnt=`$MYSQL --version|grep 5.7|head -1|wc -l`
+mysql_version_cnt_ct=`$MYSQL --version|grep 5.7|head -1`
+if [[ $mysql_version_cnt -gt 0 ]];then
+  echo -e "   \033[31m check mysql version [$mysql_version_cnt_ct]  success! \033[0m"
+else
+  echo -e "   \033[33m check mysql version [$mysql_version_cnt_ct] failed! \033[0m"
+fi
+
+
+mysql_pars_lower=`$MYSQL -u$DB_USER -p$DB_PWD -h$DB_HOST -e "show variables like '%lower_case_table_names%' " 2>/dev/null |grep lower_case_table_names |awk '{print $NF}'`
+if [[ $mysql_pars_lower -eq 1 ]];then
+  echo -e "   \033[31m check mysql parameter lower_case_table_names success! \033[0m"
+else
+  echo -e "   \033[31m check mysql parameter lower_case_table_names failed! \033[0m"
 fi
 
 echo "###start to check mysql_dump command"
@@ -85,9 +111,10 @@ else
 fi
 
 echo "###start to check mysql connect from app.conf"
-echo "db_host:$DB_HOST"
-echo "db_user:$DB_USER"
-echo "db_pwd:$DB_PWD"
+echo "modify application.yml using below info"
+echo "url: jdbc:mysql://127.0.0.1:$DB_PORT/$DB_NAME?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false "
+echo "username: $DB_USER"
+echo "password: $DB_PWD"
 mysql_ping_cnt=`$MYSQL_ADMIN -u$DB_USER -p$DB_PWD ping 2>&1|grep alive|wc -l`
 if [[ $mysql_ping_cnt -gt 0 ]];then
   echo -e "   \033[33m check mysql connect,user $DB_USER success! \033[0m"
@@ -95,7 +122,23 @@ else
   echo -e "   \033[31m check mysql connect,user $DB_USER failed! \033[0m"
 fi
 
-#echo "###start to check mysql connect from yml file"
+echo "###start to check application.yml db connect info url"
+yml_url_check=`cat $yml_file|grep -v "#"|grep "jdbc:mysql://127.0.0.1:$DB_PORT/$DB_NAME"|wc -l`
+if [[ $yml_url_check -gt 0 ]];then
+  echo -e "   \033[33m check application.yml db connect info url success! \033[0m"
+else
+  echo -e "   \033[31m check application.yml db connect info url failed! \033[0m"
+fi
+
+echo "###start to check application.yml db connect info username"
+yml_user_check=`cat $yml_file|grep username|grep -v "#"|grep $DB_USER|wc -l`
+if [[ $yml_user_check -gt 0 ]];then
+  echo -e "   \033[33m check application.yml db connect info username success! \033[0m"
+else
+  echo -e "   \033[31m check application.yml db connect info username failed! \033[0m"
+fi
+
+echo "###start to check mysql connect from yml file"
 #if [[ -f "$yml_file" ]];then
 #  echo "db_user:$DB_USER"
 #  echo "db_pwd:$DB_PWD"

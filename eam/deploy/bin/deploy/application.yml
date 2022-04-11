@@ -5,8 +5,7 @@ server:
     session:
       # 会话超时时间，如 30s , 20m 等
       timeout: 12000s
-  #应用web访问端口,可按照实际情况进行修改
-  port: 8089
+  port: APP_WEB_PORT
 
 spring:
   main:
@@ -16,8 +15,8 @@ spring:
     description: Foxnic Web Service All
   servlet:
     multipart:
-      max-file-size: 200MB
-      max-request-size: 200MB
+      max-file-size: 100MB
+      max-request-size: 100MB
   datasource:
     # Druid 监控 , 访问 ${url-prefix}/login.html
     monitor:
@@ -30,19 +29,15 @@ spring:
     druid:
       primary:
         encrypt:
-          #数据库连接信息url,username,password三个属性是否加密，如果enable为true，则加密，加密因子从file指定的路径获取
-          enable: true
+          enable: false
           file:
             windows: d:/foxnic/passwd.txt
             mac: /Users/Shared/foxnic/passwd.txt
             linux: /foxnic/passwd.txt
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: ai+mCm8asbK9SNrQDk7ac29neidjdgHp2jFU7HYbZZOmvbR4OKNXb877AJzdYToBGLgN+etaRMM4wzovFLMULMH6brIo3zgsyub026w4Il4Oqg9jzyYsLaa6LNyznmYm5kKoS17K9XHBX8e0lDuik9pcc/DfdjaUkhm0MmOALUM86dHiyURHUP5hfQ4otf/kE9gVP+GO1G7fUdc4JBLDYylfBzmp9SNKQcTLQ/5AkWcnbm89+5pAz4JNnCJILF0B
-        username: tD5wkJAfnCt04A+Y+QN5GA==
-        password: ODGx5F84xpWJgfRFnzAaYhViHJqrTO3uxxDZ2lRlZNk=
-#        url: jdbc:mysql://121.43.103.102:3306/eam?tinyInt1isBit=false&useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true
-#        username: root
-#        password: 12345
+        url: jdbc:mysql://127.0.0.1:APP_DB_PORT/APP_DB_NAME?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
+        username: APP_DB_USERNAME
+        password: APP_DB_PASSWORD
         # 启动程序时，在连接池中初始化多少个连接
         initialSize: 16
         # 连接池中最多支持多少个活动会话
@@ -87,11 +82,11 @@ spring:
     content-type: text/html
     mode: HTML5
     cache: false
-  #session:
-    #store-type: redis # 使用 redis 存储session
-  #redis:
-      #port: 6379
-      #host: 127.0.0.1
+      #session:
+      #store-type: redis # 使用 redis 存储session
+      #redis:
+    #port: 6379
+    #host: 127.0.0.1
 
 
 foxnic:
@@ -99,7 +94,7 @@ foxnic:
     log-enable: true
   config:
     # 按顺序读取 profile 下的配置值，默认使用 default Profile 的配置值，如果位于靠前的 profile 已经有配置，则不再往后读取，即前面 profile 的覆盖后面的 profile ;
-    profiles: empty,profile@GuoYIE
+    profiles: empty
   # 设置 API 接口
   job:
     enable: false
@@ -221,4 +216,4 @@ develop:
   deploy:
     enable: true
     # 可以使用以当前项目为基础的相对路径，指定静态资源自动部署的项目目录
-    projects:  ../view/view-cms,../view/view-vehicle,../view/view-customer,../view/view-contract,../view/view-knowledgebase, ../view/view-common, ../view/view-console, ../view/view-datacenter, ../view/view-eam, ../view/view-hrm, ../view/view-ops
+    projects: ../view/view-customer,../view/view-contract,../view/view-knowledgebase, ../view/view-common, ../view/view-console, ../view/view-datacenter, ../view/view-eam, ../view/view-hrm, ../view/view-ops

@@ -32,7 +32,6 @@ import org.springframework.context.annotation.ComponentScan;
 })
 @SpringBootApplication(exclude = {FeignAutoConfiguration.class})
 public class WrapperAllApp {
-
 	public static void main(String[] args) {
 		BootApplication.run(WrapperAllApp.class, args);
 	}

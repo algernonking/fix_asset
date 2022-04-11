@@ -15,7 +15,7 @@
     特别注意:url:这行比较长，不能换行，否则会报异常问题
 - 6、二次开发的时候，优先关注自动代码生产部分(common/generator/src/main/java/module/eam)，比较关键，
     每张数据库表，都会建立一个自动代码生产类(必须的)，自动代码生产可以为你生成所有前后端代码，以及关键的关联操作等，具体使用依样画葫芦就行。
-
+- 7、IDEA应用启动，启动类：wrapper/wrapper-all/src/main/java/com/dt/platform/wrapper/WrapperAllApp.java
 
 
 问题清单:
