@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-12-01 18:56:16
+ * @since 2022-04-14 20:16:52
  */
 
 function FormPage() {
@@ -61,7 +61,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
-			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight,'eam-asset-form-data-win');
 			if(area==null) return;
 			admin.putTempData('eam-asset-form-area', area);
 			window.adjustPopup=adjustPopup;
@@ -167,6 +167,8 @@ function FormPage() {
 			el: "goodsId",
 			radio: true,
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsId",data.arr,data.change,data.isAdd);
@@ -230,18 +232,24 @@ function FormPage() {
 			accept: "image",
 			acceptMime:'image/*',
 			exts:'png|jpg|bmp|gif|jpeg',
-			afterPreview:function(elId,index,fileId,upload){
+			afterPreview:function(elId,index,fileId,upload,fileName,fileType){
 				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterPreview",elId:elId,index:index,fileId:fileId,upload:upload,fileName:fileName,fileType:fileType});
 			},
-			afterUpload:function (result,index,upload) {
-				console.log("文件上传后回调")
+			afterUpload:function (elId,result,index,upload) {
+				console.log("文件上传后回调");
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterUpload",elId:elId,index:index,upload:upload});
 			},
 			beforeRemove:function (elId,fileId,index,upload) {
 				console.log("文件删除前回调");
+				if(window.pageExt.form.onUploadEvent) {
+					return window.pageExt.form.onUploadEvent({event:"beforeRemove",elId:elId,index:index,fileId:fileId,upload:upload});
+				}
 				return true;
 			},
 			afterRemove:function (elId,fileId,index,upload) {
 				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterRemove",elId:elId,index:index,upload:upload});
 			}
 	    });
 		//渲染 safetyLevelCode 下拉字段
@@ -363,17 +371,26 @@ function FormPage() {
 		laydate.render({
 			elem: '#purchaseDate',
 			format:"yyyy-MM-dd",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("purchaseDate",value, date, endDate);
+			}
 		});
 		laydate.render({
 			elem: '#productionDate',
 			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("productionDate",value, date, endDate);
+			}
 		});
 		laydate.render({
 			elem: '#registerDate',
 			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("registerDate",value, date, endDate);
+			}
 		});
 	    //渲染图片字段
 		foxup.render({
@@ -383,24 +400,33 @@ function FormPage() {
 			accept: "image",
 			acceptMime:'image/*',
 			exts:'png|jpg|bmp|gif|jpeg',
-			afterPreview:function(elId,index,fileId,upload){
+			afterPreview:function(elId,index,fileId,upload,fileName,fileType){
 				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterPreview",elId:elId,index:index,fileId:fileId,upload:upload,fileName:fileName,fileType:fileType});
 			},
-			afterUpload:function (result,index,upload) {
-				console.log("文件上传后回调")
+			afterUpload:function (elId,result,index,upload) {
+				console.log("文件上传后回调");
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterUpload",elId:elId,index:index,upload:upload});
 			},
 			beforeRemove:function (elId,fileId,index,upload) {
 				console.log("文件删除前回调");
+				if(window.pageExt.form.onUploadEvent) {
+					return window.pageExt.form.onUploadEvent({event:"beforeRemove",elId:elId,index:index,fileId:fileId,upload:upload});
+				}
 				return true;
 			},
 			afterRemove:function (elId,fileId,index,upload) {
 				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterRemove",elId:elId,index:index,upload:upload});
 			}
 	    });
 		laydate.render({
 			elem: '#lastVerificationDate',
 			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("lastVerificationDate",value, date, endDate);
+			}
 		});
 		//渲染 maintainerId 下拉字段
 		fox.renderSelectBox({
@@ -461,12 +487,18 @@ function FormPage() {
 		laydate.render({
 			elem: '#maintenanceStartDate',
 			format:"yyyy-MM-dd",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("maintenanceStartDate",value, date, endDate);
+			}
 		});
 		laydate.render({
 			elem: '#maintenanceEndDate',
 			format:"yyyy-MM-dd",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("maintenanceEndDate",value, date, endDate);
+			}
 		});
 		//渲染 financialCategoryId 下拉字段
 		fox.renderSelectBox({
@@ -533,7 +565,10 @@ function FormPage() {
 		laydate.render({
 			elem: '#entryTime',
 			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("entryTime",value, date, endDate);
+			}
 		});
 		//渲染 equipmentStatus 下拉字段
 		fox.renderSelectBox({
@@ -822,7 +857,7 @@ function FormPage() {
 					admin.finishPopupCenterById('eam-asset-form-data-win');
 				}
 			} else {
-				layer.msg(data.message, {icon: 2, time: 1500});
+				fox.showMessage(data);
 			}
 			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
 		}, {delayLoading:1000,elms:[$("#submit-button")]});
@@ -914,7 +949,7 @@ function FormPage() {
 		});
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('eam-asset-form-data-win'); });
 
     }
 
@@ -924,7 +959,10 @@ function FormPage() {
 		saveForm: saveForm,
 		fillFormData: fillFormData,
 		adjustPopup: adjustPopup,
-		action: action
+		action: action,
+		setAction: function (act) {
+			action = act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();

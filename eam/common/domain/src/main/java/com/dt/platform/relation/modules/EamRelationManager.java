@@ -48,9 +48,59 @@ public class EamRelationManager extends RelationManager {
         this.setupStockAsset();
         this.setupStockAssetCollection();
 
+        this.setupPurchaseApply();
+        this.setupPurchaseCheck();
+        this.setupPurchaseOrder();
     }
 
     public void setupProperties() {
+    }
+
+    public void setupPurchaseOrder() {
+
+        this.property(PurchaseOrderMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_PURCHASE_ORDER.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(PurchaseOrderMeta.PURCHASE_APPLY_PROP)
+                .using(EAMTables.EAM_PURCHASE_ORDER.APPLY_ID).join(EAMTables.EAM_PURCHASE_APPLY.ID);
+
+        this.property(PurchaseOrderMeta.PURCHASE_CHECK_PROP)
+                .using(EAMTables.EAM_PURCHASE_ORDER.CHECK_ID).join(EAMTables.EAM_PURCHASE_CHECK.ID);
+
+    }
+
+
+    public void setupPurchaseApply() {
+
+
+        this.property(PurchaseApplyMeta.APPLY_ORG_PROP)
+                .using(EAMTables.EAM_PURCHASE_APPLY.APPLY_ORG_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+
+        this.property(PurchaseApplyMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_PURCHASE_APPLY.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(PurchaseApplyMeta.SUPPLIER_PROP)
+                .using(EAMTables.EAM_PURCHASE_APPLY.SUPPLIER_ID).join(EAMTables.EAM_SUPPLIER.ID);
+
+
+    }
+
+    public void setupPurchaseCheck() {
+
+        this.property(PurchaseCheckMeta.PURCHASE_APPLY_PROP)
+                .using(EAMTables.EAM_PURCHASE_CHECK.OWNER_ID).join(EAMTables.EAM_PURCHASE_APPLY.ID);
+
+        this.property(PurchaseCheckMeta.CHECK_ORG_PROP)
+                .using(EAMTables.EAM_PURCHASE_CHECK.CHECK_ORG_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        this.property(PurchaseCheckMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_PURCHASE_CHECK.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(PurchaseCheckMeta.SUPPLIER_PROP)
+                .using(EAMTables.EAM_PURCHASE_CHECK.SUPPLIER_ID).join(EAMTables.EAM_SUPPLIER.ID);
+
+
     }
 
     public void setupAssetDataPermissions(){

@@ -44,6 +44,10 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_STOCK_DISTRIBUTE(CodeModuleEnum.EAM_ASSET_STOCK_DISTRIBUTE.code() , "EAM_资产库存-分配"),
     EAM_ASSET_STOCK_INVENTORY(CodeModuleEnum.EAM_ASSET_STOCK_INVENTORY.code()  , "EAM_资产库存-盘点"),
 
+    EAM_ASSET_PURCHASE_CHECK(CodeModuleEnum.EAM_ASSET_PURCHASE_CHECK.code(), "EAM资产采购验收"),
+    EAM_ASSET_PURCHASE_APPLY(CodeModuleEnum.EAM_ASSET_PURCHASE_APPLY.code(), "EAM资产采购申请"),
+    EAM_ASSET_PURCHASE_ORDER(CodeModuleEnum.EAM_ASSET_PURCHASE_ORDER.code(), "EAM资产采购订单"),
+
     //单据下载
     EAM_DOWNLOAD_ASSET("eam_download_asset", "EAM_资产数据下载"),
     EAM_DOWNLOAD_ASSET_REGISTER_BILL("eam_download_asset_register_bill" , "EAM_资产登记单据"),

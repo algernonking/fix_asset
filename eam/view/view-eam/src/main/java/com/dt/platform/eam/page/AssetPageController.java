@@ -110,9 +110,6 @@ public class AssetPageController extends ViewController {
 		return prefix+"/asset_select_list";
 	}
 
-
-
-
 	/**
 	 * 资产 人员资产信息
 	 */
@@ -221,6 +218,24 @@ public class AssetPageController extends ViewController {
 		}
 		return prefix+"/asset_search/position_tree";
 	}
+
+
+	/**
+	 * 资产 台账
+	 */
+	@RequestMapping("/asset_search/asset_wait_clean_search.html")
+	public String searchWaitCleanList(Model model,HttpServletRequest request) {
+
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/asset_search/asset_wait_clean_search";
+	}
+
 
 
 	/**

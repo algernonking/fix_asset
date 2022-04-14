@@ -56,7 +56,10 @@ public enum CodeModuleEnum implements CodeTextEnum {
 
 	VEHICLE_APPLY("vehicle_apply" , "申请领用"),
 	VEHICLE_MAINTENANCE("vehicle_maintenance" , "报修保险"),
-;
+
+	EAM_ASSET_PURCHASE_CHECK("eam_asset_purchase_check" , "EAM_资产采购验收"),
+	EAM_ASSET_PURCHASE_APPLY("eam_asset_purchase_apply" , "EAM_资产采购申请"),
+	EAM_ASSET_PURCHASE_ORDER("eam_asset_purchase_order" , "EAM_资产采购订单");
 
 	private String code;
 	private String text;

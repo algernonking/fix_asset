@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-04-10 11:44:07
+ * @since 2022-04-15 05:13:23
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -260,6 +260,112 @@ public class ContractTables {
 			this.init($NAME,"合同附件" , ID , OWNER_ID , OWNER_TYPE , TYPE , FILE_ID , NAME , NOTES , TENANT_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final CONT_CONTRACT_ATTACHMENT $TABLE=new CONT_CONTRACT_ATTACHMENT();
+	}
+	
+	/**
+	 * 发票信息
+	*/
+	public static class CONT_CONTRACT_INVOICE extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "cont_contract_invoice";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 所有者ID
+		*/
+		public static final DBField OWNER_ID = new DBField(DBDataType.STRING , "owner_id","ownerId","所有者ID","所有者ID",false,false,true);
+		
+		/**
+		 * 文件ID
+		*/
+		public static final DBField FILE_ID = new DBField(DBDataType.STRING , "file_id","fileId","文件ID","文件ID",false,false,true);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 销售方
+		*/
+		public static final DBField SELLER = new DBField(DBDataType.STRING , "seller","seller","销售方","销售方",false,false,true);
+		
+		/**
+		 * 发票类型
+		*/
+		public static final DBField INVOICE_TYPE = new DBField(DBDataType.STRING , "invoice_type","invoiceType","发票类型","发票类型",false,false,true);
+		
+		/**
+		 * 含税价格
+		*/
+		public static final DBField TAX_PRICE = new DBField(DBDataType.DECIMAL , "tax_price","taxPrice","含税价格","含税价格",false,false,true);
+		
+		/**
+		 * 开盘时间
+		*/
+		public static final DBField INVOICE_DATE = new DBField(DBDataType.DATE , "invoice_date","invoiceDate","开盘时间","开盘时间",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 租户ID
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户ID","租户ID",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 数据版本号
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
+		
+		public CONT_CONTRACT_INVOICE() {
+			this.init($NAME,"发票信息" , ID , OWNER_ID , FILE_ID , NAME , SELLER , INVOICE_TYPE , TAX_PRICE , INVOICE_DATE , NOTES , TENANT_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final CONT_CONTRACT_INVOICE $TABLE=new CONT_CONTRACT_INVOICE();
 	}
 	
 	/**

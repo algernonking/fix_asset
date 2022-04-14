@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-12-01 18:56:06
+ * @since 2022-04-14 20:16:52
  */
 
 
@@ -74,90 +74,90 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产分类'), templet: function (d) { return templet('categoryId' ,fox.joinLabel(d.category,"name"),d);}}
-					,{ field: 'categoryCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类编码') , templet: function (d) { return templet('categoryCode',d.categoryCode,d);}  }
-					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
-					,{ field: 'procId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('流程') , templet: function (d) { return templet('procId',d.procId,d);}  }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
-					,{ field: 'batchCode', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('批次编码') , templet: function (d) { return templet('batchCode',d.batchCode,d);}  }
-					,{ field: 'ownerCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('归属') , templet: function (d) { return templet('ownerCode',d.ownerCode,d);}  }
-					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产编号') , templet: function (d) { return templet('assetCode',d.assetCode,d);}  }
-					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return templet('assetStatus',fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.assetStatus),d);}}
-					,{ field: 'goodsId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('物品档案'), templet: function (d) { return templet('goodsId' ,fox.joinLabel(d.goods,"name"),d);}}
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'manufacturerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('厂商'), templet: function (d) { return templet('manufacturerId' ,fox.joinLabel(d.manufacturer,"manufacturerName"),d);}}
-					,{ field: 'model', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('规格型号') , templet: function (d) { return templet('model',d.model,d);}  }
-					,{ field: 'unit', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('计量单位') , templet: function (d) { return templet('unit',d.unit,d);}  }
-					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('使用期限') , templet: function (d) { return templet('serviceLife',d.serviceLife,d);}  }
-					,{ field: 'safetyLevelCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('安全等级'), templet: function (d) { return templet('safetyLevelCode' ,fox.joinLabel(d.safetyLevel,"label"),d);}}
-					,{ field: 'serialNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('序列号') , templet: function (d) { return templet('serialNumber',d.serialNumber,d);}  }
-					,{ field: 'ownCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属公司') , templet: function (d) { return templet('ownCompanyId',fox.getProperty(d,["ownerCompany","fullName"]),d);} }
-					,{ field: 'managerId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('管理人员') , templet: function (d) { return templet('managerId',fox.getProperty(d,["manager","name"]),d);} }
-					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用公司/部门') , templet: function (d) { return templet('useOrganizationId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
-					,{ field: 'useUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') , templet: function (d) { return templet('useUserId',fox.getProperty(d,["useUser","name"]),d);} }
-					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置'), templet: function (d) { return templet('positionId' ,fox.joinLabel(d.position,"name"),d);}}
-					,{ field: 'positionDetail', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('详细位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
-					,{ field: 'warehouseId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('仓库'), templet: function (d) { return templet('warehouseId' ,fox.joinLabel(d.warehouse,"warehouseName"),d);}}
-					,{ field: 'sourceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('来源'), templet: function (d) { return templet('sourceId' ,fox.joinLabel(d.source,"label"),d);}}
-					,{ field: 'assetNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产数量') , templet: function (d) { return templet('assetNumber',d.assetNumber,d);}  }
-					,{ field: 'remainNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('剩余数量') , templet: function (d) { return templet('remainNumber',d.remainNumber,d);}  }
-					,{ field: 'purchaseDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('购置日期') ,templet: function (d) { return templet('purchaseDate',fox.dateFormat(d.purchaseDate,"yyyy-MM-dd"),d); }  }
-					,{ field: 'productionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('生产日期') ,templet: function (d) { return templet('productionDate',fox.dateFormat(d.productionDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'registerDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('登记时间') ,templet: function (d) { return templet('registerDate',fox.dateFormat(d.registerDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'rfid', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产RFID') , templet: function (d) { return templet('rfid',d.rfid,d);}  }
-					,{ field: 'lastVerificationDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('最近核对日期') ,templet: function (d) { return templet('lastVerificationDate',fox.dateFormat(d.lastVerificationDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'purpose', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用途') , templet: function (d) { return templet('purpose',d.purpose,d);}  }
-					,{ field: 'assetNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产备注') , templet: function (d) { return templet('assetNotes',d.assetNotes,d);}  }
-					,{ field: 'maintainerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保商'), templet: function (d) { return templet('maintainerId' ,fox.joinLabel(d.maintnainer,"maintainerName"),d);}}
-					,{ field: 'maintainerName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保厂商') , templet: function (d) { return templet('maintainerName',d.maintainerName,d);}  }
-					,{ field: 'maintenanceStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保状态'), templet: function (d) { return templet('maintenanceStatus' ,fox.joinLabel(d.assetMaintenanceStatus,"label"),d);}}
-					,{ field: 'contacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系人') , templet: function (d) { return templet('contacts',d.contacts,d);}  }
-					,{ field: 'contactInformation', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系方式') , templet: function (d) { return templet('contactInformation',d.contactInformation,d);}  }
-					,{ field: 'director', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') , templet: function (d) { return templet('director',d.director,d);}  }
-					,{ field: 'maintenanceStartDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('维保开始时间') ,templet: function (d) { return templet('maintenanceStartDate',fox.dateFormat(d.maintenanceStartDate,"yyyy-MM-dd"),d); }  }
-					,{ field: 'maintenanceEndDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('维保到期时间') ,templet: function (d) { return templet('maintenanceEndDate',fox.dateFormat(d.maintenanceEndDate,"yyyy-MM-dd"),d); }  }
-					,{ field: 'maintenanceNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保备注') , templet: function (d) { return templet('maintenanceNotes',d.maintenanceNotes,d);}  }
-					,{ field: 'financialCategoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务分类'), templet: function (d) { return templet('financialCategoryId' ,fox.joinLabel(d.categoryFinance,"hierarchyName"),d);}}
-					,{ field: 'financialCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务编号') , templet: function (d) { return templet('financialCode',d.financialCode,d);}  }
-					,{ field: 'supplierId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('供应商'), templet: function (d) { return templet('supplierId' ,fox.joinLabel(d.supplier,"supplierName"),d);}}
-					,{ field: 'taxAmountRate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('税额') , templet: function (d) { return templet('taxAmountRate',d.taxAmountRate,d);}  }
-					,{ field: 'taxAmountPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('含税金额') , templet: function (d) { return templet('taxAmountPrice',d.taxAmountPrice,d);}  }
-					,{ field: 'totalAmountPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产总值') , templet: function (d) { return templet('totalAmountPrice',d.totalAmountPrice,d);}  }
-					,{ field: 'originalUnitPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产原值(单价)') , templet: function (d) { return templet('originalUnitPrice',d.originalUnitPrice,d);}  }
-					,{ field: 'accumulatedDepreciation', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('累计折旧') , templet: function (d) { return templet('accumulatedDepreciation',d.accumulatedDepreciation,d);}  }
-					,{ field: 'residualsRate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('残值率') , templet: function (d) { return templet('residualsRate',d.residualsRate,d);}  }
-					,{ field: 'navPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产净值') , templet: function (d) { return templet('navPrice',d.navPrice,d);}  }
-					,{ field: 'purchaseUnitPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('采购单价') , templet: function (d) { return templet('purchaseUnitPrice',d.purchaseUnitPrice,d);}  }
-					,{ field: 'entryTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入账时间') ,templet: function (d) { return templet('entryTime',fox.dateFormat(d.entryTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'financialNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务备注') , templet: function (d) { return templet('financialNotes',d.financialNotes,d);}  }
-					,{ field: 'equipmentCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备编号') , templet: function (d) { return templet('equipmentCode',d.equipmentCode,d);}  }
-					,{ field: 'equipmentStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备状态'), templet:function (d){ return templet('equipmentStatus',fox.getEnumText(SELECT_EQUIPMENTSTATUS_DATA,d.equipmentStatus),d);}}
-					,{ field: 'equipmentIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备IP') , templet: function (d) { return templet('equipmentIp',d.equipmentIp,d);}  }
-					,{ field: 'manageIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('管理IP') , templet: function (d) { return templet('manageIp',d.manageIp,d);}  }
-					,{ field: 'equipmentCpu', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备CPU') , templet: function (d) { return templet('equipmentCpu',d.equipmentCpu,d);}  }
-					,{ field: 'equipmentMemory', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备内存') , templet: function (d) { return templet('equipmentMemory',d.equipmentMemory,d);}  }
-					,{ field: 'equipmentLabel', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备标签') , templet: function (d) { return templet('equipmentLabel',d.equipmentLabel,d);}  }
-					,{ field: 'equipmentConf', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备配置') , templet: function (d) { return templet('equipmentConf',d.equipmentConf,d);}  }
-					,{ field: 'equipmentEnvironmentCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运行环境'), templet: function (d) { return templet('equipmentEnvironmentCode' ,fox.joinLabel(d.equipmentEnvironment,"label"),d);}}
-					,{ field: 'equipmentSerialNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备序列号') , templet: function (d) { return templet('equipmentSerialNumber',d.equipmentSerialNumber,d);}  }
-					,{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('机柜'), templet: function (d) { return templet('rackId' ,fox.joinLabel(d.rack,"rackName"),d);}}
-					,{ field: 'rackUpNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜上位置') , templet: function (d) { return templet('rackUpNumber',d.rackUpNumber,d);}  }
-					,{ field: 'rackDownNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜下位置') , templet: function (d) { return templet('rackDownNumber',d.rackDownNumber,d);}  }
-					,{ field: 'label', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签1') , templet: function (d) { return templet('label',d.label,d);}  }
-					,{ field: 'label2', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签2') , templet: function (d) { return templet('label2',d.label2,d);}  }
-					,{ field: 'internalControlLabel', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内部控制标签') , templet: function (d) { return templet('internalControlLabel',d.internalControlLabel,d);}  }
-					,{ field: 'billId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单据') , templet: function (d) { return templet('billId',d.billId,d);}  }
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
-					,{ field: 'chsType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更类型') , templet: function (d) { return templet('chsType',d.chsType,d);}  }
-					,{ field: 'chsStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更状态') , templet: function (d) { return templet('chsStatus',d.chsStatus,d);}  }
-					,{ field: 'chsVersion', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更版本号') , templet: function (d) { return templet('chsVersion',d.chsVersion,d);}  }
-					,{ field: 'changeInstanceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更ID') , templet: function (d) { return templet('changeInstanceId',d.changeInstanceId,d);}  }
-					,{ field: 'summary', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('流程概要') , templet: function (d) { return templet('summary',d.summary,d);}  }
-					,{ field: 'latestApproverId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('最后审批人账户ID') , templet: function (d) { return templet('latestApproverId',d.latestApproverId,d);}  }
-					,{ field: 'latestApproverName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('最后审批人姓名') , templet: function (d) { return templet('latestApproverName',d.latestApproverName,d);}  }
-					,{ field: 'nextApproverIds', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('下一节点审批人') , templet: function (d) { return templet('nextApproverIds',d.nextApproverIds,d);}  }
-					,{ field: 'nextApproverNames', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('下一个审批节点审批人姓名') , templet: function (d) { return templet('nextApproverNames',d.nextApproverNames,d);}  }
-					,{ field: 'approvalOpinion', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('审批意见') , templet: function (d) { return templet('approvalOpinion',d.approvalOpinion,d);}  }
+					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('资产分类'), templet: function (d) { return templet('categoryId' ,fox.joinLabel(d.category,"name"),d);}}
+					,{ field: 'categoryCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('分类编码') , templet: function (d) { return templet('categoryCode',d.categoryCode,d);}  }
+					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
+					,{ field: 'procId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('流程') , templet: function (d) { return templet('procId',d.procId,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+					,{ field: 'batchCode', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('批次编码') , templet: function (d) { return templet('batchCode',d.batchCode,d);}  }
+					,{ field: 'ownerCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('归属') , templet: function (d) { return templet('ownerCode',d.ownerCode,d);}  }
+					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('资产编号') , templet: function (d) { return templet('assetCode',d.assetCode,d);}  }
+					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('资产状态'), templet:function (d){ return templet('assetStatus',fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.assetStatus),d);}}
+					,{ field: 'goodsId', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('物品档案'), templet: function (d) { return templet('goodsId' ,fox.joinLabel(d.goods,"name"),d);}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
+					,{ field: 'manufacturerId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('厂商'), templet: function (d) { return templet('manufacturerId' ,fox.joinLabel(d.manufacturer,"manufacturerName"),d);}}
+					,{ field: 'model', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('规格型号') , templet: function (d) { return templet('model',d.model,d);}  }
+					,{ field: 'unit', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('计量单位') , templet: function (d) { return templet('unit',d.unit,d);}  }
+					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('使用期限') , templet: function (d) { return templet('serviceLife',d.serviceLife,d);}  }
+					,{ field: 'safetyLevelCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('安全等级'), templet: function (d) { return templet('safetyLevelCode' ,fox.joinLabel(d.safetyLevel,"label"),d);}}
+					,{ field: 'serialNumber', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('序列号') , templet: function (d) { return templet('serialNumber',d.serialNumber,d);}  }
+					,{ field: 'ownCompanyId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('所属公司') , templet: function (d) { return templet('ownCompanyId',fox.getProperty(d,["ownerCompany","fullName"]),d);} }
+					,{ field: 'managerId', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('管理人员') , templet: function (d) { return templet('managerId',fox.getProperty(d,["manager","name"]),d);} }
+					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('使用公司/部门') , templet: function (d) { return templet('useOrganizationId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
+					,{ field: 'useUserId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('使用人员') , templet: function (d) { return templet('useUserId',fox.getProperty(d,["useUser","name"]),d);} }
+					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('位置'), templet: function (d) { return templet('positionId' ,fox.joinLabel(d.position,"name"),d);}}
+					,{ field: 'positionDetail', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('详细位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
+					,{ field: 'warehouseId', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('仓库'), templet: function (d) { return templet('warehouseId' ,fox.joinLabel(d.warehouse,"warehouseName"),d);}}
+					,{ field: 'sourceId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('来源'), templet: function (d) { return templet('sourceId' ,fox.joinLabel(d.source,"label"),d);}}
+					,{ field: 'assetNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('资产数量') , templet: function (d) { return templet('assetNumber',d.assetNumber,d);}  }
+					,{ field: 'remainNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('剩余数量') , templet: function (d) { return templet('remainNumber',d.remainNumber,d);}  }
+					,{ field: 'purchaseDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('购置日期') ,templet: function (d) { return templet('purchaseDate',fox.dateFormat(d.purchaseDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'productionDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('生产日期') ,templet: function (d) { return templet('productionDate',fox.dateFormat(d.productionDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'registerDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('登记时间') ,templet: function (d) { return templet('registerDate',fox.dateFormat(d.registerDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'rfid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('资产RFID') , templet: function (d) { return templet('rfid',d.rfid,d);}  }
+					,{ field: 'lastVerificationDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('最近核对日期') ,templet: function (d) { return templet('lastVerificationDate',fox.dateFormat(d.lastVerificationDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'purpose', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('用途') , templet: function (d) { return templet('purpose',d.purpose,d);}  }
+					,{ field: 'assetNotes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('资产备注') , templet: function (d) { return templet('assetNotes',d.assetNotes,d);}  }
+					,{ field: 'maintainerId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('维保商'), templet: function (d) { return templet('maintainerId' ,fox.joinLabel(d.maintnainer,"maintainerName"),d);}}
+					,{ field: 'maintainerName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('维保厂商') , templet: function (d) { return templet('maintainerName',d.maintainerName,d);}  }
+					,{ field: 'maintenanceStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('维保状态'), templet: function (d) { return templet('maintenanceStatus' ,fox.joinLabel(d.assetMaintenanceStatus,"label"),d);}}
+					,{ field: 'contacts', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('联系人') , templet: function (d) { return templet('contacts',d.contacts,d);}  }
+					,{ field: 'contactInformation', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('联系方式') , templet: function (d) { return templet('contactInformation',d.contactInformation,d);}  }
+					,{ field: 'director', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('负责人') , templet: function (d) { return templet('director',d.director,d);}  }
+					,{ field: 'maintenanceStartDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('维保开始时间') ,templet: function (d) { return templet('maintenanceStartDate',fox.dateFormat(d.maintenanceStartDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'maintenanceEndDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('维保到期时间') ,templet: function (d) { return templet('maintenanceEndDate',fox.dateFormat(d.maintenanceEndDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'maintenanceNotes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('维保备注') , templet: function (d) { return templet('maintenanceNotes',d.maintenanceNotes,d);}  }
+					,{ field: 'financialCategoryId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('财务分类'), templet: function (d) { return templet('financialCategoryId' ,fox.joinLabel(d.categoryFinance,"hierarchyName"),d);}}
+					,{ field: 'financialCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('财务编号') , templet: function (d) { return templet('financialCode',d.financialCode,d);}  }
+					,{ field: 'supplierId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('供应商'), templet: function (d) { return templet('supplierId' ,fox.joinLabel(d.supplier,"supplierName"),d);}}
+					,{ field: 'taxAmountRate', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('税额') , templet: function (d) { return templet('taxAmountRate',d.taxAmountRate,d);}  }
+					,{ field: 'taxAmountPrice', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('含税金额') , templet: function (d) { return templet('taxAmountPrice',d.taxAmountPrice,d);}  }
+					,{ field: 'totalAmountPrice', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('资产总值') , templet: function (d) { return templet('totalAmountPrice',d.totalAmountPrice,d);}  }
+					,{ field: 'originalUnitPrice', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('资产原值(单价)') , templet: function (d) { return templet('originalUnitPrice',d.originalUnitPrice,d);}  }
+					,{ field: 'accumulatedDepreciation', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('累计折旧') , templet: function (d) { return templet('accumulatedDepreciation',d.accumulatedDepreciation,d);}  }
+					,{ field: 'residualsRate', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('残值率') , templet: function (d) { return templet('residualsRate',d.residualsRate,d);}  }
+					,{ field: 'navPrice', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('资产净值') , templet: function (d) { return templet('navPrice',d.navPrice,d);}  }
+					,{ field: 'purchaseUnitPrice', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('采购单价') , templet: function (d) { return templet('purchaseUnitPrice',d.purchaseUnitPrice,d);}  }
+					,{ field: 'entryTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('入账时间') ,templet: function (d) { return templet('entryTime',fox.dateFormat(d.entryTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'financialNotes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('财务备注') , templet: function (d) { return templet('financialNotes',d.financialNotes,d);}  }
+					,{ field: 'equipmentCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备编号') , templet: function (d) { return templet('equipmentCode',d.equipmentCode,d);}  }
+					,{ field: 'equipmentStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备状态'), templet:function (d){ return templet('equipmentStatus',fox.getEnumText(SELECT_EQUIPMENTSTATUS_DATA,d.equipmentStatus),d);}}
+					,{ field: 'equipmentIp', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备IP') , templet: function (d) { return templet('equipmentIp',d.equipmentIp,d);}  }
+					,{ field: 'manageIp', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('管理IP') , templet: function (d) { return templet('manageIp',d.manageIp,d);}  }
+					,{ field: 'equipmentCpu', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备CPU') , templet: function (d) { return templet('equipmentCpu',d.equipmentCpu,d);}  }
+					,{ field: 'equipmentMemory', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备内存') , templet: function (d) { return templet('equipmentMemory',d.equipmentMemory,d);}  }
+					,{ field: 'equipmentLabel', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备标签') , templet: function (d) { return templet('equipmentLabel',d.equipmentLabel,d);}  }
+					,{ field: 'equipmentConf', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备配置') , templet: function (d) { return templet('equipmentConf',d.equipmentConf,d);}  }
+					,{ field: 'equipmentEnvironmentCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('运行环境'), templet: function (d) { return templet('equipmentEnvironmentCode' ,fox.joinLabel(d.equipmentEnvironment,"label"),d);}}
+					,{ field: 'equipmentSerialNumber', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备序列号') , templet: function (d) { return templet('equipmentSerialNumber',d.equipmentSerialNumber,d);}  }
+					,{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('机柜'), templet: function (d) { return templet('rackId' ,fox.joinLabel(d.rack,"rackName"),d);}}
+					,{ field: 'rackUpNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('设备机柜上位置') , templet: function (d) { return templet('rackUpNumber',d.rackUpNumber,d);}  }
+					,{ field: 'rackDownNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('设备机柜下位置') , templet: function (d) { return templet('rackDownNumber',d.rackDownNumber,d);}  }
+					,{ field: 'label', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('标签1') , templet: function (d) { return templet('label',d.label,d);}  }
+					,{ field: 'label2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签2') , templet: function (d) { return templet('label2',d.label2,d);}  }
+					,{ field: 'internalControlLabel', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('内部控制标签') , templet: function (d) { return templet('internalControlLabel',d.internalControlLabel,d);}  }
+					,{ field: 'billId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('单据') , templet: function (d) { return templet('billId',d.billId,d);}  }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
+					,{ field: 'chsType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('变更类型') , templet: function (d) { return templet('chsType',d.chsType,d);}  }
+					,{ field: 'chsStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('变更状态') , templet: function (d) { return templet('chsStatus',d.chsStatus,d);}  }
+					,{ field: 'chsVersion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('变更版本号') , templet: function (d) { return templet('chsVersion',d.chsVersion,d);}  }
+					,{ field: 'changeInstanceId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('变更ID') , templet: function (d) { return templet('changeInstanceId',d.changeInstanceId,d);}  }
+					,{ field: 'summary', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('流程概要') , templet: function (d) { return templet('summary',d.summary,d);}  }
+					,{ field: 'latestApproverId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('最后审批人账户ID') , templet: function (d) { return templet('latestApproverId',d.latestApproverId,d);}  }
+					,{ field: 'latestApproverName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('最后审批人姓名') , templet: function (d) { return templet('latestApproverName',d.latestApproverName,d);}  }
+					,{ field: 'nextApproverIds', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('下一节点审批人') , templet: function (d) { return templet('nextApproverIds',d.nextApproverIds,d);}  }
+					,{ field: 'nextApproverNames', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('下一个审批节点审批人姓名') , templet: function (d) { return templet('nextApproverNames',d.nextApproverNames,d);}  }
+					,{ field: 'approvalOpinion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('审批意见') , templet: function (d) { return templet('approvalOpinion',d.approvalOpinion,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -172,6 +172,8 @@ function ListPage() {
 							} else {
 								layer.msg(fox.translate('数据导入失败')+"!");
 							}
+							// 是否执行后续逻辑：错误提示
+							return false;
 						}
 					}:false
 				}
@@ -180,7 +182,7 @@ function ListPage() {
 			dataTable=fox.renderTable(tableConfig);
 			//绑定排序事件
 			table.on('sort(data-table)', function(obj){
-			  refreshTableData(obj.field,obj.type);
+			  refreshTableData(obj.sortField,obj.type);
 			});
 			window.pageExt.list.afterTableRender && window.pageExt.list.afterTableRender();
 		}
@@ -188,27 +190,121 @@ function ListPage() {
     };
 
 	/**
+	 * 刷新单号数据
+	 * */
+	function refreshRowData(data,remote) {
+		var context=dataTable.getDataRowContext( { id : data.id } );
+		if(context==null) return;
+		if(remote) {
+			admin.post(moduleURL+"/get-by-id", { id : data.id }, function (r) {
+				if (r.success) {
+					data = r.data;
+					context.update(data);
+				} else {
+					fox.showMessage(data);
+				}
+			});
+		} else {
+			context.update(data);
+		}
+	}
+
+	/**
       * 刷新表格数据
       */
 	function refreshTableData(sortField,sortType,reset) {
+		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
+		value.id={ inputType:"button",value: $("#id").val()};
+		value.categoryId={ inputType:"select_box", value: getSelectedValue("#categoryId","value") ,fillBy:["category"]  , label:getSelectedValue("#categoryId","nameStr") };
+		value.categoryCode={ inputType:"button",value: $("#categoryCode").val()};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.procId={ inputType:"button",value: $("#procId").val()};
+		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
+		value.batchCode={ inputType:"button",value: $("#batchCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.ownerCode={ inputType:"button",value: $("#ownerCode").val()};
 		value.assetCode={ inputType:"button",value: $("#assetCode").val()};
-		value.assetStatus={ inputType:"select_box", value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr") };
-		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.manufacturerId={ inputType:"select_box", value: xmSelect.get("#manufacturerId",true).getValue("value") ,fillBy:["manufacturer"]  , label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
-		value.model={ inputType:"button",value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.serialNumber={ inputType:"button",value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.assetStatus={ inputType:"select_box", value: getSelectedValue("#assetStatus","value"), label:getSelectedValue("#assetStatus","nameStr") };
+		value.display={ inputType:"button",value: $("#display").val()};
+		value.cleanOut={ inputType:"button",value: $("#cleanOut").val()};
+		value.goodsId={ inputType:"select_box", value: getSelectedValue("#goodsId","value") ,fillBy:["goods"]  , label:getSelectedValue("#goodsId","nameStr") };
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.manufacturerId={ inputType:"select_box", value: getSelectedValue("#manufacturerId","value") ,fillBy:["manufacturer"]  , label:getSelectedValue("#manufacturerId","nameStr") };
+		value.model={ inputType:"button",value: $("#model").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.pictureId={ inputType:"button",value: $("#pictureId").val()};
+		value.unit={ inputType:"button",value: $("#unit").val()};
+		value.serviceLife={ inputType:"number_input", value: $("#serviceLife").val() };
+		value.safetyLevelCode={ inputType:"select_box", value: getSelectedValue("#safetyLevelCode","value") ,fillBy:["safetyLevel"]  , label:getSelectedValue("#safetyLevelCode","nameStr") };
+		value.serialNumber={ inputType:"button",value: $("#serialNumber").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.ownCompanyId={ inputType:"button",value: $("#ownCompanyId").val(),fillBy:["ownerCompany","fullName"] ,label:$("#ownCompanyId-button").text() };
 		value.managerId={ inputType:"button",value: $("#managerId").val(),fillBy:["manager","name"] ,label:$("#managerId-button").text() };
 		value.useOrganizationId={ inputType:"button",value: $("#useOrganizationId").val(),fillBy:["useOrganization","fullName"] ,label:$("#useOrganizationId-button").text() };
 		value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text() };
-		value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value") ,fillBy:["position"]  , label:xmSelect.get("#positionId",true).getValue("nameStr") };
-		value.sourceId={ inputType:"select_box", value: xmSelect.get("#sourceId",true).getValue("value") ,fillBy:["source"]  , label:xmSelect.get("#sourceId",true).getValue("nameStr") };
-		value.purchaseDate={ inputType:"date_input", begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
-		value.assetNotes={ inputType:"button",value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.maintainerId={ inputType:"select_box", value: xmSelect.get("#maintainerId",true).getValue("value") ,fillBy:["maintnainer"]  , label:xmSelect.get("#maintainerId",true).getValue("nameStr") };
+		value.positionId={ inputType:"select_box", value: getSelectedValue("#positionId","value") ,fillBy:["position"]  , label:getSelectedValue("#positionId","nameStr") };
+		value.positionDetail={ inputType:"button",value: $("#positionDetail").val()};
+		value.warehouseId={ inputType:"select_box", value: getSelectedValue("#warehouseId","value") ,fillBy:["warehouse"]  , label:getSelectedValue("#warehouseId","nameStr") };
+		value.sourceId={ inputType:"select_box", value: getSelectedValue("#sourceId","value") ,fillBy:["source"]  , label:getSelectedValue("#sourceId","nameStr") };
+		value.assetNumber={ inputType:"number_input", value: $("#assetNumber").val() };
+		value.remainNumber={ inputType:"number_input", value: $("#remainNumber").val() };
+		value.purchaseDate={ inputType:"date_input", begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() ,matchType:"auto" };
+		value.productionDate={ inputType:"date_input", value: $("#productionDate").val() ,matchType:"auto"};
+		value.registerDate={ inputType:"date_input", value: $("#registerDate").val() ,matchType:"auto"};
+		value.rfid={ inputType:"button",value: $("#rfid").val()};
+		value.attach={ inputType:"button",value: $("#attach").val()};
+		value.lastVerificationDate={ inputType:"date_input", value: $("#lastVerificationDate").val() ,matchType:"auto"};
+		value.purpose={ inputType:"button",value: $("#purpose").val()};
+		value.assetNotes={ inputType:"button",value: $("#assetNotes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.maintainerId={ inputType:"select_box", value: getSelectedValue("#maintainerId","value") ,fillBy:["maintnainer"]  , label:getSelectedValue("#maintainerId","nameStr") };
+		value.maintainerName={ inputType:"button",value: $("#maintainerName").val()};
+		value.maintenanceStatus={ inputType:"select_box", value: getSelectedValue("#maintenanceStatus","value") ,fillBy:["assetMaintenanceStatus"]  , label:getSelectedValue("#maintenanceStatus","nameStr") };
+		value.contacts={ inputType:"button",value: $("#contacts").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.contactInformation={ inputType:"button",value: $("#contactInformation").val()};
+		value.director={ inputType:"button",value: $("#director").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.maintenanceStartDate={ inputType:"date_input", begin: $("#maintenanceStartDate-begin").val(), end: $("#maintenanceStartDate-end").val() ,matchType:"auto" };
+		value.maintenanceEndDate={ inputType:"date_input", begin: $("#maintenanceEndDate-begin").val(), end: $("#maintenanceEndDate-end").val() ,matchType:"auto" };
+		value.maintenanceNotes={ inputType:"button",value: $("#maintenanceNotes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.financialCategoryId={ inputType:"select_box", value: getSelectedValue("#financialCategoryId","value") ,fillBy:["categoryFinance"]  , label:getSelectedValue("#financialCategoryId","nameStr") };
+		value.financialCode={ inputType:"button",value: $("#financialCode").val()};
+		value.supplierId={ inputType:"select_box", value: getSelectedValue("#supplierId","value") ,fillBy:["supplier"]  , label:getSelectedValue("#supplierId","nameStr") };
+		value.taxAmountRate={ inputType:"number_input", value: $("#taxAmountRate").val() };
+		value.taxAmountPrice={ inputType:"number_input", value: $("#taxAmountPrice").val() };
+		value.totalAmountPrice={ inputType:"number_input", value: $("#totalAmountPrice").val() };
+		value.originalUnitPrice={ inputType:"number_input", value: $("#originalUnitPrice").val() };
+		value.accumulatedDepreciation={ inputType:"number_input", value: $("#accumulatedDepreciation").val() };
+		value.residualsRate={ inputType:"number_input", value: $("#residualsRate").val() };
+		value.navPrice={ inputType:"number_input", value: $("#navPrice").val() };
+		value.purchaseUnitPrice={ inputType:"number_input", value: $("#purchaseUnitPrice").val() };
+		value.entryTime={ inputType:"date_input", begin: $("#entryTime-begin").val(), end: $("#entryTime-end").val() ,matchType:"auto" };
+		value.financialNotes={ inputType:"button",value: $("#financialNotes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.equipmentCode={ inputType:"button",value: $("#equipmentCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.equipmentStatus={ inputType:"select_box", value: getSelectedValue("#equipmentStatus","value"), label:getSelectedValue("#equipmentStatus","nameStr") };
+		value.equipmentIp={ inputType:"button",value: $("#equipmentIp").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.manageIp={ inputType:"button",value: $("#manageIp").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.equipmentCpu={ inputType:"button",value: $("#equipmentCpu").val()};
+		value.equipmentMemory={ inputType:"button",value: $("#equipmentMemory").val()};
+		value.equipmentLabel={ inputType:"button",value: $("#equipmentLabel").val()};
+		value.equipmentConf={ inputType:"button",value: $("#equipmentConf").val()};
+		value.equipmentEnvironmentCode={ inputType:"select_box", value: getSelectedValue("#equipmentEnvironmentCode","value") ,fillBy:["equipmentEnvironment"]  , label:getSelectedValue("#equipmentEnvironmentCode","nameStr") };
+		value.equipmentSerialNumber={ inputType:"button",value: $("#equipmentSerialNumber").val()};
+		value.rackId={ inputType:"select_box", value: getSelectedValue("#rackId","value") ,fillBy:["rack"]  , label:getSelectedValue("#rackId","nameStr") };
+		value.rackUpNumber={ inputType:"number_input", value: $("#rackUpNumber").val() };
+		value.rackDownNumber={ inputType:"number_input", value: $("#rackDownNumber").val() };
+		value.label={ inputType:"button",value: $("#label").val()};
+		value.label2={ inputType:"button",value: $("#label2").val()};
+		value.internalControlLabel={ inputType:"button",value: $("#internalControlLabel").val()};
+		value.billId={ inputType:"button",value: $("#billId").val()};
+		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
+		value.originatorId={ inputType:"button",value: $("#originatorId").val()};
+		value.chsType={ inputType:"button",value: $("#chsType").val()};
+		value.chsStatus={ inputType:"button",value: $("#chsStatus").val()};
+		value.chsVersion={ inputType:"button",value: $("#chsVersion").val()};
+		value.changeInstanceId={ inputType:"button",value: $("#changeInstanceId").val()};
+		value.summary={ inputType:"button",value: $("#summary").val()};
+		value.latestApproverId={ inputType:"button",value: $("#latestApproverId").val()};
+		value.latestApproverName={ inputType:"button",value: $("#latestApproverName").val()};
+		value.nextApproverIds={ inputType:"button",value: $("#nextApproverIds").val()};
+		value.nextApproverNames={ inputType:"button",value: $("#nextApproverNames").val()};
+		value.approvalOpinion={ inputType:"button",value: $("#approvalOpinion").val()};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -259,9 +355,14 @@ function ListPage() {
 		//渲染 status 下拉字段
 		fox.renderSelectBox({
 			el: "status",
-			radio: false,
+			radio: true,
 			size: "small",
 			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
@@ -276,9 +377,14 @@ function ListPage() {
 		//渲染 assetStatus 下拉字段
 		fox.renderSelectBox({
 			el: "assetStatus",
-			radio: false,
+			radio: true,
 			size: "small",
 			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("assetStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
@@ -293,9 +399,14 @@ function ListPage() {
 		//渲染 manufacturerId 下拉字段
 		fox.renderSelectBox({
 			el: "manufacturerId",
-			radio: false,
+			radio: true,
 			size: "small",
 			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("manufacturerId",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			paging: true,
 			pageRemote: true,
 			//转换数据
@@ -315,9 +426,14 @@ function ListPage() {
 		//渲染 positionId 下拉字段
 		fox.renderSelectBox({
 			el: "positionId",
-			radio: false,
+			radio: true,
 			size: "small",
 			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("positionId",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			paging: true,
 			pageRemote: true,
 			//转换数据
@@ -337,9 +453,14 @@ function ListPage() {
 		//渲染 sourceId 下拉字段
 		fox.renderSelectBox({
 			el: "sourceId",
-			radio: false,
+			radio: true,
 			size: "small",
 			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("sourceId",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
@@ -354,18 +475,33 @@ function ListPage() {
 		});
 		laydate.render({
 			elem: '#purchaseDate-begin',
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("purchaseDate",value, date, endDate);
+				},1);
+			}
 		});
 		laydate.render({
 			elem: '#purchaseDate-end',
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("purchaseDate",value, date, endDate);
+				},1);
+			}
 		});
 		//渲染 maintainerId 下拉字段
 		fox.renderSelectBox({
 			el: "maintainerId",
-			radio: false,
+			radio: true,
 			size: "small",
 			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("maintainerId",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			searchField: "maintainerName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -524,22 +660,18 @@ function ListPage() {
             }
             //调用批量删除接口
 			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产')+fox.translate('吗？'), function (i) {
-				top.layer.close(i);
-				top.layer.load(2);
-                admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
-					top.layer.closeAll('loading');
+                admin.post(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     if (data.success) {
 						if(window.pageExt.list.afterBatchDelete) {
 							var doNext=window.pageExt.list.afterBatchDelete(data);
 							if(!doNext) return;
 						}
-                    	top.layer.msg(data.message, {icon: 1, time: 500});
+						fox.showMessage(data);
                         refreshTableData();
                     } else {
-						top.layer.msg(data.message, {icon: 2, time: 1500});
+						fox.showMessage(data);
                     }
                 });
-
 			});
         }
 	}
@@ -560,29 +692,21 @@ function ListPage() {
 
 			admin.putTempData('eam-asset-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('eam-asset-form-data-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
-						 layer.msg(data.message, {icon: 1, time: 1500});
+						 fox.showMessage(data);
 					}
 				});
 			} else if (layEvent === 'view') { // 查看
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('eam-asset-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
-						top.layer.msg(data.message, {icon: 1, time: 1500});
+						fox.showMessage(data);
 					}
 				});
 			}
@@ -603,10 +727,10 @@ function ListPage() {
 								var doNext=window.pageExt.list.afterSingleDelete(data);
 								if(!doNext) return;
 							}
-							top.layer.msg(data.message, {icon: 1, time: 500});
+							fox.showMessage(data);
 							refreshTableData();
 						} else {
-							top.layer.msg(data.message, {icon: 2, time: 1500});
+							fox.showMessage(data);
 						}
 					});
 				});
@@ -629,7 +753,10 @@ function ListPage() {
 		}
 		var action=admin.getTempData('eam-asset-form-data-form-action');
 		var queryString="";
-		if(data && data.id) queryString="?" + 'id=' + data.id;
+		if(data && data.id) queryString='id=' + data.id;
+		if(window.pageExt.list.makeFormQueryString) {
+			queryString=window.pageExt.list.makeFormQueryString(data,queryString,action);
+		}
 		admin.putTempData('eam-asset-form-data', data);
 		var area=admin.getTempData('eam-asset-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
@@ -646,15 +773,21 @@ function ListPage() {
 			area: ["98%",height+"px"],
 			type: 2,
 			id:"eam-asset-form-data-win",
-			content: '/business/eam/asset/asset_form.html' + queryString,
+			content: '/business/eam/asset/asset_form.html' + (queryString?("?"+queryString):""),
 			finish: function () {
-				refreshTableData();
+				if(action=="create") {
+					refreshTableData();
+				}
+				if(action=="edit") {
+					false?refreshTableData():refreshRowData(data,true);
+				}
 			}
 		});
 	};
 
 	window.module={
 		refreshTableData: refreshTableData,
+		refreshRowData: refreshRowData,
 		getCheckedList: getCheckedList
 	};
 

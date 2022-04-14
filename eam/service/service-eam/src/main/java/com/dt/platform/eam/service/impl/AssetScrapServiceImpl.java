@@ -108,7 +108,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 		AssetScrap billData=getById(id);
 		if(AssetHandleStatusEnum.COMPLETE.code().equals(billData.getStatus())){
-			String sql="update eam_asset set owner_code=? where id in (select asset_id from eam_asset_item where handle_id=? and crd in ('r','c') and deleted=0)";
+			String sql="update eam_asset set asset_status='"+AssetStatusEnum.HANDLED+"',owner_code=? where id in (select asset_id from eam_asset_item where handle_id=? and crd in ('r','c') and deleted=0)";
 			dao.execute(sql, AssetOwnerCodeEnum.ASSET_CLEAN_OUT.code(),id);
 			AssetScrap bill=new AssetScrap();
 			bill.setId(id);
