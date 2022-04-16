@@ -17,7 +17,7 @@
 - 数据库链接池:Druid 1.2.8
 - 模版引擎:Thymeleaf 3
 - 运行容器:Undertow
-- 持久层框架:Foxnic,Foxnic-Web 文档
+- 持久层框架:[Foxnic](https://gitee.com/LeeFJ/foxnic),[Foxnic-Web](https://gitee.com/LeeFJ/foxnic-web) [开发文档](http://foxnicweb.com/docs/doc.html)
 - 日志管理:Logback
 - 流程引擎:Camunda
 - 任务调度:Quartz
