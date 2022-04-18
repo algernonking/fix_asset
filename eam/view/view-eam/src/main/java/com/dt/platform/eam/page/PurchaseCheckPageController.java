@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 采购验收 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:07
+ * @since 2022-04-16 23:19:17
 */
 
 @Controller("EamPurchaseCheckPageController")
@@ -41,7 +41,8 @@ public class PurchaseCheckPageController extends ViewController {
 	 * 采购验收 功能主页面
 	 */
 	@RequestMapping("/purchase_check_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String pageType) {
+		model.addAttribute("pageType",pageType);
 		return prefix+"/purchase_check_list";
 	}
 
@@ -49,7 +50,8 @@ public class PurchaseCheckPageController extends ViewController {
 	 * 采购验收 表单页面
 	 */
 	@RequestMapping("/purchase_check_form.html")
-	public String form(Model model,HttpServletRequest request , String id) {
+	public String form(Model model,HttpServletRequest request , String id,String applyId) {
+		model.addAttribute("applyId",applyId);
 		return prefix+"/purchase_check_form";
 	}
 }

@@ -70,6 +70,8 @@ public class AssetBillController extends SuperController {
     @Autowired
     private IAssetTranferService assetTranferService;
 
+    @Autowired
+    private IPurchaseApplyService purchaseApplyService;
 
     private  InputStream cloneInputStream(InputStream input) {
         try {
@@ -260,6 +262,25 @@ public class AssetBillController extends SuperController {
     public void queryCollectionReturnBill(String id,HttpServletResponse response) throws Exception {
         InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_COLLECTION_RETURN_BILL.code());
         Map<String,Object> map=assetCollectionReturnService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("领用退库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
+    }
+
+    @SentinelResource(value = AssetBillServiceProxy.QUERY_PURCHASE_APPLY_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @RequestMapping(AssetBillServiceProxy.QUERY_PURCHASE_APPLY_BILL)
+    public void queryPurchaseApplyBill(String id,HttpServletResponse response) throws Exception {
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_PURCHASE_APPLY.code());
+        Map<String,Object> map=purchaseApplyService.getBill(id);
         HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
         Configure config = Configure.builder().bind("assetList",policy).build();
         XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);

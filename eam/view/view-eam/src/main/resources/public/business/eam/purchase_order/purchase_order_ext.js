@@ -1,7 +1,7 @@
 /**
  * 采购订单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:15
+ * @since 2022-04-16 08:07:35
  */
 
 layui.config({
@@ -17,15 +17,21 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+    var formAction=admin.getTempData('eam-purchase-order-form-data-form-action');
     //模块基础路径
     const moduleURL="/service-eam/eam-purchase-order";
-
+    var timestamp = Date.parse(new Date());
     //列表页的扩展
     var list={
         /**
          * 列表页初始化前调用
          * */
         beforeInit:function () {
+            if(PAGE_TYPE&&PAGE_TYPE=="view"){
+                var toolHtml=document.getElementById("toolbarTemplate").innerHTML;
+                toolHtml=toolHtml.replace(/lay-event="create"/i, "style=\"display:none\"")
+                document.getElementById("toolbarTemplate").innerHTML=toolHtml;
+            }
             console.log("list:beforeInit");
         },
         /**
@@ -77,13 +83,25 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeQuery:function (conditions,param,location) {
             console.log('beforeQuery',conditions,param,location);
+            if(APPLY_ID&&APPLY_ID!="undefined"&&APPLY_ID!="null"){
+                conditions.applyId={ inputType:"button",value: APPLY_ID};
+            }else{
+                conditions.selectedCode={ inputType:"button",value: SELECTED_CODE};
+
+            }
             return true;
         },
         /**
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
-
+            for (var i = 0; i < data.length; i++) {
+                if (PAGE_TYPE && PAGE_TYPE == "view") {
+                    fox.disableButton($('.ops-view-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+            }
         },
         /**
          * 进一步转换 list 数据
@@ -96,6 +114,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单页面打开时，追加更多的参数信息
          * */
         makeFormQueryString:function(data,queryString,action) {
+            if(data.id){
+                queryString=queryString+"&selectedCode="+SELECTED_CODE;
+
+            }else{
+                queryString="selectedCode="+SELECTED_CODE;
+            }
+            queryString=queryString+"&applyId="+APPLY_ID;
             return queryString;
         },
         /**
@@ -218,6 +243,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
+            data.selectedCode=SELECTED_CODE;
+            data.applyId=APPLY_ID;
+
             return true;
         },
         /**
@@ -233,6 +261,32 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         afterSubmit:function (param,result) {
             console.log("afterSubmitt",param,result);
         },
+
+
+        assetSelectList:function (ifr,win,orderData) {
+
+
+            //设置 iframe 高度
+            ifr.height("450px");
+            //设置地址
+            var data={};
+            data.searchContent={};
+            data.assetSelectedCode=SELECTED_CODE;
+            data.assetBusinessType="asset_purchase_apply"
+            data.action=formAction;
+            data.ownerCode="asset_purchase_apply";
+         //   if(BILL_ID==null)BILL_ID="";
+            if(orderData.id){
+                data.assetOwnerId=orderData.id;
+            }else{
+                data.assetOwnerId=""
+            }
+            admin.putTempData('eam-asset-selected-data'+SELECTED_CODE,data,true);
+            admin.putTempData('eam-asset-selected-action'+SELECTED_CODE,formAction,true);
+            win.location="/business/eam/stock/stock_asset_list.html?assetSelectedCode="+SELECTED_CODE+"&ownerCode="+data.ownerCode;
+
+
+         },
 
         /**
          * 文件上传组件回调

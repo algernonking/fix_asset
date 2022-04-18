@@ -116,13 +116,17 @@ public class EamPurchaseApplyGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_PURCHASE_APPLY.APPLY_ORG_ID)
                 .form().button().chooseOrganization(true);
         cfg.view().field(EAMTables.EAM_PURCHASE_APPLY.APPLY_ORG_ID).table().fillBy("applyOrg","fullName");
+        cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","approvalRequired");
 
         cfg.view().list().disableBatchDelete();
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button","eam_asset_scrap:for-approval");
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button","eam_asset_scrap:confirm");
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button","eam_asset_scrap:revoke");
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button","eam_asset_scrap:bill");
+        cfg.view().list().operationColumn().addActionButton("验收","check","check-bill-button","eam_asset_purchase_apply:check");
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button","eam_asset_purchase_apply:for-approval");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button","eam_asset_purchase_apply:confirm");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button","eam_asset_purchase_apply:revoke");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button","eam_asset_purchase_apply:bill");
+
+
 
 
         cfg.view().formWindow().bottomSpace(250);
@@ -150,14 +154,17 @@ public class EamPurchaseApplyGtr extends BaseCodeGenerator {
                 }
         );
 
+        //订单
+        cfg.view().form().addPage("订单列表","assetSelectOrderList");
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
+                .setPageController(WriteMode.IGNORE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页
         //生成代码
         cfg.buildAll();
     }

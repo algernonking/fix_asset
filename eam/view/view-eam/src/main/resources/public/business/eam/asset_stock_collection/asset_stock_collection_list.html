@@ -5,7 +5,7 @@
  * @since 2021-11-29 13:22:24
  */
  -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -63,8 +63,8 @@
                     <!-- 使用人员 , useUserId ,typeName=button, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('使用人员')}" class="search-label useUserId-label">使用人员</span><span class="search-colon">:</span></div>
-                            <input lay-filter="useUserId" id="useUserId" name="useUserId"  type="hidden" class="layui-input"    lay-verify="|required"   />
-                            <button id="useUserId-button" type="button" action-type="emp-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
+                        <input lay-filter="useUserId" id="useUserId" name="useUserId"  type="hidden" class="layui-input"    lay-verify="|required"   />
+                        <button id="useUserId-button" type="button" action-type="emp-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
                     </div>
 
 
@@ -79,9 +79,9 @@
                     <!-- 领用日期 , collectionDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('领用日期')}" class="search-label collectionDate-label">领用日期</span><span class="search-colon">:</span></div>
-                            <input type="text" id="collectionDate-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
-                            <span class="search-dash">-</span>
-                            <input type="text" id="collectionDate-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                        <input type="text" id="collectionDate-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                        <span class="search-dash">-</span>
+                        <input type="text" id="collectionDate-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
 
 
@@ -124,7 +124,7 @@
     <button th:if="${forApprovalBtn}" class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
     <button th:if="${confirmDataBtn}" class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" th:text="${lang.translate('确认')}" data-id="{{d.id}}">确认</button>
     <button th:if="${revokeDataBtn}" class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" th:text="${lang.translate('撤销')}" data-id="{{d.id}}">撤销</button>
-<!--    <button th:if="${billBtn}" class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" th:text="${lang.translate('单据')}" data-id="{{d.id}}">单据</button>-->
+    <!--    <button th:if="${billBtn}" class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" th:text="${lang.translate('单据')}" data-id="{{d.id}}">单据</button>-->
 
 </script>
 

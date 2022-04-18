@@ -2,7 +2,7 @@
 /**
  * 采购订单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:18
+ * @since 2022-04-16 16:56:53
  */
  -->
  <!DOCTYPE html>
@@ -44,7 +44,7 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编码')}" class="search-label businessCode-label">业务编码</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
-                    <!-- 采购申请单 , applyId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 采购申请单 , applyId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 验收单 , checkId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
@@ -125,7 +125,12 @@
     var SELECT_STORAGETYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetPurchaseStorageTypeEnum')}]];
     var AUTH_PREFIX="eam_purchase_order";
 
+    // 页面类型
+    var PAGE_TYPE = [[${pageType}]] ;
+    // applyId
+    var APPLY_ID = [[${applyId}]] ;
 
+    var SELECTED_CODE = [[${selectedCode}]] ;
 </script>
 
 <script th:src="'/business/eam/purchase_order/purchase_order_ext.js?'+${cacheKey}"></script>

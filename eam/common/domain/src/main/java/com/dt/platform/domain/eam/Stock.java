@@ -23,7 +23,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产库存
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 16:22:44
+ * @since 2022-04-17 19:21:07
  * @sign F4443130CBD041049C830D051E99EA4F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

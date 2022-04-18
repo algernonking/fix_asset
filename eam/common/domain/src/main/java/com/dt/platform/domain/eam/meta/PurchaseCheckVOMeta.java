@@ -9,13 +9,13 @@ import com.dt.platform.domain.eam.Supplier;
 import com.dt.platform.domain.eam.PurchaseApply;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Employee;
-import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.PurchaseOrder;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:02
+ * @since 2022-04-16 23:19:16
  * @sign 0195E75D1437044564ACD2B3A16B6ECC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -165,12 +165,12 @@ public class PurchaseCheckVOMeta extends PurchaseCheckMeta {
 	/**
 	 * 采购申请 , 类型: java.lang.String
 	*/
-	public static final String OWNER_ID="ownerId";
+	public static final String APPLY_ID="applyId";
 	
 	/**
 	 * 采购申请 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseCheckVO,java.lang.String> OWNER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseCheckVO.class ,OWNER_ID, java.lang.String.class, "采购申请", "采购申请", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseCheckVO,java.lang.String> APPLY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseCheckVO.class ,APPLY_ID, java.lang.String.class, "采购申请", "采购申请", java.lang.String.class, null);
 	
 	/**
 	 * 验收单 , 类型: java.lang.String
@@ -413,14 +413,14 @@ public class PurchaseCheckVOMeta extends PurchaseCheckMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseCheckVO,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseCheckVO.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
-	 * 订单 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
+	 * 订单 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.PurchaseOrder
 	*/
 	public static final String ORDER_LIST="orderList";
 	
 	/**
-	 * 订单 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
+	 * 订单 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.PurchaseOrder
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseCheckVO,com.dt.platform.domain.eam.Asset> ORDER_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseCheckVO.class ,ORDER_LIST, java.util.List.class, "订单", "订单", com.dt.platform.domain.eam.Asset.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseCheckVO,com.dt.platform.domain.eam.PurchaseOrder> ORDER_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseCheckVO.class ,ORDER_LIST, java.util.List.class, "订单", "订单", com.dt.platform.domain.eam.PurchaseOrder.class, null);
 	
 	/**
 	 * 订单列表 , 集合类型: LIST , 类型: java.lang.String
@@ -435,7 +435,7 @@ public class PurchaseCheckVOMeta extends PurchaseCheckMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PROC_ID , STATUS , BUSINESS_CODE , NAME , OWNER_ID , CODE , SUPPLIER_ID , CHECK_ORG_ID , CHECK_USER_NAME , RECEIVE_DATE , CHECK_DATE , CHECK_INFORMATION , NOTES , ATTACH , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , SUPPLIER , PURCHASE_APPLY , CHECK_ORG , ORIGINATOR , ORDER_LIST , ORDER_IDS };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PROC_ID , STATUS , BUSINESS_CODE , NAME , APPLY_ID , CODE , SUPPLIER_ID , CHECK_ORG_ID , CHECK_USER_NAME , RECEIVE_DATE , CHECK_DATE , CHECK_INFORMATION , NOTES , ATTACH , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , SUPPLIER , PURCHASE_APPLY , CHECK_ORG , ORIGINATOR , ORDER_LIST , ORDER_IDS };
 	
 	/**
 	 * 代理类
@@ -601,12 +601,12 @@ public class PurchaseCheckVOMeta extends PurchaseCheckMeta {
 		
 		/**
 		 * 设置 采购申请
-		 * @param ownerId 采购申请
+		 * @param applyId 采购申请
 		 * @return 当前对象
 		*/
-		public PurchaseCheck setOwnerId(String ownerId) {
-			super.change(OWNER_ID,super.getOwnerId(),ownerId);
-			super.setOwnerId(ownerId);
+		public PurchaseCheck setApplyId(String applyId) {
+			super.change(APPLY_ID,super.getApplyId(),applyId);
+			super.setApplyId(applyId);
 			return this;
 		}
 		
@@ -879,7 +879,7 @@ public class PurchaseCheckVOMeta extends PurchaseCheckMeta {
 		 * @param orderList 订单
 		 * @return 当前对象
 		*/
-		public PurchaseCheck setOrderList(List<Asset> orderList) {
+		public PurchaseCheck setOrderList(List<PurchaseOrder> orderList) {
 			super.change(ORDER_LIST,super.getOrderList(),orderList);
 			super.setOrderList(orderList);
 			return this;

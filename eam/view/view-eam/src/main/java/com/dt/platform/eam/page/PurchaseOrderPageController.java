@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 采购订单 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:15
+ * @since 2022-04-16 07:45:23
 */
 
 @Controller("EamPurchaseOrderPageController")
@@ -41,15 +41,21 @@ public class PurchaseOrderPageController extends ViewController {
 	 * 采购订单 功能主页面
 	 */
 	@RequestMapping("/purchase_order_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String pageType,String applyId,String selectedCode) {
+		model.addAttribute("pageType",pageType);
+		model.addAttribute("applyId",applyId);
+		model.addAttribute("selectedCode",selectedCode);
 		return prefix+"/purchase_order_list";
+
 	}
 
 	/**
 	 * 采购订单 表单页面
 	 */
 	@RequestMapping("/purchase_order_form.html")
-	public String form(Model model,HttpServletRequest request , String id) {
+	public String form(Model model,HttpServletRequest request , String id,String applyId,String selectedCode) {
+		model.addAttribute("applyId",applyId);
+		model.addAttribute("selectedCode",selectedCode);
 		return prefix+"/purchase_order_form";
 	}
 }

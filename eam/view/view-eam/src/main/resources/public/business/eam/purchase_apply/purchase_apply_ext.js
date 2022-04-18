@@ -1,7 +1,7 @@
 /**
  * 采购申请 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:44:46
+ * @since 2022-04-16 06:46:55
  */
 
 layui.config({
@@ -25,7 +25,45 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         /**
          * 列表页初始化前调用
          * */
+
         beforeInit:function () {
+            var toolbarHtml=document.getElementById("toolbarTemplate").innerHTML;
+            var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
+            if(APPROVAL_REQUIRED){
+                operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
+                // operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
+                // document.getElementById("tableOperationTemplate").innerHTML=operHtml;
+            }else{
+                operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
+
+
+                operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+                // operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
+                // operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+                // document.getElementById("tableOperationTemplate").innerHTML=operHtml;
+            }
+
+            // if(PAGE_TYPE&&PAGE_TYPE=="approval"){
+            //     $("#status-search-unit").hide();
+            //     toolbarHtml=toolbarHtml.replace(/lay-event="create"/i, "style=\"display:none\"")
+            //     operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
+            //     operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
+            //     operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+            //     operHtml=operHtml.replace(/lay-event="edit"/i, "style=\"display:none\"")
+            //     operHtml=operHtml.replace(/lay-event="del"/i, "style=\"display:none\"")
+            //
+            //     operHtml=operHtml.replace(/lay-event="clean-out"/i, "style=\"display:none\"")
+            //     operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
+            //
+            // }else if( PAGE_TYPE&&PAGE_TYPE=="asset_scrap"){
+            //     operHtml=operHtml.replace(/lay-event="agree"/i, "style=\"display:none\"")
+            //     operHtml=operHtml.replace(/lay-event="deny"/i, "style=\"display:none\"")
+            // }
+
+            document.getElementById("toolbarTemplate").innerHTML=toolbarHtml;
+            document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             console.log("list:beforeInit");
         },
         /**
@@ -83,6 +121,60 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
+
+            for (var i = 0; i < data.length; i++) {
+                //如果审批中或审批通过的不允许编辑
+                if(data[i].status=="complete") {
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    if(data[i].assetCheck=="not_check"){
+                        console.log("enable")
+                    }else{
+                        fox.disableButton($('.check-bill-button').filter("[data-id='" + data[i].id + "']"), true);
+                    }
+
+                }else if(data[i].status=="incomplete"){
+                    fox.disableButton($('.check-bill-button').filter("[data-id='" + data[i].id + "']"), true);
+
+                    // fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    // fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    // fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                    // fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+
+
+                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="deny"){
+
+
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="approval"){
+
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    // fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="cancel"){
+
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+
+                if(data[i].cleanStatus=="complete"){
+                    fox.disableButton($('.clean-out-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+
+            }
 
         },
         /**
@@ -144,6 +236,32 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('beforeRowOperationEvent',data,obj);
             return true;
         },
+        billOper:function(url,btnClass,ps,successMessage){
+            var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
+            var api=moduleURL+"/"+url;
+
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, ps, function (r) {
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+        },
         /**
          * 表格右侧操作列更多按钮事件
          * */
@@ -154,6 +272,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('forApproval',data);
         },
         confirmData:function (data){
+            list.billOper("confirm-operation","confirm-data-button",{id:data.id},"已确认");
             console.log('confirmData',data);
         },
         revokeData:function (data){
@@ -162,6 +281,39 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         downloadBill:function (data){
             console.log('downloadBill',data);
         },
+        check:function (applyData){
+            //设置新增是初始化数据
+            var data={};
+            admin.putTempData('eam-purchase-check-form-data-form-action', "create",true);
+            var action="create";
+            var queryString="applyId="+applyData.id;
+            admin.putTempData('eam-purchase-check-form-data', data);
+            var area=admin.getTempData('eam-purchase-check-form-area');
+            var height= (area && area.height) ? area.height : ($(window).height()*0.6);
+            var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
+            var title = fox.translate('采购验收');
+            if(action=="create") title=fox.translate('添加')+title;
+            else if(action=="edit") title=fox.translate('修改')+title;
+            else if(action=="view") title=fox.translate('查看')+title;
+            admin.popupCenter({
+                title: title,
+                resize: false,
+                offset: [top,null],
+                area: ["85%",height+"px"],
+                type: 2,
+                id:"eam-purchase-check-form-data-win",
+                content: '/business/eam/purchase_check/purchase_check_form.html' + (queryString?("?"+queryString):""),
+                finish: function () {
+                    setTimeout(function(){
+                        window.module.refreshTableData();
+                    },2500);
+
+                    if(action=="create") {
+
+                    }
+                }
+            });
+        },
         /**
          * 末尾执行
          */
@@ -169,7 +321,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
         }
     }
-
+    var timestamp = Date.parse(new Date());
     //表单页的扩展
     var form={
         /**
@@ -229,6 +381,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
+            var listData=$(".form-iframe")[0].contentWindow.module.getList(function(res){
+                data.orderIds=res;
+            })
             console.log("beforeSubmit",data);
             return true;
         },
@@ -246,6 +401,23 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
+        /**
+         *  加载 订单列表
+         */
+        assetSelectOrderList:function (ifr,win,data) {
+            // debugger
+            var pageType="view";
+            var actionType=admin.getTempData('eam-purchase-apply-form-data-form-action');
+            if(actionType=="view"){
+                pageType="view"
+            }else{
+                pageType="edit"
+            }
+            //设置 iframe 高度
+            ifr.height("400px");
+            //设置地址
+            win.location="/business/eam/purchase_order/purchase_order_list.html?selectedCode="+timestamp+"&pageType="+pageType+"&applyId="+data.id;
+        },
         /**
          * 文件上传组件回调
          *  event 类型包括：

@@ -37,7 +37,7 @@ import com.dt.platform.domain.eam.Supplier;
 import com.dt.platform.domain.eam.PurchaseApply;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Employee;
-import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.PurchaseOrder;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -53,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 采购验收 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:02
+ * @since 2022-04-16 23:19:16
 */
 
 @Api(tags = "采购验收")
@@ -70,20 +70,20 @@ public class PurchaseCheckController extends SuperController {
 	*/
 	@ApiOperation(value = "添加采购验收")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "567087680291078144"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.OWNER_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.APPLY_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_ORG_ID , value = "验收部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -103,7 +103,7 @@ public class PurchaseCheckController extends SuperController {
 	*/
 	@ApiOperation(value = "删除采购验收")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "567087680291078144")
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = PurchaseCheckVOMeta.ID)
@@ -137,20 +137,20 @@ public class PurchaseCheckController extends SuperController {
 	*/
 	@ApiOperation(value = "更新采购验收")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "567087680291078144"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.OWNER_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.APPLY_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_ORG_ID , value = "验收部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -170,20 +170,20 @@ public class PurchaseCheckController extends SuperController {
 	*/
 	@ApiOperation(value = "保存采购验收")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "567087680291078144"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.OWNER_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.APPLY_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_ORG_ID , value = "验收部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -216,6 +216,7 @@ public class PurchaseCheckController extends SuperController {
 		purchaseCheckService.dao().fill(purchaseCheck)
 			.with("checkOrg")
 			.with(PurchaseCheckMeta.SUPPLIER)
+			.with(PurchaseCheckMeta.PURCHASE_APPLY)
 			.execute();
 		result.success(true).data(purchaseCheck);
 		return result;
@@ -247,20 +248,20 @@ public class PurchaseCheckController extends SuperController {
 	*/
 	@ApiOperation(value = "查询采购验收")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "567087680291078144"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.OWNER_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.APPLY_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_ORG_ID , value = "验收部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -281,20 +282,20 @@ public class PurchaseCheckController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询采购验收")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "567087680291078144"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.OWNER_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.APPLY_ID , value = "采购申请" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CODE , value = "验收单" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.SUPPLIER_ID , value = "供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_ORG_ID , value = "验收部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_USER_NAME , value = "验收人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.RECEIVE_DATE , value = "到货日期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_DATE , value = "验收时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.CHECK_INFORMATION , value = "验收信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PurchaseCheckVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PurchaseCheckVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
@@ -309,6 +310,7 @@ public class PurchaseCheckController extends SuperController {
 		purchaseCheckService.dao().fill(list)
 			.with("checkOrg")
 			.with(PurchaseCheckMeta.SUPPLIER)
+			.with(PurchaseCheckMeta.PURCHASE_APPLY)
 			.execute();
 		result.success(true).data(list);
 		return result;

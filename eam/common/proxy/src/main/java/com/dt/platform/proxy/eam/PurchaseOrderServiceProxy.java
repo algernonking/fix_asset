@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 采购订单  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:13
+ * @since 2022-04-17 01:46:37
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = PurchaseOrderServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

@@ -29,6 +29,9 @@ public enum AssetAttributeItemOwnerEnum implements CodeTextEnum {
 	ASSET_STOCK_SHOW("asset_stock_show","库存公共显示"),
 //	ASSET_STOCK_INSERT("asset_stock_insert","库存插入"),
 
+	ASSET_PURCHASE_APPLY_BILL("asset_purchase_apply_bill","采购申请单据"),
+	ASSET_PURCHASE_APPLY_SHOW("asset_purchase_apply_show","采购申请公共显示"),
+
 	//单据和资产选择，资产公共显示
 	ASSET_BILL("asset_bill" , "资产单据列表"),
 	PUBLIC_SHOW("public_show" , "公共显示列表"),

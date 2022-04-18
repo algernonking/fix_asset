@@ -19,7 +19,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 采购订单
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:13
+ * @since 2022-04-17 01:46:37
  * @sign F3BF4A39023C4678982061352917D506
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

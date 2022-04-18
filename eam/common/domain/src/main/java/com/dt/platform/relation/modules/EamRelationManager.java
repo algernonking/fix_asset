@@ -45,8 +45,11 @@ public class EamRelationManager extends RelationManager {
         this.setupInventoryManager();
         this.setupTplFile();
         this.setupAssetDataChange();
+
         this.setupStockAsset();
         this.setupStockAssetCollection();
+
+        this.setupAssetStockDeliver();
 
         this.setupPurchaseApply();
         this.setupPurchaseCheck();
@@ -55,6 +58,31 @@ public class EamRelationManager extends RelationManager {
 
     public void setupProperties() {
     }
+
+    public void setupAssetStockDeliver(){
+
+        this.property(AssetStockDeliverMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_DELIVER.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(AssetStockDeliverMeta.RECEIVER_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_DELIVER.RECEIVER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(AssetStockDeliverMeta.RECEIVING_COMPANY_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_DELIVER.RECEIVING_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        this.property(AssetStockDeliverMeta.RECEIVING_ORG_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_DELIVER.RECEIVING_ORG_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+
+        // 关联资产
+        this.property(AssetStockDeliverMeta.DELIVER_ASSET_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_DELIVER.ID ).join(EAMTables.EAM_ASSET.INTERNAL_CONTROL_LABEL);
+
+
+
+    }
+
+
 
     public void setupPurchaseOrder() {
 
@@ -89,7 +117,7 @@ public class EamRelationManager extends RelationManager {
     public void setupPurchaseCheck() {
 
         this.property(PurchaseCheckMeta.PURCHASE_APPLY_PROP)
-                .using(EAMTables.EAM_PURCHASE_CHECK.OWNER_ID).join(EAMTables.EAM_PURCHASE_APPLY.ID);
+                .using(EAMTables.EAM_PURCHASE_CHECK.APPLY_ID).join(EAMTables.EAM_PURCHASE_APPLY.ID);
 
         this.property(PurchaseCheckMeta.CHECK_ORG_PROP)
                 .using(EAMTables.EAM_PURCHASE_CHECK.CHECK_ORG_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);

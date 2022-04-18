@@ -70,6 +70,9 @@ public class StockPageController extends ViewController {
 		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
 			categoryCode=AssetCategoryCodeEnum.ASSET.code();
 			itemOwner=AssetAttributeItemOwnerEnum.ASSET_STOCK_BILL.code();
+		}else if(AssetOwnerCodeEnum.ASSET_PURCHASE_APPLY.code().equals(ownerCode)){
+			categoryCode=AssetCategoryCodeEnum.ASSET.code();
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_STOCK_BILL.code();
 		}
 
 
@@ -209,6 +212,8 @@ public class StockPageController extends ViewController {
 			itemOwner=AssetAttributeItemOwnerEnum.ASSET_CONSUMABLES_SHOW.code();
 		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
 			itemOwner=AssetAttributeItemOwnerEnum.ASSET_STOCK_SHOW.code();
+		}else if(AssetOwnerCodeEnum.ASSET_PURCHASE_APPLY.code().equals(ownerCode)){
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_PURCHASE_APPLY_SHOW.code();
 		}
 		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(itemOwner,null);
 		if(result.isSuccess()){

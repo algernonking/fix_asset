@@ -3,6 +3,9 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.meta.AssetScrapVOMeta;
+import com.dt.platform.proxy.eam.AssetScrapServiceProxy;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +40,7 @@ import com.dt.platform.domain.eam.Supplier;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.changes.ChangeInstance;
-import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.PurchaseOrder;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -53,7 +56,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 采购申请 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:44:46
+ * @since 2022-04-16 22:09:37
 */
 
 @Api(tags = "采购申请")
@@ -362,6 +365,84 @@ public class PurchaseApplyController extends SuperController {
 			.execute();
 		result.success(true).data(list);
 		return result;
+	}
+
+
+	/**
+	 * 报废送审
+	 * */
+	@ApiOperation(value = "报废送审")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = PurchaseApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = PurchaseApplyVOMeta.ID)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = PurchaseApplyServiceProxy.FOR_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(PurchaseApplyServiceProxy.FOR_APPROVAL)
+	public Result forApproval(String id)  {
+		return purchaseApplyService.forApproval(id);
+	}
+
+
+	/**
+	 * 确认
+	 * */
+	@ApiOperation(value = "报废确认")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = PurchaseApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = PurchaseApplyVOMeta.ID)
+	@ApiOperationSupport(order=13)
+	@SentinelResource(value = PurchaseApplyServiceProxy.CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(PurchaseApplyServiceProxy.CONFIRM_OPERATION)
+	public Result confirmOperation(String id)  {
+		return purchaseApplyService.confirmOperation(id);
+	}
+
+
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = PurchaseApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = PurchaseApplyVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = PurchaseApplyServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(PurchaseApplyServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return purchaseApplyService.revokeOperation(id);
+	}
+
+
+	/**
+	 * 审批
+	 * */
+	@ApiOperation(value = "审批")
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = PurchaseApplyServiceProxy.APPROVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(PurchaseApplyServiceProxy.APPROVE)
+	public Result approve(ProcessApproveVO approveVO)  {
+		return purchaseApplyService.approve(approveVO);
+	}
+
+
+	/**
+	 * 验收
+	 * */
+	@ApiOperation(value = "验收")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = PurchaseApplyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = PurchaseApplyVOMeta.ID)
+	@ApiOperationSupport(order=16)
+	@SentinelResource(value = PurchaseApplyServiceProxy.CHECK , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(PurchaseApplyServiceProxy.CHECK)
+	public Result check(String id,String checkId)  {
+		return purchaseApplyService.check(id,checkId);
 	}
 
 

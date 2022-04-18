@@ -1,7 +1,7 @@
 /**
  * 采购申请 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:44:47
+ * @since 2022-04-16 23:52:40
  */
 
 function FormPage() {
@@ -109,32 +109,6 @@ function FormPage() {
 				return opts;
 			}
 		});
-		//渲染 assetCheck 下拉字段
-		fox.renderSelectBox({
-			el: "assetCheck",
-			radio: true,
-			filterable: false,
-			on: function(data){
-				setTimeout(function () {
-					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetCheck",data.arr,data.change,data.isAdd);
-				},1);
-			},
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues=[],defaultIndexs=[];
-				if(action=="create") {
-					defaultValues = "not_check".split(",");
-					defaultIndexs = "".split(",");
-				}
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
 		//渲染 supplierId 下拉字段
 		fox.renderSelectBox({
 			el: "supplierId",
@@ -180,6 +154,32 @@ function FormPage() {
 			trigger:"click",
 			done: function(value, date, endDate){
 				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("applyDate",value, date, endDate);
+			}
+		});
+		//渲染 assetCheck 下拉字段
+		fox.renderSelectBox({
+			el: "assetCheck",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetCheck",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "not_check".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
 			}
 		});
 	    //渲染图片字段

@@ -1,7 +1,7 @@
 /**
  * 采购订单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:20
+ * @since 2022-04-16 16:56:54
  */
 
 
@@ -78,8 +78,8 @@ function ListPage() {
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编码') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('订单编号') , templet: function (d) { return templet('code',d.code,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('订单名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'applyId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('采购申请单') , templet: function (d) { return templet('applyId',d.applyId,d);}  }
-					,{ field: 'checkId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('验收单') , templet: function (d) { return templet('checkId',d.checkId,d);}  }
+					,{ field: 'applyId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('采购申请单'), templet: function (d) { return templet('applyId' ,fox.joinLabel(d.purchaseApply,"name"),d);}}
+			//		,{ field: 'checkId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('验收单') , templet: function (d) { return templet('checkId',d.checkId,d);}  }
 					,{ field: 'goodsType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('物品类型'), templet:function (d){ return templet('goodsType',fox.getEnumText(SELECT_GOODSTYPE_DATA,d.goodsType),d);}}
 					,{ field: 'storageType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('存放类型'), templet:function (d){ return templet('storageType',fox.getEnumText(SELECT_STORAGETYPE_DATA,d.storageType),d);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
@@ -145,7 +145,7 @@ function ListPage() {
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.code={ inputType:"button",value: $("#code").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.applyId={ inputType:"button",value: $("#applyId").val()};
+		value.applyId={ inputType:"select_box", value: getSelectedValue("#applyId","value") ,fillBy:["purchaseApply"]  , label:getSelectedValue("#applyId","nameStr") };
 		value.checkId={ inputType:"button",value: $("#checkId").val()};
 		value.goodsType={ inputType:"select_box", value: getSelectedValue("#goodsType","value"), label:getSelectedValue("#goodsType","nameStr") };
 		value.storageType={ inputType:"select_box", value: getSelectedValue("#storageType","value"), label:getSelectedValue("#storageType","nameStr") };
@@ -422,6 +422,7 @@ function ListPage() {
 		if(window.pageExt.list.makeFormQueryString) {
 			queryString=window.pageExt.list.makeFormQueryString(data,queryString,action);
 		}
+
 		admin.putTempData('eam-purchase-order-form-data', data);
 		var area=admin.getTempData('eam-purchase-order-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
@@ -431,6 +432,7 @@ function ListPage() {
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
 
+		console.log("queryString",queryString);
 		admin.popupCenter({
 			title: title,
 			resize: false,
@@ -450,10 +452,20 @@ function ListPage() {
 		});
 	};
 
+	function getList(callback) {
+		var tdata=table.cache['data-table'];
+		var res=[];
+		for(var i=0;i<tdata.length;i++) {
+			res.push(tdata[i].id);
+		}
+		callback(res);
+	}
+
 	window.module={
 		refreshTableData: refreshTableData,
 		refreshRowData: refreshRowData,
-		getCheckedList: getCheckedList
+		getCheckedList: getCheckedList,
+		getList: getList
 	};
 
 	window.pageExt.list.ending && window.pageExt.list.ending();

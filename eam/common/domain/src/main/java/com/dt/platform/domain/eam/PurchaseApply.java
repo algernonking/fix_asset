@@ -21,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 采购申请
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:44:46
- * @sign 9FA5D951028A2042ED05FFD744FA4940
+ * @since 2022-04-16 23:52:38
+ * @sign 42BF0CF6C8F06037D99CA97A316EEA9C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -71,12 +71,6 @@ public class PurchaseApply extends Entity {
 	private String applyStatus;
 	
 	/**
-	 * 验收情况：验收情况
-	*/
-	@ApiModelProperty(required = false,value="验收情况" , notes = "验收情况")
-	private String assetCheck;
-	
-	/**
 	 * 申请部门：申请部门
 	*/
 	@ApiModelProperty(required = false,value="申请部门" , notes = "申请部门")
@@ -111,6 +105,18 @@ public class PurchaseApply extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="申请日期" , notes = "申请日期")
 	private String applyDate;
+	
+	/**
+	 * 验收情况：验收情况
+	*/
+	@ApiModelProperty(required = false,value="验收情况" , notes = "验收情况")
+	private String assetCheck;
+	
+	/**
+	 * 验收编号：验收编号
+	*/
+	@ApiModelProperty(required = false,value="验收编号" , notes = "验收编号")
+	private String checkCode;
 	
 	/**
 	 * 备注：备注
@@ -278,7 +284,7 @@ public class PurchaseApply extends Entity {
 	 * 订单：订单
 	*/
 	@ApiModelProperty(required = false,value="订单" , notes = "订单")
-	private List<Asset> orderList;
+	private List<PurchaseOrder> orderList;
 	
 	/**
 	 * 订单列表：订单列表
@@ -401,25 +407,6 @@ public class PurchaseApply extends Entity {
 	}
 	
 	/**
-	 * 获得 验收情况<br>
-	 * 验收情况
-	 * @return 验收情况
-	*/
-	public String getAssetCheck() {
-		return assetCheck;
-	}
-	
-	/**
-	 * 设置 验收情况
-	 * @param assetCheck 验收情况
-	 * @return 当前对象
-	*/
-	public PurchaseApply setAssetCheck(String assetCheck) {
-		this.assetCheck=assetCheck;
-		return this;
-	}
-	
-	/**
 	 * 获得 申请部门<br>
 	 * 申请部门
 	 * @return 申请部门
@@ -530,6 +517,44 @@ public class PurchaseApply extends Entity {
 	*/
 	public PurchaseApply setApplyDate(String applyDate) {
 		this.applyDate=applyDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 验收情况<br>
+	 * 验收情况
+	 * @return 验收情况
+	*/
+	public String getAssetCheck() {
+		return assetCheck;
+	}
+	
+	/**
+	 * 设置 验收情况
+	 * @param assetCheck 验收情况
+	 * @return 当前对象
+	*/
+	public PurchaseApply setAssetCheck(String assetCheck) {
+		this.assetCheck=assetCheck;
+		return this;
+	}
+	
+	/**
+	 * 获得 验收编号<br>
+	 * 验收编号
+	 * @return 验收编号
+	*/
+	public String getCheckCode() {
+		return checkCode;
+	}
+	
+	/**
+	 * 设置 验收编号
+	 * @param checkCode 验收编号
+	 * @return 当前对象
+	*/
+	public PurchaseApply setCheckCode(String checkCode) {
+		this.checkCode=checkCode;
 		return this;
 	}
 	
@@ -1051,7 +1076,7 @@ public class PurchaseApply extends Entity {
 	 * 订单
 	 * @return 订单
 	*/
-	public List<Asset> getOrderList() {
+	public List<PurchaseOrder> getOrderList() {
 		return orderList;
 	}
 	
@@ -1060,7 +1085,7 @@ public class PurchaseApply extends Entity {
 	 * @param orderList 订单
 	 * @return 当前对象
 	*/
-	public PurchaseApply setOrderList(List<Asset> orderList) {
+	public PurchaseApply setOrderList(List<PurchaseOrder> orderList) {
 		this.orderList=orderList;
 		return this;
 	}
@@ -1070,7 +1095,7 @@ public class PurchaseApply extends Entity {
 	 * @param order 订单
 	 * @return 当前对象
 	*/
-	public PurchaseApply addOrder(Asset order) {
+	public PurchaseApply addOrder(PurchaseOrder order) {
 		if(this.orderList==null) orderList=new ArrayList<>();
 		this.orderList.add(order);
 		return this;

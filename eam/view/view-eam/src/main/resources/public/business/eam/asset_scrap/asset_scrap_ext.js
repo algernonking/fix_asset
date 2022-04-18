@@ -87,7 +87,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('beforeQuery',conditions,param,location);
             if(PAGE_TYPE=="approval"){
                 param.status="approval";
-
             }
             param.pageType=PAGE_TYPE;
             return true;

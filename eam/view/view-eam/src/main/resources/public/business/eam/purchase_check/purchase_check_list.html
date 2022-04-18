@@ -2,7 +2,7 @@
 /**
  * 采购验收 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:10
+ * @since 2022-04-16 23:19:18
  */
  -->
  <!DOCTYPE html>
@@ -46,7 +46,7 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
-                    <!-- 采购申请 , ownerId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 采购申请 , applyId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 验收部门 , checkOrgId ,typeName=button, isHideInSearch=true -->
                     <!-- 验收信息 , checkInformation ,typeName=text_area, isHideInSearch=true -->
@@ -129,10 +129,10 @@
 
     <button th:if="${perm.checkAuth('eam_purchase_check:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
-    <button th:if="${perm.checkAuth('eam_asset_scrap:for-approval')}"class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" data-id="{{d.id}}"><span th:text="${lang.translate('送审')}">送审</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_scrap:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认')}">确认</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_scrap:revoke')}"class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" data-id="{{d.id}}"><span th:text="${lang.translate('撤销')}">撤销</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_scrap:bill')}"class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" data-id="{{d.id}}"><span th:text="${lang.translate('单据')}">单据</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_purchase_check:for-approval')}"class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" data-id="{{d.id}}"><span th:text="${lang.translate('送审')}">送审</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_purchase_check:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认')}">确认</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_purchase_check:revoke')}"class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" data-id="{{d.id}}"><span th:text="${lang.translate('撤销')}">撤销</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_purchase_check:bill')}"class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" data-id="{{d.id}}"><span th:text="${lang.translate('单据')}">单据</span></button>
 
 </script>
 
@@ -140,8 +140,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var AUTH_PREFIX="eam_purchase_check";
-
-
+    var PAGE_TYPE = [[${pageType}]] ;
 </script>
 
 <script th:src="'/business/eam/purchase_check/purchase_check_ext.js?'+${cacheKey}"></script>

@@ -3,18 +3,25 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetApplyCheckStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.eam.service.IOperateService;
+import com.dt.platform.eam.service.IPurchaseCheckService;
+import com.dt.platform.eam.service.IPurchaseOrderService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.PurchaseApply;
-import com.dt.platform.domain.eam.PurchaseApplyVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -35,7 +42,10 @@ import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
 import com.dt.platform.eam.service.IPurchaseApplyService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
@@ -48,6 +58,17 @@ import java.util.Date;
 
 @Service("EamPurchaseApplyService")
 public class PurchaseApplyServiceImpl extends SuperService<PurchaseApply> implements IPurchaseApplyService {
+
+	@Autowired
+	private IPurchaseCheckService purchaseCheckService;
+
+
+	@Autowired
+	private IPurchaseOrderService purchaseOrderService;
+
+
+	@Autowired
+	private IOperateService operateService;
 
 	/**
 	 * 注入DAO对象
@@ -93,6 +114,8 @@ public class PurchaseApplyServiceImpl extends SuperService<PurchaseApply> implem
 			purchaseApply.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
+
+
 		//生成编码规则
 		if(StringUtil.isBlank(purchaseApply.getBusinessCode())){
 			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_PURCHASE_APPLY.code());
@@ -104,7 +127,97 @@ public class PurchaseApplyServiceImpl extends SuperService<PurchaseApply> implem
 		}
 
 		Result r=super.insert(purchaseApply,throwsException);
+
+		if(r.isSuccess()){
+			//更新订单
+			String applyId=purchaseApply.getId();
+			List<PurchaseOrder> orderList=new ArrayList<>();
+			for(int i=0;i<purchaseApply.getOrderIds().size();i++){
+				PurchaseOrder e=new PurchaseOrder();
+				e.setId(purchaseApply.getOrderIds().get(i));
+				e.setApplyId(applyId);
+				orderList.add(e);
+			}
+			purchaseOrderService.updateList(orderList,SaveMode.NOT_NULL_FIELDS);
+		}
 		return r;
+	}
+
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(String instanceId, List<AssetScrap> assets, String approveAction, String opinion) {
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getBill(String id) {
+		return null;
+	}
+
+	@Override
+	public Result check(String id,String checkId) {
+		PurchaseApply obj=new PurchaseApply();
+		obj.setId(id);
+		obj.setAssetCheck(AssetApplyCheckStatusEnum.CHECKED.code());
+		PurchaseCheck check=purchaseCheckService.getById(checkId);
+		obj.setCheckCode(check.getBusinessCode());
+		return super.update(obj,SaveMode.NOT_NULL_FIELDS,false);
+	}
+
+	@Override
+	public Result revokeOperation(String id) {
+		return null;
+	}
+
+	@Override
+	public Result forApproval(String id) {
+		return null;
+	}
+
+
+
+	/**
+	 * 操作
+	 * @param id  ID
+	 * @param result 结果
+	 * @return
+	 * */
+	@Transactional
+	Result operateResult(String id,String result,String status,String message) {
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
+			PurchaseApply bill=new PurchaseApply();
+			bill.setId(id);
+			bill.setStatus(status);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
+		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
+			return ErrorDesc.failureMessage(message);
+		}else{
+			return ErrorDesc.failureMessage("返回未知结果");
+		}
+	}
+
+
+	@Override
+	public Result confirmOperation(String id) {
+		PurchaseApply billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_PURCHASE_APPLY.code()) ) {
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
+			}else{
+				return operateResult(id, AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
 	}
 
 	/**
@@ -194,6 +307,18 @@ public class PurchaseApplyServiceImpl extends SuperService<PurchaseApply> implem
 	@Override
 	public Result update(PurchaseApply purchaseApply , SaveMode mode,boolean throwsException) {
 		Result r=super.update(purchaseApply , mode , throwsException);
+		if(r.isSuccess()){
+			//更新订单
+			String applyId=purchaseApply.getId();
+			List<PurchaseOrder> orderList=new ArrayList<>();
+			for(int i=0;i<purchaseApply.getOrderIds().size();i++){
+				PurchaseOrder e=new PurchaseOrder();
+				e.setId(purchaseApply.getOrderIds().get(i));
+				e.setApplyId(applyId);
+				orderList.add(e);
+			}
+			purchaseOrderService.updateList(orderList,SaveMode.NOT_NULL_FIELDS);
+		}
 		return r;
 	}
 

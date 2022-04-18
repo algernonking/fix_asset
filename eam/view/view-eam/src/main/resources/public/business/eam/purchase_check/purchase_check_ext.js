@@ -1,7 +1,7 @@
 /**
  * 采购验收 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:07
+ * @since 2022-04-16 23:19:17
  */
 
 layui.config({
@@ -26,6 +26,11 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 列表页初始化前调用
          * */
         beforeInit:function () {
+            if(PAGE_TYPE&&PAGE_TYPE=="view"){
+                var toolbarHtml=document.getElementById("toolbarTemplate").innerHTML;
+                toolbarHtml=toolbarHtml.replace(/lay-event="create"/i, "style=\"display:none\"");
+                document.getElementById("toolbarTemplate").innerHTML=toolbarHtml;
+            }
             console.log("list:beforeInit");
         },
         /**
@@ -83,7 +88,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
-
+            if(PAGE_TYPE&&PAGE_TYPE=="view"){
+                for (var i = 0; i < data.length; i++) {
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                  //  fox.disableButton($('.ops-view-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+            }
         },
         /**
          * 进一步转换 list 数据
@@ -243,6 +254,19 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交后执行
          * */
         afterSubmit:function (param,result) {
+            var id=result.data;
+            var ps={};
+            console.log("id",result);
+            ps.id=APPLY_ID;
+            ps.checkId=id;
+            ps.abc="12";
+            admin.post("/service-eam/eam-purchase-apply/check", ps, function (data) {
+                if (data.success) {
+                    layer.msg("验收成功", {icon: 2, time: 1000});
+                }else{
+                    layer.msg(data.message, {icon: 2, time: 1000});
+                }
+            }, {delayLoading:1000,elms:[$("#submit-button")]});
             console.log("afterSubmitt",param,result);
         },
 

@@ -15,16 +15,11 @@ function ListPage() {
     this.init=function(layui) {
         admin = layui.admin,settings = layui.settings,upload = layui.upload,laydate= layui.laydate;
         table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
-
         echarts=layui.echarts;
-
-
-
         var assetCata = echarts.init(document.getElementById('assetCata'));
         var assetStatusPie = echarts.init(document.getElementById('assetStatusPie'));
-
-
-
+        var ownerAssetPie = echarts.init(document.getElementById('ownerAssetPie'));
+        var posAssetPie = echarts.init(document.getElementById('posAssetPie'));
         var task=setTimeout(function(){layer.load(2);},1000);
         admin.request(moduleURL+"/dashboard", {}, function (data) {
             clearTimeout(task);
@@ -36,7 +31,7 @@ function ListPage() {
                 $("#assetCnt").html(assetData.assetData.assetCnt);
                 $("#assetCleanCnt").html(assetData.assetData.assetCleanCnt);
                 $("#assetRepairCnt").html(assetData.assetData.assetRepairCnt);
-
+                $("#maintenanceEndCnt").html(assetData.assetData.maintenanceEndCnt);
                 var html="<tr>\n" +
                     "<th>资产状态</th>\n" +
                     "<th>数量</th>\n" +
@@ -49,9 +44,7 @@ function ListPage() {
                         "    <td>"+assetData.assetStatusData[i].assetOriginalUnitPrice+"</td>\n" +
                         "  </tr>"
                 }
-
                 $("#assetStatus").html(html);
-
 
                 var optionchart = {
                     title: {
@@ -99,6 +92,54 @@ function ListPage() {
                               }
                             },
                             data:assetData.assetStatusPieData
+                        }
+                    ]
+                })
+
+                ownerAssetPie.setOption({
+                    title:{
+                        text:"资产所属公司",
+                        show:true,
+                        textStyle:{
+                            fontSize:20
+                        }
+                    },
+                    series : [
+                        {
+                            name: '所属公司占比',
+                            type: 'pie',    // 设置图表类型为饼图
+                            radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                            label:{
+                                normal:{
+                                    show:true,
+                                    formatter:'{b}:{c}({d}%)'
+                                }
+                            },
+                            data:assetData.ownerAssetPieData
+                        }
+                    ]
+                })
+
+                posAssetPie.setOption({
+                    title:{
+                        text:"存放位置占比",
+                        show:true,
+                        textStyle:{
+                            fontSize:20
+                        }
+                    },
+                    series : [
+                        {
+                            name: '资产存放位置',
+                            type: 'pie',    // 设置图表类型为饼图
+                            radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                            label:{
+                                normal:{
+                                    show:true,
+                                    formatter:'{b}:{c}({d}%)'
+                                }
+                            },
+                            data:assetData.posAssetPieData
                         }
                     ]
                 })

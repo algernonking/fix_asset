@@ -2,7 +2,7 @@
 /**
  * 采购申请 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:44:47
+ * @since 2022-04-16 23:52:39
  */
  -->
  <!DOCTYPE html>
@@ -49,6 +49,7 @@
                     <!-- 收货信息 , harvestInformation ,typeName=text_input, isHideInSearch=true -->
                     <!-- 期望到货时间 , expectedArrivalDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 申请说明 , applyContent ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 验收编号 , checkCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
                     <!-- 附件 , attach ,typeName=upload, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
@@ -142,10 +143,11 @@
 
     <button th:if="${perm.checkAuth('eam_purchase_apply:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
-    <button th:if="${perm.checkAuth('eam_asset_scrap:for-approval')}"class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" data-id="{{d.id}}"><span th:text="${lang.translate('送审')}">送审</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_scrap:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认')}">确认</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_scrap:revoke')}"class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" data-id="{{d.id}}"><span th:text="${lang.translate('撤销')}">撤销</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_scrap:bill')}"class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" data-id="{{d.id}}"><span th:text="${lang.translate('单据')}">单据</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_purchase_apply:check')}"class="layui-btn layui-btn-xs  check-bill-button " lay-event="check" data-id="{{d.id}}"><span th:text="${lang.translate('验收')}">验收</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_purchase_apply:for-approval')}"class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" data-id="{{d.id}}"><span th:text="${lang.translate('送审')}">送审</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_purchase_apply:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认')}">确认</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_purchase_apply:revoke')}"class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" data-id="{{d.id}}"><span th:text="${lang.translate('撤销')}">撤销</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_purchase_apply:bill')}"class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" data-id="{{d.id}}"><span th:text="${lang.translate('单据')}">单据</span></button>
 
 </script>
 
@@ -156,6 +158,8 @@
     var SELECT_ASSETCHECK_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetApplyCheckStatusEnum')}]];
     var AUTH_PREFIX="eam_purchase_apply";
 
+    // approvalRequired
+    var APPROVAL_REQUIRED = [[${approvalRequired}]] ;
 
 </script>
 

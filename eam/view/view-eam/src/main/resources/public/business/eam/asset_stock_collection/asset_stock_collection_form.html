@@ -5,13 +5,13 @@
  * @since 2021-11-29 13:22:26
  */
  -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html style="background-color: #FFFFFF;">
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
-	<title th:text="${lang.translate('资产领用')}">资产领用</title>
+    <title th:text="${lang.translate('资产领用')}">资产领用</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
@@ -31,87 +31,87 @@
 
         <input name="id" id="id"  type="hidden"/>
 
-         <!--开始：group 循环-->
+        <!--开始：group 循环-->
 
 
 
         <div class="layui-row form-row">
 
-             <!--开始：group 循环-->
+            <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"  />
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"  />
                     </div>
+                </div>
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('领用后公司/部门')}">领用后公司/部门</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
-                            <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('领用后公司/部门')}">领用后公司/部门</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
+                        <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                     </div>
+                </div>
 
                 <!--结束：栏次内字段循环-->
             </div>
-             <!--开始：group 循环-->
+            <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
-                        <div class="layui-input-block ">
-                            <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}" extraParam="{}"></div>
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
+                    <div class="layui-input-block ">
+                        <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}" extraParam="{}"></div>
                     </div>
+                </div>
 
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"  />
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"  />
                     </div>
+                </div>
 
                 <!--结束：栏次内字段循环-->
             </div>
-             <!--开始：group 循环-->
+            <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="useUserId" id="useUserId" name="useUserId"  type="hidden" class="layui-input"    lay-verify="|required"   />
-                            <button id="useUserId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="useUserId" id="useUserId" name="useUserId"  type="hidden" class="layui-input"    lay-verify="|required"   />
+                        <button id="useUserId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
                     </div>
+                </div>
 
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('领用日期')}">领用日期</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="collectionDate" id="collectionDate" name="collectionDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('领用日期') }" type="text" class="layui-input"    lay-verify="|required"   />
-                        </div>
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('领用日期')}">领用日期</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="date" lay-filter="collectionDate" id="collectionDate" name="collectionDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('领用日期') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
+                </div>
 
                 <!--结束：栏次内字段循环-->
             </div>
             <!--结束：栏次输入框循环-->
         </div>
-         <!--开始：group 循环-->
+        <!--开始：group 循环-->
 
 
 
         <div class="layui-row form-row">
 
-             <!--开始：group 循环-->
+            <!--开始：group 循环-->
             <div class="layui-col-xs12 form-column">
 
 
-                    <div class="layui-form-item" >
+                <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('领用说明')}">领用说明</div></div>
                     <div class="layui-input-block ">
                         <textarea lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('领用说明') }" class="layui-textarea" style="height: 30px" ></textarea>
@@ -123,14 +123,14 @@
             </div>
             <!--结束：栏次输入框循环-->
         </div>
-         <!--开始：group 循环-->
+        <!--开始：group 循环-->
 
         <fieldset class="layui-elem-field layui-field-title form-group-title">
-        <legend>资产列表</legend>
+            <legend>资产列表</legend>
         </fieldset>
         <div class="layui-row form-row" style="text-align: center;">
             <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
-            <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
+                <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
 
             </div>
         </div>

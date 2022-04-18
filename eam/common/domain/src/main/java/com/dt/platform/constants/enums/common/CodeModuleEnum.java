@@ -33,14 +33,14 @@ public enum CodeModuleEnum implements CodeTextEnum {
 
 	//库存
 	EAM_ASSET_STOCK_IN("eam_asset_stock_in" , "EAM_资产库存-入库"),
-	EAM_ASSET_STOCK_OUT("eam_asset_stock_out" , "EAM_资产库存-出库"),
+	EAM_ASSET_STOCK_DELIVER("eam_asset_stock_deliver" , "EAM_资产库存-出库"),
 	EAM_ASSET_STOCK_ALLOCATE("eam_asset_stock_allocate" , "EAM_资产库存-调拨"),
 	EAM_ASSET_STOCK_DISTRIBUTE("eam_asset_stock_distribute" , "EAM_资产库存-分配"),
 	EAM_ASSET_STOCK_INVENTORY("eam_asset_stock_inventory" , "EAM_资产库存-盘点"),
 
 	//耗材
 	EAM_ASSET_CONSUMABLES_STOCK_IN("eam_asset_consumables_stock_in" , "EAM_资产耗材单据-入库"),
-	EAM_ASSET_CONSUMABLES_STOCK_OUT("eam_asset_consumables_stock_out" , "EAM_资产耗材单据-出库"),
+	EAM_ASSET_CONSUMABLES_DELIVER("eam_asset_consumables_deliver" , "EAM_资产耗材单据-出库"),
 	EAM_ASSET_CONSUMABLES_COLLECTION("eam_asset_consumables_collection" , "EAM_资产耗材单据-领用"),
 	EAM_ASSET_CONSUMABLES_TRANFER("eam_asset_consumables_tranfer" , "EAM_资产耗材单据-转移"),
 	EAM_ASSET_CONSUMABLES_ALLOCATE("eam_asset_consumables_allocate" , "EAM_资产耗材单据-调拨"),

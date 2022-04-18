@@ -78,9 +78,54 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
         result.put("assetStatusData",assetStatusArr);
         result.put("assetStatusPieData",assetStatusPieData);
 
+        //资产位置
+        String posSql="select t.*,\n" +
+                "(select name from eam_position where id=t.position_id) label from (\n" +
+                "select position_id,count(1) cnt, IFNULL(sum(original_unit_price),0) asset_original_unit_price from eam_asset where owner_code='asset' and deleted=0  and status='complete' group by position_id order by 2 desc\n" +
+                ")t";
+        RcdSet posRs=dao.query(posSql);
+        JSONArray posAssetArr=new JSONArray();
+        JSONArray posAssetPieData=new JSONArray();
+        for(int i=0;i<posRs.size();i++){
+            JSONObject r=posRs.getRcd(i).toJSONObject();
+            String value=StringUtil.isBlank(posRs.getRcd(i).getString("label"))?"未知":posRs.getRcd(i).getString("label"); ;
+            r.put("name",value);
+            posAssetArr.add(r);
+
+            JSONObject r2=new JSONObject();
+            r2.put("value",posRs.getRcd(i).getInteger("cnt"));
+            r2.put("name",value);
+            posAssetPieData.add(r2);
+        }
+        result.put("posAssetData",posAssetArr);
+        result.put("posAssetPieData",posAssetPieData);
+
+
+        //所属组织
+        String ownerSql="select t.*,\n" +
+                "(select full_name from hrm_organization where id=t.own_company_id) label from (\n" +
+                "select own_company_id,count(1) cnt, IFNULL(sum(original_unit_price),0) asset_original_unit_price from eam_asset where owner_code='asset' and deleted=0  and status='complete' group by own_company_id order by 2 desc\n" +
+                ")t\n";
+        RcdSet ownerRs=dao.query(ownerSql);
+        JSONArray ownerAssetArr=new JSONArray();
+        JSONArray ownerAssetPieData=new JSONArray();
+        for(int i=0;i<ownerRs.size();i++){
+            JSONObject r=ownerRs.getRcd(i).toJSONObject();
+            String value=StringUtil.isBlank(ownerRs.getRcd(i).getString("label"))?"未知":ownerRs.getRcd(i).getString("label"); ;
+            r.put("name",value);
+            ownerAssetArr.add(r);
+
+            JSONObject r2=new JSONObject();
+            r2.put("value",ownerRs.getRcd(i).getInteger("cnt"));
+            r2.put("name",value);
+            ownerAssetPieData.add(r2);
+        }
+        result.put("ownerAssetData",ownerAssetArr);
+        result.put("ownerAssetPieData",ownerAssetPieData);
+
+
         //资产分类
-        String sql2="select b.name,count(1) cnt from eam_asset a, pcm_catalog b where a.owner_code='asset' and a.deleted=0  and a.status='complete'  \n" +
-                "and a.category_id=b.id group by name";
+        String sql2="select b.name,count(1) cnt from eam_asset a, pcm_catalog b where a.owner_code='asset' and a.deleted=0 and a.status='complete' and a.category_id=b.id group by name";
         RcdSet rs2=dao.query(sql2);
         JSONArray catalogName=new JSONArray();
         JSONArray catalogCount=new JSONArray();
@@ -93,6 +138,8 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
 
         //资产总数
         String sql3="select \n" +
+                "(select count(1) from eam_asset_tranfer where deleted='0' and status='approval') wait_asset_tranfer_cnt,\n" +
+                "(select count(1) maintenance_end_cnt from eam_asset a where a.owner_code='asset' and a.deleted=0 and a.status='complete' and maintenance_end_date>date_sub(curdate(),interval 30 day) )maintenance_end_cnt,\n"+
                 "(select count(1) asset_cnt from eam_asset a where a.owner_code='asset' and a.deleted=0  and a.status='complete') asset_cnt,\n" +
                 "(select IFNULL(sum(original_unit_price),0) asset_original_unit_price from eam_asset a where a.owner_code='asset' and a.deleted=0  and a.status='complete') asset_original_unit_price,\n" +
                 "(select count(1) asset_clean_cnt from eam_asset a where a.owner_code='asset_clean_out' and a.deleted=0  and a.status='complete') asset_clean_cnt,\n" +
@@ -100,6 +147,13 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
 
         Rcd rs3=dao.queryRecord(sql3);
         result.put("assetData",rs3.toJSONObject());
+
+
+        //公司占比
+
+
+        //区域占比
+
 
         Result<JSONObject> resJson=new Result<>();
         resJson.data(result);

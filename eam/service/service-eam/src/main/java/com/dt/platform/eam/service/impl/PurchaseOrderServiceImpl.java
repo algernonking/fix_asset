@@ -2,6 +2,15 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.domain.eam.AssetItem;
+import com.dt.platform.eam.service.IAssetSelectedDataService;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +51,13 @@ import java.util.Date;
 @Service("EamPurchaseOrderService")
 public class PurchaseOrderServiceImpl extends SuperService<PurchaseOrder> implements IPurchaseOrderService {
 
+	@Autowired
+	private AssetItemServiceImpl assetItemService;
+
+
+	@Autowired
+	private IAssetSelectedDataService assetSelectedDataService;
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -69,7 +85,46 @@ public class PurchaseOrderServiceImpl extends SuperService<PurchaseOrder> implem
 	 */
 	@Override
 	public Result insert(PurchaseOrder purchaseOrder,boolean throwsException) {
+
+		//制单人
+		if(StringUtil.isBlank(purchaseOrder.getOriginatorId())){
+			purchaseOrder.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		if(purchaseOrder.getAssetIds()==null||purchaseOrder.getAssetIds().size()==0){
+			String assetSelectedCode=purchaseOrder.getSelectedCode();
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode==null?"":assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
+			purchaseOrder.setAssetIds(list);
+		}
+
+		//生成编码规则
+		if(StringUtil.isBlank(purchaseOrder.getBusinessCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_PURCHASE_ORDER.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				purchaseOrder.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
 		Result r=super.insert(purchaseOrder,throwsException);
+		if (r.isSuccess()){
+			//保存资产数据
+			List<AssetItem> saveList=new ArrayList<AssetItem>();
+			for(int i=0;i<purchaseOrder.getAssetIds().size();i++){
+				AssetItem asset=new AssetItem();
+				asset.setId(IDGenerator.getSnowflakeIdString());
+				asset.setHandleId(purchaseOrder.getId());
+				asset.setAssetId(purchaseOrder.getAssetIds().get(i));
+				saveList.add(asset);
+			}
+			Result batchInsertReuslt= assetItemService.insertList(saveList);
+			if(!batchInsertReuslt.isSuccess()){
+				return batchInsertReuslt;
+			}
+		}
 		return r;
 	}
 
@@ -160,6 +215,11 @@ public class PurchaseOrderServiceImpl extends SuperService<PurchaseOrder> implem
 	@Override
 	public Result update(PurchaseOrder purchaseOrder , SaveMode mode,boolean throwsException) {
 		Result r=super.update(purchaseOrder , mode , throwsException);
+		if(r.success()){
+			//保存表单数据
+			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",purchaseOrder.getId());
+			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",purchaseOrder.getId());
+		}
 		return r;
 	}
 

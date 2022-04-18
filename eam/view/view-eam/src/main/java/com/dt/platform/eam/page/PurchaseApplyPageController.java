@@ -1,5 +1,8 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
+import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -13,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * 采购申请 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:44:46
+ * @since 2022-04-16 22:09:37
 */
 
 @Controller("EamPurchaseApplyPageController")
@@ -42,6 +45,12 @@ public class PurchaseApplyPageController extends ViewController {
 	 */
 	@RequestMapping("/purchase_apply_list.html")
 	public String list(Model model,HttpServletRequest request) {
+		boolean approvalRequired=true;
+		Result approvalResult= OperateServiceProxy.api().approvalRequired(AssetOperateEnum.EAM_ASSET_PURCHASE_APPLY.code());
+		if(approvalResult.isSuccess()){
+			approvalRequired= (boolean) approvalResult.getData();
+		}
+		model.addAttribute("approvalRequired",approvalRequired);
 		return prefix+"/purchase_apply_list";
 	}
 

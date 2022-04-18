@@ -20,9 +20,9 @@ $MYSQL -u$DB_USER -p$DB_PWD -h$DB_HOST eam_demo < $demo_sql
 if [[ -f $app_dir/update/update.tar ]];then
   rm -rf $app_dir/update/update.tar
 fi
-cp /tmp/app.tar $app_dir/update/update.tar
+cp /tmp/app.tar $app_dir/update/update.tar.gz
 cd $app_dir
 sh bin/updateApp.sh
 sleep 2
-sh eamRestart.sh
+sh appRestart.sh
 exit 0

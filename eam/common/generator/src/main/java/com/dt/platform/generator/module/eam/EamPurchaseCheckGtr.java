@@ -7,6 +7,7 @@ import com.dt.platform.domain.eam.PurchaseOrder;
 import com.dt.platform.domain.eam.Supplier;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.generator.config.Config;
+import com.dt.platform.proxy.eam.PurchaseApplyServiceProxy;
 import com.dt.platform.proxy.eam.SupplierServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
@@ -95,6 +96,11 @@ public class EamPurchaseCheckGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(SupplierServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillWith(PurchaseCheckMeta.SUPPLIER).muliti(false);
 
+        cfg.view().field(EAMTables.EAM_PURCHASE_CHECK.APPLY_ID)
+                .basic()
+                .form().selectBox().queryApi(PurchaseApplyServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(PurchaseApplyMeta.ID).textField(PurchaseApplyMeta.NAME).fillWith(PurchaseCheckMeta.PURCHASE_APPLY).muliti(false);
+
 
         cfg.view().field(EAMTables.EAM_PURCHASE_CHECK.CHECK_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_PURCHASE_CHECK.RECEIVE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
@@ -107,20 +113,27 @@ public class EamPurchaseCheckGtr extends BaseCodeGenerator {
 
         cfg.view().list().disableBatchDelete();
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button","eam_asset_scrap:for-approval");
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button","eam_asset_scrap:confirm");
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button","eam_asset_scrap:revoke");
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button","eam_asset_scrap:bill");
 
+
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button","eam_asset_purchase_check:for-approval");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button","eam_asset_purchase_check:confirm");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button","eam_asset_purchase_check:revoke");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button","eam_asset_purchase_check:bill");
+
+
+        cfg.view().form().addJsVariable("APPLY_ID","[[${applyId}]]","applyId");
+        cfg.view().list().addJsVariable("PAGE_TYPE","[[${pageType}]]","pageType");
 
         cfg.view().formWindow().bottomSpace(250);
         cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_PURCHASE_CHECK.NAME,
-                        EAMTables.EAM_PURCHASE_CHECK.CODE,
                         EAMTables.EAM_PURCHASE_CHECK.CHECK_USER_NAME,
+                        EAMTables.EAM_PURCHASE_CHECK.CODE,
+
                 }, new Object[] {
+
                         EAMTables.EAM_PURCHASE_CHECK.SUPPLIER_ID,
                         EAMTables.EAM_PURCHASE_CHECK.CHECK_ORG_ID,
                 }, new Object[] {
@@ -135,7 +148,6 @@ public class EamPurchaseCheckGtr extends BaseCodeGenerator {
                         EAMTables.EAM_PURCHASE_CHECK.CHECK_INFORMATION,
                         EAMTables.EAM_PURCHASE_CHECK.NOTES,
                         EAMTables.EAM_PURCHASE_CHECK.ATTACH
-
                 }
         );
 
@@ -143,11 +155,11 @@ public class EamPurchaseCheckGtr extends BaseCodeGenerator {
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
-                .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
+                .setPageController(WriteMode.IGNORE) //页面控制器
+                .setFormPage(WriteMode.IGNORE) //表单HTML页
+                .setListPage(WriteMode.IGNORE)//列表HTML页
+                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页
         //生成代码
         cfg.buildAll();
     }

@@ -1,7 +1,7 @@
 /**
  * 采购申请 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:44:47
+ * @since 2022-04-16 23:52:39
  */
 
 
@@ -78,13 +78,14 @@ function ListPage() {
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'assetCheck', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('验收情况'), templet:function (d){ return templet('assetCheck',fox.getEnumText(SELECT_ASSETCHECK_DATA,d.assetCheck),d);}}
 					,{ field: 'applyOrgId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('申请部门') , templet: function (d) { return templet('applyOrgId',fox.getProperty(d,["applyOrg","fullName"]),d);} }
 					,{ field: 'supplierId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('供应商'), templet: function (d) { return templet('supplierId' ,fox.joinLabel(d.supplier,"supplierName"),d);}}
 					,{ field: 'harvestInformation', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('收货信息') , templet: function (d) { return templet('harvestInformation',d.harvestInformation,d);}  }
 					,{ field: 'expectedArrivalDate', align:"left", fixed:false, hide:false, sort: true   ,title: fox.translate('期望到货时间') ,templet: function (d) { return templet('expectedArrivalDate',fox.dateFormat(d.expectedArrivalDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'applyContent', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('申请说明') , templet: function (d) { return templet('applyContent',d.applyContent,d);}  }
 					,{ field: 'applyDate', align:"left", fixed:false, hide:false, sort: true   ,title: fox.translate('申请日期') ,templet: function (d) { return templet('applyDate',fox.dateFormat(d.applyDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'assetCheck', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('验收情况'), templet:function (d){ return templet('assetCheck',fox.getEnumText(SELECT_ASSETCHECK_DATA,d.assetCheck),d);}}
+					,{ field: 'checkCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('验收编号') , templet: function (d) { return templet('checkCode',d.checkCode,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -150,13 +151,14 @@ function ListPage() {
 		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.applyStatus={ inputType:"button",value: $("#applyStatus").val()};
-		value.assetCheck={ inputType:"select_box", value: getSelectedValue("#assetCheck","value"), label:getSelectedValue("#assetCheck","nameStr") };
 		value.applyOrgId={ inputType:"button",value: $("#applyOrgId").val(),fillBy:["applyOrg","fullName"] ,label:$("#applyOrgId-button").text() };
 		value.supplierId={ inputType:"select_box", value: getSelectedValue("#supplierId","value") ,fillBy:["supplier"]  , label:getSelectedValue("#supplierId","nameStr") };
 		value.harvestInformation={ inputType:"button",value: $("#harvestInformation").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.expectedArrivalDate={ inputType:"date_input", begin: $("#expectedArrivalDate-begin").val(), end: $("#expectedArrivalDate-end").val() ,matchType:"auto" };
 		value.applyContent={ inputType:"button",value: $("#applyContent").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.applyDate={ inputType:"date_input", begin: $("#applyDate-begin").val(), end: $("#applyDate-end").val() ,matchType:"auto" };
+		value.assetCheck={ inputType:"select_box", value: getSelectedValue("#assetCheck","value"), label:getSelectedValue("#assetCheck","nameStr") };
+		value.checkCode={ inputType:"button",value: $("#checkCode").val()};
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.attach={ inputType:"button",value: $("#attach").val()};
 		value.originatorId={ inputType:"button",value: $("#originatorId").val()};
@@ -241,28 +243,6 @@ function ListPage() {
 				return opts;
 			}
 		});
-		//渲染 assetCheck 下拉字段
-		fox.renderSelectBox({
-			el: "assetCheck",
-			radio: true,
-			size: "small",
-			filterable: false,
-			on: function(data){
-				setTimeout(function () {
-					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("assetCheck",data.arr,data.change,data.isAdd);
-				},1);
-			},
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({data:data[i],name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
 		//渲染 supplierId 下拉字段
 		fox.renderSelectBox({
 			el: "supplierId",
@@ -306,6 +286,28 @@ function ListPage() {
 				setTimeout(function () {
 					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("applyDate",value, date, endDate);
 				},1);
+			}
+		});
+		//渲染 assetCheck 下拉字段
+		fox.renderSelectBox({
+			el: "assetCheck",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("assetCheck",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
 			}
 		});
 		fox.renderSearchInputs();
@@ -481,6 +483,9 @@ function ListPage() {
 						}
 					});
 				});
+			}
+			else if (layEvent === 'check') { // 验收
+				window.pageExt.list.check(data);
 			}
 			else if (layEvent === 'for-approval') { // 送审
 				window.pageExt.list.forApproval(data);

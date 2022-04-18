@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 采购验收
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:02
- * @sign 4FE5EF545960C08C1578074F6877D559
+ * @since 2022-04-16 23:19:16
+ * @sign D7AAD2772C31E9DF866A154F07E07429
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -67,7 +67,7 @@ public class PurchaseCheck extends Entity {
 	 * 采购申请：采购申请
 	*/
 	@ApiModelProperty(required = false,value="采购申请" , notes = "采购申请")
-	private String ownerId;
+	private String applyId;
 	
 	/**
 	 * 验收单：验收单
@@ -217,7 +217,7 @@ public class PurchaseCheck extends Entity {
 	 * 订单：订单
 	*/
 	@ApiModelProperty(required = false,value="订单" , notes = "订单")
-	private List<Asset> orderList;
+	private List<PurchaseOrder> orderList;
 	
 	/**
 	 * 订单列表：订单列表
@@ -325,17 +325,17 @@ public class PurchaseCheck extends Entity {
 	 * 采购申请
 	 * @return 采购申请
 	*/
-	public String getOwnerId() {
-		return ownerId;
+	public String getApplyId() {
+		return applyId;
 	}
 	
 	/**
 	 * 设置 采购申请
-	 * @param ownerId 采购申请
+	 * @param applyId 采购申请
 	 * @return 当前对象
 	*/
-	public PurchaseCheck setOwnerId(String ownerId) {
-		this.ownerId=ownerId;
+	public PurchaseCheck setApplyId(String applyId) {
+		this.applyId=applyId;
 		return this;
 	}
 	
@@ -800,7 +800,7 @@ public class PurchaseCheck extends Entity {
 	 * 订单
 	 * @return 订单
 	*/
-	public List<Asset> getOrderList() {
+	public List<PurchaseOrder> getOrderList() {
 		return orderList;
 	}
 	
@@ -809,7 +809,7 @@ public class PurchaseCheck extends Entity {
 	 * @param orderList 订单
 	 * @return 当前对象
 	*/
-	public PurchaseCheck setOrderList(List<Asset> orderList) {
+	public PurchaseCheck setOrderList(List<PurchaseOrder> orderList) {
 		this.orderList=orderList;
 		return this;
 	}
@@ -819,7 +819,7 @@ public class PurchaseCheck extends Entity {
 	 * @param order 订单
 	 * @return 当前对象
 	*/
-	public PurchaseCheck addOrder(Asset order) {
+	public PurchaseCheck addOrder(PurchaseOrder order) {
 		if(this.orderList==null) orderList=new ArrayList<>();
 		this.orderList.add(order);
 		return this;

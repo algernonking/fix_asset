@@ -9,13 +9,13 @@ import com.dt.platform.domain.eam.Supplier;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.changes.ChangeInstance;
-import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.PurchaseOrder;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:44:46
+ * @since 2022-04-16 23:52:38
  * @sign 8F49CCC8F6BE66D0CC1017FA1CEC2478
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -173,16 +173,6 @@ public class PurchaseApplyVOMeta extends PurchaseApplyMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseApplyVO,java.lang.String> APPLY_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseApplyVO.class ,APPLY_STATUS, java.lang.String.class, "申请状态", "申请状态", java.lang.String.class, null);
 	
 	/**
-	 * 验收情况 , 类型: java.lang.String
-	*/
-	public static final String ASSET_CHECK="assetCheck";
-	
-	/**
-	 * 验收情况 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseApplyVO,java.lang.String> ASSET_CHECK_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseApplyVO.class ,ASSET_CHECK, java.lang.String.class, "验收情况", "验收情况", java.lang.String.class, null);
-	
-	/**
 	 * 申请部门 , 类型: java.lang.String
 	*/
 	public static final String APPLY_ORG_ID="applyOrgId";
@@ -241,6 +231,26 @@ public class PurchaseApplyVOMeta extends PurchaseApplyMeta {
 	 * 申请日期 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseApplyVO,java.lang.String> APPLY_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseApplyVO.class ,APPLY_DATE, java.lang.String.class, "申请日期", "申请日期", java.lang.String.class, null);
+	
+	/**
+	 * 验收情况 , 类型: java.lang.String
+	*/
+	public static final String ASSET_CHECK="assetCheck";
+	
+	/**
+	 * 验收情况 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseApplyVO,java.lang.String> ASSET_CHECK_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseApplyVO.class ,ASSET_CHECK, java.lang.String.class, "验收情况", "验收情况", java.lang.String.class, null);
+	
+	/**
+	 * 验收编号 , 类型: java.lang.String
+	*/
+	public static final String CHECK_CODE="checkCode";
+	
+	/**
+	 * 验收编号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseApplyVO,java.lang.String> CHECK_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseApplyVO.class ,CHECK_CODE, java.lang.String.class, "验收编号", "验收编号", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -513,14 +523,14 @@ public class PurchaseApplyVOMeta extends PurchaseApplyMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseApplyVO,org.github.foxnic.web.domain.changes.ChangeInstance> CHANGE_INSTANCE_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseApplyVO.class ,CHANGE_INSTANCE, org.github.foxnic.web.domain.changes.ChangeInstance.class, "变更实例", "变更实例", org.github.foxnic.web.domain.changes.ChangeInstance.class, null);
 	
 	/**
-	 * 订单 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
+	 * 订单 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.PurchaseOrder
 	*/
 	public static final String ORDER_LIST="orderList";
 	
 	/**
-	 * 订单 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
+	 * 订单 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.PurchaseOrder
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseApplyVO,com.dt.platform.domain.eam.Asset> ORDER_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseApplyVO.class ,ORDER_LIST, java.util.List.class, "订单", "订单", com.dt.platform.domain.eam.Asset.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.PurchaseApplyVO,com.dt.platform.domain.eam.PurchaseOrder> ORDER_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.PurchaseApplyVO.class ,ORDER_LIST, java.util.List.class, "订单", "订单", com.dt.platform.domain.eam.PurchaseOrder.class, null);
 	
 	/**
 	 * 订单列表 , 集合类型: LIST , 类型: java.lang.String
@@ -535,7 +545,7 @@ public class PurchaseApplyVOMeta extends PurchaseApplyMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , APPLY_STATUS , ASSET_CHECK , APPLY_ORG_ID , SUPPLIER_ID , HARVEST_INFORMATION , EXPECTED_ARRIVAL_DATE , APPLY_CONTENT , APPLY_DATE , NOTES , ATTACH , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , SUPPLIER , ORIGINATOR , APPLY_ORG , CHANGE_INSTANCE , ORDER_LIST , ORDER_IDS };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , APPLY_STATUS , APPLY_ORG_ID , SUPPLIER_ID , HARVEST_INFORMATION , EXPECTED_ARRIVAL_DATE , APPLY_CONTENT , APPLY_DATE , ASSET_CHECK , CHECK_CODE , NOTES , ATTACH , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , SUPPLIER , ORIGINATOR , APPLY_ORG , CHANGE_INSTANCE , ORDER_LIST , ORDER_IDS };
 	
 	/**
 	 * 代理类
@@ -711,17 +721,6 @@ public class PurchaseApplyVOMeta extends PurchaseApplyMeta {
 		}
 		
 		/**
-		 * 设置 验收情况
-		 * @param assetCheck 验收情况
-		 * @return 当前对象
-		*/
-		public PurchaseApply setAssetCheck(String assetCheck) {
-			super.change(ASSET_CHECK,super.getAssetCheck(),assetCheck);
-			super.setAssetCheck(assetCheck);
-			return this;
-		}
-		
-		/**
 		 * 设置 申请部门
 		 * @param applyOrgId 申请部门
 		 * @return 当前对象
@@ -784,6 +783,28 @@ public class PurchaseApplyVOMeta extends PurchaseApplyMeta {
 		public PurchaseApply setApplyDate(String applyDate) {
 			super.change(APPLY_DATE,super.getApplyDate(),applyDate);
 			super.setApplyDate(applyDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 验收情况
+		 * @param assetCheck 验收情况
+		 * @return 当前对象
+		*/
+		public PurchaseApply setAssetCheck(String assetCheck) {
+			super.change(ASSET_CHECK,super.getAssetCheck(),assetCheck);
+			super.setAssetCheck(assetCheck);
+			return this;
+		}
+		
+		/**
+		 * 设置 验收编号
+		 * @param checkCode 验收编号
+		 * @return 当前对象
+		*/
+		public PurchaseApply setCheckCode(String checkCode) {
+			super.change(CHECK_CODE,super.getCheckCode(),checkCode);
+			super.setCheckCode(checkCode);
 			return this;
 		}
 		
@@ -1089,7 +1110,7 @@ public class PurchaseApplyVOMeta extends PurchaseApplyMeta {
 		 * @param orderList 订单
 		 * @return 当前对象
 		*/
-		public PurchaseApply setOrderList(List<Asset> orderList) {
+		public PurchaseApply setOrderList(List<PurchaseOrder> orderList) {
 			super.change(ORDER_LIST,super.getOrderList(),orderList);
 			super.setOrderList(orderList);
 			return this;

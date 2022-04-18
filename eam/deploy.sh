@@ -41,7 +41,7 @@ content=$full_content
 ###生成远程执行文件
 tmp_dir=`cat $conf_file|grep ${hostname}.ops_dir|awk -F "=" '{print $2}'`
 ops_remotefile_recreate=1
-ops_remotefile_recreate_file="$tmp_dir/deploy_app.sh"
+ops_remotefile_recreate_file="$tmp_dir/deploy_ops_app.sh"
 ops_node_file_recreate=0
 ops_node_file="$tmp_dir/ops.node"
 
@@ -78,9 +78,9 @@ mv $app_tar $tmp_dir
 if [[ $ops_remotefile_recreate -eq 1 ]];then
 	echo "">$ops_remotefile_recreate_file
 	echo "UPLOAD sf=$tmp_dir/$app_tar         @@ dd=/tmp @@ df=app.tar"        >>$ops_remotefile_recreate_file
-	echo "UPLOAD sf=$tmp_dir/deploy_eam.sh    @@ dd=/tmp @@ df=deploy_eam.sh"  >>$ops_remotefile_recreate_file
+	echo "UPLOAD sf=$tmp_dir/deploy_app.sh    @@ dd=/tmp @@ df=deploy_app.sh"  >>$ops_remotefile_recreate_file
 	echo "cd /tmp/"                           >>$ops_remotefile_recreate_file
-	echo "sh deploy_eam.sh "                  >>$ops_remotefile_recreate_file
+	echo "sh deploy_app.sh "                  >>$ops_remotefile_recreate_file
 	echo "exit 0"												      >>$ops_remotefile_recreate_file
 fi
 ####################### Create Base Node File ###############

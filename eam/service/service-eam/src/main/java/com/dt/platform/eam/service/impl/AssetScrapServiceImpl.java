@@ -317,7 +317,6 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		//发起审批
 
 		Result result=assistant.request(requestBody);
-		System.out.println(1111);
 		return result;
 	}
 

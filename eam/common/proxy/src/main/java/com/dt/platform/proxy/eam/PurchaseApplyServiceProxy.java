@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 采购申请  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:44:46
+ * @since 2022-04-16 22:09:37
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = PurchaseApplyServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -101,6 +101,32 @@ public interface PurchaseApplyServiceProxy {
 	 * 导入采购申请数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+	/**
+	 * 审批
+	 */
+	public static final String APPROVE= API_PREFIX + "approve";
+
+	/**
+	 * 提交审批
+	 */
+	public static final String FOR_APPROVAL= API_PREFIX + "for-approval";
+
+	/**
+	 * 确认操作
+	 */
+	public static final String CONFIRM_OPERATION= API_PREFIX + "confirm-operation";
+
+	/**
+	 * 验收
+	 */
+	public static final String CHECK= API_PREFIX + "check";
+
+	/**
+	 * 撤销操作
+	 */
+	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
+
 
 	/**
 	 * 添加采购申请

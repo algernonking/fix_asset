@@ -229,7 +229,7 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 				if(AssetStockTypeEnum.IN.code().equals(stock.getStockType())){
 					code=CodeModuleEnum.EAM_ASSET_STOCK_IN.code();
 				}else if(AssetStockTypeEnum.OUT.code().equals(stock.getStockType())){
-					code=CodeModuleEnum.EAM_ASSET_STOCK_OUT.code();
+					code=CodeModuleEnum.EAM_ASSET_STOCK_DELIVER.code();
 				}else if(AssetStockTypeEnum.ALLOCATE.code().equals(stock.getStockType())){
 					code=CodeModuleEnum.EAM_ASSET_STOCK_ALLOCATE.code();
 				}
@@ -237,7 +237,7 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 				if(AssetStockTypeEnum.IN.code().equals(stock.getStockType())){
 					code=CodeModuleEnum.EAM_ASSET_CONSUMABLES_STOCK_IN.code();
 				}else if(AssetStockTypeEnum.OUT.code().equals(stock.getStockType())){
-					code=CodeModuleEnum.EAM_ASSET_CONSUMABLES_STOCK_OUT.code();
+					code=CodeModuleEnum.EAM_ASSET_STOCK_DELIVER.code();
 				}else if(AssetStockTypeEnum.ALLOCATE.code().equals(stock.getStockType())){
 					code=CodeModuleEnum.EAM_ASSET_CONSUMABLES_ALLOCATE.code();
 				}

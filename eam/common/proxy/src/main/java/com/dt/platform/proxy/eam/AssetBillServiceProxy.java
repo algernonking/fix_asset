@@ -91,6 +91,11 @@ public interface AssetBillServiceProxy {
      */
     public static final String QUERY_COLLECTION_BILLS = API_PREFIX + "query-collection-bills";
 
+    /**
+     * 查询采购
+     */
+    public static final String QUERY_PURCHASE_APPLY_BILL = API_PREFIX + "query-purchase-apply-bill";
+
 
     /**
      * 查询资产单据

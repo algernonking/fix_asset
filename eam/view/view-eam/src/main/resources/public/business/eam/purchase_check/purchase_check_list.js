@@ -1,7 +1,7 @@
 /**
  * 采购验收 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-15 05:45:11
+ * @since 2022-04-16 23:19:18
  */
 
 
@@ -77,7 +77,7 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'ownerId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('采购申请') , templet: function (d) { return templet('ownerId',d.ownerId,d);}  }
+					,{ field: 'applyId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('采购申请'), templet: function (d) { return templet('applyId' ,fox.joinLabel(d.purchaseApply,"name"),d);}}
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('验收单') , templet: function (d) { return templet('code',d.code,d);}  }
 					,{ field: 'supplierId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('供应商'), templet: function (d) { return templet('supplierId' ,fox.joinLabel(d.supplier,"supplierName"),d);}}
 					,{ field: 'checkOrgId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('验收部门') , templet: function (d) { return templet('checkOrgId',fox.getProperty(d,["checkOrg","fullName"]),d);} }
@@ -149,7 +149,7 @@ function ListPage() {
 		value.status={ inputType:"button",value: $("#status").val()};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.ownerId={ inputType:"button",value: $("#ownerId").val()};
+		value.applyId={ inputType:"select_box", value: getSelectedValue("#applyId","value") ,fillBy:["purchaseApply"]  , label:getSelectedValue("#applyId","nameStr") };
 		value.code={ inputType:"button",value: $("#code").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.supplierId={ inputType:"select_box", value: getSelectedValue("#supplierId","value") ,fillBy:["supplier"]  , label:getSelectedValue("#supplierId","nameStr") };
 		value.checkOrgId={ inputType:"button",value: $("#checkOrgId").val(),fillBy:["checkOrg","fullName"] ,label:$("#checkOrgId-button").text() };

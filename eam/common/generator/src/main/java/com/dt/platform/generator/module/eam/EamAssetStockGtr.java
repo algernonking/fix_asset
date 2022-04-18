@@ -199,7 +199,7 @@ public class EamAssetStockGtr extends BaseCodeGenerator{
                 }
         );
 
-        cfg.view().form().addPage("列表","assetSelectList");
+        cfg.view().form().addPage("资产列表","assetSelectList");
 
 
 

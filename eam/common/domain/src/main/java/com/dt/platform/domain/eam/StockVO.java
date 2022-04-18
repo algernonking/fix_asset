@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 资产库存
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 16:22:44
+ * @since 2022-04-17 19:21:07
  * @sign 2F84D01B7DCA90E0031DACB75A2E418D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

@@ -97,7 +97,10 @@ public class PurchaseCheckServiceImpl extends SuperService<PurchaseCheck> implem
 		}
 
 		Result r=super.insert(purchaseCheck,throwsException);
-		return r;
+		Result r2=new Result();
+		r2.success();
+		r2.data(purchaseCheck.getId());
+		return r2;
 	}
 
 	/**

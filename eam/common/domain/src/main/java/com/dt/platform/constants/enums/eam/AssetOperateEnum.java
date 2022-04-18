@@ -32,13 +32,13 @@ public enum AssetOperateEnum implements CodeTextEnum {
 
     //耗材
     EAM_ASSET_CONSUMABLES_STOCK_IN(CodeModuleEnum.EAM_ASSET_CONSUMABLES_STOCK_IN.code() , "EAM_资产耗材单据-入库"),
-    EAM_ASSET_CONSUMABLES_STOCK_OUT(CodeModuleEnum.EAM_ASSET_CONSUMABLES_STOCK_OUT.code() , "EAM_资产耗材单据-出库"),
+    EAM_ASSET_CONSUMABLES_DELIVER(CodeModuleEnum.EAM_ASSET_CONSUMABLES_DELIVER.code() , "EAM_资产耗材单据-出库"),
     EAM_ASSET_CONSUMABLES_COLLECTION(CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code() , "EAM_资产耗材单据-领用"),
     EAM_ASSET_CONSUMABLES_TRANFER(CodeModuleEnum.EAM_ASSET_CONSUMABLES_TRANFER.code() , "EAM_资产耗材单据-转移"),
     //EAM_ASSET_CONSUMABLES_ALLOCATE(CodeModuleEnum.EAM_ASSET_CONSUMABLES_ALLOCATE.code() , "EAM_资产耗材单据-调拨"),
 
     //库存
-    EAM_ASSET_STOCK_OUT(CodeModuleEnum.EAM_ASSET_STOCK_OUT.code() , "EAM_资产库存-出库"),
+    EAM_ASSET_STOCK_DELIVER(CodeModuleEnum.EAM_ASSET_STOCK_DELIVER.code() , "EAM_资产库存-出库"),
     EAM_ASSET_STOCK_IN(CodeModuleEnum.EAM_ASSET_STOCK_IN.code() , "EAM_资产库存-入库"),
     EAM_ASSET_STOCK_ALLOCATE(CodeModuleEnum.EAM_ASSET_STOCK_ALLOCATE.code() , "EAM_资产库存-调拨"),
     EAM_ASSET_STOCK_DISTRIBUTE(CodeModuleEnum.EAM_ASSET_STOCK_DISTRIBUTE.code() , "EAM_资产库存-分配"),

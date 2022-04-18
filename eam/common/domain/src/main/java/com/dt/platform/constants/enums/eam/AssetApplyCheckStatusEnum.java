@@ -13,7 +13,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum AssetApplyCheckStatusEnum implements CodeTextEnum {
 
-	CHECKED("checked" , "验收"),
+	CHECKED("checked" , "验收通过"),
 	NOT_CHECK("not_check" , "未验收");
 
 	private String code;
