@@ -24,6 +24,20 @@
 - 7、数据库初始化的SQL文件找不到
 请看本Git的readme说明文件
 
+- 8、如何修改本应用的系统名称、网站图标、首页右上的logo图片、登录页背景图等信息
+在系统参数处进行修改
+菜单路径:系统管理模块-->系统配置-->系统参数-->修改参数
+修改参数:
+    略
+
+- 9、启动时提示Error creating bean with name 'CP': Invocation of init method failed;
+启动等时候需要添加参数-noverify参数，例如:
+java -noverify -Dfile.encoding=UTF-8 -Dloader.path=./lib/ -jar app.jar --Dspring.config.location=/opt/eam/bin/../application.yml
+
+- 10、
+
+
+
 
 
 
