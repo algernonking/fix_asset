@@ -17,7 +17,8 @@
 - 数据库链接池:Druid 1.2.8
 - 模版引擎:Thymeleaf 3
 - 运行容器:Undertow
-- 持久层框架:Foxnic
+- 应用层框架:[Foxnic-Web](https://gitee.com/LeeFJ/foxnic-web) [开发文档](http://foxnicweb.com/docs/doc.html)
+- 持久层框架:[FoxnicSQL&FoxnicDAO](https://gitee.com/LeeFJ/foxnic)
 - 日志管理:Logback
 - 流程引擎:Camunda
 - 任务调度:Quartz
@@ -28,7 +29,7 @@
 
 #### 开发环境
 - IDE： IntelliJ IDEA 2020.2
-- JDK:JDK1.8
+- JDK:JDK 1.8
 - 数据库:Mysql 5.7.X
 - Redis：5.1(可选)
 
@@ -54,7 +55,7 @@
 - EAM安装手册:在EAM项目的文档目录
 - EAM使用手册:登录系统后,选择公共服务下的公共资源菜单->EAM使用手册
   或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
-- [Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages) https://gitee.com/LeeFJ/foxnic-web/wikis/pages
+- 应用框架[Foxnic-Web](https://gitee.com/LeeFJ/foxnic-web) [开发文档](http://foxnicweb.com/docs/doc.html)
 
 ### 实施方案
 - 1、传统方式:传统单体架构方式打包部署
@@ -99,9 +100,10 @@
 - 在 service 项目生成对应的控制器，接口以及接口实现类；
 - 在前端项目生成页面控制器(前端模版引擎 thymeleaf)，列表页面和表单页面
   **如重复执行，请在 EamCodeGenerator 类的代码生成逻辑中加入文件覆盖策略。** 
-　4. 调整 MenuGenerator 的代码，生成对应的菜单，并将菜单授权给 admin 角色，建议一次生成一组菜单，菜单生成后，会输出batchId，如果撤销可以调用 removeByBatchId 方法即可。
+ 4. 调整 MenuGenerator 的代码，生成对应的菜单，并将菜单授权给 admin 角色，建议一次生成一组菜单，菜单生成后，会输出batchId，如果撤销可以调用 removeByBatchId 方法即可。
  以上步骤因为调用main函数生成代码，开发工具并不能立即刷入，如果是Eclipse，请刷新项目。IDEA正常情况下会自动刷入，建议也刷新一下 relaod from disk 。
  :point_right: **注意：代码生成的逻辑，需要按照上面提到的类中给出的示例按需调整。** 
+ 5. 相关源码与开发文档 [Foxnic-Web](https://gitee.com/LeeFJ/foxnic-web) [开发文档](http://foxnicweb.com/docs/doc.html)
 
 ## 系统演示预览
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/212929_46438369_448530.jpeg "1.jpg")
