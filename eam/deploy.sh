@@ -1,5 +1,6 @@
 #!/bin/sh
 #/bin/zsh -x  /Users/lank/IdeaProjectsnew/eam/eam/deploy.sh
+
 #####################################################################
 # Script Help:
 #     sh deploy.sh full | incr
