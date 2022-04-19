@@ -3,6 +3,7 @@ package #(package);
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.springframework.web.bind.annotation.RequestParam;
 
 #if(isEnableMicroService)import org.springframework.cloud.openfeign.FeignClient;#end
 

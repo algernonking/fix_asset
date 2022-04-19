@@ -176,12 +176,14 @@ function ListPage() {
 				if (r.success) {
 					data = r.data;
 					context.update(data);
+					fox.renderFormInputs(form);
 				} else {
 					fox.showMessage(data);
 				}
 			});
 		} else {
 			context.update(data);
+			fox.renderFormInputs(form);
 		}
 	}
 
@@ -192,6 +194,7 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		#for(f : fields)
+		#if(!f.isHideInSearch)
 		#if(f.typeName.equals("logic_switch"))
 		value.#(f.varName)={ inputType:"logic_switch",value: getSelectedValue("##(f.varName)","value"), label:getSelectedValue("##(f.varName)","nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end };
 		#else if(f.typeName.equals("radio_box"))
@@ -224,6 +227,7 @@ function ListPage() {
 		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,splitValue:#(f.search.splitValue),valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)" #end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end,label:$("##(f.varName)-button").text() #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
 		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,splitValue:#(f.search.splitValue),valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)" #end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end};
+		#end
 		#end
 		#end
 		var ps={searchField:"$composite"};
