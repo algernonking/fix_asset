@@ -1,36 +1,39 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.eam.page.BrandDemoPageController;
+import com.dt.platform.domain.eam.AssetStockGoodsDetail;
+import com.dt.platform.eam.page.AssetStockGoodsDetailPageController;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.proxy.eam.BrandDemoServiceProxy;
+import com.dt.platform.proxy.eam.AssetStockGoodsDetailServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class BrandDemoGtr extends BaseCodeGenerator {
+public class StockGoodsDetail extends BaseCodeGenerator {
 
 
-    public BrandDemoGtr() {
-        super(EAMTables.EAM_BRAND_DEMO.$TABLE,BASIC_DATA_MENU_ID);
+    public StockGoodsDetail() {
+        super(EAMTables.EAM_ASSET_STOCK_GOODS_DETAIL.$TABLE,BASIC_STOCK_GOODS_ID);
     }
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
-        cfg.view().field(EAMTables.EAM_BRAND_DEMO.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_DETAIL.ID).basic().hidden(true);
 
-        cfg.view().field(EAMTables.EAM_BRAND_DEMO.BRAND_NAME).search().fuzzySearch();
-
-        cfg.view().field(EAMTables.EAM_BRAND_DEMO.BRAND_NAME).form().validate().required();
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_BRAND_DEMO.BRAND_NAME,
-                        EAMTables.EAM_BRAND_DEMO.SORT
+                        EAMTables.EAM_ASSET_STOCK_GOODS_DETAIL.ID,
+
                 }
         );
 
-       // cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().formWindow().bottomSpace(20);
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET_STOCK_GOODS_DETAIL.ID,
+
+                }
+        );
 
         cfg.view().search().inputWidth(Config.searchInputWidth);
-
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
@@ -46,15 +49,15 @@ public class BrandDemoGtr extends BaseCodeGenerator {
     }
 
     public static void main(String[] args) throws Exception {
-        BrandDemoGtr g=new BrandDemoGtr();
+        StockGoodsDetail g=new StockGoodsDetail();
         //生成代码
-//        g.generateCode();
+       g.generateCode();
 
+       // g.removeByBatchId("507635127677878272");
         //移除之前生成的菜单，视情况执行
-//        g.removeByBatchId("471622036347682816");
+     // g.generateMenu(AssetStockGoodsDetailServiceProxy.class, AssetStockGoodsDetailPageController.class);
         //生成菜单
 
-        g.generateMenu(BrandDemoServiceProxy.class, BrandDemoPageController.class);
     }
 
 }

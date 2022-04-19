@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 仓库
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:12
- * @sign E4BCEF20E5876FBE47A83B4389D80D90
+ * @since 2022-04-19 09:33:36
+ * @sign F70481B9FF57AA13A3CF8581FF45A9E4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +34,18 @@ public class Warehouse extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
+	
+	/**
+	 * 编号：编号
+	*/
+	@ApiModelProperty(required = false,value="编号" , notes = "编号")
+	private String code;
+	
+	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private String status;
 	
 	/**
 	 * 名称：名称
@@ -117,6 +129,44 @@ public class Warehouse extends Entity {
 	*/
 	public Warehouse setId(String id) {
 		this.id=id;
+		return this;
+	}
+	
+	/**
+	 * 获得 编号<br>
+	 * 编号
+	 * @return 编号
+	*/
+	public String getCode() {
+		return code;
+	}
+	
+	/**
+	 * 设置 编号
+	 * @param code 编号
+	 * @return 当前对象
+	*/
+	public Warehouse setCode(String code) {
+		this.code=code;
+		return this;
+	}
+	
+	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param status 状态
+	 * @return 当前对象
+	*/
+	public Warehouse setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	

@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.common.StatusEnableEnum;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -16,10 +17,11 @@ public class EamWarehouseGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_WAREHOUSE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_WAREHOUSE.WAREHOUSE_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_WAREHOUSE.WAREHOUSE_NOTES).search().fuzzySearch();
-
+        cfg.view().field(EAMTables.EAM_WAREHOUSE.CODE).search().fuzzySearch();
 
         cfg.view().search().inputLayout(
                 new Object[]{
+                        EAMTables.EAM_WAREHOUSE.STATUS,
                         EAMTables.EAM_WAREHOUSE.WAREHOUSE_NAME,
                         EAMTables.EAM_WAREHOUSE.WAREHOUSE_NOTES,
 
@@ -29,6 +31,19 @@ public class EamWarehouseGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().field(EAMTables.EAM_WAREHOUSE.WAREHOUSE_NAME).form().validate().required();
+        cfg.view().field(EAMTables.EAM_BRAND.STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class);
+        cfg.view().field(EAMTables.EAM_WAREHOUSE.CODE).form().validate().required();
+
+
+        cfg.view().formWindow().bottomSpace(20);
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_WAREHOUSE.STATUS,
+                        EAMTables.EAM_WAREHOUSE.WAREHOUSE_NAME,
+                        EAMTables.EAM_WAREHOUSE.WAREHOUSE_NOTES,
+                }
+        );
+
 
         //文件生成覆盖模式
         cfg.overrides()

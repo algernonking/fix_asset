@@ -34,7 +34,13 @@
 启动等时候需要添加参数-noverify参数，例如:
 java -noverify -Dfile.encoding=UTF-8 -Dloader.path=./lib/ -jar app.jar --Dspring.config.location=/opt/eam/bin/../application.yml
 
-- 10、
+
+- 10、应用日志报错，发现没有存在表，可能原因当前应用初始化SQL不是最新的或者数据库大小写敏感参数未设置
+
+
+- 11、
+
+
 
 
 

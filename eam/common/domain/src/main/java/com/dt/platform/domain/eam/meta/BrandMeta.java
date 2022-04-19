@@ -2,14 +2,15 @@ package com.dt.platform.domain.eam.meta;
 
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.Brand;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:51
- * @sign C534CCA1D4867FA30D5F73D552CE3515
+ * @since 2022-04-18 21:13:51
+ * @sign B62A3D6CDC7B40F948B81563B24937E2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,6 +27,26 @@ public class BrandMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final String STATUS="status";
+	
+	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
+	
+	/**
+	 * 编码 , 类型: java.lang.String
+	*/
+	public static final String BRAND_CODE="brandCode";
+	
+	/**
+	 * 编码 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> BRAND_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,BRAND_CODE, java.lang.String.class, "编码", "编码", java.lang.String.class, null);
+	
+	/**
 	 * 名称 , 类型: java.lang.String
 	*/
 	public static final String BRAND_NAME="brandName";
@@ -34,6 +55,16 @@ public class BrandMeta {
 	 * 名称 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> BRAND_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,BRAND_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	
+	/**
+	 * 排序 , 类型: java.math.BigDecimal
+	*/
+	public static final String SORT="sort";
+	
+	/**
+	 * 排序 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.math.BigDecimal> SORT_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,SORT, java.math.BigDecimal.class, "排序", "排序", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -128,7 +159,7 @@ public class BrandMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BRAND_NAME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ ID , STATUS , BRAND_CODE , BRAND_NAME , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
 	
 	/**
 	 * 代理类
@@ -150,6 +181,28 @@ public class BrandMeta {
 		}
 		
 		/**
+		 * 设置 状态
+		 * @param status 状态
+		 * @return 当前对象
+		*/
+		public Brand setStatus(String status) {
+			super.change(STATUS,super.getStatus(),status);
+			super.setStatus(status);
+			return this;
+		}
+		
+		/**
+		 * 设置 编码
+		 * @param brandCode 编码
+		 * @return 当前对象
+		*/
+		public Brand setBrandCode(String brandCode) {
+			super.change(BRAND_CODE,super.getBrandCode(),brandCode);
+			super.setBrandCode(brandCode);
+			return this;
+		}
+		
+		/**
 		 * 设置 名称
 		 * @param brandName 名称
 		 * @return 当前对象
@@ -157,6 +210,17 @@ public class BrandMeta {
 		public Brand setBrandName(String brandName) {
 			super.change(BRAND_NAME,super.getBrandName(),brandName);
 			super.setBrandName(brandName);
+			return this;
+		}
+		
+		/**
+		 * 设置 排序
+		 * @param sort 排序
+		 * @return 当前对象
+		*/
+		public Brand setSort(BigDecimal sort) {
+			super.change(SORT,super.getSort(),sort);
+			super.setSort(sort);
 			return this;
 		}
 		

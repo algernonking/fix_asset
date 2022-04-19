@@ -71,6 +71,9 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(ChangeInstance.class,"changeInstance","变更实例","变更实例");
 
 
+        cfg.getPoClassFile().addSimpleProperty(GoodsStock.class,"goodsStock","库存物品","库存物品");
+
+
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NOTES).search().fuzzySearch();
@@ -210,6 +213,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_STATUS).form().
                 label("设备状态").selectBox().enumType(AssetEquipmentStatusEnum.class);
 
+
         cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_ID)
                 .basic().label("资产分类")
                 .form().selectBox().queryApi(CatalogServiceProxy.QUERY_NODES)
@@ -247,6 +251,15 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .basic().label("位置")
                 .form().selectBox().queryApi(PositionServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField( PositionMeta.NAME).fillWith(AssetMeta.POSITION).muliti(false);
+
+        cfg.view().field(EAMTables.EAM_ASSET.GOODS_STOCK_ID)
+                .basic().label("库存物品")
+                .form().selectBox().queryApi(GoodsStockServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(GoodsStockMeta.ID).textField( GoodsStockMeta.NAME).fillWith(AssetMeta.GOODS_STOCK).muliti(false);
+
+
+        cfg.view().field(EAMTables.EAM_ASSET.LABEL3).form().textArea().height(50);
+        cfg.view().field(EAMTables.EAM_ASSET.LABEL4).form().textArea().height(50);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.MANUFACTURER_ID)

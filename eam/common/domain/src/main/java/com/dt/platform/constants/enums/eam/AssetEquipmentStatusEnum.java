@@ -15,8 +15,9 @@ public enum AssetEquipmentStatusEnum implements CodeTextEnum {
 
 	RUNNING("running" , "运行中"),
 	STOP("stop" , "停用"),
-
+	FAULT("fault" , "故障")
 	;
+
 	private String code;
 	private String text;
 	private AssetEquipmentStatusEnum(String code, String text)  {

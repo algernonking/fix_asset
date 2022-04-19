@@ -6,6 +6,7 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.EAMTables.EAM_BRAND;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -16,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 品牌
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:51
- * @sign C534CCA1D4867FA30D5F73D552CE3515
+ * @since 2022-04-18 21:13:51
+ * @sign B62A3D6CDC7B40F948B81563B24937E2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,10 +37,28 @@ public class Brand extends Entity {
 	private String id;
 	
 	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private String status;
+	
+	/**
+	 * 编码：编码
+	*/
+	@ApiModelProperty(required = false,value="编码" , notes = "编码")
+	private String brandCode;
+	
+	/**
 	 * 名称：名称
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
 	private String brandName;
+	
+	/**
+	 * 排序：排序
+	*/
+	@ApiModelProperty(required = false,value="排序" , notes = "排序")
+	private BigDecimal sort;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -115,6 +134,44 @@ public class Brand extends Entity {
 	}
 	
 	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param status 状态
+	 * @return 当前对象
+	*/
+	public Brand setStatus(String status) {
+		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码<br>
+	 * 编码
+	 * @return 编码
+	*/
+	public String getBrandCode() {
+		return brandCode;
+	}
+	
+	/**
+	 * 设置 编码
+	 * @param brandCode 编码
+	 * @return 当前对象
+	*/
+	public Brand setBrandCode(String brandCode) {
+		this.brandCode=brandCode;
+		return this;
+	}
+	
+	/**
 	 * 获得 名称<br>
 	 * 名称
 	 * @return 名称
@@ -130,6 +187,25 @@ public class Brand extends Entity {
 	*/
 	public Brand setBrandName(String brandName) {
 		this.brandName=brandName;
+		return this;
+	}
+	
+	/**
+	 * 获得 排序<br>
+	 * 排序
+	 * @return 排序
+	*/
+	public BigDecimal getSort() {
+		return sort;
+	}
+	
+	/**
+	 * 设置 排序
+	 * @param sort 排序
+	 * @return 当前对象
+	*/
+	public Brand setSort(BigDecimal sort) {
+		this.sort=sort;
 		return this;
 	}
 	

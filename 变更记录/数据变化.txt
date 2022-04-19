@@ -3,10 +3,34 @@ Version 1.0.9 版本
 2、增加首页修改pie图
 3、优化调整资产界面的菜单
 4、完善库存管理模块
-5、
+5、添加库存管理的物品统计功能
+
 
 --sql
-创建表 eam_asset_stock_deliver
+新创建表 eam_asset_stock_deliver
+新创建表 eam_stock_goods_detail
+新创建表 eam_stock_goods
+新创建表 eam_asset_stock_goods_adjust
+新创建表 eam_asset_stock_goods_out
+新创建表 eam_asset_stock_goods_tranfer
+新创建表 eam_asset_stock_goods
+新创建表 eam_asset_stock_goods_detail
+重建表 eam_goods_stock
+重建表 eam_brand_demo
+重建表 eam_warehouse
+
+ALTER TABLE `eam_asset` ADD `goods_stock_id` VARCHAR(50)  NULL  DEFAULT NULL  COMMENT '库存物品'  AFTER `warehouse_id`;
+ALTER TABLE `eam_asset` ADD `label3` 	VARCHAR(1000)  NULL  DEFAULT NULL  COMMENT '标签3'  AFTER `label2`;
+ALTER TABLE `eam_asset` ADD `label4` 	VARCHAR(1000)  NULL  DEFAULT NULL  COMMENT '标签4'  AFTER `label3`;
+
+INSERT INTO `eam_asset_attribute` (`id`, `code`, `label`, `value_type`, `value_path`, `label_notes`, `dimension`, `status`, `required`, `required_modify`, `component_type`, `component_content`, `notes`, `create_by`, `create_time`, `update_by`, `update_time`, `deleted`, `delete_by`, `delete_time`, `version`, `tenant_id`, `owner`)
+VALUES
+	('00f152f2-0f8b-11ec-ab09-00163e2e6a12', 'label3', '资产标签3', 'string', NULL, '标签', 'attribution', 'valid', '0', '1', 'text_input', '', '', '', NULL, '', '2021-09-07 18:34:32', 0, '', NULL, 2, 'T001', 'asset');
+	INSERT INTO `eam_asset_attribute` (`id`, `code`, `label`, `value_type`, `value_path`, `label_notes`, `dimension`, `status`, `required`, `required_modify`, `component_type`, `component_content`, `notes`, `create_by`, `create_time`, `update_by`, `update_time`, `deleted`, `delete_by`, `delete_time`, `version`, `tenant_id`, `owner`)
+VALUES
+	('00f152f2-0f8b-11ec-ab10-00163e2e6a12', 'label4', '资产标签4', 'string', NULL, '标签', 'attribution', 'valid', '0', '1', 'text_input', '', '', '', NULL, '', '2021-09-07 18:34:32', 0, '', NULL, 2, 'T001', 'asset');
+
+
 
 
 Version 1.0.8 版本

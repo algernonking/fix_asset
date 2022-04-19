@@ -27,8 +27,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-14 20:16:50
- * @sign 9C5608F1D022C1992601DBDF9C3B1483
+ * @since 2022-04-19 08:06:03
+ * @sign A635559592B893DCAECD02C81A113D35
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -207,6 +207,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
 	private String warehouseId;
+	
+	/**
+	 * 库存物品：库存物品
+	*/
+	@ApiModelProperty(required = false,value="库存物品" , notes = "库存物品")
+	private String goodsStockId;
 	
 	/**
 	 * 来源：来源
@@ -497,6 +503,18 @@ public class Asset extends Entity {
 	private String label2;
 	
 	/**
+	 * 标签3：标签3
+	*/
+	@ApiModelProperty(required = false,value="标签3" , notes = "标签3")
+	private String label3;
+	
+	/**
+	 * 标签4：标签4
+	*/
+	@ApiModelProperty(required = false,value="标签4" , notes = "标签4")
+	private String label4;
+	
+	/**
 	 * 内部控制标签：内部控制标签
 	*/
 	@ApiModelProperty(required = false,value="内部控制标签" , notes = "内部控制标签")
@@ -759,6 +777,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="变更实例" , notes = "变更实例")
 	private ChangeInstance changeInstance;
+	
+	/**
+	 * 库存物品：库存物品
+	*/
+	@ApiModelProperty(required = false,value="库存物品" , notes = "库存物品")
+	private GoodsStock goodsStock;
 	
 	/**
 	 * 获得 主键<br>
@@ -1289,6 +1313,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setWarehouseId(String warehouseId) {
 		this.warehouseId=warehouseId;
+		return this;
+	}
+	
+	/**
+	 * 获得 库存物品<br>
+	 * 库存物品
+	 * @return 库存物品
+	*/
+	public String getGoodsStockId() {
+		return goodsStockId;
+	}
+	
+	/**
+	 * 设置 库存物品
+	 * @param goodsStockId 库存物品
+	 * @return 当前对象
+	*/
+	public Asset setGoodsStockId(String goodsStockId) {
+		this.goodsStockId=goodsStockId;
 		return this;
 	}
 	
@@ -2205,6 +2248,44 @@ public class Asset extends Entity {
 	}
 	
 	/**
+	 * 获得 标签3<br>
+	 * 标签3
+	 * @return 标签3
+	*/
+	public String getLabel3() {
+		return label3;
+	}
+	
+	/**
+	 * 设置 标签3
+	 * @param label3 标签3
+	 * @return 当前对象
+	*/
+	public Asset setLabel3(String label3) {
+		this.label3=label3;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签4<br>
+	 * 标签4
+	 * @return 标签4
+	*/
+	public String getLabel4() {
+		return label4;
+	}
+	
+	/**
+	 * 设置 标签4
+	 * @param label4 标签4
+	 * @return 当前对象
+	*/
+	public Asset setLabel4(String label4) {
+		this.label4=label4;
+		return this;
+	}
+	
+	/**
 	 * 获得 内部控制标签<br>
 	 * 内部控制标签
 	 * @return 内部控制标签
@@ -3060,6 +3141,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setChangeInstance(ChangeInstance changeInstance) {
 		this.changeInstance=changeInstance;
+		return this;
+	}
+	
+	/**
+	 * 获得 库存物品<br>
+	 * 库存物品
+	 * @return 库存物品
+	*/
+	public GoodsStock getGoodsStock() {
+		return goodsStock;
+	}
+	
+	/**
+	 * 设置 库存物品
+	 * @param goodsStock 库存物品
+	 * @return 当前对象
+	*/
+	public Asset setGoodsStock(GoodsStock goodsStock) {
+		this.goodsStock=goodsStock;
 		return this;
 	}
 

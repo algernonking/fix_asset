@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-14 20:16:52
+ * @since 2022-04-19 08:06:04
  */
 
 
@@ -98,6 +98,7 @@ function ListPage() {
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('位置'), templet: function (d) { return templet('positionId' ,fox.joinLabel(d.position,"name"),d);}}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('详细位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
 					,{ field: 'warehouseId', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('仓库'), templet: function (d) { return templet('warehouseId' ,fox.joinLabel(d.warehouse,"warehouseName"),d);}}
+					,{ field: 'goodsStockId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('库存物品'), templet: function (d) { return templet('goodsStockId' ,fox.joinLabel(d.goodsStock,"name"),d);}}
 					,{ field: 'sourceId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('来源'), templet: function (d) { return templet('sourceId' ,fox.joinLabel(d.source,"label"),d);}}
 					,{ field: 'assetNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('资产数量') , templet: function (d) { return templet('assetNumber',d.assetNumber,d);}  }
 					,{ field: 'remainNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('剩余数量') , templet: function (d) { return templet('remainNumber',d.remainNumber,d);}  }
@@ -145,6 +146,8 @@ function ListPage() {
 					,{ field: 'rackDownNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('设备机柜下位置') , templet: function (d) { return templet('rackDownNumber',d.rackDownNumber,d);}  }
 					,{ field: 'label', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('标签1') , templet: function (d) { return templet('label',d.label,d);}  }
 					,{ field: 'label2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签2') , templet: function (d) { return templet('label2',d.label2,d);}  }
+					,{ field: 'label3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签3') , templet: function (d) { return templet('label3',d.label3,d);}  }
+					,{ field: 'label4', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签4') , templet: function (d) { return templet('label4',d.label4,d);}  }
 					,{ field: 'internalControlLabel', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('内部控制标签') , templet: function (d) { return templet('internalControlLabel',d.internalControlLabel,d);}  }
 					,{ field: 'billId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('单据') , templet: function (d) { return templet('billId',d.billId,d);}  }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
@@ -243,6 +246,7 @@ function ListPage() {
 		value.positionId={ inputType:"select_box", value: getSelectedValue("#positionId","value") ,fillBy:["position"]  , label:getSelectedValue("#positionId","nameStr") };
 		value.positionDetail={ inputType:"button",value: $("#positionDetail").val()};
 		value.warehouseId={ inputType:"select_box", value: getSelectedValue("#warehouseId","value") ,fillBy:["warehouse"]  , label:getSelectedValue("#warehouseId","nameStr") };
+		value.goodsStockId={ inputType:"select_box", value: getSelectedValue("#goodsStockId","value") ,fillBy:["goodsStock"]  , label:getSelectedValue("#goodsStockId","nameStr") };
 		value.sourceId={ inputType:"select_box", value: getSelectedValue("#sourceId","value") ,fillBy:["source"]  , label:getSelectedValue("#sourceId","nameStr") };
 		value.assetNumber={ inputType:"number_input", value: $("#assetNumber").val() };
 		value.remainNumber={ inputType:"number_input", value: $("#remainNumber").val() };
@@ -291,6 +295,8 @@ function ListPage() {
 		value.rackDownNumber={ inputType:"number_input", value: $("#rackDownNumber").val() };
 		value.label={ inputType:"button",value: $("#label").val()};
 		value.label2={ inputType:"button",value: $("#label2").val()};
+		value.label3={ inputType:"button",value: $("#label3").val()};
+		value.label4={ inputType:"button",value: $("#label4").val()};
 		value.internalControlLabel={ inputType:"button",value: $("#internalControlLabel").val()};
 		value.billId={ inputType:"button",value: $("#billId").val()};
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};

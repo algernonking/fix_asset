@@ -664,6 +664,27 @@
 </div>
 
 
+<div th:fragment="label3" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('标签3')}">标签3</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <textarea lay-filter="label3" id="label3" name="label3" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签3') }" class="layui-textarea" style="height: 50px" ></textarea>
+    </div>
+</div>
+
+<div  th:fragment="label4" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('标签4')}">标签4</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <textarea lay-filter="label4" id="label4" name="label4" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签4') }" class="layui-textarea" style="height: 50px" ></textarea>
+    </div>
+</div>
+
+<div th:fragment="goods_stock_id" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('物品')}">库存物品</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <div id="goodsStockId" input-type="select" th:data="${'/service-eam/eam-goods-stock/query-paged-list'}" extraParam="{}"></div>
+    </div>
+</div>
+
 
 </body>
 </html>

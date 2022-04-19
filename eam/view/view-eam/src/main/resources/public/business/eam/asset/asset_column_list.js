@@ -72,6 +72,10 @@ layui.define([],
                 ,equipment_serial_number:{ field: 'equipmentSerialNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备序列') , templet: function (d) { return templet('equipmentSerialNumber',d.equipmentSerialNumber,d);}  }
                 ,last_verification_date:{ field: 'lastVerificationDate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('核对日期') , templet: function (d) { return templet('lastVerificationDate',fox.dateFormat(d.lastVerificationDate,"yyyy-MM-dd"),d); }}
                 ,approval_opinion:{ field: 'approvalOpinion', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('审批意见') , templet: function (d) { return templet('approvalOpinion',d.approvalOpinion,d);}  }
+                ,label3:{ field: 'label3', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签3') , templet: function (d) { return templet('label3',d.label3,d);}  }
+                ,label4:{ field: 'label4', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签4') , templet: function (d) { return templet('label4',d.label2,d);}  }
+                ,goodsStockId:{ field: 'goodsStockId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('物品'), templet: function (d) { return templet('goodsStockId',fox.joinLabel(d.goodsStock,"name"),d);}}
+
             }
             return COL_ALL_DATA;
         }

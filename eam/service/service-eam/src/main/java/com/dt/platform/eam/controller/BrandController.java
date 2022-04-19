@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.BrandMeta;
+import java.math.BigDecimal;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 品牌 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:51
+ * @since 2022-04-18 21:13:51
 */
 
 @Api(tags = "品牌")
@@ -65,14 +66,17 @@ public class BrandController extends SuperController {
 	*/
 	@ApiOperation(value = "添加品牌")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471286350721581056"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = BrandServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.INSERT)
 	public Result insert(BrandVO brandVO) {
-		Result result=brandService.insert(brandVO);
+		Result result=brandService.insert(brandVO,false);
 		return result;
 	}
 
@@ -83,7 +87,7 @@ public class BrandController extends SuperController {
 	*/
 	@ApiOperation(value = "删除品牌")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471286350721581056")
+		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = BrandVOMeta.ID)
@@ -117,15 +121,18 @@ public class BrandController extends SuperController {
 	*/
 	@ApiOperation(value = "更新品牌")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471286350721581056"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } )
+	@ApiOperationSupport( order=4 , ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.DIRTY_FIELDS , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } )
 	@NotNull(name = BrandVOMeta.ID)
 	@SentinelResource(value = BrandServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.UPDATE)
 	public Result update(BrandVO brandVO) {
-		Result result=brandService.update(brandVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=brandService.update(brandVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -135,15 +142,18 @@ public class BrandController extends SuperController {
 	*/
 	@ApiOperation(value = "保存品牌")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471286350721581056"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } )
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.DIRTY_FIELDS , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } )
 	@NotNull(name = BrandVOMeta.ID)
 	@SentinelResource(value = BrandServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.SAVE)
 	public Result save(BrandVO brandVO) {
-		Result result=brandService.save(brandVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=brandService.save(brandVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -162,11 +172,6 @@ public class BrandController extends SuperController {
 	public Result<Brand> getById(String id) {
 		Result<Brand> result=new Result<>();
 		Brand brand=brandService.getById(id);
-
-		// join 关联的对象
-		brandService.dao().fill(brand)
-			.execute();
-
 		result.success(true).data(brand);
 		return result;
 	}
@@ -197,8 +202,11 @@ public class BrandController extends SuperController {
 	*/
 	@ApiOperation(value = "查询品牌")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471286350721581056"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = BrandServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -216,8 +224,11 @@ public class BrandController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询品牌")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471286350721581056"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = BrandServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -225,11 +236,6 @@ public class BrandController extends SuperController {
 	public Result<PagedList<Brand>> queryPagedList(BrandVO sample) {
 		Result<PagedList<Brand>> result=new Result<>();
 		PagedList<Brand> list=brandService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-
-		// join 关联的对象
-		brandService.dao().fill(list)
-			.execute();
-
 		result.success(true).data(list);
 		return result;
 	}
@@ -242,10 +248,14 @@ public class BrandController extends SuperController {
 	@SentinelResource(value = BrandServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(BrandServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(BrandVO  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=brandService.exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -255,11 +265,15 @@ public class BrandController extends SuperController {
 	@SentinelResource(value = BrandServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(BrandServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=brandService.exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
+	}
 
 
 

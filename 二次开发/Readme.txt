@@ -2,10 +2,7 @@
 所有需要二次开发的代码均已开放，确保不影响二次开发
 
 
-
-
 二次开发说明
-
 - 1、正常情况下使用IDE maven3.6版本可以正常下载,如果未下载，优先检查maven版本，比如3.8版本确实无法下载，想尽一切办法下载缺少的库lib就行,绝大情况下我这边私服服务器没有问题。
 - 2、SQL文件:(每日更新):http://121.43.103.102/upload/sql.tar.gz
 - 3、运行环境要求:mysql版:5.7.X,Java版本:1.8
@@ -14,7 +11,7 @@
     (如果启动报错password.txt文件不存在)
     则把配置文件中的druid.primary.encrypt.enable:false
     另外密文的连接信息，账户，密码，改成明文的jdbc连接信息即可
-        url: jdbc:mysql://121.43.103.102:3306/eam?tinyInt1isBit=false&useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://127.0.0.1:3306/eam?tinyInt1isBit=false&useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true
         username: root
         password: 12345
     特别注意:url:这行比较长，不能换行，否则会报异常问题

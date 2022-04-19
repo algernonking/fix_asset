@@ -27,6 +27,14 @@ delete from eam_asset_collection where 1=1  and tenant_id='T001' ;
 delete from eam_asset_collection_return where 1=1  and tenant_id='T001' ;
 delete from eam_asset_handle where 1=1  and tenant_id='T001' ;
 delete from eam_asset_tranfer where 1=1  and tenant_id='T001' ;
+
+delete from eam_purchase_apply  where 1=1  and tenant_id='T001' ;
+delete from eam_purchase_apply_item  where 1=1  and tenant_id='T001' ;
+delete from eam_purchase_check  where 1=1  and tenant_id='T001' ;
+delete from eam_purchase_order_detail  where 1=1  and tenant_id='T001' ;
+delete from eam_asset_stock_deliver  where 1=1  and tenant_id='T001' ;
+
+
 -- inventory
 delete from eam_inventory where 1=1  and tenant_id='T001' ;
 delete from eam_inventory_asset where 1=1 ;
@@ -43,6 +51,8 @@ delete from cont_contract_attachment where 1=1  and tenant_id='T001' ;
 delete from cont_contract_performance where 1=1  and tenant_id='T001' ;
 delete from cont_contract_signer where 1=1  and tenant_id='T001' ;
 -- end
+
+
 
 delete from sys_job_log;
 

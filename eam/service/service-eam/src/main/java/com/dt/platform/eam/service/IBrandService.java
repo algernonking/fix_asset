@@ -21,17 +21,26 @@ import com.github.foxnic.dao.data.SaveMode;
  * 品牌 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:51
+ * @since 2022-04-18 21:13:51
 */
 
 public interface IBrandService extends ISuperService<Brand> {
 
 	/**
-	 * 插入实体
-	 * @param brand 实体数据
+	 * 添加，如果语句错误，则抛出异常
+	 * @param brand 数据对象
 	 * @return 插入是否成功
 	 * */
 	Result insert(Brand brand);
+
+	/**
+	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param brand  数据对象
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果 , 如果失败返回 false，成功返回 true
+	 */
+	Result insert(Brand brand,boolean throwsException);
 
 	/**
 	 * 批量插入实体，事务内
@@ -82,12 +91,23 @@ public interface IBrandService extends ISuperService<Brand> {
 	boolean update(DBField field,Object value , String id);
 
 	/**
-	 * 更新实体
+	 * 更新，如果执行错误，则抛出异常
 	 * @param brand 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	Result update(Brand brand , SaveMode mode);
+
+
+	/**
+	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param brand 数据对象
+	 * @param mode SaveMode,数据更新的模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果
+	 */
+	Result update(Brand brand , SaveMode mode,boolean throwsException);
 
 
 	/**
@@ -99,7 +119,16 @@ public interface IBrandService extends ISuperService<Brand> {
 	Result updateList(List<Brand> brandList, SaveMode mode);
 
 	/**
-	 * 保存实体，如果主键值不为 null，则更新，否则插入
+	 * 保存实体，根据 throwsException 参数抛出异常或返回 Result 对象
+	 * @param brand 实体数据
+	 * @param mode 保存模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 保存是否成功
+	 * */
+	Result save(Brand brand , SaveMode mode,boolean throwsException);
+
+	/**
+	 * 保存实体，如果语句错误，则抛出异常
 	 * @param brand 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功
@@ -115,7 +144,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	Result saveList(List<Brand> brandList , SaveMode mode);
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 检查实体中的数据字段是否已经存在 . 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 * @param brand  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
@@ -132,19 +161,19 @@ public interface IBrandService extends ISuperService<Brand> {
 	Brand getById(String id);
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 按 id 获取多个对象
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
 	List<Brand> getByIds(List<String> ids);
 
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param brand 数据对象
 	 * @return 判断结果
 	 */
-	Result<Brand> checkExists(Brand brand);
+	Boolean checkExists(Brand brand);
 
 	/**
 	 * 根据实体数构建默认的条件表达式, 不支持 Join 其它表

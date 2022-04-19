@@ -21,13 +21,14 @@ import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.DictItem;
 import com.dt.platform.domain.datacenter.Rack;
 import org.github.foxnic.web.domain.changes.ChangeInstance;
+import com.dt.platform.domain.eam.GoodsStock;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-14 20:16:50
- * @sign 9C5608F1D022C1992601DBDF9C3B1483
+ * @since 2022-04-19 08:06:03
+ * @sign A635559592B893DCAECD02C81A113D35
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -312,6 +313,16 @@ public class AssetMeta {
 	 * 仓库 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> WAREHOUSE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,WAREHOUSE_ID, java.lang.String.class, "仓库", "仓库", java.lang.String.class, null);
+	
+	/**
+	 * 库存物品 , 类型: java.lang.String
+	*/
+	public static final String GOODS_STOCK_ID="goodsStockId";
+	
+	/**
+	 * 库存物品 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> GOODS_STOCK_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,GOODS_STOCK_ID, java.lang.String.class, "库存物品", "库存物品", java.lang.String.class, null);
 	
 	/**
 	 * 来源 , 类型: java.lang.String
@@ -794,6 +805,26 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> LABEL2_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,LABEL2, java.lang.String.class, "标签2", "标签2", java.lang.String.class, null);
 	
 	/**
+	 * 标签3 , 类型: java.lang.String
+	*/
+	public static final String LABEL3="label3";
+	
+	/**
+	 * 标签3 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> LABEL3_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,LABEL3, java.lang.String.class, "标签3", "标签3", java.lang.String.class, null);
+	
+	/**
+	 * 标签4 , 类型: java.lang.String
+	*/
+	public static final String LABEL4="label4";
+	
+	/**
+	 * 标签4 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> LABEL4_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,LABEL4, java.lang.String.class, "标签4", "标签4", java.lang.String.class, null);
+	
+	/**
 	 * 内部控制标签 , 类型: java.lang.String
 	*/
 	public static final String INTERNAL_CONTROL_LABEL="internalControlLabel";
@@ -1234,9 +1265,19 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.changes.ChangeInstance> CHANGE_INSTANCE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CHANGE_INSTANCE, org.github.foxnic.web.domain.changes.ChangeInstance.class, "变更实例", "变更实例", org.github.foxnic.web.domain.changes.ChangeInstance.class, null);
 	
 	/**
+	 * 库存物品 , 类型: com.dt.platform.domain.eam.GoodsStock
+	*/
+	public static final String GOODS_STOCK="goodsStock";
+	
+	/**
+	 * 库存物品 , 类型: com.dt.platform.domain.eam.GoodsStock
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.GoodsStock> GOODS_STOCK_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,GOODS_STOCK, com.dt.platform.domain.eam.GoodsStock.class, "库存物品", "库存物品", com.dt.platform.domain.eam.GoodsStock.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , OWNER_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , CLEAN_OUT , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , PRODUCTION_DATE , REGISTER_DATE , RFID , ATTACH , LAST_VERIFICATION_DATE , PURPOSE , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAX_AMOUNT_RATE , TAX_AMOUNT_PRICE , TOTAL_AMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , EQUIPMENT_SERIAL_NUMBER , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , LABEL2 , INTERNAL_CONTROL_LABEL , BILL_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , EXT_DATA , PCM_DATA , CATALOG_ATTRIBUTE , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , OWNER_COMPANY , USE_ORGANIZATION , SOURCE , EQUIPMENT_ENVIRONMENT , SAFETY_LEVEL , ASSET_MAINTENANCE_STATUS , RACK , CHANGE_INSTANCE };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , OWNER_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , CLEAN_OUT , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , GOODS_STOCK_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , PRODUCTION_DATE , REGISTER_DATE , RFID , ATTACH , LAST_VERIFICATION_DATE , PURPOSE , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAX_AMOUNT_RATE , TAX_AMOUNT_PRICE , TOTAL_AMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , EQUIPMENT_SERIAL_NUMBER , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , LABEL2 , LABEL3 , LABEL4 , INTERNAL_CONTROL_LABEL , BILL_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , EXT_DATA , PCM_DATA , CATALOG_ATTRIBUTE , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , OWNER_COMPANY , USE_ORGANIZATION , SOURCE , EQUIPMENT_ENVIRONMENT , SAFETY_LEVEL , ASSET_MAINTENANCE_STATUS , RACK , CHANGE_INSTANCE , GOODS_STOCK };
 	
 	/**
 	 * 代理类
@@ -1551,6 +1592,17 @@ public class AssetMeta {
 		public Asset setWarehouseId(String warehouseId) {
 			super.change(WAREHOUSE_ID,super.getWarehouseId(),warehouseId);
 			super.setWarehouseId(warehouseId);
+			return this;
+		}
+		
+		/**
+		 * 设置 库存物品
+		 * @param goodsStockId 库存物品
+		 * @return 当前对象
+		*/
+		public Asset setGoodsStockId(String goodsStockId) {
+			super.change(GOODS_STOCK_ID,super.getGoodsStockId(),goodsStockId);
+			super.setGoodsStockId(goodsStockId);
 			return this;
 		}
 		
@@ -2083,6 +2135,28 @@ public class AssetMeta {
 		}
 		
 		/**
+		 * 设置 标签3
+		 * @param label3 标签3
+		 * @return 当前对象
+		*/
+		public Asset setLabel3(String label3) {
+			super.change(LABEL3,super.getLabel3(),label3);
+			super.setLabel3(label3);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签4
+		 * @param label4 标签4
+		 * @return 当前对象
+		*/
+		public Asset setLabel4(String label4) {
+			super.change(LABEL4,super.getLabel4(),label4);
+			super.setLabel4(label4);
+			return this;
+		}
+		
+		/**
 		 * 设置 内部控制标签
 		 * @param internalControlLabel 内部控制标签
 		 * @return 当前对象
@@ -2563,6 +2637,17 @@ public class AssetMeta {
 		public Asset setChangeInstance(ChangeInstance changeInstance) {
 			super.change(CHANGE_INSTANCE,super.getChangeInstance(),changeInstance);
 			super.setChangeInstance(changeInstance);
+			return this;
+		}
+		
+		/**
+		 * 设置 库存物品
+		 * @param goodsStock 库存物品
+		 * @return 当前对象
+		*/
+		public Asset setGoodsStock(GoodsStock goodsStock) {
+			super.change(GOODS_STOCK,super.getGoodsStock(),goodsStock);
+			super.setGoodsStock(goodsStock);
 			return this;
 		}
 	}

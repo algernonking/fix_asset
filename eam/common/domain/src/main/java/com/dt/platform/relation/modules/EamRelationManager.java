@@ -27,6 +27,7 @@ public class EamRelationManager extends RelationManager {
         this.setupProperties();
         this.setupAssetDataPermissions();
         this.setupGoods();
+        this.setupGoodsStock();
         this.setupAsset();
         this.setupAlloction();
         this.setupAssetBorrow();
@@ -792,6 +793,23 @@ public class EamRelationManager extends RelationManager {
     private void setupRelations() {
 
     }
+
+    private void setupGoodsStock(){
+
+        // 关联品牌
+        this.property(GoodsStockMeta.BRAND_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
+
+        // 关联生产厂商
+        this.property(GoodsStockMeta.MANUFACTURER_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.MANUFACTURER_ID).join(EAMTables.EAM_MANUFACTURER.ID);
+
+        // 关联分类
+        this.property(GoodsStockMeta.CATEGORY_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.CATEGORY_ID).join(EAMTables.EAM_CATEGORY.ID);
+    }
+
+
     private void setupGoods() {
 
         // 关联品牌

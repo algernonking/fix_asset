@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-14 20:16:52
+ * @since 2022-04-19 08:06:05
  */
 
 function FormPage() {
@@ -337,6 +337,37 @@ function FormPage() {
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
 					opts.push({data:data[i],name:data[i].warehouseName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 goodsStockId 下拉字段
+		fox.renderSelectBox({
+			el: "goodsStockId",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsStockId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -738,6 +769,8 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#positionId",formData.position);
 			//设置  仓库 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
+			//设置  库存物品 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#goodsStockId",formData.goodsStock);
 			//设置  来源 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#sourceId",formData.source);
 			//设置  维保商 设置下拉框勾选
@@ -820,6 +853,8 @@ function FormPage() {
 		data["positionId"]=fox.getSelectedValue("positionId",false);
 		//获取 仓库 下拉框的值
 		data["warehouseId"]=fox.getSelectedValue("warehouseId",false);
+		//获取 库存物品 下拉框的值
+		data["goodsStockId"]=fox.getSelectedValue("goodsStockId",false);
 		//获取 来源 下拉框的值
 		data["sourceId"]=fox.getSelectedValue("sourceId",false);
 		//获取 维保商 下拉框的值

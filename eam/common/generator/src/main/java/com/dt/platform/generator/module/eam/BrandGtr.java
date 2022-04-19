@@ -1,7 +1,11 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.common.StatusEnableEnum;
+import com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import com.dt.platform.eam.page.BrandPageController;
 import com.dt.platform.generator.config.Config;
+import com.dt.platform.proxy.eam.BrandServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class BrandGtr extends BaseCodeGenerator {
@@ -14,17 +18,35 @@ public class BrandGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.EAM_BRAND.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).search().fuzzySearch();
 
+        cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_BRAND.BRAND_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_BRAND.STATUS).search().fuzzySearch();
 
         cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).form().validate().required();
+        cfg.view().field(EAMTables.EAM_BRAND.BRAND_CODE).form().validate().required();
+        cfg.view().field(EAMTables.EAM_BRAND.STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class)
+;
+
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_BRAND.BRAND_NAME
+                        EAMTables.EAM_BRAND.STATUS,
+                        EAMTables.EAM_BRAND.BRAND_CODE,
+                        EAMTables.EAM_BRAND.BRAND_NAME,
                 }
         );
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+
+
+        cfg.view().formWindow().bottomSpace(20);
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_BRAND.STATUS,
+                        EAMTables.EAM_BRAND.BRAND_CODE,
+                        EAMTables.EAM_BRAND.BRAND_NAME,
+                        EAMTables.EAM_BRAND.SORT
+                }
+        );
 
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
@@ -45,12 +67,13 @@ public class BrandGtr extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         BrandGtr g=new BrandGtr();
         //生成代码
-        g.generateCode();
+   //    g.generateCode();
 
+       // g.removeByBatchId("507635127677878272");
         //移除之前生成的菜单，视情况执行
-//        g.removeByBatchId("471622036347682816");
+     //g.generateMenu(BrandServiceProxy.class, BrandPageController.class);
         //生成菜单
-//        g.generateMenu(BrandServiceProxy.class, BrandPageController.class);
+
     }
 
 }
