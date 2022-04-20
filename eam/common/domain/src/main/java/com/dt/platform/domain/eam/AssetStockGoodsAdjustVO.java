@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 库存调整
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:15:41
+ * @since 2022-04-20 12:20:56
  * @sign 518521CB66AD62841C9779F7B3A4DCE0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

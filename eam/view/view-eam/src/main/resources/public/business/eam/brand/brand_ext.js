@@ -1,7 +1,7 @@
 /**
  * 品牌 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-18 21:13:51
+ * @since 2022-04-20 13:06:29
  */
 
 layui.config({

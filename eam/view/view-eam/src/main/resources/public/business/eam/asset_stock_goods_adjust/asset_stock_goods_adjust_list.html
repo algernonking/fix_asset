@@ -2,7 +2,7 @@
 /**
  * 库存调整 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:15:41
+ * @since 2022-04-20 12:20:57
  */
  -->
  <!DOCTYPE html>
@@ -48,7 +48,11 @@
                     <!-- 使用人员 , useUserId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 领用后位置 , positionId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 详细位置 , positionDetail ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 领用日期 , collectionDate ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 领用日期 , collectionDate ,typeName=date_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('领用日期')}" class="search-label collectionDate-label">领用日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="collectionDate"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                    </div>
                     <!-- 领用说明 , content ,typeName=text_input, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=true -->

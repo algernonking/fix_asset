@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 库存物品明细 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:13:08
+ * @since 2022-04-20 08:23:16
 */
 
 @Api(tags = "库存物品明细")

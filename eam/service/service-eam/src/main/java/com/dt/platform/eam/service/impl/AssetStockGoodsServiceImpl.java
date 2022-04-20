@@ -32,10 +32,10 @@ import java.util.Date;
 
 /**
  * <p>
- * 物品库存 服务实现
+ * 库存物品单 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:04:37
+ * @since 2022-04-20 16:08:02
 */
 
 
@@ -95,7 +95,7 @@ public class AssetStockGoodsServiceImpl extends SuperService<AssetStockGoods> im
 
 	
 	/**
-	 * 按主键删除 物品库存
+	 * 按主键删除 库存物品单
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -116,7 +116,7 @@ public class AssetStockGoodsServiceImpl extends SuperService<AssetStockGoods> im
 	}
 	
 	/**
-	 * 按主键删除 物品库存
+	 * 按主键删除 库存物品单
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -176,7 +176,7 @@ public class AssetStockGoodsServiceImpl extends SuperService<AssetStockGoods> im
 
 	
 	/**
-	 * 按主键更新字段 物品库存
+	 * 按主键更新字段 库存物品单
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -190,7 +190,7 @@ public class AssetStockGoodsServiceImpl extends SuperService<AssetStockGoods> im
 
 	
 	/**
-	 * 按主键获取 物品库存
+	 * 按主键获取 库存物品单
 	 *
 	 * @param id 主键
 	 * @return AssetStockGoods 数据对象

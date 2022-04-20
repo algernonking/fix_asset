@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 库存物品明细 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:13:08
+ * @since 2022-04-20 08:23:16
 */
 
 @Controller("EamAssetStockGoodsDetailPageController")

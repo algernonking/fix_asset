@@ -102,7 +102,7 @@ foxnic:
     profiles: empty,profile@GuoYIE
   # 设置 API 接口
   job:
-    enable: false
+    enable: true
     force-run-job-ids:
     # 指定 Quartz 使用的DAO数据源
     dao-bean-name: primaryDAO

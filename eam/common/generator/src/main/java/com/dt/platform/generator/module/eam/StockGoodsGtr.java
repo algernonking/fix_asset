@@ -1,13 +1,19 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.domain.eam.AssetStockGoods;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.eam.page.AssetStockGoodsPageController;
 import com.dt.platform.eam.page.BrandPageController;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.proxy.eam.AssetStockGoodsServiceProxy;
-import com.dt.platform.proxy.eam.BrandServiceProxy;
+import com.dt.platform.proxy.eam.*;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.system.meta.DictItemMeta;
+import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 
 public class StockGoodsGtr extends BaseCodeGenerator {
 
@@ -20,27 +26,125 @@ public class StockGoodsGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.ID).basic().hidden(true);
 
+        cfg.getPoClassFile().addSimpleProperty(GoodsStock.class,"goods","物品","物品");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
+        cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"ownerCompany","所属公司","所属公司");
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");
+        cfg.getPoClassFile().addSimpleProperty(Warehouse.class,"warehouse","仓库","仓库");
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
 
-        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.STOCK_NAME).form().validate().required();
-
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.STOCK_BATCH_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.NOTES).search().fuzzySearch();
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_ASSET_STOCK_GOODS.STATUS,
-
+                        EAMTables.EAM_ASSET_STOCK_GOODS.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_STOCK_GOODS.SUPPLIER_ID,
                 }
         );
 
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
+
+//        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.PURCHASE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.NOTES).form().textArea().height(60);
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.OWN_COMPANY_ID)
+                .form().button().chooseCompany(true);
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.OWN_COMPANY_ID).table().fillBy("ownerCompany","fullName");
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.USE_ORG_ID)
+                .form().button().chooseOrganization(true);
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.USE_ORG_ID).table().fillBy("useOrganization","fullName");
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.CREATE_TIME).table().disable(true);
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.SELECTED_CODE).table().disable(true);
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.OWNER_CODE).table().disable(true);
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.OWNER_TYPE).table().disable(true);
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.STOCK_TYPE).table().disable(true);
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.NOTES).table().hidden(true);
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.SUPPLIER_ID)
+                .basic().label("供应商")
+                .form().selectBox().queryApi(SupplierServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillWith(AssetStockGoodsMeta.SUPPLIER).muliti(false);
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.WAREHOUSE_ID)
+                .basic().label("仓库")
+                .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillWith(AssetStockGoodsMeta.WAREHOUSE).muliti(false);
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.SOURCE_ID)
+                .basic().label("来源")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_source")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillWith(AssetStockGoodsMeta.SOURCE).muliti(false).defaultValue("purchase");
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.GOODS_ID)
+                .basic().label("物品")
+                .form().selectBox().queryApi(GoodsStockServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(GoodsStockMeta.ID).textField( GoodsStockMeta.NAME).fillWith(AssetStockGoodsMeta.GOODS).muliti(false);
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.STOCK_CUR_NUMBER).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.STOCK_IN_NUMBER).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.GOODS_ID).form().validate().required();
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.UNIT_PRICE).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS.AMOUNT).form().validate().required();
+
+
+        cfg.view().formWindow().width("85%");
         cfg.view().formWindow().bottomSpace(20);
-        cfg.view().form().addGroup(null,
+        cfg.view().form().addGroup("基本信息",
+                new Object[] {
+                        EAMTables.EAM_ASSET_STOCK_GOODS.STOCK_BATCH_CODE,
+                        EAMTables.EAM_ASSET_STOCK_GOODS.SOURCE_ID,
+                },
                 new Object[] {
                         EAMTables.EAM_ASSET_STOCK_GOODS.OWN_COMPANY_ID,
-
+                        EAMTables.EAM_ASSET_STOCK_GOODS.USE_ORG_ID,
+                },
+                new Object[] {
+                        EAMTables.EAM_ASSET_STOCK_GOODS.SUPPLIER_ID,
+                        EAMTables.EAM_ASSET_STOCK_GOODS.WAREHOUSE_ID,
                 }
         );
 
+        cfg.view().form().addGroup("库存信息",
+                new Object[] {
+                        EAMTables.EAM_ASSET_STOCK_GOODS.STOCK_IN_NUMBER,
+                        EAMTables.EAM_ASSET_STOCK_GOODS.STOCK_CUR_NUMBER,
+                },
+                new Object[] {
+                        EAMTables.EAM_ASSET_STOCK_GOODS.AMOUNT,
+                        EAMTables.EAM_ASSET_STOCK_GOODS.UNIT_PRICE,
+                },
+                new Object[] {
+                        EAMTables.EAM_ASSET_STOCK_GOODS.GOODS_ID,
+                }
+        );
 
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET_STOCK_GOODS.NOTES,
+                }
+        );
+
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //文件生成覆盖模式

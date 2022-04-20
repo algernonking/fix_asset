@@ -26,24 +26,14 @@ public class EamGoodsStockGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
-
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
-
-
         cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");
-
-
-
 
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.NAME).basic().label("物品名称").search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.MODEL).basic().label("规格型号").search().fuzzySearch();
-
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.NOTES).basic().label("备注").search().fuzzySearch();
-
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.PICTURE_ID).table().disable();
-
-
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -83,24 +73,19 @@ public class EamGoodsStockGtr extends BaseCodeGenerator {
                 .valueField(BrandMeta.ID).textField(BrandMeta.BRAND_NAME).fillWith(GoodsStockMeta.BRAND).muliti(false);
 
 
-
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.MANUFACTURER_ID)
                 .basic().label("厂商")
                 .form().validate().required()
                 .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillWith(GoodsMeta.MANUFACTURER).muliti(false);
 
-
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.STATUS).basic().label("状态")
                 .form().validate().required().form().selectBox().enumType(StatusEnableEnum.class);
-
-
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.CODE).form().validate().required();
-
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.BAR_CODE).form().validate().required();
-
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.NAME).form().validate().required();
-        cfg.view().field(EAMTables.EAM_GOODS_STOCK.NOTES).form().textArea().height(50);
+        cfg.view().field(EAMTables.EAM_GOODS_STOCK.MODEL).form().validate().required();
+        cfg.view().field(EAMTables.EAM_GOODS_STOCK.NOTES).form().textArea().height(60);
 
 
         cfg.view().formWindow().bottomSpace(250);
@@ -109,22 +94,28 @@ public class EamGoodsStockGtr extends BaseCodeGenerator {
                 new Object[] {
                         EAMTables.EAM_GOODS_STOCK.CATEGORY_ID,
                         EAMTables.EAM_GOODS_STOCK.STATUS,
-                        EAMTables.EAM_GOODS_STOCK.NAME,
-                        EAMTables.EAM_GOODS_STOCK.MODEL,
+                        EAMTables.EAM_GOODS_STOCK.UNIT,
                 }, new Object[] {
                         EAMTables.EAM_GOODS_STOCK.CODE,
                         EAMTables.EAM_GOODS_STOCK.BAR_CODE,
-                        EAMTables.EAM_GOODS_STOCK.BRAND_ID,
                 },
                 new Object[] {
                         EAMTables.EAM_GOODS_STOCK.MANUFACTURER_ID,
-                        EAMTables.EAM_GOODS_STOCK.DEFAULT_PRICE,
-                        EAMTables.EAM_GOODS_STOCK.UNIT,
+                        EAMTables.EAM_GOODS_STOCK.BRAND_ID,
+                }
+        );
+
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_GOODS_STOCK.NAME,
+                        EAMTables.EAM_GOODS_STOCK.MODEL,
                 },
                 new Object[] {
                         EAMTables.EAM_GOODS_STOCK.STOCK_MIN,
                         EAMTables.EAM_GOODS_STOCK.STOCK_MAX,
+                }, new Object[] {
                         EAMTables.EAM_GOODS_STOCK.STOCK_SECURITY,
+                        EAMTables.EAM_GOODS_STOCK.DEFAULT_PRICE,
                 }
         );
 
@@ -136,9 +127,6 @@ public class EamGoodsStockGtr extends BaseCodeGenerator {
 
                 }
         );
-
-
-
 
 
 

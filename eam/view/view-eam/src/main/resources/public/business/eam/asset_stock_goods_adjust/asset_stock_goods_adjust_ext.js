@@ -1,7 +1,7 @@
 /**
  * 库存调整 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:15:41
+ * @since 2022-04-20 12:20:57
  */
 
 layui.config({

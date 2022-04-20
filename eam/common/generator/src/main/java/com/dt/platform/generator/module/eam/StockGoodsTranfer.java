@@ -58,7 +58,7 @@ public class StockGoodsTranfer extends BaseCodeGenerator {
 
        // g.removeByBatchId("507635127677878272");
         //移除之前生成的菜单，视情况执行
-      g.generateMenu(AssetStockGoodsTranferServiceProxy.class, AssetStockGoodsTranferPageController.class);
+     // g.generateMenu(AssetStockGoodsTranferServiceProxy.class, AssetStockGoodsTranferPageController.class);
         //生成菜单
 
     }

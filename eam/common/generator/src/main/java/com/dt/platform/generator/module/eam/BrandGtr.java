@@ -25,7 +25,10 @@ public class BrandGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_BRAND.BRAND_CODE).form().validate().required();
-        cfg.view().field(EAMTables.EAM_BRAND.STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class)
+
+
+        cfg.view().field(EAMTables.EAM_BRAND.STATUS).form().validate().required().
+                form().selectBox().enumType(StatusEnableEnum.class)
 ;
 
         cfg.view().search().inputLayout(
@@ -35,8 +38,6 @@ public class BrandGtr extends BaseCodeGenerator {
                         EAMTables.EAM_BRAND.BRAND_NAME,
                 }
         );
-
-
 
         cfg.view().formWindow().bottomSpace(20);
         cfg.view().form().addGroup(null,
@@ -67,7 +68,7 @@ public class BrandGtr extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         BrandGtr g=new BrandGtr();
         //生成代码
-   //    g.generateCode();
+       g.generateCode();
 
        // g.removeByBatchId("507635127677878272");
         //移除之前生成的菜单，视情况执行

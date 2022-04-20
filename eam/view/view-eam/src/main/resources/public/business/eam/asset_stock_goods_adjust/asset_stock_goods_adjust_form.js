@@ -1,7 +1,7 @@
 /**
  * 库存调整 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:15:42
+ * @since 2022-04-20 12:20:57
  */
 
 function FormPage() {
@@ -127,6 +127,10 @@ function FormPage() {
 
 
 
+			//设置 领用日期 显示复选框勾选
+			if(formData["collectionDate"]) {
+				$("#collectionDate").val(fox.dateFormat(formData["collectionDate"],"yyyy-MM-dd HH:mm:ss"));
+			}
 
 
 

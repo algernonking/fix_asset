@@ -3,6 +3,7 @@ package com.dt.platform.proxy.eam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import com.dt.platform.domain.eam.Brand;
 import com.dt.platform.domain.eam.BrandVO;
@@ -10,14 +11,13 @@ import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.dt.platform.proxy.ServiceNames;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
  * 品牌  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:51
+ * @since 2022-04-20 13:06:29
  */
 @FeignClient(value = ServiceNames.EAM, contextId = BrandServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface BrandServiceProxy {
@@ -134,7 +134,7 @@ public interface BrandServiceProxy {
     Result<Brand> getById(@RequestParam(name = "id") String id);
 
     /**
-     * 批量删除品牌
+     * 获取多个品牌
      */
     @RequestMapping(BrandServiceProxy.GET_BY_IDS)
     Result<List<Brand>> getByIds(@RequestParam(name = "ids") List<String> ids);

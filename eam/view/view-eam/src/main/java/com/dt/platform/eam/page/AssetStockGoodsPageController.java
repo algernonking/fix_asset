@@ -10,10 +10,10 @@ import com.dt.platform.proxy.eam.AssetStockGoodsServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 物品库存 模版页面控制器
+ * 库存物品单 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:04:37
+ * @since 2022-04-20 16:08:03
 */
 
 @Controller("EamAssetStockGoodsPageController")
@@ -38,7 +38,7 @@ public class AssetStockGoodsPageController extends ViewController {
 	}
 	
 	/**
-	 * 物品库存 功能主页面
+	 * 库存物品单 功能主页面
 	 */
 	@RequestMapping("/asset_stock_goods_list.html")
 	public String list(Model model,HttpServletRequest request) {
@@ -46,7 +46,7 @@ public class AssetStockGoodsPageController extends ViewController {
 	}
 
 	/**
-	 * 物品库存 表单页面
+	 * 库存物品单 表单页面
 	 */
 	@RequestMapping("/asset_stock_goods_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {

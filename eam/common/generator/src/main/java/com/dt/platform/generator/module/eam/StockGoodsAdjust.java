@@ -19,20 +19,29 @@ public class StockGoodsAdjust extends BaseCodeGenerator {
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.ID,
-
+                        EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.COLLECTION_DATE,
                 }
         );
+
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth+30);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth+30);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
+
+
 
         cfg.view().formWindow().bottomSpace(20);
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.ID,
+                        EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.COLLECTION_DATE,
 
                 }
         );
 
-        cfg.view().search().inputWidth(Config.searchInputWidth);
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

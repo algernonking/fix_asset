@@ -10,10 +10,10 @@ import com.github.foxnic.commons.bean.BeanUtil;
 
 
 /**
- * 物品库存
+ * 库存物品单
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:04:37
- * @sign 1D8CCCC34F03028D8A2761ACB016C783
+ * @since 2022-04-20 16:08:02
+ * @sign 7D4339BF417666EEADF8D5E7912310EF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

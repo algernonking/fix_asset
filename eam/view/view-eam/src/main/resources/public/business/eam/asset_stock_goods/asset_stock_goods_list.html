@@ -1,8 +1,8 @@
 <!--
 /**
- * 物品库存 列表页 JS 脚本
+ * 库存物品单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:04:38
+ * @since 2022-04-20 16:08:03
  */
  -->
  <!DOCTYPE html>
@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
-    <title th:text="${lang.translate('物品库存')}">物品库存</title>
+    <title th:text="${lang.translate('库存物品单')}">库存物品单</title>
     <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
     <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -40,39 +40,32 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 库存所属 , ownerCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 所属类型 , ownerType ,typeName=text_input, isHideInSearch=true -->
                     <!-- 库存类型 , stockType ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 办理状态 , status ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
-                        <input id="status" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 批次号 , stockBatchCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 单据名称 , stockName ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 来源 , sourceId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 所属公司 , ownCompanyId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 资产供应商 , supplierId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 仓库 , warehouseId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 来源 , sourceId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 所属公司 , ownCompanyId ,typeName=button, isHideInSearch=true -->
+                    <!-- 所属组织 , useOrgId ,typeName=button, isHideInSearch=true -->
+                    <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 入库存数量 , stockInNumber ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 当前库存数量 , stockCurNumber ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 单价 , unitPrice ,typeName=number_input, isHideInSearch=true -->
                     <!-- 总金额 , amount ,typeName=number_input, isHideInSearch=true -->
                     <!-- 购置日期 , purchaseDate ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 管理人 , managerId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 接收人 , receiverUserName ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 业务时间 , businessDate ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 附件 , attachId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 备注 , stockNotes ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 物品 , goodsId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 变更类型 , chsType ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 变更状态 , chsStatus ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 变更版本号 , chsVersion ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 变更ID , changeInstanceId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 流程概要 , summary ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 最后审批人账户ID , latestApproverId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 最后审批人姓名 , latestApproverName ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 下一节点审批人 , nextApproverIds ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 下一个审批节点审批人姓名 , nextApproverNames ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 审批意见 , approvalOpinion ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('供应商')}" class="search-label supplierId-label">供应商</span><span class="search-colon">:</span></div>
+                        <div id="supplierId" th:data="${'/service-eam/eam-supplier/query-paged-list'}" style="width:150px" extraParam="{}"></div>
+                    </div>
 
 
                 </div>

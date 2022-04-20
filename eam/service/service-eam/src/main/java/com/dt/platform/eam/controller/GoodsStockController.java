@@ -53,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 库存物品 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 07:22:05
+ * @since 2022-04-20 13:15:09
 */
 
 @Api(tags = "库存物品")

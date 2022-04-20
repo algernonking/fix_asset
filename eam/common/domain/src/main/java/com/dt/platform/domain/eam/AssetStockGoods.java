@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -15,10 +18,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * 物品库存
+ * 库存物品单
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:04:37
- * @sign C8948CB9743C9610C5DFC1C020D33A0D
+ * @since 2022-04-20 16:08:02
+ * @sign 0510EBD14D68768C30CCFD4B96962A48
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -43,6 +46,12 @@ public class AssetStockGoods extends Entity {
 	private String ownerCode;
 	
 	/**
+	 * 所属类型：所属类型
+	*/
+	@ApiModelProperty(required = false,value="所属类型" , notes = "所属类型")
+	private String ownerType;
+	
+	/**
 	 * 库存类型：库存类型
 	*/
 	@ApiModelProperty(required = false,value="库存类型" , notes = "库存类型")
@@ -55,28 +64,10 @@ public class AssetStockGoods extends Entity {
 	private String businessCode;
 	
 	/**
-	 * 流程：流程
-	*/
-	@ApiModelProperty(required = false,value="流程" , notes = "流程")
-	private String procId;
-	
-	/**
-	 * 办理状态：办理状态
-	*/
-	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
-	private String status;
-	
-	/**
 	 * 批次号：批次号
 	*/
 	@ApiModelProperty(required = false,value="批次号" , notes = "批次号")
 	private String stockBatchCode;
-	
-	/**
-	 * 单据名称：单据名称
-	*/
-	@ApiModelProperty(required = false,value="单据名称" , notes = "单据名称")
-	private String stockName;
 	
 	/**
 	 * 来源：来源
@@ -91,6 +82,12 @@ public class AssetStockGoods extends Entity {
 	private String ownCompanyId;
 	
 	/**
+	 * 所属组织：所属组织
+	*/
+	@ApiModelProperty(required = false,value="所属组织" , notes = "所属组织")
+	private String useOrgId;
+	
+	/**
 	 * 资产供应商：资产供应商
 	*/
 	@ApiModelProperty(required = false,value="资产供应商" , notes = "资产供应商")
@@ -101,6 +98,24 @@ public class AssetStockGoods extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
 	private String warehouseId;
+	
+	/**
+	 * 入库存数量：入库存数量
+	*/
+	@ApiModelProperty(required = false,value="入库存数量" , notes = "入库存数量")
+	private BigDecimal stockInNumber;
+	
+	/**
+	 * 当前库存数量：当前库存数量
+	*/
+	@ApiModelProperty(required = false,value="当前库存数量" , notes = "当前库存数量")
+	private BigDecimal stockCurNumber;
+	
+	/**
+	 * 单价：单价
+	*/
+	@ApiModelProperty(required = false,value="单价" , notes = "单价")
+	private BigDecimal unitPrice;
 	
 	/**
 	 * 总金额：总金额
@@ -115,34 +130,16 @@ public class AssetStockGoods extends Entity {
 	private Date purchaseDate;
 	
 	/**
-	 * 管理人：管理人
+	 * 物品：物品
 	*/
-	@ApiModelProperty(required = false,value="管理人" , notes = "管理人")
-	private String managerId;
-	
-	/**
-	 * 接收人：接收人
-	*/
-	@ApiModelProperty(required = false,value="接收人" , notes = "接收人")
-	private String receiverUserName;
-	
-	/**
-	 * 业务时间：业务时间
-	*/
-	@ApiModelProperty(required = false,value="业务时间" , notes = "业务时间")
-	private Date businessDate;
-	
-	/**
-	 * 附件：附件
-	*/
-	@ApiModelProperty(required = false,value="附件" , notes = "附件")
-	private String attachId;
+	@ApiModelProperty(required = false,value="物品" , notes = "物品")
+	private String goodsId;
 	
 	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String stockNotes;
+	private String notes;
 	
 	/**
 	 * 制单人：制单人
@@ -211,64 +208,46 @@ public class AssetStockGoods extends Entity {
 	private String selectedCode;
 	
 	/**
-	 * 变更类型：变更类型
+	 * 物品：物品
 	*/
-	@ApiModelProperty(required = false,value="变更类型" , notes = "变更类型")
-	private String chsType;
+	@ApiModelProperty(required = false,value="物品" , notes = "物品")
+	private GoodsStock goods;
 	
 	/**
-	 * 变更状态：变更状态
+	 * 制单人：制单人
 	*/
-	@ApiModelProperty(required = false,value="变更状态" , notes = "变更状态")
-	private String chsStatus;
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
 	
 	/**
-	 * 变更版本号：变更版本号
+	 * 供应商：供应商
 	*/
-	@ApiModelProperty(required = false,value="变更版本号" , notes = "变更版本号")
-	private String chsVersion;
+	@ApiModelProperty(required = false,value="供应商" , notes = "供应商")
+	private Supplier supplier;
 	
 	/**
-	 * 变更ID：变更ID
+	 * 所属公司：所属公司
 	*/
-	@ApiModelProperty(required = false,value="变更ID" , notes = "变更ID")
-	private String changeInstanceId;
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private Organization ownerCompany;
 	
 	/**
-	 * 流程概要：流程概要
+	 * 使用公司/部门：使用公司/部门
 	*/
-	@ApiModelProperty(required = false,value="流程概要" , notes = "流程概要")
-	private String summary;
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
+	private Organization useOrganization;
 	
 	/**
-	 * 最后审批人账户ID：最后审批人账户ID
+	 * 仓库：仓库
 	*/
-	@ApiModelProperty(required = false,value="最后审批人账户ID" , notes = "最后审批人账户ID")
-	private String latestApproverId;
+	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
+	private Warehouse warehouse;
 	
 	/**
-	 * 最后审批人姓名：最后审批人姓名
+	 * 来源：来源
 	*/
-	@ApiModelProperty(required = false,value="最后审批人姓名" , notes = "最后审批人姓名")
-	private String latestApproverName;
-	
-	/**
-	 * 下一节点审批人：下一节点审批人
-	*/
-	@ApiModelProperty(required = false,value="下一节点审批人" , notes = "下一节点审批人")
-	private String nextApproverIds;
-	
-	/**
-	 * 下一个审批节点审批人姓名：用逗号隔开
-	*/
-	@ApiModelProperty(required = false,value="下一个审批节点审批人姓名" , notes = "用逗号隔开")
-	private String nextApproverNames;
-	
-	/**
-	 * 审批意见：审批意见
-	*/
-	@ApiModelProperty(required = false,value="审批意见" , notes = "审批意见")
-	private String approvalOpinion;
+	@ApiModelProperty(required = false,value="来源" , notes = "来源")
+	private DictItem source;
 	
 	/**
 	 * 获得 主键<br>
@@ -305,6 +284,25 @@ public class AssetStockGoods extends Entity {
 	*/
 	public AssetStockGoods setOwnerCode(String ownerCode) {
 		this.ownerCode=ownerCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属类型<br>
+	 * 所属类型
+	 * @return 所属类型
+	*/
+	public String getOwnerType() {
+		return ownerType;
+	}
+	
+	/**
+	 * 设置 所属类型
+	 * @param ownerType 所属类型
+	 * @return 当前对象
+	*/
+	public AssetStockGoods setOwnerType(String ownerType) {
+		this.ownerType=ownerType;
 		return this;
 	}
 	
@@ -347,44 +345,6 @@ public class AssetStockGoods extends Entity {
 	}
 	
 	/**
-	 * 获得 流程<br>
-	 * 流程
-	 * @return 流程
-	*/
-	public String getProcId() {
-		return procId;
-	}
-	
-	/**
-	 * 设置 流程
-	 * @param procId 流程
-	 * @return 当前对象
-	*/
-	public AssetStockGoods setProcId(String procId) {
-		this.procId=procId;
-		return this;
-	}
-	
-	/**
-	 * 获得 办理状态<br>
-	 * 办理状态
-	 * @return 办理状态
-	*/
-	public String getStatus() {
-		return status;
-	}
-	
-	/**
-	 * 设置 办理状态
-	 * @param status 办理状态
-	 * @return 当前对象
-	*/
-	public AssetStockGoods setStatus(String status) {
-		this.status=status;
-		return this;
-	}
-	
-	/**
 	 * 获得 批次号<br>
 	 * 批次号
 	 * @return 批次号
@@ -400,25 +360,6 @@ public class AssetStockGoods extends Entity {
 	*/
 	public AssetStockGoods setStockBatchCode(String stockBatchCode) {
 		this.stockBatchCode=stockBatchCode;
-		return this;
-	}
-	
-	/**
-	 * 获得 单据名称<br>
-	 * 单据名称
-	 * @return 单据名称
-	*/
-	public String getStockName() {
-		return stockName;
-	}
-	
-	/**
-	 * 设置 单据名称
-	 * @param stockName 单据名称
-	 * @return 当前对象
-	*/
-	public AssetStockGoods setStockName(String stockName) {
-		this.stockName=stockName;
 		return this;
 	}
 	
@@ -461,6 +402,25 @@ public class AssetStockGoods extends Entity {
 	}
 	
 	/**
+	 * 获得 所属组织<br>
+	 * 所属组织
+	 * @return 所属组织
+	*/
+	public String getUseOrgId() {
+		return useOrgId;
+	}
+	
+	/**
+	 * 设置 所属组织
+	 * @param useOrgId 所属组织
+	 * @return 当前对象
+	*/
+	public AssetStockGoods setUseOrgId(String useOrgId) {
+		this.useOrgId=useOrgId;
+		return this;
+	}
+	
+	/**
 	 * 获得 资产供应商<br>
 	 * 资产供应商
 	 * @return 资产供应商
@@ -495,6 +455,63 @@ public class AssetStockGoods extends Entity {
 	*/
 	public AssetStockGoods setWarehouseId(String warehouseId) {
 		this.warehouseId=warehouseId;
+		return this;
+	}
+	
+	/**
+	 * 获得 入库存数量<br>
+	 * 入库存数量
+	 * @return 入库存数量
+	*/
+	public BigDecimal getStockInNumber() {
+		return stockInNumber;
+	}
+	
+	/**
+	 * 设置 入库存数量
+	 * @param stockInNumber 入库存数量
+	 * @return 当前对象
+	*/
+	public AssetStockGoods setStockInNumber(BigDecimal stockInNumber) {
+		this.stockInNumber=stockInNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 当前库存数量<br>
+	 * 当前库存数量
+	 * @return 当前库存数量
+	*/
+	public BigDecimal getStockCurNumber() {
+		return stockCurNumber;
+	}
+	
+	/**
+	 * 设置 当前库存数量
+	 * @param stockCurNumber 当前库存数量
+	 * @return 当前对象
+	*/
+	public AssetStockGoods setStockCurNumber(BigDecimal stockCurNumber) {
+		this.stockCurNumber=stockCurNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 单价<br>
+	 * 单价
+	 * @return 单价
+	*/
+	public BigDecimal getUnitPrice() {
+		return unitPrice;
+	}
+	
+	/**
+	 * 设置 单价
+	 * @param unitPrice 单价
+	 * @return 当前对象
+	*/
+	public AssetStockGoods setUnitPrice(BigDecimal unitPrice) {
+		this.unitPrice=unitPrice;
 		return this;
 	}
 	
@@ -537,78 +554,21 @@ public class AssetStockGoods extends Entity {
 	}
 	
 	/**
-	 * 获得 管理人<br>
-	 * 管理人
-	 * @return 管理人
+	 * 获得 物品<br>
+	 * 物品
+	 * @return 物品
 	*/
-	public String getManagerId() {
-		return managerId;
+	public String getGoodsId() {
+		return goodsId;
 	}
 	
 	/**
-	 * 设置 管理人
-	 * @param managerId 管理人
+	 * 设置 物品
+	 * @param goodsId 物品
 	 * @return 当前对象
 	*/
-	public AssetStockGoods setManagerId(String managerId) {
-		this.managerId=managerId;
-		return this;
-	}
-	
-	/**
-	 * 获得 接收人<br>
-	 * 接收人
-	 * @return 接收人
-	*/
-	public String getReceiverUserName() {
-		return receiverUserName;
-	}
-	
-	/**
-	 * 设置 接收人
-	 * @param receiverUserName 接收人
-	 * @return 当前对象
-	*/
-	public AssetStockGoods setReceiverUserName(String receiverUserName) {
-		this.receiverUserName=receiverUserName;
-		return this;
-	}
-	
-	/**
-	 * 获得 业务时间<br>
-	 * 业务时间
-	 * @return 业务时间
-	*/
-	public Date getBusinessDate() {
-		return businessDate;
-	}
-	
-	/**
-	 * 设置 业务时间
-	 * @param businessDate 业务时间
-	 * @return 当前对象
-	*/
-	public AssetStockGoods setBusinessDate(Date businessDate) {
-		this.businessDate=businessDate;
-		return this;
-	}
-	
-	/**
-	 * 获得 附件<br>
-	 * 附件
-	 * @return 附件
-	*/
-	public String getAttachId() {
-		return attachId;
-	}
-	
-	/**
-	 * 设置 附件
-	 * @param attachId 附件
-	 * @return 当前对象
-	*/
-	public AssetStockGoods setAttachId(String attachId) {
-		this.attachId=attachId;
+	public AssetStockGoods setGoodsId(String goodsId) {
+		this.goodsId=goodsId;
 		return this;
 	}
 	
@@ -617,17 +577,17 @@ public class AssetStockGoods extends Entity {
 	 * 备注
 	 * @return 备注
 	*/
-	public String getStockNotes() {
-		return stockNotes;
+	public String getNotes() {
+		return notes;
 	}
 	
 	/**
 	 * 设置 备注
-	 * @param stockNotes 备注
+	 * @param notes 备注
 	 * @return 当前对象
 	*/
-	public AssetStockGoods setStockNotes(String stockNotes) {
-		this.stockNotes=stockNotes;
+	public AssetStockGoods setNotes(String notes) {
+		this.notes=notes;
 		return this;
 	}
 	
@@ -841,192 +801,135 @@ public class AssetStockGoods extends Entity {
 	}
 	
 	/**
-	 * 获得 变更类型<br>
-	 * 变更类型
-	 * @return 变更类型
+	 * 获得 物品<br>
+	 * 物品
+	 * @return 物品
 	*/
-	public String getChsType() {
-		return chsType;
+	public GoodsStock getGoods() {
+		return goods;
 	}
 	
 	/**
-	 * 设置 变更类型
-	 * @param chsType 变更类型
+	 * 设置 物品
+	 * @param goods 物品
 	 * @return 当前对象
 	*/
-	public AssetStockGoods setChsType(String chsType) {
-		this.chsType=chsType;
+	public AssetStockGoods setGoods(GoodsStock goods) {
+		this.goods=goods;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更状态<br>
-	 * 变更状态
-	 * @return 变更状态
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
 	*/
-	public String getChsStatus() {
-		return chsStatus;
+	public Employee getOriginator() {
+		return originator;
 	}
 	
 	/**
-	 * 设置 变更状态
-	 * @param chsStatus 变更状态
+	 * 设置 制单人
+	 * @param originator 制单人
 	 * @return 当前对象
 	*/
-	public AssetStockGoods setChsStatus(String chsStatus) {
-		this.chsStatus=chsStatus;
+	public AssetStockGoods setOriginator(Employee originator) {
+		this.originator=originator;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更版本号<br>
-	 * 变更版本号
-	 * @return 变更版本号
+	 * 获得 供应商<br>
+	 * 供应商
+	 * @return 供应商
 	*/
-	public String getChsVersion() {
-		return chsVersion;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 	
 	/**
-	 * 设置 变更版本号
-	 * @param chsVersion 变更版本号
+	 * 设置 供应商
+	 * @param supplier 供应商
 	 * @return 当前对象
 	*/
-	public AssetStockGoods setChsVersion(String chsVersion) {
-		this.chsVersion=chsVersion;
+	public AssetStockGoods setSupplier(Supplier supplier) {
+		this.supplier=supplier;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更ID<br>
-	 * 变更ID
-	 * @return 变更ID
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
 	*/
-	public String getChangeInstanceId() {
-		return changeInstanceId;
+	public Organization getOwnerCompany() {
+		return ownerCompany;
 	}
 	
 	/**
-	 * 设置 变更ID
-	 * @param changeInstanceId 变更ID
+	 * 设置 所属公司
+	 * @param ownerCompany 所属公司
 	 * @return 当前对象
 	*/
-	public AssetStockGoods setChangeInstanceId(String changeInstanceId) {
-		this.changeInstanceId=changeInstanceId;
+	public AssetStockGoods setOwnerCompany(Organization ownerCompany) {
+		this.ownerCompany=ownerCompany;
 		return this;
 	}
 	
 	/**
-	 * 获得 流程概要<br>
-	 * 流程概要
-	 * @return 流程概要
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
 	*/
-	public String getSummary() {
-		return summary;
+	public Organization getUseOrganization() {
+		return useOrganization;
 	}
 	
 	/**
-	 * 设置 流程概要
-	 * @param summary 流程概要
+	 * 设置 使用公司/部门
+	 * @param useOrganization 使用公司/部门
 	 * @return 当前对象
 	*/
-	public AssetStockGoods setSummary(String summary) {
-		this.summary=summary;
+	public AssetStockGoods setUseOrganization(Organization useOrganization) {
+		this.useOrganization=useOrganization;
 		return this;
 	}
 	
 	/**
-	 * 获得 最后审批人账户ID<br>
-	 * 最后审批人账户ID
-	 * @return 最后审批人账户ID
+	 * 获得 仓库<br>
+	 * 仓库
+	 * @return 仓库
 	*/
-	public String getLatestApproverId() {
-		return latestApproverId;
+	public Warehouse getWarehouse() {
+		return warehouse;
 	}
 	
 	/**
-	 * 设置 最后审批人账户ID
-	 * @param latestApproverId 最后审批人账户ID
+	 * 设置 仓库
+	 * @param warehouse 仓库
 	 * @return 当前对象
 	*/
-	public AssetStockGoods setLatestApproverId(String latestApproverId) {
-		this.latestApproverId=latestApproverId;
+	public AssetStockGoods setWarehouse(Warehouse warehouse) {
+		this.warehouse=warehouse;
 		return this;
 	}
 	
 	/**
-	 * 获得 最后审批人姓名<br>
-	 * 最后审批人姓名
-	 * @return 最后审批人姓名
+	 * 获得 来源<br>
+	 * 来源
+	 * @return 来源
 	*/
-	public String getLatestApproverName() {
-		return latestApproverName;
+	public DictItem getSource() {
+		return source;
 	}
 	
 	/**
-	 * 设置 最后审批人姓名
-	 * @param latestApproverName 最后审批人姓名
+	 * 设置 来源
+	 * @param source 来源
 	 * @return 当前对象
 	*/
-	public AssetStockGoods setLatestApproverName(String latestApproverName) {
-		this.latestApproverName=latestApproverName;
-		return this;
-	}
-	
-	/**
-	 * 获得 下一节点审批人<br>
-	 * 下一节点审批人
-	 * @return 下一节点审批人
-	*/
-	public String getNextApproverIds() {
-		return nextApproverIds;
-	}
-	
-	/**
-	 * 设置 下一节点审批人
-	 * @param nextApproverIds 下一节点审批人
-	 * @return 当前对象
-	*/
-	public AssetStockGoods setNextApproverIds(String nextApproverIds) {
-		this.nextApproverIds=nextApproverIds;
-		return this;
-	}
-	
-	/**
-	 * 获得 下一个审批节点审批人姓名<br>
-	 * 用逗号隔开
-	 * @return 下一个审批节点审批人姓名
-	*/
-	public String getNextApproverNames() {
-		return nextApproverNames;
-	}
-	
-	/**
-	 * 设置 下一个审批节点审批人姓名
-	 * @param nextApproverNames 下一个审批节点审批人姓名
-	 * @return 当前对象
-	*/
-	public AssetStockGoods setNextApproverNames(String nextApproverNames) {
-		this.nextApproverNames=nextApproverNames;
-		return this;
-	}
-	
-	/**
-	 * 获得 审批意见<br>
-	 * 审批意见
-	 * @return 审批意见
-	*/
-	public String getApprovalOpinion() {
-		return approvalOpinion;
-	}
-	
-	/**
-	 * 设置 审批意见
-	 * @param approvalOpinion 审批意见
-	 * @return 当前对象
-	*/
-	public AssetStockGoods setApprovalOpinion(String approvalOpinion) {
-		this.approvalOpinion=approvalOpinion;
+	public AssetStockGoods setSource(DictItem source) {
+		this.source=source;
 		return this;
 	}
 

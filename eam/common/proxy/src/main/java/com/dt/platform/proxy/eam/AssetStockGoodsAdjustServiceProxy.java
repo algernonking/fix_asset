@@ -3,6 +3,7 @@ package com.dt.platform.proxy.eam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import com.dt.platform.domain.eam.AssetStockGoodsAdjust;
 import com.dt.platform.domain.eam.AssetStockGoodsAdjustVO;
@@ -10,14 +11,13 @@ import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.dt.platform.proxy.ServiceNames;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
  * 库存调整  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:15:41
+ * @since 2022-04-20 12:20:56
  */
 @FeignClient(value = ServiceNames.EAM, contextId = AssetStockGoodsAdjustServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface AssetStockGoodsAdjustServiceProxy {

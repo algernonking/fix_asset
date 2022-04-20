@@ -1,7 +1,7 @@
 /**
  * 库存出库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:17:39
+ * @since 2022-04-20 08:24:30
  */
 
 
@@ -133,12 +133,14 @@ function ListPage() {
 				if (r.success) {
 					data = r.data;
 					context.update(data);
+					fox.renderFormInputs(form);
 				} else {
 					fox.showMessage(data);
 				}
 			});
 		} else {
 			context.update(data);
+			fox.renderFormInputs(form);
 		}
 	}
 
@@ -148,23 +150,6 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.id={ inputType:"button",value: $("#id").val()};
-		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
-		value.procId={ inputType:"button",value: $("#procId").val()};
-		value.status={ inputType:"button",value: $("#status").val()};
-		value.ownerCode={ inputType:"button",value: $("#ownerCode").val()};
-		value.name={ inputType:"button",value: $("#name").val()};
-		value.useOrganizationId={ inputType:"button",value: $("#useOrganizationId").val()};
-		value.useUserId={ inputType:"button",value: $("#useUserId").val()};
-		value.positionId={ inputType:"button",value: $("#positionId").val()};
-		value.positionDetail={ inputType:"button",value: $("#positionDetail").val()};
-		value.collectionDate={ inputType:"date_input", value: $("#collectionDate").val() ,matchType:"auto"};
-		value.content={ inputType:"button",value: $("#content").val()};
-		value.originatorId={ inputType:"button",value: $("#originatorId").val()};
-		value.businessDate={ inputType:"date_input", value: $("#businessDate").val() ,matchType:"auto"};
-		value.attach={ inputType:"button",value: $("#attach").val()};
-		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
-		value.selectedCode={ inputType:"button",value: $("#selectedCode").val()};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

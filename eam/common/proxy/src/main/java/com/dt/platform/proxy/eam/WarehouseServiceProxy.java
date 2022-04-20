@@ -3,6 +3,7 @@ package com.dt.platform.proxy.eam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import com.dt.platform.domain.eam.Warehouse;
 import com.dt.platform.domain.eam.WarehouseVO;
@@ -10,14 +11,13 @@ import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.dt.platform.proxy.ServiceNames;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
  * 仓库  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:12
+ * @since 2022-04-20 13:08:21
  */
 @FeignClient(value = ServiceNames.EAM, contextId = WarehouseServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface WarehouseServiceProxy {
@@ -134,7 +134,7 @@ public interface WarehouseServiceProxy {
     Result<Warehouse> getById(@RequestParam(name = "id") String id);
 
     /**
-     * 批量删除仓库
+     * 获取多个仓库
      */
     @RequestMapping(WarehouseServiceProxy.GET_BY_IDS)
     Result<List<Warehouse>> getByIds(@RequestParam(name = "ids") List<String> ids);

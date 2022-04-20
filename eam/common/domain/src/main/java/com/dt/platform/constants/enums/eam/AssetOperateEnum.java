@@ -35,7 +35,6 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_CONSUMABLES_DELIVER(CodeModuleEnum.EAM_ASSET_CONSUMABLES_DELIVER.code() , "EAM_资产耗材单据-出库"),
     EAM_ASSET_CONSUMABLES_COLLECTION(CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code() , "EAM_资产耗材单据-领用"),
     EAM_ASSET_CONSUMABLES_TRANFER(CodeModuleEnum.EAM_ASSET_CONSUMABLES_TRANFER.code() , "EAM_资产耗材单据-转移"),
-    //EAM_ASSET_CONSUMABLES_ALLOCATE(CodeModuleEnum.EAM_ASSET_CONSUMABLES_ALLOCATE.code() , "EAM_资产耗材单据-调拨"),
 
     //库存
     EAM_ASSET_STOCK_DELIVER(CodeModuleEnum.EAM_ASSET_STOCK_DELIVER.code() , "EAM_资产库存-出库"),
@@ -44,9 +43,24 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_STOCK_DISTRIBUTE(CodeModuleEnum.EAM_ASSET_STOCK_DISTRIBUTE.code() , "EAM_资产库存-分配"),
     EAM_ASSET_STOCK_INVENTORY(CodeModuleEnum.EAM_ASSET_STOCK_INVENTORY.code()  , "EAM_资产库存-盘点"),
 
+    //物品库存
+    EAM_ASSET_STOCK_GOODS_IN(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_IN.code(), "EAM_资产物品库存-入库"),
+    EAM_ASSET_STOCK_GOODS_OUT(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_OUT.code(), "EAM_资产物品库存-出库"),
+    EAM_ASSET_STOCK_GOODS_TRANFER(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_TRANFER.code(), "EAM_资产物品库存-转移"),
+    EAM_ASSET_STOCK_GOODS_ADJUST(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_ADJUST.code(), "EAM_资产物品库存-调整"),
+    EAM_ASSET_STOCK_GOODS_INVENTORY(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_INVENTORY.code(), "EAM_资产物品库存-盘点"),
+
+
+    //物品耗材
+
+
+
+    //采购
     EAM_ASSET_PURCHASE_CHECK(CodeModuleEnum.EAM_ASSET_PURCHASE_CHECK.code(), "EAM资产采购验收"),
     EAM_ASSET_PURCHASE_APPLY(CodeModuleEnum.EAM_ASSET_PURCHASE_APPLY.code(), "EAM资产采购申请"),
     EAM_ASSET_PURCHASE_ORDER(CodeModuleEnum.EAM_ASSET_PURCHASE_ORDER.code(), "EAM资产采购订单"),
+
+
 
     //单据下载
     EAM_DOWNLOAD_ASSET("eam_download_asset", "EAM_资产数据下载"),
@@ -60,6 +74,11 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_DOWNLOAD_ASSET_BORROW_BILL("eam_download_asset_borrow_bill" , "EAM_资产借用下载"),
     EAM_DOWNLOAD_ASSET_REPAIR_BILL("eam_download_asset_repair_bill" , "EAM_资产报修下载"),
     EAM_DOWNLOAD_ASSET_SCRAP_BILL("eam_download_asset_scrap_bill" , "EAM_资产报废下载"),
+
+    //库存
+    EAM_DOWNLOAD_ASSET_STOCK_GOODS_IN_BILL("eam_download_asset_stock_goods_in_bill" , "EAM_资产物品库存-入库单下载"),
+    EAM_DOWNLOAD_ASSET_STOCK_GOODS_OUT_BILL("eam_download_asset_stock_goods_out_bill" , "EAM_资产物品库存-出库单下载"),
+
 
     EAM_ASSET_DATA_SYNC("eam_asset_data_sync" , "EAM_资产数据同步");
 

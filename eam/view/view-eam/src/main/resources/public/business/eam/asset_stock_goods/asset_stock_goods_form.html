@@ -1,8 +1,8 @@
 <!--
 /**
- * 物品库存 列表页 JS 脚本
+ * 库存物品单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:04:38
+ * @since 2022-04-20 16:08:04
  */
  -->
  <!DOCTYPE html>
@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
-	<title th:text="${lang.translate('物品库存')}">物品库存</title>
+	<title th:text="${lang.translate('库存物品单')}">库存物品单</title>
     <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
     <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -37,19 +37,174 @@
          <!--开始：group 循环-->
 
 
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-9284-fieldset">
+            <legend>基本信息</legend>
+        </fieldset>
 
-        <div class="layui-row form-row" id="random-2991-content">
+        <div class="layui-row form-row" id="random-9284-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs12 form-column" >
+            <div class="layui-col-xs4 form-column" >
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('所属公司')}">所属公司</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="ownCompanyId" id="ownCompanyId" name="ownCompanyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属公司') }" type="text" class="layui-input"  />
+                        <div class="layui-form-label "><div th:text="${lang.translate('批次号')}">批次号</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="stockBatchCode" id="stockBatchCode" name="stockBatchCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('批次号') }" type="text" class="layui-input"  />
                         </div>
                     </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('来源')}">来源</div></div>
+                        <div class="layui-input-block ">
+                            <div id="sourceId" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=eam_source'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('所属公司')}">所属公司</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="ownCompanyId" id="ownCompanyId" name="ownCompanyId"  type="hidden" class="layui-input"   />
+                            <button id="ownCompanyId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择公司')}" th:default-label="${lang.translate('请选择公司')}">按钮文本</span></button>
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('所属组织')}">所属组织</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="useOrgId" id="useOrgId" name="useOrgId"  type="hidden" class="layui-input"   />
+                            <button id="useOrgId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('供应商')}">供应商</div></div>
+                        <div class="layui-input-block ">
+                            <div id="supplierId" input-type="select" th:data="${'/service-eam/eam-supplier/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('仓库')}">仓库</div></div>
+                        <div class="layui-input-block ">
+                            <div id="warehouseId" input-type="select" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-9541-fieldset">
+            <legend>库存信息</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-9541-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('入库存数量')}">入库存数量</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="stockInNumber" id="stockInNumber" name="stockInNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('入库存数量') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('当前库存数量')}">当前库存数量</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="stockCurNumber" id="stockCurNumber" name="stockCurNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('当前库存数量') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('总金额')}">总金额</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="amount" id="amount" name="amount" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('总金额') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('单价')}">单价</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="unitPrice" id="unitPrice" name="unitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('单价') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('物品')}">物品</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="goodsId" input-type="select" th:data="${'/service-eam/eam-goods-stock/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+
+        <div class="layui-row form-row" id="random-9687-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
+
+
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-input-block ">
+                        <textarea lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" class="layui-textarea" style="height: 60px" ></textarea>
+                    </div>
+                </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -77,7 +232,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"stockName":{"labelInForm":"单据名称","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"unitPrice":{"labelInForm":"单价","inputType":"number_input","required":true},"stockInNumber":{"labelInForm":"入库存数量","inputType":"number_input","required":true},"stockCurNumber":{"labelInForm":"当前库存数量","inputType":"number_input","required":true},"amount":{"labelInForm":"总金额","inputType":"number_input","required":true},"purchaseDate":{"date":true,"labelInForm":"购置日期","inputType":"date_input"},"goodsId":{"labelInForm":"物品","inputType":"select_box","required":true}};
     var AUTH_PREFIX="eam_asset_stock_goods";
 
 

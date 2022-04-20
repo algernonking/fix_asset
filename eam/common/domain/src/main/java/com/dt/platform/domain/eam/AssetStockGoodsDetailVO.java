@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 库存物品明细
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:13:08
+ * @since 2022-04-20 08:23:16
  * @sign 62F1A30C6501E957D525574597856DA3
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

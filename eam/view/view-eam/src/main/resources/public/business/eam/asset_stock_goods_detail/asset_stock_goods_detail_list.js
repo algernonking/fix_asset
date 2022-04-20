@@ -1,7 +1,7 @@
 /**
  * 库存物品明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 10:13:09
+ * @since 2022-04-20 08:23:17
  */
 
 
@@ -125,12 +125,14 @@ function ListPage() {
 				if (r.success) {
 					data = r.data;
 					context.update(data);
+					fox.renderFormInputs(form);
 				} else {
 					fox.showMessage(data);
 				}
 			});
 		} else {
 			context.update(data);
+			fox.renderFormInputs(form);
 		}
 	}
 
@@ -140,15 +142,6 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.id={ inputType:"button",value: $("#id").val()};
-		value.goodsId={ inputType:"button",value: $("#goodsId").val()};
-		value.stockId={ inputType:"button",value: $("#stockId").val()};
-		value.inNumber={ inputType:"number_input", value: $("#inNumber").val() };
-		value.curNumber={ inputType:"number_input", value: $("#curNumber").val() };
-		value.unitPrice={ inputType:"number_input", value: $("#unitPrice").val() };
-		value.amount={ inputType:"number_input", value: $("#amount").val() };
-		value.notes={ inputType:"button",value: $("#notes").val()};
-		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

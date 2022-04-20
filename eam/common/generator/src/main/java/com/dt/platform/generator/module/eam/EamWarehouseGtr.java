@@ -29,20 +29,29 @@ public class EamWarehouseGtr extends BaseCodeGenerator{
         );
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
+
         cfg.view().field(EAMTables.EAM_WAREHOUSE.WAREHOUSE_NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_BRAND.STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class);
         cfg.view().field(EAMTables.EAM_WAREHOUSE.CODE).form().validate().required();
-
+        cfg.view().field(EAMTables.EAM_WAREHOUSE.WAREHOUSE_NOTES).form().textArea().height(60);
 
         cfg.view().formWindow().bottomSpace(20);
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_WAREHOUSE.STATUS,
+                        EAMTables.EAM_WAREHOUSE.CODE,
                         EAMTables.EAM_WAREHOUSE.WAREHOUSE_NAME,
+                }
+        );
+        cfg.view().form().addGroup(null,
+                new Object[] {
                         EAMTables.EAM_WAREHOUSE.WAREHOUSE_NOTES,
                 }
         );
+
 
 
         //文件生成覆盖模式
