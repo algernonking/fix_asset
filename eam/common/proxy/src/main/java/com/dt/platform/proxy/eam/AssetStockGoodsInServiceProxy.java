@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 库存物品单  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:37:42
+ * @since 2022-04-21 13:05:35
  */
 @FeignClient(value = ServiceNames.EAM, contextId = AssetStockGoodsInServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface AssetStockGoodsInServiceProxy {

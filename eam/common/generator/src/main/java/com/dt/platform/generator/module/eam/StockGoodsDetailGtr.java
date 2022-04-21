@@ -1,16 +1,13 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.domain.eam.AssetStockGoodsDetail;
-import com.dt.platform.eam.page.AssetStockGoodsDetailPageController;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.proxy.eam.AssetStockGoodsDetailServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class StockGoodsDetail extends BaseCodeGenerator {
+public class StockGoodsDetailGtr extends BaseCodeGenerator {
 
 
-    public StockGoodsDetail() {
+    public StockGoodsDetailGtr() {
         super(EAMTables.EAM_ASSET_STOCK_GOODS_DETAIL.$TABLE,BASIC_STOCK_GOODS_ID);
     }
 
@@ -20,10 +17,13 @@ public class StockGoodsDetail extends BaseCodeGenerator {
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_ASSET_STOCK_GOODS_DETAIL.ID,
+                        EAMTables.EAM_ASSET_STOCK_GOODS_DETAIL.AMOUNT,
 
                 }
         );
+
+
+        cfg.view().list().disableBatchDelete();
 
         cfg.view().formWindow().bottomSpace(20);
         cfg.view().form().addGroup(null,
@@ -32,6 +32,8 @@ public class StockGoodsDetail extends BaseCodeGenerator {
 
                 }
         );
+
+
 
         cfg.view().search().inputWidth(Config.searchInputWidth);
         //文件生成覆盖模式
@@ -49,7 +51,7 @@ public class StockGoodsDetail extends BaseCodeGenerator {
     }
 
     public static void main(String[] args) throws Exception {
-        StockGoodsDetail g=new StockGoodsDetail();
+        StockGoodsDetailGtr g=new StockGoodsDetailGtr();
         //生成代码
        g.generateCode();
 

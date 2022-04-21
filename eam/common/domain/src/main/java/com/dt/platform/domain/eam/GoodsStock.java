@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.hrm.Employee;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 库存物品
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:15:09
- * @sign 413570DC08AC047448B23BE995B36C4C
+ * @since 2022-04-21 12:25:21
+ * @sign 144A32F0103252CA3F112160EBDA141F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -35,6 +38,36 @@ public class GoodsStock extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
+	
+	/**
+	 * 所属：所属
+	*/
+	@ApiModelProperty(required = false,value="所属" , notes = "所属")
+	private String ownerId;
+	
+	/**
+	 * 所属：所属
+	*/
+	@ApiModelProperty(required = false,value="所属" , notes = "所属")
+	private String ownerTmpId;
+	
+	/**
+	 * 库存所属：库存所属
+	*/
+	@ApiModelProperty(required = false,value="库存所属" , notes = "库存所属")
+	private String ownerCode;
+	
+	/**
+	 * 所属类型：所属类型
+	*/
+	@ApiModelProperty(required = false,value="所属类型" , notes = "所属类型")
+	private String ownerType;
+	
+	/**
+	 * 业务编号：业务编号
+	*/
+	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
+	private String businessCode;
 	
 	/**
 	 * 资产分类：资产分类
@@ -55,6 +88,12 @@ public class GoodsStock extends Entity {
 	private String name;
 	
 	/**
+	 * 规格型号：规格型号
+	*/
+	@ApiModelProperty(required = false,value="规格型号" , notes = "规格型号")
+	private String model;
+	
+	/**
 	 * 物品编码：物品编码
 	*/
 	@ApiModelProperty(required = false,value="物品编码" , notes = "物品编码")
@@ -65,12 +104,6 @@ public class GoodsStock extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="物品条码" , notes = "物品条码")
 	private String barCode;
-	
-	/**
-	 * 规格型号：规格型号
-	*/
-	@ApiModelProperty(required = false,value="规格型号" , notes = "规格型号")
-	private String model;
 	
 	/**
 	 * 厂商：厂商
@@ -88,7 +121,7 @@ public class GoodsStock extends Entity {
 	 * 默认单价：默认单价
 	*/
 	@ApiModelProperty(required = false,value="默认单价" , notes = "默认单价")
-	private BigDecimal defaultPrice;
+	private BigDecimal unitPrice;
 	
 	/**
 	 * 计量单位：计量单位
@@ -125,6 +158,90 @@ public class GoodsStock extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
 	private String notes;
+	
+	/**
+	 * 批次号：批次号
+	*/
+	@ApiModelProperty(required = false,value="批次号" , notes = "批次号")
+	private String batchCode;
+	
+	/**
+	 * 所属公司：所属公司
+	*/
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private String ownCompanyId;
+	
+	/**
+	 * 使用组织：使用组织
+	*/
+	@ApiModelProperty(required = false,value="使用组织" , notes = "使用组织")
+	private String useOrgId;
+	
+	/**
+	 * 供应商：供应商
+	*/
+	@ApiModelProperty(required = false,value="供应商" , notes = "供应商")
+	private String supplierName;
+	
+	/**
+	 * 仓库：仓库
+	*/
+	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
+	private String warehouseId;
+	
+	/**
+	 * 来源：来源
+	*/
+	@ApiModelProperty(required = false,value="来源" , notes = "来源")
+	private String sourceId;
+	
+	/**
+	 * 物品：物品
+	*/
+	@ApiModelProperty(required = false,value="物品" , notes = "物品")
+	private String goodsId;
+	
+	/**
+	 * 入库存数量：入库存数量
+	*/
+	@ApiModelProperty(required = false,value="入库存数量" , notes = "入库存数量")
+	private BigDecimal stockInNumber;
+	
+	/**
+	 * 当前库存数量：当前库存数量
+	*/
+	@ApiModelProperty(required = false,value="当前库存数量" , notes = "当前库存数量")
+	private BigDecimal stockCurNumber;
+	
+	/**
+	 * 总金额：总金额
+	*/
+	@ApiModelProperty(required = false,value="总金额" , notes = "总金额")
+	private BigDecimal amount;
+	
+	/**
+	 * 管理人：管理人
+	*/
+	@ApiModelProperty(required = false,value="管理人" , notes = "管理人")
+	private String managerId;
+	
+	/**
+	 * 入库时间：入库时间
+	*/
+	@ApiModelProperty(required = false,value="入库时间" , notes = "入库时间")
+	private Date storageDate;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
+	
+	/**
+	 * 选择：选择
+	*/
+	@ApiModelProperty(required = false,value="选择" , notes = "选择")
+	private String selectedCode;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -193,6 +310,102 @@ public class GoodsStock extends Entity {
 	private Brand brand;
 	
 	/**
+	 * 物品：物品
+	*/
+	@ApiModelProperty(required = false,value="物品" , notes = "物品")
+	private GoodsStock goods;
+	
+	/**
+	 * 所属公司：所属公司
+	*/
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private Organization ownerCompany;
+	
+	/**
+	 * 使用公司/部门：使用公司/部门
+	*/
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
+	private Organization useOrganization;
+	
+	/**
+	 * 仓库：仓库
+	*/
+	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
+	private Warehouse warehouse;
+	
+	/**
+	 * 来源：来源
+	*/
+	@ApiModelProperty(required = false,value="来源" , notes = "来源")
+	private DictItem source;
+	
+	/**
+	 * 管理人：管理人
+	*/
+	@ApiModelProperty(required = false,value="管理人" , notes = "管理人")
+	private Employee manager;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
+	
+	/**
+	 * 类型：类型
+	*/
+	@ApiModelProperty(required = false,value="类型" , notes = "类型")
+	private String goodsModel;
+	
+	/**
+	 * 名称：名称
+	*/
+	@ApiModelProperty(required = false,value="名称" , notes = "名称")
+	private String goodsName;
+	
+	/**
+	 * 分类：分类
+	*/
+	@ApiModelProperty(required = false,value="分类" , notes = "分类")
+	private String goodsCategoryName;
+	
+	/**
+	 * 计算单位：计算单位
+	*/
+	@ApiModelProperty(required = false,value="计算单位" , notes = "计算单位")
+	private String goodsUnit;
+	
+	/**
+	 * 物品编码：物品编码
+	*/
+	@ApiModelProperty(required = false,value="物品编码" , notes = "物品编码")
+	private String goodsCode;
+	
+	/**
+	 * 物品条码：物品条码
+	*/
+	@ApiModelProperty(required = false,value="物品条码" , notes = "物品条码")
+	private String goodsBarCode;
+	
+	/**
+	 * 物品条码：物品条码
+	*/
+	@ApiModelProperty(required = false,value="物品条码" , notes = "物品条码")
+	private String goodsStockMax;
+	
+	/**
+	 * 物品条码：物品条码
+	*/
+	@ApiModelProperty(required = false,value="物品条码" , notes = "物品条码")
+	private String goodsStockMin;
+	
+	/**
+	 * 物品条码：物品条码
+	*/
+	@ApiModelProperty(required = false,value="物品条码" , notes = "物品条码")
+	private String goodsStockSecurity;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -208,6 +421,101 @@ public class GoodsStock extends Entity {
 	*/
 	public GoodsStock setId(String id) {
 		this.id=id;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属<br>
+	 * 所属
+	 * @return 所属
+	*/
+	public String getOwnerId() {
+		return ownerId;
+	}
+	
+	/**
+	 * 设置 所属
+	 * @param ownerId 所属
+	 * @return 当前对象
+	*/
+	public GoodsStock setOwnerId(String ownerId) {
+		this.ownerId=ownerId;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属<br>
+	 * 所属
+	 * @return 所属
+	*/
+	public String getOwnerTmpId() {
+		return ownerTmpId;
+	}
+	
+	/**
+	 * 设置 所属
+	 * @param ownerTmpId 所属
+	 * @return 当前对象
+	*/
+	public GoodsStock setOwnerTmpId(String ownerTmpId) {
+		this.ownerTmpId=ownerTmpId;
+		return this;
+	}
+	
+	/**
+	 * 获得 库存所属<br>
+	 * 库存所属
+	 * @return 库存所属
+	*/
+	public String getOwnerCode() {
+		return ownerCode;
+	}
+	
+	/**
+	 * 设置 库存所属
+	 * @param ownerCode 库存所属
+	 * @return 当前对象
+	*/
+	public GoodsStock setOwnerCode(String ownerCode) {
+		this.ownerCode=ownerCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属类型<br>
+	 * 所属类型
+	 * @return 所属类型
+	*/
+	public String getOwnerType() {
+		return ownerType;
+	}
+	
+	/**
+	 * 设置 所属类型
+	 * @param ownerType 所属类型
+	 * @return 当前对象
+	*/
+	public GoodsStock setOwnerType(String ownerType) {
+		this.ownerType=ownerType;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务编号<br>
+	 * 业务编号
+	 * @return 业务编号
+	*/
+	public String getBusinessCode() {
+		return businessCode;
+	}
+	
+	/**
+	 * 设置 业务编号
+	 * @param businessCode 业务编号
+	 * @return 当前对象
+	*/
+	public GoodsStock setBusinessCode(String businessCode) {
+		this.businessCode=businessCode;
 		return this;
 	}
 	
@@ -269,6 +577,25 @@ public class GoodsStock extends Entity {
 	}
 	
 	/**
+	 * 获得 规格型号<br>
+	 * 规格型号
+	 * @return 规格型号
+	*/
+	public String getModel() {
+		return model;
+	}
+	
+	/**
+	 * 设置 规格型号
+	 * @param model 规格型号
+	 * @return 当前对象
+	*/
+	public GoodsStock setModel(String model) {
+		this.model=model;
+		return this;
+	}
+	
+	/**
 	 * 获得 物品编码<br>
 	 * 物品编码
 	 * @return 物品编码
@@ -303,25 +630,6 @@ public class GoodsStock extends Entity {
 	*/
 	public GoodsStock setBarCode(String barCode) {
 		this.barCode=barCode;
-		return this;
-	}
-	
-	/**
-	 * 获得 规格型号<br>
-	 * 规格型号
-	 * @return 规格型号
-	*/
-	public String getModel() {
-		return model;
-	}
-	
-	/**
-	 * 设置 规格型号
-	 * @param model 规格型号
-	 * @return 当前对象
-	*/
-	public GoodsStock setModel(String model) {
-		this.model=model;
 		return this;
 	}
 	
@@ -368,17 +676,17 @@ public class GoodsStock extends Entity {
 	 * 默认单价
 	 * @return 默认单价
 	*/
-	public BigDecimal getDefaultPrice() {
-		return defaultPrice;
+	public BigDecimal getUnitPrice() {
+		return unitPrice;
 	}
 	
 	/**
 	 * 设置 默认单价
-	 * @param defaultPrice 默认单价
+	 * @param unitPrice 默认单价
 	 * @return 当前对象
 	*/
-	public GoodsStock setDefaultPrice(BigDecimal defaultPrice) {
-		this.defaultPrice=defaultPrice;
+	public GoodsStock setUnitPrice(BigDecimal unitPrice) {
+		this.unitPrice=unitPrice;
 		return this;
 	}
 	
@@ -493,6 +801,272 @@ public class GoodsStock extends Entity {
 	*/
 	public GoodsStock setNotes(String notes) {
 		this.notes=notes;
+		return this;
+	}
+	
+	/**
+	 * 获得 批次号<br>
+	 * 批次号
+	 * @return 批次号
+	*/
+	public String getBatchCode() {
+		return batchCode;
+	}
+	
+	/**
+	 * 设置 批次号
+	 * @param batchCode 批次号
+	 * @return 当前对象
+	*/
+	public GoodsStock setBatchCode(String batchCode) {
+		this.batchCode=batchCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
+	*/
+	public String getOwnCompanyId() {
+		return ownCompanyId;
+	}
+	
+	/**
+	 * 设置 所属公司
+	 * @param ownCompanyId 所属公司
+	 * @return 当前对象
+	*/
+	public GoodsStock setOwnCompanyId(String ownCompanyId) {
+		this.ownCompanyId=ownCompanyId;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用组织<br>
+	 * 使用组织
+	 * @return 使用组织
+	*/
+	public String getUseOrgId() {
+		return useOrgId;
+	}
+	
+	/**
+	 * 设置 使用组织
+	 * @param useOrgId 使用组织
+	 * @return 当前对象
+	*/
+	public GoodsStock setUseOrgId(String useOrgId) {
+		this.useOrgId=useOrgId;
+		return this;
+	}
+	
+	/**
+	 * 获得 供应商<br>
+	 * 供应商
+	 * @return 供应商
+	*/
+	public String getSupplierName() {
+		return supplierName;
+	}
+	
+	/**
+	 * 设置 供应商
+	 * @param supplierName 供应商
+	 * @return 当前对象
+	*/
+	public GoodsStock setSupplierName(String supplierName) {
+		this.supplierName=supplierName;
+		return this;
+	}
+	
+	/**
+	 * 获得 仓库<br>
+	 * 仓库
+	 * @return 仓库
+	*/
+	public String getWarehouseId() {
+		return warehouseId;
+	}
+	
+	/**
+	 * 设置 仓库
+	 * @param warehouseId 仓库
+	 * @return 当前对象
+	*/
+	public GoodsStock setWarehouseId(String warehouseId) {
+		this.warehouseId=warehouseId;
+		return this;
+	}
+	
+	/**
+	 * 获得 来源<br>
+	 * 来源
+	 * @return 来源
+	*/
+	public String getSourceId() {
+		return sourceId;
+	}
+	
+	/**
+	 * 设置 来源
+	 * @param sourceId 来源
+	 * @return 当前对象
+	*/
+	public GoodsStock setSourceId(String sourceId) {
+		this.sourceId=sourceId;
+		return this;
+	}
+	
+	/**
+	 * 获得 物品<br>
+	 * 物品
+	 * @return 物品
+	*/
+	public String getGoodsId() {
+		return goodsId;
+	}
+	
+	/**
+	 * 设置 物品
+	 * @param goodsId 物品
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsId(String goodsId) {
+		this.goodsId=goodsId;
+		return this;
+	}
+	
+	/**
+	 * 获得 入库存数量<br>
+	 * 入库存数量
+	 * @return 入库存数量
+	*/
+	public BigDecimal getStockInNumber() {
+		return stockInNumber;
+	}
+	
+	/**
+	 * 设置 入库存数量
+	 * @param stockInNumber 入库存数量
+	 * @return 当前对象
+	*/
+	public GoodsStock setStockInNumber(BigDecimal stockInNumber) {
+		this.stockInNumber=stockInNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 当前库存数量<br>
+	 * 当前库存数量
+	 * @return 当前库存数量
+	*/
+	public BigDecimal getStockCurNumber() {
+		return stockCurNumber;
+	}
+	
+	/**
+	 * 设置 当前库存数量
+	 * @param stockCurNumber 当前库存数量
+	 * @return 当前对象
+	*/
+	public GoodsStock setStockCurNumber(BigDecimal stockCurNumber) {
+		this.stockCurNumber=stockCurNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 总金额<br>
+	 * 总金额
+	 * @return 总金额
+	*/
+	public BigDecimal getAmount() {
+		return amount;
+	}
+	
+	/**
+	 * 设置 总金额
+	 * @param amount 总金额
+	 * @return 当前对象
+	*/
+	public GoodsStock setAmount(BigDecimal amount) {
+		this.amount=amount;
+		return this;
+	}
+	
+	/**
+	 * 获得 管理人<br>
+	 * 管理人
+	 * @return 管理人
+	*/
+	public String getManagerId() {
+		return managerId;
+	}
+	
+	/**
+	 * 设置 管理人
+	 * @param managerId 管理人
+	 * @return 当前对象
+	*/
+	public GoodsStock setManagerId(String managerId) {
+		this.managerId=managerId;
+		return this;
+	}
+	
+	/**
+	 * 获得 入库时间<br>
+	 * 入库时间
+	 * @return 入库时间
+	*/
+	public Date getStorageDate() {
+		return storageDate;
+	}
+	
+	/**
+	 * 设置 入库时间
+	 * @param storageDate 入库时间
+	 * @return 当前对象
+	*/
+	public GoodsStock setStorageDate(Date storageDate) {
+		this.storageDate=storageDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public GoodsStock setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择<br>
+	 * 选择
+	 * @return 选择
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择
+	 * @param selectedCode 选择
+	 * @return 当前对象
+	*/
+	public GoodsStock setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 	
@@ -702,6 +1276,310 @@ public class GoodsStock extends Entity {
 	*/
 	public GoodsStock setBrand(Brand brand) {
 		this.brand=brand;
+		return this;
+	}
+	
+	/**
+	 * 获得 物品<br>
+	 * 物品
+	 * @return 物品
+	*/
+	public GoodsStock getGoods() {
+		return goods;
+	}
+	
+	/**
+	 * 设置 物品
+	 * @param goods 物品
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoods(GoodsStock goods) {
+		this.goods=goods;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
+	*/
+	public Organization getOwnerCompany() {
+		return ownerCompany;
+	}
+	
+	/**
+	 * 设置 所属公司
+	 * @param ownerCompany 所属公司
+	 * @return 当前对象
+	*/
+	public GoodsStock setOwnerCompany(Organization ownerCompany) {
+		this.ownerCompany=ownerCompany;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
+	*/
+	public Organization getUseOrganization() {
+		return useOrganization;
+	}
+	
+	/**
+	 * 设置 使用公司/部门
+	 * @param useOrganization 使用公司/部门
+	 * @return 当前对象
+	*/
+	public GoodsStock setUseOrganization(Organization useOrganization) {
+		this.useOrganization=useOrganization;
+		return this;
+	}
+	
+	/**
+	 * 获得 仓库<br>
+	 * 仓库
+	 * @return 仓库
+	*/
+	public Warehouse getWarehouse() {
+		return warehouse;
+	}
+	
+	/**
+	 * 设置 仓库
+	 * @param warehouse 仓库
+	 * @return 当前对象
+	*/
+	public GoodsStock setWarehouse(Warehouse warehouse) {
+		this.warehouse=warehouse;
+		return this;
+	}
+	
+	/**
+	 * 获得 来源<br>
+	 * 来源
+	 * @return 来源
+	*/
+	public DictItem getSource() {
+		return source;
+	}
+	
+	/**
+	 * 设置 来源
+	 * @param source 来源
+	 * @return 当前对象
+	*/
+	public GoodsStock setSource(DictItem source) {
+		this.source=source;
+		return this;
+	}
+	
+	/**
+	 * 获得 管理人<br>
+	 * 管理人
+	 * @return 管理人
+	*/
+	public Employee getManager() {
+		return manager;
+	}
+	
+	/**
+	 * 设置 管理人
+	 * @param manager 管理人
+	 * @return 当前对象
+	*/
+	public GoodsStock setManager(Employee manager) {
+		this.manager=manager;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Employee getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public GoodsStock setOriginator(Employee originator) {
+		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 类型<br>
+	 * 类型
+	 * @return 类型
+	*/
+	public String getGoodsModel() {
+		return goodsModel;
+	}
+	
+	/**
+	 * 设置 类型
+	 * @param goodsModel 类型
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsModel(String goodsModel) {
+		this.goodsModel=goodsModel;
+		return this;
+	}
+	
+	/**
+	 * 获得 名称<br>
+	 * 名称
+	 * @return 名称
+	*/
+	public String getGoodsName() {
+		return goodsName;
+	}
+	
+	/**
+	 * 设置 名称
+	 * @param goodsName 名称
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsName(String goodsName) {
+		this.goodsName=goodsName;
+		return this;
+	}
+	
+	/**
+	 * 获得 分类<br>
+	 * 分类
+	 * @return 分类
+	*/
+	public String getGoodsCategoryName() {
+		return goodsCategoryName;
+	}
+	
+	/**
+	 * 设置 分类
+	 * @param goodsCategoryName 分类
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsCategoryName(String goodsCategoryName) {
+		this.goodsCategoryName=goodsCategoryName;
+		return this;
+	}
+	
+	/**
+	 * 获得 计算单位<br>
+	 * 计算单位
+	 * @return 计算单位
+	*/
+	public String getGoodsUnit() {
+		return goodsUnit;
+	}
+	
+	/**
+	 * 设置 计算单位
+	 * @param goodsUnit 计算单位
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsUnit(String goodsUnit) {
+		this.goodsUnit=goodsUnit;
+		return this;
+	}
+	
+	/**
+	 * 获得 物品编码<br>
+	 * 物品编码
+	 * @return 物品编码
+	*/
+	public String getGoodsCode() {
+		return goodsCode;
+	}
+	
+	/**
+	 * 设置 物品编码
+	 * @param goodsCode 物品编码
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsCode(String goodsCode) {
+		this.goodsCode=goodsCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 物品条码<br>
+	 * 物品条码
+	 * @return 物品条码
+	*/
+	public String getGoodsBarCode() {
+		return goodsBarCode;
+	}
+	
+	/**
+	 * 设置 物品条码
+	 * @param goodsBarCode 物品条码
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsBarCode(String goodsBarCode) {
+		this.goodsBarCode=goodsBarCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 物品条码<br>
+	 * 物品条码
+	 * @return 物品条码
+	*/
+	public String getGoodsStockMax() {
+		return goodsStockMax;
+	}
+	
+	/**
+	 * 设置 物品条码
+	 * @param goodsStockMax 物品条码
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsStockMax(String goodsStockMax) {
+		this.goodsStockMax=goodsStockMax;
+		return this;
+	}
+	
+	/**
+	 * 获得 物品条码<br>
+	 * 物品条码
+	 * @return 物品条码
+	*/
+	public String getGoodsStockMin() {
+		return goodsStockMin;
+	}
+	
+	/**
+	 * 设置 物品条码
+	 * @param goodsStockMin 物品条码
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsStockMin(String goodsStockMin) {
+		this.goodsStockMin=goodsStockMin;
+		return this;
+	}
+	
+	/**
+	 * 获得 物品条码<br>
+	 * 物品条码
+	 * @return 物品条码
+	*/
+	public String getGoodsStockSecurity() {
+		return goodsStockSecurity;
+	}
+	
+	/**
+	 * 设置 物品条码
+	 * @param goodsStockSecurity 物品条码
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsStockSecurity(String goodsStockSecurity) {
+		this.goodsStockSecurity=goodsStockSecurity;
 		return this;
 	}
 

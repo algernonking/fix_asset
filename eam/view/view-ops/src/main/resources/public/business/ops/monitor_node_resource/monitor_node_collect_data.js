@@ -85,7 +85,6 @@ function ListPage() {
                     // ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
                 ]],
                 parseData:function(res){
-                    console.log("parese res:",res);
                     return {
                         "code": res.code == "00" ? 0 : -1, //解析接口状态
                         "msg": res.message, //解析提示文本
@@ -94,7 +93,6 @@ function ListPage() {
                     };
                 },
                 done: function (data) {
-                    console.log("done data",data)
                     window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
                 footer : {
 

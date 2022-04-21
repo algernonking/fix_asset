@@ -39,11 +39,12 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_STOCK_INVENTORY("eam_asset_stock_inventory" , "EAM_资产库存-盘点"),
 
 	//物品库存
-	EAM_ASSET_STOCK_GOODS_IN("eam_asset_stock_goods_in" , "EAM_资产库存-入库"),
-	EAM_ASSET_STOCK_GOODS_OUT("eam_asset_stock_goods_out" , "EAM_资产库存-出库"),
-	EAM_ASSET_STOCK_GOODS_TRANFER("eam_asset_stock_goods_tranfer" , "EAM_资产库存-转移"),
-	EAM_ASSET_STOCK_GOODS_ADJUST("eam_asset_stock_goods_adjust" , "EAM_资产库存-调整"),
-	EAM_ASSET_STOCK_GOODS_INVENTORY("eam_asset_stock_goods_inventory" , "EAM_资产库存-盘点"),
+	EAM_ASSET_STOCK_GOODS("eam_asset_stock_goods" , "EAM_库存物品-入库"),
+	EAM_ASSET_STOCK_GOODS_IN("eam_asset_stock_goods_in" , "EAM_库存物品-入库"),
+	EAM_ASSET_STOCK_GOODS_OUT("eam_asset_stock_goods_out" , "EAM_库存物品-出库"),
+	EAM_ASSET_STOCK_GOODS_TRANFER("eam_asset_stock_goods_tranfer" , "EAM_库存物品-转移"),
+	EAM_ASSET_STOCK_GOODS_ADJUST("eam_asset_stock_goods_adjust" , "EAM_库存物品-调整"),
+	EAM_ASSET_STOCK_GOODS_INVENTORY("eam_asset_stock_goods_inventory" , "EAM_库存物品-盘点"),
 
 	//耗材
 	EAM_ASSET_CONSUMABLES_STOCK_IN("eam_asset_consumables_stock_in" , "EAM_资产耗材单据-入库"),

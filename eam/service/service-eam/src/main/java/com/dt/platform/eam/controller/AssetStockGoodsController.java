@@ -55,7 +55,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 库存物品单 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 16:08:02
+ * @since 2022-04-20 17:52:46
 */
 
 @Api(tags = "库存物品单")
@@ -72,24 +72,23 @@ public class AssetStockGoodsController extends SuperController {
 	*/
 	@ApiOperation(value = "添加库存物品单")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569181413270618112"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569199655045300224"),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_TYPE , value = "所属类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_TYPE , value = "库存类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class , example = "give"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.PURCHASE_DATE , value = "购置日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.GOODS_ID , value = "物品" , required = false , dataTypeClass=String.class , example = "569149507741155328"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "22.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "473623647488049153"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class , example = "569147473092673536"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
@@ -108,7 +107,7 @@ public class AssetStockGoodsController extends SuperController {
 	*/
 	@ApiOperation(value = "删除库存物品单")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569181413270618112")
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569199655045300224")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetStockGoodsVOMeta.ID)
@@ -142,24 +141,23 @@ public class AssetStockGoodsController extends SuperController {
 	*/
 	@ApiOperation(value = "更新库存物品单")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569181413270618112"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569199655045300224"),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_TYPE , value = "所属类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_TYPE , value = "库存类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class , example = "give"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.PURCHASE_DATE , value = "购置日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.GOODS_ID , value = "物品" , required = false , dataTypeClass=String.class , example = "569149507741155328"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "22.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "473623647488049153"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class , example = "569147473092673536"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
@@ -178,24 +176,23 @@ public class AssetStockGoodsController extends SuperController {
 	*/
 	@ApiOperation(value = "保存库存物品单")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569181413270618112"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569199655045300224"),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_TYPE , value = "所属类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_TYPE , value = "库存类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class , example = "give"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.PURCHASE_DATE , value = "购置日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.GOODS_ID , value = "物品" , required = false , dataTypeClass=String.class , example = "569149507741155328"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "22.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "473623647488049153"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class , example = "569147473092673536"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
@@ -227,10 +224,10 @@ public class AssetStockGoodsController extends SuperController {
 		assetStockGoodsService.dao().fill(assetStockGoods)
 			.with("ownerCompany")
 			.with("useOrganization")
+			.with(AssetStockGoodsMeta.GOODS)
 			.with(AssetStockGoodsMeta.SUPPLIER)
 			.with(AssetStockGoodsMeta.WAREHOUSE)
 			.with(AssetStockGoodsMeta.SOURCE)
-			.with(AssetStockGoodsMeta.GOODS)
 			.execute();
 		result.success(true).data(assetStockGoods);
 		return result;
@@ -262,24 +259,23 @@ public class AssetStockGoodsController extends SuperController {
 	*/
 	@ApiOperation(value = "查询库存物品单")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569181413270618112"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569199655045300224"),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_TYPE , value = "所属类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_TYPE , value = "库存类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class , example = "give"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.PURCHASE_DATE , value = "购置日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.GOODS_ID , value = "物品" , required = false , dataTypeClass=String.class , example = "569149507741155328"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "22.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "473623647488049153"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class , example = "569147473092673536"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
@@ -299,24 +295,23 @@ public class AssetStockGoodsController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询库存物品单")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569181413270618112"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569199655045300224"),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWNER_TYPE , value = "所属类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_TYPE , value = "库存类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class , example = "give"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
-		@ApiImplicitParam(name = AssetStockGoodsVOMeta.PURCHASE_DATE , value = "购置日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_BATCH_CODE , value = "批次号" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.GOODS_ID , value = "物品" , required = false , dataTypeClass=String.class , example = "569149507741155328"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_IN_NUMBER , value = "入库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.STOCK_CUR_NUMBER , value = "当前库存数量" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.UNIT_PRICE , value = "单价" , required = false , dataTypeClass=BigDecimal.class , example = "22.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.AMOUNT , value = "总金额" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "473623647488049153"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class , example = "569147473092673536"),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsVOMeta.USE_ORG_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
@@ -330,10 +325,10 @@ public class AssetStockGoodsController extends SuperController {
 		assetStockGoodsService.dao().fill(list)
 			.with("ownerCompany")
 			.with("useOrganization")
+			.with(AssetStockGoodsMeta.GOODS)
 			.with(AssetStockGoodsMeta.SUPPLIER)
 			.with(AssetStockGoodsMeta.WAREHOUSE)
 			.with(AssetStockGoodsMeta.SOURCE)
-			.with(AssetStockGoodsMeta.GOODS)
 			.execute();
 		result.success(true).data(list);
 		return result;

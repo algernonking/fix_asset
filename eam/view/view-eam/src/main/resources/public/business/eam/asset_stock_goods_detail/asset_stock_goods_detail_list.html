@@ -2,7 +2,7 @@
 /**
  * 库存物品明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 08:23:17
+ * @since 2022-04-21 06:06:17
  */
  -->
  <!DOCTYPE html>
@@ -44,7 +44,11 @@
                     <!-- 入库数量 , inNumber ,typeName=number_input, isHideInSearch=true -->
                     <!-- 当前数量 , curNumber ,typeName=number_input, isHideInSearch=true -->
                     <!-- 单价 , unitPrice ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 金额 , amount ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 金额 , amount ,typeName=number_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('金额')}" class="search-label amount-label">金额</span><span class="search-colon">:</span></div>
+                            <input id="amount" class="layui-input search-input" style="width: 150px" type="text" autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="" max-value="" scale="0"/>
+                    </div>
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
 
 

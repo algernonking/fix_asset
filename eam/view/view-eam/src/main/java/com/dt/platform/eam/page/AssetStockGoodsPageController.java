@@ -1,5 +1,8 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetCategoryCodeEnum;
+import com.dt.platform.proxy.eam.AssetCategoryServiceProxy;
+import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -13,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * 库存物品单 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 16:08:03
+ * @since 2022-04-20 17:52:47
 */
 
 @Controller("EamAssetStockGoodsPageController")
@@ -52,4 +55,22 @@ public class AssetStockGoodsPageController extends ViewController {
 	public String form(Model model,HttpServletRequest request , String id) {
 		return prefix+"/asset_stock_goods_form";
 	}
+
+
+	/**
+	 * 库存物品单 功能主页面
+	 */
+	@RequestMapping("/asset_stock_goods_select_tree.html")
+	public String assetStockGoodsSelectTree(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode,String ownerType) {
+
+
+		Result idResult= AssetCategoryServiceProxy.api().queryNodesByCode(AssetCategoryCodeEnum.ASSET.code());
+		model.addAttribute("categoryParentId",idResult.getData());
+		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		model.addAttribute("ownerCode",ownerCode);
+		model.addAttribute("ownerType",ownerType);
+		return prefix+"/asset_stock_goods_list";
+	}
+
+
 }

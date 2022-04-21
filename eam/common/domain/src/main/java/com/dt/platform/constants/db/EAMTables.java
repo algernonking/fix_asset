@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-04-20 16:09:35
+ * @since 2022-04-21 10:58:46
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -3477,24 +3477,9 @@ public class EAMTables {
 		public static final DBField SOURCE_ID = new DBField(DBDataType.STRING , "source_id","sourceId","来源","来源",false,false,true);
 		
 		/**
-		 * 所属公司
+		 * 物品
 		*/
-		public static final DBField OWN_COMPANY_ID = new DBField(DBDataType.STRING , "own_company_id","ownCompanyId","所属公司","所属公司",false,false,true);
-		
-		/**
-		 * 所属组织
-		*/
-		public static final DBField USE_ORG_ID = new DBField(DBDataType.STRING , "use_org_id","useOrgId","所属组织","所属组织",false,false,true);
-		
-		/**
-		 * 资产供应商
-		*/
-		public static final DBField SUPPLIER_ID = new DBField(DBDataType.STRING , "supplier_id","supplierId","资产供应商","资产供应商",false,false,true);
-		
-		/**
-		 * 仓库
-		*/
-		public static final DBField WAREHOUSE_ID = new DBField(DBDataType.STRING , "warehouse_id","warehouseId","仓库","仓库",false,false,true);
+		public static final DBField GOODS_ID = new DBField(DBDataType.STRING , "goods_id","goodsId","物品","物品",false,false,true);
 		
 		/**
 		 * 入库存数量
@@ -3517,14 +3502,29 @@ public class EAMTables {
 		public static final DBField AMOUNT = new DBField(DBDataType.DECIMAL , "amount","amount","总金额","总金额",false,false,true);
 		
 		/**
-		 * 物品
+		 * 资产供应商
 		*/
-		public static final DBField GOODS_ID = new DBField(DBDataType.STRING , "goods_id","goodsId","物品","物品",false,false,true);
+		public static final DBField SUPPLIER_ID = new DBField(DBDataType.STRING , "supplier_id","supplierId","资产供应商","资产供应商",false,false,true);
+		
+		/**
+		 * 仓库
+		*/
+		public static final DBField WAREHOUSE_ID = new DBField(DBDataType.STRING , "warehouse_id","warehouseId","仓库","仓库",false,false,true);
+		
+		/**
+		 * 所属公司
+		*/
+		public static final DBField OWN_COMPANY_ID = new DBField(DBDataType.STRING , "own_company_id","ownCompanyId","所属公司","所属公司",false,false,true);
 		
 		/**
 		 * 备注
 		*/
 		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 所属组织
+		*/
+		public static final DBField USE_ORG_ID = new DBField(DBDataType.STRING , "use_org_id","useOrgId","所属组织","所属组织",false,false,true);
 		
 		/**
 		 * 制单人
@@ -3581,7 +3581,7 @@ public class EAMTables {
 		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","选择数据","选择数据",false,false,true);
 		
 		public EAM_ASSET_STOCK_GOODS() {
-			this.init($NAME,"库存物品单" , ID , OWNER_CODE , OWNER_TYPE , STOCK_TYPE , BUSINESS_CODE , STOCK_BATCH_CODE , SOURCE_ID , OWN_COMPANY_ID , USE_ORG_ID , SUPPLIER_ID , WAREHOUSE_ID , STOCK_IN_NUMBER , STOCK_CUR_NUMBER , UNIT_PRICE , AMOUNT , GOODS_ID , NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE);
+			this.init($NAME,"库存物品单" , ID , OWNER_CODE , OWNER_TYPE , STOCK_TYPE , BUSINESS_CODE , STOCK_BATCH_CODE , SOURCE_ID , GOODS_ID , STOCK_IN_NUMBER , STOCK_CUR_NUMBER , UNIT_PRICE , AMOUNT , SUPPLIER_ID , WAREHOUSE_ID , OWN_COMPANY_ID , NOTES , USE_ORG_ID , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE);
 		}
 		public static final EAM_ASSET_STOCK_GOODS $TABLE=new EAM_ASSET_STOCK_GOODS();
 	}
@@ -3839,12 +3839,7 @@ public class EAMTables {
 		/**
 		 * 库存所属
 		*/
-		public static final DBField OWNER_CODE = new DBField(DBDataType.STRING , "owner_code","ownerCode","库存所属","库存所属",false,false,true);
-		
-		/**
-		 * 库存类型
-		*/
-		public static final DBField STOCK_TYPE = new DBField(DBDataType.STRING , "stock_type","stockType","库存类型","库存类型",false,false,true);
+		public static final DBField OWNER_TYPE = new DBField(DBDataType.STRING , "owner_type","ownerType","库存所属","库存所属",false,false,true);
 		
 		/**
 		 * 业务编号
@@ -3862,44 +3857,24 @@ public class EAMTables {
 		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","办理状态","办理状态",false,false,true);
 		
 		/**
-		 * 批次号
-		*/
-		public static final DBField STOCK_BATCH_CODE = new DBField(DBDataType.STRING , "stock_batch_code","stockBatchCode","批次号","批次号",false,false,true);
-		
-		/**
 		 * 单据名称
 		*/
-		public static final DBField STOCK_NAME = new DBField(DBDataType.STRING , "stock_name","stockName","单据名称","单据名称",false,false,true);
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","单据名称","单据名称",false,false,true);
 		
 		/**
-		 * 来源
+		 * 批次号
 		*/
-		public static final DBField SOURCE_ID = new DBField(DBDataType.STRING , "source_id","sourceId","来源","来源",false,false,true);
+		public static final DBField BATCH_CODE = new DBField(DBDataType.STRING , "batch_code","batchCode","批次号","批次号",false,false,true);
 		
 		/**
-		 * 所属公司
+		 * 入库类型
 		*/
-		public static final DBField OWN_COMPANY_ID = new DBField(DBDataType.STRING , "own_company_id","ownCompanyId","所属公司","所属公司",false,false,true);
-		
-		/**
-		 * 资产供应商
-		*/
-		public static final DBField SUPPLIER_ID = new DBField(DBDataType.STRING , "supplier_id","supplierId","资产供应商","资产供应商",false,false,true);
+		public static final DBField STOCK_TYPE = new DBField(DBDataType.STRING , "stock_type","stockType","入库类型","入库类型",false,false,true);
 		
 		/**
 		 * 仓库
 		*/
 		public static final DBField WAREHOUSE_ID = new DBField(DBDataType.STRING , "warehouse_id","warehouseId","仓库","仓库",false,false,true);
-		
-		/**
-		 * 总金额
-		*/
-		public static final DBField AMOUNT = new DBField(DBDataType.DECIMAL , "amount","amount","总金额","总金额",false,false,true);
-		
-		/**
-		 * 购置日期
-		*/
-		public static final DBField PURCHASE_DATE = new DBField(DBDataType.DATE , "purchase_date","purchaseDate","购置日期","购置日期",false,false,true);
 		
 		/**
 		 * 管理人
@@ -3910,6 +3885,31 @@ public class EAMTables {
 		 * 接收人
 		*/
 		public static final DBField RECEIVER_USER_NAME = new DBField(DBDataType.STRING , "receiver_user_name","receiverUserName","接收人","接收人",false,false,true);
+		
+		/**
+		 * 总金额
+		*/
+		public static final DBField AMOUNT = new DBField(DBDataType.DECIMAL , "amount","amount","总金额","总金额",false,false,true);
+		
+		/**
+		 * 所属公司
+		*/
+		public static final DBField OWN_COMPANY_ID = new DBField(DBDataType.STRING , "own_company_id","ownCompanyId","所属公司","所属公司",false,false,true);
+		
+		/**
+		 * 供应商
+		*/
+		public static final DBField SUPPLIER_NAME = new DBField(DBDataType.STRING , "supplier_name","supplierName","供应商","供应商",false,false,true);
+		
+		/**
+		 * 来源
+		*/
+		public static final DBField SOURCE_ID = new DBField(DBDataType.STRING , "source_id","sourceId","来源","来源",false,false,true);
+		
+		/**
+		 * 购置日期
+		*/
+		public static final DBField PURCHASE_DATE = new DBField(DBDataType.DATE , "purchase_date","purchaseDate","购置日期","购置日期",false,false,true);
 		
 		/**
 		 * 业务时间
@@ -3924,7 +3924,7 @@ public class EAMTables {
 		/**
 		 * 备注
 		*/
-		public static final DBField STOCK_NOTES = new DBField(DBDataType.STRING , "stock_notes","stockNotes","备注","备注",false,false,true);
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
 		
 		/**
 		 * 制单人
@@ -4031,7 +4031,7 @@ public class EAMTables {
 		public static final DBField APPROVAL_OPINION = new DBField(DBDataType.STRING , "approval_opinion","approvalOpinion","审批意见","审批意见",false,false,true);
 		
 		public EAM_ASSET_STOCK_GOODS_IN() {
-			this.init($NAME,"库存物品单" , ID , OWNER_CODE , STOCK_TYPE , BUSINESS_CODE , PROC_ID , STATUS , STOCK_BATCH_CODE , STOCK_NAME , SOURCE_ID , OWN_COMPANY_ID , SUPPLIER_ID , WAREHOUSE_ID , AMOUNT , PURCHASE_DATE , MANAGER_ID , RECEIVER_USER_NAME , BUSINESS_DATE , ATTACH_ID , STOCK_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION);
+			this.init($NAME,"库存物品单" , ID , OWNER_TYPE , BUSINESS_CODE , PROC_ID , STATUS , NAME , BATCH_CODE , STOCK_TYPE , WAREHOUSE_ID , MANAGER_ID , RECEIVER_USER_NAME , AMOUNT , OWN_COMPANY_ID , SUPPLIER_NAME , SOURCE_ID , PURCHASE_DATE , BUSINESS_DATE , ATTACH_ID , NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION);
 		}
 		public static final EAM_ASSET_STOCK_GOODS_IN $TABLE=new EAM_ASSET_STOCK_GOODS_IN();
 	}
@@ -5605,6 +5605,31 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
+		 * 所属
+		*/
+		public static final DBField OWNER_ID = new DBField(DBDataType.STRING , "owner_id","ownerId","所属","所属",false,false,true);
+		
+		/**
+		 * 所属
+		*/
+		public static final DBField OWNER_TMP_ID = new DBField(DBDataType.STRING , "owner_tmp_id","ownerTmpId","所属","所属",false,false,true);
+		
+		/**
+		 * 库存所属
+		*/
+		public static final DBField OWNER_CODE = new DBField(DBDataType.STRING , "owner_code","ownerCode","库存所属","库存所属",false,false,true);
+		
+		/**
+		 * 所属类型
+		*/
+		public static final DBField OWNER_TYPE = new DBField(DBDataType.STRING , "owner_type","ownerType","所属类型","所属类型",false,false,true);
+		
+		/**
+		 * 业务编号
+		*/
+		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","业务编号","业务编号",false,false,true);
+		
+		/**
 		 * 资产分类
 		*/
 		public static final DBField CATEGORY_ID = new DBField(DBDataType.STRING , "category_id","categoryId","资产分类","资产分类",false,false,true);
@@ -5620,6 +5645,11 @@ public class EAMTables {
 		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","物品名称","物品名称",false,false,true);
 		
 		/**
+		 * 规格型号
+		*/
+		public static final DBField MODEL = new DBField(DBDataType.STRING , "model","model","规格型号","规格型号",false,false,true);
+		
+		/**
 		 * 物品编码
 		*/
 		public static final DBField CODE = new DBField(DBDataType.STRING , "code","code","物品编码","物品编码",false,false,true);
@@ -5628,11 +5658,6 @@ public class EAMTables {
 		 * 物品条码
 		*/
 		public static final DBField BAR_CODE = new DBField(DBDataType.STRING , "bar_code","barCode","物品条码","物品条码",false,false,true);
-		
-		/**
-		 * 规格型号
-		*/
-		public static final DBField MODEL = new DBField(DBDataType.STRING , "model","model","规格型号","规格型号",false,false,true);
 		
 		/**
 		 * 厂商
@@ -5647,7 +5672,7 @@ public class EAMTables {
 		/**
 		 * 默认单价
 		*/
-		public static final DBField DEFAULT_PRICE = new DBField(DBDataType.DECIMAL , "default_price","defaultPrice","默认单价","默认单价",false,false,true);
+		public static final DBField UNIT_PRICE = new DBField(DBDataType.DECIMAL , "unit_price","unitPrice","默认单价","默认单价",false,false,true);
 		
 		/**
 		 * 计量单位
@@ -5678,6 +5703,76 @@ public class EAMTables {
 		 * 备注
 		*/
 		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 批次号
+		*/
+		public static final DBField BATCH_CODE = new DBField(DBDataType.STRING , "batch_code","batchCode","批次号","批次号",false,false,true);
+		
+		/**
+		 * 所属公司
+		*/
+		public static final DBField OWN_COMPANY_ID = new DBField(DBDataType.STRING , "own_company_id","ownCompanyId","所属公司","所属公司",false,false,true);
+		
+		/**
+		 * 使用组织
+		*/
+		public static final DBField USE_ORG_ID = new DBField(DBDataType.STRING , "use_org_id","useOrgId","使用组织","使用组织",false,false,true);
+		
+		/**
+		 * 供应商
+		*/
+		public static final DBField SUPPLIER_NAME = new DBField(DBDataType.STRING , "supplier_name","supplierName","供应商","供应商",false,false,true);
+		
+		/**
+		 * 仓库
+		*/
+		public static final DBField WAREHOUSE_ID = new DBField(DBDataType.STRING , "warehouse_id","warehouseId","仓库","仓库",false,false,true);
+		
+		/**
+		 * 来源
+		*/
+		public static final DBField SOURCE_ID = new DBField(DBDataType.STRING , "source_id","sourceId","来源","来源",false,false,true);
+		
+		/**
+		 * 物品
+		*/
+		public static final DBField GOODS_ID = new DBField(DBDataType.STRING , "goods_id","goodsId","物品","物品",false,false,true);
+		
+		/**
+		 * 入库存数量
+		*/
+		public static final DBField STOCK_IN_NUMBER = new DBField(DBDataType.DECIMAL , "stock_in_number","stockInNumber","入库存数量","入库存数量",false,false,true);
+		
+		/**
+		 * 当前库存数量
+		*/
+		public static final DBField STOCK_CUR_NUMBER = new DBField(DBDataType.DECIMAL , "stock_cur_number","stockCurNumber","当前库存数量","当前库存数量",false,false,true);
+		
+		/**
+		 * 总金额
+		*/
+		public static final DBField AMOUNT = new DBField(DBDataType.DECIMAL , "amount","amount","总金额","总金额",false,false,true);
+		
+		/**
+		 * 管理人
+		*/
+		public static final DBField MANAGER_ID = new DBField(DBDataType.STRING , "manager_id","managerId","管理人","管理人",false,false,true);
+		
+		/**
+		 * 入库时间
+		*/
+		public static final DBField STORAGE_DATE = new DBField(DBDataType.DATE , "storage_date","storageDate","入库时间","入库时间",false,false,true);
+		
+		/**
+		 * 制单人
+		*/
+		public static final DBField ORIGINATOR_ID = new DBField(DBDataType.STRING , "originator_id","originatorId","制单人","制单人",false,false,true);
+		
+		/**
+		 * 选择
+		*/
+		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","选择","选择",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -5719,7 +5814,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_GOODS_STOCK() {
-			this.init($NAME,"库存物品" , ID , CATEGORY_ID , STATUS , NAME , CODE , BAR_CODE , MODEL , MANUFACTURER_ID , BRAND_ID , DEFAULT_PRICE , UNIT , STOCK_MIN , STOCK_MAX , STOCK_SECURITY , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"库存物品" , ID , OWNER_ID , OWNER_TMP_ID , OWNER_CODE , OWNER_TYPE , BUSINESS_CODE , CATEGORY_ID , STATUS , NAME , MODEL , CODE , BAR_CODE , MANUFACTURER_ID , BRAND_ID , UNIT_PRICE , UNIT , STOCK_MIN , STOCK_MAX , STOCK_SECURITY , PICTURE_ID , NOTES , BATCH_CODE , OWN_COMPANY_ID , USE_ORG_ID , SUPPLIER_NAME , WAREHOUSE_ID , SOURCE_ID , GOODS_ID , STOCK_IN_NUMBER , STOCK_CUR_NUMBER , AMOUNT , MANAGER_ID , STORAGE_DATE , ORIGINATOR_ID , SELECTED_CODE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_GOODS_STOCK $TABLE=new EAM_GOODS_STOCK();
 	}

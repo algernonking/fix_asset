@@ -2,7 +2,7 @@
 /**
  * 库存物品 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:15:10
+ * @since 2022-04-21 12:25:22
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-4226-content">
+        <div class="layui-row form-row" id="random-0221-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -121,7 +121,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-1563-content">
+        <div class="layui-row form-row" id="random-7165-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -184,7 +184,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('默认单价')}">默认单价</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="defaultPrice" id="defaultPrice" name="defaultPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('默认单价') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                            <input lay-filter="unitPrice" id="unitPrice" name="unitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('默认单价') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
@@ -197,7 +197,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-3693-content">
+        <div class="layui-row form-row" id="random-2925-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -251,9 +251,15 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
-    var VALIDATE_CONFIG={"code":{"labelInForm":"物品编码","inputType":"text_input","required":true},"brandId":{"labelInForm":"品牌","inputType":"select_box","required":true},"name":{"labelInForm":"物品名称","inputType":"text_input","required":true},"manufacturerId":{"labelInForm":"厂商","inputType":"select_box","required":true},"model":{"labelInForm":"规格型号","inputType":"text_input","required":true},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true},"barCode":{"labelInForm":"物品条码","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"code":{"labelInForm":"物品编码","inputType":"text_input","required":true},"brandId":{"labelInForm":"品牌","inputType":"select_box","required":true},"name":{"labelInForm":"物品名称","inputType":"text_input","required":true},"manufacturerId":{"labelInForm":"厂商","inputType":"select_box","required":true},"model":{"labelInForm":"规格型号","inputType":"text_input","required":true},"storageDate":{"date":true,"labelInForm":"入库时间","inputType":"date_input"},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true},"barCode":{"labelInForm":"物品条码","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_goods_stock";
 
+    // PAGE_TYPE:view|edit|add
+    var PAGE_TYPE = [[${pageType}]] ;
+    // OWNER_CODE
+    var OWNER_CODE = [[${ownerCode}]] ;
+    // OWNER_TYPE
+    var OWNER_TYPE = [[${ownerType}]] ;
 
 </script>
 

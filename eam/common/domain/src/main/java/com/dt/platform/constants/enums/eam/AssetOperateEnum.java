@@ -44,6 +44,7 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_STOCK_INVENTORY(CodeModuleEnum.EAM_ASSET_STOCK_INVENTORY.code()  , "EAM_资产库存-盘点"),
 
     //物品库存
+    EAM_ASSET_STOCK_GOODS(CodeModuleEnum.EAM_ASSET_STOCK_GOODS.code(), "EAM_资产物品库存-入库"),
     EAM_ASSET_STOCK_GOODS_IN(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_IN.code(), "EAM_资产物品库存-入库"),
     EAM_ASSET_STOCK_GOODS_OUT(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_OUT.code(), "EAM_资产物品库存-出库"),
     EAM_ASSET_STOCK_GOODS_TRANFER(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_TRANFER.code(), "EAM_资产物品库存-转移"),

@@ -1,7 +1,7 @@
 /**
  * 库存物品 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:15:10
+ * @since 2022-04-21 12:25:22
  */
 
 function FormPage() {
@@ -228,6 +228,320 @@ function FormPage() {
 				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterRemove",elId:elId,index:index,upload:upload});
 			}
 	    });
+		//渲染 warehouseId 下拉字段
+		fox.renderSelectBox({
+			el: "warehouseId",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("warehouseId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "warehouseName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].warehouseName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 sourceId 下拉字段
+		fox.renderSelectBox({
+			el: "sourceId",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("sourceId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "purchase".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 goodsId 下拉字段
+		fox.renderSelectBox({
+			el: "goodsId",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#storageDate',
+			format:"yyyy-MM-dd",
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("storageDate",value, date, endDate);
+			}
+		});
+		//渲染 goodsStockMax 下拉字段
+		fox.renderSelectBox({
+			el: "goodsStockMax",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsStockMax",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "goodsStockMax", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].goodsStockMax,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 goodsStockMin 下拉字段
+		fox.renderSelectBox({
+			el: "goodsStockMin",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsStockMin",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "goodsStockMin", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].goodsStockMin,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 goodsStockSecurity 下拉字段
+		fox.renderSelectBox({
+			el: "goodsStockSecurity",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsStockSecurity",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "goodsStockSecurity", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].goodsStockSecurity,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 goodsModel 下拉字段
+		fox.renderSelectBox({
+			el: "goodsModel",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsModel",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "model", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].model,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 goodsUnit 下拉字段
+		fox.renderSelectBox({
+			el: "goodsUnit",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsUnit",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "unit", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].unit,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 goodsCode 下拉字段
+		fox.renderSelectBox({
+			el: "goodsCode",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsCode",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "code", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].code,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 goodsBarCode 下拉字段
+		fox.renderSelectBox({
+			el: "goodsBarCode",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("goodsBarCode",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "barCode", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].barCode,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 	}
 
 	/**
@@ -375,6 +689,70 @@ function FormPage() {
 	        return false;
 	    });
 
+		// 请选择公司对话框
+		$("#ownCompanyId-button").click(function(){
+			var ownCompanyIdDialogOptions={
+				field:"ownCompanyId",
+				formData:getFormData(),
+				inputEl:$("#ownCompanyId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"com",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseOrgNode(ownCompanyIdDialogOptions);
+		});
+		// 请选择组织节点对话框
+		$("#useOrgId-button").click(function(){
+			var useOrgIdDialogOptions={
+				field:"useOrgId",
+				formData:getFormData(),
+				inputEl:$("#useOrgId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"org",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseOrgNode(useOrgIdDialogOptions);
+		});
+		// 请选择人员对话框
+		$("#managerId-button").click(function(){
+				var managerIdDialogOptions={
+				field:"managerId",
+				formData:getFormData(),
+				inputEl:$("#managerId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseEmployee(managerIdDialogOptions);
+		});
+		// 请选择人员对话框
+		$("#originatorId-button").click(function(){
+				var originatorIdDialogOptions={
+				field:"originatorId",
+				formData:getFormData(),
+				inputEl:$("#originatorId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseEmployee(originatorIdDialogOptions);
+		});
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('eam-goods-stock-form-data-win'); });

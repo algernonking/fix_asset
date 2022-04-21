@@ -1,7 +1,7 @@
 /**
  * 库存物品单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:37:42
+ * @since 2022-04-21 07:23:10
  */
 
 layui.config({
@@ -19,6 +19,10 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //模块基础路径
     const moduleURL="/service-eam/eam-asset-stock-goods-in";
+    var formAction=admin.getTempData('eam-asset-stock-goods-in-form-data-form-action');
+
+
+
 
     //列表页的扩展
     var list={
@@ -96,6 +100,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单页面打开时，追加更多的参数信息
          * */
         makeFormQueryString:function(data,queryString,action) {
+            admin.putTempData('eam-asset-stock-goods-in-form-ownerType', OWNER_TYPE);
             return queryString;
         },
         /**
@@ -158,6 +163,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         }
     }
 
+
+    var timestamp = Date.parse(new Date());
+
     //表单页的扩展
     var form={
         /**
@@ -167,6 +175,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //获取参数，并调整下拉框查询用的URL
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
+            OWNER_TYPE=admin.getTempData('eam-asset-stock-goods-in-form-ownerType');
             console.log("form:beforeInit")
         },
         /**
@@ -217,6 +226,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
+            data.selectedCode=timestamp;
+            data.ownerType=OWNER_TYPE;
             console.log("beforeSubmit",data);
             return true;
         },
@@ -234,6 +245,22 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
+        /**
+         *  加载 物品列表
+         */
+        goodsSelectList:function (ifr,win,data) {
+            // debugger
+            console.log("goodsSelectList",ifr,data);
+            //设置 iframe 高度
+            ifr.height("400px");
+            var ownerTmpId="";
+            if(data&&data.id){
+                ownerTmpId=data.id;
+            }
+            var queryString="?operType=eam_asset_stock_goods_in&selectedCode="+timestamp+"&ownerTmpId="+ownerTmpId+"&ownerCode=goods&ownerType="+OWNER_TYPE+"&pageType="+formAction;
+            //设置地址
+            win.location="/business/eam/goods_stock/goods_stock_selected_list.html"+queryString
+        },
         /**
          * 文件上传组件回调
          *  event 类型包括：

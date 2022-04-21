@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 库存物品单 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:37:42
+ * @since 2022-04-21 08:49:01
 */
 
 @Controller("EamAssetStockGoodsInPageController")
@@ -41,7 +41,8 @@ public class AssetStockGoodsInPageController extends ViewController {
 	 * 库存物品单 功能主页面
 	 */
 	@RequestMapping("/asset_stock_goods_in_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String ownerType) {
+		model.addAttribute("ownerType",ownerType);
 		return prefix+"/asset_stock_goods_in_list";
 	}
 
@@ -49,7 +50,8 @@ public class AssetStockGoodsInPageController extends ViewController {
 	 * 库存物品单 表单页面
 	 */
 	@RequestMapping("/asset_stock_goods_in_form.html")
-	public String form(Model model,HttpServletRequest request , String id) {
+	public String form(Model model,HttpServletRequest request , String id,String ownerType) {
+		model.addAttribute("ownerType",ownerType);
 		return prefix+"/asset_stock_goods_in_form";
 	}
 }

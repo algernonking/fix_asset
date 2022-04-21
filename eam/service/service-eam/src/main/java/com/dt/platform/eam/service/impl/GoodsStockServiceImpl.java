@@ -2,6 +2,8 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.alibaba.csp.sentinel.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +37,7 @@ import java.util.Date;
  * 库存物品 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:15:09
+ * @since 2022-04-21 11:41:53
 */
 
 
@@ -71,6 +73,95 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 	public Result insert(GoodsStock goodsStock,boolean throwsException) {
 		Result r=super.insert(goodsStock,throwsException);
 		return r;
+	}
+
+
+	//type:create,edit
+	public Result saveOwnerData(String oid,String ownerType,List<GoodsStock> list){
+		this.dao.execute("delete from eam_goods_stock where owner_id=?",oid);
+		for(int i=0;i<list.size();i++){
+			GoodsStock e=list.get(i);
+			e.setId(null);
+			e.setOwnerId(oid);
+			e.setOwnerTmpId("none");
+			e.setOwnerType(ownerType);
+			super.insert(e,false);
+		}
+		return ErrorDesc.success();
+	}
+
+//	public Result saveOwnerTmpData(String oid){
+//		//删除原来数据
+//		this.dao.execute("delete from eam_goods_stock where owner_tmp_id=?",oid);
+//		//插入新的数据
+//		GoodsStock qE=new GoodsStock();
+//		qE.setOwnerId(oid);
+//		List<GoodsStock> list =super.queryList(qE);
+//		if(list.size()>0){
+//			for(int i=0;i<list.size();i++){
+//				GoodsStock e=list.get(i);
+//				e.setId(null);
+//				e.setOwnerTmpId(oid);
+//				super.insert(e,false);
+//			}
+//		}
+//		return ErrorDesc.success();
+//	}
+
+	@Override
+	public PagedList<GoodsStock> queryPagedListBySelected(GoodsStockVO sample, String operType,String dataType) {
+
+		//重置数据
+		String ownerTmpId=sample.getOwnerTmpId();
+		if(!StringUtil.isBlank(ownerTmpId)){
+			if("reset".equals(dataType)){
+				//删除原来数据
+				this.dao.execute("delete from eam_goods_stock where owner_tmp_id=?",ownerTmpId);
+				//插入新的数据
+				GoodsStock qE=new GoodsStock();
+				qE.setOwnerId(ownerTmpId);
+				List<GoodsStock> list =super.queryList(qE);
+				if(list.size()>0){
+					for(int i=0;i<list.size();i++){
+						GoodsStock e=list.get(i);
+						e.setId(null);
+						e.setOwnerId("none");
+						e.setOwnerTmpId(ownerTmpId);
+						super.insert(e,false);
+					}
+				}
+			}
+		}
+
+		ConditionExpr queryCondition=new ConditionExpr();
+		if(!StringUtil.isBlank(sample.getCategoryId())) {
+			queryCondition.and("category_id in (select id from pcm_catalog where deleted=0 and (concat('/',hierarchy) like '%/"+sample.getCategoryId()+"/%' or id=?))",sample.getCategoryId());
+			sample.setCategoryId(null);
+		}
+
+		PagedList<GoodsStock> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
+		return list;
+
+	}
+
+	@Override
+	public PagedList<GoodsStock> queryPagedListBySelect(GoodsStockVO sample, String assetSearchContent) {
+		ConditionExpr queryCondition=new ConditionExpr();
+		String ownerId=sample.getOwnerId();
+
+
+		if(StringUtil.isBlank(ownerId)){
+			sample.setOwnerId(null);
+
+		}
+
+		if(!StringUtil.isBlank(sample.getCategoryId())) {
+			queryCondition.and("category_id in (select id from pcm_catalog where deleted=0 and (concat('/',hierarchy) like '%/"+sample.getCategoryId()+"/%' or id=?))",sample.getCategoryId());
+			sample.setCategoryId(null);
+		}
+
+		PagedList<GoodsStock> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
+		return list;
 	}
 
 	/**

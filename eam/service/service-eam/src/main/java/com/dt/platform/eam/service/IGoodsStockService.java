@@ -1,6 +1,8 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.AssetVO;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.GoodsStock;
@@ -21,10 +23,19 @@ import com.github.foxnic.dao.data.SaveMode;
  * 库存物品 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:15:09
+ * @since 2022-04-21 11:41:53
 */
 
 public interface IGoodsStockService extends ISuperService<GoodsStock> {
+
+
+	PagedList<GoodsStock> queryPagedListBySelected(GoodsStockVO sample ,String operType,String dataType);
+
+	PagedList<GoodsStock> queryPagedListBySelect(GoodsStockVO sample,String assetSearchContent);
+
+	Result saveOwnerData(String oid,String ownerType,List<GoodsStock> list);
+
+	List<GoodsStock> queryList(String s, Object... objects);
 
 	/**
 	 * 添加，如果语句错误，则抛出异常

@@ -125,7 +125,6 @@ public class EamAssetStockGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.EAM_STOCK.MANAGER_ID).table().fillBy("manager","nameAndBadge");
-
         cfg.view().field(EAMTables.EAM_STOCK.MANAGER_ID).form()
                 .button().chooseEmployee(true);
 

@@ -26,8 +26,7 @@ public class EamRelationManager extends RelationManager {
         this.setupRelations();
         this.setupProperties();
         this.setupAssetDataPermissions();
-        this.setupGoods();
-        this.setupGoodsStock();
+
         this.setupAsset();
         this.setupAlloction();
         this.setupAssetBorrow();
@@ -46,10 +45,15 @@ public class EamRelationManager extends RelationManager {
         this.setupInventoryManager();
         this.setupTplFile();
         this.setupAssetDataChange();
+
+        this.setupGoods();
+        this.setupGoodsStock();
+        this.setupAssetStockIn();
+
+
         this.setupAssetStock();
         this.setupAssetStockCollection();
         this.setupAssetStockDeliver();
-
         this.setupAssetStockGoods();
 
 
@@ -61,6 +65,85 @@ public class EamRelationManager extends RelationManager {
     public void setupProperties() {
     }
 
+    public void setupAssetStockIn() {
+        this.property(AssetStockGoodsInMeta.SOURCE_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_GOODS_IN.SOURCE_ID).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_source'");
+
+        this.property(AssetStockGoodsInMeta.STOCK_TYPE_DICT_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_GOODS_IN.STOCK_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_stock_in_type'");
+
+        //关联 仓库
+        this.property(AssetStockGoodsInMeta.WAREHOUSE_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_GOODS_IN.WAREHOUSE_ID).join(EAMTables.EAM_WAREHOUSE.ID);
+
+        //制单人
+        this.property(AssetStockGoodsInMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_GOODS_IN.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //管理人
+        this.property(AssetStockGoodsInMeta.MANAGER_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_GOODS_IN.MANAGER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
+        //关联 所属公司
+        this.property(AssetStockGoodsInMeta.OWNER_COMPANY_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_GOODS_IN.OWN_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+
+    }
+
+
+
+    private void setupGoodsStock(){
+
+        // 关联品牌
+        this.property(GoodsStockMeta.BRAND_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
+
+        // 关联生产厂商
+        this.property(GoodsStockMeta.MANUFACTURER_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.MANUFACTURER_ID).join(EAMTables.EAM_MANUFACTURER.ID);
+
+        // 关联分类
+        this.property(GoodsStockMeta.CATEGORY_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.CATEGORY_ID).join(EAMTables.EAM_CATEGORY.ID);
+
+
+        // 关联来源
+        this.property(GoodsStockMeta.SOURCE_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.SOURCE_ID).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_source'");
+
+
+
+        //关联 所属公司
+        this.property(GoodsStockMeta.OWNER_COMPANY_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.OWN_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+
+        //关联 仓库
+        this.property(GoodsStockMeta.WAREHOUSE_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.WAREHOUSE_ID).join(EAMTables.EAM_WAREHOUSE.ID);
+
+        //关联 使用公司
+        this.property(GoodsStockMeta.USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.USE_ORG_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        //制单人
+        this.property(GoodsStockMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //管理人
+        this.property(GoodsStockMeta.MANAGER_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.MANAGER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //物品
+        this.property(GoodsStockMeta.GOODS_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.GOODS_ID).join(EAMTables.EAM_GOODS_STOCK.ID);
+
+    }
     public void setupAssetStockGoods(){
         // 关联来源
         this.property(AssetStockGoodsMeta.SOURCE_PROP)
@@ -830,20 +913,7 @@ public class EamRelationManager extends RelationManager {
 
     }
 
-    private void setupGoodsStock(){
 
-        // 关联品牌
-        this.property(GoodsStockMeta.BRAND_PROP)
-                .using(EAMTables.EAM_GOODS_STOCK.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
-
-        // 关联生产厂商
-        this.property(GoodsStockMeta.MANUFACTURER_PROP)
-                .using(EAMTables.EAM_GOODS_STOCK.MANUFACTURER_ID).join(EAMTables.EAM_MANUFACTURER.ID);
-
-        // 关联分类
-        this.property(GoodsStockMeta.CATEGORY_PROP)
-                .using(EAMTables.EAM_GOODS_STOCK.CATEGORY_ID).join(EAMTables.EAM_CATEGORY.ID);
-    }
 
 
     private void setupGoods() {

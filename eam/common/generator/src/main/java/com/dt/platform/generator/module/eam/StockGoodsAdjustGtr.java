@@ -1,15 +1,13 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.eam.page.AssetStockGoodsAdjustPageController;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.proxy.eam.AssetStockGoodsAdjustServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class StockGoodsAdjust extends BaseCodeGenerator {
+public class StockGoodsAdjustGtr extends BaseCodeGenerator {
 
 
-    public StockGoodsAdjust() {
+    public StockGoodsAdjustGtr() {
         super(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.$TABLE,BASIC_STOCK_GOODS_ID);
     }
 
@@ -32,6 +30,7 @@ public class StockGoodsAdjust extends BaseCodeGenerator {
 
 
 
+        cfg.view().list().disableBatchDelete();
         cfg.view().formWindow().bottomSpace(20);
         cfg.view().form().addGroup(null,
                 new Object[] {
@@ -57,7 +56,7 @@ public class StockGoodsAdjust extends BaseCodeGenerator {
     }
 
     public static void main(String[] args) throws Exception {
-        StockGoodsAdjust g=new StockGoodsAdjust();
+        StockGoodsAdjustGtr g=new StockGoodsAdjustGtr();
         //生成代码
        g.generateCode();
 

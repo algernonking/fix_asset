@@ -1,7 +1,7 @@
 /**
  * 库存物品单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 16:08:03
+ * @since 2022-04-20 17:52:47
  */
 
 
@@ -78,18 +78,20 @@ function ListPage() {
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'stockBatchCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('批次号') , templet: function (d) { return templet('stockBatchCode',d.stockBatchCode,d);}  }
 					,{ field: 'sourceId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('来源'), templet: function (d) { return templet('sourceId' ,fox.joinLabel(d.source,"label"),d);}}
-					,{ field: 'ownCompanyId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('所属公司') , templet: function (d) { return templet('ownCompanyId',fox.getProperty(d,["ownerCompany","fullName"]),d);} }
-					,{ field: 'useOrgId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('所属组织') , templet: function (d) { return templet('useOrgId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
-					,{ field: 'supplierId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('供应商'), templet: function (d) { return templet('supplierId' ,fox.joinLabel(d.supplier,"supplierName"),d);}}
-					,{ field: 'warehouseId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('仓库'), templet: function (d) { return templet('warehouseId' ,fox.joinLabel(d.warehouse,"warehouseName"),d);}}
+					,{ field: 'goodsId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('物品'), templet: function (d) { return templet('goodsId' ,fox.joinLabel(d.goods,"name"),d);}}
 					,{ field: 'stockInNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('入库存数量') , templet: function (d) { return templet('stockInNumber',d.stockInNumber,d);}  }
 					,{ field: 'stockCurNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('当前库存数量') , templet: function (d) { return templet('stockCurNumber',d.stockCurNumber,d);}  }
 					,{ field: 'unitPrice', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('单价') , templet: function (d) { return templet('unitPrice',d.unitPrice,d);}  }
 					,{ field: 'amount', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('总金额') , templet: function (d) { return templet('amount',d.amount,d);}  }
-					,{ field: 'purchaseDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('购置日期') ,templet: function (d) { return templet('purchaseDate',fox.dateFormat(d.purchaseDate,"yyyy-MM-dd"),d); }  }
-					,{ field: 'goodsId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('物品'), templet: function (d) { return templet('goodsId' ,fox.joinLabel(d.goods,"name"),d);}}
+					,{ field: 'supplierId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('供应商'), templet: function (d) { return templet('supplierId' ,fox.joinLabel(d.supplier,"supplierName"),d);}}
+					,{ field: 'warehouseId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('仓库'), templet: function (d) { return templet('warehouseId' ,fox.joinLabel(d.warehouse,"warehouseName"),d);}}
+					,{ field: 'ownCompanyId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('所属公司') , templet: function (d) { return templet('ownCompanyId',fox.getProperty(d,["ownerCompany","fullName"]),d);} }
 					,{ field: 'notes', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
+					,{ field: 'useOrgId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('所属组织') , templet: function (d) { return templet('useOrgId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
+					,{ field: 'goodsModel', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('物品型号'), templet: function (d) { return templet('goodsModel' ,fox.joinLabel(d.goods,"model"),d);}}
+					,{ field: 'goodsUnit', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('计量单位'), templet: function (d) { return templet('goodsUnit' ,fox.joinLabel(d.goods,"unit"),d);}}
+					,{ field: 'goodsCode', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('物品编码'), templet: function (d) { return templet('goodsCode' ,fox.joinLabel(d.goods,"code"),d);}}
+					,{ field: 'goodsBarCode', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('物品条码'), templet: function (d) { return templet('goodsBarCode' ,fox.joinLabel(d.goods,"barCode"),d);}}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -151,6 +153,7 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
 		value.supplierId={ inputType:"select_box", value: getSelectedValue("#supplierId","value") ,fillBy:["supplier"]  , label:getSelectedValue("#supplierId","nameStr") };
+		value.warehouseId={ inputType:"select_box", value: getSelectedValue("#warehouseId","value") ,fillBy:["warehouse"]  , label:getSelectedValue("#warehouseId","nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -221,6 +224,33 @@ function ListPage() {
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
 					opts.push({data:data[i],name:data[i].supplierName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 warehouseId 下拉字段
+		fox.renderSelectBox({
+			el: "warehouseId",
+			radio: true,
+			size: "small",
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("warehouseId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			paging: true,
+			pageRemote: true,
+			//转换数据
+			searchField: "warehouseName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].warehouseName,value:data[i].id});
 				}
 				return opts;
 			}

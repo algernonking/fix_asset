@@ -2,6 +2,9 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.domain.eam.GoodsStock;
+import com.dt.platform.eam.service.IGoodsStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +38,16 @@ import java.util.Date;
  * 库存物品单 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:37:42
+ * @since 2022-04-21 13:05:35
 */
 
 
 @Service("EamAssetStockGoodsInService")
 public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn> implements IAssetStockGoodsInService {
+
+
+	@Autowired
+	private IGoodsStockService goodsStockService;
 
 	/**
 	 * 注入DAO对象
@@ -69,8 +76,19 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 	 */
 	@Override
 	public Result insert(AssetStockGoodsIn assetStockGoodsIn,boolean throwsException) {
+
+		String selectedCode=assetStockGoodsIn.getSelectedCode();
+		GoodsStock qE=new GoodsStock();
+		qE.setSelectedCode(selectedCode);
+		List<GoodsStock> list =goodsStockService.queryList(qE);
+		if(list.size()==0){
+			return ErrorDesc.failureMessage("请选择数据");
+		}
+
+
+
 		Result r=super.insert(assetStockGoodsIn,throwsException);
-		return r;
+		return goodsStockService.saveOwnerData(assetStockGoodsIn.getId(),assetStockGoodsIn.getOwnerType(),list);
 	}
 
 	/**
@@ -159,8 +177,19 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 	 * */
 	@Override
 	public Result update(AssetStockGoodsIn assetStockGoodsIn , SaveMode mode,boolean throwsException) {
+
+		GoodsStock qE=new GoodsStock();
+		qE.setOwnerTmpId(assetStockGoodsIn.getId());
+		List<GoodsStock> list =goodsStockService.queryList(qE);
+		if(list.size()==0){
+			return ErrorDesc.failureMessage("请选择数据");
+		}
+
+
+
 		Result r=super.update(assetStockGoodsIn , mode , throwsException);
-		return r;
+		return goodsStockService.saveOwnerData(assetStockGoodsIn.getId(),assetStockGoodsIn.getOwnerType(),list);
+
 	}
 
 	/**

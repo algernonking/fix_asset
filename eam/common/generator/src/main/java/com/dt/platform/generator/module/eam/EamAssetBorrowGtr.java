@@ -46,6 +46,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"borrower","借用人","借用人");
         //cfg.service().addRelationSaveAction(AssetItemServiceImpl.class,AssetBorrowVOMeta.ASSET_IDS);
        // cfg.view().list().disableSpaceColumn();
+
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.SELECTED_CODE).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).basic().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE).search().fuzzySearch();

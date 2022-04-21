@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 库存物品  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:15:09
+ * @since 2022-04-21 11:41:53
  */
 @FeignClient(value = ServiceNames.EAM, contextId = GoodsStockServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface GoodsStockServiceProxy {
@@ -63,6 +63,12 @@ public interface GoodsStockServiceProxy {
     public static final String SAVE = API_PREFIX + "save";
 
     /**
+     * 保存库存物品
+     */
+    public static final String SAVE_BY_IDS= API_PREFIX + "save-by-ids";
+
+
+    /**
      * 获取单个库存物品
      */
     public static final String GET_BY_ID = API_PREFIX + "get-by-id";
@@ -96,6 +102,11 @@ public interface GoodsStockServiceProxy {
      * 导入库存物品数据(Excel)
      */
     public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+
+    public static final String QUERY_PAGED_LIST_BY_SELECTED = API_PREFIX + "query-paged-list-by-selected";
+
+    public static final String QUERY_PAGED_LIST_BY_SELECT = API_PREFIX + "query-paged-list-by-select";
 
     /**
      * 添加库存物品

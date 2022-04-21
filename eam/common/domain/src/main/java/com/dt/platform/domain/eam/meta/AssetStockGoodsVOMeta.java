@@ -17,7 +17,7 @@ import org.github.foxnic.web.domain.system.DictItem;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 16:08:02
+ * @since 2022-04-20 17:52:46
  * @sign 7D4339BF417666EEADF8D5E7912310EF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -185,44 +185,14 @@ public class AssetStockGoodsVOMeta extends AssetStockGoodsMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> SOURCE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,SOURCE_ID, java.lang.String.class, "来源", "来源", java.lang.String.class, null);
 	
 	/**
-	 * 所属公司 , 类型: java.lang.String
+	 * 物品 , 类型: java.lang.String
 	*/
-	public static final String OWN_COMPANY_ID="ownCompanyId";
+	public static final String GOODS_ID="goodsId";
 	
 	/**
-	 * 所属公司 , 类型: java.lang.String
+	 * 物品 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> OWN_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,OWN_COMPANY_ID, java.lang.String.class, "所属公司", "所属公司", java.lang.String.class, null);
-	
-	/**
-	 * 所属组织 , 类型: java.lang.String
-	*/
-	public static final String USE_ORG_ID="useOrgId";
-	
-	/**
-	 * 所属组织 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> USE_ORG_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,USE_ORG_ID, java.lang.String.class, "所属组织", "所属组织", java.lang.String.class, null);
-	
-	/**
-	 * 资产供应商 , 类型: java.lang.String
-	*/
-	public static final String SUPPLIER_ID="supplierId";
-	
-	/**
-	 * 资产供应商 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> SUPPLIER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,SUPPLIER_ID, java.lang.String.class, "资产供应商", "资产供应商", java.lang.String.class, null);
-	
-	/**
-	 * 仓库 , 类型: java.lang.String
-	*/
-	public static final String WAREHOUSE_ID="warehouseId";
-	
-	/**
-	 * 仓库 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> WAREHOUSE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,WAREHOUSE_ID, java.lang.String.class, "仓库", "仓库", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> GOODS_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,GOODS_ID, java.lang.String.class, "物品", "物品", java.lang.String.class, null);
 	
 	/**
 	 * 入库存数量 , 类型: java.math.BigDecimal
@@ -265,24 +235,34 @@ public class AssetStockGoodsVOMeta extends AssetStockGoodsMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.math.BigDecimal> AMOUNT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,AMOUNT, java.math.BigDecimal.class, "总金额", "总金额", java.math.BigDecimal.class, null);
 	
 	/**
-	 * 购置日期 , 类型: java.util.Date
+	 * 资产供应商 , 类型: java.lang.String
 	*/
-	public static final String PURCHASE_DATE="purchaseDate";
+	public static final String SUPPLIER_ID="supplierId";
 	
 	/**
-	 * 购置日期 , 类型: java.util.Date
+	 * 资产供应商 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.util.Date> PURCHASE_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,PURCHASE_DATE, java.util.Date.class, "购置日期", "购置日期", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> SUPPLIER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,SUPPLIER_ID, java.lang.String.class, "资产供应商", "资产供应商", java.lang.String.class, null);
 	
 	/**
-	 * 物品 , 类型: java.lang.String
+	 * 仓库 , 类型: java.lang.String
 	*/
-	public static final String GOODS_ID="goodsId";
+	public static final String WAREHOUSE_ID="warehouseId";
 	
 	/**
-	 * 物品 , 类型: java.lang.String
+	 * 仓库 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> GOODS_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,GOODS_ID, java.lang.String.class, "物品", "物品", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> WAREHOUSE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,WAREHOUSE_ID, java.lang.String.class, "仓库", "仓库", java.lang.String.class, null);
+	
+	/**
+	 * 所属公司 , 类型: java.lang.String
+	*/
+	public static final String OWN_COMPANY_ID="ownCompanyId";
+	
+	/**
+	 * 所属公司 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> OWN_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,OWN_COMPANY_ID, java.lang.String.class, "所属公司", "所属公司", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -293,6 +273,16 @@ public class AssetStockGoodsVOMeta extends AssetStockGoodsMeta {
 	 * 备注 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	
+	/**
+	 * 所属组织 , 类型: java.lang.String
+	*/
+	public static final String USE_ORG_ID="useOrgId";
+	
+	/**
+	 * 所属组织 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> USE_ORG_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,USE_ORG_ID, java.lang.String.class, "所属组织", "所属组织", java.lang.String.class, null);
 	
 	/**
 	 * 制单人 , 类型: java.lang.String
@@ -475,9 +465,69 @@ public class AssetStockGoodsVOMeta extends AssetStockGoodsMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,org.github.foxnic.web.domain.system.DictItem> SOURCE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,SOURCE, org.github.foxnic.web.domain.system.DictItem.class, "来源", "来源", org.github.foxnic.web.domain.system.DictItem.class, null);
 	
 	/**
+	 * 类型 , 类型: java.lang.String
+	*/
+	public static final String GOODS_MODEL="goodsModel";
+	
+	/**
+	 * 类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> GOODS_MODEL_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,GOODS_MODEL, java.lang.String.class, "类型", "类型", java.lang.String.class, null);
+	
+	/**
+	 * 名称 , 类型: java.lang.String
+	*/
+	public static final String GOODS_NAME="goodsName";
+	
+	/**
+	 * 名称 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> GOODS_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,GOODS_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	
+	/**
+	 * 分类 , 类型: java.lang.String
+	*/
+	public static final String GOODS_CATEGORY_NAME="goodsCategoryName";
+	
+	/**
+	 * 分类 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> GOODS_CATEGORY_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,GOODS_CATEGORY_NAME, java.lang.String.class, "分类", "分类", java.lang.String.class, null);
+	
+	/**
+	 * 计算单位 , 类型: java.lang.String
+	*/
+	public static final String GOODS_UNIT="goodsUnit";
+	
+	/**
+	 * 计算单位 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> GOODS_UNIT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,GOODS_UNIT, java.lang.String.class, "计算单位", "计算单位", java.lang.String.class, null);
+	
+	/**
+	 * 物品编码 , 类型: java.lang.String
+	*/
+	public static final String GOODS_CODE="goodsCode";
+	
+	/**
+	 * 物品编码 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> GOODS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,GOODS_CODE, java.lang.String.class, "物品编码", "物品编码", java.lang.String.class, null);
+	
+	/**
+	 * 物品条码 , 类型: java.lang.String
+	*/
+	public static final String GOODS_BAR_CODE="goodsBarCode";
+	
+	/**
+	 * 物品条码 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsVO,java.lang.String> GOODS_BAR_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsVO.class ,GOODS_BAR_CODE, java.lang.String.class, "物品条码", "物品条码", java.lang.String.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , OWNER_CODE , OWNER_TYPE , STOCK_TYPE , BUSINESS_CODE , STOCK_BATCH_CODE , SOURCE_ID , OWN_COMPANY_ID , USE_ORG_ID , SUPPLIER_ID , WAREHOUSE_ID , STOCK_IN_NUMBER , STOCK_CUR_NUMBER , UNIT_PRICE , AMOUNT , PURCHASE_DATE , GOODS_ID , NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , GOODS , ORIGINATOR , SUPPLIER , OWNER_COMPANY , USE_ORGANIZATION , WAREHOUSE , SOURCE };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , OWNER_CODE , OWNER_TYPE , STOCK_TYPE , BUSINESS_CODE , STOCK_BATCH_CODE , SOURCE_ID , GOODS_ID , STOCK_IN_NUMBER , STOCK_CUR_NUMBER , UNIT_PRICE , AMOUNT , SUPPLIER_ID , WAREHOUSE_ID , OWN_COMPANY_ID , NOTES , USE_ORG_ID , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , GOODS , ORIGINATOR , SUPPLIER , OWNER_COMPANY , USE_ORGANIZATION , WAREHOUSE , SOURCE , GOODS_MODEL , GOODS_NAME , GOODS_CATEGORY_NAME , GOODS_UNIT , GOODS_CODE , GOODS_BAR_CODE };
 	
 	/**
 	 * 代理类
@@ -664,46 +714,13 @@ public class AssetStockGoodsVOMeta extends AssetStockGoodsMeta {
 		}
 		
 		/**
-		 * 设置 所属公司
-		 * @param ownCompanyId 所属公司
+		 * 设置 物品
+		 * @param goodsId 物品
 		 * @return 当前对象
 		*/
-		public AssetStockGoods setOwnCompanyId(String ownCompanyId) {
-			super.change(OWN_COMPANY_ID,super.getOwnCompanyId(),ownCompanyId);
-			super.setOwnCompanyId(ownCompanyId);
-			return this;
-		}
-		
-		/**
-		 * 设置 所属组织
-		 * @param useOrgId 所属组织
-		 * @return 当前对象
-		*/
-		public AssetStockGoods setUseOrgId(String useOrgId) {
-			super.change(USE_ORG_ID,super.getUseOrgId(),useOrgId);
-			super.setUseOrgId(useOrgId);
-			return this;
-		}
-		
-		/**
-		 * 设置 资产供应商
-		 * @param supplierId 资产供应商
-		 * @return 当前对象
-		*/
-		public AssetStockGoods setSupplierId(String supplierId) {
-			super.change(SUPPLIER_ID,super.getSupplierId(),supplierId);
-			super.setSupplierId(supplierId);
-			return this;
-		}
-		
-		/**
-		 * 设置 仓库
-		 * @param warehouseId 仓库
-		 * @return 当前对象
-		*/
-		public AssetStockGoods setWarehouseId(String warehouseId) {
-			super.change(WAREHOUSE_ID,super.getWarehouseId(),warehouseId);
-			super.setWarehouseId(warehouseId);
+		public AssetStockGoods setGoodsId(String goodsId) {
+			super.change(GOODS_ID,super.getGoodsId(),goodsId);
+			super.setGoodsId(goodsId);
 			return this;
 		}
 		
@@ -752,24 +769,35 @@ public class AssetStockGoodsVOMeta extends AssetStockGoodsMeta {
 		}
 		
 		/**
-		 * 设置 购置日期
-		 * @param purchaseDate 购置日期
+		 * 设置 资产供应商
+		 * @param supplierId 资产供应商
 		 * @return 当前对象
 		*/
-		public AssetStockGoods setPurchaseDate(Date purchaseDate) {
-			super.change(PURCHASE_DATE,super.getPurchaseDate(),purchaseDate);
-			super.setPurchaseDate(purchaseDate);
+		public AssetStockGoods setSupplierId(String supplierId) {
+			super.change(SUPPLIER_ID,super.getSupplierId(),supplierId);
+			super.setSupplierId(supplierId);
 			return this;
 		}
 		
 		/**
-		 * 设置 物品
-		 * @param goodsId 物品
+		 * 设置 仓库
+		 * @param warehouseId 仓库
 		 * @return 当前对象
 		*/
-		public AssetStockGoods setGoodsId(String goodsId) {
-			super.change(GOODS_ID,super.getGoodsId(),goodsId);
-			super.setGoodsId(goodsId);
+		public AssetStockGoods setWarehouseId(String warehouseId) {
+			super.change(WAREHOUSE_ID,super.getWarehouseId(),warehouseId);
+			super.setWarehouseId(warehouseId);
+			return this;
+		}
+		
+		/**
+		 * 设置 所属公司
+		 * @param ownCompanyId 所属公司
+		 * @return 当前对象
+		*/
+		public AssetStockGoods setOwnCompanyId(String ownCompanyId) {
+			super.change(OWN_COMPANY_ID,super.getOwnCompanyId(),ownCompanyId);
+			super.setOwnCompanyId(ownCompanyId);
 			return this;
 		}
 		
@@ -781,6 +809,17 @@ public class AssetStockGoodsVOMeta extends AssetStockGoodsMeta {
 		public AssetStockGoods setNotes(String notes) {
 			super.change(NOTES,super.getNotes(),notes);
 			super.setNotes(notes);
+			return this;
+		}
+		
+		/**
+		 * 设置 所属组织
+		 * @param useOrgId 所属组织
+		 * @return 当前对象
+		*/
+		public AssetStockGoods setUseOrgId(String useOrgId) {
+			super.change(USE_ORG_ID,super.getUseOrgId(),useOrgId);
+			super.setUseOrgId(useOrgId);
 			return this;
 		}
 		
@@ -979,6 +1018,72 @@ public class AssetStockGoodsVOMeta extends AssetStockGoodsMeta {
 		public AssetStockGoods setSource(DictItem source) {
 			super.change(SOURCE,super.getSource(),source);
 			super.setSource(source);
+			return this;
+		}
+		
+		/**
+		 * 设置 类型
+		 * @param goodsModel 类型
+		 * @return 当前对象
+		*/
+		public AssetStockGoods setGoodsModel(String goodsModel) {
+			super.change(GOODS_MODEL,super.getGoodsModel(),goodsModel);
+			super.setGoodsModel(goodsModel);
+			return this;
+		}
+		
+		/**
+		 * 设置 名称
+		 * @param goodsName 名称
+		 * @return 当前对象
+		*/
+		public AssetStockGoods setGoodsName(String goodsName) {
+			super.change(GOODS_NAME,super.getGoodsName(),goodsName);
+			super.setGoodsName(goodsName);
+			return this;
+		}
+		
+		/**
+		 * 设置 分类
+		 * @param goodsCategoryName 分类
+		 * @return 当前对象
+		*/
+		public AssetStockGoods setGoodsCategoryName(String goodsCategoryName) {
+			super.change(GOODS_CATEGORY_NAME,super.getGoodsCategoryName(),goodsCategoryName);
+			super.setGoodsCategoryName(goodsCategoryName);
+			return this;
+		}
+		
+		/**
+		 * 设置 计算单位
+		 * @param goodsUnit 计算单位
+		 * @return 当前对象
+		*/
+		public AssetStockGoods setGoodsUnit(String goodsUnit) {
+			super.change(GOODS_UNIT,super.getGoodsUnit(),goodsUnit);
+			super.setGoodsUnit(goodsUnit);
+			return this;
+		}
+		
+		/**
+		 * 设置 物品编码
+		 * @param goodsCode 物品编码
+		 * @return 当前对象
+		*/
+		public AssetStockGoods setGoodsCode(String goodsCode) {
+			super.change(GOODS_CODE,super.getGoodsCode(),goodsCode);
+			super.setGoodsCode(goodsCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 物品条码
+		 * @param goodsBarCode 物品条码
+		 * @return 当前对象
+		*/
+		public AssetStockGoods setGoodsBarCode(String goodsBarCode) {
+			super.change(GOODS_BAR_CODE,super.getGoodsBarCode(),goodsBarCode);
+			super.setGoodsBarCode(goodsBarCode);
 			return this;
 		}
 	}

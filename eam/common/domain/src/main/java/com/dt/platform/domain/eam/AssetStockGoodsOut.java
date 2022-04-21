@@ -16,7 +16,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 库存出库
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 08:24:29
+ * @since 2022-04-21 06:06:39
  * @sign F433AED2E20807B8F0DA537739573ABC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

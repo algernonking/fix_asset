@@ -1,7 +1,7 @@
 /**
  * 库存出库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 08:24:30
+ * @since 2022-04-21 06:06:40
  */
 
 
@@ -150,6 +150,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
+		value.name={ inputType:"button",value: $("#name").val()};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
