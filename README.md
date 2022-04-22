@@ -9,8 +9,7 @@
 ### 联系方式
 - 1、QQ群:634770774 
 - 2、微信号:myxyjm
-- 3、微信群：
-![微信群](view/view-console/src/main/resources/static/assets/images/wx.png)
+- 3、![微信群](https://gitee.com/LeeFJ/foxnic-web/raw/master/view/view-console/src/main/resources/static/assets/images/wx.png)
 
 ### 主要技术栈
 #### 后端技术栈
