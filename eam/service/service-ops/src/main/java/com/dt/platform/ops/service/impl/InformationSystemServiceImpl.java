@@ -1,55 +1,50 @@
 package com.dt.platform.ops.service.impl;
 
 
-import javax.annotation.Resource;
-
-import com.dt.platform.constants.enums.ops.OpsHostDataExportColumnEnum;
 import com.dt.platform.constants.enums.ops.OpsISDataExportColumnEnum;
 import com.dt.platform.constants.enums.ops.OpsOperateEnum;
+import com.dt.platform.domain.ops.InformationSystem;
+import com.dt.platform.ops.service.IInformationSystemService;
 import com.dt.platform.ops.service.IOpsDataService;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
+import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.excel.*;
 import com.github.foxnic.dao.meta.DBTableMeta;
+import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.dao.sql.SQLBuilder;
-import com.github.foxnic.sql.expr.*;
+import com.github.foxnic.sql.expr.ConditionExpr;
+import com.github.foxnic.sql.expr.Insert;
+import com.github.foxnic.sql.expr.SQL;
+import com.github.foxnic.sql.expr.Update;
+import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.sql.treaty.DBTreaty;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import com.dt.platform.domain.ops.InformationSystem;
-import com.dt.platform.domain.ops.InformationSystemVO;
-
+import javax.annotation.Resource;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.dao.entity.SuperService;
-import com.github.foxnic.dao.spec.DAO;
-import java.lang.reflect.Field;
-import com.github.foxnic.commons.busi.id.IDGenerator;
-import com.github.foxnic.api.error.ErrorDesc;
-
-import java.io.InputStream;
-import com.github.foxnic.sql.meta.DBField;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.meta.DBColumnMeta;
-
-import java.util.ArrayList;
-import com.dt.platform.ops.service.IInformationSystemService;
-import org.github.foxnic.web.framework.dao.DBConfigs;
-import java.util.Date;
 
 /**
  * <p>
@@ -380,7 +375,6 @@ public class InformationSystemServiceImpl extends SuperService<InformationSystem
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 
 		ExcelStructure es=new ExcelStructure();
-		es.setDataColumnBegin(0);
 		es.setDataRowBegin(2);
 		String code= OpsOperateEnum.OPS_DOWNLOAD_INFORMATION_SYSTEM.code();
 		InputStream inputStream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
@@ -407,7 +401,7 @@ public class InformationSystemServiceImpl extends SuperService<InformationSystem
 							EnumUtil.parseByCode(OpsISDataExportColumnEnum.class,column).text();
 
 					System.out.println(row.getCell(i)  +","+ firstRow.getCell(i)+","+column+rColumn);
-					charIndex=ExcelStructure.toExcel26(i);
+					charIndex=ExcelUtil.toExcel26(i);
 					es.addColumn(charIndex,rColumn,firstRow.getCell(i).toString(), ExcelColumn.STRING_CELL_READER);
 				}
 				//追加自定义属性部分

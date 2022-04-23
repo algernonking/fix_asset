@@ -215,6 +215,22 @@ function FormPage() {
 				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("#(f.varName)",value, date, endDate);
 			}
 		});
+		#else if(f.typeName.equals("radio_box"))
+		form.on('radio(#(f.varName))', function(data){
+			var checked=[];
+			$('input[type=radio][lay-filter=#(f.varName)]:checked').each(function() {
+				checked.push($(this).val());
+			});
+			window.pageExt.form.onRadioBoxChanged && window.pageExt.form.onRadioBoxChanged("#(f.varName)",data,checked);
+		});
+		#else if(f.typeName.equals("check_box"))
+		form.on('checkbox(#(f.varName))', function(data){
+			var checked=[];
+			$('input[type=checkbox][lay-filter=#(f.varName)]:checked').each(function() {
+				checked.push($(this).val());
+			});
+			window.pageExt.form.onCheckBoxChanged && window.pageExt.form.onCheckBoxChanged("#(f.varName)",data ,checked);
+		});
 	    #end
 	    #end
 	}

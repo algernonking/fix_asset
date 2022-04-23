@@ -372,7 +372,7 @@
 		<repository>
 			<id>releases</id>
 			<name>Releases</name>
-			<url>http://47.92.240.43:9091/repository/maven-releases/</url>
+			<url>http://foxnicweb.com:9091/repository/maven-releases/</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -385,7 +385,7 @@
 		<repository>
 			<id>snapshots</id>
 			<name>Snapshots</name>
-			<url>http://47.92.240.43:9091/repository/maven-snapshots/</url>
+			<url>http://foxnicweb.com:9091/repository/maven-snapshots/</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -400,7 +400,7 @@
 		<pluginRepository>
 			<id>releases</id>
 			<name>Releases</name>
-			<url>http://47.92.240.43:9091/repository/maven-releases/</url>
+			<url>http://foxnicweb.com:9091/repository/maven-releases/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
