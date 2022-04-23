@@ -1,37 +1,43 @@
 package com.dt.platform.vehicle.service.impl;
 
 
-import com.dt.platform.domain.vehicle.Info;
-import com.dt.platform.vehicle.service.IInfoService;
-import com.github.foxnic.api.error.ErrorDesc;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.commons.busi.id.IDGenerator;
+import javax.annotation.Resource;
+
 import com.github.foxnic.commons.lang.DateUtil;
 import com.github.foxnic.commons.log.Logger;
-import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.RcdSet;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.entity.SuperService;
-import com.github.foxnic.dao.excel.ExcelStructure;
-import com.github.foxnic.dao.excel.ExcelWriter;
-import com.github.foxnic.dao.excel.ValidateResult;
-import com.github.foxnic.dao.excel.wrapper.SheetWrapper;
-import com.github.foxnic.dao.meta.DBColumnMeta;
+import com.github.foxnic.dao.entity.QuerySQLBuilder;
 import com.github.foxnic.dao.meta.DBTableMeta;
-import com.github.foxnic.dao.spec.DAO;
-import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.expr.Expr;
 import com.github.foxnic.sql.expr.OrderBy;
-import com.github.foxnic.sql.meta.DBField;
-import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Date;
+
+import com.dt.platform.domain.vehicle.Info;
+import com.dt.platform.domain.vehicle.InfoVO;
 import java.util.List;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.entity.SuperService;
+import com.github.foxnic.dao.spec.DAO;
+import java.lang.reflect.Field;
+import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.sql.expr.ConditionExpr;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.dao.excel.ValidateResult;
+import com.github.foxnic.dao.excel.ExcelStructure;
+import java.io.InputStream;
+import com.github.foxnic.sql.meta.DBField;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.meta.DBColumnMeta;
+import com.github.foxnic.sql.expr.Select;
+import java.util.ArrayList;
+import com.dt.platform.vehicle.service.IInfoService;
+import org.github.foxnic.web.framework.dao.DBConfigs;
+import java.util.Date;
 
 /**
  * <p>
@@ -298,7 +304,7 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 	ExcelStructure es=buildExcelStructure(true);
 	//ExcelStructure es1=ExcelStructure.parse(rs,true);
 
-	SheetWrapper sheet=ew.fillSheet(rs, tm.getShortTopic()+"清单",es);
+	//Sheet sheet=ew.fillSheet(rs, tm.getShortTopic()+"清单",es);
 	ew.setWorkBookName(tm.getShortTopic()+"清单-"+ DateUtil.format(new Date(),"yyyyMMdd-HHmmss") +".xlsx");
 	Logger.info("导出 "+this.table()+" 数据 "+rs.size() +" 行");
 		return ew;
