@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.alibaba.csp.sentinel.util.StringUtil;
+import com.dt.platform.constants.enums.eam.AssetStockGoodsOwnerEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -125,6 +126,7 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 					for(int i=0;i<list.size();i++){
 						GoodsStock e=list.get(i);
 						e.setId(null);
+						e.setOwnerCode(AssetStockGoodsOwnerEnum.DATA_SELECTED.code());
 						e.setOwnerId("none");
 						e.setOwnerTmpId(ownerTmpId);
 						super.insert(e,false);

@@ -3,6 +3,9 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.meta.AssetCollectionVOMeta;
+import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -393,6 +396,65 @@ public class AssetStockGoodsInController extends SuperController {
 		return result;
 	}
 
+
+	/**
+	 * 送审
+	 * */
+	@ApiOperation(value = "送审")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetStockGoodsInVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetStockGoodsInVOMeta.ID)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetStockGoodsInServiceProxy.FOR_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsInServiceProxy.FOR_APPROVAL)
+	public Result forApproval(String id)  {
+		return assetStockGoodsInService.forApproval(id);
+	}
+
+
+	/**
+	 * 确认
+	 * */
+	@ApiOperation(value = "确认")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetStockGoodsInVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetStockGoodsInVOMeta.ID)
+	@ApiOperationSupport(order=13)
+	@SentinelResource(value = AssetStockGoodsInServiceProxy.CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsInServiceProxy.CONFIRM_OPERATION)
+	public Result confirmOperation(String id)  {
+		return assetStockGoodsInService.confirmOperation(id);
+	}
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetStockGoodsInVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetStockGoodsInVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetStockGoodsInServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsInServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetStockGoodsInService.revokeOperation(id);
+	}
+
+
+	/**
+	 * 审批
+	 * */
+	@ApiOperation(value = "审批")
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = AssetStockGoodsInServiceProxy.APPROVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsInServiceProxy.APPROVE)
+	public Result approve(ProcessApproveVO approveVO)  {
+		return assetStockGoodsInService.approve(approveVO);
+	}
 
 
 	/**

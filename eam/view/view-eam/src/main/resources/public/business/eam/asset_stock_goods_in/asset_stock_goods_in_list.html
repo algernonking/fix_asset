@@ -2,7 +2,7 @@
 /**
  * 库存物品单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 21:20:18
+ * @since 2022-04-23 07:42:39
  */
  -->
  <!DOCTYPE html>
@@ -41,20 +41,20 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 库存所属 , ownerType ,typeName=text_input, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 状态 , status ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 单据类型 , stockType ,typeName=select_box, isHideInSearch=true -->
                     <!-- 管理人 , managerId ,typeName=button, isHideInSearch=true -->
                     <!-- 总金额 , amount ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 所属公司 , ownCompanyId ,typeName=button, isHideInSearch=true -->
                     <!-- 来源 , sourceId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 购置日期 , purchaseDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 业务时间 , businessDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 附件 , attachId ,typeName=upload, isHideInSearch=true -->
-                    <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 制单人 , originatorId ,typeName=button, isHideInSearch=true -->
                     <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 变更类型 , chsType ,typeName=text_input, isHideInSearch=true -->
                     <!-- 变更状态 , chsStatus ,typeName=text_input, isHideInSearch=true -->
@@ -68,17 +68,17 @@
                     <!-- 审批意见 , approvalOpinion ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 单据名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('单据名称')}" class="search-label name-label">单据名称</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('单据名称')}" class="search-label name-label">单据名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 批次号 , batchCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('批次号')}" class="search-label batchCode-label">批次号</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('批次号')}" class="search-label batchCode-label">批次号</span><span class="search-colon">:</span></div>
                         <input id="batchCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
@@ -88,24 +88,23 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('仓库')}" class="search-label warehouseId-label">仓库</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('仓库')}" class="search-label warehouseId-label">仓库</span><span class="search-colon">:</span></div>
                         <div id="warehouseId" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 供应商 , supplierName ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('供应商')}" class="search-label supplierName-label">供应商</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('供应商')}" class="search-label supplierName-label">供应商</span><span class="search-colon">:</span></div>
                         <input id="supplierName" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- 所属公司 , ownCompanyId ,typeName=button, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('所属公司')}" class="search-label ownCompanyId-label">所属公司</span><span class="search-colon">:</span></div>
-                            <input lay-filter="ownCompanyId" id="ownCompanyId" name="ownCompanyId"  type="hidden" class="layui-input"   />
-                            <button id="ownCompanyId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 150px"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择公司')}" th:default-label="${lang.translate('请选择公司')}">按钮文本</span></button>
                     </div>
                     <!-- 接收人 , receiverUserName ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('接收人')}" class="search-label receiverUserName-label">接收人</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('接收人')}" class="search-label receiverUserName-label">接收人</span><span class="search-colon">:</span></div>
                         <input id="receiverUserName" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 
@@ -148,6 +147,10 @@
 
     <button th:if="${perm.checkAuth('eam_asset_stock_goods_in:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
+    <button th:if="${perm.checkAuth('eam_asset_stock_goods_in:for-approval')}"class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" data-id="{{d.id}}"><span th:text="${lang.translate('送审')}">送审</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_stock_goods_in:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认')}">确认</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_stock_goods_in:revoke')}"class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" data-id="{{d.id}}"><span th:text="${lang.translate('撤销')}">撤销</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_stock_goods_in:bill')}"class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" data-id="{{d.id}}"><span th:text="${lang.translate('单据')}">单据</span></button>
 
 </script>
 
@@ -159,6 +162,8 @@
 
     // OWNER_TYPE
     var OWNER_TYPE = [[${ownerType}]] ;
+    // APPROVAL_REQUIRED
+    var APPROVAL_REQUIRED = [[${approvalRequired}]] ;
 
 </script>
 

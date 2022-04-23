@@ -1,7 +1,7 @@
 /**
  * 库存物品单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 21:20:19
+ * @since 2022-04-23 07:42:40
  */
 
 function FormPage() {
@@ -113,19 +113,23 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "stockType",
 			radio: true,
-			filterable: false,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("stockType",data.arr,data.change,data.isAdd);
 				},1);
 			},
 			//转换数据
+			searchField: "label", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
+					defaultIndexs = "0".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;
@@ -156,7 +160,7 @@ function FormPage() {
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
+					defaultIndexs = "0".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;
@@ -197,6 +201,7 @@ function FormPage() {
 		laydate.render({
 			elem: '#purchaseDate',
 			format:"yyyy-MM-dd",
+			value:$('#purchaseDate').val()?$('#purchaseDate').val():new Date(),
 			trigger:"click",
 			done: function(value, date, endDate){
 				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("purchaseDate",value, date, endDate);
@@ -205,6 +210,7 @@ function FormPage() {
 		laydate.render({
 			elem: '#businessDate',
 			format:"yyyy-MM-dd",
+			value:$('#businessDate').val()?$('#businessDate').val():new Date(),
 			trigger:"click",
 			done: function(value, date, endDate){
 				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("businessDate",value, date, endDate);
@@ -418,6 +424,22 @@ function FormPage() {
 				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(ownCompanyIdDialogOptions);
+		});
+		// 请选择人员对话框
+		$("#originatorId-button").click(function(){
+				var originatorIdDialogOptions={
+				field:"originatorId",
+				formData:getFormData(),
+				inputEl:$("#originatorId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseEmployee(originatorIdDialogOptions);
 		});
 
 	    //关闭窗口

@@ -22,8 +22,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 库存物品单
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 21:20:17
- * @sign BBAEF3D7357641B62EC27BCE3B3FD217
+ * @since 2022-04-23 07:42:39
+ * @sign A20A2FBD9A7F33863B959EE6721ECD20
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -279,25 +279,13 @@ public class AssetStockGoodsIn extends Entity {
 	 * 物品：物品
 	*/
 	@ApiModelProperty(required = false,value="物品" , notes = "物品")
-	private List<GoodsStock> goodStockList;
+	private List<GoodsStock> goodsList;
 	
 	/**
 	 * 物品：物品
 	*/
 	@ApiModelProperty(required = false,value="物品" , notes = "物品")
-	private List<String> goodStockIds;
-	
-	/**
-	 * 物品：物品
-	*/
-	@ApiModelProperty(required = false,value="物品" , notes = "物品")
-	private List<GoodsStock> goodStockTmpList;
-	
-	/**
-	 * 物品：物品
-	*/
-	@ApiModelProperty(required = false,value="物品" , notes = "物品")
-	private List<String> goodStockTmpIds;
+	private List<String> goodsIds;
 	
 	/**
 	 * 入库类型：入库类型
@@ -1106,28 +1094,28 @@ public class AssetStockGoodsIn extends Entity {
 	 * 物品
 	 * @return 物品
 	*/
-	public List<GoodsStock> getGoodStockList() {
-		return goodStockList;
+	public List<GoodsStock> getGoodsList() {
+		return goodsList;
 	}
 	
 	/**
 	 * 设置 物品
-	 * @param goodStockList 物品
+	 * @param goodsList 物品
 	 * @return 当前对象
 	*/
-	public AssetStockGoodsIn setGoodStockList(List<GoodsStock> goodStockList) {
-		this.goodStockList=goodStockList;
+	public AssetStockGoodsIn setGoodsList(List<GoodsStock> goodsList) {
+		this.goodsList=goodsList;
 		return this;
 	}
 	
 	/**
 	 * 添加 物品
-	 * @param goodStock 物品
+	 * @param goods 物品
 	 * @return 当前对象
 	*/
-	public AssetStockGoodsIn addGoodStock(GoodsStock goodStock) {
-		if(this.goodStockList==null) goodStockList=new ArrayList<>();
-		this.goodStockList.add(goodStock);
+	public AssetStockGoodsIn addGoods(GoodsStock goods) {
+		if(this.goodsList==null) goodsList=new ArrayList<>();
+		this.goodsList.add(goods);
 		return this;
 	}
 	
@@ -1136,88 +1124,28 @@ public class AssetStockGoodsIn extends Entity {
 	 * 物品
 	 * @return 物品
 	*/
-	public List<String> getGoodStockIds() {
-		return goodStockIds;
+	public List<String> getGoodsIds() {
+		return goodsIds;
 	}
 	
 	/**
 	 * 设置 物品
-	 * @param goodStockIds 物品
+	 * @param goodsIds 物品
 	 * @return 当前对象
 	*/
-	public AssetStockGoodsIn setGoodStockIds(List<String> goodStockIds) {
-		this.goodStockIds=goodStockIds;
+	public AssetStockGoodsIn setGoodsIds(List<String> goodsIds) {
+		this.goodsIds=goodsIds;
 		return this;
 	}
 	
 	/**
 	 * 添加 物品
-	 * @param goodStockId 物品
+	 * @param goodsId 物品
 	 * @return 当前对象
 	*/
-	public AssetStockGoodsIn addGoodStockId(String goodStockId) {
-		if(this.goodStockIds==null) goodStockIds=new ArrayList<>();
-		this.goodStockIds.add(goodStockId);
-		return this;
-	}
-	
-	/**
-	 * 获得 物品<br>
-	 * 物品
-	 * @return 物品
-	*/
-	public List<GoodsStock> getGoodStockTmpList() {
-		return goodStockTmpList;
-	}
-	
-	/**
-	 * 设置 物品
-	 * @param goodStockTmpList 物品
-	 * @return 当前对象
-	*/
-	public AssetStockGoodsIn setGoodStockTmpList(List<GoodsStock> goodStockTmpList) {
-		this.goodStockTmpList=goodStockTmpList;
-		return this;
-	}
-	
-	/**
-	 * 添加 物品
-	 * @param goodStockTmp 物品
-	 * @return 当前对象
-	*/
-	public AssetStockGoodsIn addGoodStockTmp(GoodsStock goodStockTmp) {
-		if(this.goodStockTmpList==null) goodStockTmpList=new ArrayList<>();
-		this.goodStockTmpList.add(goodStockTmp);
-		return this;
-	}
-	
-	/**
-	 * 获得 物品<br>
-	 * 物品
-	 * @return 物品
-	*/
-	public List<String> getGoodStockTmpIds() {
-		return goodStockTmpIds;
-	}
-	
-	/**
-	 * 设置 物品
-	 * @param goodStockTmpIds 物品
-	 * @return 当前对象
-	*/
-	public AssetStockGoodsIn setGoodStockTmpIds(List<String> goodStockTmpIds) {
-		this.goodStockTmpIds=goodStockTmpIds;
-		return this;
-	}
-	
-	/**
-	 * 添加 物品
-	 * @param goodStockTmpId 物品
-	 * @return 当前对象
-	*/
-	public AssetStockGoodsIn addGoodStockTmpId(String goodStockTmpId) {
-		if(this.goodStockTmpIds==null) goodStockTmpIds=new ArrayList<>();
-		this.goodStockTmpIds.add(goodStockTmpId);
+	public AssetStockGoodsIn addGoodsId(String goodsId) {
+		if(this.goodsIds==null) goodsIds=new ArrayList<>();
+		this.goodsIds.add(goodsId);
 		return this;
 	}
 	

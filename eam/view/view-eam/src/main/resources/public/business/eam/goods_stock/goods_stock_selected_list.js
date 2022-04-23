@@ -112,8 +112,8 @@ function ListPage() {
                     ,{ field: 'goodsStockMin', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('库存下限'), templet: function (d) { return templet('goodsStockMin' ,fox.joinLabel(d.goods,"stockMin"),d);}}
                     ,{ field: 'goodsStockSecurity', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('安全库存'), templet: function (d) { return templet('goodsStockSecurity' ,fox.joinLabel(d.goods,"stockSecurity"),d);}}
                     ,{ field: 'batchCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('批次号') , templet: function (d) { return templet('batchCode',d.batchCode,d);}  }
-                    ,{ field: 'ownCompanyId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('所属公司') , templet: function (d) { return templet('ownCompanyId',fox.getProperty(d,["ownerCompany","fullName"]),d);} }
-                    ,{ field: 'useOrgId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('使用组织') , templet: function (d) { return templet('useOrgId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
+                 //   ,{ field: 'ownCompanyId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('所属公司') , templet: function (d) { return templet('ownCompanyId',fox.getProperty(d,["ownerCompany","fullName"]),d);} }
+                //    ,{ field: 'useOrgId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('使用组织') , templet: function (d) { return templet('useOrgId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
                     ,{ field: 'supplierName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('供应商') , templet: function (d) { return templet('supplierName',d.supplierName,d);}  }
                     ,{ field: 'warehouseId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('仓库'), templet: function (d) { return templet('warehouseId' ,fox.joinLabel(d.warehouse,"warehouseName"),d);}}
                    ,{ field: 'goodsBarCode', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('物品条码'), templet: function (d) { return templet('goodsBarCode' ,fox.joinLabel(d.goods,"barCode"),d);}}
@@ -356,7 +356,26 @@ function ListPage() {
             //设置新增是初始化数据
             var data={};
             admin.putTempData('eam-goods-stock-form-data-form-action', "create",true);
-            showEditForm(data);
+
+
+            var queryString="?ownerType="+OWNER_TYPE+"&selectedCode="+SELECTED_CODE+"&ownerCode="+OWNER_CODE+"&ownerTmpId="+OWNER_TMP_ID+"&operType="+OPER_TYPE+"&pageType="+PAGE_TYPE;
+            var top=2
+            var index=admin.popupCenter({
+                title: "选择资产",
+                resize: false,
+                offset: [top,null],
+                area: ["95%","90%"],
+                type: 2,
+                id:"eam-asset-select-data-win",
+                content: '/business/eam/goods_stock/goods_stock_select_tree.html'+queryString,
+                finish: function () {
+                    console.log("select form finish,");
+                    refreshTableData();
+                }
+            });
+            admin.putTempData('eam-asset-select-data-popup-index', index);
+
+
         };
 
         //批量删除按钮点击事件
@@ -459,60 +478,42 @@ function ListPage() {
      */
     function showEditForm(data) {
 
-        var queryString="?ownerType="+OWNER_TYPE+"&selectedCode="+SELECTED_CODE+"&ownerCode="+OWNER_CODE+"&ownerTmpId="+OWNER_TMP_ID+"&operType="+OPER_TYPE+"&pageType="+PAGE_TYPE;
+        if(window.pageExt.list.beforeEdit) {
+            var doNext=window.pageExt.list.beforeEdit(data);
+            if(!doNext) return;
+        }
+        var action=admin.getTempData('eam-goods-stock-form-data-form-action');
+        var queryString="";
+        if(data && data.id) queryString='id=' + data.id;
+        if(window.pageExt.list.makeFormQueryString) {
+            queryString=window.pageExt.list.makeFormQueryString(data,queryString,action);
+        }
+        admin.putTempData('eam-goods-stock-form-data', data);
+        var area=admin.getTempData('eam-goods-stock-form-area');
+        var height= (area && area.height) ? area.height : ($(window).height()*0.6);
+        var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
+        var title = fox.translate('库存物品');
+        if(action=="create") title=fox.translate('添加')+title;
+        else if(action=="edit") title=fox.translate('修改')+title;
+        else if(action=="view") title=fox.translate('查看')+title;
 
-        var top=2
-        var index=admin.popupCenter({
-            title: "选择资产",
+        admin.popupCenter({
+            title: title,
             resize: false,
             offset: [top,null],
-            area: ["95%","90%"],
+            area: ["85%",height+"px"],
             type: 2,
-            id:"eam-asset-select-data-win",
-            content: '/business/eam/goods_stock/goods_stock_select_tree.html'+queryString,
+            id:"eam-goods-stock-form-data-win",
+            content: '/business/eam/goods_stock/goods_stock_selected_form.html' + (queryString?("?"+queryString):""),
             finish: function () {
-                console.log("select form finish,");
-                refreshTableData();
+                if(action=="create") {
+                    refreshTableData();
+                }
+                if(action=="edit") {
+                    false?refreshTableData():refreshRowData(data,true);
+                }
             }
         });
-        admin.putTempData('eam-asset-select-data-popup-index', index);
-
-        // if(window.pageExt.list.beforeEdit) {
-        //     var doNext=window.pageExt.list.beforeEdit(data);
-        //     if(!doNext) return;
-        // }
-        // var action=admin.getTempData('eam-goods-stock-form-data-form-action');
-        // var queryString="";
-        // if(data && data.id) queryString='id=' + data.id;
-        // if(window.pageExt.list.makeFormQueryString) {
-        //     queryString=window.pageExt.list.makeFormQueryString(data,queryString,action);
-        // }
-        // admin.putTempData('eam-goods-stock-form-data', data);
-        // var area=admin.getTempData('eam-goods-stock-form-area');
-        // var height= (area && area.height) ? area.height : ($(window).height()*0.6);
-        // var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-        // var title = fox.translate('库存物品');
-        // if(action=="create") title=fox.translate('添加')+title;
-        // else if(action=="edit") title=fox.translate('修改')+title;
-        // else if(action=="view") title=fox.translate('查看')+title;
-        //
-        // admin.popupCenter({
-        //     title: title,
-        //     resize: false,
-        //     offset: [top,null],
-        //     area: ["85%",height+"px"],
-        //     type: 2,
-        //     id:"eam-goods-stock-form-data-win",
-        //     content: '/business/eam/goods_stock/goods_stock_form.html' + (queryString?("?"+queryString):""),
-        //     finish: function () {
-        //         if(action=="create") {
-        //             refreshTableData();
-        //         }
-        //         if(action=="edit") {
-        //             false?refreshTableData():refreshRowData(data,true);
-        //         }
-        //     }
-        // });
     };
 
     window.module={

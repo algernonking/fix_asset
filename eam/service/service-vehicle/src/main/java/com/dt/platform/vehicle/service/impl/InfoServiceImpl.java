@@ -303,6 +303,7 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 	ExcelWriter ew=new ExcelWriter();
 	ExcelStructure es=buildExcelStructure(true);
 	//ExcelStructure es1=ExcelStructure.parse(rs,true);
+
 	Sheet sheet=ew.fillSheet(rs, tm.getShortTopic()+"清单",es);
 	ew.setWorkBookName(tm.getShortTopic()+"清单-"+ DateUtil.format(new Date(),"yyyyMMdd-HHmmss") +".xlsx");
 	Logger.info("导出 "+this.table()+" 数据 "+rs.size() +" 行");

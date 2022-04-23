@@ -1751,7 +1751,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		InputStream inputStream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
 
 		ExcelStructure es=new ExcelStructure();
-		es.setDataColumnBegin(0);
+	//	es.setDataColumnBegin(0);
 		es.setDataRowBegin(2);
 
 		Short lastNum=0;
@@ -1782,7 +1782,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 							BeanNameUtil.instance().depart(asset_column):
 							EnumUtil.parseByCode(AssetDataExportColumnEnum.class,asset_column).text();
 
-					charIndex=ExcelStructure.toExcel26(i);
+				//	charIndex=ExcelStructure.toExcel26(i);
 					System.out.println(charIndex+","+secondRow.getCell(i)  +","+ firstRow.getCell(i)+","+asset_column+","+rAssetColumn);
 					es.addColumn(charIndex,rAssetColumn,firstRow.getCell(i).toString(), ExcelColumn.STRING_CELL_READER);
 				}
@@ -1803,7 +1803,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		String charIndex="";
 		for(int i=0;i<list.size();i++){
 			CatalogAttribute attribute=list.get(i);
-			charIndex=ExcelStructure.toExcel26(lastNum+i);
+		//	charIndex=ExcelStructure.toExcel26(lastNum+i);
 			System.out.println(charIndex+",自定义属性:"+attribute.getShortName()+","+ attribute.getField());
 			es.addColumn(charIndex,attribute.getField(),attribute.getShortName(), ExcelColumn.STRING_CELL_READER);
 

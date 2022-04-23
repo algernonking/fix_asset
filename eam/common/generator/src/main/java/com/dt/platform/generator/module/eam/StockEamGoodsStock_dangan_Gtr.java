@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.generator.config.Config;
@@ -107,7 +108,7 @@ public class StockEamGoodsStock_dangan_Gtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.STORAGE_DATE).table().disable();
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.AMOUNT).table().disable();
 
-
+        cfg.view().field(EAMTables.EAM_GOODS_STOCK.STATUS).table().disable();
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_GOODS_STOCK.MANUFACTURER_ID,
@@ -131,6 +132,8 @@ public class StockEamGoodsStock_dangan_Gtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.PICTURE_ID)
                 .form().label("图片").upload().acceptSingleImage().maxFileCount(1).displayFileName(false);
 
+        cfg.view().field(EAMTables.EAM_GOODS_STOCK.STATUS).form()
+                .label("办理状态").selectBox().enumType(AssetHandleStatusEnum.class);
 
         cfg.view().field(GoodsStockMeta.GOODS_MODEL)
                 .basic().label("物品型号")
@@ -192,7 +195,7 @@ public class StockEamGoodsStock_dangan_Gtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillWith(GoodsMeta.MANUFACTURER).muliti(false);
 
-        cfg.view().field(EAMTables.EAM_GOODS_STOCK.STATUS).basic().label("状态")
+        cfg.view().field(EAMTables.EAM_GOODS_STOCK.GOODS_STATUS).basic().label("状态")
                 .form().validate().required().form().selectBox().enumType(StatusEnableEnum.class);
 
 
@@ -233,11 +236,21 @@ public class StockEamGoodsStock_dangan_Gtr extends BaseCodeGenerator {
 
 
         cfg.view().formWindow().bottomSpace(250);
-        cfg.view().formWindow().width("85%");
+        cfg.view().formWindow().width("95%");
+//                cfg.view().form().addGroup(null,
+//                new Object[] {
+//                        EAMTables.EAM_GOODS_STOCK.STOCK_IN_NUMBER,
+//
+//
+//                }, new Object[] {
+//                        EAMTables.EAM_GOODS_STOCK.AMOUNT,
+//                }
+//
+//        );
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_GOODS_STOCK.CATEGORY_ID,
-                        EAMTables.EAM_GOODS_STOCK.STATUS,
+                        EAMTables.EAM_GOODS_STOCK.GOODS_STATUS,
                         EAMTables.EAM_GOODS_STOCK.UNIT,
                 }, new Object[] {
                         EAMTables.EAM_GOODS_STOCK.CODE,

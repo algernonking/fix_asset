@@ -1,5 +1,9 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetStockGoodsTypeEnum;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
+import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -42,6 +46,20 @@ public class AssetStockGoodsInPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_stock_goods_in_list.html")
 	public String list(Model model,HttpServletRequest request,String ownerType) {
+
+		String operCode="";
+		if(AssetStockGoodsTypeEnum.STOCK.code().equals(ownerType)){
+			operCode=AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code();
+		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(ownerType)){
+			operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code();
+
+		}
+		boolean approvalRequired=true;
+		Result approvalResult= OperateServiceProxy.api().approvalRequired(operCode);
+		if(approvalResult.isSuccess()){
+			approvalRequired= (boolean) approvalResult.getData();
+		}
+		model.addAttribute("approvalRequired",approvalRequired);
 		model.addAttribute("ownerType",ownerType);
 		return prefix+"/asset_stock_goods_in_list";
 	}

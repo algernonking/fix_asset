@@ -1,7 +1,7 @@
 /**
  * 库存调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 06:06:58
+ * @since 2022-04-23 07:42:08
  */
 
 layui.config({
@@ -150,6 +150,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
+        forApproval:function (data){
+            console.log('forApproval',data);
+        },
+        confirmData:function (data){
+            console.log('confirmData',data);
+        },
+        revokeData:function (data){
+            console.log('revokeData',data);
+        },
+        downloadBill:function (data){
+            console.log('downloadBill',data);
+        },
         /**
          * 末尾执行
          */
@@ -234,6 +246,17 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
+        /**
+         *  加载 物品列表
+         */
+        goodsSelectList:function (ifr,win,data) {
+            // debugger
+            console.log("goodsSelectList",ifr,data);
+            //设置 iframe 高度
+            ifr.height("400px");
+            //设置地址
+            win.location="/business/system/node/node_list.html?id="+data.id;
+        },
         /**
          * 文件上传组件回调
          *  event 类型包括：

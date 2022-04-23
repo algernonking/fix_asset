@@ -16,7 +16,7 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 21:20:17
+ * @since 2022-04-23 07:42:39
  * @sign 67D0182CEA0E77C92313F8BA2C5DBE15
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -516,42 +516,22 @@ public class AssetStockGoodsInVOMeta extends AssetStockGoodsInMeta {
 	/**
 	 * 物品 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.GoodsStock
 	*/
-	public static final String GOOD_STOCK_LIST="goodStockList";
+	public static final String GOODS_LIST="goodsList";
 	
 	/**
 	 * 物品 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.GoodsStock
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsInVO,com.dt.platform.domain.eam.GoodsStock> GOOD_STOCK_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsInVO.class ,GOOD_STOCK_LIST, java.util.List.class, "物品", "物品", com.dt.platform.domain.eam.GoodsStock.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsInVO,com.dt.platform.domain.eam.GoodsStock> GOODS_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsInVO.class ,GOODS_LIST, java.util.List.class, "物品", "物品", com.dt.platform.domain.eam.GoodsStock.class, null);
 	
 	/**
 	 * 物品 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String GOOD_STOCK_IDS="goodStockIds";
+	public static final String GOODS_IDS="goodsIds";
 	
 	/**
 	 * 物品 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsInVO,java.lang.String> GOOD_STOCK_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsInVO.class ,GOOD_STOCK_IDS, java.util.List.class, "物品", "物品", java.lang.String.class, null);
-	
-	/**
-	 * 物品 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.GoodsStock
-	*/
-	public static final String GOOD_STOCK_TMP_LIST="goodStockTmpList";
-	
-	/**
-	 * 物品 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.GoodsStock
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsInVO,com.dt.platform.domain.eam.GoodsStock> GOOD_STOCK_TMP_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsInVO.class ,GOOD_STOCK_TMP_LIST, java.util.List.class, "物品", "物品", com.dt.platform.domain.eam.GoodsStock.class, null);
-	
-	/**
-	 * 物品 , 集合类型: LIST , 类型: java.lang.String
-	*/
-	public static final String GOOD_STOCK_TMP_IDS="goodStockTmpIds";
-	
-	/**
-	 * 物品 , 集合类型: LIST , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsInVO,java.lang.String> GOOD_STOCK_TMP_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsInVO.class ,GOOD_STOCK_TMP_IDS, java.util.List.class, "物品", "物品", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsInVO,java.lang.String> GOODS_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsInVO.class ,GOODS_IDS, java.util.List.class, "物品", "物品", java.lang.String.class, null);
 	
 	/**
 	 * 入库类型 , 类型: org.github.foxnic.web.domain.system.DictItem
@@ -626,7 +606,7 @@ public class AssetStockGoodsInVOMeta extends AssetStockGoodsInMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , OWNER_TYPE , BUSINESS_CODE , PROC_ID , STATUS , NAME , BATCH_CODE , STOCK_TYPE , WAREHOUSE_ID , MANAGER_ID , RECEIVER_USER_NAME , AMOUNT , OWN_COMPANY_ID , SUPPLIER_NAME , SOURCE_ID , PURCHASE_DATE , BUSINESS_DATE , ATTACH_ID , NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , GOOD_STOCK_LIST , GOOD_STOCK_IDS , GOOD_STOCK_TMP_LIST , GOOD_STOCK_TMP_IDS , STOCK_TYPE_DICT , OWNER_COMPANY , USE_ORGANIZATION , WAREHOUSE , SOURCE , ORIGINATOR , MANAGER };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , OWNER_TYPE , BUSINESS_CODE , PROC_ID , STATUS , NAME , BATCH_CODE , STOCK_TYPE , WAREHOUSE_ID , MANAGER_ID , RECEIVER_USER_NAME , AMOUNT , OWN_COMPANY_ID , SUPPLIER_NAME , SOURCE_ID , PURCHASE_DATE , BUSINESS_DATE , ATTACH_ID , NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , GOODS_LIST , GOODS_IDS , STOCK_TYPE_DICT , OWNER_COMPANY , USE_ORGANIZATION , WAREHOUSE , SOURCE , ORIGINATOR , MANAGER };
 	
 	/**
 	 * 代理类
@@ -1177,45 +1157,23 @@ public class AssetStockGoodsInVOMeta extends AssetStockGoodsInMeta {
 		
 		/**
 		 * 设置 物品
-		 * @param goodStockList 物品
+		 * @param goodsList 物品
 		 * @return 当前对象
 		*/
-		public AssetStockGoodsIn setGoodStockList(List<GoodsStock> goodStockList) {
-			super.change(GOOD_STOCK_LIST,super.getGoodStockList(),goodStockList);
-			super.setGoodStockList(goodStockList);
+		public AssetStockGoodsIn setGoodsList(List<GoodsStock> goodsList) {
+			super.change(GOODS_LIST,super.getGoodsList(),goodsList);
+			super.setGoodsList(goodsList);
 			return this;
 		}
 		
 		/**
 		 * 设置 物品
-		 * @param goodStockIds 物品
+		 * @param goodsIds 物品
 		 * @return 当前对象
 		*/
-		public AssetStockGoodsIn setGoodStockIds(List<String> goodStockIds) {
-			super.change(GOOD_STOCK_IDS,super.getGoodStockIds(),goodStockIds);
-			super.setGoodStockIds(goodStockIds);
-			return this;
-		}
-		
-		/**
-		 * 设置 物品
-		 * @param goodStockTmpList 物品
-		 * @return 当前对象
-		*/
-		public AssetStockGoodsIn setGoodStockTmpList(List<GoodsStock> goodStockTmpList) {
-			super.change(GOOD_STOCK_TMP_LIST,super.getGoodStockTmpList(),goodStockTmpList);
-			super.setGoodStockTmpList(goodStockTmpList);
-			return this;
-		}
-		
-		/**
-		 * 设置 物品
-		 * @param goodStockTmpIds 物品
-		 * @return 当前对象
-		*/
-		public AssetStockGoodsIn setGoodStockTmpIds(List<String> goodStockTmpIds) {
-			super.change(GOOD_STOCK_TMP_IDS,super.getGoodStockTmpIds(),goodStockTmpIds);
-			super.setGoodStockTmpIds(goodStockTmpIds);
+		public AssetStockGoodsIn setGoodsIds(List<String> goodsIds) {
+			super.change(GOODS_IDS,super.getGoodsIds(),goodsIds);
+			super.setGoodsIds(goodsIds);
 			return this;
 		}
 		

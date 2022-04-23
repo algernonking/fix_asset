@@ -18,7 +18,7 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 12:25:21
+ * @since 2022-04-22 06:25:05
  * @sign E61DDEDD383FD9454C0576D5BA324863
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -176,6 +176,26 @@ public class GoodsStockVOMeta extends GoodsStockMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.GoodsStockVO,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.GoodsStockVO.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
 	
 	/**
+	 * 办理状态 , 类型: java.lang.String
+	*/
+	public static final String STATUS="status";
+	
+	/**
+	 * 办理状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.GoodsStockVO,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.GoodsStockVO.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
+	
+	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final String GOODS_STATUS="goodsStatus";
+	
+	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.GoodsStockVO,java.lang.String> GOODS_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.GoodsStockVO.class ,GOODS_STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
+	
+	/**
 	 * 资产分类 , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_ID="categoryId";
@@ -184,16 +204,6 @@ public class GoodsStockVOMeta extends GoodsStockMeta {
 	 * 资产分类 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.GoodsStockVO,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.GoodsStockVO.class ,CATEGORY_ID, java.lang.String.class, "资产分类", "资产分类", java.lang.String.class, null);
-	
-	/**
-	 * 状态 , 类型: java.lang.String
-	*/
-	public static final String STATUS="status";
-	
-	/**
-	 * 状态 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.GoodsStockVO,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.GoodsStockVO.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
 	
 	/**
 	 * 物品名称 , 类型: java.lang.String
@@ -738,7 +748,7 @@ public class GoodsStockVOMeta extends GoodsStockMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , OWNER_ID , OWNER_TMP_ID , OWNER_CODE , OWNER_TYPE , BUSINESS_CODE , CATEGORY_ID , STATUS , NAME , MODEL , CODE , BAR_CODE , MANUFACTURER_ID , BRAND_ID , UNIT_PRICE , UNIT , STOCK_MIN , STOCK_MAX , STOCK_SECURITY , PICTURE_ID , NOTES , BATCH_CODE , OWN_COMPANY_ID , USE_ORG_ID , SUPPLIER_NAME , WAREHOUSE_ID , SOURCE_ID , GOODS_ID , STOCK_IN_NUMBER , STOCK_CUR_NUMBER , AMOUNT , MANAGER_ID , STORAGE_DATE , ORIGINATOR_ID , SELECTED_CODE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , MANUFACTURER , BRAND , GOODS , OWNER_COMPANY , USE_ORGANIZATION , WAREHOUSE , SOURCE , MANAGER , ORIGINATOR , GOODS_MODEL , GOODS_NAME , GOODS_CATEGORY_NAME , GOODS_UNIT , GOODS_CODE , GOODS_BAR_CODE , GOODS_STOCK_MAX , GOODS_STOCK_MIN , GOODS_STOCK_SECURITY };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , OWNER_ID , OWNER_TMP_ID , OWNER_CODE , OWNER_TYPE , BUSINESS_CODE , STATUS , GOODS_STATUS , CATEGORY_ID , NAME , MODEL , CODE , BAR_CODE , MANUFACTURER_ID , BRAND_ID , UNIT_PRICE , UNIT , STOCK_MIN , STOCK_MAX , STOCK_SECURITY , PICTURE_ID , NOTES , BATCH_CODE , OWN_COMPANY_ID , USE_ORG_ID , SUPPLIER_NAME , WAREHOUSE_ID , SOURCE_ID , GOODS_ID , STOCK_IN_NUMBER , STOCK_CUR_NUMBER , AMOUNT , MANAGER_ID , STORAGE_DATE , ORIGINATOR_ID , SELECTED_CODE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , MANUFACTURER , BRAND , GOODS , OWNER_COMPANY , USE_ORGANIZATION , WAREHOUSE , SOURCE , MANAGER , ORIGINATOR , GOODS_MODEL , GOODS_NAME , GOODS_CATEGORY_NAME , GOODS_UNIT , GOODS_CODE , GOODS_BAR_CODE , GOODS_STOCK_MAX , GOODS_STOCK_MIN , GOODS_STOCK_SECURITY };
 	
 	/**
 	 * 代理类
@@ -914,6 +924,28 @@ public class GoodsStockVOMeta extends GoodsStockMeta {
 		}
 		
 		/**
+		 * 设置 办理状态
+		 * @param status 办理状态
+		 * @return 当前对象
+		*/
+		public GoodsStock setStatus(String status) {
+			super.change(STATUS,super.getStatus(),status);
+			super.setStatus(status);
+			return this;
+		}
+		
+		/**
+		 * 设置 状态
+		 * @param goodsStatus 状态
+		 * @return 当前对象
+		*/
+		public GoodsStock setGoodsStatus(String goodsStatus) {
+			super.change(GOODS_STATUS,super.getGoodsStatus(),goodsStatus);
+			super.setGoodsStatus(goodsStatus);
+			return this;
+		}
+		
+		/**
 		 * 设置 资产分类
 		 * @param categoryId 资产分类
 		 * @return 当前对象
@@ -921,17 +953,6 @@ public class GoodsStockVOMeta extends GoodsStockMeta {
 		public GoodsStock setCategoryId(String categoryId) {
 			super.change(CATEGORY_ID,super.getCategoryId(),categoryId);
 			super.setCategoryId(categoryId);
-			return this;
-		}
-		
-		/**
-		 * 设置 状态
-		 * @param status 状态
-		 * @return 当前对象
-		*/
-		public GoodsStock setStatus(String status) {
-			super.change(STATUS,super.getStatus(),status);
-			super.setStatus(status);
 			return this;
 		}
 		

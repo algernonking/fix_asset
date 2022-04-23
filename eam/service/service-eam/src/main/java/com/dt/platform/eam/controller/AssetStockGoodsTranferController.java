@@ -33,6 +33,9 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsTranferMeta;
+import com.dt.platform.domain.eam.GoodsStock;
+import com.dt.platform.domain.eam.Warehouse;
+import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 库存调拨 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 06:06:58
+ * @since 2022-04-23 07:42:08
 */
 
 @Api(tags = "库存调拨")
@@ -69,18 +72,25 @@ public class AssetStockGoodsTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_TYPE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_OUT_ID , value = "调出仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_IN_ID , value = "调入仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetStockGoodsTranferServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -135,18 +145,25 @@ public class AssetStockGoodsTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_TYPE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_OUT_ID , value = "调出仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_IN_ID , value = "调入仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetStockGoodsTranferVOMeta.PAGE_INDEX , AssetStockGoodsTranferVOMeta.PAGE_SIZE , AssetStockGoodsTranferVOMeta.SEARCH_FIELD , AssetStockGoodsTranferVOMeta.FUZZY_FIELD , AssetStockGoodsTranferVOMeta.SEARCH_VALUE , AssetStockGoodsTranferVOMeta.DIRTY_FIELDS , AssetStockGoodsTranferVOMeta.SORT_FIELD , AssetStockGoodsTranferVOMeta.SORT_TYPE , AssetStockGoodsTranferVOMeta.IDS } )
 	@NotNull(name = AssetStockGoodsTranferVOMeta.ID)
@@ -167,18 +184,25 @@ public class AssetStockGoodsTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_TYPE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_OUT_ID , value = "调出仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_IN_ID , value = "调入仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetStockGoodsTranferVOMeta.PAGE_INDEX , AssetStockGoodsTranferVOMeta.PAGE_SIZE , AssetStockGoodsTranferVOMeta.SEARCH_FIELD , AssetStockGoodsTranferVOMeta.FUZZY_FIELD , AssetStockGoodsTranferVOMeta.SEARCH_VALUE , AssetStockGoodsTranferVOMeta.DIRTY_FIELDS , AssetStockGoodsTranferVOMeta.SORT_FIELD , AssetStockGoodsTranferVOMeta.SORT_TYPE , AssetStockGoodsTranferVOMeta.IDS } )
 	@NotNull(name = AssetStockGoodsTranferVOMeta.ID)
@@ -204,6 +228,12 @@ public class AssetStockGoodsTranferController extends SuperController {
 	public Result<AssetStockGoodsTranfer> getById(String id) {
 		Result<AssetStockGoodsTranfer> result=new Result<>();
 		AssetStockGoodsTranfer assetStockGoodsTranfer=assetStockGoodsTranferService.getById(id);
+		// join 关联的对象
+		assetStockGoodsTranferService.dao().fill(assetStockGoodsTranfer)
+			.with("originator")
+			.with(AssetStockGoodsTranferMeta.WAREHOUSE_IN)
+			.with(AssetStockGoodsTranferMeta.WAREHOUSE_OUT)
+			.execute();
 		result.success(true).data(assetStockGoodsTranfer);
 		return result;
 	}
@@ -238,18 +268,25 @@ public class AssetStockGoodsTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_TYPE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_OUT_ID , value = "调出仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_IN_ID , value = "调入仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetStockGoodsTranferVOMeta.PAGE_INDEX , AssetStockGoodsTranferVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetStockGoodsTranferServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -271,18 +308,25 @@ public class AssetStockGoodsTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_CODE , value = "库存所属" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.OWNER_TYPE , value = "库存所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_OUT_ID , value = "调出仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.WAREHOUSE_IN_ID , value = "调入仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetStockGoodsTranferServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -290,6 +334,12 @@ public class AssetStockGoodsTranferController extends SuperController {
 	public Result<PagedList<AssetStockGoodsTranfer>> queryPagedList(AssetStockGoodsTranferVO sample) {
 		Result<PagedList<AssetStockGoodsTranfer>> result=new Result<>();
 		PagedList<AssetStockGoodsTranfer> list=assetStockGoodsTranferService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// join 关联的对象
+		assetStockGoodsTranferService.dao().fill(list)
+			.with("originator")
+			.with(AssetStockGoodsTranferMeta.WAREHOUSE_IN)
+			.with(AssetStockGoodsTranferMeta.WAREHOUSE_OUT)
+			.execute();
 		result.success(true).data(list);
 		return result;
 	}

@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 库存物品
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 12:25:21
- * @sign 144A32F0103252CA3F112160EBDA141F
+ * @since 2022-04-22 06:25:05
+ * @sign 2DFE66069CED21D69A620A84C5C573AB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -70,16 +70,22 @@ public class GoodsStock extends Entity {
 	private String businessCode;
 	
 	/**
-	 * 资产分类：资产分类
+	 * 办理状态：办理状态
 	*/
-	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
-	private String categoryId;
+	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
+	private String status;
 	
 	/**
 	 * 状态：状态
 	*/
 	@ApiModelProperty(required = false,value="状态" , notes = "状态")
-	private String status;
+	private String goodsStatus;
+	
+	/**
+	 * 资产分类：资产分类
+	*/
+	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
+	private String categoryId;
 	
 	/**
 	 * 物品名称：物品名称
@@ -520,6 +526,44 @@ public class GoodsStock extends Entity {
 	}
 	
 	/**
+	 * 获得 办理状态<br>
+	 * 办理状态
+	 * @return 办理状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 办理状态
+	 * @param status 办理状态
+	 * @return 当前对象
+	*/
+	public GoodsStock setStatus(String status) {
+		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public String getGoodsStatus() {
+		return goodsStatus;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param goodsStatus 状态
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsStatus(String goodsStatus) {
+		this.goodsStatus=goodsStatus;
+		return this;
+	}
+	
+	/**
 	 * 获得 资产分类<br>
 	 * 资产分类
 	 * @return 资产分类
@@ -535,25 +579,6 @@ public class GoodsStock extends Entity {
 	*/
 	public GoodsStock setCategoryId(String categoryId) {
 		this.categoryId=categoryId;
-		return this;
-	}
-	
-	/**
-	 * 获得 状态<br>
-	 * 状态
-	 * @return 状态
-	*/
-	public String getStatus() {
-		return status;
-	}
-	
-	/**
-	 * 设置 状态
-	 * @param status 状态
-	 * @return 当前对象
-	*/
-	public GoodsStock setStatus(String status) {
-		this.status=status;
 		return this;
 	}
 	

@@ -6,10 +6,7 @@ import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.GoodsStock;
 import com.dt.platform.domain.eam.Supplier;
 import com.dt.platform.domain.eam.Warehouse;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsInMeta;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsMeta;
-import com.dt.platform.domain.eam.meta.SupplierMeta;
-import com.dt.platform.domain.eam.meta.WarehouseMeta;
+import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.eam.page.AssetStockGoodsInPageController;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetStockGoodsInServiceProxy;
@@ -34,11 +31,9 @@ public class StockGoodsInGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.ID).basic().hidden(true);
 
 
-        cfg.getPoClassFile().addListProperty(GoodsStock.class,"goodStockList","物品","物品");
-        cfg.getPoClassFile().addListProperty(String.class,"goodStockIds","物品","物品");
+        cfg.getPoClassFile().addListProperty(GoodsStock.class,"goodsList","物品","物品");
+        cfg.getPoClassFile().addListProperty(String.class,"goodsIds","物品","物品");
 
-        cfg.getPoClassFile().addListProperty(GoodsStock.class,"goodStockTmpList","物品","物品");
-        cfg.getPoClassFile().addListProperty(String.class,"goodStockTmpIds","物品","物品");
 
 
 
@@ -69,14 +64,18 @@ public class StockGoodsInGtr extends BaseCodeGenerator {
                 new Object[]{
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.WAREHOUSE_ID,
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.SUPPLIER_NAME,
-                        EAMTables.EAM_ASSET_STOCK_GOODS_IN.OWN_COMPANY_ID,
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.RECEIVER_USER_NAME,
+                        EAMTables.EAM_ASSET_STOCK_GOODS_IN.NOTES,
 
                 }
         );
 
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth+60);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth+60);
 
         cfg.view().list().disableBatchDelete();
 
@@ -101,11 +100,12 @@ public class StockGoodsInGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.NEXT_APPROVER_NAMES).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.APPROVAL_OPINION).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.ATTACH_ID).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.ORIGINATOR_ID).table().disable(true);
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.OWN_COMPANY_ID).table().disable(true);
+//        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.ORIGINATOR_ID).table().disable(true);
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.BUSINESS_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
-        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.PURCHASE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.BUSINESS_DATE).form().dateInput().defaultNow().format("yyyy-MM-dd").search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.PURCHASE_DATE).form().dateInput().defaultNow().format("yyyy-MM-dd").search().range();
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.NOTES).form().textArea().height(60);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.ATTACH_ID)
@@ -114,8 +114,8 @@ public class StockGoodsInGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.WAREHOUSE_ID)
                 .basic().label("仓库")
-                .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
-                .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillWith(AssetStockGoodsInMeta.WAREHOUSE).muliti(false);
+                .form().validate().required().form().selectBox().queryApi(WarehouseServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillWith(AssetStockGoodsInMeta.WAREHOUSE).muliti(false).defaultIndex(0);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.SOURCE_ID)
@@ -128,22 +128,27 @@ public class StockGoodsInGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.STOCK_TYPE)
                 .basic().label("单据类型")
-                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_stock_in_type")
-                .paging(false).filter(false).toolbar(false)
+                .form().validate().required().form().selectBox().queryApi(DictItemServiceProxy.QUERY_PAGED_LIST+"?dictCode=eam_stock_in_type")
+                .paging(true).filter(true).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillWith(AssetStockGoodsInMeta.STOCK_TYPE_DICT).muliti(false);
+                fillWith(AssetStockGoodsOutMeta.STOCK_TYPE_DICT).muliti(false).defaultIndex(0);
+
+
+
 
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.OWN_COMPANY_ID)
                 .form().button().chooseCompany(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.OWN_COMPANY_ID).table().fillBy("ownerCompany","fullName");
 
-        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.STATUS).basic().label("状态")
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.STATUS).basic().label("办理状态")
                 .form().selectBox().enumType(AssetHandleStatusEnum.class);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.ORIGINATOR_ID).form()
+                .button().chooseEmployee(true);
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.MANAGER_ID).table().fillBy("manager","nameAndBadge");
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_IN.MANAGER_ID).form()
@@ -153,6 +158,17 @@ public class StockGoodsInGtr extends BaseCodeGenerator {
         cfg.view().list().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
         cfg.view().form().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
 
+        cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","APPROVAL_REQUIRED");
+
+
+
+
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button","eam_asset_stock_goods_in:for-approval");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button","eam_asset_stock_goods_in:confirm");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button","eam_asset_stock_goods_in:revoke");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button","eam_asset_stock_goods_in:bill");
+
+
 
         cfg.view().formWindow().width("95%");
         cfg.view().formWindow().bottomSpace(20);
@@ -161,30 +177,22 @@ public class StockGoodsInGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.NAME,
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.STOCK_TYPE,
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.RECEIVER_USER_NAME,
+                        EAMTables.EAM_ASSET_STOCK_GOODS_IN.MANAGER_ID,
                 },
                 new Object[] {
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.WAREHOUSE_ID,
-                        EAMTables.EAM_ASSET_STOCK_GOODS_IN.OWN_COMPANY_ID,
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.SUPPLIER_NAME,
+                        EAMTables.EAM_ASSET_STOCK_GOODS_IN.BATCH_CODE,
+                        EAMTables.EAM_ASSET_STOCK_GOODS_IN.AMOUNT,
                 },
                 new Object[] {
+                     //   EAMTables.EAM_ASSET_STOCK_GOODS_IN.OWN_COMPANY_ID,
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.SOURCE_ID,
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.BUSINESS_DATE,
-                }
-        );
-
-        cfg.view().form().addGroup(null,
-                new Object[] {
-                        EAMTables.EAM_ASSET_STOCK_GOODS_IN.MANAGER_ID,
-
-                },
-                new Object[] {
                         EAMTables.EAM_ASSET_STOCK_GOODS_IN.PURCHASE_DATE,
-                },
-                new Object[] {
-                        EAMTables.EAM_ASSET_STOCK_GOODS_IN.AMOUNT,
                 }
         );
+
 
         cfg.view().form().addGroup(null,
                 new Object[] {

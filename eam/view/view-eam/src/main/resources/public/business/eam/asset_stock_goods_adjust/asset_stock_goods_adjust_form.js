@@ -1,7 +1,7 @@
 /**
  * 库存调整 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 06:06:07
+ * @since 2022-04-23 07:43:57
  */
 
 function FormPage() {
@@ -42,8 +42,6 @@ function FormPage() {
 		//绑定提交事件
 		bindButtonEvent();
 
-		//调整窗口的高度与位置
-		adjustPopup();
 	}
 
 	/**
@@ -85,22 +83,72 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		laydate.render({
-			elem: '#collectionDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click",
-			done: function(value, date, endDate){
-				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("collectionDate",value, date, endDate);
+		//渲染 warehouseId 下拉字段
+		fox.renderSelectBox({
+			el: "warehouseId",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("warehouseId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "warehouseName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "0".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].warehouseName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
 			}
 		});
 		laydate.render({
 			elem: '#businessDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
+			value:$('#businessDate').val()?$('#businessDate').val():new Date(),
 			trigger:"click",
 			done: function(value, date, endDate){
 				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("businessDate",value, date, endDate);
 			}
 		});
+	    //渲染图片字段
+		foxup.render({
+			el:"attachId",
+			maxFileCount: 1,
+			displayFileName: false,
+			accept: "file",
+			afterPreview:function(elId,index,fileId,upload,fileName,fileType){
+				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterPreview",elId:elId,index:index,fileId:fileId,upload:upload,fileName:fileName,fileType:fileType});
+			},
+			afterUpload:function (elId,result,index,upload) {
+				console.log("文件上传后回调");
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterUpload",elId:elId,index:index,upload:upload});
+			},
+			beforeRemove:function (elId,fileId,index,upload) {
+				console.log("文件删除前回调");
+				if(window.pageExt.form.onUploadEvent) {
+					return window.pageExt.form.onUploadEvent({event:"beforeRemove",elId:elId,index:index,fileId:fileId,upload:upload});
+				}
+				return true;
+			},
+			afterRemove:function (elId,fileId,index,upload) {
+				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterRemove",elId:elId,index:index,upload:upload});
+			}
+	    });
 	}
 
 	/**
@@ -124,15 +172,23 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
-
-
-
-			//设置 领用日期 显示复选框勾选
-			if(formData["collectionDate"]) {
-				$("#collectionDate").val(fox.dateFormat(formData["collectionDate"],"yyyy-MM-dd HH:mm:ss"));
+			//设置 附件 显示附件
+		    if($("#attachId").val()) {
+				foxup.fill("attachId",$("#attachId").val());
+		    } else {
+				adjustPopup();
 			}
 
 
+
+			//设置 业务日期 显示复选框勾选
+			if(formData["businessDate"]) {
+				$("#businessDate").val(fox.dateFormat(formData["businessDate"],"yyyy-MM-dd"));
+			}
+
+
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
 
 			//处理fillBy
 
@@ -183,6 +239,8 @@ function FormPage() {
 
 
 
+		//获取 仓库 下拉框的值
+		data["warehouseId"]=fox.getSelectedValue("warehouseId",false);
 
 		return data;
 	}
@@ -230,6 +288,22 @@ function FormPage() {
 	        return false;
 	    });
 
+		// 请选择人员对话框
+		$("#originatorId-button").click(function(){
+				var originatorIdDialogOptions={
+				field:"originatorId",
+				formData:getFormData(),
+				inputEl:$("#originatorId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseEmployee(originatorIdDialogOptions);
+		});
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('eam-asset-stock-goods-adjust-form-data-win'); });

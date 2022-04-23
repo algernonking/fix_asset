@@ -2,7 +2,7 @@
 /**
  * 库存调整 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 06:06:07
+ * @since 2022-04-23 07:43:57
  */
  -->
  <!DOCTYPE html>
@@ -39,25 +39,54 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 办理状态 , status ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 库存所属 , ownerCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 领用后公司/部门 , useOrganizationId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 使用人员 , useUserId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 领用后位置 , positionId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 详细位置 , positionDetail ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 领用日期 , collectionDate ,typeName=date_input, isHideInSearch=false -->
+                    <!-- 办理状态 , status ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('领用日期')}" class="search-label collectionDate-label">领用日期</span><span class="search-colon">:</span></div>
-                            <input type="text" id="collectionDate"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
+                        <input id="status" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
-                    <!-- 领用说明 , content ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 附件 , attach ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 库存所属 , ownerType ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 制单人 , originatorId ,typeName=button, isHideInSearch=true -->
+                    <!-- 附件 , attachId ,typeName=upload, isHideInSearch=true -->
                     <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 变更类型 , chsType ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 变更状态 , chsStatus ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 变更版本号 , chsVersion ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 变更ID , changeInstanceId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 流程概要 , summary ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 最后审批人账户ID , latestApproverId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 最后审批人姓名 , latestApproverName ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 下一节点审批人 , nextApproverIds ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 下一个审批节点审批人姓名 , nextApproverNames ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 审批意见 , approvalOpinion ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:100px"><span th:text="${lang.translate('仓库')}" class="search-label warehouseId-label">仓库</span><span class="search-colon">:</span></div>
+                        <div id="warehouseId" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 调整说明 , content ,typeName=text_area, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:100px"><span th:text="${lang.translate('调整说明')}" class="search-label content-label">调整说明</span><span class="search-colon">:</span></div>
+                        <input id="content" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务日期')}" class="search-label businessDate-label">业务日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="businessDate-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="businessDate-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                    </div>
 
 
                 </div>
@@ -70,7 +99,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 
@@ -87,7 +116,6 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('eam_asset_stock_goods_adjust:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('eam_asset_stock_goods_adjust:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
@@ -100,6 +128,10 @@
 
     <button th:if="${perm.checkAuth('eam_asset_stock_goods_adjust:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
+    <button th:if="${perm.checkAuth('eam_asset_stock_goods_adjust:for-approval')}"class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" data-id="{{d.id}}"><span th:text="${lang.translate('送审')}">送审</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_stock_goods_adjust:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认')}">确认</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_stock_goods_adjust:revoke')}"class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" data-id="{{d.id}}"><span th:text="${lang.translate('撤销')}">撤销</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_stock_goods_adjust:bill')}"class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" data-id="{{d.id}}"><span th:text="${lang.translate('单据')}">单据</span></button>
 
 </script>
 
@@ -108,6 +140,10 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var AUTH_PREFIX="eam_asset_stock_goods_adjust";
 
+    // OWNER_TYPE
+    var OWNER_TYPE = [[${ownerType}]] ;
+    // APPROVAL_REQUIRED
+    var APPROVAL_REQUIRED = [[${approvalRequired}]] ;
 
 </script>
 

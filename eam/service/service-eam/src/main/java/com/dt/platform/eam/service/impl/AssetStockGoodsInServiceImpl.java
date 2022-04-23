@@ -3,14 +3,20 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
-import com.dt.platform.domain.eam.GoodsStock;
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.service.IGoodsStockService;
+import com.dt.platform.eam.service.IOperateService;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetStockGoodsIn;
-import com.dt.platform.domain.eam.AssetStockGoodsInVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -32,6 +38,7 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IAssetStockGoodsInService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
@@ -45,6 +52,9 @@ import java.util.Date;
 @Service("EamAssetStockGoodsInService")
 public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn> implements IAssetStockGoodsInService {
 
+
+	@Autowired
+	private IOperateService operateService;
 
 	@Autowired
 	private IGoodsStockService goodsStockService;
@@ -86,9 +96,122 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 		}
 
 
+		//制单人
+		if(StringUtil.isBlank(assetStockGoodsIn.getOriginatorId())){
+			assetStockGoodsIn.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		//办理情况
+		if(StringUtil.isBlank(assetStockGoodsIn.getStatus())){
+			assetStockGoodsIn.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+
+		//登记日期
+		if(assetStockGoodsIn.getBusinessDate()==null){
+			assetStockGoodsIn.setBusinessDate(new Date());
+		}
+
+		//编码
+		String codeRule="";
+		if(AssetStockGoodsTypeEnum.STOCK.code().equals(assetStockGoodsIn.getOwnerType())){
+			codeRule= CodeModuleEnum.EAM_ASSET_STOCK_GOODS_IN.code();
+		}
+		if(StringUtil.isBlank(assetStockGoodsIn.getBusinessCode())){
+			if(!StringUtil.isBlank(codeRule)){
+				if(!StringUtil.isBlank(codeRule)){
+					Result codeResult= CodeModuleServiceProxy.api().generateCode(codeRule) ;
+					if(!codeResult.isSuccess()){
+						return codeResult;
+					}else{
+						assetStockGoodsIn.setBusinessCode(codeResult.getData().toString());
+					}
+				}
+			}
+		}
 
 		Result r=super.insert(assetStockGoodsIn,throwsException);
+		for(int i=0;i<list.size();i++){
+			list.get(i).setBusinessCode(assetStockGoodsIn.getBusinessCode());
+			list.get(i).setBatchCode(assetStockGoodsIn.getBatchCode());
+			list.get(i).setOwnCompanyId(assetStockGoodsIn.getOwnCompanyId());
+			list.get(i).setSupplierName(assetStockGoodsIn.getSupplierName());
+			list.get(i).setWarehouseId(assetStockGoodsIn.getWarehouseId());
+			list.get(i).setManagerId(assetStockGoodsIn.getManagerId());
+			list.get(i).setStatus(assetStockGoodsIn.getStatus());
+			list.get(i).setStorageDate(new Date());
+		}
 		return goodsStockService.saveOwnerData(assetStockGoodsIn.getId(),assetStockGoodsIn.getOwnerType(),list);
+	}
+
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(String instanceId, List<AssetAllocation> assets, String approveAction, String opinion) {
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getBill(String id) {
+		return null;
+	}
+
+	@Override
+	public Result revokeOperation(String id) {
+		return null;
+	}
+
+	@Override
+	public Result forApproval(String id) {
+		return null;
+	}
+
+	/**
+	 * 操作
+	 * @param id  ID
+	 * @param result 结果
+	 * @return
+	 * */
+	private Result operateResult(String id,String result,String status,String message) {
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
+			AssetStockGoodsIn bill=new AssetStockGoodsIn();
+			bill.setId(id);
+			bill.setStatus(status);
+			this.dao.execute("update eam_goods_stock set status=? where owner_id=?",status,bill.getId());
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
+		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
+			return ErrorDesc.failureMessage(message);
+		}else{
+			return ErrorDesc.failureMessage("返回未知结果");
+		}
+	}
+	@Override
+	public Result confirmOperation(String id) {
+
+		AssetStockGoodsIn billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			String operCode="";
+			if(AssetStockGoodsTypeEnum.STOCK.code().equals(billData.getOwnerType())){
+				operCode=AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code();
+			}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(billData.getOwnerType())){
+				operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code();
+			}
+			if(operateService.approvalRequired(operCode) ) {
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
+			}else{
+				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
 	}
 
 	/**
@@ -186,8 +309,16 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 		}
 
 
-
 		Result r=super.update(assetStockGoodsIn , mode , throwsException);
+		for(int i=0;i<list.size();i++){
+			list.get(i).setBatchCode(assetStockGoodsIn.getBatchCode());
+			list.get(i).setOwnCompanyId(assetStockGoodsIn.getOwnCompanyId());
+			list.get(i).setSupplierName(assetStockGoodsIn.getSupplierName());
+			list.get(i).setWarehouseId(assetStockGoodsIn.getWarehouseId());
+			list.get(i).setManagerId(assetStockGoodsIn.getManagerId());
+			list.get(i).setStatus(assetStockGoodsIn.getStatus());
+			list.get(i).setStorageDate(new Date());
+		}
 		return goodsStockService.saveOwnerData(assetStockGoodsIn.getId(),assetStockGoodsIn.getOwnerType(),list);
 
 	}

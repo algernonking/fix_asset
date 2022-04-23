@@ -1,8 +1,8 @@
 <!--
 /**
- * 库存调整 列表页 JS 脚本
+ * 库存物品 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:43:57
+ * @since 2022-04-22 05:33:06
  */
  -->
  <!DOCTYPE html>
@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
-	<title th:text="${lang.translate('库存调整')}">库存调整</title>
+	<title th:text="${lang.translate('库存物品')}">库存物品</title>
     <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
     <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -38,30 +38,17 @@
 
 
 
-        <div class="layui-row form-row" id="random-9324-content">
+        <div class="layui-row form-row" id="random-5497-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs4 form-column" >
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
-                    </div>
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：column 循环-->
-            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs4 form-column" >
+            <div class="layui-col-xs6 form-column" >
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('仓库')}">仓库</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('入库存数量')}">入库存数量</div></div>
                         <div class="layui-input-block ">
-                            <div id="warehouseId" input-type="select" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" extraParam="{}"></div>
+                            <input lay-filter="stockInNumber" id="stockInNumber" name="stockInNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('入库存数量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
@@ -70,15 +57,16 @@
             </div>
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs4 form-column" >
+            <div class="layui-col-xs6 form-column" >
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('业务日期')}">业务日期</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('总金额')}">总金额</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="businessDate" id="businessDate" name="businessDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('业务日期') }" type="text" class="layui-input"    lay-verify=""   />
+                            <input lay-filter="amount" id="amount" name="amount" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('总金额') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -88,7 +76,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-3098-content">
+        <div class="layui-row form-row" id="random-3065-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -96,20 +84,20 @@
 
 
                     <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('调整说明')}">调整说明</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
                     <div class="layui-input-block ">
-                        <textarea lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调整说明') }" class="layui-textarea" style="height: 60px" ></textarea>
+                        <textarea lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" class="layui-textarea" style="height: 60px" ></textarea>
                     </div>
                 </div>
 
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('附件')}">附件</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('图片')}">图片</div></div>
                     <div class="layui-upload layui-input-block ">
-                        <input input-type="upload" id="attachId"  name="attachId" lay-filter="attachId" style="display: none">
-                        <button type="button" class="layui-btn" id="attachId-button" th:text="${lang.translate('选择附件')}">选择附件</button>
-                        <div class="layui-upload-list" id="attachId-file-list"></div>
+                        <input input-type="upload" id="pictureId"  name="pictureId" lay-filter="pictureId" style="display: none">
+                        <button type="button" class="layui-btn" id="pictureId-button" th:text="${lang.translate('选择附件')}">选择附件</button>
+                        <div class="layui-upload-list" id="pictureId-file-list"></div>
                     </div>
                 </div>
 
@@ -119,20 +107,10 @@
             </div>
             <!--结束：栏次输入框循环-->
         </div>
-         <!--开始：group 循环-->
-
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-7303-fieldset">
-        <legend>物品列表</legend>
-        </fieldset>
-        <div class="layui-row form-row" style="text-align: center;" id="random-7303-content">
-            <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
-            <iframe js-fn="goodsSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
-            </div>
-        </div>
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
-        <div style="height: 20px"></div>
+        <div style="height: 250px"></div>
 
 
     </form>
@@ -140,7 +118,7 @@
 </div>
 <div class="model-form-footer">
     <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_stock_goods_adjust:create','eam_asset_stock_goods_adjust:update','eam_asset_stock_goods_adjust:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+    <button th:if="${perm.checkAnyAuth('eam_goods_stock:create','eam_goods_stock:update','eam_goods_stock:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
 </div>
 
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
@@ -151,9 +129,12 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"warehouseId":{"labelInForm":"仓库","inputType":"select_box","required":true},"name":{"labelInForm":"业务名称","inputType":"text_input","required":true}};
-    var AUTH_PREFIX="eam_asset_stock_goods_adjust";
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var VALIDATE_CONFIG={"code":{"labelInForm":"物品编码","inputType":"text_input","required":true},"brandId":{"labelInForm":"品牌","inputType":"select_box","required":true},"name":{"labelInForm":"物品名称","inputType":"text_input","required":true},"manufacturerId":{"labelInForm":"厂商","inputType":"select_box","required":true},"model":{"labelInForm":"规格型号","inputType":"text_input","required":true},"storageDate":{"date":true,"labelInForm":"入库时间","inputType":"date_input"},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true},"barCode":{"labelInForm":"物品条码","inputType":"text_input","required":true}};
+    var AUTH_PREFIX="eam_goods_stock";
 
+    // OWNER_CODE
+    var OWNER_CODE = [[${ownerCode}]] ;
     // OWNER_TYPE
     var OWNER_TYPE = [[${ownerType}]] ;
 
@@ -161,8 +142,8 @@
 
 
 
-<script th:src="'/business/eam/asset_stock_goods_adjust/asset_stock_goods_adjust_ext.js?'+${cacheKey}"></script>
-<script th:src="'/business/eam/asset_stock_goods_adjust/asset_stock_goods_adjust_form.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/goods_stock/goods_stock_ext.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/goods_stock/goods_stock_form.js?'+${cacheKey}"></script>
 
 </body>
 </html>

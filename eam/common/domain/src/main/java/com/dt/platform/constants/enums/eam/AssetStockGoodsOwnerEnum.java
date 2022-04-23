@@ -15,6 +15,11 @@ public enum AssetStockGoodsOwnerEnum implements CodeTextEnum {
 
 	GOODS("goods" , "物品"),
 	STOCK("stock" , "库存"),
+	REAL_STOCK("real_stock" , "实时库存"),
+	DATA_SELECTED("data_selected" , "数据选择"),
+	CONSUMABLES("consumables" , "耗材"),
+	REAL_CONSUMABLES("real_consumables" , "耗材"),
+
 	;
 	private String code;
 	private String text;

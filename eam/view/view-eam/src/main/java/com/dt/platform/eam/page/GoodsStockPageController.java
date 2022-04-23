@@ -63,6 +63,15 @@ public class GoodsStockPageController extends ViewController {
 		return prefix+"/goods_stock_form";
 	}
 
+	/**
+	 * 库存物品 表单页面
+	 */
+	@RequestMapping("/goods_stock_selected_form.html")
+	public String selectedForm(Model model,HttpServletRequest request , String id,String ownerType) {
+		model.addAttribute("ownerType",ownerType);
+		return prefix+"/goods_stock_selected_form";
+	}
+
 
 
 	/**

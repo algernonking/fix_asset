@@ -5,12 +5,15 @@ import com.dt.platform.domain.eam.AssetStockGoodsTranferVO;
 import java.util.List;
 import com.dt.platform.domain.eam.AssetStockGoodsTranfer;
 import java.util.Date;
+import com.dt.platform.domain.eam.GoodsStock;
+import com.dt.platform.domain.eam.Warehouse;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 06:06:58
+ * @since 2022-04-23 07:42:08
  * @sign 8594EC5522D430D032FB4E260E97B38D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -150,12 +153,12 @@ public class AssetStockGoodsTranferVOMeta extends AssetStockGoodsTranferMeta {
 	/**
 	 * 库存所属 , 类型: java.lang.String
 	*/
-	public static final String OWNER_CODE="ownerCode";
+	public static final String OWNER_TYPE="ownerType";
 	
 	/**
 	 * 库存所属 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> OWNER_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,OWNER_CODE, java.lang.String.class, "库存所属", "库存所属", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> OWNER_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,OWNER_TYPE, java.lang.String.class, "库存所属", "库存所属", java.lang.String.class, null);
 	
 	/**
 	 * 业务名称 , 类型: java.lang.String
@@ -168,64 +171,34 @@ public class AssetStockGoodsTranferVOMeta extends AssetStockGoodsTranferMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
-	 * 领用后公司/部门 , 类型: java.lang.String
+	 * 调出仓库 , 类型: java.lang.String
 	*/
-	public static final String USE_ORGANIZATION_ID="useOrganizationId";
+	public static final String WAREHOUSE_OUT_ID="warehouseOutId";
 	
 	/**
-	 * 领用后公司/部门 , 类型: java.lang.String
+	 * 调出仓库 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,USE_ORGANIZATION_ID, java.lang.String.class, "领用后公司/部门", "领用后公司/部门", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> WAREHOUSE_OUT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,WAREHOUSE_OUT_ID, java.lang.String.class, "调出仓库", "调出仓库", java.lang.String.class, null);
 	
 	/**
-	 * 使用人员 , 类型: java.lang.String
+	 * 调入仓库 , 类型: java.lang.String
 	*/
-	public static final String USE_USER_ID="useUserId";
+	public static final String WAREHOUSE_IN_ID="warehouseInId";
 	
 	/**
-	 * 使用人员 , 类型: java.lang.String
+	 * 调入仓库 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> USE_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,USE_USER_ID, java.lang.String.class, "使用人员", "使用人员", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> WAREHOUSE_IN_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,WAREHOUSE_IN_ID, java.lang.String.class, "调入仓库", "调入仓库", java.lang.String.class, null);
 	
 	/**
-	 * 领用后位置 , 类型: java.lang.String
-	*/
-	public static final String POSITION_ID="positionId";
-	
-	/**
-	 * 领用后位置 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> POSITION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,POSITION_ID, java.lang.String.class, "领用后位置", "领用后位置", java.lang.String.class, null);
-	
-	/**
-	 * 详细位置 , 类型: java.lang.String
-	*/
-	public static final String POSITION_DETAIL="positionDetail";
-	
-	/**
-	 * 详细位置 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> POSITION_DETAIL_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,POSITION_DETAIL, java.lang.String.class, "详细位置", "详细位置", java.lang.String.class, null);
-	
-	/**
-	 * 领用日期 , 类型: java.util.Date
-	*/
-	public static final String COLLECTION_DATE="collectionDate";
-	
-	/**
-	 * 领用日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.util.Date> COLLECTION_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,COLLECTION_DATE, java.util.Date.class, "领用日期", "领用日期", java.util.Date.class, null);
-	
-	/**
-	 * 领用说明 , 类型: java.lang.String
+	 * 转移说明 , 类型: java.lang.String
 	*/
 	public static final String CONTENT="content";
 	
 	/**
-	 * 领用说明 , 类型: java.lang.String
+	 * 转移说明 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,CONTENT, java.lang.String.class, "领用说明", "领用说明", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,CONTENT, java.lang.String.class, "转移说明", "转移说明", java.lang.String.class, null);
 	
 	/**
 	 * 制单人 , 类型: java.lang.String
@@ -250,12 +223,12 @@ public class AssetStockGoodsTranferVOMeta extends AssetStockGoodsTranferMeta {
 	/**
 	 * 附件 , 类型: java.lang.String
 	*/
-	public static final String ATTACH="attach";
+	public static final String ATTACH_ID="attachId";
 	
 	/**
 	 * 附件 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> ATTACH_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,ATTACH, java.lang.String.class, "附件", "附件", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> ATTACH_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,ATTACH_ID, java.lang.String.class, "附件", "附件", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -358,9 +331,159 @@ public class AssetStockGoodsTranferVOMeta extends AssetStockGoodsTranferMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,SELECTED_CODE, java.lang.String.class, "选择数据", "选择数据", java.lang.String.class, null);
 	
 	/**
+	 * 变更类型 , 类型: java.lang.String
+	*/
+	public static final String CHS_TYPE="chsType";
+	
+	/**
+	 * 变更类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> CHS_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,CHS_TYPE, java.lang.String.class, "变更类型", "变更类型", java.lang.String.class, null);
+	
+	/**
+	 * 变更状态 , 类型: java.lang.String
+	*/
+	public static final String CHS_STATUS="chsStatus";
+	
+	/**
+	 * 变更状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> CHS_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,CHS_STATUS, java.lang.String.class, "变更状态", "变更状态", java.lang.String.class, null);
+	
+	/**
+	 * 变更版本号 , 类型: java.lang.String
+	*/
+	public static final String CHS_VERSION="chsVersion";
+	
+	/**
+	 * 变更版本号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> CHS_VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,CHS_VERSION, java.lang.String.class, "变更版本号", "变更版本号", java.lang.String.class, null);
+	
+	/**
+	 * 变更ID , 类型: java.lang.String
+	*/
+	public static final String CHANGE_INSTANCE_ID="changeInstanceId";
+	
+	/**
+	 * 变更ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> CHANGE_INSTANCE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,CHANGE_INSTANCE_ID, java.lang.String.class, "变更ID", "变更ID", java.lang.String.class, null);
+	
+	/**
+	 * 流程概要 , 类型: java.lang.String
+	*/
+	public static final String SUMMARY="summary";
+	
+	/**
+	 * 流程概要 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> SUMMARY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,SUMMARY, java.lang.String.class, "流程概要", "流程概要", java.lang.String.class, null);
+	
+	/**
+	 * 最后审批人账户ID , 类型: java.lang.String
+	*/
+	public static final String LATEST_APPROVER_ID="latestApproverId";
+	
+	/**
+	 * 最后审批人账户ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> LATEST_APPROVER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,LATEST_APPROVER_ID, java.lang.String.class, "最后审批人账户ID", "最后审批人账户ID", java.lang.String.class, null);
+	
+	/**
+	 * 最后审批人姓名 , 类型: java.lang.String
+	*/
+	public static final String LATEST_APPROVER_NAME="latestApproverName";
+	
+	/**
+	 * 最后审批人姓名 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> LATEST_APPROVER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,LATEST_APPROVER_NAME, java.lang.String.class, "最后审批人姓名", "最后审批人姓名", java.lang.String.class, null);
+	
+	/**
+	 * 下一节点审批人 , 类型: java.lang.String
+	*/
+	public static final String NEXT_APPROVER_IDS="nextApproverIds";
+	
+	/**
+	 * 下一节点审批人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> NEXT_APPROVER_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,NEXT_APPROVER_IDS, java.lang.String.class, "下一节点审批人", "下一节点审批人", java.lang.String.class, null);
+	
+	/**
+	 * 下一个审批节点审批人姓名 , 用逗号隔开 , 类型: java.lang.String
+	*/
+	public static final String NEXT_APPROVER_NAMES="nextApproverNames";
+	
+	/**
+	 * 下一个审批节点审批人姓名 , 用逗号隔开 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> NEXT_APPROVER_NAMES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,NEXT_APPROVER_NAMES, java.lang.String.class, "下一个审批节点审批人姓名", "用逗号隔开", java.lang.String.class, null);
+	
+	/**
+	 * 审批意见 , 类型: java.lang.String
+	*/
+	public static final String APPROVAL_OPINION="approvalOpinion";
+	
+	/**
+	 * 审批意见 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> APPROVAL_OPINION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,APPROVAL_OPINION, java.lang.String.class, "审批意见", "审批意见", java.lang.String.class, null);
+	
+	/**
+	 * 物品 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.GoodsStock
+	*/
+	public static final String GOODS_LIST="goodsList";
+	
+	/**
+	 * 物品 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.GoodsStock
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,com.dt.platform.domain.eam.GoodsStock> GOODS_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,GOODS_LIST, java.util.List.class, "物品", "物品", com.dt.platform.domain.eam.GoodsStock.class, null);
+	
+	/**
+	 * 物品 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String GOODS_IDS="goodsIds";
+	
+	/**
+	 * 物品 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,java.lang.String> GOODS_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,GOODS_IDS, java.util.List.class, "物品", "物品", java.lang.String.class, null);
+	
+	/**
+	 * 调出仓库 , 类型: com.dt.platform.domain.eam.Warehouse
+	*/
+	public static final String WAREHOUSE_OUT="warehouseOut";
+	
+	/**
+	 * 调出仓库 , 类型: com.dt.platform.domain.eam.Warehouse
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,com.dt.platform.domain.eam.Warehouse> WAREHOUSE_OUT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,WAREHOUSE_OUT, com.dt.platform.domain.eam.Warehouse.class, "调出仓库", "调出仓库", com.dt.platform.domain.eam.Warehouse.class, null);
+	
+	/**
+	 * 调入仓库 , 类型: com.dt.platform.domain.eam.Warehouse
+	*/
+	public static final String WAREHOUSE_IN="warehouseIn";
+	
+	/**
+	 * 调入仓库 , 类型: com.dt.platform.domain.eam.Warehouse
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,com.dt.platform.domain.eam.Warehouse> WAREHOUSE_IN_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,WAREHOUSE_IN, com.dt.platform.domain.eam.Warehouse.class, "调入仓库", "调入仓库", com.dt.platform.domain.eam.Warehouse.class, null);
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String ORIGINATOR="originator";
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockGoodsTranferVO,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockGoodsTranferVO.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , BUSINESS_CODE , PROC_ID , STATUS , OWNER_CODE , NAME , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , COLLECTION_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , BUSINESS_CODE , PROC_ID , STATUS , OWNER_TYPE , NAME , WAREHOUSE_OUT_ID , WAREHOUSE_IN_ID , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , GOODS_LIST , GOODS_IDS , WAREHOUSE_OUT , WAREHOUSE_IN , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -515,12 +638,12 @@ public class AssetStockGoodsTranferVOMeta extends AssetStockGoodsTranferMeta {
 		
 		/**
 		 * 设置 库存所属
-		 * @param ownerCode 库存所属
+		 * @param ownerType 库存所属
 		 * @return 当前对象
 		*/
-		public AssetStockGoodsTranfer setOwnerCode(String ownerCode) {
-			super.change(OWNER_CODE,super.getOwnerCode(),ownerCode);
-			super.setOwnerCode(ownerCode);
+		public AssetStockGoodsTranfer setOwnerType(String ownerType) {
+			super.change(OWNER_TYPE,super.getOwnerType(),ownerType);
+			super.setOwnerType(ownerType);
 			return this;
 		}
 		
@@ -536,63 +659,30 @@ public class AssetStockGoodsTranferVOMeta extends AssetStockGoodsTranferMeta {
 		}
 		
 		/**
-		 * 设置 领用后公司/部门
-		 * @param useOrganizationId 领用后公司/部门
+		 * 设置 调出仓库
+		 * @param warehouseOutId 调出仓库
 		 * @return 当前对象
 		*/
-		public AssetStockGoodsTranfer setUseOrganizationId(String useOrganizationId) {
-			super.change(USE_ORGANIZATION_ID,super.getUseOrganizationId(),useOrganizationId);
-			super.setUseOrganizationId(useOrganizationId);
+		public AssetStockGoodsTranfer setWarehouseOutId(String warehouseOutId) {
+			super.change(WAREHOUSE_OUT_ID,super.getWarehouseOutId(),warehouseOutId);
+			super.setWarehouseOutId(warehouseOutId);
 			return this;
 		}
 		
 		/**
-		 * 设置 使用人员
-		 * @param useUserId 使用人员
+		 * 设置 调入仓库
+		 * @param warehouseInId 调入仓库
 		 * @return 当前对象
 		*/
-		public AssetStockGoodsTranfer setUseUserId(String useUserId) {
-			super.change(USE_USER_ID,super.getUseUserId(),useUserId);
-			super.setUseUserId(useUserId);
+		public AssetStockGoodsTranfer setWarehouseInId(String warehouseInId) {
+			super.change(WAREHOUSE_IN_ID,super.getWarehouseInId(),warehouseInId);
+			super.setWarehouseInId(warehouseInId);
 			return this;
 		}
 		
 		/**
-		 * 设置 领用后位置
-		 * @param positionId 领用后位置
-		 * @return 当前对象
-		*/
-		public AssetStockGoodsTranfer setPositionId(String positionId) {
-			super.change(POSITION_ID,super.getPositionId(),positionId);
-			super.setPositionId(positionId);
-			return this;
-		}
-		
-		/**
-		 * 设置 详细位置
-		 * @param positionDetail 详细位置
-		 * @return 当前对象
-		*/
-		public AssetStockGoodsTranfer setPositionDetail(String positionDetail) {
-			super.change(POSITION_DETAIL,super.getPositionDetail(),positionDetail);
-			super.setPositionDetail(positionDetail);
-			return this;
-		}
-		
-		/**
-		 * 设置 领用日期
-		 * @param collectionDate 领用日期
-		 * @return 当前对象
-		*/
-		public AssetStockGoodsTranfer setCollectionDate(Date collectionDate) {
-			super.change(COLLECTION_DATE,super.getCollectionDate(),collectionDate);
-			super.setCollectionDate(collectionDate);
-			return this;
-		}
-		
-		/**
-		 * 设置 领用说明
-		 * @param content 领用说明
+		 * 设置 转移说明
+		 * @param content 转移说明
 		 * @return 当前对象
 		*/
 		public AssetStockGoodsTranfer setContent(String content) {
@@ -625,12 +715,12 @@ public class AssetStockGoodsTranferVOMeta extends AssetStockGoodsTranferMeta {
 		
 		/**
 		 * 设置 附件
-		 * @param attach 附件
+		 * @param attachId 附件
 		 * @return 当前对象
 		*/
-		public AssetStockGoodsTranfer setAttach(String attach) {
-			super.change(ATTACH,super.getAttach(),attach);
-			super.setAttach(attach);
+		public AssetStockGoodsTranfer setAttachId(String attachId) {
+			super.change(ATTACH_ID,super.getAttachId(),attachId);
+			super.setAttachId(attachId);
 			return this;
 		}
 		
@@ -741,6 +831,171 @@ public class AssetStockGoodsTranferVOMeta extends AssetStockGoodsTranferMeta {
 		public AssetStockGoodsTranfer setSelectedCode(String selectedCode) {
 			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
 			super.setSelectedCode(selectedCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更类型
+		 * @param chsType 变更类型
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setChsType(String chsType) {
+			super.change(CHS_TYPE,super.getChsType(),chsType);
+			super.setChsType(chsType);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更状态
+		 * @param chsStatus 变更状态
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setChsStatus(String chsStatus) {
+			super.change(CHS_STATUS,super.getChsStatus(),chsStatus);
+			super.setChsStatus(chsStatus);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更版本号
+		 * @param chsVersion 变更版本号
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setChsVersion(String chsVersion) {
+			super.change(CHS_VERSION,super.getChsVersion(),chsVersion);
+			super.setChsVersion(chsVersion);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更ID
+		 * @param changeInstanceId 变更ID
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setChangeInstanceId(String changeInstanceId) {
+			super.change(CHANGE_INSTANCE_ID,super.getChangeInstanceId(),changeInstanceId);
+			super.setChangeInstanceId(changeInstanceId);
+			return this;
+		}
+		
+		/**
+		 * 设置 流程概要
+		 * @param summary 流程概要
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setSummary(String summary) {
+			super.change(SUMMARY,super.getSummary(),summary);
+			super.setSummary(summary);
+			return this;
+		}
+		
+		/**
+		 * 设置 最后审批人账户ID
+		 * @param latestApproverId 最后审批人账户ID
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setLatestApproverId(String latestApproverId) {
+			super.change(LATEST_APPROVER_ID,super.getLatestApproverId(),latestApproverId);
+			super.setLatestApproverId(latestApproverId);
+			return this;
+		}
+		
+		/**
+		 * 设置 最后审批人姓名
+		 * @param latestApproverName 最后审批人姓名
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setLatestApproverName(String latestApproverName) {
+			super.change(LATEST_APPROVER_NAME,super.getLatestApproverName(),latestApproverName);
+			super.setLatestApproverName(latestApproverName);
+			return this;
+		}
+		
+		/**
+		 * 设置 下一节点审批人
+		 * @param nextApproverIds 下一节点审批人
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setNextApproverIds(String nextApproverIds) {
+			super.change(NEXT_APPROVER_IDS,super.getNextApproverIds(),nextApproverIds);
+			super.setNextApproverIds(nextApproverIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 下一个审批节点审批人姓名
+		 * @param nextApproverNames 下一个审批节点审批人姓名
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setNextApproverNames(String nextApproverNames) {
+			super.change(NEXT_APPROVER_NAMES,super.getNextApproverNames(),nextApproverNames);
+			super.setNextApproverNames(nextApproverNames);
+			return this;
+		}
+		
+		/**
+		 * 设置 审批意见
+		 * @param approvalOpinion 审批意见
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setApprovalOpinion(String approvalOpinion) {
+			super.change(APPROVAL_OPINION,super.getApprovalOpinion(),approvalOpinion);
+			super.setApprovalOpinion(approvalOpinion);
+			return this;
+		}
+		
+		/**
+		 * 设置 物品
+		 * @param goodsList 物品
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setGoodsList(List<GoodsStock> goodsList) {
+			super.change(GOODS_LIST,super.getGoodsList(),goodsList);
+			super.setGoodsList(goodsList);
+			return this;
+		}
+		
+		/**
+		 * 设置 物品
+		 * @param goodsIds 物品
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setGoodsIds(List<String> goodsIds) {
+			super.change(GOODS_IDS,super.getGoodsIds(),goodsIds);
+			super.setGoodsIds(goodsIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 调出仓库
+		 * @param warehouseOut 调出仓库
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setWarehouseOut(Warehouse warehouseOut) {
+			super.change(WAREHOUSE_OUT,super.getWarehouseOut(),warehouseOut);
+			super.setWarehouseOut(warehouseOut);
+			return this;
+		}
+		
+		/**
+		 * 设置 调入仓库
+		 * @param warehouseIn 调入仓库
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setWarehouseIn(Warehouse warehouseIn) {
+			super.change(WAREHOUSE_IN,super.getWarehouseIn(),warehouseIn);
+			super.setWarehouseIn(warehouseIn);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originator 制单人
+		 * @return 当前对象
+		*/
+		public AssetStockGoodsTranfer setOriginator(Employee originator) {
+			super.change(ORIGINATOR,super.getOriginator(),originator);
+			super.setOriginator(originator);
 			return this;
 		}
 	}

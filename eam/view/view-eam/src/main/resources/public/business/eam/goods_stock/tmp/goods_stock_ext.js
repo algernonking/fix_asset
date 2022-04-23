@@ -1,7 +1,7 @@
 /**
- * 库存物品单 列表页 JS 脚本
+ * 库存物品 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-21 07:23:10
+ * @since 2022-04-20 20:25:42
  */
 
 layui.config({
@@ -18,11 +18,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
     //模块基础路径
-    const moduleURL="/service-eam/eam-asset-stock-goods-in";
-    var formAction=admin.getTempData('eam-asset-stock-goods-in-form-data-form-action');
-
-
-
+    const moduleURL="/service-eam/eam-goods-stock";
 
     //列表页的扩展
     var list={
@@ -31,19 +27,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeInit:function () {
             console.log("list:beforeInit");
-            if(APPROVAL_REQUIRED){
-                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
-                operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
-                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
-            }else{
-                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
-                operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
-                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
-                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
-            }
-            console.log("list:beforeInit");
-
-
         },
         /**
          * 表格渲染前调用
@@ -101,42 +84,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterQuery : function (data) {
 
-            for (var i = 0; i < data.length; i++) {
-                //如果审批中或审批通过的不允许编辑
-                console.log(data[i]);
-                if(data[i].status=="complete") {
-                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                }else if(data[i].status=="incomplete"){
-                    // fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
-                    // fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
-                    // fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
-                    // fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                }else if(data[i].status=="deny"){
-                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                }else if(data[i].status=="approval"){
-                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                    // fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                }else if(data[i].status=="cancel"){
-                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                }
-            }
-
         },
         /**
          * 进一步转换 list 数据
@@ -149,7 +96,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单页面打开时，追加更多的参数信息
          * */
         makeFormQueryString:function(data,queryString,action) {
-            admin.putTempData('eam-asset-stock-goods-in-form-ownerType', OWNER_TYPE);
             return queryString;
         },
         /**
@@ -204,40 +150,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
-        billOper:function(url,btnClass,ps,successMessage){
-            var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
-            var api=moduleURL+"/"+url;
-            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
-                top.layer.close(i);
-                admin.post(api, ps, function (r) {
-                    if (r.success) {
-                        top.layer.msg(successMessage, {time: 1000});
-                        window.module.refreshTableData();
-                    } else {
-                        var errs = [];
-                        if (r.errors) {
-                            for (var i = 0; i < r.errors.length; i++) {
-                                if (errs.indexOf(r.errors[i].message) == -1) {
-                                    errs.push(r.errors[i].message);
-                                }
-                            }
-                            top.layer.msg(errs.join("<br>"), {time: 2000});
-                        } else {
-                            top.layer.msg(r.message, {time: 2000});
-                        }
-                    }
-                }, {delayLoading: 1000, elms: [btn]});
-            });
-        },
-        confirmData:function (item){
-            list.billOper("confirm-operation","confirm-data-button",{id:item.id},"已确认");
-        },
-        forApproval:function (item){
-            list.billOper("for-approval","for-approval-button",{id:item.id},"已送审");
-        },
-        revokeData:function (item){
-            list.billOper("revoke-operation","revoke-data-button",{id:item.id},"已撤销");
-        },
         /**
          * 末尾执行
          */
@@ -245,9 +157,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
         }
     }
-
-
-    var timestamp = Date.parse(new Date());
 
     //表单页的扩展
     var form={
@@ -258,7 +167,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //获取参数，并调整下拉框查询用的URL
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
-            OWNER_TYPE=admin.getTempData('eam-asset-stock-goods-in-form-ownerType');
             console.log("form:beforeInit")
         },
         /**
@@ -309,8 +217,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
-            data.selectedCode=timestamp;
-            data.ownerType=OWNER_TYPE;
             console.log("beforeSubmit",data);
             return true;
         },
@@ -328,22 +234,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
-        /**
-         *  加载 物品列表
-         */
-        goodsSelectList:function (ifr,win,data) {
-            // debugger
-            console.log("goodsSelectList",ifr,data);
-            //设置 iframe 高度
-            ifr.height("400px");
-            var ownerTmpId="";
-            if(data&&data.id){
-                ownerTmpId=data.id;
-            }
-            var queryString="?operType=eam_asset_stock_goods_in&selectedCode="+timestamp+"&ownerTmpId="+ownerTmpId+"&ownerCode=goods&ownerType="+OWNER_TYPE+"&pageType="+formAction;
-            //设置地址
-            win.location="/business/eam/goods_stock/goods_stock_selected_list.html"+queryString
-        },
         /**
          * 文件上传组件回调
          *  event 类型包括：

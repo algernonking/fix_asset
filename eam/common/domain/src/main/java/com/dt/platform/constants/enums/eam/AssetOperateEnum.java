@@ -53,6 +53,12 @@ public enum AssetOperateEnum implements CodeTextEnum {
 
 
     //物品耗材
+    EAM_ASSET_CONSUMABLES_GOODS(CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS.code(), "EAM_资产物品库存-入库"),
+    EAM_ASSET_CONSUMABLES_GOODS_IN(CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code(), "EAM_资产物品库存-入库"),
+    EAM_ASSET_CONSUMABLES_GOODS_OUT(CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_OUT.code(), "EAM_资产物品库存-出库"),
+    EAM_ASSET_CONSUMABLES_GOODS_TRANFER(CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_TRANFER.code(), "EAM_资产物品库存-转移"),
+    EAM_ASSET_CONSUMABLES_GOODS_ADJUST(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_ADJUST.code(), "EAM_资产物品库存-调整"),
+    EAM_ASSET_CONSUMABLES_GOODS_INVENTORY(CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_INVENTORY.code(), "EAM_资产物品库存-盘点"),
 
 
 
@@ -77,8 +83,16 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_DOWNLOAD_ASSET_SCRAP_BILL("eam_download_asset_scrap_bill" , "EAM_资产报废下载"),
 
     //库存
+    EAM_DOWNLOAD_ASSET_STOCK_GOODS_IN_BILL2("eam_download_asset_stock_goods_in_bill2" , "EAM_资产物品库存-入库单下载"),
+    EAM_DOWNLOAD_ASSET_STOCK_GOODS_OUT_BILL2("eam_download_asset_stock_goods_out_bill2" , "EAM_资产物品库存-出库单下载"),
+
+    //库存
     EAM_DOWNLOAD_ASSET_STOCK_GOODS_IN_BILL("eam_download_asset_stock_goods_in_bill" , "EAM_资产物品库存-入库单下载"),
     EAM_DOWNLOAD_ASSET_STOCK_GOODS_OUT_BILL("eam_download_asset_stock_goods_out_bill" , "EAM_资产物品库存-出库单下载"),
+
+    //耗材
+    EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_IN_BILL("eam_download_asset_consumables_goods_in_bill" , "EAM_耗材库存-入库单下载"),
+    EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_OUT_BILL("eam_download_asset_consumables_goods_out_bill" , "EAM_耗材库存-出库单下载"),
 
 
     EAM_ASSET_DATA_SYNC("eam_asset_data_sync" , "EAM_资产数据同步");
