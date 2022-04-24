@@ -74,8 +74,8 @@ public class StockGoodsInGtr extends BaseCodeGenerator {
 
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
-        cfg.view().search().labelWidth(3,Config.searchLabelWidth+60);
-        cfg.view().search().labelWidth(4,Config.searchLabelWidth+60);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
 
         cfg.view().list().disableBatchDelete();
 
@@ -158,6 +158,8 @@ public class StockGoodsInGtr extends BaseCodeGenerator {
         cfg.view().list().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
         cfg.view().form().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
 
+        cfg.view().list().addJsVariable("OPER_TYPE","[[${operType}]]","OPER_TYPE");
+        cfg.view().form().addJsVariable("OPER_TYPE","[[${operType}]]","OPER_TYPE");
         cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","APPROVAL_REQUIRED");
 
 

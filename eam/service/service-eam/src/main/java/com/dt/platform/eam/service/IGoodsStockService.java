@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
 import com.github.foxnic.sql.expr.ConditionExpr;
@@ -61,7 +62,9 @@ public interface IGoodsStockService extends ISuperService<GoodsStock> {
 	Result insertList(List<GoodsStock> goodsStockList);
 
 
-		
+
+	PagedList<GoodsStock> queryGoodsStockRealAll(GoodsStockVO goods);
+
 	/**
 	 * 按主键删除 库存物品
 	 *

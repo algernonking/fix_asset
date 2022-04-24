@@ -19,7 +19,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //模块基础路径
     const moduleURL="/service-eam/eam-asset-stock-goods-out";
-
+    var formAction=admin.getTempData('eam-asset-stock-goods-out-form-data-form-action');
     //列表页的扩展
     var list={
         /**
@@ -35,6 +35,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+
+                //单据临时屏蔽
+                operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
                 document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }
         },
@@ -142,6 +145,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         makeFormQueryString:function(data,queryString,action) {
             admin.putTempData('eam-asset-stock-goods-out-form-ownerType', OWNER_TYPE);
+            admin.putTempData('eam-asset-stock-goods-out-form-operType', OPER_TYPE);
             return queryString;
         },
         /**
@@ -254,6 +258,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("form:beforeInit")
 
             OWNER_TYPE=admin.getTempData('eam-asset-stock-goods-out-form-ownerType');
+            OPER_TYPE=admin.getTempData('eam-asset-stock-goods-out-form-operType');
             console.log("form:beforeInit")
         },
         /**
@@ -331,8 +336,16 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("goodsSelectList",ifr,data);
             //设置 iframe 高度
             ifr.height("400px");
+            var ownerTmpId="";
+            if(data&&data.id){
+                ownerTmpId=data.id;
+            }
+
+            var queryString="?operType="+OPER_TYPE+"&selectedCode="+timestamp+"&ownerTmpId="+ownerTmpId+"&ownerType="+OWNER_TYPE+"&pageType="+formAction;
+
             //设置地址
-            win.location="/business/system/node/node_list.html?id="+data.id;
+            win.location="/business/eam/goods_stock/goods_stock_selected_list.html"+queryString
+
         },
         /**
          * 文件上传组件回调

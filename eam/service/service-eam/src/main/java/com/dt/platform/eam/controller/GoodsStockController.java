@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.csp.sentinel.util.StringUtil;
+import com.alibaba.fastjson.JSONArray;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.constants.enums.eam.AssetStockGoodsOwnerEnum;
 import com.dt.platform.constants.enums.eam.AssetStockTypeEnum;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.proxy.eam.AssetReportServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -277,6 +282,7 @@ public class GoodsStockController extends SuperController {
 			.with("useOrganization")
 			.with("manager")
 			.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
 			.with(GoodsStockMeta.GOODS)
 			.with(GoodsStockMeta.SOURCE)
 			.with(GoodsStockMeta.WAREHOUSE)
@@ -415,6 +421,7 @@ public class GoodsStockController extends SuperController {
 			.with("useOrganization")
 			.with("manager")
 			.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
 			.with(GoodsStockMeta.GOODS)
 			.with(GoodsStockMeta.SOURCE)
 			.with(GoodsStockMeta.WAREHOUSE)
@@ -423,6 +430,11 @@ public class GoodsStockController extends SuperController {
 			.with(GoodsMeta.MANUFACTURER)
 			.execute();
 		result.success(true).data(list);
+
+
+		List<Employee> originatorList= CollectorUtil.collectList(list, GoodsStock::getOriginator);
+		goodsStockService.dao().join(originatorList, Person.class);
+
 		return result;
 	}
 
@@ -439,6 +451,7 @@ public class GoodsStockController extends SuperController {
 				.with("useOrganization")
 				.with("manager")
 				.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
 				.with(GoodsStockMeta.GOODS)
 				.with(GoodsStockMeta.SOURCE)
 				.with(GoodsStockMeta.WAREHOUSE)
@@ -446,6 +459,9 @@ public class GoodsStockController extends SuperController {
 				.with(GoodsStockMeta.BRAND)
 				.with(GoodsMeta.MANUFACTURER)
 				.execute();
+		List<Employee> originatorList= CollectorUtil.collectList(list, GoodsStock::getOriginator);
+		goodsStockService.dao().join(originatorList, Person.class);
+
 		result.success(true).data(list);
 		return result;
 	}
@@ -463,6 +479,69 @@ public class GoodsStockController extends SuperController {
 				.with("useOrganization")
 				.with("manager")
 				.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
+				.with(GoodsStockMeta.GOODS)
+				.with(GoodsStockMeta.SOURCE)
+				.with(GoodsStockMeta.WAREHOUSE)
+				.with(GoodsMeta.CATEGORY)
+				.with(GoodsStockMeta.BRAND)
+				.with(GoodsMeta.MANUFACTURER)
+				.execute();
+		List<Employee> originatorList= CollectorUtil.collectList(list, GoodsStock::getOriginator);
+		goodsStockService.dao().join(originatorList, Person.class);
+
+		result.success(true).data(list);
+		return result;
+	}
+
+
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { GoodsStockVOMeta.PAGE_INDEX , GoodsStockVOMeta.PAGE_SIZE , GoodsStockVOMeta.SEARCH_FIELD , GoodsStockVOMeta.FUZZY_FIELD , GoodsStockVOMeta.SEARCH_VALUE , GoodsStockVOMeta.DIRTY_FIELDS , GoodsStockVOMeta.SORT_FIELD , GoodsStockVOMeta.SORT_TYPE , GoodsStockVOMeta.IDS } )
+	@SentinelResource(value = GoodsStockServiceProxy.SAVE_BY_IDS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(GoodsStockServiceProxy.SAVE_BY_IDS)
+	public Result saveByIds(List<String> ids,String selectedCode,String ownerTmpId,String ownerType,String operType) {
+
+		for(String id:ids){
+			GoodsStockVO e=new GoodsStockVO();
+			e.setOwnerCode(AssetStockGoodsOwnerEnum.STOCK.code());
+			e.setOwnerType(ownerType);
+			if(AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code().equals(operType)||AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code().equals(operType)){
+				//直接物品
+				e.setGoodsId(id);
+			}else{
+				//获取的是库存数据,再次查询获取物品
+				GoodsStock goods=goodsStockService.getById(id);
+				if(goods!=null){
+					e.setGoodsId(goods.getGoodsId());
+				}
+			}
+			e.setRealStockId(id);
+			if(!StringUtil.isBlank(ownerTmpId)){
+				e.setOwnerTmpId(ownerTmpId);
+			}
+			e.setSelectedCode(selectedCode);
+			goodsStockService.insert(e,false);
+
+		}
+		return ErrorDesc.success();
+	}
+
+
+
+	@ApiOperation(value = "组织资产数据")
+	@ApiOperationSupport(order=1)
+	@SentinelResource(value = GoodsStockServiceProxy.QUERY_GOODS_STOCK_REAL_ALL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(GoodsStockServiceProxy.QUERY_GOODS_STOCK_REAL_ALL)
+	public Result queryGoodsStockRealAll(GoodsStockVO goodsStockVO) {
+
+		Result<PagedList<GoodsStock>> result=new Result<>();
+		PagedList<GoodsStock> list= goodsStockService.queryGoodsStockRealAll(goodsStockVO);
+		// join 关联的对象
+		goodsStockService.dao().fill(list)
+				.with("ownerCompany")
+				.with("useOrganization")
+				.with("manager")
+				.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
 				.with(GoodsStockMeta.GOODS)
 				.with(GoodsStockMeta.SOURCE)
 				.with(GoodsStockMeta.WAREHOUSE)
@@ -473,26 +552,6 @@ public class GoodsStockController extends SuperController {
 		result.success(true).data(list);
 		return result;
 	}
-
-
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { GoodsStockVOMeta.PAGE_INDEX , GoodsStockVOMeta.PAGE_SIZE , GoodsStockVOMeta.SEARCH_FIELD , GoodsStockVOMeta.FUZZY_FIELD , GoodsStockVOMeta.SEARCH_VALUE , GoodsStockVOMeta.DIRTY_FIELDS , GoodsStockVOMeta.SORT_FIELD , GoodsStockVOMeta.SORT_TYPE , GoodsStockVOMeta.IDS } )
-	@SentinelResource(value = GoodsStockServiceProxy.SAVE_BY_IDS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
-	@PostMapping(GoodsStockServiceProxy.SAVE_BY_IDS)
-	public Result saveByIds(List<String> ids,String selectedCode,String ownerTmpId,String ownerType) {
-		for(String id:ids){
-			GoodsStockVO e=new GoodsStockVO();
-			e.setOwnerCode(AssetStockGoodsOwnerEnum.STOCK.code());
-			e.setOwnerType(ownerType);
-			e.setGoodsId(id);
-			if(!StringUtil.isBlank(ownerTmpId)){
-				e.setOwnerTmpId(ownerTmpId);
-			}
-			e.setSelectedCode(selectedCode);
-			goodsStockService.insert(e,false);
-		}
-		return ErrorDesc.success();
-	}
-
 
 
 	/**
@@ -527,6 +586,7 @@ public class GoodsStockController extends SuperController {
 			DownloadUtil.writeDownloadError(response,e);
 		}
 	}
+
 
 
 

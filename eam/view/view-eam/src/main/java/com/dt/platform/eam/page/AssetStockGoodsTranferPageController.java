@@ -1,5 +1,9 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetStockGoodsTypeEnum;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
+import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -41,7 +45,22 @@ public class AssetStockGoodsTranferPageController extends ViewController {
 	 * 库存调拨 功能主页面
 	 */
 	@RequestMapping("/asset_stock_goods_tranfer_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String ownerType) {
+
+		String operCode="";
+		if(AssetStockGoodsTypeEnum.STOCK.code().equals(ownerType)){
+			operCode= AssetOperateEnum.EAM_ASSET_STOCK_GOODS_OUT.code();
+		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(ownerType)){
+			operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_OUT.code();
+		}
+		boolean approvalRequired=true;
+		Result approvalResult= OperateServiceProxy.api().approvalRequired(operCode);
+		if(approvalResult.isSuccess()){
+			approvalRequired= (boolean) approvalResult.getData();
+		}
+		model.addAttribute("approvalRequired",approvalRequired);
+		model.addAttribute("ownerType",ownerType);
+		model.addAttribute("operType",operCode);
 		return prefix+"/asset_stock_goods_tranfer_list";
 	}
 
@@ -49,7 +68,10 @@ public class AssetStockGoodsTranferPageController extends ViewController {
 	 * 库存调拨 表单页面
 	 */
 	@RequestMapping("/asset_stock_goods_tranfer_form.html")
-	public String form(Model model,HttpServletRequest request , String id) {
+	public String form(Model model,HttpServletRequest request , String id,String ownerType,String operType) {
+
+		model.addAttribute("ownerType",ownerType);
+		model.addAttribute("operType",operType);
 		return prefix+"/asset_stock_goods_tranfer_form";
 	}
 }

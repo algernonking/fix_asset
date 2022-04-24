@@ -6,8 +6,11 @@ import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
 import com.dt.platform.proxy.eam.AssetCategoryServiceProxy;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.framework.view.aspect.PageHelper;
+
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,16 +77,74 @@ public class GoodsStockPageController extends ViewController {
 
 
 
+	//goods 物品档案
+	//real 库存
+	//type,		selected  select
+	//库存
+	//in:		stock goods
+	//out:		stock real_goods
+	//adjust:   stock real_goods
+	//tranfer:  stock real_goods
+
+	//耗材
+	//in:		consumables goods
+	//out:		consumables real_consumables
+	//adjust:   consumables real_consumables
+	//tranfer:  consumables real_consumables
+
+	public  static String PAGE_ACTION_SELECT="select";
+	public  static String PAGE_ACTION_SELECTED="selected";
+
+
+	private String getOwnerCodeByOperType(String operType,String ownerType,String pageAction){
+		String ownerCode="";
+
+
+		if(AssetStockGoodsTypeEnum.STOCK.code().equals(ownerType)){
+			//库存
+			if(PAGE_ACTION_SELECTED.equals(pageAction)){
+				ownerCode=AssetStockGoodsOwnerEnum.STOCK.code();
+			}else if(PAGE_ACTION_SELECT.equals(pageAction)){
+				//类型
+				if(AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code().equals(operType)){
+					ownerCode=AssetStockGoodsOwnerEnum.GOODS.code();
+				}else if(AssetOperateEnum.EAM_ASSET_STOCK_GOODS_OUT.code().equals(operType)
+						||AssetOperateEnum.EAM_ASSET_STOCK_GOODS_ADJUST.code().equals(operType)
+						||AssetOperateEnum.EAM_ASSET_STOCK_GOODS_TRANFER.code().equals(operType)){
+					ownerCode=AssetStockGoodsOwnerEnum.REAL_STOCK.code();
+				}
+			}
+		}
+
+		//耗材
+		if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(ownerType)){
+			//库存
+			if(PAGE_ACTION_SELECTED.equals(pageAction)){
+				ownerCode=AssetStockGoodsOwnerEnum.CONSUMABLES.code();
+			}else if(PAGE_ACTION_SELECT.equals(pageAction)){
+				//类型
+				if(AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code().equals(operType)){
+					ownerCode=AssetStockGoodsOwnerEnum.GOODS.code();
+				}else if(AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_OUT.code().equals(operType)
+						||AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_ADJUST.code().equals(operType)
+						||AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_TRANFER.code().equals(operType)){
+					ownerCode=AssetStockGoodsOwnerEnum.REAL_CONSUMABLES.code();
+				}
+			}
+		}
+		return ownerCode;
+	}
+
+
 	/**
 	 * 库存物品 功能主页面
 	 */
 	@RequestMapping("/goods_stock_select_tree.html")
-	public String selectTree(Model model,HttpServletRequest request,String ownerTmpId,String operType,String pageType,String ownerCode,String ownerType,String selectedCode) {
+	public String selectTree(Model model,HttpServletRequest request,String ownerTmpId,String operType,String pageType,String ownerType,String selectedCode) {
 
 		Result idResult= AssetCategoryServiceProxy.api().queryNodesByCode(AssetCategoryCodeEnum.ASSET.code());
 		model.addAttribute("categoryParentId",idResult.getData());
-
-		model.addAttribute("ownerCode",ownerCode);
+		model.addAttribute("ownerCode",getOwnerCodeByOperType(operType,ownerType,PAGE_ACTION_SELECT));
 		model.addAttribute("ownerTmpId",ownerTmpId);
 		model.addAttribute("operType",operType);
 		model.addAttribute("ownerType",ownerType);
@@ -94,19 +155,18 @@ public class GoodsStockPageController extends ViewController {
 	}
 
 
+
 	/**
 	 * 库存物品 功能主页面
 	 */
 	@RequestMapping("/goods_stock_select_list.html")
-	public String selectList(Model model,HttpServletRequest request,String ownerTmpId,String operType,String pageType,String ownerCode,String ownerType,String selectedCode) {
+	public String selectList(Model model,HttpServletRequest request,String ownerTmpId,String operType,String pageType,String ownerType,String selectedCode) {
 
-
-
-		if(AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code().equals(operType)){
-			model.addAttribute("ownerCode",AssetStockGoodsOwnerEnum.GOODS.code());
-		}else{
-			model.addAttribute("ownerCode",ownerCode);
-		}
+		PageHelper p=new PageHelper(request, SessionUser.getCurrent());
+		String tableId="dt"+operType;
+		model.addAttribute("layuiTableWidthConfig2",p.getTableColumnWidthConfig(tableId));
+		model.addAttribute("tableId",tableId);
+		model.addAttribute("ownerCode",getOwnerCodeByOperType(operType,ownerType,PAGE_ACTION_SELECT));
 		model.addAttribute("ownerTmpId",ownerTmpId);
 		model.addAttribute("operType",operType);
 		model.addAttribute("ownerType",ownerType);
@@ -121,8 +181,9 @@ public class GoodsStockPageController extends ViewController {
 	 * 库存物品 功能主页面
 	 */
 	@RequestMapping("/goods_stock_selected_list.html")
-	public String selectedList(Model model,HttpServletRequest request,String ownerTmpId,String operType,String pageType,String ownerCode,String ownerType,String selectedCode) {
-		model.addAttribute("ownerCode",ownerCode);
+	public String selectedList(Model model,HttpServletRequest request,String ownerTmpId,String operType,String pageType,String ownerType,String selectedCode) {
+
+		model.addAttribute("ownerCode",getOwnerCodeByOperType(operType,ownerType,PAGE_ACTION_SELECTED));
 		model.addAttribute("ownerTmpId",ownerTmpId);
 		model.addAttribute("operType",operType);
 		model.addAttribute("ownerType",ownerType);

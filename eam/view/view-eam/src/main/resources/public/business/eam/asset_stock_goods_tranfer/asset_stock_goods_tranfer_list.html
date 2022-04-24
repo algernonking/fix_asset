@@ -2,7 +2,7 @@
 /**
  * 库存调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:42:09
+ * @since 2022-04-24 15:20:52
  */
  -->
  <!DOCTYPE html>
@@ -40,10 +40,10 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 办理状态 , status ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
-                        <input id="status" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 库存所属 , ownerType ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=true -->
@@ -68,12 +68,12 @@
                     </div>
                     <!-- 调出仓库 , warehouseOutId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('调出仓库')}" class="search-label warehouseOutId-label">调出仓库</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('调出仓库')}" class="search-label warehouseOutId-label">调出仓库</span><span class="search-colon">:</span></div>
                         <div id="warehouseOutId" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 调入仓库 , warehouseInId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('调入仓库')}" class="search-label warehouseInId-label">调入仓库</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('调入仓库')}" class="search-label warehouseInId-label">调入仓库</span><span class="search-colon">:</span></div>
                         <div id="warehouseInId" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
 
@@ -139,8 +139,11 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var AUTH_PREFIX="eam_asset_stock_goods_tranfer";
 
+    // OPER_TYPE
+    var OPER_TYPE = [[${operType}]] ;
     // OWNER_TYPE
     var OWNER_TYPE = [[${ownerType}]] ;
     // APPROVAL_REQUIRED

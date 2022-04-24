@@ -66,8 +66,8 @@ public class StockGoodsOutGtr extends BaseCodeGenerator {
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
-        cfg.view().search().labelWidth(3,Config.searchLabelWidth+60);
-        cfg.view().search().labelWidth(4,Config.searchLabelWidth+60);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.CREATE_TIME).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.SELECTED_CODE).table().disable(true);
@@ -88,12 +88,13 @@ public class StockGoodsOutGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.NEXT_APPROVER_NAMES).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.APPROVAL_OPINION).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.ATTACH_ID).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.ORIGINATOR_ID).table().disable(true);
+//        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.ORIGINATOR_ID).table().disable(true);
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.CONTENT).table().disable(true);
 
 
-
+        cfg.view().list().addJsVariable("OPER_TYPE","[[${operType}]]","OPER_TYPE");
+        cfg.view().form().addJsVariable("OPER_TYPE","[[${operType}]]","OPER_TYPE");
         cfg.view().list().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
         cfg.view().form().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
         cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","APPROVAL_REQUIRED");

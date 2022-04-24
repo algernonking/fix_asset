@@ -19,7 +19,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 库存调整
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:43:56
+ * @since 2022-04-24 15:08:00
  * @sign F7237542CF88F455A65178E0F029759D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

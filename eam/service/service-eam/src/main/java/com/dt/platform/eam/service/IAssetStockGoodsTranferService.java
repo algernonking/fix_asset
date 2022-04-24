@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetAllocation;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetStockGoodsTranfer;
@@ -9,23 +10,63 @@ import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import java.io.InputStream;
+import java.util.Map;
+
 import com.github.foxnic.sql.expr.OrderBy;
 import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 /**
  * <p>
  * 库存调拨 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:42:08
+ * @since 2022-04-24 12:15:19
 */
 
 public interface IAssetStockGoodsTranferService extends ISuperService<AssetStockGoodsTranfer> {
 
+
+
+	Result startProcess(ProcessStartVO startVO);
+
+	Result approve(ProcessApproveVO approveVO);
+
+	Result approve(String instanceId, List<AssetAllocation> assets, String approveAction, String opinion);
+
+
+	/**
+	 * 获取单据数据
+	 * @param id ID
+	 * @return 返回结果
+	 * */
+	Map<String, Object> getBill(String id);
+
+	/**
+	 * 撤销流程
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result revokeOperation(String id);
+
+	/**
+	 * 送审
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result forApproval(String id);
+
+	/**
+	 * 确认操作
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result confirmOperation(String id);
 	/**
 	 * 添加，如果语句错误，则抛出异常
 	 * @param assetStockGoodsTranfer 数据对象

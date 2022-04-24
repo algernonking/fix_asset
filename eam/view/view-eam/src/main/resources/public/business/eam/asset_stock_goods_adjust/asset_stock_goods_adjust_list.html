@@ -2,7 +2,7 @@
 /**
  * 库存调整 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:43:57
+ * @since 2022-04-24 15:08:00
  */
  -->
  <!DOCTYPE html>
@@ -40,10 +40,10 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 办理状态 , status ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
-                        <input id="status" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 库存所属 , ownerType ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=true -->
@@ -67,12 +67,12 @@
                     </div>
                     <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:100px"><span th:text="${lang.translate('仓库')}" class="search-label warehouseId-label">仓库</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('仓库')}" class="search-label warehouseId-label">仓库</span><span class="search-colon">:</span></div>
                         <div id="warehouseId" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 调整说明 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:100px"><span th:text="${lang.translate('调整说明')}" class="search-label content-label">调整说明</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('调整说明')}" class="search-label content-label">调整说明</span><span class="search-colon">:</span></div>
                         <input id="content" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
@@ -138,8 +138,11 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var AUTH_PREFIX="eam_asset_stock_goods_adjust";
 
+    // OPER_TYPE
+    var OPER_TYPE = [[${operType}]] ;
     // OWNER_TYPE
     var OWNER_TYPE = [[${ownerType}]] ;
     // APPROVAL_REQUIRED

@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 库存调整  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:43:56
+ * @since 2022-04-24 12:15:09
  */
 @FeignClient(value = ServiceNames.EAM, contextId = AssetStockGoodsAdjustServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface AssetStockGoodsAdjustServiceProxy {
@@ -96,6 +96,27 @@ public interface AssetStockGoodsAdjustServiceProxy {
      * 导入库存调整数据(Excel)
      */
     public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+    /**
+     * 审批
+     */
+    public static final String APPROVE = API_PREFIX + "approve";
+
+    /**
+     * 提交审批
+     */
+    public static final String FOR_APPROVAL = API_PREFIX + "for-approval";
+
+    /**
+     * 确认操作
+     */
+    public static final String CONFIRM_OPERATION = API_PREFIX + "confirm-operation";
+
+    /**
+     * 撤销操作
+     */
+    public static final String REVOKE_OPERATION = API_PREFIX + "revoke-operation";
+
 
     /**
      * 添加库存调整

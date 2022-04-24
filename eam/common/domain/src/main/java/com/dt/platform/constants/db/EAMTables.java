@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-04-23 07:12:40
+ * @since 2022-04-24 13:23:05
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -5870,14 +5870,14 @@ public class EAMTables {
 		public static final DBField GOODS_ID = new DBField(DBDataType.STRING , "goods_id","goodsId","物品","物品",false,false,true);
 		
 		/**
-		 * 入库存数量
+		 * 入库数量
 		*/
-		public static final DBField STOCK_IN_NUMBER = new DBField(DBDataType.DECIMAL , "stock_in_number","stockInNumber","入库存数量","入库存数量",false,false,true);
+		public static final DBField STOCK_IN_NUMBER = new DBField(DBDataType.DECIMAL , "stock_in_number","stockInNumber","入库数量","入库数量",false,false,true);
 		
 		/**
-		 * 当前库存数量
+		 * 当前数量
 		*/
-		public static final DBField STOCK_CUR_NUMBER = new DBField(DBDataType.DECIMAL , "stock_cur_number","stockCurNumber","当前库存数量","当前库存数量",false,false,true);
+		public static final DBField STOCK_CUR_NUMBER = new DBField(DBDataType.DECIMAL , "stock_cur_number","stockCurNumber","当前数量","当前数量",false,false,true);
 		
 		/**
 		 * 总金额
@@ -5893,6 +5893,11 @@ public class EAMTables {
 		 * 入库时间
 		*/
 		public static final DBField STORAGE_DATE = new DBField(DBDataType.DATE , "storage_date","storageDate","入库时间","入库时间",false,false,true);
+		
+		/**
+		 * 库存数据
+		*/
+		public static final DBField REAL_STOCK_ID = new DBField(DBDataType.STRING , "real_stock_id","realStockId","库存数据","库存数据",false,false,true);
 		
 		/**
 		 * 制单人
@@ -5943,8 +5948,13 @@ public class EAMTables {
 		*/
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
 		public EAM_GOODS_STOCK() {
-			this.init($NAME,"库存物品" , ID , OWNER_ID , OWNER_TMP_ID , OWNER_CODE , OWNER_TYPE , BUSINESS_CODE , STATUS , GOODS_STATUS , CATEGORY_ID , NAME , MODEL , CODE , BAR_CODE , MANUFACTURER_ID , BRAND_ID , UNIT_PRICE , UNIT , STOCK_MIN , STOCK_MAX , STOCK_SECURITY , PICTURE_ID , NOTES , BATCH_CODE , OWN_COMPANY_ID , USE_ORG_ID , SUPPLIER_NAME , WAREHOUSE_ID , SOURCE_ID , GOODS_ID , STOCK_IN_NUMBER , STOCK_CUR_NUMBER , AMOUNT , MANAGER_ID , STORAGE_DATE , ORIGINATOR_ID , SELECTED_CODE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"库存物品" , ID , OWNER_ID , OWNER_TMP_ID , OWNER_CODE , OWNER_TYPE , BUSINESS_CODE , STATUS , GOODS_STATUS , CATEGORY_ID , NAME , MODEL , CODE , BAR_CODE , MANUFACTURER_ID , BRAND_ID , UNIT_PRICE , UNIT , STOCK_MIN , STOCK_MAX , STOCK_SECURITY , PICTURE_ID , NOTES , BATCH_CODE , OWN_COMPANY_ID , USE_ORG_ID , SUPPLIER_NAME , WAREHOUSE_ID , SOURCE_ID , GOODS_ID , STOCK_IN_NUMBER , STOCK_CUR_NUMBER , AMOUNT , MANAGER_ID , STORAGE_DATE , REAL_STOCK_ID , ORIGINATOR_ID , SELECTED_CODE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
 		}
 		public static final EAM_GOODS_STOCK $TABLE=new EAM_GOODS_STOCK();
 	}

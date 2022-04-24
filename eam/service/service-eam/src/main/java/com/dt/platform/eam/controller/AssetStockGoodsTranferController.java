@@ -3,6 +3,12 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetStockGoodsAdjustVOMeta;
+import com.dt.platform.proxy.eam.AssetStockGoodsAdjustServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +24,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetStockGoodsTranferServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsTranferVOMeta;
-import com.dt.platform.domain.eam.AssetStockGoodsTranfer;
-import com.dt.platform.domain.eam.AssetStockGoodsTranferVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -33,8 +37,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsTranferMeta;
-import com.dt.platform.domain.eam.GoodsStock;
-import com.dt.platform.domain.eam.Warehouse;
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -51,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 库存调拨 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:42:08
+ * @since 2022-04-24 12:15:19
 */
 
 @Api(tags = "库存调拨")
@@ -340,9 +342,75 @@ public class AssetStockGoodsTranferController extends SuperController {
 			.with(AssetStockGoodsTranferMeta.WAREHOUSE_IN)
 			.with(AssetStockGoodsTranferMeta.WAREHOUSE_OUT)
 			.execute();
+
+		List<Employee> originatorList= CollectorUtil.collectList(list, AssetStockGoodsTranfer::getOriginator);
+		assetStockGoodsTranferService.dao().join(originatorList, Person.class);
 		result.success(true).data(list);
 		return result;
 	}
+
+
+
+
+	/**
+	 * 送审
+	 * */
+	@ApiOperation(value = "送审")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetStockGoodsTranferVOMeta.ID)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetStockGoodsAdjustServiceProxy.FOR_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsTranferServiceProxy.FOR_APPROVAL)
+	public Result forApproval(String id)  {
+		return assetStockGoodsTranferService.forApproval(id);
+	}
+
+
+	/**
+	 * 确认
+	 * */
+	@ApiOperation(value = "确认")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetStockGoodsTranferVOMeta.ID)
+	@ApiOperationSupport(order=13)
+	@SentinelResource(value = AssetStockGoodsTranferServiceProxy.CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsTranferServiceProxy.CONFIRM_OPERATION)
+	public Result confirmOperation(String id)  {
+		return assetStockGoodsTranferService.confirmOperation(id);
+	}
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetStockGoodsTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetStockGoodsTranferVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetStockGoodsTranferServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsTranferServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetStockGoodsTranferService.revokeOperation(id);
+	}
+
+
+	/**
+	 * 审批
+	 * */
+	@ApiOperation(value = "审批")
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = AssetStockGoodsTranferServiceProxy.APPROVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsTranferServiceProxy.APPROVE)
+	public Result approve(ProcessApproveVO approveVO)  {
+		return assetStockGoodsTranferService.approve(approveVO);
+	}
+
 
 
 

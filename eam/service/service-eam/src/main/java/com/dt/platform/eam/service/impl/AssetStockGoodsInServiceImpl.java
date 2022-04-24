@@ -6,10 +6,14 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetStockGoodsInMeta;
 import com.dt.platform.eam.service.IGoodsStockService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.dao.data.Rcd;
+import com.github.foxnic.dao.data.RcdSet;
+import com.github.foxnic.sql.expr.Insert;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
@@ -116,6 +120,8 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 		String codeRule="";
 		if(AssetStockGoodsTypeEnum.STOCK.code().equals(assetStockGoodsIn.getOwnerType())){
 			codeRule= CodeModuleEnum.EAM_ASSET_STOCK_GOODS_IN.code();
+		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(assetStockGoodsIn.getOwnerType())) {
+			codeRule= CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code();
 		}
 		if(StringUtil.isBlank(assetStockGoodsIn.getBusinessCode())){
 			if(!StringUtil.isBlank(codeRule)){
@@ -186,12 +192,59 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 			bill.setId(id);
 			bill.setStatus(status);
 			this.dao.execute("update eam_goods_stock set status=? where owner_id=?",status,bill.getId());
+			//后续需要加盘点
+			computeStockData(id);
 			return super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{
 			return ErrorDesc.failureMessage("返回未知结果");
 		}
+	}
+
+	private Result computeStockData(String id){
+		AssetStockGoodsIn bill=this.getById(id);
+		String tenantId= SessionUser.getCurrent().getActivatedTenantId();
+		this.dao().fill(bill)
+				.with(AssetStockGoodsInMeta.GOODS_LIST)
+				.execute();
+		String ownerCode="";
+		if(AssetStockGoodsTypeEnum.STOCK.code().equals(bill.getOwnerType())){
+			ownerCode=AssetStockGoodsOwnerEnum.REAL_STOCK.code();
+		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(bill.getOwnerType())){
+			ownerCode=AssetStockGoodsOwnerEnum.REAL_CONSUMABLES.code();
+		}
+		List<GoodsStock> goods=bill.getGoodsList();
+		if(goods!=null&&goods.size()>0){
+			for(int i=0;i<goods.size();i++){
+				String goodsId=goods.get(i).getGoodsId();
+				String stockInNumber=goods.get(i).getStockInNumber()+"";
+				String warehouseId=goods.get(i).getWarehouseId();
+				if(StringUtil.isBlank(goodsId)||StringUtil.isBlank(warehouseId)){
+					System.out.println("goodsId or warehouseId is empty");
+				}else{
+					String sql="select id,goods_id from eam_goods_stock where owner_code=? and deleted=0 and tenant_id=? and goods_id=? and warehouse_id=?";
+					Rcd rs=this.dao.queryRecord(sql,ownerCode,tenantId,goodsId,warehouseId);
+					if(rs==null){
+						//新增
+						Insert ins=new Insert("eam_goods_stock");
+						ins.set("id",IDGenerator.getSnowflakeIdString());
+						ins.set("owner_code",ownerCode);
+						ins.set("owner_type",bill.getOwnerType());
+						ins.set("stock_cur_number",stockInNumber);
+						ins.set("tenant_id",tenantId);
+						ins.set("warehouse_id",warehouseId);
+						ins.set("goods_id",goodsId);
+						this.dao.execute(ins);
+					}else{
+						String gid=rs.getString("id");
+						String updateSql="update eam_goods_stock set stock_cur_number=stock_cur_number+"+stockInNumber+" where id=?";
+						this.dao.execute(updateSql,gid);
+					}
+				}
+			}
+		}
+		return ErrorDesc.success();
 	}
 	@Override
 	public Result confirmOperation(String id) {
@@ -307,7 +360,6 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 		if(list.size()==0){
 			return ErrorDesc.failureMessage("请选择数据");
 		}
-
 
 		Result r=super.update(assetStockGoodsIn , mode , throwsException);
 		for(int i=0;i<list.size();i++){

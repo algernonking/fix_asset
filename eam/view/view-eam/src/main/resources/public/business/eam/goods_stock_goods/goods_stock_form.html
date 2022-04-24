@@ -48,7 +48,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('分类')}">分类</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="categoryId" input-type="select" th:data="${'/service-eam/eam-category/query-paged-list'}" extraParam="{}"></div>
+                            <div id="categoryId" input-type="select"  extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -255,8 +255,11 @@
     var VALIDATE_CONFIG={"code":{"labelInForm":"物品编码","inputType":"text_input","required":true},"goodsStatus":{"labelInForm":"状态","inputType":"select_box","required":true},"brandId":{"labelInForm":"品牌","inputType":"select_box","required":true},"name":{"labelInForm":"物品名称","inputType":"text_input","required":true},"manufacturerId":{"labelInForm":"厂商","inputType":"select_box","required":true},"model":{"labelInForm":"规格型号","inputType":"text_input","required":true},"storageDate":{"date":true,"labelInForm":"入库时间","inputType":"date_input"},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true},"barCode":{"labelInForm":"物品条码","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_goods_stock";
 
+    var ASSET_CATEGORY_DATA =  [[${assetCategoryData}]];
+
     // OWNER_CODE
     var OWNER_CODE = [[${ownerCode}]] ;
+
     // OWNER_TYPE
     var OWNER_TYPE = [[${ownerType}]] ;
 

@@ -1,12 +1,21 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetCategoryCodeEnum;
 import com.dt.platform.proxy.eam.GoodsStockServiceProxy;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.lang.StringUtil;
+
+import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.CatalogVO;
 import org.github.foxnic.web.framework.view.controller.ViewController;
+import org.github.foxnic.web.misc.ztree.ZTreeNode;
+import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -58,6 +67,24 @@ public class GoodsStockGoodsPageController extends ViewController {
 
 		model.addAttribute("ownerCode",ownerCode);
 		model.addAttribute("ownerType",ownerType);
+
+
+		//设置资产分类
+		CatalogVO catalog=new CatalogVO();
+		catalog.setCode(AssetCategoryCodeEnum.ASSET.code());
+		Result<List<Catalog>> catalogListResult= CatalogServiceProxy.api().queryList(catalog);
+		String categoryId="";
+		if(catalogListResult.isSuccess()){
+			List<Catalog> catalogList=catalogListResult.getData();
+			if(catalogList.size()>0){
+				categoryId=catalogList.get(0).getId();
+				CatalogVO catalog2=new CatalogVO();
+				catalog2.setParentId(categoryId);
+				catalog2.setIsLoadAllDescendants(1);
+				Result<List<ZTreeNode>> treeResult=CatalogServiceProxy.api().queryNodes(catalog2);
+				model.addAttribute("assetCategoryData",treeResult.getData());
+			}
+		}
 
 
 		return prefix+"/goods_stock_form";

@@ -46,7 +46,7 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('入库存数量')}">入库存数量</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('物品数量')}">物品数量</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="stockInNumber" id="stockInNumber" name="stockInNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('入库存数量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
@@ -58,16 +58,12 @@
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs6 form-column" >
-
-
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('总金额')}">总金额</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="amount" id="amount" name="amount" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('总金额') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
-
-
                 <!--结束：栏次内字段循环-->
             </div>
             <!--结束：栏次输入框循环-->

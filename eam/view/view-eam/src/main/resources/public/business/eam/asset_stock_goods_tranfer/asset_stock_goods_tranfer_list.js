@@ -1,7 +1,7 @@
 /**
  * 库存调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:42:09
+ * @since 2022-04-24 15:20:52
  */
 
 
@@ -76,11 +76,11 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('办理状态') , templet: function (d) { return templet('status',d.status,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'warehouseOutId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('调出仓库'), templet: function (d) { return templet('warehouseOutId' ,fox.joinLabel(d.warehouseOut,"warehouseName"),d);}}
 					,{ field: 'warehouseInId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('调入仓库'), templet: function (d) { return templet('warehouseInId' ,fox.joinLabel(d.warehouseIn,"warehouseName"),d);}}
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('转移说明') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('业务日期') ,templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -143,7 +143,7 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
-		value.status={ inputType:"button",value: $("#status").val()};
+		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		value.warehouseOutId={ inputType:"select_box", value: getSelectedValue("#warehouseOutId","value") ,fillBy:["warehouseOut"]  , label:getSelectedValue("#warehouseOutId","nameStr") };
 		value.warehouseInId={ inputType:"select_box", value: getSelectedValue("#warehouseInId","value") ,fillBy:["warehouseIn"]  , label:getSelectedValue("#warehouseInId","nameStr") };
 		value.businessDate={ inputType:"date_input", begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() ,matchType:"auto" };
@@ -194,6 +194,28 @@ function ListPage() {
 
 		fox.switchSearchRow(2);
 
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		//渲染 warehouseOutId 下拉字段
 		fox.renderSelectBox({
 			el: "warehouseOutId",

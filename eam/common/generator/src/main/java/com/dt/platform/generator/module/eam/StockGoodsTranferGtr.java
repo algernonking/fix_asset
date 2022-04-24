@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.GoodsStock;
 import com.dt.platform.domain.eam.Warehouse;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsInMeta;
@@ -52,8 +53,8 @@ public class StockGoodsTranferGtr extends BaseCodeGenerator {
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
-        cfg.view().search().labelWidth(3,Config.searchLabelWidth+60);
-        cfg.view().search().labelWidth(4,Config.searchLabelWidth+60);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.SELECTED_CODE).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.OWNER_TYPE).table().disable(true);
@@ -71,11 +72,13 @@ public class StockGoodsTranferGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.NEXT_APPROVER_NAMES).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.APPROVAL_OPINION).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.ATTACH_ID).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.ORIGINATOR_ID).table().disable(true);
+//        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.ORIGINATOR_ID).table().disable(true);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.CONTENT).table().disable(true);
 
+        cfg.view().list().addJsVariable("OPER_TYPE","[[${operType}]]","OPER_TYPE");
+        cfg.view().form().addJsVariable("OPER_TYPE","[[${operType}]]","OPER_TYPE");
         cfg.view().list().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
         cfg.view().form().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
         cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","APPROVAL_REQUIRED");
@@ -90,7 +93,8 @@ public class StockGoodsTranferGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.ATTACH_ID)
                 .form().label("附件").upload().acceptSingleFile().maxFileCount(1).displayFileName(false);
 
-
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.STATUS).basic().label("办理状态")
+                .form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.NAME).form().validate().required();
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.WAREHOUSE_IN_ID)
@@ -136,8 +140,8 @@ public class StockGoodsTranferGtr extends BaseCodeGenerator {
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
+                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
                 .setPageController(WriteMode.IGNORE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)

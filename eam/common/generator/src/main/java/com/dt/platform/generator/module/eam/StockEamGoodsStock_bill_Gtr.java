@@ -10,6 +10,8 @@ import com.dt.platform.proxy.eam.*;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.meta.CatalogMeta;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.meta.DictItemMeta;
 import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
@@ -24,10 +26,12 @@ public class StockEamGoodsStock_bill_Gtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
-        cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
+        cfg.getPoClassFile().addSimpleProperty(Catalog.class,"category","资产分类","资产分类");
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");
         cfg.getPoClassFile().addSimpleProperty(GoodsStock.class,"goods","物品","物品");
+        cfg.getPoClassFile().addSimpleProperty(GoodsStock.class,"realGoods","库存数据","库存数据");
+
 
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"ownerCompany","所属公司","所属公司");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");
@@ -45,6 +49,8 @@ public class StockEamGoodsStock_bill_Gtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(String.class,"goodsStockMax","物品条码","物品条码");
         cfg.getPoClassFile().addSimpleProperty(String.class,"goodsStockMin","物品条码","物品条码");
         cfg.getPoClassFile().addSimpleProperty(String.class,"goodsStockSecurity","物品条码","物品条码");
+        cfg.getPoClassFile().addSimpleProperty(String.class,"goodsStockNotes","库存备注","库存备注");
+
 
 
 
@@ -59,6 +65,8 @@ public class StockEamGoodsStock_bill_Gtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.OWNER_TYPE).table().disable();
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.CREATE_TIME).table().disable();
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.SELECTED_CODE).table().disable();
+
+        cfg.view().field(EAMTables.EAM_GOODS_STOCK.REAL_STOCK_ID).table().disable();
 
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.STATUS).table().disable();
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.NAME).table().disable();
@@ -211,7 +219,8 @@ public class StockEamGoodsStock_bill_Gtr extends BaseCodeGenerator {
                 .basic().label("分类")
                 .form().validate().required()
                 .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
-                .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillWith(GoodsMeta.CATEGORY).muliti(false);
+                .valueField(CatalogMeta.ID).textField(CatalogMeta.NAME).fillWith(GoodsMeta.CATEGORY).muliti(false);
+
 
         cfg.view().field(EAMTables.EAM_GOODS_STOCK.BRAND_ID)
                 .basic().label("品牌")

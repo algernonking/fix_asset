@@ -13,6 +13,7 @@ function FormPage() {
 	var disableCreateNew=false;
 	var disableModify=false;
 	var dataBeforeEdit=null;
+	var categorySelect;
 	/**
       * 入口函数，初始化
       */
@@ -136,36 +137,65 @@ function FormPage() {
 			}
 		});
 		//渲染 categoryId 下拉字段
-		fox.renderSelectBox({
-			el: "categoryId",
-			radio: true,
+		categorySelect = xmSelect.render({
+			el: '#categoryId',
+			prop: {
+				name: 'name',
+				value: 'id',
+			},
 			filterable: true,
-			paging: true,
-			pageRemote: true,
+			tree: {
+				showFolderIcon: true,
+				show: true,
+				strict: false,
+				expandedKeys: [ -1],
+			},
+			//处理方式
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("categoryId",data.arr,data.change,data.isAdd);
 				},1);
 			},
-			//转换数据
-			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues=[],defaultIndexs=[];
-				if(action=="create") {
-					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
-				}
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({data:data[i],name:data[i].hierarchyName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
+			//显示为text模式
+			model: { label: { type: 'text' } },
+			//单选模式
+			radio: true,
+			//选中关闭
+			clickClose: true,
+			height: '450px',
+			data:ASSET_CATEGORY_DATA
+		})
+
+		// fox.renderSelectBox({
+		// 	el: "categoryId",
+		// 	radio: true,
+		// 	filterable: true,
+		// 	paging: true,
+		// 	pageRemote: true,
+		// 	on: function(data){
+		// 		setTimeout(function () {
+		// 			window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("categoryId",data.arr,data.change,data.isAdd);
+		// 		},1);
+		// 	},
+		// 	//转换数据
+		// 	searchField: "hierarchyName", //请自行调整用于搜索的字段名称
+		// 	extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+		// 	transform: function(data) {
+		// 		//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+		// 		var defaultValues=[],defaultIndexs=[];
+		// 		if(action=="create") {
+		// 			defaultValues = "".split(",");
+		// 			defaultIndexs = "".split(",");
+		// 		}
+		// 		var opts=[];
+		// 		if(!data) return opts;
+		// 		for (var i = 0; i < data.length; i++) {
+		// 			if(!data[i]) continue;
+		// 			opts.push({data:data[i],name:data[i].hierarchyName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+		// 		}
+		// 		return opts;
+		// 	}
+		// });
 		//渲染 manufacturerId 下拉字段
 		fox.renderSelectBox({
 			el: "manufacturerId",
@@ -481,11 +511,20 @@ function FormPage() {
 			//设置  状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#goodsStatus",formData.goodsStatus,SELECT_GOODSSTATUS_DATA);
 			//设置  分类 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			// fox.setSelectValue4QueryApi("#categoryId",formData.category);
 			//设置  厂商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#manufacturerId",formData.manufacturer);
 			//设置  品牌 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#brandId",formData.brand);
+
+
+			setTimeout(function(){
+				if(categorySelect){
+					if(formData.category&&formData.categoryId){
+						categorySelect.setValue(formData.categoryId.split(","));
+					}
+				}
+			},150)
 
 			//处理fillBy
 
@@ -540,6 +579,9 @@ function FormPage() {
 		data["goodsStatus"]=fox.getSelectedValue("goodsStatus",false);
 		//获取 分类 下拉框的值
 		data["categoryId"]=fox.getSelectedValue("categoryId",false);
+
+
+
 		//获取 厂商 下拉框的值
 		data["manufacturerId"]=fox.getSelectedValue("manufacturerId",false);
 		//获取 品牌 下拉框的值

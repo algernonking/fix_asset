@@ -39,6 +39,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+
+                //单据临时屏蔽
+                operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
                 document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }
 
@@ -148,6 +151,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         makeFormQueryString:function(data,queryString,action) {
             admin.putTempData('eam-asset-stock-goods-in-form-ownerType', OWNER_TYPE);
+            admin.putTempData('eam-asset-stock-goods-in-form-operType', OPER_TYPE);
             return queryString;
         },
         /**
@@ -257,6 +261,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
             OWNER_TYPE=admin.getTempData('eam-asset-stock-goods-in-form-ownerType');
+            OPER_TYPE=admin.getTempData('eam-asset-stock-goods-in-form-operType');
             console.log("form:beforeInit")
         },
         /**
@@ -338,9 +343,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             if(data&&data.id){
                 ownerTmpId=data.id;
             }
-            var queryString="?operType=eam_asset_stock_goods_in&selectedCode="+timestamp+"&ownerTmpId="+ownerTmpId+"&ownerCode=goods&ownerType="+OWNER_TYPE+"&pageType="+formAction;
+
+
+            var queryString="?operType="+OPER_TYPE+"&selectedCode="+timestamp+"&ownerTmpId="+ownerTmpId+"&ownerType="+OWNER_TYPE+"&pageType="+formAction;
             //设置地址
             win.location="/business/eam/goods_stock/goods_stock_selected_list.html"+queryString
+
+
         },
         /**
          * 文件上传组件回调

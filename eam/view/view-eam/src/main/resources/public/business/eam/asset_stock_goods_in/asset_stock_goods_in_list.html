@@ -2,7 +2,7 @@
 /**
  * 库存物品单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:42:39
+ * @since 2022-04-24 15:04:46
  */
  -->
  <!DOCTYPE html>
@@ -73,12 +73,12 @@
                     </div>
                     <!-- 单据名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('单据名称')}" class="search-label name-label">单据名称</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('单据名称')}" class="search-label name-label">单据名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 批次号 , batchCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('批次号')}" class="search-label batchCode-label">批次号</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('批次号')}" class="search-label batchCode-label">批次号</span><span class="search-colon">:</span></div>
                         <input id="batchCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
@@ -98,12 +98,12 @@
                     </div>
                     <!-- 接收人 , receiverUserName ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('接收人')}" class="search-label receiverUserName-label">接收人</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('接收人')}" class="search-label receiverUserName-label">接收人</span><span class="search-colon">:</span></div>
                         <input id="receiverUserName" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
                         <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
@@ -162,6 +162,8 @@
 
     // OWNER_TYPE
     var OWNER_TYPE = [[${ownerType}]] ;
+    // OPER_TYPE
+    var OPER_TYPE = [[${operType}]] ;
     // APPROVAL_REQUIRED
     var APPROVAL_REQUIRED = [[${approvalRequired}]] ;
 

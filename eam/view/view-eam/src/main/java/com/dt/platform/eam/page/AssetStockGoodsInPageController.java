@@ -47,12 +47,12 @@ public class AssetStockGoodsInPageController extends ViewController {
 	@RequestMapping("/asset_stock_goods_in_list.html")
 	public String list(Model model,HttpServletRequest request,String ownerType) {
 
+
 		String operCode="";
 		if(AssetStockGoodsTypeEnum.STOCK.code().equals(ownerType)){
 			operCode=AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code();
 		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(ownerType)){
 			operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code();
-
 		}
 		boolean approvalRequired=true;
 		Result approvalResult= OperateServiceProxy.api().approvalRequired(operCode);
@@ -61,6 +61,7 @@ public class AssetStockGoodsInPageController extends ViewController {
 		}
 		model.addAttribute("approvalRequired",approvalRequired);
 		model.addAttribute("ownerType",ownerType);
+		model.addAttribute("operType",operCode);
 		return prefix+"/asset_stock_goods_in_list";
 	}
 
@@ -68,8 +69,10 @@ public class AssetStockGoodsInPageController extends ViewController {
 	 * 库存物品单 表单页面
 	 */
 	@RequestMapping("/asset_stock_goods_in_form.html")
-	public String form(Model model,HttpServletRequest request , String id,String ownerType) {
+	public String form(Model model,HttpServletRequest request , String id,String ownerType,String operType) {
+
 		model.addAttribute("ownerType",ownerType);
+		model.addAttribute("operType",operType);
 		return prefix+"/asset_stock_goods_in_form";
 	}
 }

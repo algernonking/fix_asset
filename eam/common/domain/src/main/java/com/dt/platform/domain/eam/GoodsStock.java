@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.hrm.Employee;
@@ -20,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 库存物品
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-22 06:25:05
- * @sign 2DFE66069CED21D69A620A84C5C573AB
+ * @since 2022-04-24 20:39:36
+ * @sign E01BFB39E9982699E66C58785D332C80
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -208,15 +209,15 @@ public class GoodsStock extends Entity {
 	private String goodsId;
 	
 	/**
-	 * 入库存数量：入库存数量
+	 * 入库数量：入库数量
 	*/
-	@ApiModelProperty(required = false,value="入库存数量" , notes = "入库存数量")
+	@ApiModelProperty(required = false,value="入库数量" , notes = "入库数量")
 	private BigDecimal stockInNumber;
 	
 	/**
-	 * 当前库存数量：当前库存数量
+	 * 当前数量：当前数量
 	*/
-	@ApiModelProperty(required = false,value="当前库存数量" , notes = "当前库存数量")
+	@ApiModelProperty(required = false,value="当前数量" , notes = "当前数量")
 	private BigDecimal stockCurNumber;
 	
 	/**
@@ -236,6 +237,12 @@ public class GoodsStock extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="入库时间" , notes = "入库时间")
 	private Date storageDate;
+	
+	/**
+	 * 库存数据：库存数据
+	*/
+	@ApiModelProperty(required = false,value="库存数据" , notes = "库存数据")
+	private String realStockId;
 	
 	/**
 	 * 制单人：制单人
@@ -298,10 +305,16 @@ public class GoodsStock extends Entity {
 	private Integer version;
 	
 	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
+	
+	/**
 	 * 资产分类：资产分类
 	*/
 	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
-	private Category category;
+	private Catalog category;
 	
 	/**
 	 * 生产厂商：生产厂商
@@ -358,6 +371,12 @@ public class GoodsStock extends Entity {
 	private Employee originator;
 	
 	/**
+	 * 库存数据：库存数据
+	*/
+	@ApiModelProperty(required = false,value="库存数据" , notes = "库存数据")
+	private GoodsStock realGoods;
+	
+	/**
 	 * 类型：类型
 	*/
 	@ApiModelProperty(required = false,value="类型" , notes = "类型")
@@ -410,6 +429,12 @@ public class GoodsStock extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="物品条码" , notes = "物品条码")
 	private String goodsStockSecurity;
+	
+	/**
+	 * 库存备注：库存备注
+	*/
+	@ApiModelProperty(required = false,value="库存备注" , notes = "库存备注")
+	private String goodsStockNotes;
 	
 	/**
 	 * 获得 主键<br>
@@ -963,17 +988,17 @@ public class GoodsStock extends Entity {
 	}
 	
 	/**
-	 * 获得 入库存数量<br>
-	 * 入库存数量
-	 * @return 入库存数量
+	 * 获得 入库数量<br>
+	 * 入库数量
+	 * @return 入库数量
 	*/
 	public BigDecimal getStockInNumber() {
 		return stockInNumber;
 	}
 	
 	/**
-	 * 设置 入库存数量
-	 * @param stockInNumber 入库存数量
+	 * 设置 入库数量
+	 * @param stockInNumber 入库数量
 	 * @return 当前对象
 	*/
 	public GoodsStock setStockInNumber(BigDecimal stockInNumber) {
@@ -982,17 +1007,17 @@ public class GoodsStock extends Entity {
 	}
 	
 	/**
-	 * 获得 当前库存数量<br>
-	 * 当前库存数量
-	 * @return 当前库存数量
+	 * 获得 当前数量<br>
+	 * 当前数量
+	 * @return 当前数量
 	*/
 	public BigDecimal getStockCurNumber() {
 		return stockCurNumber;
 	}
 	
 	/**
-	 * 设置 当前库存数量
-	 * @param stockCurNumber 当前库存数量
+	 * 设置 当前数量
+	 * @param stockCurNumber 当前数量
 	 * @return 当前对象
 	*/
 	public GoodsStock setStockCurNumber(BigDecimal stockCurNumber) {
@@ -1054,6 +1079,25 @@ public class GoodsStock extends Entity {
 	*/
 	public GoodsStock setStorageDate(Date storageDate) {
 		this.storageDate=storageDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 库存数据<br>
+	 * 库存数据
+	 * @return 库存数据
+	*/
+	public String getRealStockId() {
+		return realStockId;
+	}
+	
+	/**
+	 * 设置 库存数据
+	 * @param realStockId 库存数据
+	 * @return 当前对象
+	*/
+	public GoodsStock setRealStockId(String realStockId) {
+		this.realStockId=realStockId;
 		return this;
 	}
 	
@@ -1248,11 +1292,30 @@ public class GoodsStock extends Entity {
 	}
 	
 	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public GoodsStock setTenantId(String tenantId) {
+		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
 	 * 获得 资产分类<br>
 	 * 资产分类
 	 * @return 资产分类
 	*/
-	public Category getCategory() {
+	public Catalog getCategory() {
 		return category;
 	}
 	
@@ -1261,7 +1324,7 @@ public class GoodsStock extends Entity {
 	 * @param category 资产分类
 	 * @return 当前对象
 	*/
-	public GoodsStock setCategory(Category category) {
+	public GoodsStock setCategory(Catalog category) {
 		this.category=category;
 		return this;
 	}
@@ -1438,6 +1501,25 @@ public class GoodsStock extends Entity {
 	}
 	
 	/**
+	 * 获得 库存数据<br>
+	 * 库存数据
+	 * @return 库存数据
+	*/
+	public GoodsStock getRealGoods() {
+		return realGoods;
+	}
+	
+	/**
+	 * 设置 库存数据
+	 * @param realGoods 库存数据
+	 * @return 当前对象
+	*/
+	public GoodsStock setRealGoods(GoodsStock realGoods) {
+		this.realGoods=realGoods;
+		return this;
+	}
+	
+	/**
 	 * 获得 类型<br>
 	 * 类型
 	 * @return 类型
@@ -1605,6 +1687,25 @@ public class GoodsStock extends Entity {
 	*/
 	public GoodsStock setGoodsStockSecurity(String goodsStockSecurity) {
 		this.goodsStockSecurity=goodsStockSecurity;
+		return this;
+	}
+	
+	/**
+	 * 获得 库存备注<br>
+	 * 库存备注
+	 * @return 库存备注
+	*/
+	public String getGoodsStockNotes() {
+		return goodsStockNotes;
+	}
+	
+	/**
+	 * 设置 库存备注
+	 * @param goodsStockNotes 库存备注
+	 * @return 当前对象
+	*/
+	public GoodsStock setGoodsStockNotes(String goodsStockNotes) {
+		this.goodsStockNotes=goodsStockNotes;
 		return this;
 	}
 

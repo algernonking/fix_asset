@@ -131,6 +131,10 @@ public class EamRelationManager extends RelationManager {
 
 
     public void setupAssetStockIn() {
+        this.property(AssetStockGoodsInMeta.GOODS_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_GOODS_IN.ID).join(EAMTables.EAM_GOODS_STOCK.OWNER_ID);
+
+
         this.property(AssetStockGoodsInMeta.SOURCE_PROP)
                 .using(EAMTables.EAM_ASSET_STOCK_GOODS_IN.SOURCE_ID).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
                 .condition("dict_code='eam_source'");
@@ -138,6 +142,7 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetStockGoodsInMeta.STOCK_TYPE_DICT_PROP)
                 .using(EAMTables.EAM_ASSET_STOCK_GOODS_IN.STOCK_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
                 .condition("dict_code='eam_stock_in_type'");
+
 
         //关联 仓库
         this.property(AssetStockGoodsInMeta.WAREHOUSE_PROP)
@@ -163,6 +168,8 @@ public class EamRelationManager extends RelationManager {
 
     private void setupGoodsStock(){
 
+
+
         // 关联品牌
         this.property(GoodsStockMeta.BRAND_PROP)
                 .using(EAMTables.EAM_GOODS_STOCK.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
@@ -173,15 +180,13 @@ public class EamRelationManager extends RelationManager {
 
         // 关联分类
         this.property(GoodsStockMeta.CATEGORY_PROP)
-                .using(EAMTables.EAM_GOODS_STOCK.CATEGORY_ID).join(EAMTables.EAM_CATEGORY.ID);
+                .using(EAMTables.EAM_GOODS_STOCK.CATEGORY_ID).join(FoxnicWeb.PCM_CATALOG.ID);
 
 
         // 关联来源
         this.property(GoodsStockMeta.SOURCE_PROP)
                 .using(EAMTables.EAM_GOODS_STOCK.SOURCE_ID).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
                 .condition("dict_code='eam_source'");
-
-
 
 
         //关联 所属公司
@@ -208,6 +213,10 @@ public class EamRelationManager extends RelationManager {
         //物品
         this.property(GoodsStockMeta.GOODS_PROP)
                 .using(EAMTables.EAM_GOODS_STOCK.GOODS_ID).join(EAMTables.EAM_GOODS_STOCK.ID);
+
+        //库存数据
+        this.property(GoodsStockMeta.REAL_GOODS_PROP)
+                .using(EAMTables.EAM_GOODS_STOCK.REAL_STOCK_ID).join(EAMTables.EAM_GOODS_STOCK.ID);
 
     }
     public void setupAssetStockGoods(){

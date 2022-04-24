@@ -44,10 +44,7 @@
                     <!-- 库存所属 , ownerCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 所属类型 , ownerType ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
-                        <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
+
                     <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 状态 , status ,typeName=select_box, isHideInSearch=true -->
                     <!-- 物品名称 , name ,typeName=text_input, isHideInSearch=true -->
@@ -93,21 +90,19 @@
                         <div id="warehouseId" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
 
-
-                </div>
-                <!-- 搜索输入区域 -->
-                <div class="layui-form toolbar search-inputs">
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('批次号')}" class="search-label batchCode-label">批次号</span><span class="search-colon">:</span></div>
-                        <input id="batchCode" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- 入库时间 , storageDate ,typeName=date_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('入库时间')}" class="search-label storageDate-label">入库时间</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:100px"><span th:text="${lang.translate('入库时间')}" class="search-label storageDate-label">入库时间</span><span class="search-colon">:</span></div>
                         <input type="text" id="storageDate-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
                         <span class="search-dash">-</span>
                         <input type="text" id="storageDate-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+
+                    <!-- 入库时间 , storageDate ,typeName=date_input, isHideInSearch=false -->
+
 
 
                 </div>
@@ -146,9 +141,10 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var LAYUI_TABLE_WIDTH_CONFIG2 = [[${layuiTableWidthConfig}]] ;
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
     var AUTH_PREFIX="eam_goods_stock";
-
+    var TABLE_ID = [[${tableId}]] ;
     var OWNER_CODE = [[${ownerCode}]] ;
     var OWNER_TMP_ID = [[${ownerTmpId}]] ;
     var OPER_TYPE = [[${operType}]] ;

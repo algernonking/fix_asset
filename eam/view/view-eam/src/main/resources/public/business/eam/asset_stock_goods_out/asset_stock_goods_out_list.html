@@ -2,7 +2,7 @@
 /**
  * 库存出库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 08:02:59
+ * @since 2022-04-24 15:04:55
  */
  -->
  <!DOCTYPE html>
@@ -71,12 +71,12 @@
                     </div>
                     <!-- 单据名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('单据名称')}" class="search-label name-label">单据名称</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('单据名称')}" class="search-label name-label">单据名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 出库位置 , positionDetail ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('出库位置')}" class="search-label positionDetail-label">出库位置</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('出库位置')}" class="search-label positionDetail-label">出库位置</span><span class="search-colon">:</span></div>
                         <input id="positionDetail" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
@@ -96,7 +96,7 @@
                     </div>
                     <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('业务日期')}" class="search-label businessDate-label">业务日期</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务日期')}" class="search-label businessDate-label">业务日期</span><span class="search-colon">:</span></div>
                             <input type="text" id="businessDate-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
                             <span class="search-dash">-</span>
                             <input type="text" id="businessDate-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
@@ -155,6 +155,8 @@
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var AUTH_PREFIX="eam_asset_stock_goods_out";
 
+    // OPER_TYPE
+    var OPER_TYPE = [[${operType}]] ;
     // OWNER_TYPE
     var OWNER_TYPE = [[${ownerType}]] ;
     // APPROVAL_REQUIRED

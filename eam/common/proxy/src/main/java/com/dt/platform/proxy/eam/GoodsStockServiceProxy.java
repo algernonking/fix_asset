@@ -108,6 +108,8 @@ public interface GoodsStockServiceProxy {
 
     public static final String QUERY_PAGED_LIST_BY_SELECT = API_PREFIX + "query-paged-list-by-select";
 
+    public static final String QUERY_GOODS_STOCK_REAL_ALL = API_PREFIX + "query-goods-stock-real-all";
+
     /**
      * 添加库存物品
      */

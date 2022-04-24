@@ -4,13 +4,21 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.alibaba.csp.sentinel.util.StringUtil;
+import com.alibaba.fastjson.JSONArray;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.constants.enums.eam.AssetStockGoodsOwnerEnum;
+import com.dt.platform.constants.enums.eam.AssetStockGoodsTypeEnum;
+import com.github.foxnic.dao.data.RcdSet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 
 import com.dt.platform.domain.eam.GoodsStock;
 import com.dt.platform.domain.eam.GoodsStockVO;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -91,30 +99,14 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 		return ErrorDesc.success();
 	}
 
-//	public Result saveOwnerTmpData(String oid){
-//		//删除原来数据
-//		this.dao.execute("delete from eam_goods_stock where owner_tmp_id=?",oid);
-//		//插入新的数据
-//		GoodsStock qE=new GoodsStock();
-//		qE.setOwnerId(oid);
-//		List<GoodsStock> list =super.queryList(qE);
-//		if(list.size()>0){
-//			for(int i=0;i<list.size();i++){
-//				GoodsStock e=list.get(i);
-//				e.setId(null);
-//				e.setOwnerTmpId(oid);
-//				super.insert(e,false);
-//			}
-//		}
-//		return ErrorDesc.success();
-//	}
-
 	@Override
 	public PagedList<GoodsStock> queryPagedListBySelected(GoodsStockVO sample, String operType,String dataType) {
 
 		//重置数据
 		String ownerTmpId=sample.getOwnerTmpId();
 		if(!StringUtil.isBlank(ownerTmpId)){
+			//存在ownerTmp,则为修改操作时查询，删除原来数据
+			//saveOwner to TmpData
 			if("reset".equals(dataType)){
 				//删除原来数据
 				this.dao.execute("delete from eam_goods_stock where owner_tmp_id=?",ownerTmpId);
@@ -134,13 +126,11 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 				}
 			}
 		}
-
 		ConditionExpr queryCondition=new ConditionExpr();
 		if(!StringUtil.isBlank(sample.getCategoryId())) {
 			queryCondition.and("category_id in (select id from pcm_catalog where deleted=0 and (concat('/',hierarchy) like '%/"+sample.getCategoryId()+"/%' or id=?))",sample.getCategoryId());
 			sample.setCategoryId(null);
 		}
-
 		PagedList<GoodsStock> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
 		return list;
 
@@ -150,11 +140,8 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 	public PagedList<GoodsStock> queryPagedListBySelect(GoodsStockVO sample, String assetSearchContent) {
 		ConditionExpr queryCondition=new ConditionExpr();
 		String ownerId=sample.getOwnerId();
-
-
 		if(StringUtil.isBlank(ownerId)){
 			sample.setOwnerId(null);
-
 		}
 
 		if(!StringUtil.isBlank(sample.getCategoryId())) {
@@ -186,7 +173,41 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 		return super.insertList(goodsStockList);
 	}
 
-	
+	@Override
+	public PagedList<GoodsStock> queryGoodsStockRealAll(GoodsStockVO goodsVO) {
+
+
+		String ownerCode="";
+		if(AssetStockGoodsTypeEnum.STOCK.code().equals(goodsVO.getOwnerType()) ){
+			ownerCode=AssetStockGoodsOwnerEnum.REAL_STOCK.code();
+		}else if(AssetStockGoodsTypeEnum.STOCK.code().equals(goodsVO.getOwnerType())){
+			ownerCode=AssetStockGoodsOwnerEnum.REAL_CONSUMABLES.code();
+		}
+
+		String sql="select goods_id,sum(stock_cur_number) stock_cur_number_total from eam_goods_stock where deleted=0 and owner_code=? group by goods_id";
+		RcdSet rs=this.dao.query(sql,ownerCode);
+		HashMap<String,Integer> map=new HashMap<>();
+		List<String> goodsIds=new ArrayList<>();
+		goodsIds.add("-1");
+		for(int i=0;i<rs.size();i++){
+			goodsIds.add(rs.getRcd(i).getString("goods_id"));
+			map.put(rs.getRcd(i).getString("goods_id"),rs.getRcd(i).getInteger("stock_cur_number_total"));
+		}
+		ConditionExpr expr=new ConditionExpr();
+		expr.andIn("id",goodsIds);
+		goodsVO.setOwnerType(null);
+		goodsVO.setOwnerCode(AssetStockGoodsOwnerEnum.GOODS.code());
+		PagedList<GoodsStock> list=super.queryPagedList(goodsVO,expr,goodsVO.getPageSize(),goodsVO.getPageIndex());
+		for(int i=0;i<list.size();i++){
+			String id=list.get(i).getId();
+			Integer value=map.getOrDefault(id,0);
+			list.get(i).setStockCurNumber(new BigDecimal(value));
+			list.get(i).setGoodsId(id);
+		}
+		return list;
+	}
+
+
 	/**
 	 * 按主键删除 库存物品
 	 *

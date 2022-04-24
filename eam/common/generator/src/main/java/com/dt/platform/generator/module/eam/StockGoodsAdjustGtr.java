@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.AssetStockGoodsAdjust;
 import com.dt.platform.domain.eam.GoodsStock;
 import com.dt.platform.domain.eam.Warehouse;
@@ -47,12 +48,12 @@ public class StockGoodsAdjustGtr extends BaseCodeGenerator {
                 }
         );
 
-
+        cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
-        cfg.view().search().labelWidth(3,Config.searchLabelWidth+30);
-        cfg.view().search().labelWidth(4,Config.searchLabelWidth+30);
-        cfg.view().search().inputWidth(Config.searchInputWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+
 
 
 
@@ -72,7 +73,7 @@ public class StockGoodsAdjustGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.NEXT_APPROVER_NAMES).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.APPROVAL_OPINION).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.ATTACH_ID).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.ORIGINATOR_ID).table().disable(true);
+   //     cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.ORIGINATOR_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.CONTENT).table().disable(true);
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.NAME).form().validate().required();
@@ -85,6 +86,10 @@ public class StockGoodsAdjustGtr extends BaseCodeGenerator {
                 .basic().label("仓库")
                 .form().validate().required().form().selectBox().queryApi(WarehouseServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillWith(AssetStockGoodsAdjustMeta.WAREHOUSE).muliti(false).defaultIndex(0);
+
+        cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.STATUS).basic().label("办理状态")
+                .form().selectBox().enumType(AssetHandleStatusEnum.class);
+
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_ADJUST.ORIGINATOR_ID).form()
@@ -114,6 +119,10 @@ public class StockGoodsAdjustGtr extends BaseCodeGenerator {
         );
 
         cfg.view().form().addPage("物品列表","goodsSelectList");
+
+        cfg.view().list().addJsVariable("OPER_TYPE","[[${operType}]]","OPER_TYPE");
+        cfg.view().form().addJsVariable("OPER_TYPE","[[${operType}]]","OPER_TYPE");
+
         cfg.view().list().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
         cfg.view().form().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
         cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","APPROVAL_REQUIRED");
@@ -128,8 +137,8 @@ public class StockGoodsAdjustGtr extends BaseCodeGenerator {
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
+                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
                 .setPageController(WriteMode.IGNORE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)

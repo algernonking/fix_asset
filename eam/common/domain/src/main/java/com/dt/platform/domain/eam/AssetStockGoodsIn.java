@@ -22,7 +22,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 库存物品单
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:42:39
+ * @since 2022-04-24 15:04:46
  * @sign A20A2FBD9A7F33863B959EE6721ECD20
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

@@ -2,12 +2,25 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetStockGoodsTypeEnum;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetStockGoodsInMeta;
+import com.dt.platform.eam.service.IGoodsStockService;
+import com.dt.platform.eam.service.IOperateService;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetStockGoodsOut;
-import com.dt.platform.domain.eam.AssetStockGoodsOutVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -29,6 +42,7 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IAssetStockGoodsOutService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
@@ -53,6 +67,11 @@ public class AssetStockGoodsOutServiceImpl extends SuperService<AssetStockGoodsO
 	 * */
 	public DAO dao() { return dao; }
 
+	@Autowired
+	private IOperateService operateService;
+
+	@Autowired
+	private IGoodsStockService goodsStockService;
 
 
 	@Override
@@ -69,8 +88,150 @@ public class AssetStockGoodsOutServiceImpl extends SuperService<AssetStockGoodsO
 	 */
 	@Override
 	public Result insert(AssetStockGoodsOut assetStockGoodsOut,boolean throwsException) {
+		String selectedCode=assetStockGoodsOut.getSelectedCode();
+		GoodsStock qE=new GoodsStock();
+		qE.setSelectedCode(selectedCode);
+		List<GoodsStock> list =goodsStockService.queryList(qE);
+		if(list.size()==0){
+			return ErrorDesc.failureMessage("请选择数据");
+		}
+
+
+		//制单人、
+		if(StringUtil.isBlank(assetStockGoodsOut.getOriginatorId())){
+			assetStockGoodsOut.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		//办理情况
+		if(StringUtil.isBlank(assetStockGoodsOut.getStatus())){
+			assetStockGoodsOut.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+
+
+		//登记日期
+		if(assetStockGoodsOut.getBusinessDate()==null){
+			assetStockGoodsOut.setBusinessDate(new Date());
+		}
+
+		//编码
+		String codeRule="";
+		if(AssetStockGoodsTypeEnum.STOCK.code().equals(assetStockGoodsOut.getOwnerType())){
+			codeRule= CodeModuleEnum.EAM_ASSET_STOCK_GOODS_OUT.code();
+		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(assetStockGoodsOut.getOwnerType())){
+			codeRule= CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_OUT.code();
+		}
+		if(StringUtil.isBlank(assetStockGoodsOut.getBusinessCode())){
+			if(!StringUtil.isBlank(codeRule)){
+				if(!StringUtil.isBlank(codeRule)){
+					Result codeResult= CodeModuleServiceProxy.api().generateCode(codeRule) ;
+					if(!codeResult.isSuccess()){
+						return codeResult;
+					}else{
+						assetStockGoodsOut.setBusinessCode(codeResult.getData().toString());
+					}
+				}
+			}
+		}
 		Result r=super.insert(assetStockGoodsOut,throwsException);
-		return r;
+		for(int i=0;i<list.size();i++){
+			list.get(i).setWarehouseId(assetStockGoodsOut.getWarehouseId());
+		}
+		return goodsStockService.saveOwnerData(assetStockGoodsOut.getId(),assetStockGoodsOut.getOwnerType(),list);
+	}
+
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(String instanceId, List<AssetAllocation> assets, String approveAction, String opinion) {
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getBill(String id) {
+		return null;
+	}
+
+	@Override
+	public Result revokeOperation(String id) {
+		return null;
+	}
+
+	@Override
+	public Result forApproval(String id) {
+		return null;
+	}
+
+
+	/**
+	 * 操作
+	 * @param id  ID
+	 * @param result 结果
+	 * @return
+	 * */
+	private Result operateResult(String id,String result,String status,String message) {
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
+			AssetStockGoodsOut bill=new AssetStockGoodsOut();
+			bill.setId(id);
+			bill.setStatus(status);
+			this.dao.execute("update eam_goods_stock set status=? where owner_id=?",status,bill.getId());
+			//后续需要加盘点
+			computeStockData(id);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
+		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
+			return ErrorDesc.failureMessage(message);
+		}else{
+			return ErrorDesc.failureMessage("返回未知结果");
+		}
+	}
+
+	private Result computeStockData(String id){
+
+		AssetStockGoodsOut bill=this.getById(id);
+		this.dao().fill(bill)
+				.with(AssetStockGoodsInMeta.GOODS_LIST)
+				.execute();
+		//不进行判断，直接进行库存减
+		List<GoodsStock> goods=bill.getGoodsList();
+		if(goods!=null&&goods.size()>0){
+			for(int i=0;i<goods.size();i++){
+				String rid=goods.get(i).getRealStockId();
+				String value=goods.get(i).getStockInNumber()+"";
+				String sql="update eam_goods_stock set stock_cur_number=stock_cur_number-"+value+" where id=?";
+				this.dao.execute(sql,rid);
+			}
+		}
+		return ErrorDesc.success();
+	}
+
+
+	@Override
+	public Result confirmOperation(String id) {
+		AssetStockGoodsOut billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			String operCode="";
+			if(AssetStockGoodsTypeEnum.STOCK.code().equals(billData.getOwnerType())){
+				operCode= AssetOperateEnum.EAM_ASSET_STOCK_GOODS_OUT.code();
+			}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(billData.getOwnerType())){
+				operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_OUT.code();
+			}
+			if(operateService.approvalRequired(operCode) ) {
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
+			}else{
+				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
+
 	}
 
 	/**
@@ -150,6 +311,7 @@ public class AssetStockGoodsOutServiceImpl extends SuperService<AssetStockGoodsO
 		return this.update(assetStockGoodsOut,mode,true);
 	}
 
+
 	/**
 	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
 	 * @param assetStockGoodsOut 数据对象
@@ -159,8 +321,18 @@ public class AssetStockGoodsOutServiceImpl extends SuperService<AssetStockGoodsO
 	 * */
 	@Override
 	public Result update(AssetStockGoodsOut assetStockGoodsOut , SaveMode mode,boolean throwsException) {
+		GoodsStock qE=new GoodsStock();
+		qE.setOwnerTmpId(assetStockGoodsOut.getId());
+		List<GoodsStock> list =goodsStockService.queryList(qE);
+		if(list.size()==0){
+			return ErrorDesc.failureMessage("请选择数据");
+		}
 		Result r=super.update(assetStockGoodsOut , mode , throwsException);
-		return r;
+		for(int i=0;i<list.size();i++){
+			list.get(i).setWarehouseId(assetStockGoodsOut.getWarehouseId());
+		}
+		return goodsStockService.saveOwnerData(assetStockGoodsOut.getId(),assetStockGoodsOut.getOwnerType(),list);
+
 	}
 
 	/**

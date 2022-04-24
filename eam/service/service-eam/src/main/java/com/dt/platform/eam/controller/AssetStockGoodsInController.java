@@ -3,9 +3,12 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetCollectionVOMeta;
 import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +24,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetStockGoodsInServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsInVOMeta;
-import com.dt.platform.domain.eam.AssetStockGoodsIn;
-import com.dt.platform.domain.eam.AssetStockGoodsInVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -37,10 +38,9 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsInMeta;
 import java.math.BigDecimal;
-import com.dt.platform.domain.eam.GoodsStock;
+
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.hrm.Organization;
-import com.dt.platform.domain.eam.Warehouse;
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -263,6 +263,7 @@ public class AssetStockGoodsInController extends SuperController {
 			.with("ownerCompany")
 			.with("originator")
 			.with("manager")
+			.with(AssetStockGoodsInMeta.GOODS_LIST)
 			.with(AssetStockGoodsInMeta.WAREHOUSE)
 			.with(AssetStockGoodsInMeta.SOURCE)
 			.with(AssetStockGoodsInMeta.STOCK_TYPE_DICT)
@@ -388,11 +389,21 @@ public class AssetStockGoodsInController extends SuperController {
 			.with("ownerCompany")
 			.with("originator")
 			.with("manager")
+			.with(AssetStockGoodsInMeta.GOODS_LIST)
 			.with(AssetStockGoodsInMeta.WAREHOUSE)
 			.with(AssetStockGoodsInMeta.SOURCE)
 			.with(AssetStockGoodsInMeta.STOCK_TYPE_DICT)
 			.execute();
+
+		List<Employee> originatorList= CollectorUtil.collectList(list, AssetStockGoodsIn::getOriginator);
+		assetStockGoodsInService.dao().join(originatorList, Person.class);
+
+		List<Employee> managerList= CollectorUtil.collectList(list, AssetStockGoodsIn::getManager);
+		assetStockGoodsInService.dao().join(managerList, Person.class);
+
 		result.success(true).data(list);
+
+
 		return result;
 	}
 

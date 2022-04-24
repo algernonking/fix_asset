@@ -3,6 +3,12 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetStockGoodsOutVOMeta;
+import com.dt.platform.proxy.eam.AssetStockGoodsOutServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +24,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetStockGoodsAdjustServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsAdjustVOMeta;
-import com.dt.platform.domain.eam.AssetStockGoodsAdjust;
-import com.dt.platform.domain.eam.AssetStockGoodsAdjustVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -33,8 +37,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsAdjustMeta;
-import com.dt.platform.domain.eam.GoodsStock;
-import com.dt.platform.domain.eam.Warehouse;
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -51,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 库存调整 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 07:43:56
+ * @since 2022-04-24 12:15:09
 */
 
 @Api(tags = "库存调整")
@@ -333,8 +335,72 @@ public class AssetStockGoodsAdjustController extends SuperController {
 			.with("originator")
 			.with(AssetStockGoodsAdjustMeta.WAREHOUSE)
 			.execute();
+
+		List<Employee> originatorList= CollectorUtil.collectList(list, AssetStockGoodsAdjust::getOriginator);
+		assetStockGoodsAdjustService.dao().join(originatorList, Person.class);
+
+
 		result.success(true).data(list);
 		return result;
+	}
+
+	/**
+	 * 送审
+	 * */
+	@ApiOperation(value = "送审")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetStockGoodsAdjustVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetStockGoodsAdjustVOMeta.ID)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetStockGoodsAdjustServiceProxy.FOR_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsAdjustServiceProxy.FOR_APPROVAL)
+	public Result forApproval(String id)  {
+		return assetStockGoodsAdjustService.forApproval(id);
+	}
+
+
+	/**
+	 * 确认
+	 * */
+	@ApiOperation(value = "确认")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetStockGoodsAdjustVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetStockGoodsAdjustVOMeta.ID)
+	@ApiOperationSupport(order=13)
+	@SentinelResource(value = AssetStockGoodsAdjustServiceProxy.CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsAdjustServiceProxy.CONFIRM_OPERATION)
+	public Result confirmOperation(String id)  {
+		return assetStockGoodsAdjustService.confirmOperation(id);
+	}
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetStockGoodsAdjustVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetStockGoodsAdjustVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetStockGoodsAdjustServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsAdjustServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetStockGoodsAdjustService.revokeOperation(id);
+	}
+
+
+	/**
+	 * 审批
+	 * */
+	@ApiOperation(value = "审批")
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = AssetStockGoodsAdjustServiceProxy.APPROVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockGoodsAdjustServiceProxy.APPROVE)
+	public Result approve(ProcessApproveVO approveVO)  {
+		return assetStockGoodsAdjustService.approve(approveVO);
 	}
 
 

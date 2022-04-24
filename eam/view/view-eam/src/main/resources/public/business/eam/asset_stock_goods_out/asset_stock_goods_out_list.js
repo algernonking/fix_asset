@@ -1,7 +1,7 @@
 /**
  * 库存出库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-23 08:02:59
+ * @since 2022-04-24 15:04:55
  */
 
 
@@ -84,7 +84,7 @@ function ListPage() {
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('出库位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
 					,{ field: 'collectionDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('出库日期') ,templet: function (d) { return templet('collectionDate',fox.dateFormat(d.collectionDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('业务日期') ,templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }  }
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('出库说明') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
