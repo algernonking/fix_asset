@@ -104,7 +104,7 @@ function ListPage() {
                 { fixed: 'left',type:'checkbox'}
                 ,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
                 ,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('分类'), templet: function (d) { return templet('categoryId' ,fox.joinLabel(d.category,"name"),d);}}
-                ,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+                ,{ field: 'goodsStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('goodsStatus',fox.getEnumText(SELECT_GOODSSTATUS_DATA,d.goodsStatus),d);}}
                 ,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('物品名称') , templet: function (d) { return templet('name',d.name,d);}  }
                 ,{ field: 'model', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('规格型号') , templet: function (d) { return templet('model',d.model,d);}  }
                 ,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('物品编码') , templet: function (d) { return templet('code',d.code,d);}  }

@@ -10,3 +10,5 @@ rm -rf $ops_dir/deploy_app.sh
 
 cp deploy_app.sh $ops_dir
 sh deploy.sh full
+
+exit 0

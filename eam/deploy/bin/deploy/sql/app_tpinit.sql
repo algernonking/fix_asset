@@ -14,6 +14,14 @@ insert into sys_file(id,file_name,location,size,media_type,file_type)values('T00
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_9','eam_download_asset.docx','/tpl/T001/eam_download_asset.xls',10000,'application/octet-stream','xls');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_10','eam_download_scrap.docx','/tpl/T001/eam_asset_scrap.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_11','eam_asset_register.docx','/tpl/T001/eam_asset_register.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_12','eam_asset_stock_goods_in.docx','/tpl/T001/eam_asset_stock_goods_in.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_13','eam_asset_stock_goods_out.docx','/tpl/T001/eam_asset_stock_goods_out.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_14','eam_asset_stock_goods_tranfer.docx','/tpl/T001/eam_asset_stock_goods_tranfer.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_15','eam_asset_stock_goods_adjust.docx','/tpl/T001/eam_asset_stock_goods_adjust.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_16','eam_asset_consumables_goods_in.docx','/tpl/T001/eam_asset_consumables_goods_in.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_17','eam_asset_consumables_goods_out.docx','/tpl/T001/eam_asset_consumables_goods_out.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_18','eam_asset_consumables_goods_tranfer.docx','/tpl/T001/eam_asset_consumables_goods_tranfer.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_19','eam_asset_consumables_goods_adjust.docx','/tpl/T001/eam_asset_consumables_goods_adjust.docx',10000,'application/octet-stream','docx');
 
 
 delete from sys_tpl_file where tenant_id='T001' and type in ('eam_bill_docx','eam_asset_excel');
@@ -28,8 +36,14 @@ insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_8'
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_9','eam_asset_excel','资产数据下载','eam_download_asset','T001_eam_9','T001');
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_10','eam_bill_docx','资产报废','eam_download_asset_scrap_bill','T001_eam_10','T001');
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_11','eam_bill_docx','资产登记','eam_download_asset_register_bill','T001_eam_11','T001');
-
-
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_12','eam_bill_docx','库存物品入库','eam_download_asset_stock_goods_in_bill','T001_eam_12','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_13','eam_bill_docx','库存物品出库','eam_download_asset_stock_goods_out_bill','T001_eam_13','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_14','eam_bill_docx','库存物品转移','eam_download_asset_stock_goods_tranfer_bill','T001_eam_14','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_15','eam_bill_docx','库存物品调整','eam_download_asset_stock_goods_adjust_bill','T001_eam_15','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_16','eam_bill_docx','耗材物品入库','eam_download_asset_consumables_goods_in_bill','T001_eam_16','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_17','eam_bill_docx','耗材物品出库','eam_download_asset_consumables_goods_out_bill','T001_eam_17','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_18','eam_bill_docx','耗材物品转移','eam_download_asset_consumables_goods_tranfer_bill','T001_eam_18','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_19','eam_bill_docx','耗材物品调整','eam_download_asset_consumables_goods_adjust_bill','T001_eam_19','T001');
 
 /* OPS */
 delete from sys_file where id like 'T001_ops_%';

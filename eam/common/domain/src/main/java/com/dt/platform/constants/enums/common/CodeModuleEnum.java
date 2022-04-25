@@ -39,19 +39,20 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_STOCK_INVENTORY("eam_asset_stock_inventory" , "EAM_资产库存-盘点"),
 
 	//物品库存
-	EAM_ASSET_STOCK_GOODS("eam_asset_stock_goods" , "EAM_库存物品-入库"),
+//	EAM_ASSET_STOCK_GOODS("eam_asset_stock_goods" , "EAM_库存物品-入库"),
 	EAM_ASSET_STOCK_GOODS_IN("eam_asset_stock_goods_in" , "EAM_库存物品-入库"),
 	EAM_ASSET_STOCK_GOODS_OUT("eam_asset_stock_goods_out" , "EAM_库存物品-出库"),
 	EAM_ASSET_STOCK_GOODS_TRANFER("eam_asset_stock_goods_tranfer" , "EAM_库存物品-转移"),
 	EAM_ASSET_STOCK_GOODS_ADJUST("eam_asset_stock_goods_adjust" , "EAM_库存物品-调整"),
 	EAM_ASSET_STOCK_GOODS_INVENTORY("eam_asset_stock_goods_inventory" , "EAM_库存物品-盘点"),
 
-	EAM_ASSET_CONSUMABLES_GOODS("EAM_ASSET_CONSUMABLES_GOODS" , "EAM_耗材物品-入库"),
-	EAM_ASSET_CONSUMABLES_GOODS_IN("EAM_ASSET_CONSUMABLES_GOODS_IN" , "EAM_耗材物品-入库"),
-	EAM_ASSET_CONSUMABLES_GOODS_OUT("EAM_ASSET_CONSUMABLES_GOODS_OUT" , "EAM_耗材物品-出库"),
-	EAM_ASSET_CONSUMABLES_GOODS_TRANFER("EAM_ASSET_CONSUMABLES_GOODS_TRANFER" , "EAM_耗材物品-转移"),
-	EAM_ASSET_CONSUMABLES_GOODS_ADJUST("EAM_ASSET_CONSUMABLES_GOODS_ADJUST" , "EAM_耗材物品-调整"),
-	EAM_ASSET_CONSUMABLES_GOODS_INVENTORY("EAM_ASSET_CONSUMABLES_GOODS_INVENTORY" , "EAM_耗材物品-盘点"),
+	//物品耗材
+//	EAM_ASSET_CONSUMABLES_GOODS("eam_asset_consumables_goods" , "EAM_耗材物品-入库"),
+	EAM_ASSET_CONSUMABLES_GOODS_IN("eam_asset_consumables_goods_in" , "EAM_耗材物品-入库"),
+	EAM_ASSET_CONSUMABLES_GOODS_OUT("eam_asset_consumables_goods_out" , "EAM_耗材物品-出库"),
+	EAM_ASSET_CONSUMABLES_GOODS_TRANFER("eam_asset_consumables_goods_tranfer" , "EAM_耗材物品-转移"),
+	EAM_ASSET_CONSUMABLES_GOODS_ADJUST("eam_asset_consumables_goods_adjust" , "EAM_耗材物品-调整"),
+	EAM_ASSET_CONSUMABLES_GOODS_INVENTORY("eam_asset_consumables_goods_inventory" , "EAM_耗材物品-盘点"),
 
 
 

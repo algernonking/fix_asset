@@ -11,6 +11,7 @@ import com.deepoove.poi.util.PoitlIOUtils;
 import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetStockGoodsTypeEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
@@ -76,6 +77,18 @@ public class AssetBillController extends SuperController {
 
     @Autowired
     private IAssetStockGoodsInService assetStockGoodsInService;
+
+    @Autowired
+    private IAssetStockGoodsOutService assetStockGoodsOutService;
+
+    @Autowired
+    private IAssetStockGoodsTranferService assetStockGoodsTranferService;
+
+    @Autowired
+    private IAssetStockGoodsAdjustService assetStockGoodsAdjustService;
+
+
+
 
     private  InputStream cloneInputStream(InputStream input) {
         try {
@@ -379,75 +392,6 @@ public class AssetBillController extends SuperController {
     }
 
 
-    //库存 耗材
-    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_CONSUMABLES_GOODS_IN_BILL)
-    public void queryAssetConsumablesGoodsInBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_IN_BILL.code());
-        Map<String,Object> map=assetStockGoodsInService.getBill(id);
-        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
-        Configure config = Configure.builder().bind("assetList",policy).build();
-        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
-        response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("入库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
-        OutputStream out = response.getOutputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        template.write(bos);
-        bos.flush();
-        out.flush();
-        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
-    }
-
-    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_CONSUMABLES_GOODS_OUT_BILL)
-    public void queryAssetConsumablesGoodsOutBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_OUT_BILL.code());
-        Map<String,Object> map=assetStockGoodsInService.getBill(id);
-        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
-        Configure config = Configure.builder().bind("assetList",policy).build();
-        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
-        response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("出库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
-        OutputStream out = response.getOutputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        template.write(bos);
-        bos.flush();
-        out.flush();
-        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
-    }
-
-    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_STOCK_GOODS_IN_BILL)
-    public void queryAssetStockGoodsInBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_STOCK_GOODS_IN_BILL.code());
-        Map<String,Object> map=assetStockGoodsInService.getBill(id);
-        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
-        Configure config = Configure.builder().bind("assetList",policy).build();
-        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
-        response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("入库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
-        OutputStream out = response.getOutputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        template.write(bos);
-        bos.flush();
-        out.flush();
-        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
-    }
-
-
-    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_STOCK_GOODS_OUT_BILL)
-    public void queryAssetStockGoodsOutBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_STOCK_GOODS_OUT_BILL.code());
-        Map<String,Object> map=assetStockGoodsInService.getBill(id);
-        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
-        Configure config = Configure.builder().bind("assetList",policy).build();
-        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
-        response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("出库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
-        OutputStream out = response.getOutputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        template.write(bos);
-        bos.flush();
-        out.flush();
-        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
-    }
 
     @SentinelResource(value = AssetBillServiceProxy.QUERY_SCRAP_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_SCRAP_BILLS)
@@ -555,6 +499,184 @@ public class AssetBillController extends SuperController {
 
 
     }
+
+    //库存 耗材
+//    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_CONSUMABLES_GOODS_IN_BILL)
+//    public void queryAssetConsumablesGoodsInBill(String id,HttpServletResponse response) throws Exception {
+//        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_IN_BILL.code());
+//        Map<String,Object> map=assetStockGoodsInService.getBill(id);
+//        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+//        Configure config = Configure.builder().bind("assetList",policy).build();
+//        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+//        response.setContentType("application/msword");
+//        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("入库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+//        OutputStream out = response.getOutputStream();
+//        BufferedOutputStream bos = new BufferedOutputStream(out);
+//        template.write(bos);
+//        bos.flush();
+//        out.flush();
+//        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+//    }
+//
+//    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_CONSUMABLES_GOODS_OUT_BILL)
+//    public void queryAssetConsumablesGoodsOutBill(String id,HttpServletResponse response) throws Exception {
+//        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_OUT_BILL.code());
+//        Map<String,Object> map=assetStockGoodsInService.getBill(id);
+//        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+//        Configure config = Configure.builder().bind("assetList",policy).build();
+//        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+//        response.setContentType("application/msword");
+//        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("出库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+//        OutputStream out = response.getOutputStream();
+//        BufferedOutputStream bos = new BufferedOutputStream(out);
+//        template.write(bos);
+//        bos.flush();
+//        out.flush();
+//        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+//    }
+//
+//
+//    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_CONSUMABLES_GOODS_TRANFER__BILL)
+//    public void queryAssetConsumablesGoodsTranferBill(String id,HttpServletResponse response) throws Exception {
+//        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_STOCK_GOODS_OUT_BILL.code());
+//        Map<String,Object> map=assetStockGoodsInService.getBill(id);
+//        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+//        Configure config = Configure.builder().bind("assetList",policy).build();
+//        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+//        response.setContentType("application/msword");
+//        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("出库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+//        OutputStream out = response.getOutputStream();
+//        BufferedOutputStream bos = new BufferedOutputStream(out);
+//        template.write(bos);
+//        bos.flush();
+//        out.flush();
+//        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+//    }
+//
+//    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_CONSUMABLES_GOODS_ADJUST_BILL)
+//    public void queryAssetConsumablesGoodsAdjustBill(String id,HttpServletResponse response) throws Exception {
+//        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_STOCK_GOODS_OUT_BILL.code());
+//        Map<String,Object> map=assetStockGoodsInService.getBill(id);
+//        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+//        Configure config = Configure.builder().bind("assetList",policy).build();
+//        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+//        response.setContentType("application/msword");
+//        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("出库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+//        OutputStream out = response.getOutputStream();
+//        BufferedOutputStream bos = new BufferedOutputStream(out);
+//        template.write(bos);
+//        bos.flush();
+//        out.flush();
+//        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+//    }
+
+
+
+
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_STOCK_GOODS_IN_BILL)
+    public void queryAssetStockGoodsInBill(String id,HttpServletResponse response) throws Exception {
+        AssetStockGoodsIn bill=assetStockGoodsInService.getById(id);
+        String code="";
+        if(AssetStockGoodsTypeEnum.STOCK.code().equals(bill.getOwnerType())){
+            code=AssetOperateEnum.EAM_DOWNLOAD_ASSET_STOCK_GOODS_IN_BILL.code();
+        }else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(bill.getOwnerType())){
+            code=AssetOperateEnum.EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_IN_BILL.code();
+        }
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+        Map<String,Object> map=assetStockGoodsInService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("入库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+    }
+
+
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_STOCK_GOODS_OUT_BILL)
+    public void queryAssetStockGoodsOutBill(String id,HttpServletResponse response) throws Exception {
+
+        AssetStockGoodsOut bill=assetStockGoodsOutService.getById(id);
+        String code="";
+        if(AssetStockGoodsTypeEnum.STOCK.code().equals(bill.getOwnerType())){
+            code=AssetOperateEnum.EAM_DOWNLOAD_ASSET_STOCK_GOODS_OUT_BILL.code();
+        }else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(bill.getOwnerType())){
+            code=AssetOperateEnum.EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_OUT_BILL.code();
+        }
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+
+        Map<String,Object> map=assetStockGoodsOutService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("出库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+    }
+
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_STOCK_GOODS_TRANFER_BILL)
+    public void queryAssetStockGoodsTranferBill(String id,HttpServletResponse response) throws Exception {
+
+        AssetStockGoodsTranfer bill=assetStockGoodsTranferService.getById(id);
+        String code="";
+        if(AssetStockGoodsTypeEnum.STOCK.code().equals(bill.getOwnerType())){
+            code=AssetOperateEnum.EAM_DOWNLOAD_ASSET_STOCK_GOODS_TRANFER_BILL.code();
+        }else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(bill.getOwnerType())){
+            code=AssetOperateEnum.EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_TRANFER_BILL.code();
+        }
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+
+        Map<String,Object> map=assetStockGoodsTranferService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("调拨单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+    }
+
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_STOCK_GOODS_ADJUST_BILL)
+    public void queryAssetStockGoodsAdjustBill(String id,HttpServletResponse response) throws Exception {
+
+        AssetStockGoodsAdjust bill=assetStockGoodsAdjustService.getById(id);
+        String code="";
+        if(AssetStockGoodsTypeEnum.STOCK.code().equals(bill.getOwnerType())){
+            code=AssetOperateEnum.EAM_DOWNLOAD_ASSET_STOCK_GOODS_ADJUST_BILL.code();
+        }else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(bill.getOwnerType())){
+            code=AssetOperateEnum.EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_ADJUST_BILL.code();
+        }
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+
+        Map<String,Object> map=assetStockGoodsAdjustService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("调整单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+    }
+
+
 
 
 }

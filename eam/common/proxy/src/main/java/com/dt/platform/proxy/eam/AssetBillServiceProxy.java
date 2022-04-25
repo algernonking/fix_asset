@@ -144,11 +144,10 @@ public interface AssetBillServiceProxy {
     //库存
     public static final String QUERY_ASSET_STOCK_GOODS_IN_BILL = API_PREFIX + "query-asset-stock-goods-in-bill";
     public static final String QUERY_ASSET_STOCK_GOODS_OUT_BILL = API_PREFIX + "query-asset-stock-goods-out-bill";
+    public static final String QUERY_ASSET_STOCK_GOODS_TRANFER_BILL = API_PREFIX + "query-asset-stock-goods-tranfer-bill";
+    public static final String QUERY_ASSET_STOCK_GOODS_ADJUST_BILL = API_PREFIX + "query-asset-stock-goods-adjust-bill";
 
     //耗材
-    public static final String QUERY_ASSET_CONSUMABLES_GOODS_IN_BILL = API_PREFIX + "query-asset-consumables-goods-in-bill";
-    public static final String QUERY_ASSET_CONSUMABLES_GOODS_OUT_BILL = API_PREFIX + "query-asset-consumables-goods-out-bill";
-
 
     /**
      * 控制器类名

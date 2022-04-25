@@ -29,11 +29,12 @@
 #### 前端技术栈
 - 前端组件:LayUI 2.6.8
 
+
 #### 开发环境
-- IDE： IntelliJ IDEA 2020.2
+- IDE:IntelliJ IDEA 2020.2以上
 - JDK:JDK 1.8
 - 数据库:Mysql 5.7.X
-- Redis：5.1(可选)
+- Redis:5.1(可选)
 
 
 #### 系统架构图
@@ -49,16 +50,22 @@
 - 1、当前系统提供EAM版的完整可部署的应用包和完整的SQL文件。
 - 2、当前软件包以社区版本形式提供，参考《EAM安装部署维护手册.docx》部署方式即可。
 
-#### 二次开发方式
-- 1、二次开发说明，详见Git目录下的二次开发目录的Readme.txt 文件
-- 2、SQL文件:(每日更新):http://121.43.103.102/upload/sql.tar.gz
-
 
 ### 帮助文档
 - EAM安装手册:在EAM项目的文档目录
 - EAM使用手册:登录系统后,选择公共服务下的公共资源菜单->EAM使用手册
   或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
 - 应用框架[Foxnic-Web](https://gitee.com/LeeFJ/foxnic-web) [开发文档](http://foxnicweb.com/docs/doc.html)
+
+
+### 问题清单
+- 部署或使用上遇到的一些问题，详细请先看git目录下的问题清单列表
+
+#### 二次开发方式
+- 1、二次开发说明，详见Git目录下的二次开发目录的Readme.txt 文件
+- 2、SQL文件:(每日更新):http://121.43.103.102/upload/sql.tar.gz
+
+
 
 ### 实施方案
 - 1、传统方式:传统单体架构方式打包部署
