@@ -50,8 +50,9 @@ public class GoodsStockGoodsPageController extends ViewController {
 	 * 库存物品 功能主页面
 	 */
 	@RequestMapping("/goods_stock_list.html")
-	public String list(Model model,HttpServletRequest request,String ownerCode,String ownerType) {
+	public String list(Model model,HttpServletRequest request,String ownerCode,String ownerType,String categoryCode) {
 
+		model.addAttribute("categoryCode",categoryCode);
 		model.addAttribute("ownerCode",ownerCode);
 		model.addAttribute("ownerType",ownerType);
 		return prefix+"/goods_stock_list";
@@ -62,16 +63,22 @@ public class GoodsStockGoodsPageController extends ViewController {
 	 * 库存物品 表单页面
 	 */
 	@RequestMapping("/goods_stock_form.html")
-	public String form(Model model,HttpServletRequest request , String id,String ownerCode,String ownerType) {
+	public String form(Model model,HttpServletRequest request , String id,String ownerCode,String ownerType,String categoryCode) {
 
 
 		model.addAttribute("ownerCode",ownerCode);
 		model.addAttribute("ownerType",ownerType);
 
-
+		//stock_goods
 		//设置资产分类
 		CatalogVO catalog=new CatalogVO();
-		catalog.setCode(AssetCategoryCodeEnum.ASSET.code());
+		if(StringUtil.isBlank(categoryCode)){
+			catalog.setCode(AssetCategoryCodeEnum.ASSET.code());
+		}else{
+			catalog.setCode(categoryCode);
+		}
+		System.out.println("#################"+categoryCode);
+
 		Result<List<Catalog>> catalogListResult= CatalogServiceProxy.api().queryList(catalog);
 		String categoryId="";
 		if(catalogListResult.isSuccess()){

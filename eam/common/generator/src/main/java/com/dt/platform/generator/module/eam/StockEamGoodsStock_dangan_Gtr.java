@@ -239,6 +239,8 @@ public class StockEamGoodsStock_dangan_Gtr extends BaseCodeGenerator {
         cfg.view().form().addJsVariable("OWNER_TYPE","[[${ownerType}]]","OWNER_TYPE");
 
         cfg.view().form().addJsVariable("ASSET_CATEGORY_DATA","[[${assetCategoryData}]]","ASSET_CATEGORY_DATA");
+        cfg.view().form().addJsVariable("CATEGORY_CODE","[[${categoryCode}]]","CATEGORY_CODE");
+        cfg.view().list().addJsVariable("CATEGORY_CODE","[[${categoryCode}]]","CATEGORY_CODE");
 
 
         cfg.view().formWindow().bottomSpace(250);

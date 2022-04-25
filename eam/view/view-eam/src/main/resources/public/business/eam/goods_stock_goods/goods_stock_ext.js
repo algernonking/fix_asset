@@ -97,6 +97,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单页面打开时，追加更多的参数信息
          * */
         makeFormQueryString:function(data,queryString,action) {
+            if(data.id){
+                queryString=queryString+"&categoryCode="+CATEGORY_CODE;
+            }else{
+                queryString="categoryCode="+CATEGORY_CODE;
+            }
+            admin.putTempData('eam-goods-stock-form-data-form-categoryCode', CATEGORY_CODE);
             return queryString;
         },
         /**
@@ -165,6 +171,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单初始化前调用 , 并传入表单数据
          * */
         beforeInit:function (action,data) {
+            CATEGORY_CODE=admin.getTempData('eam-goods-stock-form-data-form-categoryCode');
             //获取参数，并调整下拉框查询用的URL
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
