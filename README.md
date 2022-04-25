@@ -75,7 +75,7 @@
 - 2、应用直接运行部署:应用JAR和SQL包来源:https://gitee.com/lank/eam/releases
 
 
-#### 方案一(Docker方式)
+#### 方案一 Docker方式-建议作为体验使用
 - 注意点:docker 版本用作体验版本，正式使用不推荐docker部署方式。
 - 注意点:建议第一次docker部署完后，在重启一次，可能第一次启动数据库初始化还没完成，会导致报错
 - 应用和移动端兼容列表
@@ -98,6 +98,11 @@
     -d docker.io/algernonking/eamapp:1.0.7 \
     --character-set-server=utf8
 ```
+
+#### 方案二 应用直接部署
+- 详细部署方式查询git目录下的文档说明
+- https://gitee.com/lank/eam/tree/master/%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3
+
 
 ## 项目结构说明
  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0610/145855_29614033_1470521.png "屏幕截图.png")
