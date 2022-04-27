@@ -2,7 +2,6 @@
 #
 
 release_dir="/tmp/app_deploy"
-
 hostname=`hostname`
 cur_dir=$(cd `dirname $0`; pwd)
 conf_file=$cur_dir/app.conf

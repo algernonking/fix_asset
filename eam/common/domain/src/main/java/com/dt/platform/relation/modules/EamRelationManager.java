@@ -63,9 +63,48 @@ public class EamRelationManager extends RelationManager {
         this.setupPurchaseApply();
         this.setupPurchaseCheck();
         this.setupPurchaseOrder();
+
+        this.setupInspectionGroup();
+        this.setupInspectionPlan();
+        this.setupInspectionPoint();
+        this.setupInspectionTask();
     }
 
     public void setupProperties() {
+    }
+
+    public void setupInspectionGroup() {
+        //制单人
+        this.property(InspectionGroupMeta.LEADER_PROP)
+                .using(EAMTables.EAM_INSPECTION_GROUP.LEADER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(InspectionGroupMeta.INSPECTOR_LIST_PROP)
+                .using(EAMTables.EAM_INSPECTION_GROUP.ID).join(EAMTables.EAM_INSPECTION_GROUP_USER.GROUP_ID);
+
+
+    }
+    public void setupInspectionPlan() {
+
+        this.property(InspectionPlanMeta.INSPECTION_PLAN_POINT_LIST_PROP)
+                .using(EAMTables.EAM_INSPECTION_PLAN.ID).join(EAMTables.EAM_INSPECTION_PLAN_POINT.ID);
+
+        this.property(InspectionPlanMeta.INSPECTION_GROUP_PROP)
+                .using(EAMTables.EAM_INSPECTION_PLAN.GROUP_ID).join(EAMTables.EAM_INSPECTION_GROUP.ID);
+
+        this.property(InspectionPlanMeta.INSPECTION_TYPE_DICT_PROP)
+                .using(EAMTables.EAM_INSPECTION_PLAN.INSPECTION_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_source'");
+
+
+    }
+    public void setupInspectionPoint() {
+    }
+    public void setupInspectionTask() {
+        // 关联来源
+        this.property(InspectionTaskMeta.INSPECTION_PLAN_PROP)
+                .using(EAMTables.EAM_INSPECTION_TASK.PLAN_ID).join(EAMTables.EAM_INSPECTION_PLAN.ID);
+
+
     }
 
     public void setupAssetStockOut(){

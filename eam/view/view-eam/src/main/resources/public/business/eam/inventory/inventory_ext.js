@@ -303,12 +303,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     }
                 }
                 data.categoryIds=categoryIds;
-
             }else{
                 data.categoryIds="";
             }
-
-
 
             console.log('beforeDataFill',data);
         },

@@ -11,6 +11,10 @@ import com.github.foxnic.sql.meta.DBTable;
 public class BaseCodeGenerator {
 
 
+
+    public static final String BASIC_INSP="568078307707326464";
+
+
     public static final String BASIC_ASSET_STOCK_ID="513733380219600896";
 
     public static final String BASIC_BUY_ID="566986193363795968";

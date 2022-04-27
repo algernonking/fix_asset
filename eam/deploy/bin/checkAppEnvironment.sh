@@ -76,7 +76,7 @@ else
   echo -e "   \033[33m check mysql version [$mysql_version_cnt_ct] failed! \033[0m"
 fi
 
-
+echo "###start to check mysql parameter lower_case_table_names"
 mysql_pars_lower=`$MYSQL -u$DB_USER -p$DB_PWD -h$DB_HOST -e "show variables like '%lower_case_table_names%' " 2>/dev/null |grep lower_case_table_names |awk '{print $NF}'`
 if [[ $mysql_pars_lower -eq 1 ]];then
   echo -e "   \033[31m check mysql parameter lower_case_table_names success! \033[0m"
@@ -138,6 +138,9 @@ else
   echo -e "   \033[31m check application.yml db connect info username failed! \033[0m"
 fi
 
+echo "###start to check procedure nextVal"
+
+
 echo "###start to check mysql connect from yml file"
 #if [[ -f "$yml_file" ]];then
 #  echo "db_user:$DB_USER"
@@ -147,3 +150,5 @@ echo "###start to check mysql connect from yml file"
 #   echo -e "   \033[31m check yml file not exist failed! \033[0m"
 #fi
 exit 0
+
+mysql -uroot -pP@sswOracle123456 eam

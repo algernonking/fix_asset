@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
+import com.dt.platform.constants.enums.eam.AssetInventoryActionStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetInventoryOwnerEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.*;
@@ -303,6 +304,8 @@ public class InventoryPlanServiceImpl extends SuperService<InventoryPlan> implem
 		}
 		inventoryTpl.setOwnerCode(AssetInventoryOwnerEnum.ASSET_INVENTORY.code());
 
+		inventoryTpl.setCreateTime(new Date());
+		inventoryTpl.setInventoryStatus(AssetInventoryActionStatusEnum.NOT_START.code());
 		return inventoryServiceImpl.insert(inventoryTpl,false);
 
 	}

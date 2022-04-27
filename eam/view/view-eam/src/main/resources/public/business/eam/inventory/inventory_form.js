@@ -330,15 +330,12 @@ function FormPage() {
 			tree: {
 				showFolderIcon: true,
 				show: true,
-				//strict: false,
-				expandedKeys: [ -1],
+				strict: true,
+				expandedKeys: [],
 			},
 			//处理方式
 			on: function(data){
-				if(data.isAdd){
-
-				}
-
+				console.log(data);
 			},
 			//显示为text模式
 			model: { label: { type: 'text' } },
@@ -350,33 +347,7 @@ function FormPage() {
 			data:ASSET_CATEGORY_DATA
 		})
 
-		//渲染 categoryIds 下拉字段
-		// fox.renderSelectBox({
-		// 	el: "categoryIds",
-		// 	radio: false,
-		// 	filterable: false,
-		// 	on: function(data){
-		// 		setTimeout(function () {
-		// 			window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("categoryIds",data.arr,data.change,data.isAdd);
-		// 		},1);
-		// 	},
-		// 	//转换数据
-		// 	transform: function(data) {
-		// 		//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-		// 		var defaultValues=[],defaultIndexs=[];
-		// 		if(action=="create") {
-		// 			defaultValues = "".split(",");
-		// 			defaultIndexs = "".split(",");
-		// 		}
-		// 		var opts=[];
-		// 		if(!data) return opts;
-		// 		for (var i = 0; i < data.length; i++) {
-		// 			if(!data[i]) continue;
-		// 			opts.push({data:data[i],name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-		// 		}
-		// 		return opts;
-		// 	}
-		// });
+
 	}
 
 	/**
@@ -400,9 +371,6 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
-
-
-
 			//设置 购置开始日期 显示复选框勾选
 			if(formData["purchaseStartDate"]) {
 				$("#purchaseStartDate").val(fox.dateFormat(formData["purchaseStartDate"],"yyyy-MM-dd"));
@@ -425,7 +393,6 @@ function FormPage() {
 			// fox.setSelectValue4QueryApi("#categoryIds",formData.category);
 
 			//处理fillBy
-
 			setTimeout(function(){
 				if(categorySelect){
 					if(formData.category&&formData.categoryIds){
@@ -493,9 +460,9 @@ function FormPage() {
 		data["positionIds"]=fox.getSelectedValue("positionIds",true);
 		//获取 资产分类 下拉框的值
 		// data["categoryIds"]=fox.getSelectedValue("categoryIds",true);
-
+		console.log("######getFormData22",categorySelect.getValue('valueStr'));
 		data["categoryIds"]=categorySelect.getValue('valueStr');
-
+		console.log("######getFormData",data);
 		return data;
 	}
 

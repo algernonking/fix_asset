@@ -269,7 +269,7 @@ function ListPage() {
 			tree: {
 				// showFolderIcon: true,
 				show: true,
-				strict: false,
+				strict: true,
 				expandedKeys: [ -1],
 			},
 			//处理方式
