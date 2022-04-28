@@ -23,6 +23,8 @@ public class InspGroupGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_INSPECTION_GROUP.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_INSPECTION_GROUP.NOTES).search().fuzzySearch();
 
+      //  search.inputLayout(new Object[]{SYS_CODE_EXAMPLE_CAR.PLATE_NUMBER,SYS_CODE_EXAMPLE_CAR.ORG_ID,SYS_CODE_EXAMPLE_CAR.EMP_ID});
+//        context.view().list().disableMargin();
 
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"leader","负责人","负责人");
         cfg.getPoClassFile().addListProperty(Employee.class,"inspectorList","巡检人","巡检人");
@@ -59,27 +61,27 @@ public class InspGroupGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_INSPECTION_GROUP.LEADER_ID).form()
                 .button().chooseEmployee(true);
 
+//        view.field(SYS_CODE_EXAMPLE_CAR.EMP_ID)
+//                .form().button().chooseEmployee(true)
+//                .table().fillBy(CodeExampleCarMeta.EMPLOYEE, EmployeeMeta.PERSON, PersonMeta.NAME);
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_GROUP.OPER_USER).table().fillBy("operUser","nameAndBadge");
+      //  cfg.view().field(EAMTables.EAM_INSPECTION_GROUP.OPER_USER).table().fillBy("operUser","nameAndBadge");
+
         cfg.view().field(EAMTables.EAM_INSPECTION_GROUP.OPER_USER).form()
                 .button().chooseEmployee(false);
 
-
-
-        cfg.view().field(InspectionGroupMeta.INSPECTOR_IDS).table().fillBy("inspectorList","nameAndBadge");
-        cfg.view().field(InspectionGroupMeta.INSPECTOR_IDS).form()
-                .button().chooseEmployee(false);
 
 
         cfg.view().list().disableBatchDelete();
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_INSPECTION_GROUP.STATUS,
-                        EAMTables.EAM_INSPECTION_GROUP.LEADER_ID,
+                        EAMTables.EAM_INSPECTION_GROUP.NAME,
                 },
                 new Object[] {
-                        InspectionGroupMeta.INSPECTOR_LIST,
-                        EAMTables.EAM_INSPECTION_GROUP.NAME,
+                        EAMTables.EAM_INSPECTION_GROUP.OPER_USER,
+                        EAMTables.EAM_INSPECTION_GROUP.LEADER_ID,
+
 
                 }
         );

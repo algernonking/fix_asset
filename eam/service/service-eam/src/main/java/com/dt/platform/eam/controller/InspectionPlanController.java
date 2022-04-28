@@ -52,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 巡检计划 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:06:50
+ * @since 2022-04-27 21:17:17
 */
 
 @Api(tags = "巡检计划")
@@ -69,20 +69,20 @@ public class InspectionPlanController extends SuperController {
 	*/
 	@ApiOperation(value = "添加巡检计划")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571668813423054848"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class , example = "code"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class , example = "inspection"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "571667627504570368"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class , example = "random"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class , example = "类型1"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class , example = "no_handle"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -100,7 +100,7 @@ public class InspectionPlanController extends SuperController {
 	*/
 	@ApiOperation(value = "删除巡检计划")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571668813423054848")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = InspectionPlanVOMeta.ID)
@@ -134,20 +134,20 @@ public class InspectionPlanController extends SuperController {
 	*/
 	@ApiOperation(value = "更新巡检计划")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571668813423054848"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class , example = "code"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class , example = "inspection"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "571667627504570368"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class , example = "random"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class , example = "类型1"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class , example = "no_handle"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { InspectionPlanVOMeta.PAGE_INDEX , InspectionPlanVOMeta.PAGE_SIZE , InspectionPlanVOMeta.SEARCH_FIELD , InspectionPlanVOMeta.FUZZY_FIELD , InspectionPlanVOMeta.SEARCH_VALUE , InspectionPlanVOMeta.DIRTY_FIELDS , InspectionPlanVOMeta.SORT_FIELD , InspectionPlanVOMeta.SORT_TYPE , InspectionPlanVOMeta.IDS } )
@@ -165,20 +165,20 @@ public class InspectionPlanController extends SuperController {
 	*/
 	@ApiOperation(value = "保存巡检计划")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571668813423054848"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class , example = "code"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class , example = "inspection"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "571667627504570368"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class , example = "random"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class , example = "类型1"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class , example = "no_handle"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { InspectionPlanVOMeta.PAGE_INDEX , InspectionPlanVOMeta.PAGE_SIZE , InspectionPlanVOMeta.SEARCH_FIELD , InspectionPlanVOMeta.FUZZY_FIELD , InspectionPlanVOMeta.SEARCH_VALUE , InspectionPlanVOMeta.DIRTY_FIELDS , InspectionPlanVOMeta.SORT_FIELD , InspectionPlanVOMeta.SORT_TYPE , InspectionPlanVOMeta.IDS } )
@@ -240,20 +240,20 @@ public class InspectionPlanController extends SuperController {
 	*/
 	@ApiOperation(value = "查询巡检计划")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571668813423054848"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class , example = "code"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class , example = "inspection"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "571667627504570368"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class , example = "random"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class , example = "类型1"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class , example = "no_handle"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { InspectionPlanVOMeta.PAGE_INDEX , InspectionPlanVOMeta.PAGE_SIZE } )
@@ -272,20 +272,20 @@ public class InspectionPlanController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询巡检计划")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571668813423054848"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_CODE , value = "计划编号" , required = false , dataTypeClass=String.class , example = "code"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.PLAN_TYPE , value = "计划类型" , required = false , dataTypeClass=String.class , example = "inspection"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "571667627504570368"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.START_DATE , value = "开始日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.END_DATE , value = "截止日期" , required = false , dataTypeClass=Date.class , example = "2022-04-27 12:00:00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class , example = "random"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_TYPE , value = "巡检类型" , required = false , dataTypeClass=String.class , example = "类型1"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class , example = "no_handle"),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

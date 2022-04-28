@@ -2,7 +2,7 @@
 /**
  * 巡检班组 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:21:48
+ * @since 2022-04-27 21:27:39
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-9034-content">
+        <div class="layui-row form-row" id="random-6506-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -54,10 +54,9 @@
 
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="leaderId" id="leaderId" name="leaderId"  type="hidden" class="layui-input"   />
-                            <button id="leaderId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
 
@@ -68,9 +67,18 @@
             <div class="layui-col-xs6 form-column" >
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('成员')}">成员</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
+                            <input lay-filter="operUser" id="operUser" name="operUser"  type="hidden" class="layui-input"   />
+                            <button id="operUser-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="leaderId" id="leaderId" name="leaderId"  type="hidden" class="layui-input"   />
+                            <button id="leaderId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
                         </div>
                     </div>
 
@@ -82,7 +90,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-1497-content">
+        <div class="layui-row form-row" id="random-3239-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->

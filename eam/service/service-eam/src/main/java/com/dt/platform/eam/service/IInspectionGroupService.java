@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 巡检班组 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:21:46
+ * @since 2022-04-27 21:27:38
 */
 
 public interface IInspectionGroupService extends ISuperService<InspectionGroup> {

@@ -2,7 +2,7 @@
 /**
  * 巡检班组 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:21:47
+ * @since 2022-04-27 21:27:39
  */
  -->
  <!DOCTYPE html>
@@ -45,8 +45,8 @@
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 负责人 , leaderId ,typeName=button, isHideInSearch=true -->
+                    <!-- 成员 , operUser ,typeName=button, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
-                    <!-- inspectorIds , inspectorIds ,typeName=button, isHideInSearch=true -->
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>

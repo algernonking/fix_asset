@@ -1,7 +1,7 @@
 /**
  * 巡检计划 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:06:52
+ * @since 2022-04-27 21:17:19
  */
 
 function FormPage() {
@@ -285,7 +285,7 @@ function FormPage() {
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
+					defaultIndexs = "0".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;

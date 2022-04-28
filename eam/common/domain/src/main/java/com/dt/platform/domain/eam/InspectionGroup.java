@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检班组
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:21:46
- * @sign 27A91B163525829A7A4BD16887B7BA10
+ * @since 2022-04-27 21:27:38
+ * @sign 57773E7F8A23D1501BBA61FE2A473AC3
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -55,6 +55,12 @@ public class InspectionGroup extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="负责人" , notes = "负责人")
 	private String leaderId;
+	
+	/**
+	 * 成员：成员
+	*/
+	@ApiModelProperty(required = false,value="成员" , notes = "成员")
+	private String operUser;
 	
 	/**
 	 * 备注：备注
@@ -207,6 +213,25 @@ public class InspectionGroup extends Entity {
 	*/
 	public InspectionGroup setLeaderId(String leaderId) {
 		this.leaderId=leaderId;
+		return this;
+	}
+	
+	/**
+	 * 获得 成员<br>
+	 * 成员
+	 * @return 成员
+	*/
+	public String getOperUser() {
+		return operUser;
+	}
+	
+	/**
+	 * 设置 成员
+	 * @param operUser 成员
+	 * @return 当前对象
+	*/
+	public InspectionGroup setOperUser(String operUser) {
+		this.operUser=operUser;
 		return this;
 	}
 	

@@ -1,7 +1,7 @@
 /**
  * 巡检班组 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:21:48
+ * @since 2022-04-27 21:27:39
  */
 
 function FormPage() {
@@ -257,11 +257,11 @@ function FormPage() {
 			fox.chooseEmployee(leaderIdDialogOptions);
 		});
 		// 请选择人员对话框
-		$("#inspectorIds-button").click(function(){
-				var inspectorIdsDialogOptions={
-				field:"inspectorIds",
+		$("#operUser-button").click(function(){
+				var operUserDialogOptions={
+				field:"operUser",
 				formData:getFormData(),
-				inputEl:$("#inspectorIds"),
+				inputEl:$("#operUser"),
 				buttonEl:$(this),
 				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
@@ -270,7 +270,7 @@ function FormPage() {
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
 				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
-			fox.chooseEmployee(inspectorIdsDialogOptions);
+			fox.chooseEmployee(operUserDialogOptions);
 		});
 
 	    //关闭窗口

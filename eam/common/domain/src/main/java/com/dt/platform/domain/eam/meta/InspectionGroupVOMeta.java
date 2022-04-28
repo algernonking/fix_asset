@@ -11,7 +11,7 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:21:46
+ * @since 2022-04-27 21:27:38
  * @sign B7E251C4FA9EFDBD97FC79027D054918
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -149,6 +149,16 @@ public class InspectionGroupVOMeta extends InspectionGroupMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupVO,java.lang.String> LEADER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupVO.class ,LEADER_ID, java.lang.String.class, "负责人", "负责人", java.lang.String.class, null);
 	
 	/**
+	 * 成员 , 类型: java.lang.String
+	*/
+	public static final String OPER_USER="operUser";
+	
+	/**
+	 * 成员 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupVO,java.lang.String> OPER_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupVO.class ,OPER_USER, java.lang.String.class, "成员", "成员", java.lang.String.class, null);
+	
+	/**
 	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
@@ -281,7 +291,7 @@ public class InspectionGroupVOMeta extends InspectionGroupMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NAME , STATUS , LEADER_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , LEADER , INSPECTOR_LIST , INSPECTOR_IDS };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NAME , STATUS , LEADER_ID , OPER_USER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , LEADER , INSPECTOR_LIST , INSPECTOR_IDS };
 	
 	/**
 	 * 代理类
@@ -431,6 +441,17 @@ public class InspectionGroupVOMeta extends InspectionGroupMeta {
 		public InspectionGroup setLeaderId(String leaderId) {
 			super.change(LEADER_ID,super.getLeaderId(),leaderId);
 			super.setLeaderId(leaderId);
+			return this;
+		}
+		
+		/**
+		 * 设置 成员
+		 * @param operUser 成员
+		 * @return 当前对象
+		*/
+		public InspectionGroup setOperUser(String operUser) {
+			super.change(OPER_USER,super.getOperUser(),operUser);
+			super.setOperUser(operUser);
 			return this;
 		}
 		

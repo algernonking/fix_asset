@@ -88,8 +88,11 @@ public class InspPlanGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME).form().validate().required().form().numberInput();
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.GROUP_ID)
-                .form().validate().required().form().selectBox().queryApi(InspectionGroupServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
-                .valueField(InspectionGroupMeta.ID).textField(InspectionGroupMeta.NAME).fillWith(InspectionPlanMeta.INSPECTION_GROUP).muliti(false).defaultIndex(0);
+                .form().validate().required()
+                .form().selectBox().
+                queryApi(InspectionGroupServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(InspectionGroupMeta.ID).textField(InspectionGroupMeta.NAME)
+                .fillWith(InspectionPlanMeta.INSPECTION_GROUP).muliti(false).defaultIndex(0);
 
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.INSPECTION_TYPE)

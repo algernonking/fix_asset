@@ -76,26 +76,23 @@
 
 
 #### 方案一 Docker方式-建议作为体验使用
-- 注意点:docker 版本用作体验版本，正式使用不推荐docker部署方式。
+- 注意点:docker 版本可用作体验版本，正式使用不推荐docker部署方式。
 - 注意点:建议第一次docker部署完后，在重启一次，可能第一次启动数据库初始化还没完成，会导致报错
 - 应用和移动端兼容列表
 
  | 应用镜像     |   移动端     |
  | ---------- | -----------  |
- | 1.0.7      | 暂不支持      |
- | 1.0.6      | 暂不支持      |
+ | 1.0.9      | 1.0.1       |
 
 - 部署步骤
 ```
   其中镜像中1.0.7为版本号,替换相对于版本即可。
-  $docker run --name eamapp -t \
-    -e MYSQL_USER="eam" \
-    -e MYSQL_PASSWORD="eam_pwd" \
+  $docker run --name eamapp -it \
     -e MYSQL_ROOT_PASSWORD="root_pwd" \
-    -v /eam/mysql:/var/lib/mysql  \
-    -p 3307:3306 \
+    -v /data/mysql:/var/lib/mysql  \
+    -p 3306:3306 \
     -p 8089:8089 \
-    -d docker.io/algernonking/eamapp:1.0.7 \
+    -d docker.io/algernonking/eamapp:1.0.9 \
     --character-set-server=utf8
 ```
 

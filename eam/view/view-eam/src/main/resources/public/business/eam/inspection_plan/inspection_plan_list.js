@@ -1,7 +1,7 @@
 /**
  * 巡检计划 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:06:51
+ * @since 2022-04-27 21:17:18
  */
 
 
@@ -77,10 +77,8 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'planCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('计划编号') , templet: function (d) { return templet('planCode',d.planCode,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'planStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('planStatus',fox.getEnumText(SELECT_PLANSTATUS_DATA,d.planStatus),d);}}
 					,{ field: 'planType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('计划类型'), templet:function (d){ return templet('planType',fox.getEnumText(SELECT_PLANTYPE_DATA,d.planType),d);}}
-					,{ field: 'leaderId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('负责人') , templet: function (d) { return templet('leaderId',d.leaderId,d);}  }
 					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('班组'), templet: function (d) { return templet('groupId' ,fox.joinLabel(d.inspectionGroup,"name"),d);}}
 					,{ field: 'startDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('开始日期') ,templet: function (d) { return templet('startDate',fox.dateFormat(d.startDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'endDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('截止日期') ,templet: function (d) { return templet('endDate',fox.dateFormat(d.endDate,"yyyy-MM-dd"),d); }  }

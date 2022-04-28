@@ -1,0 +1,79 @@
+
+docker exec -it eamapp /bin/bash
+
+docker stop eamapp;docker rm eamapp
+
+docker stop eamapp
+
+docker start eamapp
+docker cp app_release.tar.gz eamapp:/tmp/
+docker cp app.sql eamapp:/tmp/
+docker cp nextVal.sql eamapp:/tmp/
+docker cp startapp.sql eamapp:/tmp/
+
+docker commit 8c05c2f17af8 docker.io/algernonking/eam_app_base:v1
+
+
+docker run --name eamapp -t \
+-e MYSQL_USER="eam" \
+-e MYSQL_ROOT_PASSWORD="root_pwd" \
+-v /d/mysql:/var/lib/mysql  \
+-p 30011:3306 \
+-p 30009:8089 \
+-d docker.io/algernonking/eam_app:base \
+--character-set-server=utf8
+
+docker run --name eamapp -t \
+-e MYSQL_USER="eam" \
+-e MYSQL_ROOT_PASSWORD="root_pwd" \
+-v /d/mysql:/var/lib/mysql  \
+-p 30011:3306 \
+-p 30009:8089 \
+-d docker.io/algernonking/eam_app:base_version \
+--character-set-server=utf8
+
+
+#确保本地操作系统/data/mysql正确
+docker run --name eamapp -it \
+-e MYSQL_ROOT_PASSWORD="root_pwd" \
+-v /v/mysql:/var/lib/mysql  \
+-p 13306:3306 \
+-p 30009:8089 \
+-d docker.io/algernonking/eamapp:1.0.9 \
+--character-set-server=utf8
+##########################打包后测试###########################
+方案一
+#确保本地操作系统/data/mysql正确
+docker run --name eamapp -it \
+-e MYSQL_ROOT_PASSWORD="root_pwd" \
+-v /data/mysql:/var/lib/mysql  \
+-p 3306:3306 \
+-p 8089:8089 \
+-d docker.io/algernonking/eamapp:1.0.9 \
+--character-set-server=utf8
+
+方案二
+docker run --user 0 --name eamapp -t \
+    -e MYSQL_USER="eam" \
+    -e MYSQL_PASSWORD="eam_pwd" \
+    -e MYSQL_ROOT_PASSWORD="root_pwd" \
+    -v /eam/mysql:/var/lib/mysql  \
+    -v /eam/app:/opt \
+    --privileged=true \
+    -p 12346:3306 \
+    -p 12345:8089 \
+    -d docker.io/algernonking/eamapp:base \
+    --character-set-server=utf8
+
+
+docker run --user 0 --name eamapp -t \
+    -e MYSQL_USER="eam" \
+    -e MYSQL_PASSWORD="eam_pwd" \
+    -e MYSQL_ROOT_PASSWORD="root_pwd" \
+    -v /eam/mysql:/var/lib/mysql  \
+    -v /eam/app:/opt \
+    --privileged=true \
+    -p 3307:3306 \
+    -p 26788:8089 \
+    -d docker.io/algernonking/eamapp:1.0.6 \
+    --character-set-server=utf8

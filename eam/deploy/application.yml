@@ -37,7 +37,7 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://127.0.0.1:3306/eam?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
         username: root
-        password: 123456
+        password: DOCKER_PASSWORD
         # 启动程序时，在连接池中初始化多少个连接
         initialSize: 16
         # 连接池中最多支持多少个活动会话
@@ -112,7 +112,7 @@ foxnic:
         #在不同的环境下选择不同的路径
         windows: c:/uploads
         mac: /opt/upload
-        linux: /opt/eam/upload
+        linux: /opt/app/upload
   cache:
     # 默认配置
     default:

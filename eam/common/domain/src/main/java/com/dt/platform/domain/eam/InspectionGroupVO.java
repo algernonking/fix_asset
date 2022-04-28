@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 巡检班组
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:21:46
+ * @since 2022-04-27 21:27:38
  * @sign B7E251C4FA9EFDBD97FC79027D054918
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

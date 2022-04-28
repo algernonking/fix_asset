@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 巡检计划  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 12:06:50
+ * @since 2022-04-27 21:17:17
  */
 @FeignClient(value = ServiceNames.EAM, contextId = InspectionPlanServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface InspectionPlanServiceProxy {

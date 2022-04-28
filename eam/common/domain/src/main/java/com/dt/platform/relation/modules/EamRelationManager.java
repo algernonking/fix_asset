@@ -81,6 +81,9 @@ public class EamRelationManager extends RelationManager {
         this.property(InspectionGroupMeta.INSPECTOR_LIST_PROP)
                 .using(EAMTables.EAM_INSPECTION_GROUP.ID).join(EAMTables.EAM_INSPECTION_GROUP_USER.GROUP_ID);
 
+//        this.property(InspectionGroupMeta.OPER_USER)
+//                .using(EAMTables.EAM_INSPECTION_GROUP.ID).join(EAMTables.EAM_INSPECTION_GROUP_USER.GROUP_ID);
+
 
     }
     public void setupInspectionPlan() {
