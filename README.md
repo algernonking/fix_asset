@@ -14,17 +14,17 @@
 
 ### 主要技术栈
 #### 后端技术栈
-- 安全框架:Spring Security
-- 开发框架:SpringBoot 2.3
+- 安全框架:Spring Security 5.3.4
+- 开发框架:SpringBoot 2.3.3
 - 数据库链接池:Druid 1.2.8
 - 模版引擎:Thymeleaf 3
-- 运行容器:Undertow
 - 应用层框架:[Foxnic-Web](https://gitee.com/LeeFJ/foxnic-web) [开发文档](http://foxnicweb.com/docs/doc.html)
 - 持久层框架:[FoxnicSQL&FoxnicDAO](https://gitee.com/LeeFJ/foxnic)
-- 日志管理:Logback
+- 日志管理:Logback 1.2.3
 - 流程引擎:Camunda
-- 任务调度:Quartz
+- 任务调度:Quartz 2.3.3
 - 项目管理框架: Maven 3.6
+- 运行容器:Undertow
 
 #### 前端技术栈
 - 前端组件:LayUI 2.6.8
@@ -34,7 +34,6 @@
 - JDK:JDK 1.8
 - 数据库:Mysql 5.7.X
 - Redis:5.1(可选)
-
 
 #### 系统架构图
 ![输入图片说明](https://images.gitee.com/uploads/images/2022/0407/143343_0a8f4947_448530.png "EAM.png")
@@ -86,7 +85,8 @@
 
 - 部署步骤
 ```
-  其中镜像中1.0.7为版本号,替换相对于版本即可。
+  其中镜像中1.0.9为版本号,替换相对于版本即可。
+  确保本地操作系统下/data/mysql目录的正确性,检查未冲突。
   $docker run --name eamapp -it \
     -e MYSQL_ROOT_PASSWORD="root_pwd" \
     -v /data/mysql:/var/lib/mysql  \
