@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-10 09:17:36
+ * @since 2022-04-30 09:08:35
  */
 
 
@@ -89,7 +89,7 @@ function ListPage() {
 					,{ field: 'jumperNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('跳线数') , templet: function (d) { return templet('jumperNumber',d.jumperNumber,d);}  }
 					,{ field: 'contractPower', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('合同电力') , templet: function (d) { return templet('contractPower',d.contractPower,d);}  }
 					,{ field: 'equipmentNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('设备数量') , templet: function (d) { return templet('equipmentNumber',d.equipmentNumber,d);}  }
-					,{ field: 'expireDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('到期日期') ,templet: function (d) { return templet('expireDate',fox.dateFormat(d.expireDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'expireDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('到期日期') ,templet: function (d) { return templet('expireDate',fox.dateFormat(d.expireDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'rackLabel1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签1') , templet: function (d) { return templet('rackLabel1',d.rackLabel1,d);}  }
 					,{ field: 'rackLabel2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签2') , templet: function (d) { return templet('rackLabel2',d.rackLabel2,d);}  }
 					,{ field: 'rackNotes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('rackNotes',d.rackNotes,d);}  }
@@ -136,12 +136,14 @@ function ListPage() {
 				if (r.success) {
 					data = r.data;
 					context.update(data);
+					fox.renderFormInputs(form);
 				} else {
 					fox.showMessage(data);
 				}
 			});
 		} else {
 			context.update(data);
+			fox.renderFormInputs(form);
 		}
 	}
 
@@ -151,7 +153,6 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.id={ inputType:"button",value: $("#id").val()};
 		value.rackCode={ inputType:"button",value: $("#rackCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.rackType={ inputType:"select_box", value: getSelectedValue("#rackType","value") ,fillBy:["typeDict"]  , label:getSelectedValue("#rackType","nameStr") };
 		value.rackName={ inputType:"button",value: $("#rackName").val()};
@@ -160,17 +161,8 @@ function ListPage() {
 		value.rackUsedType={ inputType:"select_box", value: getSelectedValue("#rackUsedType","value") ,fillBy:["usedTypeDict"]  , label:getSelectedValue("#rackUsedType","nameStr") };
 		value.areaId={ inputType:"select_box", value: getSelectedValue("#areaId","value") ,fillBy:["area"]  , label:getSelectedValue("#areaId","nameStr") };
 		value.layerId={ inputType:"select_box", value: getSelectedValue("#layerId","value") ,fillBy:["layer"]  , label:getSelectedValue("#layerId","nameStr") };
-		value.rackCaptical={ inputType:"number_input", value: $("#rackCaptical").val() };
-		value.uPostionNumber={ inputType:"number_input", value: $("#uPostionNumber").val() };
-		value.pduNumber={ inputType:"number_input", value: $("#pduNumber").val() };
-		value.jumperNumber={ inputType:"number_input", value: $("#jumperNumber").val() };
-		value.contractPower={ inputType:"number_input", value: $("#contractPower").val() };
-		value.equipmentNumber={ inputType:"number_input", value: $("#equipmentNumber").val() };
 		value.expireDate={ inputType:"date_input", begin: $("#expireDate-begin").val(), end: $("#expireDate-end").val() ,matchType:"auto" };
 		value.rackLabel1={ inputType:"button",value: $("#rackLabel1").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.rackLabel2={ inputType:"button",value: $("#rackLabel2").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.rackNotes={ inputType:"button",value: $("#rackNotes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

@@ -54,7 +54,11 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_CONSUMABLES_GOODS_ADJUST("eam_asset_consumables_goods_adjust" , "EAM_耗材物品-调整"),
 	EAM_ASSET_CONSUMABLES_GOODS_INVENTORY("eam_asset_consumables_goods_inventory" , "EAM_耗材物品-盘点"),
 
-
+	//备件
+	EAM_ASSET_PART_GOODS_IN("eam_asset_part_goods_in" , "EAM_备件物品-入库"),
+	EAM_ASSET_PART_GOODS_OUT("eam_asset_part_goods_out" , "EAM_备件物品-出库"),
+	EAM_ASSET_PART_GOODS_TRANFER("eam_asset_part_goods_tranfer" , "EAM_备件物品-转移"),
+	EAM_ASSET_PART_GOODS_ADJUST("eam_asset_part_goods_adjust" , "EAM_备件物品-调整"),
 
 	//耗材
 	EAM_ASSET_CONSUMABLES_STOCK_IN("eam_asset_consumables_stock_in" , "EAM_资产耗材单据-入库"),

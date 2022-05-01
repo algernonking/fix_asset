@@ -2,7 +2,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-10 09:17:36
+ * @since 2022-04-30 09:08:35
  */
  -->
  <!DOCTYPE html>
@@ -37,11 +37,11 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-3555-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-0572-fieldset">
             <legend>基本信息</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-3555-content">
+        <div class="layui-row form-row" id="random-0572-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -65,7 +65,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('到期日期')}">到期日期</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="expireDate" id="expireDate" name="expireDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('到期日期') }" type="text" class="layui-input"   />
+                            <input input-type="date" lay-filter="expireDate" id="expireDate" name="expireDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('到期日期') }" type="text" class="layui-input"    lay-verify=""   />
                         </div>
                     </div>
 
@@ -142,11 +142,11 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-2779-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-3729-fieldset">
             <legend>属性信息</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-2779-content">
+        <div class="layui-row form-row" id="random-3729-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -231,7 +231,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-3069-content">
+        <div class="layui-row form-row" id="random-3151-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -272,7 +272,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"rackCode":{"labelInForm":"编码","inputType":"text_input","required":true},"rackName":{"labelInForm":"名称","inputType":"text_input","required":true},"rackUsedType":{"labelInForm":"使用分类","inputType":"select_box","required":true},"rackType":{"labelInForm":"类型","inputType":"select_box","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"rackCode":{"labelInForm":"编码","inputType":"text_input","required":true},"rackName":{"labelInForm":"名称","inputType":"text_input","required":true},"rackUsedType":{"labelInForm":"使用分类","inputType":"select_box","required":true},"expireDate":{"date":true,"labelInForm":"到期日期","inputType":"date_input"},"rackType":{"labelInForm":"类型","inputType":"select_box","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
     var AUTH_PREFIX="dc_rack";
 
 

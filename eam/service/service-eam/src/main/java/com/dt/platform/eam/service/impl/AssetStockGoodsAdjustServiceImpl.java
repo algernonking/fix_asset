@@ -9,13 +9,17 @@ import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.constants.enums.eam.AssetStockGoodsTypeEnum;
 import com.dt.platform.domain.eam.*;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsInMeta;
+import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.eam.service.IGoodsStockService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.api.constant.CodeTextEnum;
+import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.reflect.EnumUtil;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,7 +125,10 @@ public class AssetStockGoodsAdjustServiceImpl extends SuperService<AssetStockGoo
 			codeRule= CodeModuleEnum.EAM_ASSET_STOCK_GOODS_ADJUST.code();
 		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(assetStockGoodsAdjust.getOwnerType())) {
 			codeRule= CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_ADJUST.code();
+		}else if(AssetStockGoodsTypeEnum.PART.code().equals(assetStockGoodsAdjust.getOwnerType())) {
+			codeRule= CodeModuleEnum.EAM_ASSET_PART_GOODS_ADJUST.code();
 		}
+
 		if(StringUtil.isBlank(assetStockGoodsAdjust.getBusinessCode())){
 			if(!StringUtil.isBlank(codeRule)){
 				if(!StringUtil.isBlank(codeRule)){
@@ -138,6 +145,8 @@ public class AssetStockGoodsAdjustServiceImpl extends SuperService<AssetStockGoo
 		Result r=super.insert(assetStockGoodsAdjust,throwsException);
 		for(int i=0;i<list.size();i++){
 			list.get(i).setWarehouseId(assetStockGoodsAdjust.getWarehouseId());
+			list.get(i).setBusinessCode(assetStockGoodsAdjust.getBusinessCode());
+			list.get(i).setOwnerCode(assetStockGoodsAdjust.getOwnerType());
 		}
 		return goodsStockService.saveOwnerData(assetStockGoodsAdjust.getId(),assetStockGoodsAdjust.getOwnerType(),list);
 
@@ -160,8 +169,41 @@ public class AssetStockGoodsAdjustServiceImpl extends SuperService<AssetStockGoo
 
 	@Override
 	public Map<String, Object> getBill(String id) {
-		return null;
+		AssetStockGoodsAdjust data = getById(id);
+		this.dao().fill(data)
+				.with("originator")
+				.with(AssetStockGoodsAdjustMeta.WAREHOUSE)
+				.execute();
+
+		this.dao().join(data.getOriginator(), Person.class);
+		GoodsStockVO vo=new GoodsStockVO();
+		vo.setPageIndex(1);
+		vo.setPageSize(1000);
+		vo.setOwnerTmpId(id);
+		PagedList<GoodsStock> list=goodsStockService.queryPagedListBySelected(vo,"","reset");
+		goodsStockService.dao().fill(list)
+				.with("ownerCompany")
+				.with("useOrganization")
+				.with("manager")
+				.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
+				.with(GoodsStockMeta.GOODS)
+				.with(GoodsStockMeta.SOURCE)
+				.with(GoodsStockMeta.WAREHOUSE)
+				.with(GoodsMeta.CATEGORY)
+				.with(GoodsStockMeta.BRAND)
+				.with(GoodsMeta.MANUFACTURER)
+				.execute();
+		data.setGoodsList(list.getList());
+		Map<String, Object> map = BeanUtil.toMap(data);
+		if (data.getStatus() != null) {
+			CodeTextEnum en = EnumUtil.parseByCode(AssetHandleStatusEnum.class, data.getStatus());
+			map.put("statusName", en == null ? data.getStatus() : en.text());
+		}
+		return map;
+
 	}
+
 
 	@Override
 	public Result revokeOperation(String id) {
@@ -223,6 +265,8 @@ public class AssetStockGoodsAdjustServiceImpl extends SuperService<AssetStockGoo
 				operCode= AssetOperateEnum.EAM_ASSET_STOCK_GOODS_ADJUST.code();
 			}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(billData.getOwnerType())){
 				operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_ADJUST.code();
+			}else if(AssetStockGoodsTypeEnum.PART.code().equals(billData.getOwnerType())){
+				operCode=AssetOperateEnum.EAM_ASSET_PART_GOODS_ADJUST.code();
 			}
 			if(operateService.approvalRequired(operCode) ) {
 				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
@@ -331,6 +375,8 @@ public class AssetStockGoodsAdjustServiceImpl extends SuperService<AssetStockGoo
 		Result r=super.update(assetStockGoodsAdjust , mode , throwsException);
 		for(int i=0;i<list.size();i++){
 			list.get(i).setWarehouseId(assetStockGoodsAdjust.getWarehouseId());
+			list.get(i).setBusinessCode(assetStockGoodsAdjust.getBusinessCode());
+			list.get(i).setOwnerCode(assetStockGoodsAdjust.getOwnerType());
 		}
 		return goodsStockService.saveOwnerData(assetStockGoodsAdjust.getId(),assetStockGoodsAdjust.getOwnerType(),list);
 

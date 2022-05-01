@@ -72,7 +72,7 @@ public class VoucherPrivServiceImpl extends SuperService<VoucherPriv> implements
 		vp_query.setEmplId(user_id);
 		vp_query.setStatus(StatusValidEnum.VALID.code());
 		ConditionExpr ce=new ConditionExpr();
-		ce.andLike("type","\""+type+"\"");
+		ce.andLike("type",type);
 		if(this.queryList(vp_query, ce).size()==0){
 			return ErrorDesc.failureMessage("当前用户无权限");
 		}

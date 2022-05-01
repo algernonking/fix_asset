@@ -37,7 +37,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
 
                 //单据临时屏蔽
-                operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
+                //operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
                 document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }
         },
@@ -90,6 +90,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeQuery:function (conditions,param,location) {
             console.log('beforeQuery',conditions,param,location);
+            param.ownerType=OWNER_TYPE;
             return true;
         },
         /**
@@ -237,6 +238,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
         downloadBill:function (data){
             console.log('downloadBill',data);
+            var downloadUrl="/service-eam/eam-asset-bill/query-asset-stock-goods-adjust-bill";
+            fox.submit(downloadUrl,{id:data.id});
         },
         /**
          * 末尾执行

@@ -4,7 +4,8 @@ package com.dt.platform.eam.controller;
 import java.util.List;
 
 import com.dt.platform.domain.eam.*;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsOutVOMeta;
+import com.dt.platform.domain.eam.meta.*;
+import com.dt.platform.eam.service.IGoodsStockService;
 import com.dt.platform.proxy.eam.AssetStockGoodsOutServiceProxy;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
@@ -23,7 +24,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 
 import com.dt.platform.proxy.eam.AssetStockGoodsAdjustServiceProxy;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsAdjustVOMeta;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -36,7 +36,7 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsAdjustMeta;
+
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -64,6 +64,9 @@ public class AssetStockGoodsAdjustController extends SuperController {
 	@Autowired
 	private IAssetStockGoodsAdjustService assetStockGoodsAdjustService;
 
+
+	@Autowired
+	private IGoodsStockService goodsStockService;
 
 	/**
 	 * 添加库存调整
@@ -232,6 +235,31 @@ public class AssetStockGoodsAdjustController extends SuperController {
 			.with("originator")
 			.with(AssetStockGoodsAdjustMeta.WAREHOUSE)
 			.execute();
+
+		assetStockGoodsAdjustService.dao().join(assetStockGoodsAdjust.getOriginator(), Person.class);
+
+
+		GoodsStockVO vo=new GoodsStockVO();
+		vo.setPageIndex(1);
+		vo.setPageSize(1000);
+		vo.setOwnerTmpId(id);
+		PagedList<GoodsStock> list=goodsStockService.queryPagedListBySelected(vo,"","reset");
+		goodsStockService.dao().fill(list)
+				.with("ownerCompany")
+				.with("useOrganization")
+				.with("manager")
+				.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
+				.with(GoodsStockMeta.GOODS)
+				.with(GoodsStockMeta.SOURCE)
+				.with(GoodsStockMeta.WAREHOUSE)
+				.with(GoodsMeta.CATEGORY)
+				.with(GoodsStockMeta.BRAND)
+				.with(GoodsMeta.MANUFACTURER)
+				.execute();
+		assetStockGoodsAdjust.setGoodsList(list.getList());
+
+
 		result.success(true).data(assetStockGoodsAdjust);
 		return result;
 	}

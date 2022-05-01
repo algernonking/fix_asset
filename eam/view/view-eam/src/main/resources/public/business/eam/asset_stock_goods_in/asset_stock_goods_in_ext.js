@@ -41,7 +41,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
 
                 //单据临时屏蔽
-                operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
+              //  operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
                 document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }
 
@@ -94,6 +94,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * @param location 调用的代码位置
          * */
         beforeQuery:function (conditions,param,location) {
+            param.ownerType=OWNER_TYPE;
             console.log('beforeQuery',conditions,param,location);
             return true;
         },
@@ -205,6 +206,11 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
+        },
+        downloadBill:function (data){
+            console.log('downloadBill',data);
+            var downloadUrl="/service-eam/eam-asset-bill/query-asset-stock-goods-in-bill";
+            fox.submit(downloadUrl,{id:data.id});
         },
         billOper:function(url,btnClass,ps,successMessage){
             var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");

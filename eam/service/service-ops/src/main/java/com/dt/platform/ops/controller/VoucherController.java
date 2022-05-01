@@ -278,17 +278,16 @@ public class VoucherController extends SuperController {
 		if(employeeId==null||vp_data==null){
 			condition.and("id=?","0");
 		}else{
-			JSONArray obj= JSONArray.parseArray(vp_data.getType());
+			String[] objArr= vp_data.getType().split(",");
 			List<String> items=new ArrayList<>();
-			for (int i=0;i<obj.size();i++){
-				items.add(obj.getString(i));
+			for (int i=0;i<objArr.length;i++){
+				items.add(objArr[i]);
 			}
 			if(items.size()>0){
 				condition.andIn("type",items);
 			}else{
 				condition.and("id=?","0");
 			}
-
 		}
 
 		PagedList<Voucher> list=voucherService.queryPagedList(sample,condition,sample.getPageSize(),sample.getPageIndex());

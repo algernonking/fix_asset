@@ -73,6 +73,11 @@
 - 1、Docker部署:直接从docker拉镜像
 - 2、应用直接运行部署:应用JAR和SQL包来源:https://gitee.com/lank/eam/releases
 
+#### 系统部署的入门视频介绍
+- 1、配置EAM项目源码 https://www.bilibili.com/video/BV1844y1377V?spm_id_from=333.999.0.0
+- 2、配置数据库 https://www.bilibili.com/video/BV1kR4y1P7Py?spm_id_from=333.999.0.0
+- 3、配置与启动应用 https://www.bilibili.com/video/BV1wu411r7xC?spm_id_from=333.999.0.0
+- 4、部署 https://www.bilibili.com/video/BV1Q34y1a7LR?spm_id_from=333.999.0.0
 
 #### 方案一 Docker方式-建议作为体验使用
 - 注意点:docker 版本可用作体验版本，正式使用不推荐docker部署方式。
@@ -133,6 +138,7 @@
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0326/212016_f9fa171e_448530.jpeg" />
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0326/212025_135c19b0_448530.jpeg" />
 
+ 
 ## 捐赠
 - 开源不易，坚持更难，如果您觉得本项目不错，可以捐赠请作者喝杯咖啡~，在此表示感谢^_^
 - 同时欢迎EAM系统的商业化定制,也欢迎其他业务的开发合作。

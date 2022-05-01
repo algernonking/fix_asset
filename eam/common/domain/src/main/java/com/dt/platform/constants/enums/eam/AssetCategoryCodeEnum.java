@@ -17,7 +17,8 @@ public enum AssetCategoryCodeEnum implements CodeTextEnum {
 	ASSET_SOFTWARE("asset_software" , "软件资产"),
 	ASSET_CONSUMABLES("asset_consumables" , "耗材"),
 	ASSET_STOCK("asset_stock" , "库存"),
-	ASSET_SPAREPARTS("asset_spareparts" , "备品备件")
+	ASSET_SPAREPARTS("asset_spareparts" , "备品备件"),
+	ASSET_STOCK_GOODS("asset_stock_goods" , "物品档案")
 	;
 	private String code;
 	private String text;

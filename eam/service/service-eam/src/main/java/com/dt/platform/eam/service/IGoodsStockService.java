@@ -29,6 +29,12 @@ import com.github.foxnic.dao.data.SaveMode;
 
 public interface IGoodsStockService extends ISuperService<GoodsStock> {
 
+	PagedList<GoodsStock> querySecurityStockWarn(GoodsStockVO sample);
+
+
+	PagedList<GoodsStock> queryMinStockWarn(GoodsStockVO sample);
+
+	PagedList<GoodsStock> queryMaxStockWarn(GoodsStockVO sample);
 
 	PagedList<GoodsStock> queryPagedListBySelected(GoodsStockVO sample ,String operType,String dataType);
 

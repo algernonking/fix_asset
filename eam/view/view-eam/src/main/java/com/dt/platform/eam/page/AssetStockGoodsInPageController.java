@@ -53,7 +53,10 @@ public class AssetStockGoodsInPageController extends ViewController {
 			operCode=AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code();
 		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(ownerType)){
 			operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code();
+		}else if(AssetStockGoodsTypeEnum.PART.code().equals(ownerType)){
+			operCode=AssetOperateEnum.EAM_ASSET_PART_GOODS_IN.code();
 		}
+
 		boolean approvalRequired=true;
 		Result approvalResult= OperateServiceProxy.api().approvalRequired(operCode);
 		if(approvalResult.isSuccess()){

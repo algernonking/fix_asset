@@ -37,11 +37,17 @@ public interface AssetReportServiceProxy {
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
-	
+
 	/**
 	 * 查询分类数据
 	 */
 	public static final String QUERY_CATEGORY_DATA = API_PREFIX + "query-category-data";
+
+
+	/**
+	 * 查询分类数据
+	 */
+	public static final String QUERY_CATEGORY_STATUS_DATA = API_PREFIX + "query-category-status-data";
 
 	/**
 	 * 查询组织数据

@@ -37,7 +37,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
 
                 //单据临时屏蔽
-                operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
+              //  operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
                 document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }
         },
@@ -90,6 +90,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeQuery:function (conditions,param,location) {
             console.log('beforeQuery',conditions,param,location);
+            param.ownerType=OWNER_TYPE;
             return true;
         },
         /**
@@ -194,6 +195,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('beforeRowOperationEvent',data,obj);
             return true;
         },
+        downloadBill:function (data){
+            console.log('downloadBill',data);
+            var downloadUrl="/service-eam/eam-asset-bill/query-asset-stock-goods-out-bill";
+            fox.submit(downloadUrl,{id:data.id});
+        },
+
         /**
          * 表格右侧操作列更多按钮事件
          * */
@@ -234,9 +241,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         revokeData:function (item){
             list.billOper("revoke-operation","revoke-data-button",{id:item.id},"已撤销");
         },
-        downloadBill:function (data){
-            console.log('downloadBill',data);
-        },
+
         /**
          * 末尾执行
          */

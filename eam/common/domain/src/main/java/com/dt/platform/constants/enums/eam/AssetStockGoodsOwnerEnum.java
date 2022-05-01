@@ -14,11 +14,19 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum AssetStockGoodsOwnerEnum implements CodeTextEnum {
 
 	GOODS("goods" , "物品"),
+
+
 	STOCK("stock" , "库存"),
 	REAL_STOCK("real_stock" , "实时库存"),
-	DATA_SELECTED("data_selected" , "数据选择"),
+
+
 	CONSUMABLES("consumables" , "耗材"),
 	REAL_CONSUMABLES("real_consumables" , "耗材"),
+
+	PART("part" , "备件"),
+	REAL_PART("real_part" , "备件"),
+
+	DATA_SELECTED("data_selected" , "数据选择"),
 
 	;
 	private String code;

@@ -50,6 +50,8 @@ public class GoodsStockRealAllPageController extends ViewController {
 			ownerCode=AssetStockGoodsOwnerEnum.REAL_STOCK.code();
 		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(ownerType)){
 			ownerCode=AssetStockGoodsOwnerEnum.REAL_CONSUMABLES.code();
+		}else if(AssetStockGoodsTypeEnum.PART.code().equals(ownerType)){
+			ownerCode=AssetStockGoodsOwnerEnum.REAL_PART.code();
 		}
 		model.addAttribute("ownerType",ownerType);
 		model.addAttribute("ownerCode",ownerCode);

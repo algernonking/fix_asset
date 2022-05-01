@@ -110,6 +110,12 @@ public interface GoodsStockServiceProxy {
 
     public static final String QUERY_GOODS_STOCK_REAL_ALL = API_PREFIX + "query-goods-stock-real-all";
 
+
+    public static final String QUERY_MIN_STOCK_WARN = API_PREFIX + "query-min-stock-warn";
+
+    public static final String QUERY_MAX_STOCK_WARN = API_PREFIX + "query-max-stock-warn";
+
+    public static final String QUERY_SECURITY_STOCK_WARN = API_PREFIX + "query-max-security-warn";
     /**
      * 添加库存物品
      */

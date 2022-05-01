@@ -52,6 +52,12 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_STOCK_GOODS_INVENTORY(CodeModuleEnum.EAM_ASSET_STOCK_GOODS_INVENTORY.code(), "EAM_资产物品库存-盘点"),
 
 
+    EAM_ASSET_PART_GOODS_IN(CodeModuleEnum.EAM_ASSET_PART_GOODS_IN.code(), "EAM_资产备件库存-入库"),
+    EAM_ASSET_PART_GOODS_OUT(CodeModuleEnum.EAM_ASSET_PART_GOODS_OUT.code(), "EAM_资产备件库存-出库"),
+    EAM_ASSET_PART_GOODS_TRANFER(CodeModuleEnum.EAM_ASSET_PART_GOODS_TRANFER.code(), "EAM_资产备件库存-转移"),
+    EAM_ASSET_PART_GOODS_ADJUST(CodeModuleEnum.EAM_ASSET_PART_GOODS_ADJUST.code(), "EAM_资产备件库存-调整"),
+
+
     //物品耗材
 //    EAM_ASSET_CONSUMABLES_GOODS(CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS.code(), "EAM_资产物品库存-入库"),
     EAM_ASSET_CONSUMABLES_GOODS_IN(CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code(), "EAM_资产物品库存-入库"),
@@ -66,7 +72,6 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_PURCHASE_CHECK(CodeModuleEnum.EAM_ASSET_PURCHASE_CHECK.code(), "EAM资产采购验收"),
     EAM_ASSET_PURCHASE_APPLY(CodeModuleEnum.EAM_ASSET_PURCHASE_APPLY.code(), "EAM资产采购申请"),
     EAM_ASSET_PURCHASE_ORDER(CodeModuleEnum.EAM_ASSET_PURCHASE_ORDER.code(), "EAM资产采购订单"),
-
 
 
     //单据下载
@@ -92,11 +97,20 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_DOWNLOAD_ASSET_STOCK_GOODS_TRANFER_BILL("eam_download_asset_stock_goods_tranfer_bill" , "EAM_资产物品库存-转移单下载"),
     EAM_DOWNLOAD_ASSET_STOCK_GOODS_ADJUST_BILL("eam_download_asset_stock_goods_adjust_bill" , "EAM_资产物品库存-调整单下载"),
 
+    //备件
+    EAM_DOWNLOAD_ASSET_PART_GOODS_IN_BILL("eam_download_asset_part_goods_in_bill" , "EAM_资产备件库存-入库单下载"),
+    EAM_DOWNLOAD_ASSET_PART_GOODS_OUT_BILL("eam_download_asset_part_goods_out_bill" , "EAM_资产备件库存-出库单下载"),
+    EAM_DOWNLOAD_ASSET_PART_GOODS_TRANFER_BILL("eam_download_asset_part_goods_tranfer_bill" , "EAM_资产备件库存-转移单下载"),
+    EAM_DOWNLOAD_ASSET_PART_GOODS_ADJUST_BILL("eam_download_asset_part_goods_adjust_bill" , "EAM_资产备件库存-调整单下载"),
+
+
     //耗材
     EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_IN_BILL("eam_download_asset_consumables_goods_in_bill" , "EAM_耗材库存-入库单下载"),
     EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_OUT_BILL("eam_download_asset_consumables_goods_out_bill" , "EAM_耗材库存-出库单下载"),
     EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_TRANFER_BILL("eam_download_asset_consumables_goods_tranfer_bill" , "EAM_资产物品库存-转移单下载"),
     EAM_DOWNLOAD_ASSET_CONSUMABLES_GOODS_ADJUST_BILL("eam_download_asset_consumables_goods_adjust_bill" , "EAM_资产物品库存-调整单下载"),
+
+
 
     EAM_ASSET_DATA_SYNC("eam_asset_data_sync" , "EAM_资产数据同步");
 

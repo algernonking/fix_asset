@@ -195,6 +195,23 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
         return data;
     }
 
+    public JSONArray queryCategoryStatusData(Asset sample){
+        String sql="select pcm.name,pcm.code,t2.*,t2.idle_cnt+t2.using_cnt+t2.borrow_cnt+t2.repair_cnt+t2.allocate_cnt+t2.scrap_cnt sum_cnt from (\n" +
+                "select t.*,\n" +
+                "case t.asset_status when 'idle' then cnt else 0 end idle_cnt,\n" +
+                "case t.asset_status when 'using' then cnt else 0 end using_cnt,\n" +
+                "case t.asset_status when 'borrow' then cnt else 0 end borrow_cnt,\n" +
+                "case t.asset_status when 'repair' then cnt else 0 end repair_cnt,\n" +
+                "case t.asset_status when 'allocate' then cnt else 0 end allocate_cnt,\n" +
+                "case t.asset_status when 'scrap' then cnt else 0 end scrap_cnt\n" +
+                " from (\n" +
+                "select category_id,asset_status,count(1) cnt from eam_asset where deleted=0 and status='complete' and owner_code='asset' and clean_out=0\n" +
+                "group by category_id, asset_status\n" +
+                ")t \n" +
+                ")t2,pcm_catalog pcm where t2.category_id=pcm.id";
+        RcdSet rs=dao.query(sql);
+        return rs.toJSONArrayWithJSONObject();
+    }
     public JSONArray queryCategoryData(Asset sample){
         HashMap<String,String> org = assetDataService.queryAssetCategoryNodes();
         //查询分类

@@ -4,7 +4,8 @@ package com.dt.platform.eam.controller;
 import java.util.List;
 
 import com.dt.platform.domain.eam.*;
-import com.dt.platform.domain.eam.meta.AssetCollectionVOMeta;
+import com.dt.platform.domain.eam.meta.*;
+import com.dt.platform.eam.service.IGoodsStockService;
 import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
@@ -23,7 +24,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 
 import com.dt.platform.proxy.eam.AssetStockGoodsInServiceProxy;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsInVOMeta;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -36,7 +36,6 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsInMeta;
 import java.math.BigDecimal;
 
 import org.github.foxnic.web.domain.system.DictItem;
@@ -68,6 +67,9 @@ public class AssetStockGoodsInController extends SuperController {
 	@Autowired
 	private IAssetStockGoodsInService assetStockGoodsInService;
 
+
+	@Autowired
+	private IGoodsStockService goodsStockService;
 
 	/**
 	 * 添加库存物品单
@@ -244,6 +246,7 @@ public class AssetStockGoodsInController extends SuperController {
 	}
 
 
+
 	/**
 	 * 获取库存物品单
 	*/
@@ -258,6 +261,7 @@ public class AssetStockGoodsInController extends SuperController {
 	public Result<AssetStockGoodsIn> getById(String id) {
 		Result<AssetStockGoodsIn> result=new Result<>();
 		AssetStockGoodsIn assetStockGoodsIn=assetStockGoodsInService.getById(id);
+
 		// join 关联的对象
 		assetStockGoodsInService.dao().fill(assetStockGoodsIn)
 			.with("ownerCompany")
@@ -268,6 +272,30 @@ public class AssetStockGoodsInController extends SuperController {
 			.with(AssetStockGoodsInMeta.SOURCE)
 			.with(AssetStockGoodsInMeta.STOCK_TYPE_DICT)
 			.execute();
+
+		assetStockGoodsInService.dao().join(assetStockGoodsIn.getOriginator(), Person.class);
+		assetStockGoodsInService.dao().join(assetStockGoodsIn.getManager(), Person.class);
+
+		GoodsStockVO vo=new GoodsStockVO();
+		vo.setPageIndex(1);
+		vo.setPageSize(1000);
+		vo.setOwnerTmpId(id);
+		PagedList<GoodsStock> list=goodsStockService.queryPagedListBySelected(vo,"","reset");
+		goodsStockService.dao().fill(list)
+				.with("ownerCompany")
+				.with("useOrganization")
+				.with("manager")
+				.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
+				.with(GoodsStockMeta.GOODS)
+				.with(GoodsStockMeta.SOURCE)
+				.with(GoodsStockMeta.WAREHOUSE)
+				.with(GoodsMeta.CATEGORY)
+				.with(GoodsStockMeta.BRAND)
+				.with(GoodsMeta.MANUFACTURER)
+				.execute();
+		assetStockGoodsIn.setGoodsList(list.getList());
+
 		result.success(true).data(assetStockGoodsIn);
 		return result;
 	}

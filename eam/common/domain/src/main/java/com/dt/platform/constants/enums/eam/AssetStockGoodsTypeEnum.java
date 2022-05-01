@@ -14,6 +14,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum AssetStockGoodsTypeEnum implements CodeTextEnum {
 
 	STOCK("stock" , "库存"),
+	PART("part" , "备件"),
 	CONSUMABLES("consumables" , "耗材")
 	;
 	private String code;

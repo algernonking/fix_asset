@@ -54,7 +54,7 @@ public class DcRackGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.DC_RACK.RACK_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.DC_RACK.RACK_LABEL1).search().fuzzySearch();
         cfg.view().field(EAMTables.DC_RACK.RACK_LABEL2).search().fuzzySearch();
-        cfg.view().field(EAMTables.DC_RACK.EXPIRE_DATE).search().range();
+
 
 
         cfg.view().search().inputLayout(
@@ -133,6 +133,11 @@ public class DcRackGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.DC_RACK.RACK_CAPTICAL).form().numberInput().range(0.0,100.0).step(1.0);
         cfg.view().field(EAMTables.DC_RACK.RACK_NOTES).form().textArea().height(30);
+
+
+        cfg.view().field(EAMTables.DC_RACK.EXPIRE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+
+
 
         //分成分组布局
         cfg.view().formWindow().width("98%");

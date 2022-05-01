@@ -57,6 +57,33 @@ public class GoodsStockPageController extends ViewController {
 		return prefix+"/goods_stock_list";
 	}
 
+	/**
+	 * 安全库存
+	 */
+	@RequestMapping("/goods_stock_security_warn_list.html")
+	public String securityWarn(Model model,HttpServletRequest request,String ownerCode) {
+		model.addAttribute("ownerCode",ownerCode);
+		return prefix+"/goods_stock_security_warn_list";
+	}
+
+	/**
+	 * 库存下限
+	 */
+	@RequestMapping("/goods_stock_min_warn_list.html")
+	public String minWarn(Model model,HttpServletRequest request,String ownerCode) {
+		model.addAttribute("ownerCode",ownerCode);
+		return prefix+"/goods_stock_min_warn_list";
+	}
+
+	/**
+	 * 库存上限
+	 */
+	@RequestMapping("/goods_stock_max_warn_list.html")
+	public String maxWarn(Model model,HttpServletRequest request,String ownerCode) {
+		model.addAttribute("ownerCode",ownerCode);
+		return prefix+"/goods_stock_max_warn_list";
+	}
+
 
 	/**
 	 * 库存物品 表单页面
@@ -85,6 +112,12 @@ public class GoodsStockPageController extends ViewController {
 	//out:		stock real_goods
 	//adjust:   stock real_goods
 	//tranfer:  stock real_goods
+
+	//备件
+	//in:		part goods
+	//out:		part real_part
+	//adjust:   part real_part
+	//tranfer:  part real_part
 
 	//耗材
 	//in:		consumables goods
@@ -132,6 +165,24 @@ public class GoodsStockPageController extends ViewController {
 				}
 			}
 		}
+
+		//备件
+		if(AssetStockGoodsTypeEnum.PART.code().equals(ownerType)){
+			//库存
+			if(PAGE_ACTION_SELECTED.equals(pageAction)){
+				ownerCode=AssetStockGoodsOwnerEnum.PART.code();
+			}else if(PAGE_ACTION_SELECT.equals(pageAction)){
+				//类型
+				if(AssetOperateEnum.EAM_ASSET_PART_GOODS_IN.code().equals(operType)){
+					ownerCode=AssetStockGoodsOwnerEnum.GOODS.code();
+				}else if(AssetOperateEnum.EAM_ASSET_PART_GOODS_OUT.code().equals(operType)
+						||AssetOperateEnum.EAM_ASSET_PART_GOODS_ADJUST.code().equals(operType)
+						||AssetOperateEnum.EAM_ASSET_PART_GOODS_TRANFER.code().equals(operType)){
+					ownerCode=AssetStockGoodsOwnerEnum.REAL_PART.code();
+				}
+			}
+		}
+
 		return ownerCode;
 	}
 
@@ -142,7 +193,7 @@ public class GoodsStockPageController extends ViewController {
 	@RequestMapping("/goods_stock_select_tree.html")
 	public String selectTree(Model model,HttpServletRequest request,String ownerTmpId,String operType,String pageType,String ownerType,String selectedCode) {
 
-		Result idResult= AssetCategoryServiceProxy.api().queryNodesByCode(AssetCategoryCodeEnum.ASSET.code());
+		Result idResult= AssetCategoryServiceProxy.api().queryNodesByCode(AssetCategoryCodeEnum.ASSET_STOCK_GOODS.code());
 		model.addAttribute("categoryParentId",idResult.getData());
 		model.addAttribute("ownerCode",getOwnerCodeByOperType(operType,ownerType,PAGE_ACTION_SELECT));
 		model.addAttribute("ownerTmpId",ownerTmpId);

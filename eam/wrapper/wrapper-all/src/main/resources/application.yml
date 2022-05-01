@@ -117,7 +117,7 @@ foxnic:
       location:
         #在不同的环境下选择不同的路径
         windows: c:/uploads
-        mac: /opt/upload
+        mac: /Users/Shared/upload
         linux: /opt/eam/upload
   cache:
     # 默认配置

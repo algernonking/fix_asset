@@ -494,6 +494,37 @@ public class GoodsStockController extends SuperController {
 		return result;
 	}
 
+	@ApiOperationSupport(order=10)
+	@SentinelResource(value = GoodsStockServiceProxy.QUERY_MIN_STOCK_WARN , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(GoodsStockServiceProxy.QUERY_MIN_STOCK_WARN)
+	public Result<PagedList<GoodsStock>> queryMinStockWarn(GoodsStockVO sample) {
+		Result<PagedList<GoodsStock>> result=new Result<>();
+		PagedList<GoodsStock> list=goodsStockService.queryMinStockWarn(sample);
+		result.success(true).data(list);
+		return result;
+	}
+
+	@ApiOperationSupport(order=11)
+	@SentinelResource(value = GoodsStockServiceProxy.QUERY_MAX_STOCK_WARN , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(GoodsStockServiceProxy.QUERY_MAX_STOCK_WARN)
+	public Result<PagedList<GoodsStock>> queryMaxStockWarn(GoodsStockVO sample) {
+		Result<PagedList<GoodsStock>> result = new Result<>();
+		PagedList<GoodsStock> list = goodsStockService.queryMaxStockWarn(sample);
+		result.success(true).data(list);
+		return result;
+	}
+
+
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = GoodsStockServiceProxy.QUERY_SECURITY_STOCK_WARN , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(GoodsStockServiceProxy.QUERY_SECURITY_STOCK_WARN)
+	public Result<PagedList<GoodsStock>> querySecurityStockWarn(GoodsStockVO sample) {
+		Result<PagedList<GoodsStock>> result=new Result<>();
+		PagedList<GoodsStock> list=goodsStockService.querySecurityStockWarn(sample);
+		result.success(true).data(list);
+		return result;
+	}
+
 
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { GoodsStockVOMeta.PAGE_INDEX , GoodsStockVOMeta.PAGE_SIZE , GoodsStockVOMeta.SEARCH_FIELD , GoodsStockVOMeta.FUZZY_FIELD , GoodsStockVOMeta.SEARCH_VALUE , GoodsStockVOMeta.DIRTY_FIELDS , GoodsStockVOMeta.SORT_FIELD , GoodsStockVOMeta.SORT_TYPE , GoodsStockVOMeta.IDS } )
 	@SentinelResource(value = GoodsStockServiceProxy.SAVE_BY_IDS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -502,9 +533,12 @@ public class GoodsStockController extends SuperController {
 
 		for(String id:ids){
 			GoodsStockVO e=new GoodsStockVO();
-			e.setOwnerCode(AssetStockGoodsOwnerEnum.STOCK.code());
+			//e.setOwnerCode(ownerType);
 			e.setOwnerType(ownerType);
-			if(AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code().equals(operType)||AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code().equals(operType)){
+			if(AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code().equals(operType)
+					||AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code().equals(operType)
+			     	||AssetOperateEnum.EAM_ASSET_PART_GOODS_IN.code().equals(operType)
+			){
 				//直接物品
 				e.setGoodsId(id);
 			}else{
@@ -519,6 +553,7 @@ public class GoodsStockController extends SuperController {
 				e.setOwnerTmpId(ownerTmpId);
 			}
 			e.setSelectedCode(selectedCode);
+			e.setNotes("物品选择");
 			goodsStockService.insert(e,false);
 
 		}

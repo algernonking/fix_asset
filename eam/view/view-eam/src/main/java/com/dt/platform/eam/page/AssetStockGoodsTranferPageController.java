@@ -52,7 +52,10 @@ public class AssetStockGoodsTranferPageController extends ViewController {
 			operCode= AssetOperateEnum.EAM_ASSET_STOCK_GOODS_OUT.code();
 		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(ownerType)){
 			operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_OUT.code();
+		}else if(AssetStockGoodsTypeEnum.PART.code().equals(ownerType)){
+			operCode=AssetOperateEnum.EAM_ASSET_PART_GOODS_OUT.code();
 		}
+
 		boolean approvalRequired=true;
 		Result approvalResult= OperateServiceProxy.api().approvalRequired(operCode);
 		if(approvalResult.isSuccess()){

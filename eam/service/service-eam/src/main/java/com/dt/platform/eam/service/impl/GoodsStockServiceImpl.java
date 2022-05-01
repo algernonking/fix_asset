@@ -8,7 +8,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.constants.enums.eam.AssetStockGoodsOwnerEnum;
 import com.dt.platform.constants.enums.eam.AssetStockGoodsTypeEnum;
+import com.dt.platform.domain.eam.meta.GoodsMeta;
+import com.dt.platform.domain.eam.meta.GoodsStockMeta;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.dao.data.RcdSet;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -53,6 +58,8 @@ import java.util.Date;
 @Service("EamGoodsStockService")
 public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements IGoodsStockService {
 
+
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -85,6 +92,8 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 	}
 
 
+
+
 	//type:create,edit
 	public Result saveOwnerData(String oid,String ownerType,List<GoodsStock> list){
 		this.dao.execute("delete from eam_goods_stock where owner_id=?",oid);
@@ -97,6 +106,106 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 			super.insert(e,false);
 		}
 		return ErrorDesc.success();
+	}
+
+	private void fillStockWarnData(PagedList<GoodsStock> list){
+		// join 关联的对象
+		this.dao().fill(list)
+				.with("ownerCompany")
+				.with("useOrganization")
+				.with("manager")
+				.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
+				.with(GoodsStockMeta.GOODS)
+				.with(GoodsStockMeta.SOURCE)
+				.with(GoodsStockMeta.WAREHOUSE)
+				.with(GoodsMeta.CATEGORY)
+				.with(GoodsStockMeta.BRAND)
+				.with(GoodsMeta.MANUFACTURER)
+				.execute();
+		List<Employee> originatorList= CollectorUtil.collectList(list, GoodsStock::getOriginator);
+		this.dao().join(originatorList, Person.class);
+	}
+
+	@Override
+	public PagedList<GoodsStock> querySecurityStockWarn(GoodsStockVO sample) {
+		ConditionExpr queryCondition=new ConditionExpr();
+		String ownerCode=sample.getOwnerCode();
+		if(!ownerCode.startsWith("real_")){
+			ownerCode="real_none";
+			sample.setOwnerCode(ownerCode);
+		}
+		String sql="select \n" +
+				"data.stock_in_number,\n" +
+				"goods.stock_min goods_stock_min,\n" +
+				"goods.stock_max goods_stock_max,\n" +
+				"goods.stock_security goods_stock_security,\n" +
+				"data.id from eam_goods_stock data, eam_goods_stock goods\n" +
+				"where data.goods_id=goods.id and data.owner_code=?\n" +
+				"and data.stock_cur_number>goods.stock_security";
+		List<String> idsList=dao.query(sql,ownerCode).getValueList("id",String.class);
+		if(idsList.size()>0){
+			queryCondition.andIn("id",idsList);
+		}else{
+			sample.setId("-1");
+		}
+		PagedList<GoodsStock> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
+		fillStockWarnData(list);
+		return list;
+	}
+
+	@Override
+	public PagedList<GoodsStock> queryMinStockWarn(GoodsStockVO sample) {
+		ConditionExpr queryCondition=new ConditionExpr();
+		String ownerCode=sample.getOwnerCode();
+		if(!ownerCode.startsWith("real_")){
+			ownerCode="real_none";
+			sample.setOwnerCode(ownerCode);
+		}
+		String sql="select \n" +
+				"data.stock_in_number,\n" +
+				"goods.stock_min goods_stock_min,\n" +
+				"goods.stock_max goods_stock_max,\n" +
+				"goods.stock_security goods_stock_security,\n" +
+				"data.id from eam_goods_stock data, eam_goods_stock goods\n" +
+				"where data.goods_id=goods.id and data.owner_code=?\n" +
+				"and data.stock_cur_number<goods.stock_min";
+		List<String> idsList=dao.query(sql,ownerCode).getValueList("id",String.class);
+		if(idsList.size()>0){
+			queryCondition.andIn("id",idsList);
+		}else{
+			sample.setId("-1");
+		}
+		PagedList<GoodsStock> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
+		fillStockWarnData(list);
+		return list;
+	}
+
+	@Override
+	public PagedList<GoodsStock> queryMaxStockWarn(GoodsStockVO sample) {
+		ConditionExpr queryCondition=new ConditionExpr();
+		String ownerCode=sample.getOwnerCode();
+		if(!ownerCode.startsWith("real_")){
+			ownerCode="real_none";
+			sample.setOwnerCode(ownerCode);
+		}
+		String sql="select \n" +
+				"data.stock_in_number,\n" +
+				"goods.stock_min goods_stock_min,\n" +
+				"goods.stock_max goods_stock_max,\n" +
+				"goods.stock_security goods_stock_security,\n" +
+				"data.id from eam_goods_stock data, eam_goods_stock goods\n" +
+				"where data.goods_id=goods.id and data.owner_code=?\n" +
+				"and data.stock_cur_number>goods.stock_max";
+		List<String> idsList=dao.query(sql,ownerCode).getValueList("id",String.class);
+		if(idsList.size()>0){
+			queryCondition.andIn("id",idsList);
+		}else{
+			sample.setId("-1");
+		}
+		PagedList<GoodsStock> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
+		fillStockWarnData(list);
+		return list;
 	}
 
 	@Override
@@ -180,8 +289,10 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 		String ownerCode="";
 		if(AssetStockGoodsTypeEnum.STOCK.code().equals(goodsVO.getOwnerType()) ){
 			ownerCode=AssetStockGoodsOwnerEnum.REAL_STOCK.code();
-		}else if(AssetStockGoodsTypeEnum.STOCK.code().equals(goodsVO.getOwnerType())){
+		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(goodsVO.getOwnerType())){
 			ownerCode=AssetStockGoodsOwnerEnum.REAL_CONSUMABLES.code();
+		}else if(AssetStockGoodsTypeEnum.PART.code().equals(goodsVO.getOwnerType())){
+			ownerCode=AssetStockGoodsOwnerEnum.REAL_PART.code();
 		}
 
 		String sql="select goods_id,sum(stock_cur_number) stock_cur_number_total from eam_goods_stock where deleted=0 and owner_code=? group by goods_id";

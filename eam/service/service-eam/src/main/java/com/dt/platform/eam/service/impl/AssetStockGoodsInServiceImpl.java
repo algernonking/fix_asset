@@ -6,16 +6,24 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetRepairMeta;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsInMeta;
+import com.dt.platform.domain.eam.meta.GoodsMeta;
+import com.dt.platform.domain.eam.meta.GoodsStockMeta;
 import com.dt.platform.eam.service.IGoodsStockService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
+import com.github.foxnic.api.constant.CodeTextEnum;
+import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.sql.expr.Insert;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +63,7 @@ import java.util.Map;
 
 @Service("EamAssetStockGoodsInService")
 public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn> implements IAssetStockGoodsInService {
+
 
 
 	@Autowired
@@ -118,10 +127,16 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 
 		//编码
 		String codeRule="";
+	//	String ownerCode="";
 		if(AssetStockGoodsTypeEnum.STOCK.code().equals(assetStockGoodsIn.getOwnerType())){
 			codeRule= CodeModuleEnum.EAM_ASSET_STOCK_GOODS_IN.code();
+		//	ownerCode=AssetStockGoodsOwnerEnum.STOCK.code();
 		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(assetStockGoodsIn.getOwnerType())) {
 			codeRule= CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code();
+	//		ownerCode=AssetStockGoodsOwnerEnum.CONSUMABLES.code();
+		}else if(AssetStockGoodsTypeEnum.PART.code().equals(assetStockGoodsIn.getOwnerType())) {
+			codeRule= CodeModuleEnum.EAM_ASSET_PART_GOODS_IN.code();
+	//		ownerCode=AssetStockGoodsOwnerEnum.PART.code();
 		}
 		if(StringUtil.isBlank(assetStockGoodsIn.getBusinessCode())){
 			if(!StringUtil.isBlank(codeRule)){
@@ -138,7 +153,7 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 
 		Result r=super.insert(assetStockGoodsIn,throwsException);
 		for(int i=0;i<list.size();i++){
-			list.get(i).setBusinessCode(assetStockGoodsIn.getBusinessCode());
+
 			list.get(i).setBatchCode(assetStockGoodsIn.getBatchCode());
 			list.get(i).setOwnCompanyId(assetStockGoodsIn.getOwnCompanyId());
 			list.get(i).setSupplierName(assetStockGoodsIn.getSupplierName());
@@ -146,6 +161,9 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 			list.get(i).setManagerId(assetStockGoodsIn.getManagerId());
 			list.get(i).setStatus(assetStockGoodsIn.getStatus());
 			list.get(i).setStorageDate(new Date());
+			list.get(i).setBusinessCode(assetStockGoodsIn.getBusinessCode());
+			list.get(i).setOwnerCode(assetStockGoodsIn.getOwnerType());
+
 		}
 		return goodsStockService.saveOwnerData(assetStockGoodsIn.getId(),assetStockGoodsIn.getOwnerType(),list);
 	}
@@ -167,7 +185,45 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 
 	@Override
 	public Map<String, Object> getBill(String id) {
-		return null;
+
+		AssetStockGoodsIn data=getById(id);
+		this.dao().fill(data)
+				.with("ownerCompany")
+				.with("originator")
+				.with("manager")
+				.with(AssetStockGoodsInMeta.GOODS_LIST)
+				.with(AssetStockGoodsInMeta.WAREHOUSE)
+				.with(AssetStockGoodsInMeta.SOURCE)
+				.with(AssetStockGoodsInMeta.STOCK_TYPE_DICT)
+				.execute();
+
+		this.dao().join(data.getManager(), Person.class);
+		this.dao().join(data.getOriginator(),Person.class);
+		GoodsStockVO vo=new GoodsStockVO();
+		vo.setPageIndex(1);
+		vo.setPageSize(1000);
+		vo.setOwnerTmpId(id);
+		PagedList<GoodsStock> list=goodsStockService.queryPagedListBySelected(vo,"","reset");
+		goodsStockService.dao().fill(list)
+				.with("ownerCompany")
+				.with("useOrganization")
+				.with("manager")
+				.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
+				.with(GoodsStockMeta.GOODS)
+				.with(GoodsStockMeta.SOURCE)
+				.with(GoodsStockMeta.WAREHOUSE)
+				.with(GoodsMeta.CATEGORY)
+				.with(GoodsStockMeta.BRAND)
+				.with(GoodsMeta.MANUFACTURER)
+				.execute();
+		data.setGoodsList(list.getList());
+		Map<String, Object> map= BeanUtil.toMap(data);
+		if(data.getStatus()!=null){
+			CodeTextEnum en= EnumUtil.parseByCode(AssetHandleStatusEnum.class,data.getStatus());
+			map.put("statusName", en==null?data.getStatus():en.text());
+		}
+		return map;
 	}
 
 	@Override
@@ -213,6 +269,8 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 			ownerCode=AssetStockGoodsOwnerEnum.REAL_STOCK.code();
 		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(bill.getOwnerType())){
 			ownerCode=AssetStockGoodsOwnerEnum.REAL_CONSUMABLES.code();
+		}else if(AssetStockGoodsTypeEnum.PART.code().equals(bill.getOwnerType())){
+			ownerCode=AssetStockGoodsOwnerEnum.REAL_PART.code();
 		}
 		List<GoodsStock> goods=bill.getGoodsList();
 		if(goods!=null&&goods.size()>0){
@@ -256,6 +314,8 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 				operCode=AssetOperateEnum.EAM_ASSET_STOCK_GOODS_IN.code();
 			}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(billData.getOwnerType())){
 				operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_IN.code();
+			}else if(AssetStockGoodsTypeEnum.PART.code().equals(billData.getOwnerType())){
+				operCode=AssetOperateEnum.EAM_ASSET_PART_GOODS_IN.code();
 			}
 			if(operateService.approvalRequired(operCode) ) {
 				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
@@ -370,6 +430,9 @@ public class AssetStockGoodsInServiceImpl extends SuperService<AssetStockGoodsIn
 			list.get(i).setManagerId(assetStockGoodsIn.getManagerId());
 			list.get(i).setStatus(assetStockGoodsIn.getStatus());
 			list.get(i).setStorageDate(new Date());
+			list.get(i).setBusinessCode(assetStockGoodsIn.getBusinessCode());
+			list.get(i).setOwnerCode(assetStockGoodsIn.getOwnerType());
+
 		}
 		return goodsStockService.saveOwnerData(assetStockGoodsIn.getId(),assetStockGoodsIn.getOwnerType(),list);
 

@@ -1,9 +1,9 @@
 package com.dt.platform.ops.controller;
 
  
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+import com.alibaba.csp.sentinel.util.StringUtil;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.common.StatusValidEnum;
 import com.dt.platform.domain.eam.AssetBorrow;
@@ -37,11 +37,10 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.springboot.web.DownloadUtil;
 import com.github.foxnic.dao.data.PagedList;
-import java.util.Date;
+
 import java.sql.Timestamp;
 import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.commons.io.StreamUtil;
-import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.VoucherPrivMeta;
@@ -260,7 +259,7 @@ public class VoucherPrivController extends SuperController {
 		vpQuery.setEmplId(employeeId);
 		vpQuery.setStatus(StatusValidEnum.VALID.code());
 		VoucherPriv vpData=voucherPrivService.queryEntity(vpQuery);
-		if(vpData==null||"[]".equals(vpData.getType())){
+		if(vpData==null||"[]".equals(vpData.getType())||StringUtil.isBlank(vpData.getType())){
 			result.success(true).data(list);
 			return result;
 		}
@@ -272,13 +271,17 @@ public class VoucherPrivController extends SuperController {
 		if(!dictItem_result.isSuccess()){
 			return dictItem_result;
 		}
+		Map<String,String> map=new HashMap<>();
+	 	String[] typeArr=type.split(",");
+	 	for(String t:typeArr){
+	 		map.put(t,t);
+		}
 
 		List<DictItem> dictItem_list=dictItem_result.getData();
 		for(int i=0;i<dictItem_list.size();i++){
 			String tempType=dictItem_list.get(i).getCode();
-			System.out.println("tempType"+tempType+",type:"+type);
-			if(type.indexOf("\""+tempType+"\"")!=-1){
-				System.out.println("match it");
+			System.out.println("tempType:"+tempType+",type:"+type);
+			if(map.containsKey(tempType)){
 				list.add(dictItem_list.get(i));
 			}
 		}

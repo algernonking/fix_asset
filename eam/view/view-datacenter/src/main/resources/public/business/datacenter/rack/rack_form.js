@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-10 09:17:37
+ * @since 2022-04-30 09:08:35
  */
 
 function FormPage() {
@@ -253,7 +253,7 @@ function FormPage() {
 		});
 		laydate.render({
 			elem: '#expireDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click",
 			done: function(value, date, endDate){
 				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("expireDate",value, date, endDate);
@@ -287,7 +287,7 @@ function FormPage() {
 
 			//设置 到期日期 显示复选框勾选
 			if(formData["expireDate"]) {
-				$("#expireDate").val(fox.dateFormat(formData["expireDate"],"yyyy-MM-dd HH:mm:ss"));
+				$("#expireDate").val(fox.dateFormat(formData["expireDate"],"yyyy-MM-dd"));
 			}
 
 

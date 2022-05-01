@@ -6,15 +6,19 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsInMeta;
+import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.eam.service.IGoodsStockService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.api.constant.CodeTextEnum;
+import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.sql.expr.Insert;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,7 +125,11 @@ public class AssetStockGoodsTranferServiceImpl extends SuperService<AssetStockGo
 			codeRule= CodeModuleEnum.EAM_ASSET_STOCK_GOODS_TRANFER.code();
 		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(assetStockGoodsTranfer.getOwnerType())) {
 			codeRule= CodeModuleEnum.EAM_ASSET_CONSUMABLES_GOODS_TRANFER.code();
+		}else if(AssetStockGoodsTypeEnum.PART.code().equals(assetStockGoodsTranfer.getOwnerType())) {
+			codeRule= CodeModuleEnum.EAM_ASSET_PART_GOODS_TRANFER.code();
 		}
+
+
 		if(StringUtil.isBlank(assetStockGoodsTranfer.getBusinessCode())){
 			if(!StringUtil.isBlank(codeRule)){
 				if(!StringUtil.isBlank(codeRule)){
@@ -139,6 +147,8 @@ public class AssetStockGoodsTranferServiceImpl extends SuperService<AssetStockGo
 		for(int i=0;i<list.size();i++){
 			//调出库存多--->调入库存(单)
 			list.get(i).setWarehouseId(assetStockGoodsTranfer.getWarehouseOutId());
+			list.get(i).setBusinessCode(assetStockGoodsTranfer.getBusinessCode());
+			list.get(i).setOwnerCode(assetStockGoodsTranfer.getOwnerType());
 		}
 		return goodsStockService.saveOwnerData(assetStockGoodsTranfer.getId(),assetStockGoodsTranfer.getOwnerType(),list);
 
@@ -161,7 +171,40 @@ public class AssetStockGoodsTranferServiceImpl extends SuperService<AssetStockGo
 
 	@Override
 	public Map<String, Object> getBill(String id) {
-		return null;
+		AssetStockGoodsTranfer data=getById(id);
+		this.dao().fill(data)
+				.with("originator")
+				.with(AssetStockGoodsTranferMeta.WAREHOUSE_IN)
+				.with(AssetStockGoodsTranferMeta.WAREHOUSE_OUT)
+				.execute();
+		this.dao().join(data.getOriginator(),Person.class);
+
+		GoodsStockVO vo=new GoodsStockVO();
+		vo.setPageIndex(1);
+		vo.setPageSize(1000);
+		vo.setOwnerTmpId(id);
+		PagedList<GoodsStock> list=goodsStockService.queryPagedListBySelected(vo,"","reset");
+		goodsStockService.dao().fill(list)
+				.with("ownerCompany")
+				.with("useOrganization")
+				.with("manager")
+				.with("originator")
+				.with(GoodsStockMeta.CATEGORY)
+				.with(GoodsStockMeta.GOODS)
+				.with(GoodsStockMeta.SOURCE)
+				.with(GoodsStockMeta.WAREHOUSE)
+				.with(GoodsMeta.CATEGORY)
+				.with(GoodsStockMeta.BRAND)
+				.with(GoodsMeta.MANUFACTURER)
+				.execute();
+		data.setGoodsList(list.getList());
+
+		Map<String, Object> map= BeanUtil.toMap(data);
+		if(data.getStatus()!=null){
+			CodeTextEnum en= EnumUtil.parseByCode(AssetHandleStatusEnum.class,data.getStatus());
+			map.put("statusName", en==null?data.getStatus():en.text());
+		}
+		return map;
 	}
 
 	@Override
@@ -210,7 +253,10 @@ public class AssetStockGoodsTranferServiceImpl extends SuperService<AssetStockGo
 			ownerCode=AssetStockGoodsOwnerEnum.REAL_STOCK.code();
 		}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(bill.getOwnerType())){
 			ownerCode=AssetStockGoodsOwnerEnum.REAL_CONSUMABLES.code();
+		}else if(AssetStockGoodsTypeEnum.PART.code().equals(bill.getOwnerType())){
+			ownerCode=AssetStockGoodsOwnerEnum.REAL_PART.code();
 		}
+
 
 		List<GoodsStock> goods=bill.getGoodsList();
 		if(goods!=null&&goods.size()>0){
@@ -263,7 +309,11 @@ public class AssetStockGoodsTranferServiceImpl extends SuperService<AssetStockGo
 				operCode= AssetOperateEnum.EAM_ASSET_STOCK_GOODS_TRANFER.code();
 			}else if(AssetStockGoodsTypeEnum.CONSUMABLES.code().equals(billData.getOwnerType())){
 				operCode=AssetOperateEnum.EAM_ASSET_CONSUMABLES_GOODS_TRANFER.code();
+			}else if(AssetStockGoodsTypeEnum.PART.code().equals(billData.getOwnerType())){
+				operCode=AssetOperateEnum.EAM_ASSET_PART_GOODS_TRANFER.code();
 			}
+
+
 			if(operateService.approvalRequired(operCode) ) {
 				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
 			}else{
@@ -374,6 +424,8 @@ public class AssetStockGoodsTranferServiceImpl extends SuperService<AssetStockGo
 		for(int i=0;i<list.size();i++){
 			//调出库存多--->调入库存(单)
 			list.get(i).setWarehouseId(assetStockGoodsTranfer.getWarehouseOutId());
+			list.get(i).setBusinessCode(assetStockGoodsTranfer.getBusinessCode());
+			list.get(i).setOwnerCode(assetStockGoodsTranfer.getOwnerType());
 		}
 		return goodsStockService.saveOwnerData(assetStockGoodsTranfer.getId(),assetStockGoodsTranfer.getOwnerType(),list);
 

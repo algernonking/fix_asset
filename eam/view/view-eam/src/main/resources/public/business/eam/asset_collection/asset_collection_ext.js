@@ -164,9 +164,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('moreAction',menu,data,it);
         },
         downloadBill:function (data){
-
             console.log('downloadBill',data);
-
             var downloadUrl="/service-eam/eam-asset-bill/query-collection-bill";
             fox.submit(downloadUrl,{id:data.id});
         },
