@@ -58,6 +58,9 @@
 #### 二次开发方式
 - 1、二次开发说明，详见Git目录下的二次开发目录的Readme.txt 文件
 - 2、SQL文件:(每日更新):http://121.43.103.102/upload/sql.tar.gz
+- 3、存储过程:[下载SQL](http://foxnicweb.com/docs/chapters/base/1.1/NextVal.zip)
+
+
 
 #### 问题清单
 - 部署或使用上遇到的一些问题，详细请先看git目录下的问题清单列表
