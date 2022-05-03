@@ -81,7 +81,11 @@ public enum CodeModuleEnum implements CodeTextEnum {
 
 	EAM_ASSET_PURCHASE_CHECK("eam_asset_purchase_check" , "EAM_资产采购验收"),
 	EAM_ASSET_PURCHASE_APPLY("eam_asset_purchase_apply" , "EAM_资产采购申请"),
-	EAM_ASSET_PURCHASE_ORDER("eam_asset_purchase_order" , "EAM_资产采购订单");
+	EAM_ASSET_PURCHASE_ORDER("eam_asset_purchase_order" , "EAM_资产采购订单"),
+
+
+	EAM_ASSET_DEPRECIATION_OPER("eam_asset_depreciation_oper" , "EAM_资产折旧");
+
 
 	private String code;
 	private String text;

@@ -32,11 +32,7 @@ public class StockEamGoodsStock_dangan_Gtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Catalog.class,"category","资产分类","资产分类");
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");
-
-
         cfg.getPoClassFile().addSimpleProperty(GoodsStock.class,"goods","物品","物品");
-
-
 
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"ownerCompany","所属公司","所属公司");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");

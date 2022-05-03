@@ -21,6 +21,7 @@ public class BaseCodeGenerator {
 
     public static final String BASIC_STOCK_GOODS_ID="568725500025896960";
 
+    public static final String BASIC_CY_MENU_ID="475955437510852608";
 
 
     public static final String BASIC_DATA_MENU_ID="471620638545543168";

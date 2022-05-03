@@ -68,10 +68,57 @@ public class EamRelationManager extends RelationManager {
         this.setupInspectionPlan();
         this.setupInspectionPoint();
         this.setupInspectionTask();
+
+        this.setupAssetDepreciationDetail();
+        this.setupAssetDepreciationOper();
+        this.setupAssetDepreciation();
     }
 
     public void setupProperties() {
     }
+    public void setupAssetDepreciationDetail() {
+        this.property(AssetDepreciationDetailMeta.ASSET_DEPRECIATION_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.DEPRECIATION_ID).join(EAMTables.EAM_ASSET_DEPRECIATION.ID);
+
+        this.property(AssetDepreciationDetailMeta.ASSET_DEPRECIATION_OPER_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.OPER_ID).join(EAMTables.EAM_ASSET_DEPRECIATION_OPER.ID);
+
+
+        this.property(AssetDepreciationDetailMeta.ASSET_TARGET_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.DETAIL_ID_TARGET).join(EAMTables.EAM_ASSET.ID);
+
+        this.property(AssetDepreciationDetailMeta.ASSET_SOURCE_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.DETAIL_ID_TARGET).join(EAMTables.EAM_ASSET.ID);
+
+        this.property(AssetDepreciationDetailMeta.ASSET_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.ASSET_ID).join(EAMTables.EAM_ASSET.ID);
+
+
+    }
+
+    public void setupAssetDepreciation() {
+
+
+        // 关联分类
+        this.property(AssetDepreciationMeta.CATEGORY_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION.CATEGORY_IDS).join(FoxnicWeb.PCM_CATALOG.ID);
+
+    }
+
+    public void setupAssetDepreciationOper() {
+
+        //制单人
+        this.property(AssetDepreciationOperMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_OPER.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(AssetDepreciationOperMeta.ASSET_DEPRECIATION_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_OPER.DEPRECIATION_ID).join(EAMTables.EAM_ASSET_DEPRECIATION.ID);
+
+        this.property(AssetDepreciationOperMeta.ASSET_DEPRECIATION_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_OPER.ID).join(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.OPER_ID);
+
+    }
+
 
     public void setupInspectionGroup() {
         //制单人

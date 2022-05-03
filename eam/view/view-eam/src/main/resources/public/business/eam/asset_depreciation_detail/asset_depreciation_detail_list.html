@@ -1,0 +1,121 @@
+<!--
+/**
+ * 折旧明细 列表页 JS 脚本
+ * @author 金杰 , maillank@qq.com
+ * @since 2022-05-03 06:22:55
+ */
+ -->
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+    <title th:text="${lang.translate('折旧明细')}">折旧明细</title>
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+    <style>
+    </style>
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
+</head>
+
+<body style="overflow-y: hidden">
+
+<div class="layui-card">
+
+    <div class="layui-card-body" style="">
+
+        <div class="search-bar" style=" display: none; ">
+
+            <div class="search-input-rows" style="opacity: 0">
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 折旧方案 , depreciationId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('折旧方案')}" class="search-label depreciationId-label">折旧方案</span><span class="search-colon">:</span></div>
+                        <div id="depreciationId" th:data="${'/service-eam/eam-asset-depreciation/query-paged-list'}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 折旧操作 , operId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('折旧操作')}" class="search-label operId-label">折旧操作</span><span class="search-colon">:</span></div>
+                        <div id="operId" th:data="${'/service-eam/eam-asset-depreciation-oper/query-paged-list'}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 资产 , assetId ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产')}" class="search-label assetId-label">资产</span><span class="search-colon">:</span></div>
+                        <input id="assetId" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 折旧前 , detailIdSource ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('折旧前')}" class="search-label detailIdSource-label">折旧前</span><span class="search-colon">:</span></div>
+                        <input id="detailIdSource" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 折旧后 , detailIdTarget ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('折旧后')}" class="search-label detailIdTarget-label">折旧后</span><span class="search-colon">:</span></div>
+                        <input id="detailIdTarget" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <!-- 按钮区域 -->
+            <div class="layui-form toolbar search-buttons" style="opacity: 0">
+                <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+            </div>
+        </div>
+
+        <div style="margin-top: 0px ">
+            <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
+
+<!-- 表格工具栏 -->
+<script type="text/html" id="toolbarTemplate">
+    <div class="layui-btn-container">
+    </div>
+</script>
+
+<!-- 表格操作列 -->
+<script type="text/html" id="tableOperationTemplate">
+
+
+
+
+
+</script>
+
+
+<script th:inline="javascript">
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var AUTH_PREFIX="eam_asset_depreciation_detail";
+
+    // OPER_ID
+    var OPER_ID = [[${operId}]] ;
+
+</script>
+
+<script th:src="'/business/eam/asset_depreciation_detail/asset_depreciation_detail_ext.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/asset_depreciation_detail/asset_depreciation_detail_list.js?'+${cacheKey}"></script>
+
+</body>
+</html>
