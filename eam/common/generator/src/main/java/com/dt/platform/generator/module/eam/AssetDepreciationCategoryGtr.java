@@ -2,8 +2,12 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
+import com.dt.platform.domain.eam.AssetDepreciation;
+import com.dt.platform.domain.eam.Inventory;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.pcm.Catalog;
 
 public class AssetDepreciationCategoryGtr extends BaseCodeGenerator {
 
@@ -28,6 +32,9 @@ public class AssetDepreciationCategoryGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_DEPRECIATION_CATEGORY.CATEGORY_ID,
                 }
         );
+
+
+        cfg.setRelationField(AssetDepreciation.class,EAMTables.EAM_ASSET_DEPRECIATION_CATEGORY.DEPRECIATION_ID, Catalog.class,EAMTables.EAM_ASSET_DEPRECIATION_CATEGORY.CATEGORY_ID,true);
 
         cfg.view().search().inputWidth(Config.searchInputWidth);
         //文件生成覆盖模式

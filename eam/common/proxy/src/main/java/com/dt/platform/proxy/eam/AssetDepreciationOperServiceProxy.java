@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 折旧操作  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 09:03:39
+ * @since 2022-05-03 14:47:45
  */
 @FeignClient(value = ServiceNames.EAM, contextId = AssetDepreciationOperServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface AssetDepreciationOperServiceProxy {
@@ -58,9 +58,31 @@ public interface AssetDepreciationOperServiceProxy {
     public static final String UPDATE = API_PREFIX + "update";
 
     /**
+     *
+     */
+    public static final String SYNCDATA = API_PREFIX + "syncData";
+
+    /**
+     *
+     */
+    public static final String ROLLBACK = API_PREFIX + "rollback";
+
+    /**
+     *
+     */
+    public static final String START = API_PREFIX + "start";
+
+    /**
+     *
+     */
+    public static final String EXECUTE = API_PREFIX + "execute";
+
+    /**
      * 保存折旧操作
      */
     public static final String SAVE = API_PREFIX + "save";
+
+
 
     /**
      * 获取单个折旧操作

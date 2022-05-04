@@ -2,7 +2,7 @@
 /**
  * 折旧操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 09:03:40
+ * @since 2022-05-03 16:09:54
  */
  -->
  <!DOCTYPE html>
@@ -39,12 +39,13 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 名称 , name ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetDepreciationStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
+                    <!-- 名称 , name ,typeName=text_input, isHideInSearch=true -->
                     <!-- 折旧内容 , content ,typeName=text_area, isHideInSearch=true -->
                     <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 执行时间 , executionStartTime ,typeName=date_input, isHideInSearch=true -->
@@ -97,11 +98,11 @@
 
     <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
-    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:detail')}"class="layui-btn layui-btn-xs " lay-event="depreciation-detail" data-id="{{d.id}}"><span th:text="${lang.translate('明细')}">明细</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:start')}"class="layui-btn layui-btn-xs " lay-event="depreciation-start" data-id="{{d.id}}"><span th:text="${lang.translate('开始')}">开始</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:execute')}"class="layui-btn layui-btn-xs " lay-event="depreciation-execute" data-id="{{d.id}}"><span th:text="${lang.translate('预执行')}">预执行</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:rollback')}"class="layui-btn layui-btn-xs " lay-event="depreciation-rollback" data-id="{{d.id}}"><span th:text="${lang.translate('回退')}">回退</span></button>
-    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:sync')}"class="layui-btn layui-btn-xs " lay-event="depreciation-sync" data-id="{{d.id}}"><span th:text="${lang.translate('同步数据')}">同步数据</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:detail')}"class="layui-btn layui-btn-xs  depreciationDetail-btn " lay-event="depreciation-detail" data-id="{{d.id}}"><span th:text="${lang.translate('明细')}">明细</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:start')}"class="layui-btn layui-btn-xs  depreciationStart-btn " lay-event="depreciation-start" data-id="{{d.id}}"><span th:text="${lang.translate('开始')}">开始</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:execute')}"class="layui-btn layui-btn-xs  depreciationExecute-btn " lay-event="depreciation-execute" data-id="{{d.id}}"><span th:text="${lang.translate('预执行')}">预执行</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:rollback')}"class="layui-btn layui-btn-xs  depreciationRollback-btn " lay-event="depreciation-rollback" data-id="{{d.id}}"><span th:text="${lang.translate('回退')}">回退</span></button>
+    <button th:if="${perm.checkAuth('eam_asset_depreciation_oper:sync')}"class="layui-btn layui-btn-xs  depreciationSync-btn " lay-event="depreciation-sync" data-id="{{d.id}}"><span th:text="${lang.translate('同步数据')}">同步数据</span></button>
 
 </script>
 

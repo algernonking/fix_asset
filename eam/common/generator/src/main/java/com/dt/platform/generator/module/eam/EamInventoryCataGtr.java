@@ -4,6 +4,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.eam.Inventory;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.pcm.Catalog;
 
 public class EamInventoryCataGtr extends BaseCodeGenerator{
 
@@ -24,7 +25,7 @@ public class EamInventoryCataGtr extends BaseCodeGenerator{
                 }
         );
 
-        cfg.setRelationField(Inventory.class,EAMTables.EAM_INVENTORY_CATALOG.INVENTORY_ID, Employee.class,EAMTables.EAM_INVENTORY_CATALOG.VALUE,true);
+        cfg.setRelationField(Inventory.class,EAMTables.EAM_INVENTORY_CATALOG.INVENTORY_ID, Catalog.class,EAMTables.EAM_INVENTORY_CATALOG.VALUE,true);
 
 
         //文件生成覆盖模式

@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 折旧分类
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-02 07:48:30
- * @sign 488CB128912451F4429CE243A8792BEE
+ * @since 2022-05-03 14:33:28
+ * @sign 2AA26ED2EDD14382EA3BB87173A8F684
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -94,12 +94,6 @@ public class AssetDepreciationCategory extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
-	
-	/**
-	 * 租户：租户
-	*/
-	@ApiModelProperty(required = false,value="租户" , notes = "租户")
-	private String tenantId;
 	
 	/**
 	 * 获得 主键<br>
@@ -307,25 +301,6 @@ public class AssetDepreciationCategory extends Entity {
 	*/
 	public AssetDepreciationCategory setVersion(Integer version) {
 		this.version=version;
-		return this;
-	}
-	
-	/**
-	 * 获得 租户<br>
-	 * 租户
-	 * @return 租户
-	*/
-	public String getTenantId() {
-		return tenantId;
-	}
-	
-	/**
-	 * 设置 租户
-	 * @param tenantId 租户
-	 * @return 当前对象
-	*/
-	public AssetDepreciationCategory setTenantId(String tenantId) {
-		this.tenantId=tenantId;
 		return this;
 	}
 

@@ -6,6 +6,7 @@ import com.dt.platform.constants.enums.eam.AssetDepreciationMethodEnum;
 import com.dt.platform.constants.enums.eam.AssetFirstDepreciationDateTypeEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.meta.AssetDepreciationMeta;
+import com.dt.platform.domain.eam.meta.InventoryMeta;
 import com.dt.platform.eam.page.AssetDepreciationPageController;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetDepreciationServiceProxy;
@@ -14,6 +15,7 @@ import com.dt.platform.proxy.eam.CategoryServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.pcm.meta.CatalogMeta;
+import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 
 public class AssetDepreciationGtr extends BaseCodeGenerator {
 
@@ -25,10 +27,13 @@ public class AssetDepreciationGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
-        cfg.getPoClassFile().addSimpleProperty(Catalog.class,"category","资产分类","资产分类");
+
+        cfg.getPoClassFile().addListProperty(Catalog.class,"category","资产分类","资产分类");
+        cfg.getPoClassFile().addListProperty(String.class,"categoryIds","资产分类Ids","资产分类Ids");
 
 
-        cfg.getPoClassFile().addListProperty(String.class,"categoryEntityIds","分类","分类");
+
+       // cfg.getPoClassFile().addListProperty(String.class,"categoryEntityIds","分类","分类");
 
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION.ID).basic().hidden(true);
 
@@ -49,11 +54,15 @@ public class AssetDepreciationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION.FIRST_DEPRECIATION_DATE).form().validate().required().
                 form().selectBox().enumType(AssetFirstDepreciationDateTypeEnum.class);
 
-        cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION.CATEGORY_IDS)
-                .basic().label("分类")
-                .form().validate().required()
-                .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
-                .valueField(CatalogMeta.ID).textField(CatalogMeta.NAME).fillWith(AssetDepreciationMeta.CATEGORY).muliti(false);
+
+
+        cfg.view().field(AssetDepreciationMeta.CATEGORY_IDS)
+                .basic().label("资产分类")
+                .table().sort(false)
+                .form().selectBox().queryApi(CatalogServiceProxy.QUERY_NODES)
+                .paging(false).filter(false).toolbar(false)
+                .valueField(CatalogMeta.ID).textField(CatalogMeta.NAME)
+                .fillWith(AssetDepreciationMeta.CATEGORY).muliti(true);
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -65,8 +74,13 @@ public class AssetDepreciationGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION.NOTES).form().textArea().height(60);
-
+        cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION.CATEGORY_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION.OWN_COMPANY_ID).table().disable(true);
+
+
+
+        cfg.view().form().addJsVariable("ASSET_CATEGORY_DATA","[[${assetCategoryData}]]","ASSET_CATEGORY_DATA");
+
 
         cfg.view().formWindow().width("85%");
         cfg.view().formWindow().bottomSpace(20);
@@ -80,7 +94,7 @@ public class AssetDepreciationGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_DEPRECIATION.FIRST_DEPRECIATION_DATE,
                 },
                 new Object[] {
-                        EAMTables.EAM_ASSET_DEPRECIATION.CATEGORY_IDS,
+                     AssetDepreciationMeta.CATEGORY_IDS
                 }
         );
         cfg.view().form().addGroup(null,
@@ -94,13 +108,12 @@ public class AssetDepreciationGtr extends BaseCodeGenerator {
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
-                .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
+                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
+                .setPageController(WriteMode.IGNORE) //页面控制器
+                .setFormPage(WriteMode.IGNORE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)
-                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页
         ; //列表HTML页
         //生成代码
         cfg.buildAll();

@@ -1,7 +1,7 @@
 /**
  * 折旧明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:22:55
+ * @since 2022-05-03 21:18:33
  */
 
 layui.config({
@@ -76,6 +76,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * @param location 调用的代码位置
          * */
         beforeQuery:function (conditions,param,location) {
+            param.operId=OPER_ID;
             console.log('beforeQuery',conditions,param,location);
             return true;
         },

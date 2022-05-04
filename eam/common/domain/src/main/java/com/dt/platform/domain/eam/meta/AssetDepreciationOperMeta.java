@@ -12,8 +12,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 09:03:39
- * @sign F4386CB15A6AA9B4BE850C3E58254882
+ * @since 2022-05-03 16:09:53
+ * @sign 03334B63D4CFA318A8E8B91DF291309B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -30,14 +30,14 @@ public class AssetDepreciationOperMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciationOper,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciationOper.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 名称 , 类型: java.lang.String
+	 * 业务编号 , 类型: java.lang.String
 	*/
-	public static final String NAME="name";
+	public static final String BUSINESS_CODE="businessCode";
 	
 	/**
-	 * 名称 , 类型: java.lang.String
+	 * 业务编号 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciationOper,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciationOper.class ,NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciationOper,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciationOper.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
 	
 	/**
 	 * 状态 , 类型: java.lang.String
@@ -48,6 +48,16 @@ public class AssetDepreciationOperMeta {
 	 * 状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciationOper,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciationOper.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
+	
+	/**
+	 * 名称 , 类型: java.lang.String
+	*/
+	public static final String NAME="name";
+	
+	/**
+	 * 名称 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciationOper,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciationOper.class ,NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
 	
 	/**
 	 * 折旧方案 , 类型: java.lang.String
@@ -292,7 +302,7 @@ public class AssetDepreciationOperMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , STATUS , DEPRECIATION_ID , CONTENT , BUSINESS_DATE , EXECUTION_START_TIME , EXECUTION_END_TIME , NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_SOURCE_LIST , ASSET_SOURCE_IDS , ASSET_TARGET_LIST , ASSET_TARGET_IDS , ASSET_DEPRECIATION_LIST , ASSET_DEPRECIATION_IDS , ASSET_DEPRECIATION , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , STATUS , NAME , DEPRECIATION_ID , CONTENT , BUSINESS_DATE , EXECUTION_START_TIME , EXECUTION_END_TIME , NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_SOURCE_LIST , ASSET_SOURCE_IDS , ASSET_TARGET_LIST , ASSET_TARGET_IDS , ASSET_DEPRECIATION_LIST , ASSET_DEPRECIATION_IDS , ASSET_DEPRECIATION , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -314,13 +324,13 @@ public class AssetDepreciationOperMeta {
 		}
 		
 		/**
-		 * 设置 名称
-		 * @param name 名称
+		 * 设置 业务编号
+		 * @param businessCode 业务编号
 		 * @return 当前对象
 		*/
-		public AssetDepreciationOper setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
+		public AssetDepreciationOper setBusinessCode(String businessCode) {
+			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
+			super.setBusinessCode(businessCode);
 			return this;
 		}
 		
@@ -332,6 +342,17 @@ public class AssetDepreciationOperMeta {
 		public AssetDepreciationOper setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
+			return this;
+		}
+		
+		/**
+		 * 设置 名称
+		 * @param name 名称
+		 * @return 当前对象
+		*/
+		public AssetDepreciationOper setName(String name) {
+			super.change(NAME,super.getName(),name);
+			super.setName(name);
 			return this;
 		}
 		

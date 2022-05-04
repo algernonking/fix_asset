@@ -1,19 +1,28 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetCategoryCodeEnum;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.CatalogVO;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
+import org.github.foxnic.web.misc.ztree.ZTreeNode;
+import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.dt.platform.proxy.eam.AssetDepreciationServiceProxy;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 /**
  * <p>
  * 折旧方案 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:32:29
+ * @since 2022-05-03 14:39:47
 */
 
 @Controller("EamAssetDepreciationPageController")
@@ -50,6 +59,24 @@ public class AssetDepreciationPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_depreciation_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
+
+		//设置资产分类
+		CatalogVO catalog=new CatalogVO();
+		catalog.setCode(AssetCategoryCodeEnum.ASSET.code());
+		Result<List<Catalog>> catalogListResult= CatalogServiceProxy.api().queryList(catalog);
+		String categoryId="";
+		if(catalogListResult.isSuccess()){
+			List<Catalog> catalogList=catalogListResult.getData();
+			if(catalogList.size()>0){
+				categoryId=catalogList.get(0).getId();
+				CatalogVO catalog2=new CatalogVO();
+				catalog2.setParentId(categoryId);
+				catalog2.setIsLoadAllDescendants(1);
+				Result<List<ZTreeNode>> treeResult=CatalogServiceProxy.api().queryNodes(catalog2);
+				model.addAttribute("assetCategoryData",treeResult.getData());
+			}
+		}
+
 		return prefix+"/asset_depreciation_form";
 	}
 }

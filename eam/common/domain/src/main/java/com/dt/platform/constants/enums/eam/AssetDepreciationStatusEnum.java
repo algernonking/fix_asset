@@ -9,6 +9,7 @@ public enum AssetDepreciationStatusEnum implements CodeTextEnum {
     ACTING("acting" , "进行中"),
     SUCCESS("sucess" , "成功"),
     FAILED("failed" , "失败"),
+    COMPLETE("complete" , "完成"),
     ;
     private String code;
     private String text;

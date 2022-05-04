@@ -460,9 +460,9 @@ function FormPage() {
 		data["positionIds"]=fox.getSelectedValue("positionIds",true);
 		//获取 资产分类 下拉框的值
 		// data["categoryIds"]=fox.getSelectedValue("categoryIds",true);
-		console.log("######getFormData22",categorySelect.getValue('valueStr'));
+
 		data["categoryIds"]=categorySelect.getValue('valueStr');
-		console.log("######getFormData",data);
+
 		return data;
 	}
 

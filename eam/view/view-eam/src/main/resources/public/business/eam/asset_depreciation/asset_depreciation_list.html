@@ -2,7 +2,7 @@
 /**
  * 折旧方案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:32:29
+ * @since 2022-05-03 14:39:47
  */
  -->
  <!DOCTYPE html>
@@ -47,8 +47,9 @@
                     <!-- 预计残值率 , preResidualRate ,typeName=number_input, isHideInSearch=true -->
                     <!-- 首次折旧时间 , firstDepreciationDate ,typeName=select_box, isHideInSearch=true -->
                     <!-- 所属公司 , ownCompanyId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 分类 , categoryIds ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 资产分类 , categoryId ,typeName=text_area, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 资产分类 , categoryIds ,typeName=select_box, isHideInSearch=true -->
                     <!-- 折旧方式 , method ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('折旧方式')}" class="search-label method-label">折旧方式</span><span class="search-colon">:</span></div>

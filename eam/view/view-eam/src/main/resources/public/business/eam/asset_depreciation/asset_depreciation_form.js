@@ -1,7 +1,7 @@
 /**
  * 折旧方案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:32:29
+ * @since 2022-05-03 14:39:48
  */
 
 function FormPage() {
@@ -13,6 +13,7 @@ function FormPage() {
 	var disableCreateNew=false;
 	var disableModify=false;
 	var dataBeforeEdit=null;
+	var categorySelect;
 	/**
       * 入口函数，初始化
       */
@@ -164,36 +165,61 @@ function FormPage() {
 			}
 		});
 		//渲染 categoryIds 下拉字段
-		fox.renderSelectBox({
-			el: "categoryIds",
-			radio: true,
-			filterable: true,
-			paging: true,
-			pageRemote: true,
-			on: function(data){
-				setTimeout(function () {
-					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("categoryIds",data.arr,data.change,data.isAdd);
-				},1);
+		// fox.renderSelectBox({
+		// 	el: "categoryIds",
+		// 	radio: false,
+		// 	filterable: false,
+		// 	on: function(data){
+		// 		setTimeout(function () {
+		// 			window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("categoryIds",data.arr,data.change,data.isAdd);
+		// 		},1);
+		// 	},
+		// 	//转换数据
+		// 	transform: function(data) {
+		// 		//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+		// 		var defaultValues=[],defaultIndexs=[];
+		// 		if(action=="create") {
+		// 			defaultValues = "".split(",");
+		// 			defaultIndexs = "".split(",");
+		// 		}
+		// 		var opts=[];
+		// 		if(!data) return opts;
+		// 		for (var i = 0; i < data.length; i++) {
+		// 			if(!data[i]) continue;
+		// 			opts.push({data:data[i],name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+		// 		}
+		// 		return opts;
+		// 	}
+		// });
+
+		//渲染 categoryId 下拉字段
+		categorySelect = xmSelect.render({
+			el: '#categoryIds',
+			prop: {
+				name: 'name',
+				value: 'id',
 			},
-			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues=[],defaultIndexs=[];
-				if(action=="create") {
-					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
-				}
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({data:data[i],name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
+			filterable: true,
+			tree: {
+				showFolderIcon: true,
+				show: true,
+				strict: true,
+				expandedKeys: [],
+			},
+			//处理方式
+			on: function(data){
+				console.log(data);
+			},
+			//显示为text模式
+			model: { label: { type: 'text' } },
+			//单选模式
+			radio: false,
+			//选中关闭
+			clickClose: false,
+			height: '450px',
+			data:ASSET_CATEGORY_DATA
+		})
+
 	}
 
 	/**
@@ -228,10 +254,21 @@ function FormPage() {
 			fox.setSelectValue4Enum("#method",formData.method,SELECT_METHOD_DATA);
 			//设置  首次折旧时间 设置下拉框勾选
 			fox.setSelectValue4Enum("#firstDepreciationDate",formData.firstDepreciationDate,SELECT_FIRSTDEPRECIATIONDATE_DATA);
-			//设置  分类 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#categoryIds",formData.category);
+			//设置  资产分类 设置下拉框勾选
+			// fox.setSelectValue4QueryApi("#categoryIds",formData.category);
 
 			//处理fillBy
+
+
+			//处理fillBy
+			setTimeout(function(){
+				if(categorySelect){
+					if(formData.category&&formData.categoryIds){
+						categorySelect.setValue(formData.categoryIds.split(","));
+					}
+					//categorySelect.update({disabled:true})
+				}
+			},150)
 
 			//
 	     	fm.attr('method', 'POST');
@@ -286,8 +323,9 @@ function FormPage() {
 		data["method"]=fox.getSelectedValue("method",false);
 		//获取 首次折旧时间 下拉框的值
 		data["firstDepreciationDate"]=fox.getSelectedValue("firstDepreciationDate",false);
-		//获取 分类 下拉框的值
-		data["categoryIds"]=fox.getSelectedValue("categoryIds",false);
+		//获取 资产分类 下拉框的值
+		//data["categoryIds"]=fox.getSelectedValue("categoryIds",true);
+		data["categoryIds"]=categorySelect.getValue('valueStr');
 
 		return data;
 	}

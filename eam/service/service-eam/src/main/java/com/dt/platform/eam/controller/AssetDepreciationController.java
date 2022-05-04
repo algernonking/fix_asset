@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 折旧方案 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:32:28
+ * @since 2022-05-03 14:39:47
 */
 
 @Api(tags = "折旧方案")
@@ -72,9 +72,9 @@ public class AssetDepreciationController extends SuperController {
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NAME , value = "折旧方案" , required = false , dataTypeClass=String.class , example = "方案一"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.METHOD , value = "折旧方式" , required = false , dataTypeClass=String.class , example = "average_age"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.PRE_RESIDUAL_RATE , value = "预计残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class , example = "purchase_cur_month"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_IDS , value = "资产分类" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "486918386278731776,486918387960647681,486918449189097473,486918029091803137,486918073320738816,486918122771582977,486918164815286273,501736778307207168,486918240887377921,501737031911604224,486918241663324161,486918242527350784,501737164271255553,501737200690397185,501737355338579969"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=1)
@@ -131,9 +131,9 @@ public class AssetDepreciationController extends SuperController {
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NAME , value = "折旧方案" , required = false , dataTypeClass=String.class , example = "方案一"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.METHOD , value = "折旧方式" , required = false , dataTypeClass=String.class , example = "average_age"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.PRE_RESIDUAL_RATE , value = "预计残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class , example = "purchase_cur_month"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_IDS , value = "资产分类" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "486918386278731776,486918387960647681,486918449189097473,486918029091803137,486918073320738816,486918122771582977,486918164815286273,501736778307207168,486918240887377921,501737031911604224,486918241663324161,486918242527350784,501737164271255553,501737200690397185,501737355338579969"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetDepreciationVOMeta.PAGE_INDEX , AssetDepreciationVOMeta.PAGE_SIZE , AssetDepreciationVOMeta.SEARCH_FIELD , AssetDepreciationVOMeta.FUZZY_FIELD , AssetDepreciationVOMeta.SEARCH_VALUE , AssetDepreciationVOMeta.DIRTY_FIELDS , AssetDepreciationVOMeta.SORT_FIELD , AssetDepreciationVOMeta.SORT_TYPE , AssetDepreciationVOMeta.IDS } )
@@ -156,9 +156,9 @@ public class AssetDepreciationController extends SuperController {
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NAME , value = "折旧方案" , required = false , dataTypeClass=String.class , example = "方案一"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.METHOD , value = "折旧方式" , required = false , dataTypeClass=String.class , example = "average_age"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.PRE_RESIDUAL_RATE , value = "预计残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class , example = "purchase_cur_month"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_IDS , value = "资产分类" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "486918386278731776,486918387960647681,486918449189097473,486918029091803137,486918073320738816,486918122771582977,486918164815286273,501736778307207168,486918240887377921,501737031911604224,486918241663324161,486918242527350784,501737164271255553,501737200690397185,501737355338579969"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDepreciationVOMeta.PAGE_INDEX , AssetDepreciationVOMeta.PAGE_SIZE , AssetDepreciationVOMeta.SEARCH_FIELD , AssetDepreciationVOMeta.FUZZY_FIELD , AssetDepreciationVOMeta.SEARCH_VALUE , AssetDepreciationVOMeta.DIRTY_FIELDS , AssetDepreciationVOMeta.SORT_FIELD , AssetDepreciationVOMeta.SORT_TYPE , AssetDepreciationVOMeta.IDS } )
@@ -224,9 +224,9 @@ public class AssetDepreciationController extends SuperController {
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NAME , value = "折旧方案" , required = false , dataTypeClass=String.class , example = "方案一"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.METHOD , value = "折旧方式" , required = false , dataTypeClass=String.class , example = "average_age"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.PRE_RESIDUAL_RATE , value = "预计残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class , example = "purchase_cur_month"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_IDS , value = "资产分类" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "486918386278731776,486918387960647681,486918449189097473,486918029091803137,486918073320738816,486918122771582977,486918164815286273,501736778307207168,486918240887377921,501737031911604224,486918241663324161,486918242527350784,501737164271255553,501737200690397185,501737355338579969"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDepreciationVOMeta.PAGE_INDEX , AssetDepreciationVOMeta.PAGE_SIZE } )
@@ -250,9 +250,9 @@ public class AssetDepreciationController extends SuperController {
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NAME , value = "折旧方案" , required = false , dataTypeClass=String.class , example = "方案一"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.METHOD , value = "折旧方式" , required = false , dataTypeClass=String.class , example = "average_age"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.PRE_RESIDUAL_RATE , value = "预计残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.FIRST_DEPRECIATION_DATE , value = "首次折旧时间" , required = false , dataTypeClass=String.class , example = "purchase_cur_month"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_IDS , value = "资产分类" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetDepreciationVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "486918386278731776,486918387960647681,486918449189097473,486918029091803137,486918073320738816,486918122771582977,486918164815286273,501736778307207168,486918240887377921,501737031911604224,486918241663324161,486918242527350784,501737164271255553,501737200690397185,501737355338579969"),
 		@ApiImplicitParam(name = AssetDepreciationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=8)

@@ -1,7 +1,7 @@
 /**
  * 折旧方案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:32:29
+ * @since 2022-05-03 14:39:47
  */
 
 layui.config({
@@ -27,6 +27,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeInit:function () {
             console.log("list:beforeInit");
+
+
         },
         /**
          * 表格渲染前调用
@@ -180,6 +182,21 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
+
+            var categoryIds="";
+            if(data&&data.category){
+                for(var i=0;i<data.category.length;i++){
+                    if(i==0){
+                        categoryIds=data.category[i].id;
+                    }else{
+                        categoryIds=categoryIds+","+data.category[i].id;
+                    }
+                }
+                data.categoryIds=categoryIds;
+            }else{
+                data.categoryIds="";
+            }
+
             console.log('beforeDataFill',data);
         },
         /**

@@ -77,8 +77,6 @@ public class GoodsStockGoodsPageController extends ViewController {
 		}else{
 			catalog.setCode(categoryCode);
 		}
-		System.out.println("#################"+categoryCode);
-
 		Result<List<Catalog>> catalogListResult= CatalogServiceProxy.api().queryList(catalog);
 		String categoryId="";
 		if(catalogListResult.isSuccess()){

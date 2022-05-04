@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 折旧分类  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-02 07:48:30
+ * @since 2022-05-03 14:33:28
  */
 @FeignClient(value = ServiceNames.EAM, contextId = AssetDepreciationCategoryServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface AssetDepreciationCategoryServiceProxy {

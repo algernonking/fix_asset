@@ -59,11 +59,11 @@ public class AssetDepreciationOperGtr extends BaseCodeGenerator {
         );
 
         cfg.view().list().disableBatchDelete();
-        cfg.view().list().operationColumn().addActionButton("明细","depreciationDetail",null,"eam_asset_depreciation_oper:detail");
-        cfg.view().list().operationColumn().addActionButton("开始","depreciationStart",null,"eam_asset_depreciation_oper:start");
-        cfg.view().list().operationColumn().addActionButton("预执行","depreciationExecute",null,"eam_asset_depreciation_oper:execute");
-        cfg.view().list().operationColumn().addActionButton("回退","depreciationRollback",null,"eam_asset_depreciation_oper:rollback");
-        cfg.view().list().operationColumn().addActionButton("同步数据","depreciationSync",null,"eam_asset_depreciation_oper:sync");
+        cfg.view().list().operationColumn().addActionButton("明细","depreciationDetail","depreciationDetail-btn","eam_asset_depreciation_oper:detail");
+        cfg.view().list().operationColumn().addActionButton("开始","depreciationStart","depreciationStart-btn","eam_asset_depreciation_oper:start");
+        cfg.view().list().operationColumn().addActionButton("预执行","depreciationExecute","depreciationExecute-btn","eam_asset_depreciation_oper:execute");
+        cfg.view().list().operationColumn().addActionButton("回退","depreciationRollback","depreciationRollback-btn","eam_asset_depreciation_oper:rollback");
+        cfg.view().list().operationColumn().addActionButton("同步数据","depreciationSync","depreciationSync-btn","eam_asset_depreciation_oper:sync");
 
 
         cfg.view().formWindow().width("85%");
@@ -103,16 +103,15 @@ public class AssetDepreciationOperGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION_OPER.BUSINESS_DATE).form().validate().required().form().dateInput().defaultNow().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION_OPER.STATUS).form().selectBox().enumType(AssetDepreciationStatusEnum.class);
 
-
         cfg.view().search().inputWidth(Config.searchInputWidth);
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
+                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
+                .setPageController(WriteMode.IGNORE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页
         ; //列表HTML页
         //生成代码
         cfg.buildAll();

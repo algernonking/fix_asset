@@ -1,7 +1,7 @@
 /**
  * 折旧方案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:32:29
+ * @since 2022-05-03 14:39:48
  */
 
 
@@ -80,9 +80,9 @@ function ListPage() {
 					,{ field: 'method', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('折旧方式'), templet:function (d){ return templet('method',fox.getEnumText(SELECT_METHOD_DATA,d.method),d);}}
 					,{ field: 'preResidualRate', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('预计残值率') , templet: function (d) { return templet('preResidualRate',d.preResidualRate,d);}  }
 					,{ field: 'firstDepreciationDate', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('首次折旧时间'), templet:function (d){ return templet('firstDepreciationDate',fox.getEnumText(SELECT_FIRSTDEPRECIATIONDATE_DATA,d.firstDepreciationDate),d);}}
-					,{ field: 'categoryIds', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('分类'), templet: function (d) { return templet('categoryIds' ,fox.joinLabel(d.category,"name"),d);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'categoryIds', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('资产分类'), templet: function (d) { return templet('categoryIds' ,fox.joinLabel(d.category,"name"),d);}}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

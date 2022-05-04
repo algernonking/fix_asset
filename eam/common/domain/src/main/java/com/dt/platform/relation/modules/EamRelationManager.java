@@ -72,11 +72,93 @@ public class EamRelationManager extends RelationManager {
         this.setupAssetDepreciationDetail();
         this.setupAssetDepreciationOper();
         this.setupAssetDepreciation();
+
+        this.setupAssetSoftware();
+
+        this.setupAssetSoftwareDistribute();
+
     }
 
     public void setupProperties() {
+
     }
+
+    public void setupAssetSoftwareDistribute() {
+        //制单人
+        this.property(AssetSoftwareDistributeMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(AssetSoftwareDistributeMeta.USE_USER_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.USE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
+        this.property(AssetSoftwareDistributeMeta.ASSET_SOFTWARE_DISTRIBUTE_DATA_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ID).join(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE_DATA.DISTRIBUTE_ID);
+
+        this.property(AssetSoftwareDistributeMeta.ASSET_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ASSET_ID).join(EAMTables.EAM_ASSET.ID);
+
+        this.property(AssetSoftwareDistributeMeta.ASSET_SOFTWARE_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ASSET_SOFTWARE_ID).join(EAMTables.EAM_ASSET_SOFTWARE.ID);
+
+
+        this.property(AssetSoftwareDistributeMeta.USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.USE_ORG_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+
+    }
+    public void setupAssetSoftware() {
+        //关联 所属公司
+        this.property(AssetSoftwareMeta.OWNER_COMPANY_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE.OWN_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        this.property(AssetSoftwareMeta.USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE.USE_ORGANIZATION_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        //制单人
+        this.property(AssetSoftwareMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(AssetSoftwareMeta.MANAGER_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE.MANAGER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
+        // 关联来源
+        this.property(AssetSoftwareMeta.SOURCE_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE.SOURCE_ID).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_source'");
+
+
+        this.property(AssetSoftwareMeta.CATEGORY_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE.CATEGORY_ID).join(FoxnicWeb.PCM_CATALOG.ID);
+
+
+        this.property(AssetSoftwareMeta.COPYRIGHT_TYPE_DICT_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE.COPYRIGHT_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='asset_software_copyright_type'");
+
+        this.property(AssetSoftwareMeta.LICENSE_MODE_DICT_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE.LICENSE_MODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='asset_software_license_mode'");
+
+
+        this.property(AssetSoftwareMeta.SUPPLIER_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE.SUPPLIER_ID).join(EAMTables.EAM_SUPPLIER.ID);
+
+    }
+
     public void setupAssetDepreciationDetail() {
+
+        this.property(AssetDepreciationDetailMeta.ASSET_TARGET_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.DETAIL_ID_TARGET).join(EAMTables.EAM_ASSET.ID);
+
+        this.property(AssetDepreciationDetailMeta.ASSET_SOURCE_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.DETAIL_ID_SOURCE).join(EAMTables.EAM_ASSET.ID);
+
+        this.property(AssetDepreciationDetailMeta.ASSET_PROP)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.ASSET_ID).join(EAMTables.EAM_ASSET.ID);
+
+
         this.property(AssetDepreciationDetailMeta.ASSET_DEPRECIATION_PROP)
                 .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.DEPRECIATION_ID).join(EAMTables.EAM_ASSET_DEPRECIATION.ID);
 
@@ -84,24 +166,14 @@ public class EamRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.OPER_ID).join(EAMTables.EAM_ASSET_DEPRECIATION_OPER.ID);
 
 
-        this.property(AssetDepreciationDetailMeta.ASSET_TARGET_PROP)
-                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.DETAIL_ID_TARGET).join(EAMTables.EAM_ASSET.ID);
-
-        this.property(AssetDepreciationDetailMeta.ASSET_SOURCE_PROP)
-                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.DETAIL_ID_TARGET).join(EAMTables.EAM_ASSET.ID);
-
-        this.property(AssetDepreciationDetailMeta.ASSET_PROP)
-                .using(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.ASSET_ID).join(EAMTables.EAM_ASSET.ID);
-
-
     }
 
     public void setupAssetDepreciation() {
 
-
-        // 关联分类
+        // 关联资产分类
         this.property(AssetDepreciationMeta.CATEGORY_PROP)
-                .using(EAMTables.EAM_ASSET_DEPRECIATION.CATEGORY_IDS).join(FoxnicWeb.PCM_CATALOG.ID);
+                .using(EAMTables.EAM_ASSET_DEPRECIATION.ID).join(EAMTables.EAM_ASSET_DEPRECIATION_CATEGORY.DEPRECIATION_ID)
+                .using(EAMTables.EAM_ASSET_DEPRECIATION_CATEGORY.CATEGORY_ID).join(FoxnicWeb.PCM_CATALOG.ID);
 
     }
 

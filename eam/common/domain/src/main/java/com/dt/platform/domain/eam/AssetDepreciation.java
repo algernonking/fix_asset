@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 折旧方案
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:32:28
- * @sign 11A04EA678D1ECC7281A35F753A6C459
+ * @since 2022-05-03 14:39:47
+ * @sign 2A21AC7ED0DCE920C08FDD3A2A75AEF6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -79,7 +79,7 @@ public class AssetDepreciation extends Entity {
 	 * 资产分类：资产分类
 	*/
 	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
-	private String categoryIds;
+	private String categoryId;
 	
 	/**
 	 * 备注：备注
@@ -145,13 +145,13 @@ public class AssetDepreciation extends Entity {
 	 * 资产分类：资产分类
 	*/
 	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
-	private Catalog category;
+	private List<Catalog> category;
 	
 	/**
-	 * 分类：分类
+	 * 资产分类Ids：资产分类Ids
 	*/
-	@ApiModelProperty(required = false,value="分类" , notes = "分类")
-	private List<String> categoryEntityIds;
+	@ApiModelProperty(required = false,value="资产分类Ids" , notes = "资产分类Ids")
+	private List<String> categoryIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -291,17 +291,17 @@ public class AssetDepreciation extends Entity {
 	 * 资产分类
 	 * @return 资产分类
 	*/
-	public String getCategoryIds() {
-		return categoryIds;
+	public String getCategoryId() {
+		return categoryId;
 	}
 	
 	/**
 	 * 设置 资产分类
-	 * @param categoryIds 资产分类
+	 * @param categoryId 资产分类
 	 * @return 当前对象
 	*/
-	public AssetDepreciation setCategoryIds(String categoryIds) {
-		this.categoryIds=categoryIds;
+	public AssetDepreciation setCategoryId(String categoryId) {
+		this.categoryId=categoryId;
 		return this;
 	}
 	
@@ -500,7 +500,7 @@ public class AssetDepreciation extends Entity {
 	 * 资产分类
 	 * @return 资产分类
 	*/
-	public Catalog getCategory() {
+	public List<Catalog> getCategory() {
 		return category;
 	}
 	
@@ -509,38 +509,49 @@ public class AssetDepreciation extends Entity {
 	 * @param category 资产分类
 	 * @return 当前对象
 	*/
-	public AssetDepreciation setCategory(Catalog category) {
+	public AssetDepreciation setCategory(List<Catalog> category) {
 		this.category=category;
 		return this;
 	}
 	
 	/**
-	 * 获得 分类<br>
-	 * 分类
-	 * @return 分类
-	*/
-	public List<String> getCategoryEntityIds() {
-		return categoryEntityIds;
-	}
-	
-	/**
-	 * 设置 分类
-	 * @param categoryEntityIds 分类
+	 * 添加 资产分类
+	 * @param entity 资产分类
 	 * @return 当前对象
 	*/
-	public AssetDepreciation setCategoryEntityIds(List<String> categoryEntityIds) {
-		this.categoryEntityIds=categoryEntityIds;
+	public AssetDepreciation addCategory(Catalog entity) {
+		if(this.category==null) category=new ArrayList<>();
+		this.category.add(entity);
 		return this;
 	}
 	
 	/**
-	 * 添加 分类
-	 * @param categoryEntityId 分类
+	 * 获得 资产分类Ids<br>
+	 * 资产分类Ids
+	 * @return 资产分类Ids
+	*/
+	public List<String> getCategoryIds() {
+		return categoryIds;
+	}
+	
+	/**
+	 * 设置 资产分类Ids
+	 * @param categoryIds 资产分类Ids
 	 * @return 当前对象
 	*/
-	public AssetDepreciation addCategoryEntityId(String categoryEntityId) {
-		if(this.categoryEntityIds==null) categoryEntityIds=new ArrayList<>();
-		this.categoryEntityIds.add(categoryEntityId);
+	public AssetDepreciation setCategoryIds(List<String> categoryIds) {
+		this.categoryIds=categoryIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产分类Ids
+	 * @param categoryId 资产分类Ids
+	 * @return 当前对象
+	*/
+	public AssetDepreciation addCategoryId(String categoryId) {
+		if(this.categoryIds==null) categoryIds=new ArrayList<>();
+		this.categoryIds.add(categoryId);
 		return this;
 	}
 

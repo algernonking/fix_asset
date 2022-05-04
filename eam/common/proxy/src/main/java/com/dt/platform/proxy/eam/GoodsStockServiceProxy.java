@@ -115,7 +115,7 @@ public interface GoodsStockServiceProxy {
 
     public static final String QUERY_MAX_STOCK_WARN = API_PREFIX + "query-max-stock-warn";
 
-    public static final String QUERY_SECURITY_STOCK_WARN = API_PREFIX + "query-max-security-warn";
+    public static final String QUERY_SECURITY_STOCK_WARN = API_PREFIX + "query-security-stock-warn";
     /**
      * 添加库存物品
      */

@@ -2,7 +2,7 @@
 /**
  * 折旧明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:22:55
+ * @since 2022-05-03 22:05:33
  */
  -->
  <!DOCTYPE html>
@@ -33,7 +33,7 @@
 
     <div class="layui-card-body" style="">
 
-        <div class="search-bar" style=" display: none; ">
+        <div class="search-bar" style="">
 
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
@@ -44,26 +44,20 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('折旧方案')}" class="search-label depreciationId-label">折旧方案</span><span class="search-colon">:</span></div>
                         <div id="depreciationId" th:data="${'/service-eam/eam-asset-depreciation/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 折旧操作 , operId ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('折旧操作')}" class="search-label operId-label">折旧操作</span><span class="search-colon">:</span></div>
-                        <div id="operId" th:data="${'/service-eam/eam-asset-depreciation-oper/query-paged-list'}" style="width:150px" extraParam="{}"></div>
-                    </div>
-                    <!-- 资产 , assetId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产')}" class="search-label assetId-label">资产</span><span class="search-colon">:</span></div>
-                        <input id="assetId" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- 折旧前 , detailIdSource ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('折旧前')}" class="search-label detailIdSource-label">折旧前</span><span class="search-colon">:</span></div>
-                        <input id="detailIdSource" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- 折旧后 , detailIdTarget ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('折旧后')}" class="search-label detailIdTarget-label">折旧后</span><span class="search-colon">:</span></div>
-                        <input id="detailIdTarget" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
+                    <!-- 折旧操作 , operId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 资产 , assetId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 折旧前 , detailIdSource ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 折旧后 , detailIdTarget ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 当前净值 , curPrice ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 折旧前净值 , beforePrice ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 折旧后净值 , afterPrice ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 资产名称 , assetCurName ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 资产型号 , assetCurModel ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 资产编号 , assetCurCode ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 当前采购单价 , assetCurPurchaseUnitPrice ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 当前净值 , assetCurNavPrice ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 折旧前净值 , assetBeforeNavPrice ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 折旧后净值 , assetAfterNavPrice ,typeName=select_box, isHideInSearch=true -->
 
 
                 </div>
@@ -76,7 +70,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 0px ">
+        <div style="margin-top: 42px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

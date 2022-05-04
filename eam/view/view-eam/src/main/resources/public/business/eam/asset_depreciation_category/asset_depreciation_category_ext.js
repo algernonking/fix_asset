@@ -1,7 +1,7 @@
 /**
  * 折旧分类 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-02 07:48:30
+ * @since 2022-05-03 14:33:28
  */
 
 layui.config({

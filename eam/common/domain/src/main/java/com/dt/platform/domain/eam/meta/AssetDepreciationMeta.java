@@ -11,8 +11,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:32:28
- * @sign 11A04EA678D1ECC7281A35F753A6C459
+ * @since 2022-05-03 14:39:47
+ * @sign 2A21AC7ED0DCE920C08FDD3A2A75AEF6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -91,12 +91,12 @@ public class AssetDepreciationMeta {
 	/**
 	 * 资产分类 , 类型: java.lang.String
 	*/
-	public static final String CATEGORY_IDS="categoryIds";
+	public static final String CATEGORY_ID="categoryId";
 	
 	/**
 	 * 资产分类 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciation,java.lang.String> CATEGORY_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciation.class ,CATEGORY_IDS, java.lang.String.class, "资产分类", "资产分类", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciation,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciation.class ,CATEGORY_ID, java.lang.String.class, "资产分类", "资产分类", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -199,29 +199,29 @@ public class AssetDepreciationMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciation,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciation.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
-	 * 资产分类 , 类型: org.github.foxnic.web.domain.pcm.Catalog
+	 * 资产分类 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.pcm.Catalog
 	*/
 	public static final String CATEGORY="category";
 	
 	/**
-	 * 资产分类 , 类型: org.github.foxnic.web.domain.pcm.Catalog
+	 * 资产分类 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.pcm.Catalog
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciation,org.github.foxnic.web.domain.pcm.Catalog> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciation.class ,CATEGORY, org.github.foxnic.web.domain.pcm.Catalog.class, "资产分类", "资产分类", org.github.foxnic.web.domain.pcm.Catalog.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciation,org.github.foxnic.web.domain.pcm.Catalog> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciation.class ,CATEGORY, java.util.List.class, "资产分类", "资产分类", org.github.foxnic.web.domain.pcm.Catalog.class, null);
 	
 	/**
-	 * 分类 , 集合类型: LIST , 类型: java.lang.String
+	 * 资产分类Ids , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String CATEGORY_ENTITY_IDS="categoryEntityIds";
+	public static final String CATEGORY_IDS="categoryIds";
 	
 	/**
-	 * 分类 , 集合类型: LIST , 类型: java.lang.String
+	 * 资产分类Ids , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciation,java.lang.String> CATEGORY_ENTITY_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciation.class ,CATEGORY_ENTITY_IDS, java.util.List.class, "分类", "分类", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDepreciation,java.lang.String> CATEGORY_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDepreciation.class ,CATEGORY_IDS, java.util.List.class, "资产分类Ids", "资产分类Ids", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , STATUS , NAME , METHOD , PRE_RESIDUAL_RATE , FIRST_DEPRECIATION_DATE , OWN_COMPANY_ID , CATEGORY_IDS , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , CATEGORY , CATEGORY_ENTITY_IDS };
+	public static final String[] $PROPS={ ID , STATUS , NAME , METHOD , PRE_RESIDUAL_RATE , FIRST_DEPRECIATION_DATE , OWN_COMPANY_ID , CATEGORY_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , CATEGORY , CATEGORY_IDS };
 	
 	/**
 	 * 代理类
@@ -310,12 +310,12 @@ public class AssetDepreciationMeta {
 		
 		/**
 		 * 设置 资产分类
-		 * @param categoryIds 资产分类
+		 * @param categoryId 资产分类
 		 * @return 当前对象
 		*/
-		public AssetDepreciation setCategoryIds(String categoryIds) {
-			super.change(CATEGORY_IDS,super.getCategoryIds(),categoryIds);
-			super.setCategoryIds(categoryIds);
+		public AssetDepreciation setCategoryId(String categoryId) {
+			super.change(CATEGORY_ID,super.getCategoryId(),categoryId);
+			super.setCategoryId(categoryId);
 			return this;
 		}
 		
@@ -434,20 +434,20 @@ public class AssetDepreciationMeta {
 		 * @param category 资产分类
 		 * @return 当前对象
 		*/
-		public AssetDepreciation setCategory(Catalog category) {
+		public AssetDepreciation setCategory(List<Catalog> category) {
 			super.change(CATEGORY,super.getCategory(),category);
 			super.setCategory(category);
 			return this;
 		}
 		
 		/**
-		 * 设置 分类
-		 * @param categoryEntityIds 分类
+		 * 设置 资产分类Ids
+		 * @param categoryIds 资产分类Ids
 		 * @return 当前对象
 		*/
-		public AssetDepreciation setCategoryEntityIds(List<String> categoryEntityIds) {
-			super.change(CATEGORY_ENTITY_IDS,super.getCategoryEntityIds(),categoryEntityIds);
-			super.setCategoryEntityIds(categoryEntityIds);
+		public AssetDepreciation setCategoryIds(List<String> categoryIds) {
+			super.change(CATEGORY_IDS,super.getCategoryIds(),categoryIds);
+			super.setCategoryIds(categoryIds);
 			return this;
 		}
 	}

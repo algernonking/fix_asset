@@ -21,10 +21,18 @@ import com.github.foxnic.dao.data.SaveMode;
  * 折旧操作 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 09:03:39
+ * @since 2022-05-03 14:47:45
 */
 
 public interface IAssetDepreciationOperService extends ISuperService<AssetDepreciationOper> {
+
+	Result syncData(String id);
+
+	Result rollback(String id);
+
+	Result start(String id);
+
+	Result execute(String id);
 
 	/**
 	 * 添加，如果语句错误，则抛出异常

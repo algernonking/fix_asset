@@ -15,13 +15,14 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import com.dt.platform.constants.db.EAMTables.*;
 
 /**
  * <p>
  * 折旧分类 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-02 07:48:30
+ * @since 2022-05-03 14:33:28
 */
 
 public interface IAssetDepreciationCategoryService extends ISuperService<AssetDepreciationCategory> {
@@ -313,5 +314,11 @@ public interface IAssetDepreciationCategoryService extends ISuperService<AssetDe
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
 
+	/**
+	 * 保存关系
+	 * @param depreciationId 折旧方案
+	 * @param categoryIds 资产分类清单
+	 */
+	void saveRelation(String depreciationId,List<String> categoryIds);
 
 }

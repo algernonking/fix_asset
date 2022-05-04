@@ -19,6 +19,13 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_STOCK_CODE("eam_asset_stock_code" , "EAM_资产库存-编码"),
 	EAM_ASSET_CONSUMABLES_CODE("eam_asset_consumables_code" , "EAM_资产耗材-编码"),
 
+
+	//
+	//软件资产
+	EAM_ASSET_SOFTWARE_INSERT("eam_asset_software_insert" , "EAM_资产软件-登记"),
+	EAM_ASSET_SOFTWARE_DISTRIBUTE("eam_asset_software_distribute" , "EAM_资产软件-分发"),
+
+
 	//资产单据
 	EAM_ASSET_COLLECTION("eam_asset_collection" , "EAM_资产单据-领用"),
 	EAM_ASSET_COLLECTION_RETURN("eam_asset_collection_return" , "EAM_资产单据-退库"),
@@ -30,6 +37,8 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_TRANFER("eam_asset_tranfer" , "EAM_资产单据-转移"),
 	EAM_ASSET_CLEAN("eam_asset_clean" , "EAM_资产单据-清理"),
 	EAM_ASSET_INVENTORY("eam_asset_inventory" , "EAM_资产数据-盘点"),
+
+
 
 	//库存
 	EAM_ASSET_STOCK_IN("eam_asset_stock_in" , "EAM_资产库存-入库"),

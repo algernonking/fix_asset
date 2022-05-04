@@ -1,7 +1,7 @@
 /**
  * 折旧操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 09:03:40
+ * @since 2022-05-03 16:09:54
  */
 
 
@@ -75,8 +75,9 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
+					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'depreciationId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('折旧方案'), templet: function (d) { return templet('depreciationId' ,fox.joinLabel(d.assetDepreciation,"name"),d);}}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('折旧内容') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('业务日期') ,templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }  }

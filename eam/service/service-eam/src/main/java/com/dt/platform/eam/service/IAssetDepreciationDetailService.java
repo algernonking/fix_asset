@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 折旧明细 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:22:54
+ * @since 2022-05-03 22:05:32
 */
 
 public interface IAssetDepreciationDetailService extends ISuperService<AssetDepreciationDetail> {

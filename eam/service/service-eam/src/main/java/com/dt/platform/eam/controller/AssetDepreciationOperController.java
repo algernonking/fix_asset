@@ -3,6 +3,9 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.*;
+import com.github.foxnic.commons.collection.CollectorUtil;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +21,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetDepreciationOperServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetDepreciationOperVOMeta;
-import com.dt.platform.domain.eam.AssetDepreciationOper;
-import com.dt.platform.domain.eam.AssetDepreciationOperVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -33,8 +34,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetDepreciationOperMeta;
-import com.dt.platform.domain.eam.Asset;
-import com.dt.platform.domain.eam.AssetDepreciation;
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -51,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 折旧操作 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 09:03:39
+ * @since 2022-05-03 14:47:45
 */
 
 @Api(tags = "折旧操作")
@@ -69,8 +68,9 @@ public class AssetDepreciationOperController extends SuperController {
 	@ApiOperation(value = "添加折旧操作")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.DEPRECIATION_ID , value = "折旧方案" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.CONTENT , value = "折旧内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -129,8 +129,9 @@ public class AssetDepreciationOperController extends SuperController {
 	@ApiOperation(value = "更新折旧操作")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.DEPRECIATION_ID , value = "折旧方案" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.CONTENT , value = "折旧内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -155,8 +156,9 @@ public class AssetDepreciationOperController extends SuperController {
 	@ApiOperation(value = "保存折旧操作")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.DEPRECIATION_ID , value = "折旧方案" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.CONTENT , value = "折旧内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -225,8 +227,9 @@ public class AssetDepreciationOperController extends SuperController {
 	@ApiOperation(value = "查询折旧操作")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.DEPRECIATION_ID , value = "折旧方案" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.CONTENT , value = "折旧内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -252,8 +255,9 @@ public class AssetDepreciationOperController extends SuperController {
 	@ApiOperation(value = "分页查询折旧操作")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.DEPRECIATION_ID , value = "折旧方案" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.CONTENT , value = "折旧内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDepreciationOperVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -273,12 +277,75 @@ public class AssetDepreciationOperController extends SuperController {
 			.with("originator")
 			.with(AssetDepreciationOperMeta.ASSET_DEPRECIATION)
 			.execute();
+		List<Employee> originatorList= CollectorUtil.collectList(list, AssetDepreciationOper::getOriginator);
+		assetDepreciationOperService.dao().join(originatorList, Person.class);
+
 		result.success(true).data(list);
 		return result;
 	}
 
 
 
+	/**
+	 *
+	 */
+	@ApiOperation(value = "")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetDepreciationOperVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@ApiOperationSupport(order=9)
+	@NotNull(name = AssetDepreciationOperVOMeta.ID)
+	@SentinelResource(value = AssetDepreciationOperServiceProxy.SYNCDATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetDepreciationOperServiceProxy.SYNCDATA)
+	public Result syncData(String id) {
+		return assetDepreciationOperService.syncData(id);
+	}
+
+
+	/**
+	 *
+	 */
+	@ApiOperation(value = "")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetDepreciationOperVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@ApiOperationSupport(order=10)
+	@NotNull(name = AssetDepreciationOperVOMeta.ID)
+	@SentinelResource(value = AssetDepreciationOperServiceProxy.ROLLBACK , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetDepreciationOperServiceProxy.ROLLBACK)
+	public Result rollback(String id) {
+		return assetDepreciationOperService.rollback(id);
+	}
+
+	/**
+	 *
+	 */
+	@ApiOperation(value = "")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetDepreciationOperVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@ApiOperationSupport(order=11)
+	@NotNull(name = AssetDepreciationOperVOMeta.ID)
+	@SentinelResource(value = AssetDepreciationOperServiceProxy.START , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetDepreciationOperServiceProxy.START)
+	public Result start(String id) {
+		return assetDepreciationOperService.start(id);
+	}
+
+	/**
+	 *
+	 */
+	@ApiOperation(value = "")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetDepreciationOperVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@ApiOperationSupport(order=12)
+	@NotNull(name = AssetDepreciationOperVOMeta.ID)
+	@SentinelResource(value = AssetDepreciationOperServiceProxy.EXECUTE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetDepreciationOperServiceProxy.EXECUTE)
+	public Result execute(String id) {
+		return assetDepreciationOperService.execute(id);
+	}
 	/**
 	 * 导出 Excel
 	 * */

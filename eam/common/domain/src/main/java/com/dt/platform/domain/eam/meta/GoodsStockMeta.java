@@ -16,7 +16,7 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-24 20:39:36
+ * @since 2022-05-03 12:20:56
  * @sign E01BFB39E9982699E66C58785D332C80
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

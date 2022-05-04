@@ -2,6 +2,8 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.eam.service.IAssetDepreciationCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +37,7 @@ import java.util.Date;
  * 折旧方案 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:32:28
+ * @since 2022-05-03 14:39:47
 */
 
 
@@ -48,6 +50,8 @@ public class AssetDepreciationServiceImpl extends SuperService<AssetDepreciation
 	@Resource(name=DBConfigs.PRIMARY_DAO) 
 	private DAO dao=null;
 
+	@Autowired
+	private IAssetDepreciationCategoryService assetDepreciationCategoryService;
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -70,6 +74,9 @@ public class AssetDepreciationServiceImpl extends SuperService<AssetDepreciation
 	@Override
 	public Result insert(AssetDepreciation assetDepreciation,boolean throwsException) {
 		Result r=super.insert(assetDepreciation,throwsException);
+		if(r.isSuccess()){
+			assetDepreciationCategoryService.saveRelation(assetDepreciation.getId(),assetDepreciation.getCategoryIds());
+		}
 		return r;
 	}
 
@@ -147,7 +154,9 @@ public class AssetDepreciationServiceImpl extends SuperService<AssetDepreciation
 	 * */
 	@Override
 	public Result update(AssetDepreciation assetDepreciation , SaveMode mode) {
+
 		return this.update(assetDepreciation,mode,true);
+
 	}
 
 	/**
@@ -160,6 +169,9 @@ public class AssetDepreciationServiceImpl extends SuperService<AssetDepreciation
 	@Override
 	public Result update(AssetDepreciation assetDepreciation , SaveMode mode,boolean throwsException) {
 		Result r=super.update(assetDepreciation , mode , throwsException);
+		if(r.isSuccess()){
+			assetDepreciationCategoryService.saveRelation(assetDepreciation.getId(),assetDepreciation.getCategoryIds());
+		}
 		return r;
 	}
 

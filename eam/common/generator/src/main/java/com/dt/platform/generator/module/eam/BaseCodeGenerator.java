@@ -38,6 +38,11 @@ public class BaseCodeGenerator {
 
     public static final String BASIC_ASSET_INVENTORY_MENU_ID="471985681850171393";
 
+
+    public static final String BASIC_ASSET_SOFT_MENU_ID="479388413435314177";
+
+
+
     //
     private String appId="service-eam";
 

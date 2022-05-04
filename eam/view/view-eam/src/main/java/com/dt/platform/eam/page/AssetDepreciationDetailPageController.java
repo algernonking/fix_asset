@@ -41,7 +41,9 @@ public class AssetDepreciationDetailPageController extends ViewController {
 	 * 折旧明细 功能主页面
 	 */
 	@RequestMapping("/asset_depreciation_detail_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String operId) {
+
+		model.addAttribute("operId",operId);
 		return prefix+"/asset_depreciation_detail_list";
 	}
 

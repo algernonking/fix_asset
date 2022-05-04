@@ -2,7 +2,7 @@
 /**
  * 折旧明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:22:55
+ * @since 2022-05-03 22:05:33
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-7304-content">
+        <div class="layui-row form-row" id="random-0345-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -46,18 +46,63 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('折旧操作')}">折旧操作</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产名称')}">资产名称</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <div id="operId" input-type="select" th:data="${'/service-eam/eam-asset-depreciation-oper/query-paged-list'}" extraParam="{}"></div>
+                            <div id="assetCurName" input-type="select" th:data="${'/service-eam/eam-asset/query-paged-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('折旧方案')}">折旧方案</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产型号')}">资产型号</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <div id="depreciationId" input-type="select" th:data="${'/service-eam/eam-asset-depreciation/query-paged-list'}" extraParam="{}"></div>
+                            <div id="assetCurModel" input-type="select" th:data="${'/service-eam/eam-asset/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产编号')}">资产编号</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="assetCurCode" input-type="select" th:data="${'/service-eam/eam-asset/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('当前采购单价')}">当前采购单价</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="assetCurPurchaseUnitPrice" input-type="select" th:data="${'/service-eam/eam-asset/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('当前净值')}">当前净值</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="assetCurNavPrice" input-type="select" th:data="${'/service-eam/eam-asset/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('折旧前净值')}">折旧前净值</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="assetBeforeNavPrice" input-type="select" th:data="${'/service-eam/eam-asset/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('折旧后净值')}">折旧后净值</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="assetAfterNavPrice" input-type="select" th:data="${'/service-eam/eam-asset/query-paged-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 

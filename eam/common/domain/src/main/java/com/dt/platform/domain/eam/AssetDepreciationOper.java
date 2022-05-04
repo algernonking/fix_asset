@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 折旧操作
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 09:03:39
- * @sign F4386CB15A6AA9B4BE850C3E58254882
+ * @since 2022-05-03 16:09:53
+ * @sign 03334B63D4CFA318A8E8B91DF291309B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -39,16 +39,22 @@ public class AssetDepreciationOper extends Entity {
 	private String id;
 	
 	/**
-	 * 名称：名称
+	 * 业务编号：业务编号
 	*/
-	@ApiModelProperty(required = false,value="名称" , notes = "名称")
-	private String name;
+	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
+	private String businessCode;
 	
 	/**
 	 * 状态：状态
 	*/
 	@ApiModelProperty(required = false,value="状态" , notes = "状态")
 	private String status;
+	
+	/**
+	 * 名称：名称
+	*/
+	@ApiModelProperty(required = false,value="名称" , notes = "名称")
+	private String name;
 	
 	/**
 	 * 折旧方案：折旧方案
@@ -214,21 +220,21 @@ public class AssetDepreciationOper extends Entity {
 	}
 	
 	/**
-	 * 获得 名称<br>
-	 * 名称
-	 * @return 名称
+	 * 获得 业务编号<br>
+	 * 业务编号
+	 * @return 业务编号
 	*/
-	public String getName() {
-		return name;
+	public String getBusinessCode() {
+		return businessCode;
 	}
 	
 	/**
-	 * 设置 名称
-	 * @param name 名称
+	 * 设置 业务编号
+	 * @param businessCode 业务编号
 	 * @return 当前对象
 	*/
-	public AssetDepreciationOper setName(String name) {
-		this.name=name;
+	public AssetDepreciationOper setBusinessCode(String businessCode) {
+		this.businessCode=businessCode;
 		return this;
 	}
 	
@@ -248,6 +254,25 @@ public class AssetDepreciationOper extends Entity {
 	*/
 	public AssetDepreciationOper setStatus(String status) {
 		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 名称<br>
+	 * 名称
+	 * @return 名称
+	*/
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * 设置 名称
+	 * @param name 名称
+	 * @return 当前对象
+	*/
+	public AssetDepreciationOper setName(String name) {
+		this.name=name;
 		return this;
 	}
 	

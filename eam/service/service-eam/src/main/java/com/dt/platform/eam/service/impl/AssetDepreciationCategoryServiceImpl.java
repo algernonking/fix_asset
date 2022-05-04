@@ -29,13 +29,16 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IAssetDepreciationCategoryService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import com.dt.platform.constants.db.EAMTables.*;
+import com.dt.platform.domain.eam.AssetDepreciation;
+import org.github.foxnic.web.domain.pcm.Catalog;
 
 /**
  * <p>
  * 折旧分类 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-02 07:48:30
+ * @since 2022-05-03 14:33:28
 */
 
 
@@ -281,5 +284,13 @@ public class AssetDepreciationCategoryServiceImpl extends SuperService<AssetDepr
 		return super.buildExcelStructure(isForExport);
 	}
 
+	/**
+     * 保存关系
+     * @param depreciationId 折旧方案
+     * @param categoryIds 资产分类清单
+     */
+	public void saveRelation(String depreciationId,List<String> categoryIds) {
+		super.saveRelation(AssetDepreciation.class,EAM_ASSET_DEPRECIATION_CATEGORY.DEPRECIATION_ID,depreciationId,Catalog.class,EAM_ASSET_DEPRECIATION_CATEGORY.CATEGORY_ID,categoryIds,true);
+	}
 
 }

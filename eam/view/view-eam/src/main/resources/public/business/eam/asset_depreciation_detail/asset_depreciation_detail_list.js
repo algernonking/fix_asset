@@ -1,7 +1,7 @@
 /**
  * 折旧明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:22:55
+ * @since 2022-05-03 22:05:33
  */
 
 
@@ -62,7 +62,7 @@ function ListPage() {
 					return value;
 				}
 			}
-			var h=-28; 
+			var h=$(".search-bar").height();
 			var tableConfig={
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
@@ -75,12 +75,13 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'depreciationId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('折旧方案'), templet: function (d) { return templet('depreciationId' ,fox.joinLabel(d.assetDepreciation,"name"),d);}}
-					,{ field: 'operId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('折旧操作'), templet: function (d) { return templet('operId' ,fox.joinLabel(d.assetDepreciationOper,"name"),d);}}
-					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
-					,{ field: 'detailIdSource', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('折旧前') , templet: function (d) { return templet('detailIdSource',d.detailIdSource,d);}  }
-					,{ field: 'detailIdTarget', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('折旧后') , templet: function (d) { return templet('detailIdTarget',d.detailIdTarget,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'assetCurName', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('资产名称'), templet: function (d) { return templet('assetCurName' ,fox.joinLabel(d.asset,"name"),d);}}
+					,{ field: 'assetCurModel', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('资产型号'), templet: function (d) { return templet('assetCurModel' ,fox.joinLabel(d.asset,"model"),d);}}
+					,{ field: 'assetCurCode', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('资产编号'), templet: function (d) { return templet('assetCurCode' ,fox.joinLabel(d.asset,"assetCode"),d);}}
+					,{ field: 'assetCurPurchaseUnitPrice', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('当前采购单价'), templet: function (d) { return templet('assetCurPurchaseUnitPrice' ,fox.joinLabel(d.asset,"purchaseUnitPrice"),d);}}
+					,{ field: 'assetCurNavPrice', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('当前净值'), templet: function (d) { return templet('assetCurNavPrice' ,fox.joinLabel(d.asset,"navPrice"),d);}}
+					,{ field: 'assetBeforeNavPrice', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('折旧前净值'), templet: function (d) { return templet('assetBeforeNavPrice' ,fox.joinLabel(d.assetSource,"navPrice"),d);}}
+					,{ field: 'assetAfterNavPrice', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('折旧后净值'), templet: function (d) { return templet('assetAfterNavPrice' ,fox.joinLabel(d.assetTarget,"navPrice"),d);}}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 				]],
 				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
@@ -140,11 +141,6 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.depreciationId={ inputType:"select_box", value: getSelectedValue("#depreciationId","value") ,fillBy:["assetDepreciation"]  , label:getSelectedValue("#depreciationId","nameStr") };
-		value.operId={ inputType:"select_box", value: getSelectedValue("#operId","value") ,fillBy:["assetDepreciationOper"]  , label:getSelectedValue("#operId","nameStr") };
-		value.assetId={ inputType:"button",value: $("#assetId").val()};
-		value.detailIdSource={ inputType:"button",value: $("#detailIdSource").val()};
-		value.detailIdTarget={ inputType:"button",value: $("#detailIdTarget").val()};
-		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -201,33 +197,6 @@ function ListPage() {
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("depreciationId",data.arr,data.change,data.isAdd);
-				},1);
-			},
-			paging: true,
-			pageRemote: true,
-			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({data:data[i],name:data[i].name,value:data[i].id});
-				}
-				return opts;
-			}
-		});
-		//渲染 operId 下拉字段
-		fox.renderSelectBox({
-			el: "operId",
-			radio: true,
-			size: "small",
-			filterable: true,
-			on: function(data){
-				setTimeout(function () {
-					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("operId",data.arr,data.change,data.isAdd);
 				},1);
 			},
 			paging: true,

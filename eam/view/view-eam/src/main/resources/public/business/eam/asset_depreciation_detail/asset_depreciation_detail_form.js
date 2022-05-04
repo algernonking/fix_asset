@@ -1,7 +1,7 @@
 /**
  * 折旧明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-03 06:22:55
+ * @since 2022-05-03 22:05:33
  */
 
 function FormPage() {
@@ -147,6 +147,223 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 assetCurName 下拉字段
+		fox.renderSelectBox({
+			el: "assetCurName",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetCurName",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 assetCurModel 下拉字段
+		fox.renderSelectBox({
+			el: "assetCurModel",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetCurModel",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "model", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].model,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 assetCurCode 下拉字段
+		fox.renderSelectBox({
+			el: "assetCurCode",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetCurCode",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "assetCode", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].assetCode,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 assetCurPurchaseUnitPrice 下拉字段
+		fox.renderSelectBox({
+			el: "assetCurPurchaseUnitPrice",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetCurPurchaseUnitPrice",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "purchaseUnitPrice", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].purchaseUnitPrice,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 assetCurNavPrice 下拉字段
+		fox.renderSelectBox({
+			el: "assetCurNavPrice",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetCurNavPrice",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "navPrice", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].navPrice,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 assetBeforeNavPrice 下拉字段
+		fox.renderSelectBox({
+			el: "assetBeforeNavPrice",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetBeforeNavPrice",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "navPrice", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].navPrice,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 assetAfterNavPrice 下拉字段
+		fox.renderSelectBox({
+			el: "assetAfterNavPrice",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetAfterNavPrice",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "navPrice", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].navPrice,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 	}
 
 	/**
@@ -175,10 +392,20 @@ function FormPage() {
 
 
 
-			//设置  折旧方案 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#depreciationId",formData.assetDepreciation);
-			//设置  折旧操作 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#operId",formData.assetDepreciationOper);
+			//设置  资产名称 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#assetCurName",formData.asset);
+			//设置  资产型号 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#assetCurModel",formData.asset);
+			//设置  资产编号 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#assetCurCode",formData.asset);
+			//设置  当前采购单价 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#assetCurPurchaseUnitPrice",formData.asset);
+			//设置  当前净值 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#assetCurNavPrice",formData.asset);
+			//设置  折旧前净值 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#assetBeforeNavPrice",formData.assetSource);
+			//设置  折旧后净值 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#assetAfterNavPrice",formData.assetTarget);
 
 			//处理fillBy
 
@@ -229,10 +456,20 @@ function FormPage() {
 
 
 
-		//获取 折旧方案 下拉框的值
-		data["depreciationId"]=fox.getSelectedValue("depreciationId",false);
-		//获取 折旧操作 下拉框的值
-		data["operId"]=fox.getSelectedValue("operId",false);
+		//获取 资产名称 下拉框的值
+		data["assetCurName"]=fox.getSelectedValue("assetCurName",false);
+		//获取 资产型号 下拉框的值
+		data["assetCurModel"]=fox.getSelectedValue("assetCurModel",false);
+		//获取 资产编号 下拉框的值
+		data["assetCurCode"]=fox.getSelectedValue("assetCurCode",false);
+		//获取 当前采购单价 下拉框的值
+		data["assetCurPurchaseUnitPrice"]=fox.getSelectedValue("assetCurPurchaseUnitPrice",false);
+		//获取 当前净值 下拉框的值
+		data["assetCurNavPrice"]=fox.getSelectedValue("assetCurNavPrice",false);
+		//获取 折旧前净值 下拉框的值
+		data["assetBeforeNavPrice"]=fox.getSelectedValue("assetBeforeNavPrice",false);
+		//获取 折旧后净值 下拉框的值
+		data["assetAfterNavPrice"]=fox.getSelectedValue("assetAfterNavPrice",false);
 
 		return data;
 	}
