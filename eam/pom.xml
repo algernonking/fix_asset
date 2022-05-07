@@ -50,6 +50,8 @@
 		<module>./service/service-customer</module>
 		<module>./service/service-vehicle</module>
 		<module>./service/service-cms</module>
+		<module>./service/service-workorder</module>
+
 
 		<!-- 界面视图 -->
 		<module>./view/view-console</module>
@@ -63,6 +65,7 @@
 		<module>./view/view-customer</module>
 		<module>./view/view-vehicle</module>
 		<module>./view/view-cms</module>
+		<module>./view/view-workorder</module>
 
 		<!-- 聚合 -->
 		<module>./wrapper/wrapper-all</module>

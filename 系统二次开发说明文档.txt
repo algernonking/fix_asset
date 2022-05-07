@@ -4,9 +4,13 @@
 
 二次开发说明
 - 1、正常情况下使用IDE maven3.6版本可以正常下载,如果未下载，优先检查maven版本，比如3.8版本确实无法下载，想尽一切办法下载缺少的库lib就行,绝大情况下我这边私服服务器没有问题。
+
 - 2、SQL文件:(每日更新):http://121.43.103.102/upload/sql.tar.gz
+
 - 3、运行环境要求:mysql版:5.7.X,Java版本:1.8
+
 - 4、部署请参考Git目录文档目录下的《EAM安装部署维护手册.docx》
+
 - 5、数据库jdbc信息默认为密文模式,当需要明文信息
     (如果启动报错password.txt文件不存在)
     则把配置文件中的druid.primary.encrypt.enable:false
@@ -15,15 +19,30 @@
         username: root
         password: 12345
     特别注意:url:这行比较长，不能换行，否则会报异常问题
+
 - 6、二次开发的时候，优先关注自动代码生产部分(common/generator/src/main/java/module/eam)，比较关键，
     每张数据库表，都会建立一个自动代码生产类(必须的)，自动代码生产可以为你生成所有前后端代码，以及关键的关联操作等，具体使用依样画葫芦就行。
+
 - 7、IDEA应用启动，启动类：wrapper/wrapper-all/src/main/java/com/dt/platform/wrapper/WrapperAllApp.java
+
 - 8、项目打包问题，maven项目wrapper-all install动作，本项目并没有把所有包打成一个jar包，而是一个wrapper.jar 运行包和lib下的依赖包，部署的时候全部复制过去启动
-- 9、jar包启动问题，启动的格式命令如下
+
+- 9、jar包启动问题，启动的格式命令参考如下
     java -noverify -Dfile.encoding=UTF-8 -Dloader.path=./lib/ -jar app.jar --Dspring.config.location=/opt/eam/bin/../application.yml
-    具体位置，参数，名称自行调整，注意 -noverify必须要加
+    具体位置，参数，名称按照实际使用环境自行调整
+    注意 -noverify这个参数必须要加
 
+-10、首次下载代码无法编译报错等问题，
+    确认使用2020以上IDEA工具
+    确认Java 1.8版本
+    确认mysql 5.7.X版本
+    确认EAM代码最新
+    确认SQL文件最新
+    确认本地仓库的jar包最新
+        (/com/github/foxnic目录相关jar包有时候后台会更新，但是没有刷新版本号,导致无法编译,将这些jar重新删除，自动下载即可)
+    依旧无法编译，参考相关系统代码开发环境部署的视频(链接在本项目Readme里)
 
+-11、
 
 
 

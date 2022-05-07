@@ -28,7 +28,8 @@ import org.springframework.context.annotation.ComponentScan;
 		PlatformMeta.CONTRACT_PACKAGE,
 		PlatformMeta.JOB_PACKAGE,
 		PlatformMeta.CUSTOMER_PACKAGE,
-		PlatformMeta.VEHICLE_PACKAGE
+		PlatformMeta.VEHICLE_PACKAGE,
+		PlatformMeta.WORKORDER_PACKAGE
 })
 @SpringBootApplication(exclude = {FeignAutoConfiguration.class})
 public class WrapperAllApp {

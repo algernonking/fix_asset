@@ -83,6 +83,10 @@ public class PlatformMeta {
 	 * */
 	public static final String CMS_PACKAGE=BASE_PACKAGE+".cms";
 
+	/**
+	 * CMS
+	 * */
+	public static final String WORKORDER_PACKAGE=BASE_PACKAGE+".workorder";
 
 
 

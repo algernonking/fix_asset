@@ -69,10 +69,16 @@ delete from eam_inventory_asset where 1=1 ;
 delete from eam_inventory_director where 1=1 ;
 delete from eam_inventory_manager where 1=1 ;
 delete from eam_inventory_user where 1=1 ;
+
+
 -- stock
 delete from eam_stock where 1=1  and tenant_id='T001' ;
 delete from eam_asset_stock_collection where 1=1;
+
+
 -- dc
+
+
 -- cont
 delete from cont_contract where 1=1  and tenant_id='T001' ;
 delete from cont_contract_attachment where 1=1  and tenant_id='T001' ;

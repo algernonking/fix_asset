@@ -138,3 +138,14 @@ applications:
     viewProjectPath: /view/view-cms
     viewPrefixPath: public/business/cms
     wrapperProjectPath: /wrapper/wrapper-all
+  #WORKORDER
+  service-workorder:
+    nacosGroup: service
+    nacosDataId: service-workorder.yml
+    serviceProjectPath: /service/service-workorder
+    packageName: com.dt.platform.workorder
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: WORKORDER
+    viewProjectPath: /view/view-workorder
+    viewPrefixPath: public/business/workorder
+    wrapperProjectPath: /wrapper/wrapper-all
