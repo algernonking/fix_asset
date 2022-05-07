@@ -89,6 +89,18 @@ public class AssetBillController extends SuperController {
 
 
 
+    @Autowired
+    private IAssetSoftwareDistributeService assetSoftwareDistributeService;
+
+    @Autowired
+    private IAssetSoftwareService assetSoftwareService;
+
+    @Autowired
+    private IAssetSoftwareMaintenanceService assetSoftwareMaintenanceService;
+
+    @Autowired
+    private IAssetSoftwareChangeService assetSoftwareChangeService;
+
 
     private  InputStream cloneInputStream(InputStream input) {
         try {
@@ -105,6 +117,89 @@ public class AssetBillController extends SuperController {
             return null;
         }
     }
+
+    @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_SOFTWARE_INSERT_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_SOFTWARE_INSERT_BILL)
+    public void queryAssetSoftwareInsertBill(String id,HttpServletResponse response) throws Exception {
+
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_SOFTWARE_INSERT_BILL.code());
+
+        Map<String,Object> map=assetSoftwareService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("转移单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
+    }
+
+
+    @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_SOFTWARE_DISTRIBUTE_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_SOFTWARE_DISTRIBUTE_BILL)
+    public void queryAssetSoftwareDistributeBill(String id,HttpServletResponse response) throws Exception {
+
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_SOFTWARE_DISTRIBUTE_BILL.code());
+        Map<String,Object> map=assetSoftwareDistributeService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("转移单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
+    }
+
+    @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_SOFTWARE_CHANGE_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_SOFTWARE_CHANGE_BILL)
+    public void queryAssetSoftwareChangeBill(String id,HttpServletResponse response) throws Exception {
+
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_SOFTWARE_CHANGE_BILL.code());
+        Map<String,Object> map=assetSoftwareChangeService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("转移单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
+    }
+
+    @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_SOFTWARE_MAINTENANCE_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_SOFTWARE_MAINTENANCE_BILL)
+    public void queryAssetSoftwareMaintenanceBill(String id,HttpServletResponse response) throws Exception {
+
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_SOFTWARE_MAINTENANCE.code());
+        Map<String,Object> map=assetSoftwareMaintenanceService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("转移单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
+    }
+
 
     @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_REGISTER_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_REGISTER_BILLS)
@@ -292,6 +387,10 @@ public class AssetBillController extends SuperController {
         PoitlIOUtils.closeQuietlyMulti(template, bos, out);
 
     }
+
+
+
+
 
     @SentinelResource(value = AssetBillServiceProxy.QUERY_PURCHASE_APPLY_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_PURCHASE_APPLY_BILL)

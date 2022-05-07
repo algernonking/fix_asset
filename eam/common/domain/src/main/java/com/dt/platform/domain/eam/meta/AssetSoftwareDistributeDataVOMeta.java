@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:25:01
+ * @since 2022-05-07 06:38:16
  * @sign 1B5686DA85B2C560CEF1B84A5D904849
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -128,6 +128,16 @@ public class AssetSoftwareDistributeDataVOMeta extends AssetSoftwareDistributeDa
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeDataVO,java.lang.String> DISTRIBUTE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeDataVO.class ,DISTRIBUTE_ID, java.lang.String.class, "软件分发", "软件分发", java.lang.String.class, null);
 	
 	/**
+	 * 软件信息 , 类型: java.lang.String
+	*/
+	public static final String SOFTWARE_ID="softwareId";
+	
+	/**
+	 * 软件信息 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeDataVO,java.lang.String> SOFTWARE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeDataVO.class ,SOFTWARE_ID, java.lang.String.class, "软件信息", "软件信息", java.lang.String.class, null);
+	
+	/**
 	 * 授权数量 , 类型: java.lang.Integer
 	*/
 	public static final String AUTHORIZED_NUMBER="authorizedNumber";
@@ -230,7 +240,7 @@ public class AssetSoftwareDistributeDataVOMeta extends AssetSoftwareDistributeDa
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , DISTRIBUTE_ID , AUTHORIZED_NUMBER , AUTHORIZED_INFO , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , DISTRIBUTE_ID , SOFTWARE_ID , AUTHORIZED_NUMBER , AUTHORIZED_INFO , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -358,6 +368,17 @@ public class AssetSoftwareDistributeDataVOMeta extends AssetSoftwareDistributeDa
 		public AssetSoftwareDistributeData setDistributeId(String distributeId) {
 			super.change(DISTRIBUTE_ID,super.getDistributeId(),distributeId);
 			super.setDistributeId(distributeId);
+			return this;
+		}
+		
+		/**
+		 * 设置 软件信息
+		 * @param softwareId 软件信息
+		 * @return 当前对象
+		*/
+		public AssetSoftwareDistributeData setSoftwareId(String softwareId) {
+			super.change(SOFTWARE_ID,super.getSoftwareId(),softwareId);
+			super.setSoftwareId(softwareId);
 			return this;
 		}
 		

@@ -15,13 +15,14 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import java.util.Map;
 
 /**
  * <p>
  * 软件分发项 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:25:01
+ * @since 2022-05-07 06:38:16
 */
 
 public interface IAssetSoftwareDistributeDataService extends ISuperService<AssetSoftwareDistributeData> {

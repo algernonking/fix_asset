@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:25:01
- * @sign 248A1A03EE818B3FD2FBFC95E81A5EAA
+ * @since 2022-05-07 06:38:16
+ * @sign F34A7F274B764A72F1B79A17C750BBC0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +34,16 @@ public class AssetSoftwareDistributeDataMeta {
 	 * 软件分发 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeData,java.lang.String> DISTRIBUTE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeData.class ,DISTRIBUTE_ID, java.lang.String.class, "软件分发", "软件分发", java.lang.String.class, null);
+	
+	/**
+	 * 软件信息 , 类型: java.lang.String
+	*/
+	public static final String SOFTWARE_ID="softwareId";
+	
+	/**
+	 * 软件信息 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeData,java.lang.String> SOFTWARE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeData.class ,SOFTWARE_ID, java.lang.String.class, "软件信息", "软件信息", java.lang.String.class, null);
 	
 	/**
 	 * 授权数量 , 类型: java.lang.Integer
@@ -138,7 +148,7 @@ public class AssetSoftwareDistributeDataMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , DISTRIBUTE_ID , AUTHORIZED_NUMBER , AUTHORIZED_INFO , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , DISTRIBUTE_ID , SOFTWARE_ID , AUTHORIZED_NUMBER , AUTHORIZED_INFO , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -167,6 +177,17 @@ public class AssetSoftwareDistributeDataMeta {
 		public AssetSoftwareDistributeData setDistributeId(String distributeId) {
 			super.change(DISTRIBUTE_ID,super.getDistributeId(),distributeId);
 			super.setDistributeId(distributeId);
+			return this;
+		}
+		
+		/**
+		 * 设置 软件信息
+		 * @param softwareId 软件信息
+		 * @return 当前对象
+		*/
+		public AssetSoftwareDistributeData setSoftwareId(String softwareId) {
+			super.change(SOFTWARE_ID,super.getSoftwareId(),softwareId);
+			super.setSoftwareId(softwareId);
 			return this;
 		}
 		

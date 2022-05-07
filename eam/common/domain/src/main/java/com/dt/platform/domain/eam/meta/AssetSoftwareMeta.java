@@ -14,8 +14,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:04:11
- * @sign F66DD8043C47E4EF364F818EF8D0C35F
+ * @since 2022-05-06 21:34:26
+ * @sign 1B84BCA61152A65A4B61686FD338FDCF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -40,6 +40,16 @@ public class AssetSoftwareMeta {
 	 * 业务编号 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftware,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftware.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
+	
+	/**
+	 * 所属 , 类型: java.lang.String
+	*/
+	public static final String OWNER_CODE="ownerCode";
+	
+	/**
+	 * 所属 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftware,java.lang.String> OWNER_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftware.class ,OWNER_CODE, java.lang.String.class, "所属", "所属", java.lang.String.class, null);
 	
 	/**
 	 * 流程 , 类型: java.lang.String
@@ -392,6 +402,16 @@ public class AssetSoftwareMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftware,java.lang.String> LABEL4_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftware.class ,LABEL4, java.lang.String.class, "标签4", "标签4", java.lang.String.class, null);
 	
 	/**
+	 * 控制 , 类型: java.lang.String
+	*/
+	public static final String CTL="ctl";
+	
+	/**
+	 * 控制 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftware,java.lang.String> CTL_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftware.class ,CTL, java.lang.String.class, "控制", "控制", java.lang.String.class, null);
+	
+	/**
 	 * 创建人ID , 类型: java.lang.String
 	*/
 	public static final String CREATE_BY="createBy";
@@ -592,6 +612,16 @@ public class AssetSoftwareMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftware,java.lang.String> APPROVAL_OPINION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftware.class ,APPROVAL_OPINION, java.lang.String.class, "审批意见", "审批意见", java.lang.String.class, null);
 	
 	/**
+	 * 选择 , 类型: java.lang.String
+	*/
+	public static final String SELECTED_CODE="selectedCode";
+	
+	/**
+	 * 选择 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftware,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftware.class ,SELECTED_CODE, java.lang.String.class, "选择", "选择", java.lang.String.class, null);
+	
+	/**
 	 * 资产分类 , 类型: org.github.foxnic.web.domain.pcm.Catalog
 	*/
 	public static final String CATEGORY="category";
@@ -684,7 +714,7 @@ public class AssetSoftwareMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , CATEGORY_ID , CODE , SOFTWARE_VERSION , COPYRIGHT_TYPE , LICENSE_MODE , COST_PRICE , OWN_COMPANY_ID , USE_ORGANIZATION_ID , SUPPLIER_ID , MANAGER_ID , POSITION_DETAIL , SOURCE_ID , SOURCE_DETAIL , AUTHORIZATION_INFO , AUTHORIZED_NUMBER , AUTHORIZED_AVAILABLE_NUMBER , AUTHORIZED_NUMBER_UNLIMIT , AUTHORIZATION_CODE , AUTHORIZATION_EXPIRATION_DATE , AUTHORIZATION_EXPIRATION_UNLIMIT , NEED_MAINTENANCE , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , PURCHASE_DATE , REGISTER_DATE , CONTENT , NOTES , ATTACH_ID , LABEL1 , LABEL2 , LABEL3 , LABEL4 , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , CATEGORY , SUPPLIER , USE_ORGANIZATION , OWNER_COMPANY , SOURCE , ORIGINATOR , MANAGER , COPYRIGHT_TYPE_DICT , LICENSE_MODE_DICT };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , OWNER_CODE , PROC_ID , STATUS , NAME , CATEGORY_ID , CODE , SOFTWARE_VERSION , COPYRIGHT_TYPE , LICENSE_MODE , COST_PRICE , OWN_COMPANY_ID , USE_ORGANIZATION_ID , SUPPLIER_ID , MANAGER_ID , POSITION_DETAIL , SOURCE_ID , SOURCE_DETAIL , AUTHORIZATION_INFO , AUTHORIZED_NUMBER , AUTHORIZED_AVAILABLE_NUMBER , AUTHORIZED_NUMBER_UNLIMIT , AUTHORIZATION_CODE , AUTHORIZATION_EXPIRATION_DATE , AUTHORIZATION_EXPIRATION_UNLIMIT , NEED_MAINTENANCE , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , PURCHASE_DATE , REGISTER_DATE , CONTENT , NOTES , ATTACH_ID , LABEL1 , LABEL2 , LABEL3 , LABEL4 , CTL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , SELECTED_CODE , CATEGORY , SUPPLIER , USE_ORGANIZATION , OWNER_COMPANY , SOURCE , ORIGINATOR , MANAGER , COPYRIGHT_TYPE_DICT , LICENSE_MODE_DICT };
 	
 	/**
 	 * 代理类
@@ -713,6 +743,17 @@ public class AssetSoftwareMeta {
 		public AssetSoftware setBusinessCode(String businessCode) {
 			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
 			super.setBusinessCode(businessCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 所属
+		 * @param ownerCode 所属
+		 * @return 当前对象
+		*/
+		public AssetSoftware setOwnerCode(String ownerCode) {
+			super.change(OWNER_CODE,super.getOwnerCode(),ownerCode);
+			super.setOwnerCode(ownerCode);
 			return this;
 		}
 		
@@ -1102,6 +1143,17 @@ public class AssetSoftwareMeta {
 		}
 		
 		/**
+		 * 设置 控制
+		 * @param ctl 控制
+		 * @return 当前对象
+		*/
+		public AssetSoftware setCtl(String ctl) {
+			super.change(CTL,super.getCtl(),ctl);
+			super.setCtl(ctl);
+			return this;
+		}
+		
+		/**
 		 * 设置 创建人ID
 		 * @param createBy 创建人ID
 		 * @return 当前对象
@@ -1318,6 +1370,17 @@ public class AssetSoftwareMeta {
 		public AssetSoftware setApprovalOpinion(String approvalOpinion) {
 			super.change(APPROVAL_OPINION,super.getApprovalOpinion(),approvalOpinion);
 			super.setApprovalOpinion(approvalOpinion);
+			return this;
+		}
+		
+		/**
+		 * 设置 选择
+		 * @param selectedCode 选择
+		 * @return 当前对象
+		*/
+		public AssetSoftware setSelectedCode(String selectedCode) {
+			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
+			super.setSelectedCode(selectedCode);
 			return this;
 		}
 		

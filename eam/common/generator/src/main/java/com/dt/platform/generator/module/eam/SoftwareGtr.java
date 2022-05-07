@@ -33,6 +33,8 @@ public class SoftwareGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
+
+
         System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.ID).basic().hidden(true);
         cfg.getPoClassFile().addSimpleProperty(Catalog.class,"category","资产分类","资产分类");
@@ -42,10 +44,10 @@ public class SoftwareGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"manager","管理人","管理人");
-
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"copyrightTypeDict","版权","版权");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"licenseModeDict","许可","许可");
-
+        cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.POSITION_DETAIL).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.NAME).search().fuzzySearch();
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_SOFTWARE.STATUS,
@@ -90,9 +92,10 @@ public class SoftwareGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.NEXT_APPROVER_NAMES).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.APPROVAL_OPINION).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.ATTACH_ID).table().disable(true);
+        cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.SELECTED_CODE).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.OWN_COMPANY_ID).table().disable(true);
 
-
+        cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.CTL).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.STATUS).form().
                 form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE.NAME).form().validate().required();

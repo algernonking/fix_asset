@@ -74,14 +74,63 @@ public class EamRelationManager extends RelationManager {
         this.setupAssetDepreciation();
 
         this.setupAssetSoftware();
-
         this.setupAssetSoftwareDistribute();
+        this.setupAssetSoftChange();
+        this.setupAssetSoftChangeDetail();
+        this.setupAssetSoftMaintenance();
 
     }
 
     public void setupProperties() {
 
     }
+
+    public void setupAssetSoftChange() {
+        //制单人
+        this.property(AssetSoftwareChangeMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_CHANGE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(AssetSoftwareChangeMeta.ASSET_SOFTWARE_CHANGE_DETAIL_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_CHANGE.ID).join(EAMTables.EAM_ASSET_SOFTWARE_CHANGE_DETAIL.CHANGE_ID);
+
+    }
+
+    public void setupAssetSoftChangeDetail() {
+        this.property(AssetSoftwareChangeDetailMeta.ASSET_SOFTWARE_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_CHANGE_DETAIL.SOFTWARE_ID).join(EAMTables.EAM_ASSET_SOFTWARE.ID);
+
+        this.property(AssetSoftwareChangeDetailMeta.ASSET_SOFTWARE_BEFORE_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_CHANGE_DETAIL.BEFORE_SOFTWARE_ID).join(EAMTables.EAM_ASSET_SOFTWARE.ID);
+
+        this.property(AssetSoftwareChangeDetailMeta.ASSET_SOFTWARE_AFTER_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_CHANGE_DETAIL.AFTER_SOFTWARE_ID).join(EAMTables.EAM_ASSET_SOFTWARE.ID);
+    }
+
+    public void setupAssetSoftMaintenance() {
+        //制单人
+        this.property(AssetSoftwareMaintenanceMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_MAINTENANCE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(AssetSoftwareMaintenanceMeta.ASSET_SOFTWARE_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_MAINTENANCE.ID).join(EAMTables.EAM_ASSET_SOFTWARE_MAINTENANCE_DETAIL.MAINTENANCE_ID)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_MAINTENANCE_DETAIL.SOFTWARE_ID).join(EAMTables.EAM_ASSET_SOFTWARE.ID);
+
+
+
+        this.property(AssetSoftwareMaintenanceMeta.USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_MAINTENANCE.USE_ORG_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+
+        this.property(AssetSoftwareMaintenanceMeta.MANAGER_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_MAINTENANCE.MANAGER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(AssetSoftwareMaintenanceMeta.MAINTAINER_PROP)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_MAINTENANCE.MAINTAINER_ID).join(EAMTables.EAM_MAINTAINER.ID);
+
+
+
+    }
+
 
     public void setupAssetSoftwareDistribute() {
         //制单人
@@ -92,14 +141,24 @@ public class EamRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.USE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
 
-        this.property(AssetSoftwareDistributeMeta.ASSET_SOFTWARE_DISTRIBUTE_DATA_PROP)
+        this.property(AssetSoftwareDistributeMeta.ASSET_SOFTWARE_LIST_PROP)
+        .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ID).join(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE_DATA.DISTRIBUTE_ID)
+                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE_DATA.SOFTWARE_ID).join(EAMTables.EAM_ASSET_SOFTWARE.ID);
+
+        this.property(AssetSoftwareDistributeMeta.ASSET_SOFTWARE_DISTRIBUTE_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ID).join(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE_DATA.DISTRIBUTE_ID);
 
-        this.property(AssetSoftwareDistributeMeta.ASSET_PROP)
-                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ASSET_ID).join(EAMTables.EAM_ASSET.ID);
 
-        this.property(AssetSoftwareDistributeMeta.ASSET_SOFTWARE_PROP)
-                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ASSET_SOFTWARE_ID).join(EAMTables.EAM_ASSET_SOFTWARE.ID);
+
+
+//        this.property(AssetSoftwareDistributeMeta.ASSET_SOFTWARE_DISTRIBUTE_DATA_PROP)
+//                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ID).join(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE_DATA.DISTRIBUTE_ID);
+//
+//        this.property(AssetSoftwareDistributeMeta.ASSET_PROP)
+//                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ASSET_ID).join(EAMTables.EAM_ASSET.ID);
+//
+//        this.property(AssetSoftwareDistributeMeta.ASSET_SOFTWARE_PROP)
+//                .using(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ASSET_SOFTWARE_ID).join(EAMTables.EAM_ASSET_SOFTWARE.ID);
 
 
         this.property(AssetSoftwareDistributeMeta.USE_ORGANIZATION_PROP)

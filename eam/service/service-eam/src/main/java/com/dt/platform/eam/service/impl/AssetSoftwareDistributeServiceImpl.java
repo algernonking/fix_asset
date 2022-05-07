@@ -7,6 +7,10 @@ import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetSoftwareDistributeMeta;
+import com.dt.platform.domain.eam.meta.AssetSoftwareMaintenanceMeta;
+import com.dt.platform.eam.service.IAssetSoftwareDistributeDataService;
+import com.dt.platform.eam.service.IAssetSoftwareService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -62,6 +66,13 @@ public class AssetSoftwareDistributeServiceImpl extends SuperService<AssetSoftwa
 	@Resource(name=DBConfigs.PRIMARY_DAO) 
 	private DAO dao=null;
 
+
+	@Autowired
+	private IAssetSoftwareService assetSoftwareService;
+
+	@Autowired
+	private IAssetSoftwareDistributeDataService assetSoftwareDistributeDataService;
+
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -83,6 +94,11 @@ public class AssetSoftwareDistributeServiceImpl extends SuperService<AssetSoftwa
 	 */
 	@Override
 	public Result insert(AssetSoftwareDistribute assetSoftwareDistribute,boolean throwsException) {
+
+		if(assetSoftwareDistribute.getAssetSoftwareIds()==null||assetSoftwareDistribute.getAssetSoftwareIds().size()==0){
+			return ErrorDesc.failureMessage("请选择软件信息");
+		}
+
 
 		//制单人
 		if(StringUtil.isBlank(assetSoftwareDistribute.getOriginatorId())){
@@ -111,7 +127,24 @@ public class AssetSoftwareDistributeServiceImpl extends SuperService<AssetSoftwa
 		}
 
 		Result r=super.insert(assetSoftwareDistribute,throwsException);
-		return r;
+		if(r.isSuccess()){
+			List<String> idsList=assetSoftwareDistribute.getAssetSoftwareIds();
+			for(int i=0;i<idsList.size();i++){
+				AssetSoftware as=new AssetSoftware();
+				String id=idsList.get(i);
+				as.setId(id);
+				as.setSelectedCode(assetSoftwareDistribute.getId());
+				assetSoftwareService.update(as,SaveMode.NOT_NULL_FIELDS,false);
+				AssetSoftware software=assetSoftwareService.getById(id);
+				//detail 数据
+				AssetSoftwareDistributeData detail=new AssetSoftwareDistributeData();
+				detail.setDistributeId(assetSoftwareDistribute.getId());
+				detail.setSoftwareId(software.getCtl());
+				detail.setAuthorizedNumber(software.getAuthorizedAvailableNumber());
+				assetSoftwareDistributeDataService.insert(detail,false);
+			}
+		}
+		return ErrorDesc.success();
 	}
 
 	@Override
@@ -151,11 +184,24 @@ public class AssetSoftwareDistributeServiceImpl extends SuperService<AssetSoftwa
 	 * @return
 	 * */
 	private Result operateResult(String id,String result,String status,String message) {
+		AssetSoftwareDistribute data=this.getById(id);
+		this.dao().fill(data)
+				.with(AssetSoftwareDistributeMeta.ASSET_SOFTWARE_DISTRIBUTE_LIST)
+				.execute();
 		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
 			AssetSoftwareDistribute bill=new AssetSoftwareDistribute();
 			bill.setId(id);
 			bill.setStatus(status);
-			return super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
+			super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
+			//减
+			List<AssetSoftwareDistributeData> list=data.getAssetSoftwareDistributeList();
+			if(list!=null&&list.size()>0){
+				for(int i=0;i<list.size();i++){
+					String sql="update eam_asset_software set authorized_available_number=authorized_available_number-"+list.get(i).getAuthorizedNumber()+" where id=?";
+					this.dao.execute(sql,list.get(i).getSoftwareId());
+				}
+			}
+			return ErrorDesc.success();
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{
@@ -265,8 +311,29 @@ public class AssetSoftwareDistributeServiceImpl extends SuperService<AssetSoftwa
 	 * */
 	@Override
 	public Result update(AssetSoftwareDistribute assetSoftwareDistribute , SaveMode mode,boolean throwsException) {
+		if(assetSoftwareDistribute.getAssetSoftwareIds()==null||assetSoftwareDistribute.getAssetSoftwareIds().size()==0){
+			return ErrorDesc.failureMessage("请选择软件信息");
+		}
 		Result r=super.update(assetSoftwareDistribute , mode , throwsException);
-		return r;
+		if(r.isSuccess()){
+			List<String> idsList=assetSoftwareDistribute.getAssetSoftwareIds();
+			for(int i=0;i<idsList.size();i++){
+				AssetSoftware as=new AssetSoftware();
+				String id=idsList.get(i);
+				as.setId(id);
+				as.setSelectedCode(assetSoftwareDistribute.getId());
+				assetSoftwareService.update(as,SaveMode.NOT_NULL_FIELDS,false);
+				AssetSoftware software=assetSoftwareService.getById(id);
+				//detail 数据
+				AssetSoftwareDistributeData detail=new AssetSoftwareDistributeData();
+				detail.setDistributeId(assetSoftwareDistribute.getId());
+				detail.setSoftwareId(software.getCtl());
+				detail.setAuthorizedNumber(software.getAuthorizedAvailableNumber());
+				assetSoftwareDistributeDataService.insert(detail,false);
+			}
+		}
+		return ErrorDesc.success();
+
 	}
 
 	/**

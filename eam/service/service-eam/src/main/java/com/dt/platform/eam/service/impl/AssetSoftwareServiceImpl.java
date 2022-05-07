@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
-import com.dt.platform.domain.eam.AssetAllocation;
-import com.dt.platform.domain.eam.AssetSoftwareDistribute;
+import com.dt.platform.constants.enums.eam.AssetOwnerCodeEnum;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -18,8 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetSoftware;
-import com.dt.platform.domain.eam.AssetSoftwareVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -97,6 +95,10 @@ public class AssetSoftwareServiceImpl extends SuperService<AssetSoftware> implem
 			assetSoftware.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
+		if(StringUtil.isBlank(assetSoftware.getOwnerCode())){
+			assetSoftware.setOwnerCode(AssetOwnerCodeEnum.ASSET_SOFTWARE.code());
+		}
+
 		if(StringUtil.isBlank(assetSoftware.getAuthorizedAvailableNumber())){
 			assetSoftware.setAuthorizedAvailableNumber(assetSoftware.getAuthorizedNumber());
 		}
@@ -118,6 +120,45 @@ public class AssetSoftwareServiceImpl extends SuperService<AssetSoftware> implem
 
 		Result r=super.insert(assetSoftware,throwsException);
 		return r;
+	}
+
+	@Override
+	public PagedList<AssetSoftware> queryPagedListBySelected(AssetSoftwareVO sample, String operType) {
+		sample.setOwnerCode(AssetOwnerCodeEnum.ASSET_DATA_SELECTED.code());
+		ConditionExpr queryCondition=new ConditionExpr();
+		PagedList<AssetSoftware> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
+		return list;
+
+	}
+	@Override
+	public PagedList<AssetSoftware> queryPagedListBySelect(AssetSoftwareVO sample, String assetSearchContent) {
+
+		sample.setOwnerCode(AssetOwnerCodeEnum.ASSET_SOFTWARE.code());
+		ConditionExpr queryCondition=new ConditionExpr();
+		PagedList<AssetSoftware> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
+		return list;
+	}
+
+	@Override
+	public Result assetSelected(List<String> ids, String selectedCode, String operType) {
+
+		if(ids==null||ids.size()==0){
+			return ErrorDesc.failureMessage("请选择数据");
+		}
+		ConditionExpr expr=new ConditionExpr();
+		expr.andIn("id",ids);
+		List<AssetSoftware> list=queryList(expr);
+		for(int i=0;i<list.size();i++){
+			AssetSoftware as=list.get(i);
+			String sid=as.getId();
+			as.setOwnerCode(AssetOwnerCodeEnum.ASSET_DATA_SELECTED.code());
+			as.setId(null);
+			as.setCtl(sid);
+			as.setCreateTime(new Date());
+			as.setSelectedCode(selectedCode);
+			super.insert(as,false);
+		}
+		return ErrorDesc.success();
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 /**
  * 软件分发项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:25:01
+ * @since 2022-05-07 06:38:17
  */
 
 
@@ -76,6 +76,7 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'distributeId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('软件分发') , templet: function (d) { return templet('distributeId',d.distributeId,d);}  }
+					,{ field: 'softwareId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('软件信息') , templet: function (d) { return templet('softwareId',d.softwareId,d);}  }
 					,{ field: 'authorizedNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('授权数量') , templet: function (d) { return templet('authorizedNumber',d.authorizedNumber,d);}  }
 					,{ field: 'authorizedInfo', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('授权信息') , templet: function (d) { return templet('authorizedInfo',d.authorizedInfo,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }

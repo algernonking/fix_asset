@@ -1,7 +1,7 @@
 /**
  * 软件分发 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:26:46
+ * @since 2022-05-07 06:47:32
  */
 
 
@@ -147,6 +147,7 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

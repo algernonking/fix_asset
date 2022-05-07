@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 软件分发项
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:25:01
- * @sign 248A1A03EE818B3FD2FBFC95E81A5EAA
+ * @since 2022-05-07 06:38:16
+ * @sign F34A7F274B764A72F1B79A17C750BBC0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -40,6 +40,12 @@ public class AssetSoftwareDistributeData extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="软件分发" , notes = "软件分发")
 	private String distributeId;
+	
+	/**
+	 * 软件信息：软件信息
+	*/
+	@ApiModelProperty(required = false,value="软件信息" , notes = "软件信息")
+	private String softwareId;
 	
 	/**
 	 * 授权数量：授权数量
@@ -136,6 +142,25 @@ public class AssetSoftwareDistributeData extends Entity {
 	*/
 	public AssetSoftwareDistributeData setDistributeId(String distributeId) {
 		this.distributeId=distributeId;
+		return this;
+	}
+	
+	/**
+	 * 获得 软件信息<br>
+	 * 软件信息
+	 * @return 软件信息
+	*/
+	public String getSoftwareId() {
+		return softwareId;
+	}
+	
+	/**
+	 * 设置 软件信息
+	 * @param softwareId 软件信息
+	 * @return 当前对象
+	*/
+	public AssetSoftwareDistributeData setSoftwareId(String softwareId) {
+		this.softwareId=softwareId;
 		return this;
 	}
 	

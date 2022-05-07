@@ -22,7 +22,6 @@ public enum AssetOwnerCodeEnum implements CodeTextEnum {
 
 	ASSET_PURCHASE_APPLY("asset_purchase_apply" , "资产采购申请"),
 
-
 	ASSET_UNCONFIRMED("asset_unconfirmed" , "资产新增未确认"),
 	ASSET_CHANGE_RECORD("asset_change_record" , "资产变更记录"),
 	ASSET_CLEAN_OUT("asset_clean_out" , "资产清理"),
@@ -35,6 +34,7 @@ public enum AssetOwnerCodeEnum implements CodeTextEnum {
 
 	ASSET_DEPRECIATION_DATA("asset_depreciation_data" , "资产折旧数据"),
 
+	ASSET_DATA_SELECTED("asset_data_selected" , "资产选择数据"),
 	;
 	private String code;
 	private String text;

@@ -7,7 +7,6 @@ import com.dt.platform.domain.eam.AssetSoftwareDistribute;
 import java.util.Date;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
-import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetSoftware;
 import com.dt.platform.domain.eam.AssetSoftwareDistributeData;
 
@@ -15,7 +14,7 @@ import com.dt.platform.domain.eam.AssetSoftwareDistributeData;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:26:45
+ * @since 2022-05-07 06:47:31
  * @sign 1DFCC97F60DA8CF680340636739FE3B5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -383,39 +382,39 @@ public class AssetSoftwareDistributeVOMeta extends AssetSoftwareDistributeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeVO,org.github.foxnic.web.domain.hrm.Organization> USE_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeVO.class ,USE_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "使用公司/部门", "使用公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
 	
 	/**
-	 * 资产分类 , 类型: com.dt.platform.domain.eam.Asset
+	 * 软件资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetSoftware
 	*/
-	public static final String ASSET="asset";
+	public static final String ASSET_SOFTWARE_LIST="assetSoftwareList";
 	
 	/**
-	 * 资产分类 , 类型: com.dt.platform.domain.eam.Asset
+	 * 软件资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetSoftware
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeVO,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeVO.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产分类", "资产分类", com.dt.platform.domain.eam.Asset.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeVO,com.dt.platform.domain.eam.AssetSoftware> ASSET_SOFTWARE_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeVO.class ,ASSET_SOFTWARE_LIST, java.util.List.class, "软件资产", "软件资产", com.dt.platform.domain.eam.AssetSoftware.class, null);
 	
 	/**
-	 * 软件 , 类型: com.dt.platform.domain.eam.AssetSoftware
+	 * 软件资产 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String ASSET_SOFTWARE="assetSoftware";
+	public static final String ASSET_SOFTWARE_IDS="assetSoftwareIds";
 	
 	/**
-	 * 软件 , 类型: com.dt.platform.domain.eam.AssetSoftware
+	 * 软件资产 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeVO,com.dt.platform.domain.eam.AssetSoftware> ASSET_SOFTWARE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeVO.class ,ASSET_SOFTWARE, com.dt.platform.domain.eam.AssetSoftware.class, "软件", "软件", com.dt.platform.domain.eam.AssetSoftware.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeVO,java.lang.String> ASSET_SOFTWARE_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeVO.class ,ASSET_SOFTWARE_IDS, java.util.List.class, "软件资产", "软件资产", java.lang.String.class, null);
 	
 	/**
-	 * 软件 , 类型: com.dt.platform.domain.eam.AssetSoftwareDistributeData
+	 * 软件 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetSoftwareDistributeData
 	*/
-	public static final String ASSET_SOFTWARE_DISTRIBUTE_DATA="assetSoftwareDistributeData";
+	public static final String ASSET_SOFTWARE_DISTRIBUTE_LIST="assetSoftwareDistributeList";
 	
 	/**
-	 * 软件 , 类型: com.dt.platform.domain.eam.AssetSoftwareDistributeData
+	 * 软件 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetSoftwareDistributeData
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeVO,com.dt.platform.domain.eam.AssetSoftwareDistributeData> ASSET_SOFTWARE_DISTRIBUTE_DATA_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeVO.class ,ASSET_SOFTWARE_DISTRIBUTE_DATA, com.dt.platform.domain.eam.AssetSoftwareDistributeData.class, "软件", "软件", com.dt.platform.domain.eam.AssetSoftwareDistributeData.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetSoftwareDistributeVO,com.dt.platform.domain.eam.AssetSoftwareDistributeData> ASSET_SOFTWARE_DISTRIBUTE_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetSoftwareDistributeVO.class ,ASSET_SOFTWARE_DISTRIBUTE_LIST, java.util.List.class, "软件", "软件", com.dt.platform.domain.eam.AssetSoftwareDistributeData.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USE_ORG_ID , USE_USER_ID , BUSINESS_DATE , CONTENT , NOTES , ASSET_ID , ASSET_SOFTWARE_ID , ATTACH_ID , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ORIGINATOR , USE_USER , USE_ORGANIZATION , ASSET , ASSET_SOFTWARE , ASSET_SOFTWARE_DISTRIBUTE_DATA };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USE_ORG_ID , USE_USER_ID , BUSINESS_DATE , CONTENT , NOTES , ASSET_ID , ASSET_SOFTWARE_ID , ATTACH_ID , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ORIGINATOR , USE_USER , USE_ORGANIZATION , ASSET_SOFTWARE_LIST , ASSET_SOFTWARE_IDS , ASSET_SOFTWARE_DISTRIBUTE_LIST };
 	
 	/**
 	 * 代理类
@@ -822,35 +821,35 @@ public class AssetSoftwareDistributeVOMeta extends AssetSoftwareDistributeMeta {
 		}
 		
 		/**
-		 * 设置 资产分类
-		 * @param asset 资产分类
+		 * 设置 软件资产
+		 * @param assetSoftwareList 软件资产
 		 * @return 当前对象
 		*/
-		public AssetSoftwareDistribute setAsset(Asset asset) {
-			super.change(ASSET,super.getAsset(),asset);
-			super.setAsset(asset);
+		public AssetSoftwareDistribute setAssetSoftwareList(List<AssetSoftware> assetSoftwareList) {
+			super.change(ASSET_SOFTWARE_LIST,super.getAssetSoftwareList(),assetSoftwareList);
+			super.setAssetSoftwareList(assetSoftwareList);
+			return this;
+		}
+		
+		/**
+		 * 设置 软件资产
+		 * @param assetSoftwareIds 软件资产
+		 * @return 当前对象
+		*/
+		public AssetSoftwareDistribute setAssetSoftwareIds(List<String> assetSoftwareIds) {
+			super.change(ASSET_SOFTWARE_IDS,super.getAssetSoftwareIds(),assetSoftwareIds);
+			super.setAssetSoftwareIds(assetSoftwareIds);
 			return this;
 		}
 		
 		/**
 		 * 设置 软件
-		 * @param assetSoftware 软件
+		 * @param assetSoftwareDistributeList 软件
 		 * @return 当前对象
 		*/
-		public AssetSoftwareDistribute setAssetSoftware(AssetSoftware assetSoftware) {
-			super.change(ASSET_SOFTWARE,super.getAssetSoftware(),assetSoftware);
-			super.setAssetSoftware(assetSoftware);
-			return this;
-		}
-		
-		/**
-		 * 设置 软件
-		 * @param assetSoftwareDistributeData 软件
-		 * @return 当前对象
-		*/
-		public AssetSoftwareDistribute setAssetSoftwareDistributeData(AssetSoftwareDistributeData assetSoftwareDistributeData) {
-			super.change(ASSET_SOFTWARE_DISTRIBUTE_DATA,super.getAssetSoftwareDistributeData(),assetSoftwareDistributeData);
-			super.setAssetSoftwareDistributeData(assetSoftwareDistributeData);
+		public AssetSoftwareDistribute setAssetSoftwareDistributeList(List<AssetSoftwareDistributeData> assetSoftwareDistributeList) {
+			super.change(ASSET_SOFTWARE_DISTRIBUTE_LIST,super.getAssetSoftwareDistributeList(),assetSoftwareDistributeList);
+			super.setAssetSoftwareDistributeList(assetSoftwareDistributeList);
 			return this;
 		}
 	}

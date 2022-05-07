@@ -12,6 +12,14 @@ public enum AssetOperateEnum implements CodeTextEnum {
     //软件资产
     EAM_ASSET_SOFTWARE_INSERT(CodeModuleEnum.EAM_ASSET_SOFTWARE_INSERT.code(), "EAM_资产软件-登记"),
     EAM_ASSET_SOFTWARE_DISTRIBUTE(CodeModuleEnum.EAM_ASSET_SOFTWARE_DISTRIBUTE.code(), "EAM_资产软件-分发"),
+    EAM_ASSET_SOFTWARE_CHANGE(CodeModuleEnum.EAM_ASSET_SOFTWARE_CHANGE.code(), "EAM_资产软件-变更"),
+    EAM_ASSET_SOFTWARE_MAINTENANCE(CodeModuleEnum.EAM_ASSET_SOFTWARE_MAINTENANCE.code(), "EAM_资产软件-维保"),
+
+    EAM_DOWNLOAD_ASSET_SOFTWARE_INSERT_BILL("eam_download_asset_software_insert_bill" , "EAM_资产软件登记下载"),
+    EAM_DOWNLOAD_ASSET_SOFTWARE_DISTRIBUTE_BILL("eam_download_asset_software_distribute_bill" , "EAM_资产软件分发下载"),
+    EAM_DOWNLOAD_ASSET_SOFTWARE_CHANGE_BILL("eam_download_asset_software_change_bill" , "EAM_资产软件变更下载"),
+    EAM_DOWNLOAD_ASSET_SOFTWARE_MAINTENANCE_BILL("eam_download_asset_software_maintenance_bill" , "EAM_资产软件维保下载"),
+
 
 
     //资产单据

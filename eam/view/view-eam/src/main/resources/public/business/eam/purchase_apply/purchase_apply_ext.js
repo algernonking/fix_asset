@@ -384,6 +384,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             var listData=$(".form-iframe")[0].contentWindow.module.getList(function(res){
                 data.orderIds=res;
             })
+
+
             console.log("beforeSubmit",data);
             return true;
         },

@@ -65,6 +65,56 @@ public class AssetSoftwarePageController extends ViewController {
 	}
 
 	/**
+	 * 软件资产 功能主页面
+	 */
+	@RequestMapping("/asset_software_selected_list.html")
+	public String selectedlist(Model model,HttpServletRequest request,String pid,String operType,String pageType) {
+		model.addAttribute("pid",pid);
+		model.addAttribute("operType",operType);
+		model.addAttribute("pageType",pageType);
+		String selectedCode=pid;
+		if(StringUtil.isBlank(pid)){
+			selectedCode=Long.toString(System.currentTimeMillis()/1000L);
+		}
+		model.addAttribute("selectedCode",selectedCode);
+
+		return prefix+"/asset_software_selected_list";
+	}
+
+
+	/**
+	 * 软件资产 功能主页面
+	 */
+	@RequestMapping("/asset_software_select_list.html")
+	public String selectlist(Model model,HttpServletRequest request,String pid,String operType,String selectedCode) {
+		model.addAttribute("pid",pid);
+		model.addAttribute("operType",operType);
+		model.addAttribute("selectedCode",selectedCode);
+		return prefix+"/asset_software_select_list";
+	}
+
+	/**
+	 * 软件资产 功能主页面
+	 */
+	@RequestMapping("/asset_software_maintenance_list.html")
+	public String maintenanceWarnlist(Model model,HttpServletRequest request) {
+		return prefix+"/asset_software_maintenance_list";
+	}
+
+
+
+	/**
+	 * 软件资产 功能主页面
+	 */
+	@RequestMapping("/asset_software_used_list.html")
+	public String usedlist(Model model,HttpServletRequest request) {
+		return prefix+"/asset_software_used_list";
+	}
+
+
+
+
+	/**
 	 * 软件资产 表单页面
 	 */
 	@RequestMapping("/asset_software_form.html")

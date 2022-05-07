@@ -2,7 +2,7 @@
 /**
  * 软件分发 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:26:46
+ * @since 2022-05-07 06:47:32
  */
  -->
  <!DOCTYPE html>
@@ -45,7 +45,6 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=true -->
                     <!-- 领用公司 , useOrgId ,typeName=button, isHideInSearch=true -->
                     <!-- 领用人 , useUserId ,typeName=button, isHideInSearch=true -->
                     <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=true -->
@@ -60,6 +59,11 @@
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务名称')}" class="search-label name-label">业务名称</span><span class="search-colon">:</span></div>
+                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 

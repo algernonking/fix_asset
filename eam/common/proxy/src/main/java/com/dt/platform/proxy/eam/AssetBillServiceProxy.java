@@ -152,8 +152,12 @@ public interface AssetBillServiceProxy {
 
     //软件
     public static final String QUERY_ASSET_SOFTWARE_INSERT_BILL = API_PREFIX + "query-asset-software-insert-bill";
-
     public static final String QUERY_ASSET_SOFTWARE_DISTRIBUTE_BILL = API_PREFIX + "query-asset-software-distribute-bill";
+    public static final String QUERY_ASSET_SOFTWARE_MAINTENANCE_BILL = API_PREFIX + "query-asset-software-maintenance-bill";
+    public static final String QUERY_ASSET_SOFTWARE_CHANGE_BILL = API_PREFIX + "query-asset-software-change-bill";
+
+
+
     /**
      * 控制器类名
      * */

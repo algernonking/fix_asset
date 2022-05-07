@@ -117,6 +117,15 @@ public interface AssetSoftwareServiceProxy {
      * 撤销操作
      */
     public static final String REVOKE_OPERATION = API_PREFIX + "revoke-operation";
+
+
+    public static final String QUERY_PAGED_LIST_BY_SELECTED = API_PREFIX + "query-paged-list-by-selected";
+
+    public static final String QUERY_PAGED_LIST_BY_SELECT = API_PREFIX + "query-paged-list-by-select";
+
+    public static final String ASSET_SELECTED = API_PREFIX + "asset-selected";
+
+
     /**
      * 添加软件资产
      */

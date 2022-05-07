@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -18,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 软件分发
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:26:45
- * @sign 9C80DEF4A1A0B0527ED9C11C306F192E
+ * @since 2022-05-07 06:47:31
+ * @sign 0DE22DEA94C986225187DE6118B4431B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -194,22 +196,22 @@ public class AssetSoftwareDistribute extends Entity {
 	private Organization useOrganization;
 	
 	/**
-	 * 资产分类：资产分类
+	 * 软件资产：软件资产
 	*/
-	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
-	private Asset asset;
+	@ApiModelProperty(required = false,value="软件资产" , notes = "软件资产")
+	private List<AssetSoftware> assetSoftwareList;
+	
+	/**
+	 * 软件资产：软件资产
+	*/
+	@ApiModelProperty(required = false,value="软件资产" , notes = "软件资产")
+	private List<String> assetSoftwareIds;
 	
 	/**
 	 * 软件：软件
 	*/
 	@ApiModelProperty(required = false,value="软件" , notes = "软件")
-	private AssetSoftware assetSoftware;
-	
-	/**
-	 * 软件：软件
-	*/
-	@ApiModelProperty(required = false,value="软件" , notes = "软件")
-	private AssetSoftwareDistributeData assetSoftwareDistributeData;
+	private List<AssetSoftwareDistributeData> assetSoftwareDistributeList;
 	
 	/**
 	 * 获得 主键<br>
@@ -725,21 +727,62 @@ public class AssetSoftwareDistribute extends Entity {
 	}
 	
 	/**
-	 * 获得 资产分类<br>
-	 * 资产分类
-	 * @return 资产分类
+	 * 获得 软件资产<br>
+	 * 软件资产
+	 * @return 软件资产
 	*/
-	public Asset getAsset() {
-		return asset;
+	public List<AssetSoftware> getAssetSoftwareList() {
+		return assetSoftwareList;
 	}
 	
 	/**
-	 * 设置 资产分类
-	 * @param asset 资产分类
+	 * 设置 软件资产
+	 * @param assetSoftwareList 软件资产
 	 * @return 当前对象
 	*/
-	public AssetSoftwareDistribute setAsset(Asset asset) {
-		this.asset=asset;
+	public AssetSoftwareDistribute setAssetSoftwareList(List<AssetSoftware> assetSoftwareList) {
+		this.assetSoftwareList=assetSoftwareList;
+		return this;
+	}
+	
+	/**
+	 * 添加 软件资产
+	 * @param assetSoftware 软件资产
+	 * @return 当前对象
+	*/
+	public AssetSoftwareDistribute addAssetSoftware(AssetSoftware assetSoftware) {
+		if(this.assetSoftwareList==null) assetSoftwareList=new ArrayList<>();
+		this.assetSoftwareList.add(assetSoftware);
+		return this;
+	}
+	
+	/**
+	 * 获得 软件资产<br>
+	 * 软件资产
+	 * @return 软件资产
+	*/
+	public List<String> getAssetSoftwareIds() {
+		return assetSoftwareIds;
+	}
+	
+	/**
+	 * 设置 软件资产
+	 * @param assetSoftwareIds 软件资产
+	 * @return 当前对象
+	*/
+	public AssetSoftwareDistribute setAssetSoftwareIds(List<String> assetSoftwareIds) {
+		this.assetSoftwareIds=assetSoftwareIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 软件资产
+	 * @param assetSoftwareId 软件资产
+	 * @return 当前对象
+	*/
+	public AssetSoftwareDistribute addAssetSoftwareId(String assetSoftwareId) {
+		if(this.assetSoftwareIds==null) assetSoftwareIds=new ArrayList<>();
+		this.assetSoftwareIds.add(assetSoftwareId);
 		return this;
 	}
 	
@@ -748,36 +791,28 @@ public class AssetSoftwareDistribute extends Entity {
 	 * 软件
 	 * @return 软件
 	*/
-	public AssetSoftware getAssetSoftware() {
-		return assetSoftware;
+	public List<AssetSoftwareDistributeData> getAssetSoftwareDistributeList() {
+		return assetSoftwareDistributeList;
 	}
 	
 	/**
 	 * 设置 软件
-	 * @param assetSoftware 软件
+	 * @param assetSoftwareDistributeList 软件
 	 * @return 当前对象
 	*/
-	public AssetSoftwareDistribute setAssetSoftware(AssetSoftware assetSoftware) {
-		this.assetSoftware=assetSoftware;
+	public AssetSoftwareDistribute setAssetSoftwareDistributeList(List<AssetSoftwareDistributeData> assetSoftwareDistributeList) {
+		this.assetSoftwareDistributeList=assetSoftwareDistributeList;
 		return this;
 	}
 	
 	/**
-	 * 获得 软件<br>
-	 * 软件
-	 * @return 软件
-	*/
-	public AssetSoftwareDistributeData getAssetSoftwareDistributeData() {
-		return assetSoftwareDistributeData;
-	}
-	
-	/**
-	 * 设置 软件
-	 * @param assetSoftwareDistributeData 软件
+	 * 添加 软件
+	 * @param assetSoftwareDistribute 软件
 	 * @return 当前对象
 	*/
-	public AssetSoftwareDistribute setAssetSoftwareDistributeData(AssetSoftwareDistributeData assetSoftwareDistributeData) {
-		this.assetSoftwareDistributeData=assetSoftwareDistributeData;
+	public AssetSoftwareDistribute addAssetSoftwareDistribute(AssetSoftwareDistributeData assetSoftwareDistribute) {
+		if(this.assetSoftwareDistributeList==null) assetSoftwareDistributeList=new ArrayList<>();
+		this.assetSoftwareDistributeList.add(assetSoftwareDistribute);
 		return this;
 	}
 

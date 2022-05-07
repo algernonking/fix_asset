@@ -3,9 +3,10 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
-import com.dt.platform.domain.eam.AssetStockGoodsIn;
-import com.dt.platform.domain.eam.meta.AssetStockGoodsInVOMeta;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.proxy.eam.AssetStockGoodsInServiceProxy;
+import com.dt.platform.proxy.eam.GoodsStockServiceProxy;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.hrm.Person;
@@ -23,9 +24,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 
 import com.dt.platform.proxy.eam.AssetSoftwareServiceProxy;
-import com.dt.platform.domain.eam.meta.AssetSoftwareVOMeta;
-import com.dt.platform.domain.eam.AssetSoftware;
-import com.dt.platform.domain.eam.AssetSoftwareVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -38,10 +36,8 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
-import com.dt.platform.domain.eam.meta.AssetSoftwareMeta;
 import java.math.BigDecimal;
 import org.github.foxnic.web.domain.pcm.Catalog;
-import com.dt.platform.domain.eam.Supplier;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.hrm.Employee;
@@ -558,6 +554,62 @@ public class AssetSoftwareController extends SuperController {
 	public Result approve(ProcessApproveVO approveVO)  {
 		return assetSoftwareService.approve(approveVO);
 	}
+
+
+
+	@ApiOperationSupport(order=16)
+	@SentinelResource(value = AssetSoftwareServiceProxy.QUERY_PAGED_LIST_BY_SELECTED , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetSoftwareServiceProxy.QUERY_PAGED_LIST_BY_SELECTED)
+	public Result<PagedList<AssetSoftware>> queryPagedListBySelected(AssetSoftwareVO sample, String operType, String dataType) {
+		Result<PagedList<AssetSoftware>> result=new Result<>();
+
+		PagedList<AssetSoftware> list=assetSoftwareService.queryPagedListBySelected(sample,operType);
+
+		assetSoftwareService.dao().fill(list)
+				.with("ownerCompany")
+				.with("useOrganization")
+
+				.with(AssetSoftwareMeta.CATEGORY)
+				.with(AssetSoftwareMeta.SUPPLIER)
+				.with(AssetSoftwareMeta.SOURCE)
+				.with(AssetSoftwareMeta.COPYRIGHT_TYPE_DICT)
+				.with(AssetSoftwareMeta.LICENSE_MODE_DICT)
+				.execute();
+		result.success(true).data(list);
+		return result;
+	}
+
+
+	@ApiOperationSupport(order=17)
+	@SentinelResource(value = AssetSoftwareServiceProxy.QUERY_PAGED_LIST_BY_SELECT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetSoftwareServiceProxy.QUERY_PAGED_LIST_BY_SELECT)
+	public Result<PagedList<AssetSoftware>> queryPagedListBySelect(AssetSoftwareVO sample,String assetSearcbContent) {
+		Result<PagedList<AssetSoftware>> result=new Result<>();
+		PagedList<AssetSoftware> list=assetSoftwareService.queryPagedListBySelect(sample,assetSearcbContent);
+		assetSoftwareService.dao().fill(list)
+				.with("ownerCompany")
+				.with("useOrganization")
+
+				.with(AssetSoftwareMeta.CATEGORY)
+				.with(AssetSoftwareMeta.SUPPLIER)
+				.with(AssetSoftwareMeta.SOURCE)
+				.with(AssetSoftwareMeta.COPYRIGHT_TYPE_DICT)
+				.with(AssetSoftwareMeta.LICENSE_MODE_DICT)
+				.execute();
+		result.success(true).data(list);
+		return result;
+	}
+
+
+	@ApiOperationSupport(order=18)
+	@SentinelResource(value = AssetSoftwareServiceProxy.ASSET_SELECTED , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetSoftwareServiceProxy.ASSET_SELECTED)
+	public Result assetSelected(List<String> ids,String selectedCode,String operType) {
+		return assetSoftwareService.assetSelected(ids,selectedCode,operType);
+	}
+
+
+
 
 
 

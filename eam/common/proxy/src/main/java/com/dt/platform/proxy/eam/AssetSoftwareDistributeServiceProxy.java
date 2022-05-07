@@ -117,6 +117,7 @@ public interface AssetSoftwareDistributeServiceProxy {
      * 撤销操作
      */
     public static final String REVOKE_OPERATION = API_PREFIX + "revoke-operation";
+
     /**
      * 添加软件分发
      */

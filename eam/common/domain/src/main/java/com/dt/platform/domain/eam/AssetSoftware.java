@@ -21,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 软件资产
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:04:11
- * @sign F66DD8043C47E4EF364F818EF8D0C35F
+ * @since 2022-05-06 21:34:26
+ * @sign 1B84BCA61152A65A4B61686FD338FDCF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -45,6 +45,12 @@ public class AssetSoftware extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
 	private String businessCode;
+	
+	/**
+	 * 所属：所属
+	*/
+	@ApiModelProperty(required = false,value="所属" , notes = "所属")
+	private String ownerCode;
 	
 	/**
 	 * 流程：流程
@@ -257,6 +263,12 @@ public class AssetSoftware extends Entity {
 	private String label4;
 	
 	/**
+	 * 控制：控制
+	*/
+	@ApiModelProperty(required = false,value="控制" , notes = "控制")
+	private String ctl;
+	
+	/**
 	 * 创建人ID：创建人ID
 	*/
 	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID")
@@ -377,6 +389,12 @@ public class AssetSoftware extends Entity {
 	private String approvalOpinion;
 	
 	/**
+	 * 选择：选择
+	*/
+	@ApiModelProperty(required = false,value="选择" , notes = "选择")
+	private String selectedCode;
+	
+	/**
 	 * 资产分类：资产分类
 	*/
 	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
@@ -465,6 +483,25 @@ public class AssetSoftware extends Entity {
 	*/
 	public AssetSoftware setBusinessCode(String businessCode) {
 		this.businessCode=businessCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属<br>
+	 * 所属
+	 * @return 所属
+	*/
+	public String getOwnerCode() {
+		return ownerCode;
+	}
+	
+	/**
+	 * 设置 所属
+	 * @param ownerCode 所属
+	 * @return 当前对象
+	*/
+	public AssetSoftware setOwnerCode(String ownerCode) {
+		this.ownerCode=ownerCode;
 		return this;
 	}
 	
@@ -1134,6 +1171,25 @@ public class AssetSoftware extends Entity {
 	}
 	
 	/**
+	 * 获得 控制<br>
+	 * 控制
+	 * @return 控制
+	*/
+	public String getCtl() {
+		return ctl;
+	}
+	
+	/**
+	 * 设置 控制
+	 * @param ctl 控制
+	 * @return 当前对象
+	*/
+	public AssetSoftware setCtl(String ctl) {
+		this.ctl=ctl;
+		return this;
+	}
+	
+	/**
 	 * 获得 创建人ID<br>
 	 * 创建人ID
 	 * @return 创建人ID
@@ -1510,6 +1566,25 @@ public class AssetSoftware extends Entity {
 	*/
 	public AssetSoftware setApprovalOpinion(String approvalOpinion) {
 		this.approvalOpinion=approvalOpinion;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择<br>
+	 * 选择
+	 * @return 选择
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择
+	 * @param selectedCode 选择
+	 * @return 当前对象
+	*/
+	public AssetSoftware setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 	

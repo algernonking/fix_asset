@@ -162,13 +162,18 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
+	//	value.businessCode={ inputType:"button",value: $("#businessCode").val()};
 		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
-		value.name={ inputType:"button",value: $("#name").val()};
+		//value.name={ inputType:"button",value: $("#name").val()};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.positionDetail={ inputType:"button",value: $("#positionDetail").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+
 		value.copyrightType={ inputType:"select_box", value: getSelectedValue("#copyrightType","value") ,fillBy:["copyrightTypeDict"]  , label:getSelectedValue("#copyrightType","nameStr") };
 		value.licenseMode={ inputType:"select_box", value: getSelectedValue("#licenseMode","value") ,fillBy:["licenseModeDict"]  , label:getSelectedValue("#licenseMode","nameStr") };
 		value.supplierId={ inputType:"select_box", value: getSelectedValue("#supplierId","value") ,fillBy:["supplier"]  , label:getSelectedValue("#supplierId","nameStr") };
-		value.positionDetail={ inputType:"button",value: $("#positionDetail").val()};
+		//value.positionDetail={ inputType:"button",value: $("#positionDetail").val()};
+
 		value.sourceId={ inputType:"select_box", value: getSelectedValue("#sourceId","value") ,fillBy:["source"]  , label:getSelectedValue("#sourceId","nameStr") };
 		value.purchaseDate={ inputType:"date_input", begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() ,matchType:"auto" };
 		var ps={searchField:"$composite"};

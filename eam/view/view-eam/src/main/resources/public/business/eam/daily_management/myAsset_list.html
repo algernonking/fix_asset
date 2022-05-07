@@ -36,21 +36,23 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
 
+                    <!-- 资产状态 , assetStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div"  style="width:70px"><span th:text="${lang.translate('资产状态')}" class="search-label assetStatus-label">资产状态</span><span class="search-colon">:</span></div>
+                        <div id="assetStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}" style="width:150px"></div>
                     </div>
+
                     <!-- 资产编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"  style="width:70px"><span th:text="${lang.translate('资产编号')}" class="search-label assetCode-label">资产编号</span><span class="search-colon">:</span></div>
                         <input id="assetCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
-                    <!-- 资产状态 , assetStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"  style="width:70px"><span th:text="${lang.translate('资产状态')}" class="search-label assetStatus-label">资产状态</span><span class="search-colon">:</span></div>
-                        <div id="assetStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}" style="width:150px"></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
+                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
+
 
                     <!-- 规格型号 , model ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">

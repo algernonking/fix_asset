@@ -1,11 +1,10 @@
 package com.dt.platform.eam.service;
 
 
-import com.dt.platform.domain.eam.AssetAllocation;
+import com.dt.platform.domain.eam.*;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.dt.platform.domain.eam.AssetSoftware;
-import com.dt.platform.domain.eam.AssetSoftwareVO;
+
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -31,6 +30,13 @@ import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 public interface IAssetSoftwareService extends ISuperService<AssetSoftware> {
 
+
+	PagedList<AssetSoftware> queryPagedListBySelected(AssetSoftwareVO sample , String operType);
+
+	PagedList<AssetSoftware> queryPagedListBySelect(AssetSoftwareVO sample,String assetSearchContent);
+
+
+	Result assetSelected(List<String> ids,String selectedCode,String operType);
 
 	Result startProcess(ProcessStartVO startVO);
 

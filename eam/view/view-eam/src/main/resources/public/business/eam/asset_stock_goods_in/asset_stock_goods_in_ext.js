@@ -349,8 +349,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             if(data&&data.id){
                 ownerTmpId=data.id;
             }
-
-
             var queryString="?operType="+OPER_TYPE+"&selectedCode="+timestamp+"&ownerTmpId="+ownerTmpId+"&ownerType="+OWNER_TYPE+"&pageType="+formAction;
             //设置地址
             win.location="/business/eam/goods_stock/goods_stock_selected_list.html"+queryString

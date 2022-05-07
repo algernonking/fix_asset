@@ -19,7 +19,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //模块基础路径
     const moduleURL="/service-eam/eam-asset-software-distribute";
-
+    var formAction=admin.getTempData('eam-asset-software-distribute-form-data-form-action');
     //列表页的扩展
     var list={
         /**
@@ -255,6 +255,16 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
             console.log("form:beforeInit")
         },
+        softwareSelectList:function (ifr,win,data) {
+            var pid=data.id;
+            if(formAction=="create"){
+                pid="";
+            }
+            ifr.height("400px");
+            var queryString="?operType=eam_asset_software_distribute&pageType="+formAction+"&pid="+pid;
+            //设置地址
+            win.location="/business/eam/asset_software/asset_software_selected_list.html"+queryString
+        },
         /**
          * 窗口调节前
          * */
@@ -309,8 +319,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
+            $(".form-iframe")[0].contentWindow.module.getDataList(function(res){
+                data.assetSoftwareIds=res;
+            })
             console.log("beforeSubmit",data);
             return true;
+
         },
         /**
          * 数据提交后窗口关闭前，如果返回 false，停止后续步骤的执行

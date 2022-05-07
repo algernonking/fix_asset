@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 软件分发项 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-05 06:25:01
+ * @since 2022-05-07 06:38:17
 */
 
 @Api(tags = "软件分发项")
@@ -67,6 +67,7 @@ public class AssetSoftwareDistributeDataController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.DISTRIBUTE_ID , value = "软件分发" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.SOFTWARE_ID , value = "软件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_NUMBER , value = "授权数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_INFO , value = "授权信息" , required = false , dataTypeClass=String.class),
 	})
@@ -121,6 +122,7 @@ public class AssetSoftwareDistributeDataController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.DISTRIBUTE_ID , value = "软件分发" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.SOFTWARE_ID , value = "软件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_NUMBER , value = "授权数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_INFO , value = "授权信息" , required = false , dataTypeClass=String.class),
 	})
@@ -141,6 +143,7 @@ public class AssetSoftwareDistributeDataController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.DISTRIBUTE_ID , value = "软件分发" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.SOFTWARE_ID , value = "软件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_NUMBER , value = "授权数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_INFO , value = "授权信息" , required = false , dataTypeClass=String.class),
 	})
@@ -200,6 +203,7 @@ public class AssetSoftwareDistributeDataController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.DISTRIBUTE_ID , value = "软件分发" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.SOFTWARE_ID , value = "软件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_NUMBER , value = "授权数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_INFO , value = "授权信息" , required = false , dataTypeClass=String.class),
 	})
@@ -221,6 +225,7 @@ public class AssetSoftwareDistributeDataController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.DISTRIBUTE_ID , value = "软件分发" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.SOFTWARE_ID , value = "软件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_NUMBER , value = "授权数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetSoftwareDistributeDataVOMeta.AUTHORIZED_INFO , value = "授权信息" , required = false , dataTypeClass=String.class),
 	})

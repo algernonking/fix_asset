@@ -27,14 +27,22 @@ public class SoftwareDisGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.BUSINESS_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.NAME).search().fuzzySearch();
+
 
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","领用人","领用人");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");
 
-        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产分类","资产分类");
-        cfg.getPoClassFile().addSimpleProperty(AssetSoftware.class,"assetSoftware","软件","软件");
-        cfg.getPoClassFile().addSimpleProperty(AssetSoftwareDistributeData.class,"assetSoftwareDistributeData","软件","软件");
+       // cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产分类","资产分类");
+       // cfg.getPoClassFile().addSimpleProperty(AssetSoftware.class,"assetSoftware","软件","软件");
+       // cfg.getPoClassFile().addSimpleProperty(AssetSoftwareDistributeData.class,"assetSoftwareDistributeData","软件","软件");
+
+        cfg.getPoClassFile().addListProperty(AssetSoftware.class,"assetSoftwareList","软件资产","软件资产");
+        cfg.getPoClassFile().addListProperty(String.class,"assetSoftwareIds","软件资产","软件资产");
+
+        cfg.getPoClassFile().addListProperty(AssetSoftwareDistributeData.class,"assetSoftwareDistributeList","软件","软件");
+
 
 
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.PROC_ID).table().disable(true);
@@ -50,6 +58,7 @@ public class SoftwareDisGtr extends BaseCodeGenerator {
                 new Object[]{
                         EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.STATUS,
                         EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.NAME,
                 }
         );
         cfg.view().search().inputWidth(Config.searchInputWidth);
@@ -60,7 +69,7 @@ public class SoftwareDisGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.USE_ORG_ID)
-                .form().button().chooseOrganization(true);
+                .form().validate().required().form().button().chooseOrganization(true);
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.USE_ORG_ID).table().fillBy("useOrganization","fullName");
 
         cfg.view().field(EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.USE_USER_ID).table().fillBy("useUser","name");
@@ -115,6 +124,7 @@ public class SoftwareDisGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_SOFTWARE_DISTRIBUTE.ATTACH_ID,
                 }
         );
+        cfg.view().form().addPage("软件信息","softwareSelectList");
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口

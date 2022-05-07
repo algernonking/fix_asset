@@ -23,6 +23,8 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	//
 	//软件资产
 	EAM_ASSET_SOFTWARE_INSERT("eam_asset_software_insert" , "EAM_资产软件-登记"),
+	EAM_ASSET_SOFTWARE_CHANGE("eam_asset_software_change" , "EAM_资产软件-变更"),
+	EAM_ASSET_SOFTWARE_MAINTENANCE("eam_asset_software_maintenance" , "EAM_资产软件-维保"),
 	EAM_ASSET_SOFTWARE_DISTRIBUTE("eam_asset_software_distribute" , "EAM_资产软件-分发"),
 
 
