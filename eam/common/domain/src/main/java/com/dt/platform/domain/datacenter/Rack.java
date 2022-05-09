@@ -3,7 +3,7 @@ package com.dt.platform.domain.datacenter;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.DC_RACK;
+import com.dt.platform.constants.db.DataCenterTables.DC_RACK;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
@@ -18,7 +18,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 机柜
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-30 09:08:34
+ * @since 2022-05-07 21:19:32
  * @sign 5BC9AB8545BB4B4FEB7B4C0F5C7D297B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

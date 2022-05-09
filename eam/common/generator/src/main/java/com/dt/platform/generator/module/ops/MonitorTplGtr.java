@@ -15,12 +15,12 @@ import com.dt.platform.proxy.ops.MonitorNodeTypeServiceProxy;
 import com.dt.platform.proxy.ops.MonitorTplServiceProxy;
 import com.dt.platform.proxy.ops.MonitorTplTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorTplGtr extends BaseCodeGenerator{
 
 
     public MonitorTplGtr() {
-        super(EAMTables.OPS_MONITOR_TPL.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_TPL.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -34,10 +34,10 @@ public class MonitorTplGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_TPL.TYPE,
-                        EAMTables.OPS_MONITOR_TPL.STATUS,
-                        EAMTables.OPS_MONITOR_TPL.NAME,
-                        EAMTables.OPS_MONITOR_TPL.CODE,
+                        OpsTables.OPS_MONITOR_TPL.TYPE,
+                        OpsTables.OPS_MONITOR_TPL.STATUS,
+                        OpsTables.OPS_MONITOR_TPL.NAME,
+                        OpsTables.OPS_MONITOR_TPL.CODE,
                 }
         );
 
@@ -45,18 +45,18 @@ public class MonitorTplGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL.CODE).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL.CODE).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL.CREATE_TIME).table().disable(true);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL.STATUS).form().validate().required().form()
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL.STATUS).form().validate().required().form()
                 .label("状态").radioBox().defaultIndex(0).enumType(MonitorEnableEnum.class);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL.TYPE)
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL.TYPE)
                 .basic().label("归类")
                 .form().selectBox().queryApi(MonitorTplTypeServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
@@ -65,17 +65,17 @@ public class MonitorTplGtr extends BaseCodeGenerator{
                 fillWith(MonitorTplMeta.TPL_TYPE).muliti(false);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL.CODE).form().validate().required();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL.CODE).form().validate().required();
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL.TYPE,
-                        EAMTables.OPS_MONITOR_TPL.STATUS,
-                        EAMTables.OPS_MONITOR_TPL.NAME,
-                        EAMTables.OPS_MONITOR_TPL.CODE,
-                        EAMTables.OPS_MONITOR_TPL.NOTES,
+                        OpsTables.OPS_MONITOR_TPL.TYPE,
+                        OpsTables.OPS_MONITOR_TPL.STATUS,
+                        OpsTables.OPS_MONITOR_TPL.NAME,
+                        OpsTables.OPS_MONITOR_TPL.CODE,
+                        OpsTables.OPS_MONITOR_TPL.NOTES,
                 }
         );
 

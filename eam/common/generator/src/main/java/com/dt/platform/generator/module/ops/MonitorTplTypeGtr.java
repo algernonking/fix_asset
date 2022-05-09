@@ -5,12 +5,12 @@ import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.MonitorTplTypePageController;
 import com.dt.platform.proxy.ops.MonitorTplTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorTplTypeGtr extends BaseCodeGenerator{
 
 
     public MonitorTplTypeGtr() {
-        super(EAMTables.OPS_MONITOR_TPL_TYPE.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_TPL_TYPE.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -18,9 +18,9 @@ public class MonitorTplTypeGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_TPL_TYPE.CODE,
-                        EAMTables.OPS_MONITOR_TPL_TYPE.NAME,
-                        EAMTables.OPS_MONITOR_TPL_TYPE.NOTES,
+                        OpsTables.OPS_MONITOR_TPL_TYPE.CODE,
+                        OpsTables.OPS_MONITOR_TPL_TYPE.NAME,
+                        OpsTables.OPS_MONITOR_TPL_TYPE.NOTES,
 
                 }
 
@@ -29,21 +29,21 @@ public class MonitorTplTypeGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_TYPE.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_TYPE.CODE).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_TYPE.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_TYPE.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_TYPE.CREATE_TIME).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_TYPE.CODE).form().validate().required();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_TYPE.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_TYPE.CODE).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_TYPE.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_TYPE.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_TYPE.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_TYPE.CODE).form().validate().required();
 
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_TYPE.NAME,
-                        EAMTables.OPS_MONITOR_TPL_TYPE.CODE,
-                        EAMTables.OPS_MONITOR_TPL_TYPE.NOTES,
+                        OpsTables.OPS_MONITOR_TPL_TYPE.NAME,
+                        OpsTables.OPS_MONITOR_TPL_TYPE.CODE,
+                        OpsTables.OPS_MONITOR_TPL_TYPE.NOTES,
                 }
         );
 

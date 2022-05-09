@@ -77,6 +77,9 @@ java -noverify -Dfile.encoding=UTF-8 -Dloader.path=./lib/ -jar app.jar --Dspring
     在系统管理模块-->系统配置-->数据字典
 
 
+- 16、当新增资产报错，执行异常，导致该错误发生的重要原因是数据的生产序列的存储过程没有正确创建
+
+
 
 
 

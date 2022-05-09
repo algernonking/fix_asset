@@ -7,12 +7,12 @@ import com.dt.platform.domain.ops.meta.MonitorNodeTypeMeta;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.ops.MonitorNodeTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorNodeSubTypeGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeSubTypeGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_SUBTYPE.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_NODE_SUBTYPE.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -25,9 +25,9 @@ public class MonitorNodeSubTypeGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE_SUBTYPE.TYPE,
-                        EAMTables.OPS_MONITOR_NODE_SUBTYPE.NAME,
-                        EAMTables.OPS_MONITOR_NODE_SUBTYPE.CODE,
+                        OpsTables.OPS_MONITOR_NODE_SUBTYPE.TYPE,
+                        OpsTables.OPS_MONITOR_NODE_SUBTYPE.NAME,
+                        OpsTables.OPS_MONITOR_NODE_SUBTYPE.CODE,
                 }
 
         );
@@ -36,15 +36,15 @@ public class MonitorNodeSubTypeGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_SUBTYPE.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_SUBTYPE.CODE).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_SUBTYPE.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_SUBTYPE.CODE).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_SUBTYPE.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_SUBTYPE.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_SUBTYPE.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_SUBTYPE.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_SUBTYPE.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_SUBTYPE.CREATE_TIME).table().disable(true);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_SUBTYPE.TYPE)
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_SUBTYPE.TYPE)
                 .basic().label("类型")
                 .form().selectBox().queryApi(MonitorNodeTypeServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
@@ -52,7 +52,7 @@ public class MonitorNodeSubTypeGtr extends BaseCodeGenerator{
                 textField(MonitorNodeTypeMeta.NAME).
                 fillWith(MonitorNodeSubtypeMeta.MONITOR_NODE_TYPE).muliti(false);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_SUBTYPE.CODE).form().validate().required();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_SUBTYPE.CODE).form().validate().required();
 
         //cfg.view().list().disableBatchDelete();
 
@@ -60,10 +60,10 @@ public class MonitorNodeSubTypeGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE_SUBTYPE.NAME,
-                        EAMTables.OPS_MONITOR_NODE_SUBTYPE.CODE,
-                        EAMTables.OPS_MONITOR_NODE_SUBTYPE.TYPE,
-                        EAMTables.OPS_MONITOR_NODE_SUBTYPE.NOTES,
+                        OpsTables.OPS_MONITOR_NODE_SUBTYPE.NAME,
+                        OpsTables.OPS_MONITOR_NODE_SUBTYPE.CODE,
+                        OpsTables.OPS_MONITOR_NODE_SUBTYPE.TYPE,
+                        OpsTables.OPS_MONITOR_NODE_SUBTYPE.NOTES,
                 }
         );
 

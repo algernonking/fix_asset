@@ -7,30 +7,30 @@ import com.dt.platform.constants.enums.ops.HostStatusEnum;
 
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsHostPositionGtr extends BaseCodeGenerator{
 
 
     public OpsHostPositionGtr() {
-        super(EAMTables.OPS_HOST_POSITION.$TABLE,BASIC_HOSTMGR_MENU_ID);
+        super(OpsTables.OPS_HOST_POSITION.$TABLE,BASIC_HOSTMGR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
 
         System.out.println(this.getClass().getName());
 
-        cfg.view().field(EAMTables.OPS_HOST_POSITION.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST_POSITION.ID).basic().hidden(true);
 
 
-        cfg.view().field(EAMTables.OPS_HOST_POSITION.NOTES).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_HOST_POSITION.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_HOST_POSITION.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_HOST_POSITION.NAME).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_HOST_POSITION.NAME).form().validate().required();
+        cfg.view().field(OpsTables.OPS_HOST_POSITION.NAME).form().validate().required();
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_HOST_POSITION.NAME,
-                        EAMTables.OPS_HOST_POSITION.NOTES,
+                        OpsTables.OPS_HOST_POSITION.NAME,
+                        OpsTables.OPS_HOST_POSITION.NOTES,
                 }
         );
 

@@ -15,12 +15,12 @@ import com.dt.platform.proxy.ops.VoucherPrivServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.meta.DictItemMeta;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsVoucherGtr extends BaseCodeGenerator{
 
 
     public OpsVoucherGtr() {
-        super(EAMTables.OPS_VOUCHER.$TABLE,BASIC_DATA_MENU_ID);
+        super(OpsTables.OPS_VOUCHER.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -32,8 +32,8 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_VOUCHER.TYPE,
-                        EAMTables.OPS_VOUCHER.NOTES
+                        OpsTables.OPS_VOUCHER.TYPE,
+                        OpsTables.OPS_VOUCHER.NOTES
                 }
 
         );
@@ -42,30 +42,30 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_VOUCHER.NOTES).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_VOUCHER.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_VOUCHER.CREATE_TIME).table().disable(true);
-        cfg.view().field(EAMTables.OPS_VOUCHER.OWNER_ID).table().hidden(true);
-
-
+        cfg.view().field(OpsTables.OPS_VOUCHER.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER.OWNER_ID).table().hidden(true);
 
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.TYPE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE)
+
+
+        cfg.view().field(OpsTables.OPS_VOUCHER.TYPE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE)
                 .textField(DictItemMeta.LABEL).muliti(false).paging(false).filter(false).toolbar(false).fillWith(VoucherMeta.VOUCHER_TYPE);
 
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.VOUCHER).form().validate().required();
+        cfg.view().field(OpsTables.OPS_VOUCHER.VOUCHER).form().validate().required();
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.USER_CODE).form().validate().required().form()
+        cfg.view().field(OpsTables.OPS_VOUCHER.USER_CODE).form().validate().required().form()
                 .form().selectBox().dict(DictEnum.OPS_USER_VOUCHER).filter(true).toolbar(false).muliti(false);
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.NOTES).form()
+        cfg.view().field(OpsTables.OPS_VOUCHER.NOTES).form()
                .textArea().height(30);
 
         cfg.view().list().disableBatchDelete();
@@ -74,14 +74,14 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_VOUCHER.TYPE,
-                        EAMTables.OPS_VOUCHER.USER_CODE,
-                        EAMTables.OPS_VOUCHER.VOUCHER,
-                        EAMTables.OPS_VOUCHER.NOTES,
+                        OpsTables.OPS_VOUCHER.TYPE,
+                        OpsTables.OPS_VOUCHER.USER_CODE,
+                        OpsTables.OPS_VOUCHER.VOUCHER,
+                        OpsTables.OPS_VOUCHER.NOTES,
                 }
         );
 
-        //cfg.setRelationField(EAMTables.OPS_VOUCHER.OWNER_ID, EAMTables.OPS_VOUCHER.USER_CODE,true);
+        //cfg.setRelationField(OpsTables.OPS_VOUCHER.OWNER_ID, OpsTables.OPS_VOUCHER.USER_CODE,true);
 
         cfg.view().list().operationColumn().addActionButton("历史记录","openHistoryVoucherWindow");
         cfg.view().list().operationColumn().width(280);

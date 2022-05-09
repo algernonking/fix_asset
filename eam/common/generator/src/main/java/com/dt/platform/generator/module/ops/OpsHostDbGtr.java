@@ -5,18 +5,18 @@ import com.dt.platform.domain.ops.Host;
 import com.dt.platform.domain.ops.HostDb;
 import com.dt.platform.domain.ops.ServiceInfo;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsHostDbGtr extends BaseCodeGenerator{
 
 
     public OpsHostDbGtr() {
-        super(EAMTables.OPS_HOST_DB.$TABLE,BASIC_HOSTMGR_MENU_ID);
+        super(OpsTables.OPS_HOST_DB.$TABLE,BASIC_HOSTMGR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
         //指定该表为关系表
-        cfg.setRelationField(Host.class,EAMTables.OPS_HOST_DB.HOST_ID, ServiceInfo.class, EAMTables.OPS_HOST_DB.SERVICE_INFO_ID,true);
+        cfg.setRelationField(Host.class,OpsTables.OPS_HOST_DB.HOST_ID, ServiceInfo.class, OpsTables.OPS_HOST_DB.SERVICE_INFO_ID,true);
 
         //文件生成覆盖模式
         cfg.overrides()

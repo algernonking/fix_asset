@@ -3,12 +3,12 @@ package com.dt.platform.generator.module.ops;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorNodeDBGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeDBGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_DB.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_NODE_DB.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -18,7 +18,7 @@ public class MonitorNodeDBGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE_DB.NOTES,
+                        OpsTables.OPS_MONITOR_NODE_DB.NOTES,
                 }
 
         );
@@ -27,13 +27,13 @@ public class MonitorNodeDBGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_DB.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_DB.NOTES).search().fuzzySearch();
 
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_DB.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_DB.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_DB.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_DB.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_DB.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_DB.CREATE_TIME).table().disable(true);
 
 
 
@@ -44,7 +44,7 @@ public class MonitorNodeDBGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE_DB.NOTES,
+                        OpsTables.OPS_MONITOR_NODE_DB.NOTES,
 
                 }
         );

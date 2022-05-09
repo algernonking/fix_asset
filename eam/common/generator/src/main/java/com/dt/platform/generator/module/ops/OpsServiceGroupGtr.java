@@ -6,28 +6,28 @@ import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.ServiceGroupPageController;
 import com.dt.platform.proxy.ops.ServiceGroupServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsServiceGroupGtr extends BaseCodeGenerator{
 
 
     public OpsServiceGroupGtr() {
-        super(EAMTables.OPS_SERVICE_GROUP.$TABLE,BASIC_DATA_MENU_ID);
+        super(OpsTables.OPS_SERVICE_GROUP.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
-        cfg.view().field(EAMTables.OPS_SERVICE_GROUP.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_SERVICE_GROUP.NAME).search().fuzzySearch();
 
 
 
-        cfg.view().field(EAMTables.OPS_SERVICE_GROUP.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_SERVICE_GROUP.NAME).form().validate().required();
-        cfg.view().field(EAMTables.OPS_SERVICE_GROUP.CODE).form().validate().required();
+        cfg.view().field(OpsTables.OPS_SERVICE_GROUP.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_SERVICE_GROUP.NAME).form().validate().required();
+        cfg.view().field(OpsTables.OPS_SERVICE_GROUP.CODE).form().validate().required();
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_SERVICE_GROUP.NAME,
+                        OpsTables.OPS_SERVICE_GROUP.NAME,
 
                 }
         );

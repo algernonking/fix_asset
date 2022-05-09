@@ -1,5 +1,6 @@
 package com.dt.platform.generator.module.dc;
 
+import com.dt.platform.constants.db.DataCenterTables;
 import com.dt.platform.constants.db.EAMTables;
 
 
@@ -13,26 +14,26 @@ import org.github.foxnic.web.constants.enums.DictEnum;
 public class DcAreaGtr extends BaseCodeGenerator {
 //
 //    public DcAreaGtr() {
-//        super(EAMTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
+//        super(DataCenterTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
 //    }
 
     public DcAreaGtr() {
-        super(AreaServiceProxy.class, AreaPageController.class,EAMTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
+        super(AreaServiceProxy.class, AreaPageController.class,DataCenterTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
-        cfg.view().field(EAMTables.DC_AREA.ID).basic().hidden(true);
+        cfg.view().field(DataCenterTables.DC_AREA.ID).basic().hidden(true);
 
-        cfg.view().field(EAMTables.DC_AREA.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.DC_AREA.POSITION).search().fuzzySearch();
-        cfg.view().field(EAMTables.DC_AREA.NOTES).search().fuzzySearch();
+        cfg.view().field(DataCenterTables.DC_AREA.NAME).search().fuzzySearch();
+        cfg.view().field(DataCenterTables.DC_AREA.POSITION).search().fuzzySearch();
+        cfg.view().field(DataCenterTables.DC_AREA.NOTES).search().fuzzySearch();
 
 
-        cfg.view().field(EAMTables.DC_AREA.TYPE).basic().label("类型")
+        cfg.view().field(DataCenterTables.DC_AREA.TYPE).basic().label("类型")
               .form().validate().required().form().radioBox().enumType(AreaTypeEnum.class);
 
-        cfg.view().field(EAMTables.DC_AREA.NAME).form().validate().required();
+        cfg.view().field(DataCenterTables.DC_AREA.NAME).form().validate().required();
 
         //文件生成覆盖模式
         cfg.overrides()

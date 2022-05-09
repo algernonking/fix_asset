@@ -5,22 +5,22 @@ import com.dt.platform.domain.ops.Host;
 import com.dt.platform.domain.ops.HostOs;
 import com.dt.platform.domain.ops.ServiceInfo;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsHostOsGtr extends BaseCodeGenerator{
 
 
     public OpsHostOsGtr() {
-        super(EAMTables.OPS_HOST_OS.$TABLE,BASIC_HOSTMGR_MENU_ID);
+        super(OpsTables.OPS_HOST_OS.$TABLE,BASIC_HOSTMGR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
 
         System.out.println(this.getClass().getName());
-        cfg.setRelationField(Host.class,EAMTables.OPS_HOST_OS.HOST_ID, ServiceInfo.class, EAMTables.OPS_HOST_OS.SERVICE_INFO_ID,true);
+        cfg.setRelationField(Host.class,OpsTables.OPS_HOST_OS.HOST_ID, ServiceInfo.class, OpsTables.OPS_HOST_OS.SERVICE_INFO_ID,true);
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_HOST_OS.ID,
+                        OpsTables.OPS_HOST_OS.ID,
                 }
         );
 

@@ -6,12 +6,12 @@ import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.VoucherHistoryPageController;
 import com.dt.platform.proxy.ops.VoucherHistoryServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsVoucherHistoryGtr extends BaseCodeGenerator{
 
 
     public OpsVoucherHistoryGtr() {
-        super(EAMTables.OPS_VOUCHER_HISTORY.$TABLE,BASIC_DATA_MENU_ID);
+        super(OpsTables.OPS_VOUCHER_HISTORY.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -21,13 +21,13 @@ public class OpsVoucherHistoryGtr extends BaseCodeGenerator{
 
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_HISTORY.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_VOUCHER_HISTORY.NOTES).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_HISTORY.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_VOUCHER_HISTORY.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_VOUCHER_HISTORY.VOUCHER_ID).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER_HISTORY.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER_HISTORY.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER_HISTORY.VOUCHER_ID).table().hidden(true);
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.USER_CODE).form().validate().required().form()
+        cfg.view().field(OpsTables.OPS_VOUCHER.USER_CODE).form().validate().required().form()
                 .form().selectBox().dict(DictEnum.OPS_USER_VOUCHER).filter(true).toolbar(false).muliti(false);
 
 
@@ -42,7 +42,7 @@ public class OpsVoucherHistoryGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_VOUCHER_HISTORY.NOTES
+                        OpsTables.OPS_VOUCHER_HISTORY.NOTES
                 }
 
         );

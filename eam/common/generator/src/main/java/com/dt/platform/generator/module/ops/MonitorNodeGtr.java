@@ -1,5 +1,5 @@
 package com.dt.platform.generator.module.ops;
-
+import com.dt.platform.constants.db.OpsTables;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.ops.MonitorEnableEnum;
 import com.dt.platform.constants.enums.ops.MonitorIndicatorValueColumnRowsEnum;
@@ -15,7 +15,7 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeGtr() {
-        super(EAMTables.OPS_MONITOR_NODE.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_NODE.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -39,15 +39,15 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
         cfg.view().search().inputLayout(
                 new Object[]{
 
-                        EAMTables.OPS_MONITOR_NODE.GROUP_ID,
-                        EAMTables.OPS_MONITOR_NODE.STATUS,
-                        EAMTables.OPS_MONITOR_NODE.NODE_IP,
-                        EAMTables.OPS_MONITOR_NODE.NODE_NAME_SHOW,
+                        OpsTables.OPS_MONITOR_NODE.GROUP_ID,
+                        OpsTables.OPS_MONITOR_NODE.STATUS,
+                        OpsTables.OPS_MONITOR_NODE.NODE_IP,
+                        OpsTables.OPS_MONITOR_NODE.NODE_NAME_SHOW,
                 },
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE.TYPE,
-                        EAMTables.OPS_MONITOR_NODE.NODE_ENABLED,
-                        EAMTables.OPS_MONITOR_NODE.NOTES
+                        OpsTables.OPS_MONITOR_NODE.TYPE,
+                        OpsTables.OPS_MONITOR_NODE.NODE_ENABLED,
+                        OpsTables.OPS_MONITOR_NODE.NOTES
                 }
 
         );
@@ -56,38 +56,38 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_IP).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NOTES).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_NAME_SHOW).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_IP).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_NAME_SHOW).search().fuzzySearch();
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.ID).table().disable(true);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.SUB_TYPE).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.SUB_TYPE).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.SUB_TYPE).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.SUB_TYPE).table().disable(true);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_NAME).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_NAME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_NAME).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_NAME).table().disable(true);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_TYPE).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_TYPE).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_TYPE).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_TYPE).table().disable(true);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.PID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.PID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.PID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.PID).table().disable(true);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.CREATE_TIME).table().disable(true);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_IP).form().validate().required();
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_NAME_SHOW).form().validate().required();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_IP).form().validate().required();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_NAME_SHOW).form().validate().required();
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.STATUS).form().validate().required().form()
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.STATUS).form().validate().required().form()
                 .label("监控状态").radioBox().defaultIndex(0).enumType(MonitorStatusEnum.class);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_ENABLED).form().validate().required().form()
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.NODE_ENABLED).form().validate().required().form()
                 .label("启用状态").radioBox().defaultIndex(0).enumType(MonitorEnableEnum.class);
 
 
@@ -101,7 +101,7 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
                 .toolbar(false).paging(false).defaultIndex(0)
                 .fillWith(MonitorNodeMeta.MONITOR_TPL_LIST).muliti(true);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.SSH_VOUCHER_ID)
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.SSH_VOUCHER_ID)
                 .basic().label("凭证(SSH)")
                 .form().selectBox().queryApi(MonitorVoucherServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
@@ -109,7 +109,7 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
                 textField(MonitorVoucherMeta.NAME).
                 fillWith(MonitorNodeMeta.SSH_VOUCHER).muliti(false);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.GROUP_ID)
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.GROUP_ID)
                 .basic().label("节点分组")
                 .form().selectBox().queryApi(MonitorNodeGroupServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
@@ -118,7 +118,7 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
                 fillWith(MonitorNodeMeta.MONITOR_NODE_GROUP).muliti(false);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.TYPE)
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE.TYPE)
                 .basic().label("节点分类")
                 .form().validate().required().form().selectBox().queryApi(ServiceGroupServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
@@ -126,7 +126,7 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
                 textField(ServiceGroupMeta.NAME).
                 fillWith(MonitorNodeMeta.MONITOR_NODE_TYPE).muliti(false);
 
-//        cfg.view().field(EAMTables.OPS_MONITOR_NODE.SUB_TYPE)
+//        cfg.view().field(OpsTables.OPS_MONITOR_NODE.SUB_TYPE)
 //                .basic().label("节点子分类")
 //                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_PAGED_LIST)
 //                .paging(true).filter(true).toolbar(false)
@@ -138,44 +138,44 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE.NODE_IP,
-                        EAMTables.OPS_MONITOR_NODE.NODE_NAME_SHOW,
-                        EAMTables.OPS_MONITOR_NODE.GROUP_ID,
+                        OpsTables.OPS_MONITOR_NODE.NODE_IP,
+                        OpsTables.OPS_MONITOR_NODE.NODE_NAME_SHOW,
+                        OpsTables.OPS_MONITOR_NODE.GROUP_ID,
                 },
                 new Object[] {
                         MonitorNodeMeta.MONITOR_TPL_IDS,
-                        EAMTables.OPS_MONITOR_NODE.NODE_ENABLED,
-                        EAMTables.OPS_MONITOR_NODE.STATUS,
+                        OpsTables.OPS_MONITOR_NODE.NODE_ENABLED,
+                        OpsTables.OPS_MONITOR_NODE.STATUS,
                 },
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE.TYPE,
-                        EAMTables.OPS_MONITOR_NODE.SUB_TYPE,
+                        OpsTables.OPS_MONITOR_NODE.TYPE,
+                        OpsTables.OPS_MONITOR_NODE.SUB_TYPE,
 
                 }
         );
 
         cfg.view().form().addGroup("数据采集",
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE.SSH_VOUCHER_ID,
-                        EAMTables.OPS_MONITOR_NODE.SSH_PORT,
-                        EAMTables.OPS_MONITOR_NODE.ZABBIX_AGENT_PORT,
+                        OpsTables.OPS_MONITOR_NODE.SSH_VOUCHER_ID,
+                        OpsTables.OPS_MONITOR_NODE.SSH_PORT,
+                        OpsTables.OPS_MONITOR_NODE.ZABBIX_AGENT_PORT,
                 },
 
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE.SNMP_PORT,
-                        EAMTables.OPS_MONITOR_NODE.SNMP_VERSION,
-                        EAMTables.OPS_MONITOR_NODE.SNMP_COMMUNITY,
+                        OpsTables.OPS_MONITOR_NODE.SNMP_PORT,
+                        OpsTables.OPS_MONITOR_NODE.SNMP_VERSION,
+                        OpsTables.OPS_MONITOR_NODE.SNMP_COMMUNITY,
                 },
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE.AGENT_PORT,
-                        EAMTables.OPS_MONITOR_NODE.IMPI_PORT,
-                        EAMTables.OPS_MONITOR_NODE.JDBC_URL,
+                        OpsTables.OPS_MONITOR_NODE.AGENT_PORT,
+                        OpsTables.OPS_MONITOR_NODE.IMPI_PORT,
+                        OpsTables.OPS_MONITOR_NODE.JDBC_URL,
                 }
         );
 
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE.NOTES,
+                        OpsTables.OPS_MONITOR_NODE.NOTES,
                 }
         );
 

@@ -7,12 +7,12 @@ import com.dt.platform.domain.ops.MonitorTpl;
 import com.dt.platform.domain.ops.ServiceInfo;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorNodeTplItemGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeTplItemGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_TPL_ITEM.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_NODE_TPL_ITEM.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -20,13 +20,13 @@ public class MonitorNodeTplItemGtr extends BaseCodeGenerator{
 
 
         //A和B，一对多 ，AA。
-        cfg.setRelationField(MonitorNode.class,EAMTables.OPS_MONITOR_NODE_TPL_ITEM.NODE_ID, MonitorTpl.class, EAMTables.OPS_MONITOR_NODE_TPL_ITEM.TPL_CODE,true);
-        //cfg.setRelationField(Host.class,EAMTables.OPS_HOST_MID.HOST_ID, ServiceInfo.class, EAMTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
+        cfg.setRelationField(MonitorNode.class,OpsTables.OPS_MONITOR_NODE_TPL_ITEM.NODE_ID, MonitorTpl.class, OpsTables.OPS_MONITOR_NODE_TPL_ITEM.TPL_CODE,true);
+        //cfg.setRelationField(Host.class,OpsTables.OPS_HOST_MID.HOST_ID, ServiceInfo.class, OpsTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
 
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE_TPL_ITEM.ID,
+                        OpsTables.OPS_MONITOR_NODE_TPL_ITEM.ID,
                 }
 
         );
@@ -45,7 +45,7 @@ public class MonitorNodeTplItemGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE_TPL_ITEM.NODE_ID,
+                        OpsTables.OPS_MONITOR_NODE_TPL_ITEM.NODE_ID,
 
                 }
         );

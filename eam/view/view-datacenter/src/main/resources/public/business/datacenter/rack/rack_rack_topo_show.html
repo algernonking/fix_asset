@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="../favicon.ico">
+    <script type="text/javascript" src="../../../plugin/tp/jquery.js"></script>
+    <script type="text/javascript" src="../../../plugin/tp/jtopo-0.4.8-min.js"></script>
+    <title></title>
+</head>
+<body>
+<div id="content"></div>
+<canvas id="canvas" width="500" height="500"></canvas>
+</body>
+<script>
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+    var id=getQueryVariable("id");
+    CanvasRenderingContext2D.prototype.wrapText = function(str,x,y){
+        var textArray = str.split('\n');
+        if(textArray==undefined||textArray==null)return false;
+        var rowCnt = textArray.length;
+        var i = 0,imax  = rowCnt,maxLength = 0;maxText = textArray[0];
+        for(;i<imax;i++){
+            var nowText = textArray[i],textLength = nowText.length;
+            if(textLength >=maxLength){
+                maxLength = textLength;
+                maxText = nowText;
+            }
+        }
+        var maxWidth = this.measureText(maxText).width;
+        var lineHeight = this.measureText("元").width;
+        for(var j= 0;j<textArray.length;j++){
+            var words = textArray[j];
+            this.fillText(words,-(maxWidth/2),y-textArray.length*lineHeight/2);
+            this.font="9px Verdana";//设置字体大小
+
+            y+= lineHeight;
+        }
+    };
+    JTopo.Node.prototype.paintText = function(a){
+        var b = this.text;
+        if (null != b && "" != b) {
+            a.beginPath(),
+                a.font = this.font;
+            var c = a.measureText(b).width,
+                d = a.measureText("田").width;
+            a.fillStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")";
+            var e = this.getTextPostion(this.textPosition, c, d);
+            a.wrapText(b, e.x, e.y),
+                a.closePath()
+        }
+    }
+    function nodeExist(node){
+        var res=true;
+        if (typeof(node) == undefined) {
+            return false;
+        }
+        if (node == undefined) {
+            return false;
+        }
+        return res;
+    }
+    function setText(value){
+        var res="";
+        if (typeof(value) == undefined) {
+            return "";
+        }
+        if (value == undefined) {
+            return "";
+        }
+        return value;
+    }
+    // 简单连线
+    function newLink(nodeA, nodeZ, text,color) {
+        var link = new JTopo.Link(nodeA, nodeZ, text);
+        link.lineWidth = 1; // 线宽
+        link.shadow = false;
+        link.showSelected = false;
+        return link;
+    }
+    function createtp(data){
+        var nodedata=data.nodes;
+        var ltype="tree";
+        var direct="bottom";
+        //var ltype="circle";
+        var h = screen.height - 40;
+        var w = screen.width - 20;
+        // var h = screen.height - 400;
+        // var w = screen.width - 200;
+        var canvas = document.getElementById('canvas');
+        canvas.setAttribute('width', w);
+        canvas.setAttribute('height', h);
+        var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
+        showJTopoToobar(stage);
+        stage.eagleEye.visible = true;
+        var scene = new JTopo.Scene(stage); // 创建一个场景对象
+        scene.background = '../../../plugin/tp/bg2.jpg';
+        scene.backgroundColor="blue"
+        //添加信息系统
+        var node_system= new JTopo.Node();    // 创建一个节点
+        node_system.text="\n\n"+data.name+"\n"+data.busname+"\nip:"+data.ip;
+        node_system.layout = {direction:direct,type: ltype, width:180, height: 150}
+        node_system.setLocation(560,80);
+        node_system.fontColor= "255,255,0";
+        node_system.showSelected=false;
+        node_system.setSize(50,50);
+        node_system.setImage('../../../plugin/tp/system.png'); // 设置图片
+        scene.add(node_system); // 放入到场景中
+        var nodes_obj={}
+        //新建节点
+        for(var i=0;i<nodedata.length;i++){
+            var objinfo=nodedata[i]
+            var obj=new JTopo.Node();    // 创建一个节点
+            obj.text="\n\n"+objinfo.name+"\n"+"\bmodel:"+objinfo.model+"\nip"+objinfo.ip;
+            obj.setSize(30,30);
+            obj.showSelected=false;
+            obj.setLocation(scene.width * Math.random(), scene.height * Math.random());
+            obj.layout = {direction:direct,type: ltype, width:100, height: 100};
+            obj.fontColor= "0,255,0";
+            obj.setImage('../../../plugin/tp/storage.png')
+            nodes_obj[objinfo.nodemapitemid]=obj;
+            scene.add(obj);
+        }
+        //建立连接
+        for(var j=0;j<nodedata.length;j++){
+            var objinfo=nodedata[j];
+            var fnode=objinfo.fnode;
+            var fnodejson=JSON.parse(fnode);
+            for(var k=0;k<fnodejson.length;k++){
+                var d=nodes_obj[objinfo.nodemapitemid];
+                var s;
+                if (fnodejson[k].id=="0"){
+                    s=node_system;
+                }else{
+                    if( typeof(fnodejson[k]) == 'undefined'){
+                        s=node_system;
+                    }else{
+                        s=nodes_obj[fnodejson[k].id];
+                    }
+                }
+                var link = newLink(s, d,'','') ;
+                scene.add(link);
+            }
+        }
+        stage.find('node').attr('shadow', false);
+        JTopo.layout.layoutNode(scene, node_system, true);
+    }
+
+    $.ajax({
+        url : "/dt/api/ops/opsNodegroup/ext/queryTpDataByGroupId.do",
+        type : "get",
+        async : true,//此处需要注意的是要想获取ajax返回的值这个async属性必须设置成同步的，否则获取不到返回值
+        data : {"groupid":id},
+        dataType : "json",
+        success : function(data) {
+            createtp(data.data);
+        }
+    });
+</script>
+</html>
+

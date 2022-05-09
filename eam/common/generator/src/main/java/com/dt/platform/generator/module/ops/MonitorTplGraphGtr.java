@@ -1,5 +1,5 @@
 package com.dt.platform.generator.module.ops;
-
+import com.dt.platform.constants.db.OpsTables;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.ops.MonitorEnableEnum;
 import com.dt.platform.constants.enums.ops.MonitorTplGraphTypeEnum;
@@ -21,7 +21,7 @@ public class MonitorTplGraphGtr extends BaseCodeGenerator{
 
 
     public MonitorTplGraphGtr() {
-        super(EAMTables.OPS_MONITOR_TPL_GRAPH.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_TPL_GRAPH.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -34,8 +34,8 @@ public class MonitorTplGraphGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.NAME,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.NOTES,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.NAME,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.NOTES,
                 }
         );
 
@@ -43,22 +43,22 @@ public class MonitorTplGraphGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH.CREATE_TIME).table().disable(true);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.STATUS).form().validate().required().form()
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH.STATUS).form().validate().required().form()
                 .label("状态").radioBox().defaultIndex(0).enumType(MonitorEnableEnum.class);
 
 
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.GRAPH_TYPE).form().validate().required().form()
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH.GRAPH_TYPE).form().validate().required().form()
                 .label("类型").radioBox().defaultIndex(0).enumType(MonitorTplGraphTypeEnum.class);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE)
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE)
                 .basic().label("图形模版")
                 .form().selectBox().queryApi(MonitorTplServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
@@ -66,34 +66,34 @@ public class MonitorTplGraphGtr extends BaseCodeGenerator{
                 textField(MonitorTplMeta.NAME).
                 fillWith(MonitorTplGraphMeta.TPL).muliti(false);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.NAME).form().validate().required();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH.NAME).form().validate().required();
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.NAME,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.STATUS,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.GRAPH_TYPE,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.NAME,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.STATUS,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.GRAPH_TYPE,
                 },
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.SORT,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.SORT,
                 },
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.GRAPH_WIDTH,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.GRAPH_HEIGHT,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.GRAPH_WIDTH,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.GRAPH_HEIGHT,
                 }
         );
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.CONTENT,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.CONTENT,
                 }
 
         );
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.NOTES,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH.NOTES,
                 }
 
         );

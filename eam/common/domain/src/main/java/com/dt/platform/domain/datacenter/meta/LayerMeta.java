@@ -3,13 +3,14 @@ package com.dt.platform.domain.datacenter.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.datacenter.Layer;
 import java.util.Date;
+import com.dt.platform.domain.datacenter.Area;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:48
- * @sign C3C353B667E089BA8E0E0B2A1DD68053
+ * @since 2022-05-07 21:49:53
+ * @sign 441BF44140F3D6B451350562CCA2A0EA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +35,26 @@ public class LayerMeta {
 	 * 名称 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Layer,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Layer.class ,NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	
+	/**
+	 * 区域 , 类型: java.lang.String
+	*/
+	public static final String AREA_ID="areaId";
+	
+	/**
+	 * 区域 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Layer,java.lang.String> AREA_ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Layer.class ,AREA_ID, java.lang.String.class, "区域", "区域", java.lang.String.class, null);
+	
+	/**
+	 * 排序 , 类型: java.lang.Integer
+	*/
+	public static final String SORT="sort";
+	
+	/**
+	 * 排序 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Layer,java.lang.Integer> SORT_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Layer.class ,SORT, java.lang.Integer.class, "排序", "排序", java.lang.Integer.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -136,9 +157,19 @@ public class LayerMeta {
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Layer,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Layer.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * 区域 , 类型: com.dt.platform.domain.datacenter.Area
+	*/
+	public static final String AREA="area";
+	
+	/**
+	 * 区域 , 类型: com.dt.platform.domain.datacenter.Area
+	*/
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Layer,com.dt.platform.domain.datacenter.Area> AREA_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Layer.class ,AREA, com.dt.platform.domain.datacenter.Area.class, "区域", "", com.dt.platform.domain.datacenter.Area.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ ID , NAME , AREA_ID , SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , AREA };
 	
 	/**
 	 * 代理类
@@ -167,6 +198,28 @@ public class LayerMeta {
 		public Layer setName(String name) {
 			super.change(NAME,super.getName(),name);
 			super.setName(name);
+			return this;
+		}
+		
+		/**
+		 * 设置 区域
+		 * @param areaId 区域
+		 * @return 当前对象
+		*/
+		public Layer setAreaId(String areaId) {
+			super.change(AREA_ID,super.getAreaId(),areaId);
+			super.setAreaId(areaId);
+			return this;
+		}
+		
+		/**
+		 * 设置 排序
+		 * @param sort 排序
+		 * @return 当前对象
+		*/
+		public Layer setSort(Integer sort) {
+			super.change(SORT,super.getSort(),sort);
+			super.setSort(sort);
 			return this;
 		}
 		
@@ -277,6 +330,17 @@ public class LayerMeta {
 		public Layer setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
+			return this;
+		}
+		
+		/**
+		 * 设置 区域
+		 * @param area 区域
+		 * @return 当前对象
+		*/
+		public Layer setArea(Area area) {
+			super.change(AREA,super.getArea(),area);
+			super.setArea(area);
 			return this;
 		}
 	}

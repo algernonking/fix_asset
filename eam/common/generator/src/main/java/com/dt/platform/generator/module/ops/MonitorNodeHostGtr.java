@@ -1,5 +1,5 @@
 package com.dt.platform.generator.module.ops;
-
+import com.dt.platform.constants.db.OpsTables;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
@@ -8,7 +8,7 @@ public class MonitorNodeHostGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeHostGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_HOST.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_NODE_HOST.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -18,7 +18,7 @@ public class MonitorNodeHostGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE_HOST.NOTES,
+                        OpsTables.OPS_MONITOR_NODE_HOST.NOTES,
                 }
 
         );
@@ -27,13 +27,13 @@ public class MonitorNodeHostGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_HOST.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_HOST.NOTES).search().fuzzySearch();
 
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_HOST.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_HOST.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_HOST.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_HOST.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_HOST.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_HOST.CREATE_TIME).table().disable(true);
 
 
 
@@ -44,7 +44,7 @@ public class MonitorNodeHostGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE_HOST.NOTES,
+                        OpsTables.OPS_MONITOR_NODE_HOST.NOTES,
 
                 }
         );

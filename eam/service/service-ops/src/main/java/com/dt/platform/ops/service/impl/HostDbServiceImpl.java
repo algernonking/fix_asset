@@ -1,7 +1,7 @@
 package com.dt.platform.ops.service.impl;
 
 
-import com.dt.platform.constants.db.EAMTables.OPS_HOST_DB;
+import com.dt.platform.constants.db.OpsTables.OPS_HOST_DB;
 import com.dt.platform.domain.ops.HostDb;
 import com.dt.platform.domain.ops.ServiceInfo;
 import com.dt.platform.ops.service.IHostDbService;

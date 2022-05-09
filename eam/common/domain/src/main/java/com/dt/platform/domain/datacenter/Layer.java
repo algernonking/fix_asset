@@ -3,7 +3,7 @@ package com.dt.platform.domain.datacenter;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.DC_LAYER;
+import com.dt.platform.constants.db.DataCenterTables.DC_LAYER;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 层级
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:48
- * @sign C3C353B667E089BA8E0E0B2A1DD68053
+ * @since 2022-05-07 21:49:53
+ * @sign 441BF44140F3D6B451350562CCA2A0EA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -40,6 +40,18 @@ public class Layer extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
 	private String name;
+	
+	/**
+	 * 区域：区域
+	*/
+	@ApiModelProperty(required = false,value="区域" , notes = "区域")
+	private String areaId;
+	
+	/**
+	 * 排序：排序
+	*/
+	@ApiModelProperty(required = false,value="排序" , notes = "排序")
+	private Integer sort;
 	
 	/**
 	 * 备注：备注
@@ -102,6 +114,12 @@ public class Layer extends Entity {
 	private String tenantId;
 	
 	/**
+	 * 区域
+	*/
+	@ApiModelProperty(required = false,value="区域" , notes = "")
+	private Area area;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -136,6 +154,44 @@ public class Layer extends Entity {
 	*/
 	public Layer setName(String name) {
 		this.name=name;
+		return this;
+	}
+	
+	/**
+	 * 获得 区域<br>
+	 * 区域
+	 * @return 区域
+	*/
+	public String getAreaId() {
+		return areaId;
+	}
+	
+	/**
+	 * 设置 区域
+	 * @param areaId 区域
+	 * @return 当前对象
+	*/
+	public Layer setAreaId(String areaId) {
+		this.areaId=areaId;
+		return this;
+	}
+	
+	/**
+	 * 获得 排序<br>
+	 * 排序
+	 * @return 排序
+	*/
+	public Integer getSort() {
+		return sort;
+	}
+	
+	/**
+	 * 设置 排序
+	 * @param sort 排序
+	 * @return 当前对象
+	*/
+	public Layer setSort(Integer sort) {
+		this.sort=sort;
 		return this;
 	}
 	
@@ -326,6 +382,24 @@ public class Layer extends Entity {
 	*/
 	public Layer setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 区域<br>
+	 * @return 区域
+	*/
+	public Area getArea() {
+		return area;
+	}
+	
+	/**
+	 * 设置 区域
+	 * @param area 区域
+	 * @return 当前对象
+	*/
+	public Layer setArea(Area area) {
+		this.area=area;
 		return this;
 	}
 

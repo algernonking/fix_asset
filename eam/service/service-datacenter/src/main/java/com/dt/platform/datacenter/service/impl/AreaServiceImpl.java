@@ -29,48 +29,61 @@ import java.util.ArrayList;
 import com.dt.platform.datacenter.service.IAreaService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
  * 区域 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:45
+ * @since 2022-05-07 21:38:48
 */
 
 
 @Service("DcAreaService")
 public class AreaServiceImpl extends SuperService<Area> implements IAreaService {
-	
+
 	/**
 	 * 注入DAO对象
 	 * */
 	@Resource(name=DBConfigs.PRIMARY_DAO) 
 	private DAO dao=null;
-	
+
 	/**
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
 
 
-	
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
 	/**
-	 * 插入实体
-	 * @param area 实体数据
+	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param area  数据对象
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果 , 如果失败返回 false，成功返回 true
+	 */
+	@Override
+	public Result insert(Area area,boolean throwsException) {
+		Result r=super.insert(area,throwsException);
+		return r;
+	}
+
+	/**
+	 * 添加，如果语句错误，则抛出异常
+	 * @param area 数据对象
 	 * @return 插入是否成功
 	 * */
 	@Override
 	public Result insert(Area area) {
-		Result r=super.insert(area);
-		return r;
+		return this.insert(area,true);
 	}
-	
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param areaList 实体数据清单
@@ -80,7 +93,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	public Result insertList(List<Area> areaList) {
 		return super.insertList(areaList);
 	}
-	
+
 	
 	/**
 	 * 按主键删除 区域
@@ -126,19 +139,31 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 			return r;
 		}
 	}
-	
+
 	/**
-	 * 更新实体
+	 * 更新，如果执行错误，则抛出异常
 	 * @param area 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
 	public Result update(Area area , SaveMode mode) {
-		Result r=super.update(area , mode);
+		return this.update(area,mode,true);
+	}
+
+	/**
+	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
+	 * @param area 数据对象
+	 * @param mode 保存模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 保存是否成功
+	 * */
+	@Override
+	public Result update(Area area , SaveMode mode,boolean throwsException) {
+		Result r=super.update(area , mode , throwsException);
 		return r;
 	}
-	
+
 	/**
 	 * 更新实体集，事务内
 	 * @param areaList 数据对象列表
@@ -149,7 +174,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	public Result updateList(List<Area> areaList , SaveMode mode) {
 		return super.updateList(areaList , mode);
 	}
-	
+
 	
 	/**
 	 * 按主键更新字段 区域
@@ -162,8 +187,8 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 		if(!field.table().name().equals(this.table())) throw new IllegalArgumentException("更新的数据表["+field.table().name()+"]与服务对应的数据表["+this.table()+"]不一致");
 		int suc=dao.update(field.table().name()).set(field.name(), value).where().and("id = ? ",id).top().execute();
 		return suc>0;
-	} 
-	
+	}
+
 	
 	/**
 	 * 按主键获取 区域
@@ -187,7 +212,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
@@ -195,11 +220,11 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	public List<Area> queryList(Area sample) {
 		return super.queryList(sample);
 	}
-	
-	
+
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param pageSize 分页条数
 	 * @param pageIndex 页码
@@ -209,10 +234,10 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	public PagedList<Area> queryPagedList(Area sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param condition 其它条件
 	 * @param pageSize 分页条数
@@ -223,18 +248,18 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	public PagedList<Area> queryPagedList(Area sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
-	
+
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param area 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Area> checkExists(Area area) {
+	public Boolean checkExists(Area area) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(area, SYS_ROLE.NAME);
+		//boolean exists=super.checkExists(area, SYS_ROLE.NAME);
 		//return exists;
-		return ErrorDesc.success();
+		return false;
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 package com.dt.platform.generator.module.ops;
-
+import com.dt.platform.constants.db.OpsTables;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.ops.Host;
 import com.dt.platform.domain.ops.HostMid;
@@ -10,7 +10,7 @@ public class OpsHostMidGtr extends BaseCodeGenerator{
 
 
     public OpsHostMidGtr() {
-        super(EAMTables.OPS_HOST_MID.$TABLE,BASIC_HOSTMGR_MENU_ID);
+        super(OpsTables.OPS_HOST_MID.$TABLE,BASIC_HOSTMGR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -18,14 +18,14 @@ public class OpsHostMidGtr extends BaseCodeGenerator{
         System.out.println(this.getClass().getName());
 
 
-        //cfg.setRelationField(HostMid.class,HostMid.class,EAMTables.OPS_HOST_MID.HOST_ID, EAMTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
+        //cfg.setRelationField(HostMid.class,HostMid.class,OpsTables.OPS_HOST_MID.HOST_ID, OpsTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
 
-        cfg.setRelationField(Host.class,EAMTables.OPS_HOST_MID.HOST_ID, ServiceInfo.class, EAMTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
+        cfg.setRelationField(Host.class,OpsTables.OPS_HOST_MID.HOST_ID, ServiceInfo.class, OpsTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
 
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_HOST_MID.ID,
+                        OpsTables.OPS_HOST_MID.ID,
                 }
         );
 

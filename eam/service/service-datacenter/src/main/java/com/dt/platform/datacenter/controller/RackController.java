@@ -3,6 +3,11 @@ package com.dt.platform.datacenter.controller;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.dt.platform.datacenter.service.IAreaService;
+import com.dt.platform.datacenter.service.ILayerService;
+import com.dt.platform.domain.datacenter.*;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +23,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.datacenter.RackServiceProxy;
 import com.dt.platform.domain.datacenter.meta.RackVOMeta;
-import com.dt.platform.domain.datacenter.Rack;
-import com.dt.platform.domain.datacenter.RackVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -34,8 +37,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.datacenter.meta.RackMeta;
 import java.math.BigDecimal;
-import com.dt.platform.domain.datacenter.Area;
-import com.dt.platform.domain.datacenter.Layer;
+
 import org.github.foxnic.web.domain.system.DictItem;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -52,7 +54,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 机柜 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-30 09:08:34
+ * @since 2022-05-07 21:19:32
 */
 
 @Api(tags = "机柜")
@@ -63,6 +65,11 @@ public class RackController extends SuperController {
 	@Autowired
 	private IRackService rackService;
 
+	@Autowired
+	private IAreaService areaService;
+
+	@Autowired
+	private ILayerService layerService;
 
 	/**
 	 * 添加机柜
@@ -331,6 +338,56 @@ public class RackController extends SuperController {
 		return result;
 	}
 
+	/**
+	 *
+	 * */
+	@SentinelResource(value = RackServiceProxy.QUERY_TREE_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(RackServiceProxy.QUERY_TREE_LIST)
+	public Result<JSONArray> queryTreeList()  {
+		Result<JSONArray> res=new Result<> ();
+		JSONArray data=new JSONArray();
+		List<Area> areaList=areaService.queryList(new Area());
+		//area
+		for(Area area:areaList){
+			String areaId=area.getId();
+			JSONObject areaObj=new JSONObject();
+			areaObj.put("name",area.getName());
+			areaObj.put("showType","area");
+			areaObj.put("type","group");
+			areaObj.put("id",areaId);
+			areaObj.put("parentId","0");
+			data.add(areaObj);
+
+			LayerVO layerVO=new LayerVO();
+			layerVO.setAreaId(areaId);
+			List<Layer> layerList=layerService.queryList(layerVO);
+			//layer
+			for(Layer layer:layerList){
+				String layerId=layer.getId();
+				JSONObject layerObj=new JSONObject();
+				layerObj.put("name",layer.getName());
+				layerObj.put("showType","layer");
+				layerObj.put("type","group");
+				layerObj.put("id",layerId);
+				layerObj.put("parentId",areaId);
+				data.add(layerObj);
+			}
+		}
+		//rack
+		List<Rack> rackList=rackService.queryList(new Rack());
+		for(Rack rack:rackList){
+			String rackId=rack.getId();
+			JSONObject rackObj=new JSONObject();
+			rackObj.put("name",rack.getRackName());
+			rackObj.put("showType","rack");
+			rackObj.put("type","node");
+			rackObj.put("id",rackId);
+			rackObj.put("parentId",rack.getLayerId());
+			data.add(rackObj);
+		}
+		res.success(true).data(data);
+	 	return res;
+	}
 
 
 	/**

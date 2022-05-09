@@ -3,19 +3,19 @@ package com.dt.platform.generator.module.ops;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorNodeValueListGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeValueListGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_LIST_VALUE.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_NODE_LIST_VALUE.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE_LIST_VALUE.CODE1,
+                        OpsTables.OPS_MONITOR_NODE_LIST_VALUE.CODE1,
                 }
         );
 
@@ -23,16 +23,16 @@ public class MonitorNodeValueListGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_LIST_VALUE.CODE1).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_LIST_VALUE.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_LIST_VALUE.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_LIST_VALUE.CODE1).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_LIST_VALUE.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_LIST_VALUE.ID).table().disable(true);
 
        // cfg.view().list().disableBatchDelete();
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE_LIST_VALUE.CODE1,
+                        OpsTables.OPS_MONITOR_NODE_LIST_VALUE.CODE1,
                 }
         );
 

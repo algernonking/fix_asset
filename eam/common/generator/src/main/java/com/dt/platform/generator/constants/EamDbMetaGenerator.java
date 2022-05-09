@@ -34,7 +34,12 @@ public class EamDbMetaGenerator  {
 		DBMetaClassFile dbMetaBuilder=new DBMetaClassFile(dao,configs.getDomianProject(),this.configs.getProjectConfigs().getDomainConstantsPackage(),"EAMTables");
 		dbMetaBuilder.setTableFilter(table->{
 			table=table.toLowerCase();
-			if( table.startsWith("fz_")|| table.startsWith("rfid_")|| table.startsWith("kn_") ||    table.startsWith("sys_tpl")||  table.startsWith("sys_code") ||table.startsWith("eam_") || table.startsWith("hrm_") || table.startsWith("dc_") || table.startsWith("ops_")) return true;
+			if( table.startsWith("fz_")||
+					table.startsWith("rfid_")||
+					table.startsWith("kn_") ||
+					table.startsWith("sys_tpl")||
+					table.startsWith("sys_code") ||
+					table.startsWith("eam_") ) return true;
 			return false;
 		});
 		dbMetaBuilder.save(true);

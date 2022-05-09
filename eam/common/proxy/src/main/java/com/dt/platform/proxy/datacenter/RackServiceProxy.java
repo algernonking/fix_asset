@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 机柜  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-30 09:08:34
+ * @since 2022-05-07 21:19:32
  */
 @FeignClient(value = ServiceNames.DATACENTER, contextId = RackServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface RackServiceProxy {
@@ -81,6 +81,11 @@ public interface RackServiceProxy {
      * 分页查询机柜
      */
     public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
+
+    /**
+     * 分页查询机柜
+     */
+    public static final String QUERY_TREE_LIST = API_PREFIX + "query-tree-list";
 
     /**
      * 导出机柜数据(Excel)

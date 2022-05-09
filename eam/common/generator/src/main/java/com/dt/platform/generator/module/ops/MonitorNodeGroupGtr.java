@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.db.OpsTables;
 import com.dt.platform.domain.ops.MonitorNodeGroup;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.MonitorNodeGroupPageController;
@@ -11,7 +12,7 @@ public class MonitorNodeGroupGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeGroupGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_GROUP.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_NODE_GROUP.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -20,8 +21,8 @@ public class MonitorNodeGroupGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE_GROUP.NAME,
-                        EAMTables.OPS_MONITOR_NODE_GROUP.NOTES,
+                        OpsTables.OPS_MONITOR_NODE_GROUP.NAME,
+                        OpsTables.OPS_MONITOR_NODE_GROUP.NOTES,
 
                 }
 
@@ -31,18 +32,18 @@ public class MonitorNodeGroupGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_GROUP.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_GROUP.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_GROUP.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_GROUP.NOTES).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_GROUP.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_GROUP.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_GROUP.CREATE_TIME).table().disable(true);
-
-
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_GROUP.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_GROUP.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_GROUP.CREATE_TIME).table().disable(true);
 
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_GROUP.NAME).form().validate().required();
+
+
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_GROUP.NAME).form().validate().required();
 
        // cfg.view().list().disableBatchDelete();
 
@@ -50,8 +51,8 @@ public class MonitorNodeGroupGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE_GROUP.NAME,
-                        EAMTables.OPS_MONITOR_NODE_GROUP.NOTES,
+                        OpsTables.OPS_MONITOR_NODE_GROUP.NAME,
+                        OpsTables.OPS_MONITOR_NODE_GROUP.NOTES,
                 }
         );
 

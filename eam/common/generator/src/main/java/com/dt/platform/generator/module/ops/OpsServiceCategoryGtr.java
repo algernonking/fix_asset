@@ -14,12 +14,12 @@ import com.dt.platform.proxy.ops.ServiceCategoryServiceProxy;
 import com.dt.platform.proxy.ops.ServiceGroupServiceProxy;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsServiceCategoryGtr extends BaseCodeGenerator{
 
 
     public OpsServiceCategoryGtr() {
-        super(EAMTables.OPS_SERVICE_CATEGORY.$TABLE,BASIC_DATA_MENU_ID);
+        super(OpsTables.OPS_SERVICE_CATEGORY.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -27,30 +27,30 @@ public class OpsServiceCategoryGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addSimpleProperty(ServiceGroup.class,"group","服务分组","服务分组");
 
-        cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.CREATE_TIME).table().hidden();
-        cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_SERVICE_CATEGORY.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_SERVICE_CATEGORY.CREATE_TIME).table().hidden();
+        cfg.view().field(OpsTables.OPS_SERVICE_CATEGORY.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_SERVICE_CATEGORY.NOTES).search().fuzzySearch();
 
 
 
-        cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.GROUP_ID)
+        cfg.view().field(OpsTables.OPS_SERVICE_CATEGORY.GROUP_ID)
                 .basic().label("服务分组")
                 .form().validate().required().form().selectBox().queryApi(ServiceGroupServiceProxy.QUERY_LIST)
                 .valueField(ServiceGroupMeta.CODE).textField(ServiceGroupMeta.NAME)
                 .toolbar(false).filter(true).paging(false).defaultIndex(0)
                 .fillWith(ServiceCategoryMeta.GROUP).muliti(false);
 
-        cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.NAME)
+        cfg.view().field(OpsTables.OPS_SERVICE_CATEGORY.NAME)
                 .form().validate().required();
 
 
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_SERVICE_CATEGORY.GROUP_ID,
-                        EAMTables.OPS_SERVICE_CATEGORY.NAME,
-                        EAMTables.OPS_SERVICE_CATEGORY.NOTES
+                        OpsTables.OPS_SERVICE_CATEGORY.GROUP_ID,
+                        OpsTables.OPS_SERVICE_CATEGORY.NAME,
+                        OpsTables.OPS_SERVICE_CATEGORY.NOTES
                 }
         );
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);

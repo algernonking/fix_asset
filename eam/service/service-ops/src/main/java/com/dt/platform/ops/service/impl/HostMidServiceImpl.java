@@ -32,7 +32,7 @@ import java.util.Date;
 import com.dt.platform.constants.db.EAMTables.*;
 import com.dt.platform.domain.ops.Host;
 import com.dt.platform.domain.ops.ServiceInfo;
-
+import com.dt.platform.constants.db.OpsTables.OPS_HOST_MID;
 /**
  * <p>
  * 中间件 服务实现

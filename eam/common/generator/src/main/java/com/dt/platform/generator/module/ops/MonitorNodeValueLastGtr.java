@@ -4,12 +4,12 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.ops.MonitorNodeValueResultStatusEnum;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorNodeValueLastGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeValueLastGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_VALUE_LAST.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_NODE_VALUE_LAST.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -18,7 +18,7 @@ public class MonitorNodeValueLastGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE_VALUE_LAST.ARCH,
+                        OpsTables.OPS_MONITOR_NODE_VALUE_LAST.ARCH,
                 }
 
         );
@@ -27,13 +27,13 @@ public class MonitorNodeValueLastGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE_LAST.INFO).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_VALUE_LAST.INFO).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE_LAST.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE_LAST.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_VALUE_LAST.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_VALUE_LAST.ID).table().disable(true);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE_LAST.RESULT_STATUS).form()
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_VALUE_LAST.RESULT_STATUS).form()
                 .label("结果状态").selectBox().enumType(MonitorNodeValueResultStatusEnum.class);
 
 
@@ -41,7 +41,7 @@ public class MonitorNodeValueLastGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE_VALUE_LAST.INFO,
+                        OpsTables.OPS_MONITOR_NODE_VALUE_LAST.INFO,
                 }
         );
 

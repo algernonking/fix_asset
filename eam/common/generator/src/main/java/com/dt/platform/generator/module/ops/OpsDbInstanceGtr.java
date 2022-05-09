@@ -17,12 +17,12 @@ import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.ops.HostServiceProxy;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
 
     public OpsDbInstanceGtr() {
-        super(EAMTables.OPS_DB_INSTANCE.$TABLE,BASIC_HOSTMGR_MENU_ID);
+        super(OpsTables.OPS_DB_INSTANCE.$TABLE,BASIC_HOSTMGR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -33,36 +33,36 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(ServiceInfo.class,"database","数据库","数据库");
 
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.CREATE_TIME).table().disable(true);
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.LABELS).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.LABELS).table().hidden(true);
 
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.LABELS).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.LABELS).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.NOTES).search().fuzzySearch();
 
 
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
-                new Object[]{EAMTables.OPS_DB_INSTANCE.NAME,EAMTables.OPS_DB_INSTANCE.NOTES,EAMTables.OPS_DB_INSTANCE.LABELS},
-                new Object[]{EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS}
+                new Object[]{OpsTables.OPS_DB_INSTANCE.NAME,OpsTables.OPS_DB_INSTANCE.NOTES,OpsTables.OPS_DB_INSTANCE.LABELS},
+                new Object[]{OpsTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,OpsTables.OPS_DB_INSTANCE.BACKUP_STATUS}
 
         );
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.BACKUP_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.HOST_ID).basic().label("主机")
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.HOST_ID).basic().label("主机")
                 .form().validate().required()
                 .form().selectBox().queryApi(HostServiceProxy.QUERY_PAGED_LIST)
                 .valueField(HostMeta.ID).textField(HostMeta.HOST_NAME)
                 .toolbar(false).filter(true).paging(true).muliti(false).fillWith(DbInstanceMeta.HOST);
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.NAME).form().validate().required();
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.NAME).form().validate().required();
 
 
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.DATABASE_ID).basic().label("数据库")
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.DATABASE_ID).basic().label("数据库")
                 .form().validate().required()
                 .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST)
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
@@ -70,26 +70,26 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
 
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_METHOD).basic().label("备份方式")
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.BACKUP_METHOD).basic().label("备份方式")
                 .form().selectBox().dict(DictEnum.OPS_DB_BACKUP_METHOD).paging(false);
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS).basic().label("备份状态")
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.BACKUP_STATUS).basic().label("备份状态")
                 .form().selectBox().dict(DictEnum.OPS_DB_BACKUP_STATUS).paging(false);
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_TYPE).basic().label("备份状态")
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.BACKUP_TYPE).basic().label("备份状态")
                     .form().selectBox().dict(DictEnum.OPS_DB_BACKUP_TYPE).paging(false);
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.LOG_METHOD).basic().label("日志模式")
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.LOG_METHOD).basic().label("日志模式")
                 .form().selectBox().dict(DictEnum.OPS_DB_LOG_METHOD).paging(false);
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_TIME)
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.BACKUP_TIME)
                 .form().label("备份时间").dateInput();
 
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_SIZE).form().numberInput().scale(2).allowNegative(false);
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.NOTES).form().textArea().height(30);
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.BACKUP_SIZE).form().numberInput().scale(2).allowNegative(false);
+        cfg.view().field(OpsTables.OPS_DB_INSTANCE.NOTES).form().textArea().height(30);
 
 
-        String resourceNameField="res_"+EAMTables.OPS_HOST.HOST_IP;
+        String resourceNameField="res_"+OpsTables.OPS_HOST.HOST_IP;
         cfg.view().field(resourceNameField)
                 .basic().label("IP")
                 .table().fillBy(DbInstanceMeta.HOST, HostMeta.HOST_IP);
@@ -97,15 +97,15 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
-                        EAMTables.OPS_DB_INSTANCE.LOG_METHOD,
-                        EAMTables.OPS_DB_INSTANCE.NAME,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_STATUS,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
+                        OpsTables.OPS_DB_INSTANCE.LOG_METHOD,
+                        OpsTables.OPS_DB_INSTANCE.NAME,
                 },
                 new Object[]{
                       //  resourceNameField,
-                        EAMTables.OPS_DB_INSTANCE.LABELS,
-                        EAMTables.OPS_DB_INSTANCE.NOTES
+                        OpsTables.OPS_DB_INSTANCE.LABELS,
+                        OpsTables.OPS_DB_INSTANCE.NOTES
                 }
         );
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
@@ -117,18 +117,18 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
         cfg.view().list().columnLayout(
                 new Object[]{
-                        EAMTables.OPS_DB_INSTANCE.HOST_ID,
+                        OpsTables.OPS_DB_INSTANCE.HOST_ID,
                         resourceNameField,
-                        EAMTables.OPS_DB_INSTANCE.NAME,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
-                        EAMTables.OPS_DB_INSTANCE.LOG_METHOD,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_TYPE,
-                        EAMTables.OPS_DB_INSTANCE.DATABASE_ID,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_TIME,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_METHOD,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_SIZE,
-                        EAMTables.OPS_DB_INSTANCE.NOTES,
+                        OpsTables.OPS_DB_INSTANCE.NAME,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_STATUS,
+                        OpsTables.OPS_DB_INSTANCE.LOG_METHOD,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_TYPE,
+                        OpsTables.OPS_DB_INSTANCE.DATABASE_ID,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_TIME,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_METHOD,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_SIZE,
+                        OpsTables.OPS_DB_INSTANCE.NOTES,
                 }
         );
 
@@ -136,26 +136,26 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
         cfg.view().formWindow().bottomSpace(150);
         cfg.view().form().addGroup(null ,
                 new Object[] {
-                        EAMTables.OPS_DB_INSTANCE.HOST_ID,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
-                        EAMTables.OPS_DB_INSTANCE.LOG_METHOD,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_TYPE,
+                        OpsTables.OPS_DB_INSTANCE.HOST_ID,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_STATUS,
+                        OpsTables.OPS_DB_INSTANCE.LOG_METHOD,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_TYPE,
 
                 }, new Object[] {
-                        EAMTables.OPS_DB_INSTANCE.DATABASE_ID,
-                        EAMTables.OPS_DB_INSTANCE.NAME,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_TIME,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
+                        OpsTables.OPS_DB_INSTANCE.DATABASE_ID,
+                        OpsTables.OPS_DB_INSTANCE.NAME,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_TIME,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
                 },
                 new Object[] {
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_METHOD,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_SIZE,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_METHOD,
+                        OpsTables.OPS_DB_INSTANCE.BACKUP_SIZE,
                 }
         );
 
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_DB_INSTANCE.NOTES,
+                        OpsTables.OPS_DB_INSTANCE.NOTES,
                 }
 
         );

@@ -3,7 +3,7 @@ package com.dt.platform.domain.ops;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.OPS_HOST_POSITION;
+import com.dt.platform.constants.db.OpsTables.OPS_HOST_POSITION;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;

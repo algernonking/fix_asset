@@ -5,12 +5,12 @@ import com.dt.platform.constants.enums.ops.MonitorMethodEnum;
 import com.dt.platform.constants.enums.ops.MonitorNodeValueResultStatusEnum;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorNodeValueGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeValueGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_VALUE.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_NODE_VALUE.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -19,7 +19,7 @@ public class MonitorNodeValueGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE_VALUE.ARCH,
+                        OpsTables.OPS_MONITOR_NODE_VALUE.ARCH,
                 }
 
         );
@@ -28,13 +28,13 @@ public class MonitorNodeValueGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.INFO).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_VALUE.INFO).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_VALUE.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_VALUE.ID).table().disable(true);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.RESULT_STATUS).form()
+        cfg.view().field(OpsTables.OPS_MONITOR_NODE_VALUE.RESULT_STATUS).form()
                 .label("结果状态").selectBox().enumType(MonitorNodeValueResultStatusEnum.class);
 
 
@@ -42,7 +42,7 @@ public class MonitorNodeValueGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE_VALUE.INFO,
+                        OpsTables.OPS_MONITOR_NODE_VALUE.INFO,
                 }
         );
 

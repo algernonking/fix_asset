@@ -3,6 +3,7 @@ package com.dt.platform.proxy.datacenter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import com.dt.platform.domain.datacenter.Layer;
 import com.dt.platform.domain.datacenter.LayerVO;
@@ -10,14 +11,13 @@ import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.dt.platform.proxy.ServiceNames;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
  * 层级  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:48
+ * @since 2022-05-07 21:49:53
  */
 @FeignClient(value = ServiceNames.DATACENTER, contextId = LayerServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface LayerServiceProxy {
@@ -134,7 +134,7 @@ public interface LayerServiceProxy {
     Result<Layer> getById(@RequestParam(name = "id") String id);
 
     /**
-     * 批量删除层级
+     * 获取多个层级
      */
     @RequestMapping(LayerServiceProxy.GET_BY_IDS)
     Result<List<Layer>> getByIds(@RequestParam(name = "ids") List<String> ids);

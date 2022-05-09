@@ -5,12 +5,12 @@ import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.MonitorVoucherPageController;
 import com.dt.platform.proxy.ops.MonitorVoucherServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorVoucherGtr extends BaseCodeGenerator{
 
 
     public MonitorVoucherGtr() {
-        super(EAMTables.OPS_MONITOR_VOUCHER.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_VOUCHER.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -18,33 +18,33 @@ public class MonitorVoucherGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_VOUCHER.NAME,
-                        EAMTables.OPS_MONITOR_VOUCHER.ACCOUNT,
-                        EAMTables.OPS_MONITOR_VOUCHER.NOTES,
+                        OpsTables.OPS_MONITOR_VOUCHER.NAME,
+                        OpsTables.OPS_MONITOR_VOUCHER.ACCOUNT,
+                        OpsTables.OPS_MONITOR_VOUCHER.NOTES,
                 }
         );
 
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
-        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.ACCOUNT).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.NOTES).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.CREATE_TIME).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.NAME).form().validate().required();
-        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.ACCOUNT).form().validate().required();
-        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.VOUCHER).form().validate().required();
+        cfg.view().field(OpsTables.OPS_MONITOR_VOUCHER.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_VOUCHER.ACCOUNT).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_VOUCHER.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_VOUCHER.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_VOUCHER.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_VOUCHER.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_VOUCHER.NAME).form().validate().required();
+        cfg.view().field(OpsTables.OPS_MONITOR_VOUCHER.ACCOUNT).form().validate().required();
+        cfg.view().field(OpsTables.OPS_MONITOR_VOUCHER.VOUCHER).form().validate().required();
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_VOUCHER.NAME,
-                        EAMTables.OPS_MONITOR_VOUCHER.ACCOUNT,
-                        EAMTables.OPS_MONITOR_VOUCHER.VOUCHER,
-                        EAMTables.OPS_MONITOR_VOUCHER.NOTES,
+                        OpsTables.OPS_MONITOR_VOUCHER.NAME,
+                        OpsTables.OPS_MONITOR_VOUCHER.ACCOUNT,
+                        OpsTables.OPS_MONITOR_VOUCHER.VOUCHER,
+                        OpsTables.OPS_MONITOR_VOUCHER.NOTES,
                 }
         );
 

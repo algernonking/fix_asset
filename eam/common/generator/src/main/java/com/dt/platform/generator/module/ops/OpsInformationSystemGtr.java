@@ -14,12 +14,12 @@ import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.meta.DictItemMeta;
 import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
 
     public OpsInformationSystemGtr() {
-        super(EAMTables.OPS_INFORMATION_SYSTEM.$TABLE,INFOYSTEM_MENU_ID);
+        super(OpsTables.OPS_INFORMATION_SYSTEM.$TABLE,INFOYSTEM_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -40,39 +40,39 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"infoSystemGrade","系统分级","系统分级");
 
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.PID).basic().hidden(true);
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NOTES).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PROFILE).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.PROFILE).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.CREATE_TIME).table().disable(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ARCH_METHOD).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.HARDWARE_INFO).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BACKUP_INFO).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DIFFPLACE_BACKUP_INFO).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.SAMEPLACE_BACUP_INFO).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DEV_METHOD).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DB_INFO).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OS_INFO).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.APP_INFO).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.ARCH_METHOD).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.HARDWARE_INFO).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.BACKUP_INFO).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.DIFFPLACE_BACKUP_INFO).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.SAMEPLACE_BACUP_INFO).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.DEV_METHOD).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.OPS_METHOD).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.DB_INFO).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.OS_INFO).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.APP_INFO).table().hidden(true);
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE).table().hidden(true);
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PROFILE).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.PROFILE).table().hidden(true);
 
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID)
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID)
                 .form().button().chooseOrganization(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID).table().fillBy("belongOrganization","fullName");
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID).table().fillBy("belongOrganization","fullName");
 
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.STATUS)
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.STATUS)
                 .basic().label("状态")
                 .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_system_status")
                 .paging(false).filter(false).toolbar(false)
@@ -81,7 +81,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 fillWith(InformationSystemMeta.INFO_SYSTEM_STATUS).muliti(false);
 
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.GRADE)
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.GRADE)
                 .basic().label("系统分级")
                 .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_system_grade")
                 .paging(false).filter(false).toolbar(false)
@@ -90,7 +90,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 fillWith(InformationSystemMeta.INFO_SYSTEM_GRADE).muliti(false);
 
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD)
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.OPS_METHOD)
                 .basic().label("运维模式")
                 .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_system_ops_method")
                 .paging(false).filter(false).toolbar(false)
@@ -99,7 +99,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 fillWith(InformationSystemMeta.INFO_SYSTEM_OPS_METHOD).muliti(false);
 
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DEV_METHOD)
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.DEV_METHOD)
                 .basic().label("开发模式")
                 .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_system_dev_method")
                 .paging(false).filter(false).toolbar(false)
@@ -109,14 +109,14 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
 
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE).basic().label("演练时间").form().
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE).basic().label("演练时间").form().
                 dateInput().format("yyyy-MM-dd").search().range();
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NAME).form().validate().required();
+        cfg.view().field(OpsTables.OPS_INFORMATION_SYSTEM.NAME).form().validate().required();
 
         ;
         cfg.view().field(InformationSystemVOMeta.VOUCHER_IDS)
@@ -131,17 +131,17 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID,
-                        EAMTables.OPS_INFORMATION_SYSTEM.STATUS,
-                        EAMTables.OPS_INFORMATION_SYSTEM.GRADE,
-                        EAMTables.OPS_INFORMATION_SYSTEM.NAME,
+                        OpsTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID,
+                        OpsTables.OPS_INFORMATION_SYSTEM.STATUS,
+                        OpsTables.OPS_INFORMATION_SYSTEM.GRADE,
+                        OpsTables.OPS_INFORMATION_SYSTEM.NAME,
 
                 },
                 new Object[]{
-                        EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,
-                        EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT,
-                        EAMTables.OPS_INFORMATION_SYSTEM.LABELS,
-                        EAMTables.OPS_INFORMATION_SYSTEM.NOTES
+                        OpsTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,
+                        OpsTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT,
+                        OpsTables.OPS_INFORMATION_SYSTEM.LABELS,
+                        OpsTables.OPS_INFORMATION_SYSTEM.NOTES
                 }
 
         );
@@ -157,40 +157,40 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().formWindow().bottomSpace(80);
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
-                        EAMTables.OPS_INFORMATION_SYSTEM.STATUS,
-                        EAMTables.OPS_INFORMATION_SYSTEM.NAME,
-                        EAMTables.OPS_INFORMATION_SYSTEM.GRADE,
-                        EAMTables.OPS_INFORMATION_SYSTEM.PROFILE,
+                        OpsTables.OPS_INFORMATION_SYSTEM.STATUS,
+                        OpsTables.OPS_INFORMATION_SYSTEM.NAME,
+                        OpsTables.OPS_INFORMATION_SYSTEM.GRADE,
+                        OpsTables.OPS_INFORMATION_SYSTEM.PROFILE,
 
                 }, new Object[] {
-                        EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID,
-                        EAMTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE,
-                        EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE,
-                        EAMTables.OPS_INFORMATION_SYSTEM.NOTES,
+                        OpsTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID,
+                        OpsTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE,
+                        OpsTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE,
+                        OpsTables.OPS_INFORMATION_SYSTEM.NOTES,
                 },
                 new Object[] {
-                        EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT,
-                        EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,
-                        EAMTables.OPS_INFORMATION_SYSTEM.LABELS,
+                        OpsTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT,
+                        OpsTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,
+                        OpsTables.OPS_INFORMATION_SYSTEM.LABELS,
                 }
         );
         cfg.view().form().addGroup("运维信息",
                 new Object[] {
-                        EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD,
-                        EAMTables.OPS_INFORMATION_SYSTEM.DEV_METHOD,
-                        EAMTables.OPS_INFORMATION_SYSTEM.OS_INFO,
-                        EAMTables.OPS_INFORMATION_SYSTEM.DB_INFO
+                        OpsTables.OPS_INFORMATION_SYSTEM.OPS_METHOD,
+                        OpsTables.OPS_INFORMATION_SYSTEM.DEV_METHOD,
+                        OpsTables.OPS_INFORMATION_SYSTEM.OS_INFO,
+                        OpsTables.OPS_INFORMATION_SYSTEM.DB_INFO
                 },
                 new Object[] {
-                        EAMTables.OPS_INFORMATION_SYSTEM.BACKUP_INFO,
-                        EAMTables.OPS_INFORMATION_SYSTEM.HARDWARE_INFO,
-                        EAMTables.OPS_INFORMATION_SYSTEM.SAMEPLACE_BACUP_INFO,
-                        EAMTables.OPS_INFORMATION_SYSTEM.DIFFPLACE_BACKUP_INFO,
+                        OpsTables.OPS_INFORMATION_SYSTEM.BACKUP_INFO,
+                        OpsTables.OPS_INFORMATION_SYSTEM.HARDWARE_INFO,
+                        OpsTables.OPS_INFORMATION_SYSTEM.SAMEPLACE_BACUP_INFO,
+                        OpsTables.OPS_INFORMATION_SYSTEM.DIFFPLACE_BACKUP_INFO,
                 }  ,
                 new Object[] {
-                        EAMTables.OPS_INFORMATION_SYSTEM.RPO,
-                        EAMTables.OPS_INFORMATION_SYSTEM.RTO,
-                        EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE
+                        OpsTables.OPS_INFORMATION_SYSTEM.RPO,
+                        OpsTables.OPS_INFORMATION_SYSTEM.RTO,
+                        OpsTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE
               }
         );
 

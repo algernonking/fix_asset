@@ -9,12 +9,12 @@ import com.dt.platform.domain.ops.meta.MonitorTplMeta;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.ops.MonitorTplServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorTplGraphItemGtr extends BaseCodeGenerator{
 
 
     public MonitorTplGraphItemGtr() {
-        super(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -23,8 +23,8 @@ public class MonitorTplGraphItemGtr extends BaseCodeGenerator{
         //node type
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.NAME,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.INDICATOR_CODE,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.NAME,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.INDICATOR_CODE,
                 }
         );
 
@@ -32,11 +32,11 @@ public class MonitorTplGraphItemGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.INDICATOR_CODE).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.INDICATOR_CODE).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.CREATE_TIME).table().disable(true);
 
 
 
@@ -44,8 +44,8 @@ public class MonitorTplGraphItemGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.NAME,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.INDICATOR_CODE
+                        OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.NAME,
+                        OpsTables.OPS_MONITOR_TPL_GRAPH_ITEM.INDICATOR_CODE
                 }
         );
 

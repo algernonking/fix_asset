@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 区域 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:45
+ * @since 2022-05-07 21:38:48
 */
 
 @Api(tags = "区域")
@@ -65,17 +65,17 @@ public class AreaController extends SuperController {
 	*/
 	@ApiOperation(value = "添加区域")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609505733607424"),
+		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457749140312064"),
 		@ApiImplicitParam(name = AreaVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "datacenter"),
-		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华东数据中心"),
-		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "上海南路2好"),
-		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "备注2"),
+		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "数据中心A"),
+		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AreaServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AreaServiceProxy.INSERT)
 	public Result insert(AreaVO areaVO) {
-		Result result=areaService.insert(areaVO);
+		Result result=areaService.insert(areaVO,false);
 		return result;
 	}
 
@@ -86,7 +86,7 @@ public class AreaController extends SuperController {
 	*/
 	@ApiOperation(value = "删除区域")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609505733607424")
+		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457749140312064")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AreaVOMeta.ID)
@@ -120,18 +120,18 @@ public class AreaController extends SuperController {
 	*/
 	@ApiOperation(value = "更新区域")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609505733607424"),
+		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457749140312064"),
 		@ApiImplicitParam(name = AreaVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "datacenter"),
-		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华东数据中心"),
-		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "上海南路2好"),
-		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "备注2"),
+		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "数据中心A"),
+		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { AreaVOMeta.PAGE_INDEX , AreaVOMeta.PAGE_SIZE , AreaVOMeta.SEARCH_FIELD , AreaVOMeta.FUZZY_FIELD , AreaVOMeta.SEARCH_VALUE , AreaVOMeta.SORT_FIELD , AreaVOMeta.SORT_TYPE , AreaVOMeta.IDS } )
+	@ApiOperationSupport( order=4 , ignoreParameters = { AreaVOMeta.PAGE_INDEX , AreaVOMeta.PAGE_SIZE , AreaVOMeta.SEARCH_FIELD , AreaVOMeta.FUZZY_FIELD , AreaVOMeta.SEARCH_VALUE , AreaVOMeta.DIRTY_FIELDS , AreaVOMeta.SORT_FIELD , AreaVOMeta.SORT_TYPE , AreaVOMeta.IDS } )
 	@NotNull(name = AreaVOMeta.ID)
 	@SentinelResource(value = AreaServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AreaServiceProxy.UPDATE)
 	public Result update(AreaVO areaVO) {
-		Result result=areaService.update(areaVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=areaService.update(areaVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -141,18 +141,18 @@ public class AreaController extends SuperController {
 	*/
 	@ApiOperation(value = "保存区域")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609505733607424"),
+		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457749140312064"),
 		@ApiImplicitParam(name = AreaVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "datacenter"),
-		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华东数据中心"),
-		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "上海南路2好"),
-		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "备注2"),
+		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "数据中心A"),
+		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { AreaVOMeta.PAGE_INDEX , AreaVOMeta.PAGE_SIZE , AreaVOMeta.SEARCH_FIELD , AreaVOMeta.FUZZY_FIELD , AreaVOMeta.SEARCH_VALUE , AreaVOMeta.SORT_FIELD , AreaVOMeta.SORT_TYPE , AreaVOMeta.IDS } )
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { AreaVOMeta.PAGE_INDEX , AreaVOMeta.PAGE_SIZE , AreaVOMeta.SEARCH_FIELD , AreaVOMeta.FUZZY_FIELD , AreaVOMeta.SEARCH_VALUE , AreaVOMeta.DIRTY_FIELDS , AreaVOMeta.SORT_FIELD , AreaVOMeta.SORT_TYPE , AreaVOMeta.IDS } )
 	@NotNull(name = AreaVOMeta.ID)
 	@SentinelResource(value = AreaServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AreaServiceProxy.SAVE)
 	public Result save(AreaVO areaVO) {
-		Result result=areaService.save(areaVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=areaService.save(areaVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -171,11 +171,6 @@ public class AreaController extends SuperController {
 	public Result<Area> getById(String id) {
 		Result<Area> result=new Result<>();
 		Area area=areaService.getById(id);
-
-		// join 关联的对象
-		areaService.dao().fill(area)
-			.execute();
-
 		result.success(true).data(area);
 		return result;
 	}
@@ -206,11 +201,11 @@ public class AreaController extends SuperController {
 	*/
 	@ApiOperation(value = "查询区域")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609505733607424"),
+		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457749140312064"),
 		@ApiImplicitParam(name = AreaVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "datacenter"),
-		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华东数据中心"),
-		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "上海南路2好"),
-		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "备注2"),
+		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "数据中心A"),
+		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AreaVOMeta.PAGE_INDEX , AreaVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AreaServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -228,11 +223,11 @@ public class AreaController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询区域")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609505733607424"),
+		@ApiImplicitParam(name = AreaVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457749140312064"),
 		@ApiImplicitParam(name = AreaVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "datacenter"),
-		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华东数据中心"),
-		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "上海南路2好"),
-		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "备注2"),
+		@ApiImplicitParam(name = AreaVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "数据中心A"),
+		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AreaServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -240,11 +235,6 @@ public class AreaController extends SuperController {
 	public Result<PagedList<Area>> queryPagedList(AreaVO sample) {
 		Result<PagedList<Area>> result=new Result<>();
 		PagedList<Area> list=areaService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-
-		// join 关联的对象
-		areaService.dao().fill(list)
-			.execute();
-
 		result.success(true).data(list);
 		return result;
 	}
@@ -257,10 +247,14 @@ public class AreaController extends SuperController {
 	@SentinelResource(value = AreaServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AreaServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(AreaVO  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=areaService.exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -270,11 +264,15 @@ public class AreaController extends SuperController {
 	@SentinelResource(value = AreaServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AreaServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=areaService.exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
+	}
 
 
 

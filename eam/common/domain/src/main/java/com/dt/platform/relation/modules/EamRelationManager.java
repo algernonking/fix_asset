@@ -1,6 +1,7 @@
 package com.dt.platform.relation.modules;
 
 
+import com.dt.platform.constants.db.DataCenterTables;
 import com.dt.platform.constants.db.EAMTables;
 
 import com.dt.platform.constants.enums.eam.AssetInventoryDetailStatusEnum;
@@ -301,7 +302,7 @@ public class EamRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
         this.property(AssetStockGoodsOutMeta.USE_USER_PROP)
-                .using(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.USE_USER_ID).join(EAMTables.HRM_EMPLOYEE.ID);
+                .using(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.USE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
         //关联 仓库
         this.property(AssetStockGoodsOutMeta.WAREHOUSE_PROP)
@@ -1082,15 +1083,15 @@ public class EamRelationManager extends RelationManager {
 //
 ////        // 关联区域
 ////        this.property(AssetExtEquipmentMeta.AREA_PROP)
-////                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID).join(EAMTables.DC_AREA.ID);
+////                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID).join(DataCenterTables.DC_AREA.ID);
 ////
 ////        // 关联层级
 ////        this.property(AssetExtEquipmentMeta.LAYER_PROP)
-////                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID).join(EAMTables.DC_LAYER.ID);
+////                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID).join(DataCenterTables.DC_LAYER.ID);
 //
 //        // 关联机柜
 //        this.property(AssetExtEquipmentMeta.RACK_PROP)
-//                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID).join(EAMTables.DC_RACK.ID);
+//                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID).join(DataCenterTables.DC_RACK.ID);
 //
 //    }
 
@@ -1141,7 +1142,7 @@ public class EamRelationManager extends RelationManager {
 
         // 关联机柜
         this.property(AssetMeta.RACK_PROP)
-                .using(EAMTables.EAM_ASSET.RACK_ID).join(EAMTables.DC_RACK.ID);
+                .using(EAMTables.EAM_ASSET.RACK_ID).join(DataCenterTables.DC_RACK.ID);
 
 
         // 关联物品档案

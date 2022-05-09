@@ -17,12 +17,12 @@ import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsHostGtr extends BaseCodeGenerator{
 
 
     public OpsHostGtr() {
-        super(EAMTables.OPS_HOST.$TABLE,BASIC_HOSTMGR_MENU_ID);
+        super(OpsTables.OPS_HOST.$TABLE,BASIC_HOSTMGR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -52,41 +52,41 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
 
-        cfg.view().field(EAMTables.OPS_HOST.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.ARCH).table().disable(true);
-        cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_HOST.HOST_MEMORY).search().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.HOST_CPU).search().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.ARCH).table().disable(true);
+        cfg.view().field(OpsTables.OPS_HOST.HOST_NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_HOST.HOST_MEMORY).search().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.HOST_CPU).search().hidden(true);
 
-        cfg.view().field(EAMTables.OPS_HOST.DIRECTOR_USERNAME).search().fuzzySearch().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_APP_USED).search().fuzzySearch().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_DB_ADMIN).search().fuzzySearch().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_DB_USED).search().fuzzySearch().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_OS_ADMIN).search().fuzzySearch().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_OPS_OPER).search().fuzzySearch().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_OTHER).search().fuzzySearch().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.DIRECTOR_USERNAME).search().fuzzySearch().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.USER_APP_USED).search().fuzzySearch().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.USER_DB_ADMIN).search().fuzzySearch().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.USER_DB_USED).search().fuzzySearch().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.USER_OS_ADMIN).search().fuzzySearch().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.USER_OPS_OPER).search().fuzzySearch().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.USER_OTHER).search().fuzzySearch().hidden(true);
 
-        cfg.view().field(EAMTables.OPS_HOST.OFFLINE_TIME).search().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.ONLINE_TIME).search().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.OFFLINE_TIME).search().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.ONLINE_TIME).search().hidden(true);
 
-        cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_HOST.HOST_IP).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_HOST.HOST_VIP).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_HOST.HOST_CONF).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_HOST.DIRECTOR_USERNAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_HOST.HOST_NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_HOST.HOST_IP).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_HOST.HOST_VIP).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_HOST.HOST_CONF).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_HOST.DIRECTOR_USERNAME).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_HOST.HOST_CONF).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.HOST_MEMORY).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.HOST_CPU).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_OPS_OPER).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_OS_ADMIN).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_OTHER).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.OFFLINE_TIME).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.ONLINE_TIME).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.LABELS).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.CREATE_TIME).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.HOST_NOTES).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.HOST_CONF).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.HOST_MEMORY).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.HOST_CPU).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.USER_OPS_OPER).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.USER_OS_ADMIN).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.USER_OTHER).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.OFFLINE_TIME).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.ONLINE_TIME).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.LABELS).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.CREATE_TIME).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.HOST_NOTES).table().hidden(true);
+        cfg.view().field(OpsTables.OPS_HOST.PASSWORD_STRATEGY_ID).table().hidden(true);
 
 
 
@@ -100,10 +100,10 @@ public class OpsHostGtr extends BaseCodeGenerator{
         //单选组织，包括公司和部门，并指定根节点
 
 
-        cfg.view().field(EAMTables.OPS_HOST.ONLINE_TIME)
+        cfg.view().field(OpsTables.OPS_HOST.ONLINE_TIME)
                 .form().dateInput().format("yyyy-MM-dd").search().range();
 
-        cfg.view().field(EAMTables.OPS_HOST.OFFLINE_TIME)
+        cfg.view().field(OpsTables.OPS_HOST.OFFLINE_TIME)
                 .form().dateInput().format("yyyy-MM-dd")
                 .search().range();
 
@@ -171,56 +171,56 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .fillWith(HostMeta.BACKUP_METHOD).muliti(false);
 
 
-        cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
+        cfg.view().field(OpsTables.OPS_HOST.HOST_TYPE)
                 .form().validate().required()
                 .form().selectBox().dict(DictEnum.OPS_HOST_TYPE).filter(true).toolbar(false).muliti(false).defaultIndex(0);
 
-//        cfg.view().field(EAMTables.OPS_HOST.HOST_BACKUP_METHOD)
+//        cfg.view().field(OpsTables.OPS_HOST.HOST_BACKUP_METHOD)
 //                .form().selectBox().dict(DictEnum.OPS_HOST_BACKUP_METHOD).filter(true).toolbar(false).muliti(false).defaultIndex(0);
 
-        cfg.view().field(EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID)
+        cfg.view().field(OpsTables.OPS_HOST.PASSWORD_STRATEGY_ID)
                 .form().selectBox().dict(DictEnum.OPS_HOST_PASSWORD_STRATEGY);
 
 
-        cfg.view().field(EAMTables.OPS_HOST.ENVIRONMENT).basic().label("所在环境")
+        cfg.view().field(OpsTables.OPS_HOST.ENVIRONMENT).basic().label("所在环境")
                 .form().selectBox().dict(DictEnum.OPS_ENVIRONMENT).defaultIndex(0);
 
 
-        cfg.view().field(EAMTables.OPS_HOST.STATUS).basic().label("主机状态")
+        cfg.view().field(OpsTables.OPS_HOST.STATUS).basic().label("主机状态")
                 .form().validate().required()
                 .form().radioBox().enumType(HostStatusEnum.class).defaultIndex(0);
 
 
-        cfg.view().field(EAMTables.OPS_HOST.MONITOR_STATUS).basic().label("监控状态")
+        cfg.view().field(OpsTables.OPS_HOST.MONITOR_STATUS).basic().label("监控状态")
                 .form().radioBox().enumType(HostMonitorStatusEnum.class).defaultIndex(0);
 
 
 
-        cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).form().validate().required();
+        cfg.view().field(OpsTables.OPS_HOST.HOST_NAME).form().validate().required();
 
-        cfg.view().field(EAMTables.OPS_HOST.USER_OTHER).form().textArea().height(30);
+        cfg.view().field(OpsTables.OPS_HOST.USER_OTHER).form().textArea().height(30);
 
         cfg.view().list().addToolButton("数据导出","exportHost",null,"ops_host:export");
 
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_HOST.STATUS,
-                        EAMTables.OPS_HOST.SYSTEM_ID,
-                        EAMTables.OPS_HOST.HOST_VIP,
-                        EAMTables.OPS_HOST.HOST_IP,
+                        OpsTables.OPS_HOST.STATUS,
+                        OpsTables.OPS_HOST.SYSTEM_ID,
+                        OpsTables.OPS_HOST.HOST_VIP,
+                        OpsTables.OPS_HOST.HOST_IP,
                 },
                 new Object[]{
-                        EAMTables.OPS_HOST.HOST_NAME,
+                        OpsTables.OPS_HOST.HOST_NAME,
                         HostMeta.HOST_OS_IDS,
                         HostMeta.HOST_DB_IDS,
                         HostMeta.HOST_MIDDLEWARE_IDS
                 },
                 new Object[]{
-                        EAMTables.OPS_HOST.POSITION_ID,
-                        EAMTables.OPS_HOST.ENVIRONMENT,
-                        EAMTables.OPS_HOST.LABELS,
-                        EAMTables.OPS_HOST.HOST_NOTES,
+                        OpsTables.OPS_HOST.POSITION_ID,
+                        OpsTables.OPS_HOST.ENVIRONMENT,
+                        OpsTables.OPS_HOST.LABELS,
+                        OpsTables.OPS_HOST.HOST_NOTES,
                 }
         );
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
@@ -234,30 +234,30 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().formWindow().bottomSpace(50);
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
-                        EAMTables.OPS_HOST.HOST_NAME,
-                        EAMTables.OPS_HOST.STATUS,
-                        EAMTables.OPS_HOST.HOST_TYPE
+                        OpsTables.OPS_HOST.HOST_NAME,
+                        OpsTables.OPS_HOST.STATUS,
+                        OpsTables.OPS_HOST.HOST_TYPE
                 }, new Object[] {
-                        EAMTables.OPS_HOST.SYSTEM_ID,
-                        EAMTables.OPS_HOST.ENVIRONMENT,
-                        EAMTables.OPS_HOST.DIRECTOR_USERNAME
+                        OpsTables.OPS_HOST.SYSTEM_ID,
+                        OpsTables.OPS_HOST.ENVIRONMENT,
+                        OpsTables.OPS_HOST.DIRECTOR_USERNAME
                 },new Object[] {
-                        EAMTables.OPS_HOST.POSITION_ID,
-                        EAMTables.OPS_HOST.ONLINE_TIME,
-                        EAMTables.OPS_HOST.OFFLINE_TIME,
+                        OpsTables.OPS_HOST.POSITION_ID,
+                        OpsTables.OPS_HOST.ONLINE_TIME,
+                        OpsTables.OPS_HOST.OFFLINE_TIME,
                 }
         );
         cfg.view().form().addGroup("操作系统",
                 new Object[] {
-                        EAMTables.OPS_HOST.HOST_CPU,
-                        EAMTables.OPS_HOST.HOST_MEMORY,
+                        OpsTables.OPS_HOST.HOST_CPU,
+                        OpsTables.OPS_HOST.HOST_MEMORY,
                   },
                 new Object[] {
-                        EAMTables.OPS_HOST.HOST_IP,
-                        EAMTables.OPS_HOST.HOST_VIP
+                        OpsTables.OPS_HOST.HOST_IP,
+                        OpsTables.OPS_HOST.HOST_VIP
                 },
                 new Object[] {
-                        EAMTables.OPS_HOST.HOST_CONF
+                        OpsTables.OPS_HOST.HOST_CONF
                 }
         );
         cfg.view().form().addGroup("系统、数据库和中间件",
@@ -274,34 +274,34 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
         cfg.view().form().addGroup("用户情况",
                 new Object[] {
-                        EAMTables.OPS_HOST.USER_APP_USED,
-                        EAMTables.OPS_HOST.USER_OPS_OPER,
+                        OpsTables.OPS_HOST.USER_APP_USED,
+                        OpsTables.OPS_HOST.USER_OPS_OPER,
 
             },
                 new Object[] {
-                        EAMTables.OPS_HOST.USER_DB_ADMIN,
-                        EAMTables.OPS_HOST.USER_DB_USED,
+                        OpsTables.OPS_HOST.USER_DB_ADMIN,
+                        OpsTables.OPS_HOST.USER_DB_USED,
 
                 },
                 new Object[] {
-                        EAMTables.OPS_HOST.USER_OS_ADMIN,
+                        OpsTables.OPS_HOST.USER_OS_ADMIN,
 
                 }
         );
             cfg.view().form().addGroup(null,
 
                     new Object[] {
-                            EAMTables.OPS_HOST.USER_OTHER,
+                            OpsTables.OPS_HOST.USER_OTHER,
 
                     }
             );
 
         cfg.view().form().addGroup("备份情况",
                 new Object[] {
-                        EAMTables.OPS_HOST.HOST_BACKUP_METHOD,
+                        OpsTables.OPS_HOST.HOST_BACKUP_METHOD,
                 },
                 new Object[] {
-                        EAMTables.OPS_HOST.HOST_BACKUP_INFO
+                        OpsTables.OPS_HOST.HOST_BACKUP_INFO
                 }
 
 
@@ -310,19 +310,19 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
         cfg.view().form().addGroup("其他情况",
                 new Object[] {
-                        EAMTables.OPS_HOST.MONITOR_STATUS,
+                        OpsTables.OPS_HOST.MONITOR_STATUS,
                 },
                 new Object[] {
-                        EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID
+                        OpsTables.OPS_HOST.PASSWORD_STRATEGY_ID
                 },
                 new Object[] {
-                        EAMTables.OPS_HOST.LABELS
+                        OpsTables.OPS_HOST.LABELS
                 }
 
         );
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_HOST.HOST_NOTES,
+                        OpsTables.OPS_HOST.HOST_NOTES,
                 }
 
         );

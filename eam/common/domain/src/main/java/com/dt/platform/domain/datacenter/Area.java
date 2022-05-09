@@ -3,7 +3,7 @@ package com.dt.platform.domain.datacenter;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.DC_AREA;
+import com.dt.platform.constants.db.DataCenterTables.DC_AREA;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -16,7 +16,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 区域
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:45
+ * @since 2022-05-07 21:38:48
  * @sign 14D173154D0B3DCCADF35A169CF448E3
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

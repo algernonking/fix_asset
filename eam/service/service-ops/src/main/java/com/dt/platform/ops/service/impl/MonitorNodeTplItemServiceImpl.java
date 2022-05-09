@@ -32,7 +32,7 @@ import java.util.Date;
 import com.dt.platform.constants.db.EAMTables.*;
 import com.dt.platform.domain.ops.MonitorNode;
 import com.dt.platform.domain.ops.MonitorTpl;
-
+import com.dt.platform.constants.db.OpsTables.OPS_MONITOR_NODE_TPL_ITEM;
 /**
  * <p>
  * 节点监控模版 服务实现

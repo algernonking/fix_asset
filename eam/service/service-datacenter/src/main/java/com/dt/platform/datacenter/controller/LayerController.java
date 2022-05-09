@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.datacenter.meta.LayerMeta;
+import com.dt.platform.domain.datacenter.Area;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 层级 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:48
+ * @since 2022-05-07 21:49:53
 */
 
 @Api(tags = "层级")
@@ -65,15 +66,17 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "添加层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457784187916288"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "楼层1"),
+		@ApiImplicitParam(name = LayerVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = LayerServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(LayerServiceProxy.INSERT)
 	public Result insert(LayerVO layerVO) {
-		Result result=layerService.insert(layerVO);
+		Result result=layerService.insert(layerVO,false);
 		return result;
 	}
 
@@ -84,7 +87,7 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "删除层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376")
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457784187916288")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = LayerVOMeta.ID)
@@ -118,16 +121,18 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "更新层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457784187916288"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "楼层1"),
+		@ApiImplicitParam(name = LayerVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE , LayerVOMeta.SEARCH_FIELD , LayerVOMeta.FUZZY_FIELD , LayerVOMeta.SEARCH_VALUE , LayerVOMeta.SORT_FIELD , LayerVOMeta.SORT_TYPE , LayerVOMeta.IDS } )
+	@ApiOperationSupport( order=4 , ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE , LayerVOMeta.SEARCH_FIELD , LayerVOMeta.FUZZY_FIELD , LayerVOMeta.SEARCH_VALUE , LayerVOMeta.DIRTY_FIELDS , LayerVOMeta.SORT_FIELD , LayerVOMeta.SORT_TYPE , LayerVOMeta.IDS } )
 	@NotNull(name = LayerVOMeta.ID)
 	@SentinelResource(value = LayerServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(LayerServiceProxy.UPDATE)
 	public Result update(LayerVO layerVO) {
-		Result result=layerService.update(layerVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=layerService.update(layerVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -137,16 +142,18 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "保存层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457784187916288"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "楼层1"),
+		@ApiImplicitParam(name = LayerVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE , LayerVOMeta.SEARCH_FIELD , LayerVOMeta.FUZZY_FIELD , LayerVOMeta.SEARCH_VALUE , LayerVOMeta.SORT_FIELD , LayerVOMeta.SORT_TYPE , LayerVOMeta.IDS } )
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE , LayerVOMeta.SEARCH_FIELD , LayerVOMeta.FUZZY_FIELD , LayerVOMeta.SEARCH_VALUE , LayerVOMeta.DIRTY_FIELDS , LayerVOMeta.SORT_FIELD , LayerVOMeta.SORT_TYPE , LayerVOMeta.IDS } )
 	@NotNull(name = LayerVOMeta.ID)
 	@SentinelResource(value = LayerServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(LayerServiceProxy.SAVE)
 	public Result save(LayerVO layerVO) {
-		Result result=layerService.save(layerVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=layerService.save(layerVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -165,11 +172,10 @@ public class LayerController extends SuperController {
 	public Result<Layer> getById(String id) {
 		Result<Layer> result=new Result<>();
 		Layer layer=layerService.getById(id);
-
 		// join 关联的对象
 		layerService.dao().fill(layer)
+			.with(LayerMeta.AREA)
 			.execute();
-
 		result.success(true).data(layer);
 		return result;
 	}
@@ -200,8 +206,10 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "查询层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457784187916288"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "楼层1"),
+		@ApiImplicitParam(name = LayerVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE } )
@@ -220,8 +228,10 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "565457784187916288"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "楼层1"),
+		@ApiImplicitParam(name = LayerVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
@@ -230,11 +240,10 @@ public class LayerController extends SuperController {
 	public Result<PagedList<Layer>> queryPagedList(LayerVO sample) {
 		Result<PagedList<Layer>> result=new Result<>();
 		PagedList<Layer> list=layerService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-
 		// join 关联的对象
 		layerService.dao().fill(list)
+			.with(LayerMeta.AREA)
 			.execute();
-
 		result.success(true).data(list);
 		return result;
 	}
@@ -247,10 +256,14 @@ public class LayerController extends SuperController {
 	@SentinelResource(value = LayerServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(LayerServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(LayerVO  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=layerService.exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -260,11 +273,15 @@ public class LayerController extends SuperController {
 	@SentinelResource(value = LayerServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(LayerServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=layerService.exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
+	}
 
 
 

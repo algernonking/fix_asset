@@ -3,6 +3,7 @@ package com.dt.platform.proxy.datacenter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import com.dt.platform.domain.datacenter.Area;
 import com.dt.platform.domain.datacenter.AreaVO;
@@ -10,14 +11,13 @@ import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.dt.platform.proxy.ServiceNames;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
  * 区域  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:45
+ * @since 2022-05-07 21:38:48
  */
 @FeignClient(value = ServiceNames.DATACENTER, contextId = AreaServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface AreaServiceProxy {
@@ -134,7 +134,7 @@ public interface AreaServiceProxy {
     Result<Area> getById(@RequestParam(name = "id") String id);
 
     /**
-     * 批量删除区域
+     * 获取多个区域
      */
     @RequestMapping(AreaServiceProxy.GET_BY_IDS)
     Result<List<Area>> getByIds(@RequestParam(name = "ids") List<String> ids);

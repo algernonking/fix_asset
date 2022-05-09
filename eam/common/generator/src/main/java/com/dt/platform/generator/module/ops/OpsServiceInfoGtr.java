@@ -14,12 +14,12 @@ import com.dt.platform.proxy.ops.ServiceCategoryServiceProxy;
 import com.dt.platform.proxy.ops.ServiceGroupServiceProxy;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsServiceInfoGtr extends BaseCodeGenerator{
 
 
     public OpsServiceInfoGtr() {
-        super(EAMTables.OPS_SERVICE_INFO.$TABLE,BASIC_DATA_MENU_ID);
+        super(OpsTables.OPS_SERVICE_INFO.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -28,13 +28,13 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(ServiceGroup.class,"group","服务分组","服务分组");
 
 
-        cfg.view().field(EAMTables.OPS_SERVICE_INFO.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_SERVICE_INFO.SORT).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_SERVICE_INFO.CREATE_TIME).table().hidden();
+        cfg.view().field(OpsTables.OPS_SERVICE_INFO.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_SERVICE_INFO.SORT).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_SERVICE_INFO.CREATE_TIME).table().hidden();
 
-        cfg.view().field(EAMTables.OPS_SERVICE_INFO.PATCH).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_SERVICE_INFO.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_SERVICE_INFO.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_SERVICE_INFO.PATCH).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_SERVICE_INFO.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_SERVICE_INFO.NOTES).search().fuzzySearch();
 //
 
 //        String resourceNameField="res_"+OpsServiceMeta.SERVICE_NAME;
@@ -43,7 +43,7 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
 //                .table().fillBy(ServiceDetailMeta.OPS_SERVICE,OpsServiceMeta.SERVICE_NAME);
 
 
-        cfg.view().field(EAMTables.OPS_SERVICE_INFO.GROUP_ID)
+        cfg.view().field(OpsTables.OPS_SERVICE_INFO.GROUP_ID)
                 .basic().label("服务分组")
                 .table().sort(false)
                 .form().validate().required().form().selectBox().queryApi(ServiceGroupServiceProxy.QUERY_LIST)
@@ -52,19 +52,19 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
                 .fillWith(ServiceCategoryMeta.GROUP).muliti(false);
 
 
-        cfg.view().field(EAMTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID)
+        cfg.view().field(OpsTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID)
                 .basic().label("服务类型")
                 .form().validate().required()
                 .form().selectBox().queryApi(ServiceCategoryServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(ServiceCategoryMeta.ID).textField(ServiceCategoryMeta.NAME).fillWith(ServiceInfoMeta.SERVICE_CATEGORY).muliti(false);
 
-        cfg.view().field(EAMTables.OPS_SERVICE_INFO.NAME).form().validate().required();
+        cfg.view().field(OpsTables.OPS_SERVICE_INFO.NAME).form().validate().required();
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_SERVICE_INFO.GROUP_ID,
-                        EAMTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID,
-                        EAMTables.OPS_SERVICE_INFO.NAME,
-                        EAMTables.OPS_SERVICE_INFO.NOTES
+                        OpsTables.OPS_SERVICE_INFO.GROUP_ID,
+                        OpsTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID,
+                        OpsTables.OPS_SERVICE_INFO.NAME,
+                        OpsTables.OPS_SERVICE_INFO.NOTES
 
                 }
 

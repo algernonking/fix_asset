@@ -12,12 +12,12 @@ import com.dt.platform.proxy.ops.*;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.meta.DictItemMeta;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
 
 
     public OpsVoucherOwnerGtr() {
-        super(EAMTables.OPS_VOUCHER_OWNER.$TABLE,BASIC_DATA_MENU_ID);
+        super(OpsTables.OPS_VOUCHER_OWNER.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -29,26 +29,26 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addListProperty(Voucher.class,"voucherList","凭证","凭证");
         cfg.getPoClassFile().addListProperty(String.class,"voucherIds","凭证","凭证");
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NOTES).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.POSITION).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_VOUCHER_OWNER.NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_VOUCHER_OWNER.NOTES).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_VOUCHER_OWNER.POSITION).search().fuzzySearch();
 
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER.ID).basic().hidden(true);
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_VOUCHER.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER.CREATE_TIME).table().disable(true);
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE,
-                        EAMTables.OPS_VOUCHER_OWNER.LABEL,
-                        EAMTables.OPS_VOUCHER_OWNER.NAME,
-                        EAMTables.OPS_VOUCHER_OWNER.POSITION,
+                        OpsTables.OPS_VOUCHER_OWNER.CATEGORY_CODE,
+                        OpsTables.OPS_VOUCHER_OWNER.LABEL,
+                        OpsTables.OPS_VOUCHER_OWNER.NAME,
+                        OpsTables.OPS_VOUCHER_OWNER.POSITION,
                 },
                     new Object[]{
 
-                            EAMTables.OPS_VOUCHER_OWNER.NOTES
+                            OpsTables.OPS_VOUCHER_OWNER.NOTES
                     }
 
         );
@@ -60,14 +60,14 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false).filter(false).muliti(false).toolbar(false).fillWith(VoucherOwnerMeta.VOUCHER_CATEGORY);
+        cfg.view().field(OpsTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false).filter(false).muliti(false).toolbar(false).fillWith(VoucherOwnerMeta.VOUCHER_CATEGORY);
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.LABEL).form().selectBox().dict(DictEnum.OPS_VOUCHER_LABEL);
+        cfg.view().field(OpsTables.OPS_VOUCHER_OWNER.LABEL).form().selectBox().dict(DictEnum.OPS_VOUCHER_LABEL);
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NAME).form().validate().required();
+        cfg.view().field(OpsTables.OPS_VOUCHER_OWNER.NAME).form().validate().required();
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NOTES).form().textArea().height(30);
+        cfg.view().field(OpsTables.OPS_VOUCHER_OWNER.NOTES).form().textArea().height(30);
 
 
 
@@ -85,20 +85,20 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_VOUCHER_OWNER.NAME,
-                        EAMTables.OPS_VOUCHER_OWNER.POSITION,
+                        OpsTables.OPS_VOUCHER_OWNER.NAME,
+                        OpsTables.OPS_VOUCHER_OWNER.POSITION,
 
 
                 },new Object[] {
-                        EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE,
-                        EAMTables.OPS_VOUCHER_OWNER.LABEL,
+                        OpsTables.OPS_VOUCHER_OWNER.CATEGORY_CODE,
+                        OpsTables.OPS_VOUCHER_OWNER.LABEL,
 
         }
         );
 
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_VOUCHER_OWNER.NOTES
+                        OpsTables.OPS_VOUCHER_OWNER.NOTES
                 }
         );
 

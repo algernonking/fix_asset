@@ -1,5 +1,9 @@
 package com.dt.platform.datacenter.page;
 
+import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
+import com.dt.platform.domain.eam.AssetAttributeItem;
+import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
+import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -8,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.dt.platform.proxy.datacenter.RackServiceProxy;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * <p>
  * 机柜 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-30 09:08:35
+ * @since 2022-05-07 21:19:32
 */
 
 @Controller("DcRackPageController")
@@ -36,7 +43,41 @@ public class RackPageController extends ViewController {
 		}
 		return proxy;
 	}
-	
+
+
+	/**
+	 * 机柜 功能主页面
+	 */
+	@RequestMapping("/rack_area_list.html")
+	public String areaList(Model model,HttpServletRequest request) {
+		return prefix+"/rack_area_list";
+	}
+
+
+
+	/**
+	 * 机柜 功能主页面
+	 */
+	@RequestMapping("/rack_dev_tree_list.html")
+	public String devTreeList(Model model,HttpServletRequest request) {
+		return prefix+"/rack_dev_tree_list";
+	}
+
+	/**
+	 * 机柜 功能主页面
+	 */
+	@RequestMapping("/rack_dev_show_list.html")
+	public String devShowList(Model model,HttpServletRequest request) {
+
+		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/rack_dev_show_list";
+	}
+
 	/**
 	 * 机柜 功能主页面
 	 */

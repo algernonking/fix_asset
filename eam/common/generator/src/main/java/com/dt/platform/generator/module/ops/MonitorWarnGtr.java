@@ -10,12 +10,12 @@ import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.MonitorTplTypePageController;
 import com.dt.platform.proxy.ops.MonitorTplTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
-
+import com.dt.platform.constants.db.OpsTables;
 public class MonitorWarnGtr extends BaseCodeGenerator{
 
 
     public MonitorWarnGtr() {
-        super(EAMTables.OPS_MONITOR_WARN.$TABLE,MONITOR_MENU_ID);
+        super(OpsTables.OPS_MONITOR_WARN.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -26,14 +26,14 @@ public class MonitorWarnGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_WARN.STATUS,
-                        EAMTables.OPS_MONITOR_WARN.WARN_LEVEL,
-                        EAMTables.OPS_MONITOR_WARN.INDICATOR_NAME,
-                        EAMTables.OPS_MONITOR_WARN.CONTENT
+                        OpsTables.OPS_MONITOR_WARN.STATUS,
+                        OpsTables.OPS_MONITOR_WARN.WARN_LEVEL,
+                        OpsTables.OPS_MONITOR_WARN.INDICATOR_NAME,
+                        OpsTables.OPS_MONITOR_WARN.CONTENT
                 },
                 new Object[]{
-                        EAMTables.OPS_MONITOR_WARN.WARN_TIME,
-                        EAMTables.OPS_MONITOR_WARN.HANDLED_TIME
+                        OpsTables.OPS_MONITOR_WARN.WARN_TIME,
+                        OpsTables.OPS_MONITOR_WARN.HANDLED_TIME
                 }
         );
 
@@ -41,20 +41,20 @@ public class MonitorWarnGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_WARN.WARN_TIME).search().range();
-        cfg.view().field(EAMTables.OPS_MONITOR_WARN.HANDLED_TIME).search().range();
-        cfg.view().field(EAMTables.OPS_MONITOR_WARN.INDICATOR_NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_MONITOR_WARN.CONTENT).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_WARN.WARN_TIME).search().range();
+        cfg.view().field(OpsTables.OPS_MONITOR_WARN.HANDLED_TIME).search().range();
+        cfg.view().field(OpsTables.OPS_MONITOR_WARN.INDICATOR_NAME).search().fuzzySearch();
+        cfg.view().field(OpsTables.OPS_MONITOR_WARN.CONTENT).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.OPS_MONITOR_WARN.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_WARN.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_WARN.CREATE_TIME).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_WARN.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_WARN.ID).table().disable(true);
+        cfg.view().field(OpsTables.OPS_MONITOR_WARN.CREATE_TIME).table().disable(true);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_WARN.STATUS).form()
+        cfg.view().field(OpsTables.OPS_MONITOR_WARN.STATUS).form()
                 .label("状态").selectBox().enumType(MonitorWarnProcessStatusEnum.class);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_WARN.WARN_LEVEL).form()
+        cfg.view().field(OpsTables.OPS_MONITOR_WARN.WARN_LEVEL).form()
                 .label("告警等级").selectBox().enumType(MonitorWarnLevelEnum.class);
 
 
@@ -64,15 +64,15 @@ public class MonitorWarnGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_WARN.STATUS,
-                        EAMTables.OPS_MONITOR_WARN.WARN_LEVEL,
-                        EAMTables.OPS_MONITOR_WARN.INDICATOR_NAME,
-                        EAMTables.OPS_MONITOR_WARN.CONTENT
+                        OpsTables.OPS_MONITOR_WARN.STATUS,
+                        OpsTables.OPS_MONITOR_WARN.WARN_LEVEL,
+                        OpsTables.OPS_MONITOR_WARN.INDICATOR_NAME,
+                        OpsTables.OPS_MONITOR_WARN.CONTENT
                 },
                 new Object[] {
-                        EAMTables.OPS_MONITOR_WARN.WARN_TIME,
-                        EAMTables.OPS_MONITOR_WARN.HANDLED_TIME,
-                        EAMTables.OPS_MONITOR_WARN.NOTES,
+                        OpsTables.OPS_MONITOR_WARN.WARN_TIME,
+                        OpsTables.OPS_MONITOR_WARN.HANDLED_TIME,
+                        OpsTables.OPS_MONITOR_WARN.NOTES,
 
                 }
         );

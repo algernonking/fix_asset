@@ -7,12 +7,12 @@ import com.dt.platform.ops.page.VoucherPrivPageController;
 import com.dt.platform.proxy.ops.VoucherPrivServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
-
+import com.dt.platform.constants.db.OpsTables;
 public class OpsVoucherPrivGtr extends BaseCodeGenerator{
 
 
     public OpsVoucherPrivGtr() {
-        super(EAMTables.OPS_VOUCHER_PRIV.$TABLE,BASIC_DATA_MENU_ID);
+        super(OpsTables.OPS_VOUCHER_PRIV.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -21,32 +21,32 @@ public class OpsVoucherPrivGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_VOUCHER_PRIV.TYPE,
-                        EAMTables.OPS_VOUCHER_PRIV.STATUS,
-                        EAMTables.OPS_VOUCHER_PRIV.EMPL_ID
+                        OpsTables.OPS_VOUCHER_PRIV.TYPE,
+                        OpsTables.OPS_VOUCHER_PRIV.STATUS,
+                        OpsTables.OPS_VOUCHER_PRIV.EMPL_ID
                 }
         );
         cfg.view().search().inputWidth(180);
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.EMPL_ID).form().validate().required().form().button().chooseEmployee(true);
-        cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.EMPL_ID).table().fillBy("employee","nameAndBadge");
+        cfg.view().field(OpsTables.OPS_VOUCHER_PRIV.ID).basic().hidden(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER_PRIV.EMPL_ID).form().validate().required().form().button().chooseEmployee(true);
+        cfg.view().field(OpsTables.OPS_VOUCHER_PRIV.EMPL_ID).table().fillBy("employee","nameAndBadge");
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.TYPE).form().validate().required().form()
+        cfg.view().field(OpsTables.OPS_VOUCHER_PRIV.TYPE).form().validate().required().form()
                 .selectBox().dict(DictEnum.OPS_VOUCHER_TYPE)
                 .paging(false).muliti(true).filter(true).toolbar(true).defaultIndex(0);
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.STATUS).form().validate().required().form()
+        cfg.view().field(OpsTables.OPS_VOUCHER_PRIV.STATUS).form().validate().required().form()
                 .radioBox().enumType(StatusValidEnum.class).defaultIndex(0);
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_VOUCHER_PRIV.TYPE,
-                        EAMTables.OPS_VOUCHER_PRIV.EMPL_ID,
-                        EAMTables.OPS_VOUCHER_PRIV.STATUS,
+                        OpsTables.OPS_VOUCHER_PRIV.TYPE,
+                        OpsTables.OPS_VOUCHER_PRIV.EMPL_ID,
+                        OpsTables.OPS_VOUCHER_PRIV.STATUS,
                 }
         );
 
