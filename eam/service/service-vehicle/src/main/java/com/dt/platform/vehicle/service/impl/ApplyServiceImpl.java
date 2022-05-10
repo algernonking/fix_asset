@@ -63,7 +63,7 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -71,7 +71,7 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 	 * */
 	public DAO dao() { return dao; }
 
-	@Autowired 
+	@Autowired
 	private ASelectItemServiceImpl aSelectItemServiceImpl;
 
 
@@ -225,7 +225,7 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 		return super.insertList(applyList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 车辆申请
 	 *
@@ -248,7 +248,7 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 车辆申请
 	 *
@@ -357,7 +357,7 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 		return super.updateList(applyList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 车辆申请
 	 *
@@ -371,7 +371,7 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 车辆申请
 	 *
@@ -387,7 +387,7 @@ public class ApplyServiceImpl extends SuperService<Apply> implements IApplyServi
 
 	@Override
 	public List<Apply> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 
