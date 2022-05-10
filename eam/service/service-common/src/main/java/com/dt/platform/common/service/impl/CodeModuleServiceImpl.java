@@ -12,6 +12,8 @@ import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.springframework.stereotype.Service;
 import com.github.foxnic.api.transter.Result;
 import javax.annotation.Resource;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -26,7 +28,16 @@ import java.util.*;
 
 @Service("CodeParseService")
 public class CodeModuleServiceImpl implements ICodeModuleService {
-	
+
+	private Random rand;
+	{
+		try {
+			rand = SecureRandom.getInstanceStrong();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -169,6 +180,7 @@ public class CodeModuleServiceImpl implements ICodeModuleService {
 				.replaceAll("\\}","").trim();
 	}
 
+
 	/**
 	 * 按照指定长度生成字符串
 	 * @param length 长度
@@ -176,10 +188,10 @@ public class CodeModuleServiceImpl implements ICodeModuleService {
 	 * */
 	public String getRandomString(int length){
 		String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		Random random=new Random();
+	//	Random random=new Random();
 		StringBuffer sb=new StringBuffer();
 		for(int i=0;i<length;i++){
-			int number=random.nextInt(62);
+			int number=this.rand.nextInt(62);
 			sb.append(str.charAt(number));
 		}
 		return sb.toString();
