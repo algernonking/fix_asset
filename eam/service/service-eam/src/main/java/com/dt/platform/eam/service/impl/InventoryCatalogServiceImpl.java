@@ -207,7 +207,7 @@ public class InventoryCatalogServiceImpl extends SuperService<InventoryCatalog> 
 
 	@Override
 	public List<InventoryCatalog> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

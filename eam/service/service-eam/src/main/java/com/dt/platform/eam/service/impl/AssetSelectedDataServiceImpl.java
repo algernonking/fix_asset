@@ -181,7 +181,7 @@ public class AssetSelectedDataServiceImpl extends SuperService<AssetSelectedData
 
 	@Override
 	public List<AssetSelectedData> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

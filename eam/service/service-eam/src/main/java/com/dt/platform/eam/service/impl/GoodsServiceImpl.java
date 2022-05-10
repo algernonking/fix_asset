@@ -180,7 +180,7 @@ public class GoodsServiceImpl extends SuperService<Goods> implements IGoodsServi
 
 	@Override
 	public List<Goods> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

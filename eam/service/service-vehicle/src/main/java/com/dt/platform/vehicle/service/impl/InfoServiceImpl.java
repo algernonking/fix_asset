@@ -54,7 +54,7 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -103,7 +103,7 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 		return super.insertList(infoList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 车辆信息
 	 *
@@ -124,7 +124,7 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 车辆信息
 	 *
@@ -184,7 +184,7 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 		return super.updateList(infoList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 车辆信息
 	 *
@@ -198,7 +198,7 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 车辆信息
 	 *
@@ -214,7 +214,7 @@ public class InfoServiceImpl extends SuperService<Info> implements IInfoService 
 
 	@Override
 	public List<Info> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

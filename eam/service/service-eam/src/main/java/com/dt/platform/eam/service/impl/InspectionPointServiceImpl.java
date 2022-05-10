@@ -45,7 +45,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -93,7 +93,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 		return super.insertList(inspectionPointList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 巡检点
 	 *
@@ -114,7 +114,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 巡检点
 	 *
@@ -174,7 +174,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 		return super.updateList(inspectionPointList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 巡检点
 	 *
@@ -188,7 +188,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 巡检点
 	 *
@@ -204,7 +204,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 
 	@Override
 	public List<InspectionPoint> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

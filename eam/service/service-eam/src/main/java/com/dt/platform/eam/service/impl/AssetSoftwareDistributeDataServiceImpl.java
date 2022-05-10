@@ -205,7 +205,7 @@ public class AssetSoftwareDistributeDataServiceImpl extends SuperService<AssetSo
 
 	@Override
 	public List<AssetSoftwareDistributeData> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

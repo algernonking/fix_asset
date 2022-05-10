@@ -310,7 +310,7 @@ public class AssetSoftwareChangeServiceImpl extends SuperService<AssetSoftwareCh
 
 	@Override
 	public List<AssetSoftwareChange> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

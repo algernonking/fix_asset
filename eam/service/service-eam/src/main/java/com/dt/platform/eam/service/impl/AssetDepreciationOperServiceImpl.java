@@ -397,7 +397,7 @@ public class AssetDepreciationOperServiceImpl extends SuperService<AssetDeprecia
 
 	@Override
 	public List<AssetDepreciationOper> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

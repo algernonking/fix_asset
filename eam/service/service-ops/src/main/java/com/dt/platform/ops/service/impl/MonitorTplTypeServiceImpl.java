@@ -45,7 +45,7 @@ public class MonitorTplTypeServiceImpl extends SuperService<MonitorTplType> impl
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -93,7 +93,7 @@ public class MonitorTplTypeServiceImpl extends SuperService<MonitorTplType> impl
 		return super.insertList(monitorTplTypeList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 模版类型
 	 *
@@ -114,7 +114,7 @@ public class MonitorTplTypeServiceImpl extends SuperService<MonitorTplType> impl
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 模版类型
 	 *
@@ -174,7 +174,7 @@ public class MonitorTplTypeServiceImpl extends SuperService<MonitorTplType> impl
 		return super.updateList(monitorTplTypeList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 模版类型
 	 *
@@ -188,7 +188,7 @@ public class MonitorTplTypeServiceImpl extends SuperService<MonitorTplType> impl
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 模版类型
 	 *
@@ -204,7 +204,7 @@ public class MonitorTplTypeServiceImpl extends SuperService<MonitorTplType> impl
 
 	@Override
 	public List<MonitorTplType> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

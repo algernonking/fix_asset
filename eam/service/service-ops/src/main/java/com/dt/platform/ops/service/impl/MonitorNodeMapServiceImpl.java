@@ -45,7 +45,7 @@ public class MonitorNodeMapServiceImpl extends SuperService<MonitorNodeMap> impl
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -93,7 +93,7 @@ public class MonitorNodeMapServiceImpl extends SuperService<MonitorNodeMap> impl
 		return super.insertList(monitorNodeMapList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 节点映射
 	 *
@@ -114,7 +114,7 @@ public class MonitorNodeMapServiceImpl extends SuperService<MonitorNodeMap> impl
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 节点映射
 	 *
@@ -174,7 +174,7 @@ public class MonitorNodeMapServiceImpl extends SuperService<MonitorNodeMap> impl
 		return super.updateList(monitorNodeMapList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 节点映射
 	 *
@@ -188,7 +188,7 @@ public class MonitorNodeMapServiceImpl extends SuperService<MonitorNodeMap> impl
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 节点映射
 	 *
@@ -204,7 +204,7 @@ public class MonitorNodeMapServiceImpl extends SuperService<MonitorNodeMap> impl
 
 	@Override
 	public List<MonitorNodeMap> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

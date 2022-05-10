@@ -201,7 +201,7 @@ public class #(simpleName) extends SuperController {
 	@PostMapping(#(agentSimpleName).GET_BY_IDS)
 	public Result<List<#(poSimpleName)>> getByIds(List<#(idsPropertyType)> #(idsPropertyName)) {
 		Result<List<#(poSimpleName)>> result=new Result<>();
-		List<#(poSimpleName)> list=#(serviceVarName).getByIds(#(idsPropertyName));
+		List<#(poSimpleName)> list=#(serviceVarName).queryListByIds(#(idsPropertyName));
 		#if(fillWithUnits.fillGetByIds!=null)
 
 		// join 关联的对象

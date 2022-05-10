@@ -63,7 +63,7 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -339,7 +339,7 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 库存物品
 	 *
@@ -399,7 +399,7 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 		return super.updateList(goodsStockList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 库存物品
 	 *
@@ -413,7 +413,7 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 库存物品
 	 *
@@ -429,7 +429,7 @@ public class GoodsStockServiceImpl extends SuperService<GoodsStock> implements I
 
 	@Override
 	public List<GoodsStock> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

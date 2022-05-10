@@ -204,7 +204,7 @@ public class AssetSoftwareChangeDetailServiceImpl extends SuperService<AssetSoft
 
 	@Override
 	public List<AssetSoftwareChangeDetail> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

@@ -46,7 +46,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -94,7 +94,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 		return super.insertList(areaList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 区域
 	 *
@@ -115,7 +115,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 区域
 	 *
@@ -175,7 +175,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 		return super.updateList(areaList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 区域
 	 *
@@ -189,7 +189,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 区域
 	 *
@@ -205,7 +205,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 
 	@Override
 	public List<Area> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

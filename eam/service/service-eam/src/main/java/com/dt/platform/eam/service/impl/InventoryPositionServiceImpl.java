@@ -207,7 +207,7 @@ public class InventoryPositionServiceImpl extends SuperService<InventoryPosition
 
 	@Override
 	public List<InventoryPosition> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

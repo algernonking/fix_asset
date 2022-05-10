@@ -469,7 +469,7 @@ public class AssetStockDeliverServiceImpl extends SuperService<AssetStockDeliver
 
 	@Override
 	public List<AssetStockDeliver> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

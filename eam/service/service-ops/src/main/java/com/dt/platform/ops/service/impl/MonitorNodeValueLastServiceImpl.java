@@ -204,7 +204,7 @@ public class MonitorNodeValueLastServiceImpl extends SuperService<MonitorNodeVal
 
 	@Override
 	public List<MonitorNodeValueLast> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

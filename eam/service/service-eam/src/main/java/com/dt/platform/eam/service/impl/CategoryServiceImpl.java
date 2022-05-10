@@ -219,7 +219,7 @@ public class CategoryServiceImpl extends SuperService<Category> implements ICate
 
 	@Override
 	public List<Category> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

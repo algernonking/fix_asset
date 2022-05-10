@@ -45,7 +45,7 @@ public class MonitorNodeGroupServiceImpl extends SuperService<MonitorNodeGroup> 
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -93,7 +93,7 @@ public class MonitorNodeGroupServiceImpl extends SuperService<MonitorNodeGroup> 
 		return super.insertList(monitorNodeGroupList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 节点分组
 	 *
@@ -114,7 +114,7 @@ public class MonitorNodeGroupServiceImpl extends SuperService<MonitorNodeGroup> 
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 节点分组
 	 *
@@ -174,7 +174,7 @@ public class MonitorNodeGroupServiceImpl extends SuperService<MonitorNodeGroup> 
 		return super.updateList(monitorNodeGroupList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 节点分组
 	 *
@@ -188,7 +188,7 @@ public class MonitorNodeGroupServiceImpl extends SuperService<MonitorNodeGroup> 
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 节点分组
 	 *
@@ -204,7 +204,7 @@ public class MonitorNodeGroupServiceImpl extends SuperService<MonitorNodeGroup> 
 
 	@Override
 	public List<MonitorNodeGroup> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

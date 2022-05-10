@@ -356,7 +356,7 @@ public class AssetSoftwareServiceImpl extends SuperService<AssetSoftware> implem
 
 	@Override
 	public List<AssetSoftware> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

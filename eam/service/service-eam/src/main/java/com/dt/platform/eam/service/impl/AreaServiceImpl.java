@@ -183,7 +183,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 
 	@Override
 	public List<Area> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

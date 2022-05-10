@@ -48,7 +48,7 @@ public class AssetDataPermissionsCatalogServiceImpl extends SuperService<AssetDa
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -96,7 +96,7 @@ public class AssetDataPermissionsCatalogServiceImpl extends SuperService<AssetDa
 		return super.insertList(assetDataPermissionsCatalogList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 分类
 	 *
@@ -117,7 +117,7 @@ public class AssetDataPermissionsCatalogServiceImpl extends SuperService<AssetDa
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 分类
 	 *
@@ -177,7 +177,7 @@ public class AssetDataPermissionsCatalogServiceImpl extends SuperService<AssetDa
 		return super.updateList(assetDataPermissionsCatalogList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 分类
 	 *
@@ -191,7 +191,7 @@ public class AssetDataPermissionsCatalogServiceImpl extends SuperService<AssetDa
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 分类
 	 *
@@ -207,7 +207,7 @@ public class AssetDataPermissionsCatalogServiceImpl extends SuperService<AssetDa
 
 	@Override
 	public List<AssetDataPermissionsCatalog> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

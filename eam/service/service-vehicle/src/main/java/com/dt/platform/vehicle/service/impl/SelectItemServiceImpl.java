@@ -207,7 +207,7 @@ public class SelectItemServiceImpl extends SuperService<SelectItem> implements I
 
 	@Override
 	public List<SelectItem> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

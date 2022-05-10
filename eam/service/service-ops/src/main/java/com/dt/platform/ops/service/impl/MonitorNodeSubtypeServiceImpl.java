@@ -45,7 +45,7 @@ public class MonitorNodeSubtypeServiceImpl extends SuperService<MonitorNodeSubty
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -93,7 +93,7 @@ public class MonitorNodeSubtypeServiceImpl extends SuperService<MonitorNodeSubty
 		return super.insertList(monitorNodeSubtypeList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 节点子类型
 	 *
@@ -114,7 +114,7 @@ public class MonitorNodeSubtypeServiceImpl extends SuperService<MonitorNodeSubty
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 节点子类型
 	 *
@@ -174,7 +174,7 @@ public class MonitorNodeSubtypeServiceImpl extends SuperService<MonitorNodeSubty
 		return super.updateList(monitorNodeSubtypeList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 节点子类型
 	 *
@@ -188,7 +188,7 @@ public class MonitorNodeSubtypeServiceImpl extends SuperService<MonitorNodeSubty
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 节点子类型
 	 *
@@ -204,7 +204,7 @@ public class MonitorNodeSubtypeServiceImpl extends SuperService<MonitorNodeSubty
 
 	@Override
 	public List<MonitorNodeSubtype> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

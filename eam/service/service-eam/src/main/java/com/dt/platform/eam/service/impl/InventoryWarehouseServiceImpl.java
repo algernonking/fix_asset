@@ -207,7 +207,7 @@ public class InventoryWarehouseServiceImpl extends SuperService<InventoryWarehou
 
 	@Override
 	public List<InventoryWarehouse> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

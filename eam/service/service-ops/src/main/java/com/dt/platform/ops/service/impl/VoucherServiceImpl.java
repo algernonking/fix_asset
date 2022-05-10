@@ -53,16 +53,16 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 	 *
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
-	
+
 	/**
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
 
 
-	
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
@@ -80,8 +80,8 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 	public Result insertList(List<Voucher> voucherList) {
 		return super.insertList(voucherList);
 	}
-	
-	
+
+
 	/**
 	 * 按主键删除 凭证
 	 *
@@ -102,7 +102,7 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 凭证
 	 *
@@ -126,7 +126,7 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 更新实体
 	 * @param voucher 数据对象
@@ -150,7 +150,7 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 		Result r=super.update(voucher , mode);
 		return r;
 	}
-	
+
 	/**
 	 * 更新实体集，事务内
 	 * @param voucherList 数据对象列表
@@ -161,8 +161,8 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 	public Result updateList(List<Voucher> voucherList , SaveMode mode) {
 		return super.updateList(voucherList , mode);
 	}
-	
-	
+
+
 	/**
 	 * 按主键更新字段 凭证
 	 *
@@ -174,9 +174,9 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 		if(!field.table().name().equals(this.table())) throw new IllegalArgumentException("更新的数据表["+field.table().name()+"]与服务对应的数据表["+this.table()+"]不一致");
 		int suc=dao.update(field.table().name()).set(field.name(), value).where().and("id = ? ",id).top().execute();
 		return suc>0;
-	} 
-	
-	
+	}
+
+
 	/**
 	 * 按主键获取 凭证
 	 *
@@ -192,14 +192,14 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 
 	@Override
 	public List<Voucher> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
@@ -207,11 +207,11 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 	public List<Voucher> queryList(Voucher sample) {
 		return super.queryList(sample);
 	}
-	
-	
+
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param pageSize 分页条数
 	 * @param pageIndex 页码
@@ -221,10 +221,10 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 	public PagedList<Voucher> queryPagedList(Voucher sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param condition 其它条件
 	 * @param pageSize 分页条数
@@ -235,7 +235,7 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 	public PagedList<Voucher> queryPagedList(Voucher sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 检查 角色 是否已经存在
 	 *

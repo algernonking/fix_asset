@@ -199,7 +199,7 @@ public class InformationSystemServiceImpl extends SuperService<InformationSystem
 
 	@Override
 	public List<InformationSystem> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

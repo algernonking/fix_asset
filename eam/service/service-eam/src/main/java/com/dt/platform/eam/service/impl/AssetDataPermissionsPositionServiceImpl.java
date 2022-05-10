@@ -207,7 +207,7 @@ public class AssetDataPermissionsPositionServiceImpl extends SuperService<AssetD
 
 	@Override
 	public List<AssetDataPermissionsPosition> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

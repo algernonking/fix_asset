@@ -204,7 +204,7 @@ public class ContentServiceImpl extends SuperService<Content> implements IConten
 
 	@Override
 	public List<Content> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

@@ -234,7 +234,7 @@ public class PurchaseCheckServiceImpl extends SuperService<PurchaseCheck> implem
 
 	@Override
 	public List<PurchaseCheck> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

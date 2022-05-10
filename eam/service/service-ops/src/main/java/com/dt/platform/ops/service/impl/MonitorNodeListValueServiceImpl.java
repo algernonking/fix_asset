@@ -45,7 +45,7 @@ public class MonitorNodeListValueServiceImpl extends SuperService<MonitorNodeLis
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -93,7 +93,7 @@ public class MonitorNodeListValueServiceImpl extends SuperService<MonitorNodeLis
 		return super.insertList(monitorNodeListValueList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 节点列表数值
 	 *
@@ -114,7 +114,7 @@ public class MonitorNodeListValueServiceImpl extends SuperService<MonitorNodeLis
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 节点列表数值
 	 *
@@ -174,7 +174,7 @@ public class MonitorNodeListValueServiceImpl extends SuperService<MonitorNodeLis
 		return super.updateList(monitorNodeListValueList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 节点列表数值
 	 *
@@ -188,7 +188,7 @@ public class MonitorNodeListValueServiceImpl extends SuperService<MonitorNodeLis
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 节点列表数值
 	 *
@@ -204,7 +204,7 @@ public class MonitorNodeListValueServiceImpl extends SuperService<MonitorNodeLis
 
 	@Override
 	public List<MonitorNodeListValue> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

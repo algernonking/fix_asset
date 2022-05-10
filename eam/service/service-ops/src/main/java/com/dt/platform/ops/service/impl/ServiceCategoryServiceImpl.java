@@ -180,7 +180,7 @@ public class ServiceCategoryServiceImpl extends SuperService<ServiceCategory> im
 
 	@Override
 	public List<ServiceCategory> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

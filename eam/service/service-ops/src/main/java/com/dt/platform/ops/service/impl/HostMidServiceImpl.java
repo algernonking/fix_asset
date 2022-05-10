@@ -207,7 +207,7 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 
 	@Override
 	public List<HostMid> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

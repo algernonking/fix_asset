@@ -42,7 +42,7 @@ public class InventoryUserServiceImpl extends SuperService<InventoryUser> implem
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -90,7 +90,7 @@ public class InventoryUserServiceImpl extends SuperService<InventoryUser> implem
 		return super.insertList(inventoryUserList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 盘点用户
 	 *
@@ -111,7 +111,7 @@ public class InventoryUserServiceImpl extends SuperService<InventoryUser> implem
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 盘点用户
 	 *
@@ -171,7 +171,7 @@ public class InventoryUserServiceImpl extends SuperService<InventoryUser> implem
 		return super.updateList(inventoryUserList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 盘点用户
 	 *
@@ -185,7 +185,7 @@ public class InventoryUserServiceImpl extends SuperService<InventoryUser> implem
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 盘点用户
 	 *
@@ -201,7 +201,7 @@ public class InventoryUserServiceImpl extends SuperService<InventoryUser> implem
 
 	@Override
 	public List<InventoryUser> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

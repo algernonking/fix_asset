@@ -204,7 +204,7 @@ public class ContractSignerServiceImpl extends SuperService<ContractSigner> impl
 
 	@Override
 	public List<ContractSigner> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

@@ -481,7 +481,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 
 	@Override
 	public List<AssetCollection> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

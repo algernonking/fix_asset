@@ -204,7 +204,7 @@ public class MonitorVoucherServiceImpl extends SuperService<MonitorVoucher> impl
 
 	@Override
 	public List<MonitorVoucher> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

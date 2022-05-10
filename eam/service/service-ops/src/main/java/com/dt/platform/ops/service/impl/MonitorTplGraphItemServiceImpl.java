@@ -204,7 +204,7 @@ public class MonitorTplGraphItemServiceImpl extends SuperService<MonitorTplGraph
 
 	@Override
 	public List<MonitorTplGraphItem> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

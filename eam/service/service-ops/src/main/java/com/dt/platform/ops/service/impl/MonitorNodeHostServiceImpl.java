@@ -204,7 +204,7 @@ public class MonitorNodeHostServiceImpl extends SuperService<MonitorNodeHost> im
 
 	@Override
 	public List<MonitorNodeHost> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

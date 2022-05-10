@@ -60,7 +60,7 @@ public class InventoryPlanServiceImpl extends SuperService<InventoryPlan> implem
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -109,7 +109,7 @@ public class InventoryPlanServiceImpl extends SuperService<InventoryPlan> implem
 		return super.insertList(inventoryPlanList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 盘点计划
 	 *
@@ -130,7 +130,7 @@ public class InventoryPlanServiceImpl extends SuperService<InventoryPlan> implem
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 盘点计划
 	 *
@@ -190,7 +190,7 @@ public class InventoryPlanServiceImpl extends SuperService<InventoryPlan> implem
 		return super.updateList(inventoryPlanList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 盘点计划
 	 *
@@ -326,7 +326,7 @@ public class InventoryPlanServiceImpl extends SuperService<InventoryPlan> implem
 
 	@Override
 	public List<InventoryPlan> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

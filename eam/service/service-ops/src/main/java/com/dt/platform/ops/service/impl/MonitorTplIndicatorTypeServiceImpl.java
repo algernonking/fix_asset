@@ -204,7 +204,7 @@ public class MonitorTplIndicatorTypeServiceImpl extends SuperService<MonitorTplI
 
 	@Override
 	public List<MonitorTplIndicatorType> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

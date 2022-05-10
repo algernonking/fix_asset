@@ -180,7 +180,7 @@ public class AssetProcessRecordServiceImpl extends SuperService<AssetProcessReco
 
 	@Override
 	public List<AssetProcessRecord> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

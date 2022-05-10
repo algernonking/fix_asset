@@ -204,7 +204,7 @@ public class PurchaseOrderDetailServiceImpl extends SuperService<PurchaseOrderDe
 
 	@Override
 	public List<PurchaseOrderDetail> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

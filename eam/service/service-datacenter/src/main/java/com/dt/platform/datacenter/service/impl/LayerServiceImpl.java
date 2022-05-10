@@ -46,7 +46,7 @@ public class LayerServiceImpl extends SuperService<Layer> implements ILayerServi
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -94,7 +94,7 @@ public class LayerServiceImpl extends SuperService<Layer> implements ILayerServi
 		return super.insertList(layerList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 层级
 	 *
@@ -115,7 +115,7 @@ public class LayerServiceImpl extends SuperService<Layer> implements ILayerServi
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 层级
 	 *
@@ -175,7 +175,7 @@ public class LayerServiceImpl extends SuperService<Layer> implements ILayerServi
 		return super.updateList(layerList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 层级
 	 *
@@ -189,7 +189,7 @@ public class LayerServiceImpl extends SuperService<Layer> implements ILayerServi
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 层级
 	 *
@@ -205,7 +205,7 @@ public class LayerServiceImpl extends SuperService<Layer> implements ILayerServi
 
 	@Override
 	public List<Layer> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

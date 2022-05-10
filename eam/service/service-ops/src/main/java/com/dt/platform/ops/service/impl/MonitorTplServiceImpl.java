@@ -204,7 +204,7 @@ public class MonitorTplServiceImpl extends SuperService<MonitorTpl> implements I
 
 	@Override
 	public List<MonitorTpl> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

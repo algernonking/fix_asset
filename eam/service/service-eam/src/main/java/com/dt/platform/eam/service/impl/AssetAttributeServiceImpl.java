@@ -51,16 +51,16 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
-	
+
 	/**
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
 
 
-	
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
@@ -92,7 +92,7 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 		Result r=super.insert(assetAttribute);
 		return r;
 	}
-	
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param assetAttributeList 实体数据清单
@@ -102,8 +102,8 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 	public Result insertList(List<AssetAttribute> assetAttributeList) {
 		return super.insertList(assetAttributeList);
 	}
-	
-	
+
+
 	/**
 	 * 按主键删除 资产字段配置
 	 *
@@ -124,7 +124,7 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 资产字段配置
 	 *
@@ -148,7 +148,7 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 更新实体
 	 * @param assetAttribute 数据对象
@@ -166,7 +166,7 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 //		}
 		return r;
 	}
-	
+
 	/**
 	 * 更新实体集，事务内
 	 * @param assetAttributeList 数据对象列表
@@ -177,8 +177,8 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 	public Result updateList(List<AssetAttribute> assetAttributeList , SaveMode mode) {
 		return super.updateList(assetAttributeList , mode);
 	}
-	
-	
+
+
 	/**
 	 * 按主键更新字段 资产字段配置
 	 *
@@ -190,9 +190,9 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 		if(!field.table().name().equals(this.table())) throw new IllegalArgumentException("更新的数据表["+field.table().name()+"]与服务对应的数据表["+this.table()+"]不一致");
 		int suc=dao.update(field.table().name()).set(field.name(), value).where().and("id = ? ",id).top().execute();
 		return suc>0;
-	} 
-	
-	
+	}
+
+
 	/**
 	 * 按主键获取 资产字段配置
 	 *
@@ -208,14 +208,14 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 
 	@Override
 	public List<AssetAttribute> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
@@ -223,11 +223,11 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 	public List<AssetAttribute> queryList(AssetAttribute sample) {
 		return super.queryList(sample);
 	}
-	
-	
+
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param pageSize 分页条数
 	 * @param pageIndex 页码
@@ -237,10 +237,10 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 	public PagedList<AssetAttribute> queryPagedList(AssetAttribute sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param condition 其它条件
 	 * @param pageSize 分页条数
@@ -251,7 +251,7 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 	public PagedList<AssetAttribute> queryPagedList(AssetAttribute sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 检查 角色 是否已经存在
 	 *

@@ -181,7 +181,7 @@ public class BrandDemoServiceImpl extends SuperService<BrandDemo> implements IBr
 
 	@Override
 	public List<BrandDemo> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 
