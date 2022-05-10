@@ -353,11 +353,11 @@ function ListPage() {
 
 
             var queryString="?ownerType="+OWNER_TYPE+"&selectedCode="+SELECTED_CODE+"&ownerCode="+OWNER_CODE+"&ownerTmpId="+OWNER_TMP_ID+"&operType="+OPER_TYPE+"&pageType="+PAGE_TYPE;
-            var top=2
+            var formTop=2
             var index=admin.popupCenter({
                 title: "选择资产",
                 resize: false,
-                offset: [top,null],
+                offset: [formTop,null],
                 area: ["95%","90%"],
                 type: 2,
                 id:"eam-asset-select-data-win",

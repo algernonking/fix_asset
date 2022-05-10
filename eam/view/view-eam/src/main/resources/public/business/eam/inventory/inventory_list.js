@@ -360,47 +360,47 @@ function ListPage() {
 			var data = obj.data;
 			var layEvent = obj.event;
 
-			if(window.pageExt.list.beforeRowOperationEvent) {
-				var doNext=window.pageExt.list.beforeRowOperationEvent(data,obj);
-				if(!doNext) return;
+			if (window.pageExt.list.beforeRowOperationEvent) {
+				var doNext = window.pageExt.list.beforeRowOperationEvent(data, obj);
+				if (!doNext) return;
 			}
 
-			admin.putTempData('eam-inventory-form-data-form-action', "",true);
+			admin.putTempData('eam-inventory-form-data-form-action', "", true);
 			if (layEvent === 'edit') { // 修改
-				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					if(data.success) {
-						admin.putTempData('eam-inventory-form-data-form-action', "edit",true);
+				admin.post(moduleURL + "/get-by-id", {id: data.id}, function (data) {
+					if (data.success) {
+						admin.putTempData('eam-inventory-form-data-form-action', "edit", true);
 						showEditForm(data.data);
 					} else {
 						top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 			} else if (layEvent === 'view') { // 查看
-				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					if(data.success) {
-						admin.putTempData('eam-inventory-form-data-form-action', "view",true);
+				admin.post(moduleURL + "/get-by-id", {id: data.id}, function (data) {
+					if (data.success) {
+						admin.putTempData('eam-inventory-form-data-form-action', "view", true);
 						showEditForm(data.data);
 					} else {
 						top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
-			}
-			else if (layEvent === 'del') { // 删除
+			} else if (layEvent === 'del') { // 删除
 
-				if(window.pageExt.list.beforeSingleDelete) {
-					var doNext=window.pageExt.list.beforeSingleDelete(data);
-					if(!doNext) return;
+				if (window.pageExt.list.beforeSingleDelete) {
+					var doNext = window.pageExt.list.beforeSingleDelete(data);
+					if (!doNext) return;
 				}
-				top.layer.confirm(fox.translate('确定删除此')+fox.translate('资产盘点')+fox.translate('吗？'), function (i) {
-					top.layer.close(i);
 
+
+				top.layer.confirm(fox.translate('确定删除此') + fox.translate('资产盘点') + fox.translate('吗？'), function (i) {
+					top.layer.close(i);
 					top.layer.load(2);
-					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
+					admin.request(moduleURL + "/delete", {id: data.id}, function (data) {
 						top.layer.closeAll('loading');
 						if (data.success) {
-							if(window.pageExt.list.afterSingleDelete) {
-								var doNext=window.pageExt.list.afterSingleDelete(data);
-								if(!doNext) return;
+							if (window.pageExt.list.afterSingleDelete) {
+								var doNext = window.pageExt.list.afterSingleDelete(data);
+								if (!doNext) return;
 							}
 							top.layer.msg(data.message, {icon: 1, time: 500});
 							refreshTableData();
@@ -409,14 +409,15 @@ function ListPage() {
 						}
 					});
 				});
+
 			}
 			else if (layEvent === 'inventory-detail') { // 明细
 
-				var top=2
+				var formTop=2
 				var index=admin.popupCenter({
 					title: "盘点明细",
 					resize: false,
-					offset: [top,null],
+					offset: [formTop,null],
 					area: ["95%","90%"],
 					type: 2,
 					id:"eam-asset-inventory-data",

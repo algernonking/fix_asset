@@ -230,11 +230,11 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
         depreciationDetail:function (data){
             console.log('depreciationDetail',data);
-            var top=2
+            var formTop=2
             var index=admin.popupCenter({
                 title: "折旧明细",
                 resize: false,
-                offset: [top,null],
+                offset: [formTop,null],
                 area: ["95%","90%"],
                 type: 2,
                 id:"eam-asset-inventory-data",

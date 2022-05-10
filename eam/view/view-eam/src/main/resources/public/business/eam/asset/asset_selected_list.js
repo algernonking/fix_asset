@@ -321,11 +321,11 @@ function ListPage() {
 			var doNext=window.pageExt.list.beforeEdit(data);
 			if(!doNext) return;
 		}
-		var top=2
+		var formTop=2
 		var index=admin.popupCenter({
 			title: "选择资产",
 			resize: false,
-			offset: [top,null],
+			offset: [formTop,null],
 			area: ["95%","90%"],
 			type: 2,
 			id:"eam-asset-select-data-win",

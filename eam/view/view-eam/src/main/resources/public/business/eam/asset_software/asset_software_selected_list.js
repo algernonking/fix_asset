@@ -410,11 +410,11 @@ function ListPage() {
 			admin.putTempData('eam-asset-software-form-data-form-action', "create",true);
 
 			var queryString="?operType="+OPER_TYPE+"&pageType="+PAGE_TYPE+"&pid="+PID+"&selectedCode="+SELECTED_CODE;
-			var top=2
+			var formTop=2
 			var index=admin.popupCenter({
 				title: "选择资产",
 				resize: false,
-				offset: [top,null],
+				offset: [formTop,null],
 				area: ["95%","90%"],
 				type: 2,
 				id:"eam-asset-software-select-data-win",
