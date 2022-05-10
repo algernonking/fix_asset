@@ -204,7 +204,7 @@ public class WarehouseServiceImpl extends SuperService<Warehouse> implements IWa
 
 	@Override
 	public List<Warehouse> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

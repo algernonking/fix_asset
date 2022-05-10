@@ -204,7 +204,7 @@ public class SupplierServiceImpl extends SuperService<Supplier> implements ISupp
 
 	@Override
 	public List<Supplier> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

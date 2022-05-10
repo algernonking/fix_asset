@@ -520,7 +520,7 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 
 	@Override
 	public List<Inventory> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

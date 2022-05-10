@@ -300,7 +300,7 @@ public class MaintenanceServiceImpl extends SuperService<Maintenance> implements
 
 	@Override
 	public List<Maintenance> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

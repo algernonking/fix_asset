@@ -204,7 +204,7 @@ public class PositionServiceImpl extends SuperService<Position> implements IPosi
 
 	@Override
 	public List<Position> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

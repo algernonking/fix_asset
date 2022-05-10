@@ -218,7 +218,7 @@ public class CategoryFinanceServiceImpl extends SuperService<CategoryFinance> im
 
 	@Override
 	public List<CategoryFinance> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

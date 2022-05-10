@@ -139,8 +139,13 @@ public class #(simpleName) extends SuperService<#(poSimpleName)> implements #(in
 
 #if(isSimplePK)
 	@Override
-	public List<#(poSimpleName)> getByIds(List<#(idPropertyType)> #(idPropertyName)s) {
-		return new ArrayList<>(getByIdsMap(#(idPropertyName)s).values());
+	public List<#(poSimpleName)> queryListByIds(List<#(idPropertyType)> #(idPropertyName)s) {
+		return super.queryListByUKeys("#(idPropertyName)",#(idPropertyName)s);
+	}
+
+	@Override
+	public Map<#(idPropertyType), #(poSimpleName)> queryMapByIds(List<#(idPropertyType)> #(idPropertyName)s) {
+		return super.queryMapByUKeys("#(idPropertyName)",#(idPropertyName)s, #(poSimpleName)::#(idGetterMethodName));
 	}
 #end
 

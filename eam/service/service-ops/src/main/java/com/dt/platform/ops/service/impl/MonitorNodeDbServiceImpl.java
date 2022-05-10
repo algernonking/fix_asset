@@ -204,7 +204,7 @@ public class MonitorNodeDbServiceImpl extends SuperService<MonitorNodeDb> implem
 
 	@Override
 	public List<MonitorNodeDb> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

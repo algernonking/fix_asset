@@ -180,7 +180,7 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 
 	@Override
 	public List<CodeAttr> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

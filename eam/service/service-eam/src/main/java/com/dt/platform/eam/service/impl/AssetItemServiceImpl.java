@@ -177,7 +177,7 @@ public class AssetItemServiceImpl extends SuperService<AssetItem> implements IAs
 
 	@Override
 	public List<AssetItem> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

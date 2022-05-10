@@ -472,7 +472,7 @@ public class AssetStockGoodsTranferServiceImpl extends SuperService<AssetStockGo
 
 	@Override
 	public List<AssetStockGoodsTranfer> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

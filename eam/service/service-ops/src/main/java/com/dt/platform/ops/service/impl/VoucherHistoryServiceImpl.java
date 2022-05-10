@@ -180,7 +180,7 @@ public class VoucherHistoryServiceImpl extends SuperService<VoucherHistory> impl
 
 	@Override
 	public List<VoucherHistory> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

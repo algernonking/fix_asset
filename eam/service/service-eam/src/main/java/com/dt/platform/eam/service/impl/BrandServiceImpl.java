@@ -204,7 +204,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 
 	@Override
 	public List<Brand> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

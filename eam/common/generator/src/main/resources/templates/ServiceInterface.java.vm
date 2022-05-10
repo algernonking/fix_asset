@@ -119,8 +119,16 @@ public interface #(simpleName) extends ISuperService<#(poSimpleName)> {
 	 * @param #(idPropertyName)s  主键清单
 	 * @return 实体集
 	 * */
-	List<#(poSimpleName)> getByIds(List<#(idPropertyType)> #(idPropertyName)s);
+	List<#(poSimpleName)> queryListByIds(List<#(idPropertyType)> #(idPropertyName)s);
+
+	/**
+	 * 按 id 列表查询 Map
+	 * @param #(idPropertyName)s  主键清单
+	 * */
+	Map<String, #(poSimpleName)> queryMapByIds(List<#(idPropertyType)> #(idPropertyName)s);
+
 	#end
+
 
 	/**
 	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在

@@ -74,7 +74,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -443,7 +443,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 		return super.insertList(assetStockCollectionList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 资产领用
 	 *
@@ -464,7 +464,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 资产领用
 	 *
@@ -530,7 +530,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 		return super.updateList(assetStockCollectionList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 资产领用
 	 *
@@ -544,7 +544,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 资产领用
 	 *
@@ -560,7 +560,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 
 	@Override
 	public List<AssetStockCollection> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

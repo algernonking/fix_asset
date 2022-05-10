@@ -180,7 +180,7 @@ public class CodeRegisterServiceImpl extends SuperService<CodeRegister> implemen
 
 	@Override
 	public List<CodeRegister> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

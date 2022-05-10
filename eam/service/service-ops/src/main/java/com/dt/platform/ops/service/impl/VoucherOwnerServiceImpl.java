@@ -180,7 +180,7 @@ public class VoucherOwnerServiceImpl extends SuperService<VoucherOwner> implemen
 
 	@Override
 	public List<VoucherOwner> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

@@ -204,7 +204,7 @@ public class InspectionGroupServiceImpl extends SuperService<InspectionGroup> im
 
 	@Override
 	public List<InspectionGroup> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

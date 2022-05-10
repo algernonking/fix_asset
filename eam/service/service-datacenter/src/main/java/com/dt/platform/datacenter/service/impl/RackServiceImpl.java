@@ -46,7 +46,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -94,7 +94,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 		return super.insertList(rackList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 机柜
 	 *
@@ -115,7 +115,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 机柜
 	 *
@@ -175,7 +175,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 		return super.updateList(rackList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 机柜
 	 *
@@ -189,7 +189,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 机柜
 	 *
@@ -205,7 +205,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 
 	@Override
 	public List<Rack> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

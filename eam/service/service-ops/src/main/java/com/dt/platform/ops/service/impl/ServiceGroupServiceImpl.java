@@ -180,7 +180,7 @@ public class ServiceGroupServiceImpl extends SuperService<ServiceGroup> implemen
 
 	@Override
 	public List<ServiceGroup> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

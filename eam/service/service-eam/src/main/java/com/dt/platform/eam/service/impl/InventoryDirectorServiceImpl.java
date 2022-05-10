@@ -207,7 +207,7 @@ public class InventoryDirectorServiceImpl extends SuperService<InventoryDirector
 
 	@Override
 	public List<InventoryDirector> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

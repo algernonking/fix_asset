@@ -45,7 +45,7 @@ public class AssetDepreciationDetailServiceImpl extends SuperService<AssetDeprec
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -93,7 +93,7 @@ public class AssetDepreciationDetailServiceImpl extends SuperService<AssetDeprec
 		return super.insertList(assetDepreciationDetailList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 折旧明细
 	 *
@@ -114,7 +114,7 @@ public class AssetDepreciationDetailServiceImpl extends SuperService<AssetDeprec
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 折旧明细
 	 *
@@ -174,7 +174,7 @@ public class AssetDepreciationDetailServiceImpl extends SuperService<AssetDeprec
 		return super.updateList(assetDepreciationDetailList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 折旧明细
 	 *
@@ -188,7 +188,7 @@ public class AssetDepreciationDetailServiceImpl extends SuperService<AssetDeprec
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 折旧明细
 	 *
@@ -204,7 +204,7 @@ public class AssetDepreciationDetailServiceImpl extends SuperService<AssetDeprec
 
 	@Override
 	public List<AssetDepreciationDetail> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

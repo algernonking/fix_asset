@@ -217,7 +217,7 @@ public class TplFileServiceImpl extends SuperService<TplFile> implements ITplFil
 
 	@Override
 	public List<TplFile> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

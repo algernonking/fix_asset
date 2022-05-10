@@ -49,6 +49,7 @@ function ListPage() {
 			fox.adjustSearchElement();
 		});
 		fox.adjustSearchElement();
+		$("#table-area").css("margin-top",$(".search-bar").height()+"px");
 		//
 		function renderTableInternal() {
 

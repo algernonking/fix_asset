@@ -469,7 +469,7 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 
 	@Override
 	public List<AssetTranfer> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

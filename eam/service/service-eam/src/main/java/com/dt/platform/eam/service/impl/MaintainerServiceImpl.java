@@ -180,7 +180,7 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 
 	@Override
 	public List<Maintainer> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

@@ -204,7 +204,7 @@ public class InventoryAssetServiceImpl extends SuperService<InventoryAsset> impl
 
 	@Override
 	public List<InventoryAsset> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

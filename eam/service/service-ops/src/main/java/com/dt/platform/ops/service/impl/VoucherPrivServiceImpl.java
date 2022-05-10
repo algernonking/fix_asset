@@ -204,7 +204,7 @@ public class VoucherPrivServiceImpl extends SuperService<VoucherPriv> implements
 
 	@Override
 	public List<VoucherPriv> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

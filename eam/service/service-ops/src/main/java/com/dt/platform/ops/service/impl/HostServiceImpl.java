@@ -222,7 +222,7 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 
 	@Override
 	public List<Host> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

@@ -220,7 +220,7 @@ public class MonitorNodeServiceImpl extends SuperService<MonitorNode> implements
 
 	@Override
 	public List<MonitorNode> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

@@ -389,7 +389,7 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 
 	@Override
 	public List<Operate> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

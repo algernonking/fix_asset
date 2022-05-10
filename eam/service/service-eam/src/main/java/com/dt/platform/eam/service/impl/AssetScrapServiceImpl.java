@@ -30,7 +30,7 @@ import com.github.foxnic.sql.expr.SQL;
 import org.github.foxnic.web.constants.enums.changes.ApprovalAction;
 import org.github.foxnic.web.constants.enums.changes.ApprovalMode;
 import org.github.foxnic.web.constants.enums.changes.ChangeType;
-import org.github.foxnic.web.domain.bpm.Appover;
+import org.github.foxnic.web.domain.bpm.Approver;
 import org.github.foxnic.web.domain.changes.*;
 import org.github.foxnic.web.framework.change.ChangesAssistant;
 import org.github.foxnic.web.proxy.changes.ChangeDefinitionServiceProxy;
@@ -73,13 +73,13 @@ import org.github.foxnic.web.framework.dao.DBConfigs;
 
 @Service("EamAssetScrapService")
 public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements IAssetScrapService {
-	
+
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
-	
+
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -93,7 +93,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 	@Autowired
 	private IAssetSelectedDataService assetSelectedDataService;
-	
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
@@ -285,17 +285,17 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		//后续可按审批人对接待办体系
 		String simpleApprovers=dao.queryRecord("select simple_approvers from chs_change_definition where code=?",changeType).getString("simple_approvers");
 		if(!StringUtil.isBlank(simpleApprovers)){
-			List<Appover> appoverList=new ArrayList<>();
+			List<Approver> appoverList=new ArrayList<>();
 			JSONArray sarr=JSONArray.parseArray(simpleApprovers);
 			for(int i=0;i<sarr.size();i++){
 				JSONObject e=sarr.getJSONObject(i);
 				String targetId=e.getString("targetId");
 				String targetType=e.getString("targetType");
 				if("busi_role".equals(targetType)){
-					List<Appover> bpmRoleApprovers1=assistant.getBpmRoleApproversById(targetId);
+					List<Approver> bpmRoleApprovers1=assistant.getBpmRoleApproversById(targetId);
 					appoverList.addAll(bpmRoleApprovers1);
 				}else if("employee".equals(targetType)){
-					List<Appover> approvers1=assistant.getEmployeeApproversById(targetId);
+					List<Approver> approvers1=assistant.getEmployeeApproversById(targetId);
 					appoverList.addAll(approvers1);
 				}
 			}
@@ -551,7 +551,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		}
 		return r;
 	}
-	
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param assetScrapList 实体数据清单
@@ -561,8 +561,8 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	public Result insertList(List<AssetScrap> assetScrapList) {
 		return super.insertList(assetScrapList);
 	}
-	
-	
+
+
 	/**
 	 * 按主键删除 资产报废
 	 *
@@ -583,7 +583,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 资产报废
 	 *
@@ -640,7 +640,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		}
 		return assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_SCRAP.code(),ckDatalist);
 	}
-	
+
 	/**
 	 * 更新实体集，事务内
 	 * @param assetScrapList 数据对象列表
@@ -651,8 +651,8 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	public Result updateList(List<AssetScrap> assetScrapList , SaveMode mode) {
 		return super.updateList(assetScrapList , mode);
 	}
-	
-	
+
+
 	/**
 	 * 按主键更新字段 资产报废
 	 *
@@ -664,9 +664,9 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		if(!field.table().name().equals(this.table())) throw new IllegalArgumentException("更新的数据表["+field.table().name()+"]与服务对应的数据表["+this.table()+"]不一致");
 		int suc=dao.update(field.table().name()).set(field.name(), value).where().and("id = ? ",id).top().execute();
 		return suc>0;
-	} 
-	
-	
+	}
+
+
 	/**
 	 * 按主键获取 资产报废
 	 *
@@ -682,14 +682,14 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 	@Override
 	public List<AssetScrap> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
@@ -697,11 +697,11 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	public List<AssetScrap> queryList(AssetScrap sample) {
 		return super.queryList(sample);
 	}
-	
-	
+
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param pageSize 分页条数
 	 * @param pageIndex 页码
@@ -712,10 +712,10 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		String dp=AssetOperateEnum.EAM_ASSET_SCRAP.code();
 		return super.queryPagedList(sample, pageSize, pageIndex,dp);
 	}
-	
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param condition 其它条件
 	 * @param pageSize 分页条数
@@ -727,7 +727,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		String dp=AssetOperateEnum.EAM_ASSET_SCRAP.code();
 		return super.queryPagedList(sample, condition, pageSize, pageIndex,dp);
 	}
-	
+
 	/**
 	 * 检查 角色 是否已经存在
 	 *

@@ -201,7 +201,7 @@ public class ContractServiceImpl extends SuperService<Contract> implements ICont
 
 	@Override
 	public List<Contract> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

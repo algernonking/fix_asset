@@ -207,7 +207,7 @@ public class MonitorNodeTplItemServiceImpl extends SuperService<MonitorNodeTplIt
 
 	@Override
 	public List<MonitorNodeTplItem> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

@@ -204,7 +204,7 @@ public class AssetStockGoodsServiceImpl extends SuperService<AssetStockGoods> im
 
 	@Override
 	public List<AssetStockGoods> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

@@ -180,7 +180,7 @@ public class HostPositionServiceImpl extends SuperService<HostPosition> implemen
 
 	@Override
 	public List<HostPosition> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

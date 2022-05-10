@@ -180,7 +180,7 @@ public class ResidualStrategyServiceImpl extends SuperService<ResidualStrategy> 
 
 	@Override
 	public List<ResidualStrategy> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

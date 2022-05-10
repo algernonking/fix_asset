@@ -205,7 +205,7 @@ public class AssetSoftwareMaintenanceDetailServiceImpl extends SuperService<Asse
 
 	@Override
 	public List<AssetSoftwareMaintenanceDetail> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

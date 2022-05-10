@@ -210,7 +210,7 @@ public class AssetDataPermissionsOrgServiceImpl extends SuperService<AssetDataPe
 
 	@Override
 	public List<AssetDataPermissionsOrg> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 

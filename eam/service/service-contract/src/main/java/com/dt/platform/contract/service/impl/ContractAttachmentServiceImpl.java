@@ -45,7 +45,7 @@ public class ContractAttachmentServiceImpl extends SuperService<ContractAttachme
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -93,7 +93,7 @@ public class ContractAttachmentServiceImpl extends SuperService<ContractAttachme
 		return super.insertList(contractAttachmentList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 合同附件
 	 *
@@ -114,7 +114,7 @@ public class ContractAttachmentServiceImpl extends SuperService<ContractAttachme
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 合同附件
 	 *
@@ -174,7 +174,7 @@ public class ContractAttachmentServiceImpl extends SuperService<ContractAttachme
 		return super.updateList(contractAttachmentList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 合同附件
 	 *
@@ -188,7 +188,7 @@ public class ContractAttachmentServiceImpl extends SuperService<ContractAttachme
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 合同附件
 	 *
@@ -204,7 +204,7 @@ public class ContractAttachmentServiceImpl extends SuperService<ContractAttachme
 
 	@Override
 	public List<ContractAttachment> getByIds(List<String> ids) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return super.queryListByUKeys("id",ids);
 	}
 
 
