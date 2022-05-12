@@ -18,16 +18,43 @@ public class EamMaintainerGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_MAINTAINER.MAINTAINER_NAME,
-                        EAMTables.EAM_MAINTAINER.MAINTAINER_NOTES,
+                        EAMTables.EAM_MAINTAINER.UNIT_CODE
 
                 }
         );
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
-        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth+60);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NAME).form().validate().required();
 
+        cfg.view().field(EAMTables.EAM_MAINTAINER.ADDRESS).form().textArea().height(60);
+        cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NOTES).form().textArea().height(60);
+
+        cfg.view().formWindow().width("85%");
+        cfg.view().formWindow().bottomSpace(20);
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_MAINTAINER.MAINTAINER_NAME,
+                        EAMTables.EAM_MAINTAINER.UNIT_CODE,
+                },
+                new Object[] {
+                        EAMTables.EAM_MAINTAINER.BUSINESS_CONTACTS,
+                        EAMTables.EAM_MAINTAINER.BUSINESS_CONTACTS_INFO,
+                },
+                new Object[] {
+                        EAMTables.EAM_MAINTAINER.AFTER_SALES_CONTACTS,
+                        EAMTables.EAM_MAINTAINER.AFTER_SALES_CONTACTS_INFO,
+                }
+        );
+
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_MAINTAINER.ADDRESS,
+                        EAMTables.EAM_MAINTAINER.MAINTAINER_NOTES,
+                }
+
+        );
 
         //文件生成覆盖模式
         cfg.overrides()

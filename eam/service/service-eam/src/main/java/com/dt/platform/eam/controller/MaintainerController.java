@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 维保厂商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:59
+ * @since 2022-05-12 06:33:06
 */
 
 @Api(tags = "维保厂商")
@@ -67,13 +67,19 @@ public class MaintainerController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS , value = "商务联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS_INFO , value = "商务联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS , value = "售后联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS_INFO , value = "售后联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.UNIT_CODE , value = "统一社会信用代码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = MaintainerServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(MaintainerServiceProxy.INSERT)
 	public Result insert(MaintainerVO maintainerVO) {
-		Result result=maintainerService.insert(maintainerVO);
+		Result result=maintainerService.insert(maintainerVO,false);
 		return result;
 	}
 
@@ -120,14 +126,20 @@ public class MaintainerController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS , value = "商务联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS_INFO , value = "商务联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS , value = "售后联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS_INFO , value = "售后联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.UNIT_CODE , value = "统一社会信用代码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE , MaintainerVOMeta.SEARCH_FIELD , MaintainerVOMeta.FUZZY_FIELD , MaintainerVOMeta.SEARCH_VALUE , MaintainerVOMeta.SORT_FIELD , MaintainerVOMeta.SORT_TYPE , MaintainerVOMeta.IDS } )
+	@ApiOperationSupport( order=4 , ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE , MaintainerVOMeta.SEARCH_FIELD , MaintainerVOMeta.FUZZY_FIELD , MaintainerVOMeta.SEARCH_VALUE , MaintainerVOMeta.DIRTY_FIELDS , MaintainerVOMeta.SORT_FIELD , MaintainerVOMeta.SORT_TYPE , MaintainerVOMeta.IDS } )
 	@NotNull(name = MaintainerVOMeta.ID)
 	@SentinelResource(value = MaintainerServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(MaintainerServiceProxy.UPDATE)
 	public Result update(MaintainerVO maintainerVO) {
-		Result result=maintainerService.update(maintainerVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=maintainerService.update(maintainerVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -139,14 +151,20 @@ public class MaintainerController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS , value = "商务联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS_INFO , value = "商务联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS , value = "售后联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS_INFO , value = "售后联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.UNIT_CODE , value = "统一社会信用代码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE , MaintainerVOMeta.SEARCH_FIELD , MaintainerVOMeta.FUZZY_FIELD , MaintainerVOMeta.SEARCH_VALUE , MaintainerVOMeta.SORT_FIELD , MaintainerVOMeta.SORT_TYPE , MaintainerVOMeta.IDS } )
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE , MaintainerVOMeta.SEARCH_FIELD , MaintainerVOMeta.FUZZY_FIELD , MaintainerVOMeta.SEARCH_VALUE , MaintainerVOMeta.DIRTY_FIELDS , MaintainerVOMeta.SORT_FIELD , MaintainerVOMeta.SORT_TYPE , MaintainerVOMeta.IDS } )
 	@NotNull(name = MaintainerVOMeta.ID)
 	@SentinelResource(value = MaintainerServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(MaintainerServiceProxy.SAVE)
 	public Result save(MaintainerVO maintainerVO) {
-		Result result=maintainerService.save(maintainerVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=maintainerService.save(maintainerVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -165,11 +183,6 @@ public class MaintainerController extends SuperController {
 	public Result<Maintainer> getById(String id) {
 		Result<Maintainer> result=new Result<>();
 		Maintainer maintainer=maintainerService.getById(id);
-
-		// join 关联的对象
-		maintainerService.dao().fill(maintainer)
-			.execute();
-
 		result.success(true).data(maintainer);
 		return result;
 	}
@@ -189,7 +202,7 @@ public class MaintainerController extends SuperController {
 	@PostMapping(MaintainerServiceProxy.GET_BY_IDS)
 	public Result<List<Maintainer>> getByIds(List<String> ids) {
 		Result<List<Maintainer>> result=new Result<>();
-		List<Maintainer> list=maintainerService.getByIds(ids);
+		List<Maintainer> list=maintainerService.queryListByIds(ids);
 		result.success(true).data(list);
 		return result;
 	}
@@ -202,6 +215,12 @@ public class MaintainerController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS , value = "商务联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS_INFO , value = "商务联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS , value = "售后联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS_INFO , value = "售后联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.UNIT_CODE , value = "统一社会信用代码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE } )
@@ -222,6 +241,12 @@ public class MaintainerController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS , value = "商务联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.BUSINESS_CONTACTS_INFO , value = "商务联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS , value = "售后联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.AFTER_SALES_CONTACTS_INFO , value = "售后联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.UNIT_CODE , value = "统一社会信用代码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
@@ -230,11 +255,6 @@ public class MaintainerController extends SuperController {
 	public Result<PagedList<Maintainer>> queryPagedList(MaintainerVO sample) {
 		Result<PagedList<Maintainer>> result=new Result<>();
 		PagedList<Maintainer> list=maintainerService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-
-		// join 关联的对象
-		maintainerService.dao().fill(list)
-			.execute();
-
 		result.success(true).data(list);
 		return result;
 	}
@@ -247,10 +267,14 @@ public class MaintainerController extends SuperController {
 	@SentinelResource(value = MaintainerServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(MaintainerServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(MaintainerVO  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=maintainerService.exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -260,11 +284,15 @@ public class MaintainerController extends SuperController {
 	@SentinelResource(value = MaintainerServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(MaintainerServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=maintainerService.exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
+	}
 
 
 

@@ -29,48 +29,61 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IMaintainerService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
  * 维保厂商 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:59
+ * @since 2022-05-12 06:33:06
 */
 
 
 @Service("EamMaintainerService")
 public class MaintainerServiceImpl extends SuperService<Maintainer> implements IMaintainerService {
-	
+
 	/**
 	 * 注入DAO对象
 	 * */
 	@Resource(name=DBConfigs.PRIMARY_DAO) 
 	private DAO dao=null;
-	
+
 	/**
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
 
 
-	
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
 	/**
-	 * 插入实体
-	 * @param maintainer 实体数据
+	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param maintainer  数据对象
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果 , 如果失败返回 false，成功返回 true
+	 */
+	@Override
+	public Result insert(Maintainer maintainer,boolean throwsException) {
+		Result r=super.insert(maintainer,throwsException);
+		return r;
+	}
+
+	/**
+	 * 添加，如果语句错误，则抛出异常
+	 * @param maintainer 数据对象
 	 * @return 插入是否成功
 	 * */
 	@Override
 	public Result insert(Maintainer maintainer) {
-		Result r=super.insert(maintainer);
-		return r;
+		return this.insert(maintainer,true);
 	}
-	
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param maintainerList 实体数据清单
@@ -80,7 +93,7 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 	public Result insertList(List<Maintainer> maintainerList) {
 		return super.insertList(maintainerList);
 	}
-	
+
 	
 	/**
 	 * 按主键删除 维保厂商
@@ -126,19 +139,31 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 			return r;
 		}
 	}
-	
+
 	/**
-	 * 更新实体
+	 * 更新，如果执行错误，则抛出异常
 	 * @param maintainer 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
 	public Result update(Maintainer maintainer , SaveMode mode) {
-		Result r=super.update(maintainer , mode);
+		return this.update(maintainer,mode,true);
+	}
+
+	/**
+	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
+	 * @param maintainer 数据对象
+	 * @param mode 保存模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 保存是否成功
+	 * */
+	@Override
+	public Result update(Maintainer maintainer , SaveMode mode,boolean throwsException) {
+		Result r=super.update(maintainer , mode , throwsException);
 		return r;
 	}
-	
+
 	/**
 	 * 更新实体集，事务内
 	 * @param maintainerList 数据对象列表
@@ -149,7 +174,7 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 	public Result updateList(List<Maintainer> maintainerList , SaveMode mode) {
 		return super.updateList(maintainerList , mode);
 	}
-	
+
 	
 	/**
 	 * 按主键更新字段 维保厂商
@@ -162,8 +187,8 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 		if(!field.table().name().equals(this.table())) throw new IllegalArgumentException("更新的数据表["+field.table().name()+"]与服务对应的数据表["+this.table()+"]不一致");
 		int suc=dao.update(field.table().name()).set(field.name(), value).where().and("id = ? ",id).top().execute();
 		return suc>0;
-	} 
-	
+	}
+
 	
 	/**
 	 * 按主键获取 维保厂商
@@ -179,15 +204,20 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 	}
 
 	@Override
-	public List<Maintainer> getByIds(List<String> ids) {
+	public List<Maintainer> queryListByIds(List<String> ids) {
 		return super.queryListByUKeys("id",ids);
+	}
+
+	@Override
+	public Map<String, Maintainer> queryMapByIds(List<String> ids) {
+		return super.queryMapByUKeys("id",ids, Maintainer::getId);
 	}
 
 
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
@@ -195,11 +225,11 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 	public List<Maintainer> queryList(Maintainer sample) {
 		return super.queryList(sample);
 	}
-	
-	
+
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param pageSize 分页条数
 	 * @param pageIndex 页码
@@ -209,10 +239,10 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 	public PagedList<Maintainer> queryPagedList(Maintainer sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param condition 其它条件
 	 * @param pageSize 分页条数
@@ -223,18 +253,18 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 	public PagedList<Maintainer> queryPagedList(Maintainer sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
-	
+
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param maintainer 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Maintainer> checkExists(Maintainer maintainer) {
+	public Boolean checkExists(Maintainer maintainer) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(maintainer, SYS_ROLE.NAME);
+		//boolean exists=super.checkExists(maintainer, SYS_ROLE.NAME);
 		//return exists;
-		return ErrorDesc.success();
+		return false;
 	}
 
 	@Override

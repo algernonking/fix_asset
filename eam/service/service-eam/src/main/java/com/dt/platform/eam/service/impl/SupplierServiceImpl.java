@@ -29,13 +29,14 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.ISupplierService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
  * 供应商 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-15 08:40:52
+ * @since 2022-05-12 06:32:56
 */
 
 
@@ -203,8 +204,13 @@ public class SupplierServiceImpl extends SuperService<Supplier> implements ISupp
 	}
 
 	@Override
-	public List<Supplier> getByIds(List<String> ids) {
+	public List<Supplier> queryListByIds(List<String> ids) {
 		return super.queryListByUKeys("id",ids);
+	}
+
+	@Override
+	public Map<String, Supplier> queryMapByIds(List<String> ids) {
+		return super.queryMapByUKeys("id",ids, Supplier::getId);
 	}
 
 
@@ -249,16 +255,16 @@ public class SupplierServiceImpl extends SuperService<Supplier> implements ISupp
 	}
 
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param supplier 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Supplier> checkExists(Supplier supplier) {
+	public Boolean checkExists(Supplier supplier) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(supplier, SYS_ROLE.NAME);
+		//boolean exists=super.checkExists(supplier, SYS_ROLE.NAME);
 		//return exists;
-		return ErrorDesc.success();
+		return false;
 	}
 
 	@Override

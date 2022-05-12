@@ -15,13 +15,14 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import java.util.Map;
 
 /**
  * <p>
  * 供应商 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-15 08:40:51
+ * @since 2022-05-12 06:32:56
 */
 
 public interface ISupplierService extends ISuperService<Supplier> {
@@ -144,7 +145,7 @@ public interface ISupplierService extends ISuperService<Supplier> {
 	Result saveList(List<Supplier> supplierList , SaveMode mode);
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 检查实体中的数据字段是否已经存在 . 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 * @param supplier  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
@@ -161,19 +162,27 @@ public interface ISupplierService extends ISuperService<Supplier> {
 	Supplier getById(String id);
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 按 id 获取多个对象
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
-	List<Supplier> getByIds(List<String> ids);
+	List<Supplier> queryListByIds(List<String> ids);
 
 	/**
-	 * 检查 角色 是否已经存在
+	 * 按 id 列表查询 Map
+	 * @param ids  主键清单
+	 * */
+	Map<String, Supplier> queryMapByIds(List<String> ids);
+
+
+
+	/**
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param supplier 数据对象
 	 * @return 判断结果
 	 */
-	Result<Supplier> checkExists(Supplier supplier);
+	Boolean checkExists(Supplier supplier);
 
 	/**
 	 * 根据实体数构建默认的条件表达式, 不支持 Join 其它表

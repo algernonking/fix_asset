@@ -3,6 +3,7 @@ package com.dt.platform.proxy.eam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import com.dt.platform.domain.eam.Supplier;
 import com.dt.platform.domain.eam.SupplierVO;
@@ -10,14 +11,13 @@ import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.dt.platform.proxy.ServiceNames;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
  * 供应商  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-15 08:40:53
+ * @since 2022-05-12 06:32:56
  */
 @FeignClient(value = ServiceNames.EAM, contextId = SupplierServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface SupplierServiceProxy {
@@ -134,7 +134,7 @@ public interface SupplierServiceProxy {
     Result<Supplier> getById(@RequestParam(name = "id") String id);
 
     /**
-     * 批量删除供应商
+     * 获取多个供应商
      */
     @RequestMapping(SupplierServiceProxy.GET_BY_IDS)
     Result<List<Supplier>> getByIds(@RequestParam(name = "ids") List<String> ids);

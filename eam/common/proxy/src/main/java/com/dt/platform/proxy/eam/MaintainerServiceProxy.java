@@ -3,6 +3,7 @@ package com.dt.platform.proxy.eam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import com.dt.platform.domain.eam.Maintainer;
 import com.dt.platform.domain.eam.MaintainerVO;
@@ -10,14 +11,13 @@ import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.dt.platform.proxy.ServiceNames;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
  * 维保厂商  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:59
+ * @since 2022-05-12 06:33:06
  */
 @FeignClient(value = ServiceNames.EAM, contextId = MaintainerServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface MaintainerServiceProxy {
@@ -134,7 +134,7 @@ public interface MaintainerServiceProxy {
     Result<Maintainer> getById(@RequestParam(name = "id") String id);
 
     /**
-     * 批量删除维保厂商
+     * 获取多个维保厂商
      */
     @RequestMapping(MaintainerServiceProxy.GET_BY_IDS)
     Result<List<Maintainer>> getByIds(@RequestParam(name = "ids") List<String> ids);

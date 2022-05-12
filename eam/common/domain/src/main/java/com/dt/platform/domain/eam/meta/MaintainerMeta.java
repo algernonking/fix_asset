@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:59
- * @sign 504486AD5EDC26C04E7FECBA1BF403A6
+ * @since 2022-05-12 06:33:05
+ * @sign BE475E8518678522324F652F63572308
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +34,66 @@ public class MaintainerMeta {
 	 * 名称 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> MAINTAINER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,MAINTAINER_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	
+	/**
+	 * 商务联系人 , 类型: java.lang.String
+	*/
+	public static final String BUSINESS_CONTACTS="businessContacts";
+	
+	/**
+	 * 商务联系人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> BUSINESS_CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,BUSINESS_CONTACTS, java.lang.String.class, "商务联系人", "商务联系人", java.lang.String.class, null);
+	
+	/**
+	 * 商务联系方式 , 类型: java.lang.String
+	*/
+	public static final String BUSINESS_CONTACTS_INFO="businessContactsInfo";
+	
+	/**
+	 * 商务联系方式 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> BUSINESS_CONTACTS_INFO_PROP = new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,BUSINESS_CONTACTS_INFO, java.lang.String.class, "商务联系方式", "商务联系方式", java.lang.String.class, null);
+	
+	/**
+	 * 售后联系人 , 类型: java.lang.String
+	*/
+	public static final String AFTER_SALES_CONTACTS="afterSalesContacts";
+	
+	/**
+	 * 售后联系人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> AFTER_SALES_CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,AFTER_SALES_CONTACTS, java.lang.String.class, "售后联系人", "售后联系人", java.lang.String.class, null);
+	
+	/**
+	 * 售后联系方式 , 类型: java.lang.String
+	*/
+	public static final String AFTER_SALES_CONTACTS_INFO="afterSalesContactsInfo";
+	
+	/**
+	 * 售后联系方式 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> AFTER_SALES_CONTACTS_INFO_PROP = new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,AFTER_SALES_CONTACTS_INFO, java.lang.String.class, "售后联系方式", "售后联系方式", java.lang.String.class, null);
+	
+	/**
+	 * 统一社会信用代码 , 类型: java.lang.String
+	*/
+	public static final String UNIT_CODE="unitCode";
+	
+	/**
+	 * 统一社会信用代码 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> UNIT_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,UNIT_CODE, java.lang.String.class, "统一社会信用代码", "统一社会信用代码", java.lang.String.class, null);
+	
+	/**
+	 * 地址 , 类型: java.lang.String
+	*/
+	public static final String ADDRESS="address";
+	
+	/**
+	 * 地址 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> ADDRESS_PROP = new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,ADDRESS, java.lang.String.class, "地址", "地址", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -138,7 +198,7 @@ public class MaintainerMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , MAINTAINER_NAME , MAINTAINER_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ ID , MAINTAINER_NAME , BUSINESS_CONTACTS , BUSINESS_CONTACTS_INFO , AFTER_SALES_CONTACTS , AFTER_SALES_CONTACTS_INFO , UNIT_CODE , ADDRESS , MAINTAINER_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
 	
 	/**
 	 * 代理类
@@ -167,6 +227,72 @@ public class MaintainerMeta {
 		public Maintainer setMaintainerName(String maintainerName) {
 			super.change(MAINTAINER_NAME,super.getMaintainerName(),maintainerName);
 			super.setMaintainerName(maintainerName);
+			return this;
+		}
+		
+		/**
+		 * 设置 商务联系人
+		 * @param businessContacts 商务联系人
+		 * @return 当前对象
+		*/
+		public Maintainer setBusinessContacts(String businessContacts) {
+			super.change(BUSINESS_CONTACTS,super.getBusinessContacts(),businessContacts);
+			super.setBusinessContacts(businessContacts);
+			return this;
+		}
+		
+		/**
+		 * 设置 商务联系方式
+		 * @param businessContactsInfo 商务联系方式
+		 * @return 当前对象
+		*/
+		public Maintainer setBusinessContactsInfo(String businessContactsInfo) {
+			super.change(BUSINESS_CONTACTS_INFO,super.getBusinessContactsInfo(),businessContactsInfo);
+			super.setBusinessContactsInfo(businessContactsInfo);
+			return this;
+		}
+		
+		/**
+		 * 设置 售后联系人
+		 * @param afterSalesContacts 售后联系人
+		 * @return 当前对象
+		*/
+		public Maintainer setAfterSalesContacts(String afterSalesContacts) {
+			super.change(AFTER_SALES_CONTACTS,super.getAfterSalesContacts(),afterSalesContacts);
+			super.setAfterSalesContacts(afterSalesContacts);
+			return this;
+		}
+		
+		/**
+		 * 设置 售后联系方式
+		 * @param afterSalesContactsInfo 售后联系方式
+		 * @return 当前对象
+		*/
+		public Maintainer setAfterSalesContactsInfo(String afterSalesContactsInfo) {
+			super.change(AFTER_SALES_CONTACTS_INFO,super.getAfterSalesContactsInfo(),afterSalesContactsInfo);
+			super.setAfterSalesContactsInfo(afterSalesContactsInfo);
+			return this;
+		}
+		
+		/**
+		 * 设置 统一社会信用代码
+		 * @param unitCode 统一社会信用代码
+		 * @return 当前对象
+		*/
+		public Maintainer setUnitCode(String unitCode) {
+			super.change(UNIT_CODE,super.getUnitCode(),unitCode);
+			super.setUnitCode(unitCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 地址
+		 * @param address 地址
+		 * @return 当前对象
+		*/
+		public Maintainer setAddress(String address) {
+			super.change(ADDRESS,super.getAddress(),address);
+			super.setAddress(address);
 			return this;
 		}
 		

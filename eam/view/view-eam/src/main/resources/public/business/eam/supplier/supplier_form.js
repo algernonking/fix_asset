@@ -1,16 +1,18 @@
 /**
  * 供应商 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-15 08:40:59
+ * @since 2022-05-12 06:32:58
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-supplier";
+	// 表单执行操作类型：view，create，edit
 	var action=null;
 	var disableCreateNew=false;
 	var disableModify=false;
+	var dataBeforeEdit=null;
 	/**
       * 入口函数，初始化
       */
@@ -28,7 +30,7 @@ function FormPage() {
 		}
 
 		if(window.pageExt.form.beforeInit) {
-			window.pageExt.form.beforeInit();
+			window.pageExt.form.beforeInit(action,admin.getTempData('eam-supplier-form-data'));
 		}
 
 		//渲染表单组件
@@ -61,7 +63,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
-			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight,'eam-supplier-form-data-win');
 			if(area==null) return;
 			admin.putTempData('eam-supplier-form-area', area);
 			window.adjustPopup=adjustPopup;
@@ -129,7 +131,8 @@ function FormPage() {
         setTimeout(function (){
             fm.animate({
                 opacity:'1.0'
-            },100);
+            },100,null,function (){
+				fm.css("opacity","1.0");});
         },1);
 
         //禁用编辑
@@ -152,6 +155,8 @@ function FormPage() {
 			}
 		}
 
+		dataBeforeEdit=getFormData();
+
 	}
 
 	function getFormData() {
@@ -168,26 +173,22 @@ function FormPage() {
 	}
 
 	function saveForm(param) {
+		param.dirtyFields=fox.compareDirtyFields(dataBeforeEdit,param);
 		var api=moduleURL+"/"+(param.id?"update":"insert");
-		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, param, function (data) {
-			clearTimeout(task);
-			layer.closeAll('loading');
+		admin.post(api, param, function (data) {
 			if (data.success) {
-				layer.msg(data.message, {icon: 1, time: 500});
-				var index=admin.getTempData('eam-supplier-form-data-popup-index');
 				var doNext=true;
 				if(window.pageExt.form.betweenFormSubmitAndClose) {
 					doNext=window.pageExt.form.betweenFormSubmitAndClose(param,data);
 				}
 				if(doNext) {
-					admin.finishPopupCenter(index);
+					admin.finishPopupCenterById('eam-supplier-form-data-win');
 				}
 			} else {
-				layer.msg(data.message, {icon: 2, time: 1000});
+				fox.showMessage(data);
 			}
 			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
-		}, "POST");
+		}, {delayLoading:1000,elms:[$("#submit-button")]});
 	}
 
 	/**
@@ -212,7 +213,7 @@ function FormPage() {
 
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('eam-supplier-form-data-win'); });
 
     }
 
@@ -221,7 +222,11 @@ function FormPage() {
 		verifyForm: verifyForm,
 		saveForm: saveForm,
 		fillFormData: fillFormData,
-		adjustPopup: adjustPopup
+		adjustPopup: adjustPopup,
+		action: action,
+		setAction: function (act) {
+			action = act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();

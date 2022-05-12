@@ -3,7 +3,7 @@ package com.dt.platform.domain.knowledgebase;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.KN_CATEGORY;
+import com.dt.platform.constants.db.KnTables.KN_CATEGORY;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;

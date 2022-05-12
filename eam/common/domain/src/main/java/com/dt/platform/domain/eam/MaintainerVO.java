@@ -12,8 +12,8 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 维保厂商
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:59
- * @sign 674008E767AEED29761E50C8D348F182
+ * @since 2022-05-12 06:33:05
+ * @sign A93E0D81096E96AD70CE21612425431C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -50,6 +50,12 @@ public class MaintainerVO extends Maintainer {
 	*/
 	@ApiModelProperty(required = false,value="搜索的值" , notes = "")
 	private String searchValue;
+	
+	/**
+	 * 已修改字段
+	*/
+	@ApiModelProperty(required = false,value="已修改字段" , notes = "")
+	private List<String> dirtyFields;
 	
 	/**
 	 * 排序字段
@@ -156,6 +162,35 @@ public class MaintainerVO extends Maintainer {
 	*/
 	public MaintainerVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
+		return this;
+	}
+	
+	/**
+	 * 获得 已修改字段<br>
+	 * @return 已修改字段
+	*/
+	public List<String> getDirtyFields() {
+		return dirtyFields;
+	}
+	
+	/**
+	 * 设置 已修改字段
+	 * @param dirtyFields 已修改字段
+	 * @return 当前对象
+	*/
+	public MaintainerVO setDirtyFields(List<String> dirtyFields) {
+		this.dirtyFields=dirtyFields;
+		return this;
+	}
+	
+	/**
+	 * 添加 已修改字段
+	 * @param dirtyField 已修改字段
+	 * @return 当前对象
+	*/
+	public MaintainerVO addDirtyField(String dirtyField) {
+		if(this.dirtyFields==null) dirtyFields=new ArrayList<>();
+		this.dirtyFields.add(dirtyField);
 		return this;
 	}
 	

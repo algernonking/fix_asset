@@ -1,6 +1,6 @@
 package com.dt.platform.generator.module.kn;
 
-import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.db.KnTables;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum;
 import com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum;
@@ -32,7 +32,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
     public KnContentGtr() {
-        super(EAMTables.KN_CONTENT.$TABLE,BASIC_MGR_MENU_ID);
+        super(KnTables.KN_CONTENT.$TABLE,BASIC_MGR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -41,56 +41,56 @@ public class KnContentGtr extends BaseCodeGenerator {
      //  cfg.getPoClassFile().addSimpleProperty(Grade.class,"grade","知识分级","知识分级");
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","知识分类","知识分类");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"editor","编辑人","编辑人");
-        cfg.view().field(EAMTables.KN_CONTENT.TITLE).table().search().fuzzySearch();
-        cfg.view().field(EAMTables.KN_CONTENT.NOTES).table().search().fuzzySearch();
-        cfg.view().field(EAMTables.KN_CONTENT.PROFILE).table().search().fuzzySearch();
+        cfg.view().field(KnTables.KN_CONTENT.TITLE).table().search().fuzzySearch();
+        cfg.view().field(KnTables.KN_CONTENT.NOTES).table().search().fuzzySearch();
+        cfg.view().field(KnTables.KN_CONTENT.PROFILE).table().search().fuzzySearch();
 
-        cfg.view().field(EAMTables.KN_CONTENT.ID).basic().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.CATEGORY_ID).search().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.KEY_WORDS).search().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.LABEL).search().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.NOTES).search().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.GRADE_ID).search().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.LINK_ADDRESS).search().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.CONTENT).search().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.REVIEW_COUNT).search().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.ATTACH).search().hidden(true);
+        cfg.view().field(KnTables.KN_CONTENT.ID).basic().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.CATEGORY_ID).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.KEY_WORDS).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.LABEL).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.NOTES).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.GRADE_ID).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.LINK_ADDRESS).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.CONTENT).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.REVIEW_COUNT).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.ATTACH).search().hidden(true);
 //
-//        cfg.view().field(EAMTables.KN_CONTENT.DISPLAY).search().hidden(true);
-//        cfg.view().field(EAMTables.KN_CONTENT.CONTENT_TYPE).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.DISPLAY).search().hidden(true);
+//        cfg.view().field(KnTables.KN_CONTENT.CONTENT_TYPE).search().hidden(true);
 
-        cfg.view().field(EAMTables.KN_CONTENT.ATTACH).table().disable(true);
-        cfg.view().field(EAMTables.KN_CONTENT.CONTENT).table().disable(true);
-        cfg.view().field(EAMTables.KN_CONTENT.NOTES).table().disable(true);
-        cfg.view().field(EAMTables.KN_CONTENT.PROFILE).table().disable(true);
-        cfg.view().field(EAMTables.KN_CONTENT.LINK_ADDRESS).table().disable(true);
-        cfg.view().field(EAMTables.KN_CONTENT.KEY_WORDS).table().disable(true);
-        cfg.view().field(EAMTables.KN_CONTENT.LABEL).table().disable(true);
-        cfg.view().field(EAMTables.KN_CONTENT.EDITOR_ID).table().disable(true);
-        cfg.view().field(EAMTables.KN_CONTENT.ATTACH)
+        cfg.view().field(KnTables.KN_CONTENT.ATTACH).table().disable(true);
+        cfg.view().field(KnTables.KN_CONTENT.CONTENT).table().disable(true);
+        cfg.view().field(KnTables.KN_CONTENT.NOTES).table().disable(true);
+        cfg.view().field(KnTables.KN_CONTENT.PROFILE).table().disable(true);
+        cfg.view().field(KnTables.KN_CONTENT.LINK_ADDRESS).table().disable(true);
+        cfg.view().field(KnTables.KN_CONTENT.KEY_WORDS).table().disable(true);
+        cfg.view().field(KnTables.KN_CONTENT.LABEL).table().disable(true);
+        cfg.view().field(KnTables.KN_CONTENT.EDITOR_ID).table().disable(true);
+        cfg.view().field(KnTables.KN_CONTENT.ATTACH)
                 .form().upload().acceptExts("doc","zip","xlsx","rar","docx","txt","svg").maxFileCount(1);
 
-        cfg.view().field(EAMTables.KN_CONTENT.GRADE_ID)
+        cfg.view().field(KnTables.KN_CONTENT.GRADE_ID)
                 .form().validate().required().form().selectBox().dict(DictEnum.KN_GRADE).defaultIndex(0);;
 
 
 
-        cfg.view().field(EAMTables.KN_CONTENT.DISPLAY)
+        cfg.view().field(KnTables.KN_CONTENT.DISPLAY)
                 .form().validate().required().form().
                 radioBox().enumType(KnowledgebaseDisplayEnum.class).defaultIndex(0);
 
 
-        cfg.view().field(EAMTables.KN_CONTENT.CONTENT_TYPE)
+        cfg.view().field(KnTables.KN_CONTENT.CONTENT_TYPE)
                 .form().validate().required().form().radioBox().enumType(KnowledgebaseContentTypeEnum.class).defaultIndex(0);
 
 
-        cfg.view().field(EAMTables.KN_CONTENT.CONTENT)
+        cfg.view().field(KnTables.KN_CONTENT.CONTENT)
               .form().textArea().height(350);
 
-        cfg.view().field(EAMTables.KN_CONTENT.NOTES)
+        cfg.view().field(KnTables.KN_CONTENT.NOTES)
                 .form().form().textArea().height(18);
 
-        cfg.view().field(EAMTables.KN_CONTENT.CATEGORY_ID)
+        cfg.view().field(KnTables.KN_CONTENT.CATEGORY_ID)
                 .form().validate().required().form()
                 .selectBox().queryApi(CategoryServiceProxy.QUERY_LIST)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).filter(true).defaultIndex(0)
@@ -100,7 +100,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         //改变前端,EAMTables.SYS_CODE_RULE.RULE 在前端显示
-        String resourceNameField="res_"+EAMTables.KN_CONTENT.EDITOR_ID;
+        String resourceNameField="res_"+KnTables.KN_CONTENT.EDITOR_ID;
         cfg.view().field(resourceNameField)
                 .basic().label("编辑人")
                 .table().fillBy(ContentMeta.EDITOR,PersonMeta.NAME);
@@ -108,24 +108,24 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
 
-        cfg.view().field(EAMTables.KN_CONTENT.TITLE)
+        cfg.view().field(KnTables.KN_CONTENT.TITLE)
                 .form().validate().required().form();
 
-        cfg.view().field(EAMTables.KN_CONTENT.PROFILE).form().textArea().height(25);
+        cfg.view().field(KnTables.KN_CONTENT.PROFILE).form().textArea().height(25);
 
         cfg.view().list().operationColumn().addActionButton("预览","reviewKnFunction","kn_content:review");
         cfg.view().list().addToolButton("知识库","knFunction",null,"kn_content:kn_search") ;
         cfg.view().list().operationColumn().width(250);
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.KN_CONTENT.CATEGORY_ID,
-                        EAMTables.KN_CONTENT.GRADE_ID,
-                        EAMTables.KN_CONTENT.DISPLAY,
-                        EAMTables.KN_CONTENT.CONTENT_TYPE,
+                        KnTables.KN_CONTENT.CATEGORY_ID,
+                        KnTables.KN_CONTENT.GRADE_ID,
+                        KnTables.KN_CONTENT.DISPLAY,
+                        KnTables.KN_CONTENT.CONTENT_TYPE,
                 },
                 new Object[]{
-                        EAMTables.KN_CONTENT.TITLE,
-                        EAMTables.KN_CONTENT.PROFILE,
+                        KnTables.KN_CONTENT.TITLE,
+                        KnTables.KN_CONTENT.PROFILE,
 
                 }
 
@@ -143,16 +143,16 @@ public class KnContentGtr extends BaseCodeGenerator {
         cfg.view().formWindow().bottomSpace(300);
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.KN_CONTENT.CATEGORY_ID,
-                        EAMTables.KN_CONTENT.GRADE_ID,
-                        EAMTables.KN_CONTENT.TITLE,
+                        KnTables.KN_CONTENT.CATEGORY_ID,
+                        KnTables.KN_CONTENT.GRADE_ID,
+                        KnTables.KN_CONTENT.TITLE,
                 }, new Object[] {
-                        EAMTables.KN_CONTENT.DISPLAY,
-                        EAMTables.KN_CONTENT.CONTENT_TYPE,
-                        EAMTables.KN_CONTENT.LINK_ADDRESS,
+                        KnTables.KN_CONTENT.DISPLAY,
+                        KnTables.KN_CONTENT.CONTENT_TYPE,
+                        KnTables.KN_CONTENT.LINK_ADDRESS,
                 }, new Object[] {
-                        EAMTables.KN_CONTENT.KEY_WORDS,
-                        EAMTables.KN_CONTENT.LABEL,
+                        KnTables.KN_CONTENT.KEY_WORDS,
+                        KnTables.KN_CONTENT.LABEL,
 
                 }
         );
@@ -161,17 +161,17 @@ public class KnContentGtr extends BaseCodeGenerator {
         cfg.view().form().addGroup(null,
                 new Object[] {
 
-                        EAMTables.KN_CONTENT.PROFILE
+                        KnTables.KN_CONTENT.PROFILE
                 },
                 new Object[] {
 
-                        EAMTables.KN_CONTENT.ATTACH
+                        KnTables.KN_CONTENT.ATTACH
                 }
 
         );
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.KN_CONTENT.CONTENT
+                        KnTables.KN_CONTENT.CONTENT
                 }
         );
 

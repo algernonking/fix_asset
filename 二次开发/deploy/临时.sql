@@ -1,3 +1,7 @@
+
+update sys_menu set css='fa fa-circle-o'  where type='page' and ( css is null or css='')
+
+
  create index ind1 on  ops_monitor_node_value_last(`node_id`,`monitor_tpl_code`,`indicator_code`,`record_time`);
  create index ind2 on  ops_monitor_node_value_last(`result_status`,`indicator_code`,`node_id`);
  create index ind3 on  ops_monitor_node_value_last (`indicator_code`,`record_time`);

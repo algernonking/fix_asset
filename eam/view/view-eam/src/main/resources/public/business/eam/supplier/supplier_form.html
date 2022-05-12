@@ -2,7 +2,7 @@
 /**
  * 供应商 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-15 08:40:57
+ * @since 2022-05-12 06:32:58
  */
  -->
  <!DOCTYPE html>
@@ -12,16 +12,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
 	<title th:text="${lang.translate('供应商')}">供应商</title>
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
-    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
-    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon"> <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
-    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
     <style>
     </style>
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 </head>
 
 <body style="overflow-y: hidden;">
@@ -29,36 +32,103 @@
 
     <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
 
+        <input name="id" id="id"  type="hidden"/>
 
          <!--开始：group 循环-->
 
 
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="random-4164-content">
 
-             <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
 
-                    <div class="layui-form-item" style="display: none">
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('主键')}">主键</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="id" id="id" name="id" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主键') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="supplierName" id="supplierName" name="supplierName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="supplierNotes" id="supplierNotes" name="supplierNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
+                        <div class="layui-form-label "><div th:text="${lang.translate('统一社会信用代码')}">统一社会信用代码</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="unitCode" id="unitCode" name="unitCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('统一社会信用代码') }" type="text" class="layui-input"  />
                         </div>
                     </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('商务联系人')}">商务联系人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="businessContacts" id="businessContacts" name="businessContacts" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('商务联系人') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('商务联系方式')}">商务联系方式</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="businessContactsInfo" id="businessContactsInfo" name="businessContactsInfo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('商务联系方式') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('售后联系人')}">售后联系人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="afterSalesContacts" id="afterSalesContacts" name="afterSalesContacts" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('售后联系人') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('售后联系方式')}">售后联系方式</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="afterSalesContactsInfo" id="afterSalesContactsInfo" name="afterSalesContactsInfo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('售后联系方式') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+
+        <div class="layui-row form-row" id="random-8463-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
+
+
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('地址')}">地址</div></div>
+                    <div class="layui-input-block ">
+                        <textarea lay-filter="address" id="address" name="address" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('地址') }" class="layui-textarea" style="height: 60px" ></textarea>
+                    </div>
+                </div>
+
+
+                
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-input-block ">
+                        <textarea lay-filter="supplierNotes" id="supplierNotes" name="supplierNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" class="layui-textarea" style="height: 60px" ></textarea>
+                    </div>
+                </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -67,6 +137,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
+        <div style="height: 20px"></div>
 
 
     </form>

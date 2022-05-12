@@ -2,6 +2,7 @@ package com.dt.platform.relation.modules;
 
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.db.KnTables;
 import com.dt.platform.domain.knowledgebase.meta.ContentMeta;
 import com.dt.platform.domain.ops.meta.DbInstanceMeta;
 import com.github.foxnic.dao.relation.RelationManager;
@@ -22,17 +23,13 @@ public class KnRelationManager extends RelationManager {
     private void setupRelations() {
 
     }
-    private void setupDcRack() {
- 
-
-    }
 
     private void setupContent() {
         this.property(ContentMeta.CATEGORY_PROP)
-                .using(EAMTables.KN_CONTENT.CATEGORY_ID).join(EAMTables.KN_CATEGORY.ID);
+                .using(KnTables.KN_CONTENT.CATEGORY_ID).join(KnTables.KN_CATEGORY.ID);
 
         this.property(ContentMeta.EDITOR_PROP)
-                .using(EAMTables.KN_CONTENT.EDITOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+                .using(KnTables.KN_CONTENT.EDITOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 //                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
 

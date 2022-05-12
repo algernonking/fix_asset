@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-15 08:40:51
- * @sign ED8360948D61BC2B7718AC119EA37CDD
+ * @since 2022-05-12 06:32:56
+ * @sign 0A1A62007DCE950EEB1FE05475AA3993
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +34,66 @@ public class SupplierMeta {
 	 * 名称 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Supplier,java.lang.String> SUPPLIER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Supplier.class ,SUPPLIER_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	
+	/**
+	 * 商务联系人 , 类型: java.lang.String
+	*/
+	public static final String BUSINESS_CONTACTS="businessContacts";
+	
+	/**
+	 * 商务联系人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Supplier,java.lang.String> BUSINESS_CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.eam.Supplier.class ,BUSINESS_CONTACTS, java.lang.String.class, "商务联系人", "商务联系人", java.lang.String.class, null);
+	
+	/**
+	 * 商务联系方式 , 类型: java.lang.String
+	*/
+	public static final String BUSINESS_CONTACTS_INFO="businessContactsInfo";
+	
+	/**
+	 * 商务联系方式 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Supplier,java.lang.String> BUSINESS_CONTACTS_INFO_PROP = new BeanProperty(com.dt.platform.domain.eam.Supplier.class ,BUSINESS_CONTACTS_INFO, java.lang.String.class, "商务联系方式", "商务联系方式", java.lang.String.class, null);
+	
+	/**
+	 * 售后联系人 , 类型: java.lang.String
+	*/
+	public static final String AFTER_SALES_CONTACTS="afterSalesContacts";
+	
+	/**
+	 * 售后联系人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Supplier,java.lang.String> AFTER_SALES_CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.eam.Supplier.class ,AFTER_SALES_CONTACTS, java.lang.String.class, "售后联系人", "售后联系人", java.lang.String.class, null);
+	
+	/**
+	 * 售后联系方式 , 类型: java.lang.String
+	*/
+	public static final String AFTER_SALES_CONTACTS_INFO="afterSalesContactsInfo";
+	
+	/**
+	 * 售后联系方式 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Supplier,java.lang.String> AFTER_SALES_CONTACTS_INFO_PROP = new BeanProperty(com.dt.platform.domain.eam.Supplier.class ,AFTER_SALES_CONTACTS_INFO, java.lang.String.class, "售后联系方式", "售后联系方式", java.lang.String.class, null);
+	
+	/**
+	 * 统一社会信用代码 , 类型: java.lang.String
+	*/
+	public static final String UNIT_CODE="unitCode";
+	
+	/**
+	 * 统一社会信用代码 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Supplier,java.lang.String> UNIT_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Supplier.class ,UNIT_CODE, java.lang.String.class, "统一社会信用代码", "统一社会信用代码", java.lang.String.class, null);
+	
+	/**
+	 * 地址 , 类型: java.lang.String
+	*/
+	public static final String ADDRESS="address";
+	
+	/**
+	 * 地址 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Supplier,java.lang.String> ADDRESS_PROP = new BeanProperty(com.dt.platform.domain.eam.Supplier.class ,ADDRESS, java.lang.String.class, "地址", "地址", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -138,7 +198,7 @@ public class SupplierMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , SUPPLIER_NAME , SUPPLIER_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ ID , SUPPLIER_NAME , BUSINESS_CONTACTS , BUSINESS_CONTACTS_INFO , AFTER_SALES_CONTACTS , AFTER_SALES_CONTACTS_INFO , UNIT_CODE , ADDRESS , SUPPLIER_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
 	
 	/**
 	 * 代理类
@@ -167,6 +227,72 @@ public class SupplierMeta {
 		public Supplier setSupplierName(String supplierName) {
 			super.change(SUPPLIER_NAME,super.getSupplierName(),supplierName);
 			super.setSupplierName(supplierName);
+			return this;
+		}
+		
+		/**
+		 * 设置 商务联系人
+		 * @param businessContacts 商务联系人
+		 * @return 当前对象
+		*/
+		public Supplier setBusinessContacts(String businessContacts) {
+			super.change(BUSINESS_CONTACTS,super.getBusinessContacts(),businessContacts);
+			super.setBusinessContacts(businessContacts);
+			return this;
+		}
+		
+		/**
+		 * 设置 商务联系方式
+		 * @param businessContactsInfo 商务联系方式
+		 * @return 当前对象
+		*/
+		public Supplier setBusinessContactsInfo(String businessContactsInfo) {
+			super.change(BUSINESS_CONTACTS_INFO,super.getBusinessContactsInfo(),businessContactsInfo);
+			super.setBusinessContactsInfo(businessContactsInfo);
+			return this;
+		}
+		
+		/**
+		 * 设置 售后联系人
+		 * @param afterSalesContacts 售后联系人
+		 * @return 当前对象
+		*/
+		public Supplier setAfterSalesContacts(String afterSalesContacts) {
+			super.change(AFTER_SALES_CONTACTS,super.getAfterSalesContacts(),afterSalesContacts);
+			super.setAfterSalesContacts(afterSalesContacts);
+			return this;
+		}
+		
+		/**
+		 * 设置 售后联系方式
+		 * @param afterSalesContactsInfo 售后联系方式
+		 * @return 当前对象
+		*/
+		public Supplier setAfterSalesContactsInfo(String afterSalesContactsInfo) {
+			super.change(AFTER_SALES_CONTACTS_INFO,super.getAfterSalesContactsInfo(),afterSalesContactsInfo);
+			super.setAfterSalesContactsInfo(afterSalesContactsInfo);
+			return this;
+		}
+		
+		/**
+		 * 设置 统一社会信用代码
+		 * @param unitCode 统一社会信用代码
+		 * @return 当前对象
+		*/
+		public Supplier setUnitCode(String unitCode) {
+			super.change(UNIT_CODE,super.getUnitCode(),unitCode);
+			super.setUnitCode(unitCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 地址
+		 * @param address 地址
+		 * @return 当前对象
+		*/
+		public Supplier setAddress(String address) {
+			super.change(ADDRESS,super.getAddress(),address);
+			super.setAddress(address);
 			return this;
 		}
 		

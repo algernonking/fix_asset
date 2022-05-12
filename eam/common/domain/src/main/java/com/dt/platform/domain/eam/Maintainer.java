@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 维保厂商
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:59
- * @sign 504486AD5EDC26C04E7FECBA1BF403A6
+ * @since 2022-05-12 06:33:05
+ * @sign BE475E8518678522324F652F63572308
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -40,6 +40,42 @@ public class Maintainer extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
 	private String maintainerName;
+	
+	/**
+	 * 商务联系人：商务联系人
+	*/
+	@ApiModelProperty(required = false,value="商务联系人" , notes = "商务联系人")
+	private String businessContacts;
+	
+	/**
+	 * 商务联系方式：商务联系方式
+	*/
+	@ApiModelProperty(required = false,value="商务联系方式" , notes = "商务联系方式")
+	private String businessContactsInfo;
+	
+	/**
+	 * 售后联系人：售后联系人
+	*/
+	@ApiModelProperty(required = false,value="售后联系人" , notes = "售后联系人")
+	private String afterSalesContacts;
+	
+	/**
+	 * 售后联系方式：售后联系方式
+	*/
+	@ApiModelProperty(required = false,value="售后联系方式" , notes = "售后联系方式")
+	private String afterSalesContactsInfo;
+	
+	/**
+	 * 统一社会信用代码：统一社会信用代码
+	*/
+	@ApiModelProperty(required = false,value="统一社会信用代码" , notes = "统一社会信用代码")
+	private String unitCode;
+	
+	/**
+	 * 地址：地址
+	*/
+	@ApiModelProperty(required = false,value="地址" , notes = "地址")
+	private String address;
 	
 	/**
 	 * 备注：备注
@@ -136,6 +172,120 @@ public class Maintainer extends Entity {
 	*/
 	public Maintainer setMaintainerName(String maintainerName) {
 		this.maintainerName=maintainerName;
+		return this;
+	}
+	
+	/**
+	 * 获得 商务联系人<br>
+	 * 商务联系人
+	 * @return 商务联系人
+	*/
+	public String getBusinessContacts() {
+		return businessContacts;
+	}
+	
+	/**
+	 * 设置 商务联系人
+	 * @param businessContacts 商务联系人
+	 * @return 当前对象
+	*/
+	public Maintainer setBusinessContacts(String businessContacts) {
+		this.businessContacts=businessContacts;
+		return this;
+	}
+	
+	/**
+	 * 获得 商务联系方式<br>
+	 * 商务联系方式
+	 * @return 商务联系方式
+	*/
+	public String getBusinessContactsInfo() {
+		return businessContactsInfo;
+	}
+	
+	/**
+	 * 设置 商务联系方式
+	 * @param businessContactsInfo 商务联系方式
+	 * @return 当前对象
+	*/
+	public Maintainer setBusinessContactsInfo(String businessContactsInfo) {
+		this.businessContactsInfo=businessContactsInfo;
+		return this;
+	}
+	
+	/**
+	 * 获得 售后联系人<br>
+	 * 售后联系人
+	 * @return 售后联系人
+	*/
+	public String getAfterSalesContacts() {
+		return afterSalesContacts;
+	}
+	
+	/**
+	 * 设置 售后联系人
+	 * @param afterSalesContacts 售后联系人
+	 * @return 当前对象
+	*/
+	public Maintainer setAfterSalesContacts(String afterSalesContacts) {
+		this.afterSalesContacts=afterSalesContacts;
+		return this;
+	}
+	
+	/**
+	 * 获得 售后联系方式<br>
+	 * 售后联系方式
+	 * @return 售后联系方式
+	*/
+	public String getAfterSalesContactsInfo() {
+		return afterSalesContactsInfo;
+	}
+	
+	/**
+	 * 设置 售后联系方式
+	 * @param afterSalesContactsInfo 售后联系方式
+	 * @return 当前对象
+	*/
+	public Maintainer setAfterSalesContactsInfo(String afterSalesContactsInfo) {
+		this.afterSalesContactsInfo=afterSalesContactsInfo;
+		return this;
+	}
+	
+	/**
+	 * 获得 统一社会信用代码<br>
+	 * 统一社会信用代码
+	 * @return 统一社会信用代码
+	*/
+	public String getUnitCode() {
+		return unitCode;
+	}
+	
+	/**
+	 * 设置 统一社会信用代码
+	 * @param unitCode 统一社会信用代码
+	 * @return 当前对象
+	*/
+	public Maintainer setUnitCode(String unitCode) {
+		this.unitCode=unitCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 地址<br>
+	 * 地址
+	 * @return 地址
+	*/
+	public String getAddress() {
+		return address;
+	}
+	
+	/**
+	 * 设置 地址
+	 * @param address 地址
+	 * @return 当前对象
+	*/
+	public Maintainer setAddress(String address) {
+		this.address=address;
 		return this;
 	}
 	

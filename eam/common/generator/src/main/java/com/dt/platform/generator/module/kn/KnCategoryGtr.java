@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.kn;
 
 import com.dt.platform.constants.db.EAMTables;
 
+import com.dt.platform.constants.db.KnTables;
 import com.dt.platform.knowledgebase.page.CategoryPageController;
 import com.dt.platform.proxy.knowledgebase.CategoryServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -10,7 +11,7 @@ public class KnCategoryGtr extends BaseCodeGenerator {
 
 
     public KnCategoryGtr() {
-        super(EAMTables.KN_CATEGORY.$TABLE,BASIC_SETTING_MENU_ID);
+        super(KnTables.KN_CATEGORY.$TABLE,BASIC_SETTING_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -18,17 +19,17 @@ public class KnCategoryGtr extends BaseCodeGenerator {
 
 
 
-        cfg.view().field(EAMTables.KN_CATEGORY.ID).basic().hidden(true);
+        cfg.view().field(KnTables.KN_CATEGORY.ID).basic().hidden(true);
 
 
-        cfg.view().field(EAMTables.KN_CATEGORY.CATEGORY_CODE).search().hidden(true);
+        cfg.view().field(KnTables.KN_CATEGORY.CATEGORY_CODE).search().hidden(true);
 
-        cfg.view().field(EAMTables.KN_CATEGORY.CATEGORY_NAME).search().hidden(true);
-        cfg.view().field(EAMTables.KN_CATEGORY.SORT).search().hidden(true);
-        cfg.view().field(EAMTables.KN_CATEGORY.PARENT_ID).search().hidden(true);
-        cfg.view().field(EAMTables.KN_CATEGORY.HIERARCHY).search().hidden(true);
-        cfg.view().field(EAMTables.KN_CATEGORY.HIERARCHY_NAME).search().hidden(true);
-        cfg.view().field(EAMTables.KN_CATEGORY.NOTES).search().hidden(true);
+        cfg.view().field(KnTables.KN_CATEGORY.CATEGORY_NAME).search().hidden(true);
+        cfg.view().field(KnTables.KN_CATEGORY.SORT).search().hidden(true);
+        cfg.view().field(KnTables.KN_CATEGORY.PARENT_ID).search().hidden(true);
+        cfg.view().field(KnTables.KN_CATEGORY.HIERARCHY).search().hidden(true);
+        cfg.view().field(KnTables.KN_CATEGORY.HIERARCHY_NAME).search().hidden(true);
+        cfg.view().field(KnTables.KN_CATEGORY.NOTES).search().hidden(true);
 
 
 
