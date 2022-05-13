@@ -22,6 +22,7 @@
     <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 
+
     <style>
         .layui-card {border:1px solid #f2f2f2;border-radius:5px;}
         .icon {margin-right:10px;color:#1aa094;}
@@ -96,6 +97,19 @@
             background-color: #f2f2f2;
         }
 
+
+
+        .hh{
+            height: 120px;
+        }
+        .ht{
+            margin-top:10px;
+        }
+        .hm{
+            margin-top:7px;
+            margin-bottom:5px;
+        }
+
     </style>
 </head>
 
@@ -106,23 +120,18 @@
 
 <div class="layui-fluid">
     <div class="layui-row layui-col-space10">
-<!--        <div class="layui-col-md12">-->
-<!--            <div class="layui-card">-->
-<!--               -->
-<!--                <div class="layui-card-body">-->
-
 
                     <div class="layui-row layui-col-space10">
                         <div class="layui-col-md2">
 
-                            <div class="panel layui-bg-number">
+                            <div class="panel layui-bg-number banner hh" >
                                 <div class="panel-body">
-                                    <div class="panel-title">
+                                    <div class="panel-title ht">
                                         <span class="label pull-right layui-bg-blue">实时</span>
                                         <h5>资产总数</h5>
                                     </div>
                                     <div class="panel-content">
-                                        <h1 id="assetCnt" class="no-margins">0</h1>
+                                        <h1 id="assetCnt" class="no-margins hm">0</h1>
                                         <small>当前资产总记录数</small>
                                     </div>
                                 </div>
@@ -130,14 +139,14 @@
                         </div>
 
                         <div class="layui-col-md2">
-                            <div class="panel layui-bg-number">
+                            <div class="panel layui-bg-number hh">
                                 <div class="panel-body">
-                                    <div class="panel-title">
+                                    <div class="panel-title ht">
                                         <span class="label pull-right layui-bg-blue">实时</span>
                                         <h5>近30天维保到期</h5>
                                     </div>
                                     <div class="panel-content">
-                                        <h1 id="maintenanceEndCnt" class="no-margins">0</h1>
+                                        <h1 id="maintenanceEndCnt" class="no-margins hm">0</h1>
                                         <small>近30天维保到期</small>
                                     </div>
                                 </div>
@@ -145,14 +154,14 @@
                         </div>
 
                         <div class="layui-col-md2">
-                            <div class="panel layui-bg-number">
+                            <div class="panel layui-bg-number hh">
                                 <div class="panel-body">
-                                    <div class="panel-title">
+                                    <div class="panel-title ht">
                                         <span class="label pull-right layui-bg-blue">实时</span>
                                         <h5>待确认转移单</h5>
                                     </div>
                                     <div class="panel-content">
-                                        <h1 id="waitAssetTranferCnt" class="no-margins">0</h1>
+                                        <h1 id="waitAssetTranferCnt" class="no-margins hm">0</h1>
                                         <small>待确认转移单</small>
                                     </div>
                                 </div>
@@ -160,14 +169,14 @@
                         </div>
 
                         <div class="layui-col-md2">
-                            <div class="panel layui-bg-number">
+                            <div class="panel layui-bg-number hh">
                                 <div class="panel-body">
-                                    <div class="panel-title">
+                                    <div class="panel-title ht">
                                         <span class="label pull-right layui-bg-blue">实时</span>
                                         <h5>资产总价值</h5>
                                     </div>
                                     <div class="panel-content">
-                                        <h1 id="assetOriginalUnitPrice" class="no-margins">0</h1>
+                                        <h1 id="assetOriginalUnitPrice" class="no-margins hm">0</h1>
                                         <small>当前资产总价值</small>
                                     </div>
                                 </div>
@@ -175,14 +184,14 @@
                         </div>
 
                         <div class="layui-col-md2">
-                            <div class="panel layui-bg-number">
+                            <div class="panel layui-bg-number hh">
                                 <div class="panel-body">
-                                    <div class="panel-title">
+                                    <div class="panel-title ht">
                                         <span class="label pull-right layui-bg-blue">实时</span>
                                         <h5>资产处理总数</h5>
                                     </div>
                                     <div class="panel-content">
-                                        <h1 id="assetCleanCnt" class="no-margins">0</h1>
+                                        <h1 id="assetCleanCnt" class="no-margins hm">0</h1>
                                         <small>当前资产处理总记录数</small>
                                     </div>
                                 </div>
@@ -190,14 +199,14 @@
                         </div>
 
                         <div class="layui-col-md2">
-                            <div class="panel layui-bg-number">
+                            <div class="panel layui-bg-number hh">
                                 <div class="panel-body">
-                                    <div class="panel-title">
+                                    <div class="panel-title ht">
                                         <span class="label pull-right layui-bg-blue">实时</span>
                                         <h5>资产报修总数</h5>
                                     </div>
                                     <div class="panel-content">
-                                        <h1 id="assetRepairCnt"   class="no-margins">0</h1>
+                                        <h1 id="assetRepairCnt"   class="no-margins hm">0</h1>
                                         <small>当前资产报修总记录数</small>
                                     </div>
                                 </div>
@@ -213,31 +222,63 @@
 <!--    </div>-->
 </div>
 
+<style>
+    table{
+    }
+    table, td, th
+    {
+        overflow-y: scroll;
+        border:1px solid #7CD8A5;
+    }
+    th
+    {
+        background-color:#7E96FE;
+        color:white;
+    }
+    .custTable{
+        overflow:auto;
+        width:100%;
+        overflow-y: scroll;
+        text-align: center;
 
+    }
+    .custTable,tr,td{
+        height: 35px!important;
+    }
+
+</style>
 
 <div class="layui-fluid">
     <div class="layui-row layui-col-space10">
-        <div class="layui-col-md12">
+        <div class="layui-col-md6">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    资产概况
+                    资产状态表
                 </div>
                 <div class="layui-card-body">
-
-
                     <div class="layui-row layui-col-space10">
-                        <div class="layui-col-md8">
+                            <div style="height:300px">
 
-                            <div style="height:250px">
-                                <table class="pure-table" id="assetStatus" style="width:70%;text-align:left;">
+                                <table  class="custTable" id="assetStatus" style="width:100%;text-align:left;">
                                 </table>
+
                             </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    资产状态图
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space10">
 
-                        <div class="layui-col-md4">
-                            <div id="assetStatusPie"  style="height:200px"></div>
-                        </div>
+<!--                        <div class="layui-col-md4">-->
+                            <div id="assetStatusPie"  style="height:300px"></div>
+<!--                        </div>-->
 
                     </div>
 
@@ -251,28 +292,33 @@
 
 <div class="layui-fluid">
     <div class="layui-row layui-col-space10">
-        <div class="layui-col-md12">
+        <div class="layui-col-md6">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    资产概况
+                    资产所属分布
                 </div>
                 <div class="layui-card-body">
-
                     <div class="layui-row layui-col-space10">
-                        <div class="layui-col-md6">
                             <div id="ownerAssetPie"  style="height:300px"></div>
-                        </div>
-                        <div class="layui-col-md6">
-                            <div id="posAssetPie"  style="height:300px"></div>
-                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    存放位置分布
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space10">
+                        <div id="posAssetPie"  style="height:300px"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="layui-fluid">
     <div class="layui-row layui-col-space10">

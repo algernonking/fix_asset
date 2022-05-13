@@ -344,8 +344,7 @@ public class AssetPageController extends ViewController {
 		model.addAttribute("deleteByIdsBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":delete-by-ids") );
 		model.addAttribute("queryBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":query") );
 		model.addAttribute("viewFormBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":view-form") );
-
-
+		model.addAttribute("batchInsertBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":view-form") );
 
 
 
@@ -402,9 +401,121 @@ public class AssetPageController extends ViewController {
 		model.addAttribute("categoryId",categoryId);
 		return prefix+"/asset_info_list";
 	}
-	/**
-	 * 资产 表单页面
-	 */
+
+	@RequestMapping("/asset_info_batch_form.html")
+	public String infoBatchForm(Model model,HttpServletRequest request , String id,String pageType,String categoryCode,String ownerCode,String internalControlLabel) {
+
+		//页面类型
+		model.addAttribute("pageType",pageType);
+		model.addAttribute("ownerCode",ownerCode);
+		model.addAttribute("internalControlLabel",internalControlLabel);
+
+
+		//设置字段布局
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(pageType,null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			System.out.println(data.get("attributeData3Column1"));
+			System.out.println(data.get("attributeData3Column2"));
+			System.out.println(data.get("attributeData3Column3"));
+			System.out.println(data.get("attributeData1Column1"));
+
+			model.addAttribute("attributeData3Column1",data.get("attributeData3Column1"));
+			model.addAttribute("attributeData3Column2",data.get("attributeData3Column2") );
+			model.addAttribute("attributeData3Column3",data.get("attributeData3Column3") );
+			model.addAttribute("attributeData1Column1",data.get("attributeData1Column1") );
+
+		}
+
+
+		//设置字段必选
+		AssetAttributeItemVO attributeItem=new AssetAttributeItemVO();
+		attributeItem.setOwnerCode(pageType);
+		attributeItem.setRequired("1");
+		attributeItem.setFormShow("1");
+		Result<List<AssetAttributeItem>> attributeItemRequiredListResult = AssetAttributeItemServiceProxy.api().queryList(attributeItem);
+		JSONObject attributeItemRequiredObject=new JSONObject();
+		if(attributeItemRequiredListResult.isSuccess()){
+			List<AssetAttributeItem>  attributeItemRequiredList = attributeItemRequiredListResult.getData();
+			if(attributeItemRequiredList.size()>0){
+				for(int i=0;i<attributeItemRequiredList.size();i++){
+					JSONObject obj=new JSONObject();
+					if(AssetAttributeDimensionEnum.ATTRIBUTION.code().equals(attributeItemRequiredList.get(i).getDimension())
+							||AssetAttributeDimensionEnum.FINANCIAL.code().equals(attributeItemRequiredList.get(i).getDimension())
+							||AssetAttributeDimensionEnum.MAINTAINER.code().equals(attributeItemRequiredList.get(i).getDimension())
+							||AssetAttributeDimensionEnum.EQUIPMENT.code().equals(attributeItemRequiredList.get(i).getDimension())
+					){
+						obj.put("labelInForm",attributeItemRequiredList.get(i).getAttribute().getLabel());
+						obj.put("inputType",attributeItemRequiredList.get(i).getAttribute().getComponentType());
+						obj.put("required",true);
+					}
+					attributeItemRequiredObject.put(BeanNameUtil.instance().getPropertyName(attributeItemRequiredList.get(i).getAttribute().getCode()),obj);
+				}
+			}
+		}
+
+
+		model.addAttribute("attributeRequiredData",attributeItemRequiredObject);
+
+
+		//设置资产分类
+		CatalogVO catalog=new CatalogVO();
+		if(StringUtil.isBlank(categoryCode)||"null".equals(categoryCode.toLowerCase())){
+			catalog.setCode(AssetCategoryCodeEnum.ASSET.code());
+		}else{
+			catalog.setCode(categoryCode);
+		}
+		Result<List<Catalog>> catalogListResult=CatalogServiceProxy.api().queryList(catalog);
+		String categoryId="";
+		if(catalogListResult.isSuccess()){
+			List<Catalog> catalogList=catalogListResult.getData();
+			if(catalogList.size()>0){
+				categoryId=catalogList.get(0).getId();
+				CatalogVO catalog2=new CatalogVO();
+				catalog2.setParentId(categoryId);
+				catalog2.setIsLoadAllDescendants(1);
+				Result<List<ZTreeNode>> treeResult=CatalogServiceProxy.api().queryNodes(catalog2);
+				model.addAttribute("assetCategoryData",treeResult.getData());
+			}
+		}
+
+
+		//
+		Result updateModeResult=OperateServiceProxy.api().queryAssetDirectUpdateMode();
+		boolean updateMode=false;
+		if(updateModeResult.isSuccess()){
+			updateMode=(boolean)updateModeResult.getData();
+		}
+		model.addAttribute("assetDirectUpdateMode",updateMode);
+
+
+
+		Result assetStatusColumnDisableResult=OperateServiceProxy.api().queryAssetStatusColumnDisable();
+		boolean assetStatusDisable=false;
+		if(assetStatusColumnDisableResult.isSuccess()){
+			assetStatusDisable=(boolean)assetStatusColumnDisableResult.getData();
+		}
+		model.addAttribute("assetStatusColumnDisable",assetStatusDisable);
+
+
+
+		//默认公司
+		OrganizationVO vo=new OrganizationVO();
+		vo.setSearchField("sort");
+		vo.setValid(1);
+		vo.setType("com");
+		Result<List<Organization>> orgResult=OrganizationServiceProxy.api().queryList(vo);
+		if(orgResult.isSuccess()&&orgResult.getData().size()>0){
+			model.addAttribute("assetDefaultOwnCompany",orgResult.getData().get(0));
+		}
+
+		return prefix+"/asset_info_batch_form";
+	}
+
+
+		/**
+         * 资产 表单页面
+         */
 	@RequestMapping("/asset_info_form.html")
 	public String infoForm(Model model,HttpServletRequest request , String id,String pageType,String categoryCode,String ownerCode,String internalControlLabel) {
 
@@ -456,6 +567,8 @@ public class AssetPageController extends ViewController {
 				}
 			}
 		}
+
+
 		model.addAttribute("attributeRequiredData",attributeItemRequiredObject);
 
 

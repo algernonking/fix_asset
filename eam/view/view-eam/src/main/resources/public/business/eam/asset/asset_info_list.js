@@ -528,9 +528,14 @@ function ListPage() {
 				case 'batchConfirm':
 					window.pageExt.list.batchConfirm && window.pageExt.list.batchConfirm(selected,obj);
 					break;
+				case 'batchInsert':
+					window.pageExt.list.batchInsert && window.pageExt.list.batchInsert(selected,obj);
+					break;
 				case 'assetLabel':
 					window.pageExt.list.assetLabel && window.pageExt.list.assetLabel(selected,obj);
 					break;
+
+
 
 			};
 		});

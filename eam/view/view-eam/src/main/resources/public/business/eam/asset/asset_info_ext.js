@@ -68,6 +68,26 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             });
             admin.putTempData('eam-asset-data-change-form-data-popup-index', index);
         },
+        batchInsert:function(data,item){
+
+            alert(2);
+            var queryString="?assetId="+data.id;
+            var index=admin.popupCenter({
+                title: "变更明细",
+                resize: false,
+                offset: [15,null],
+                area: ["95%","80%"],
+                type: 2,
+                id:"eam-asset-data-batch-insert-data-win",
+                content: '/business/eam/asset/asset_info_batch_form.html' + queryString,
+                finish: function () {
+                    refreshTableData();
+                }
+            });
+            admin.putTempData('eam-asset-data-batch-insert-data-popup-index', index);
+
+        },
+
         batchConfirm:function(data,item){
             if(data.length==0){
                 top.layer.msg("请选择要操作的资产数据!");
