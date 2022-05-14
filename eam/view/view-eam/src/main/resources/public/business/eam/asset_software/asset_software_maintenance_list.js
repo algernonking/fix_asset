@@ -49,7 +49,7 @@ function ListPage() {
 
 			var ps={searchField: "$composite"};
 			var contitions={};
-
+			contitions.status={ inputType:"select_box", value: ["complete"], label:"已完成" };
 			if(window.pageExt.list.beforeQuery){
 				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
@@ -144,7 +144,7 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		//value.businessCode={ inputType:"button",value: $("#businessCode").val()};
-		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
+	//	value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		//value.name={ inputType:"button",value: $("#name").val()};
 		value.copyrightType={ inputType:"select_box", value: getSelectedValue("#copyrightType","value") ,fillBy:["copyrightTypeDict"]  , label:getSelectedValue("#copyrightType","nameStr") };
 		value.licenseMode={ inputType:"select_box", value: getSelectedValue("#licenseMode","value") ,fillBy:["licenseModeDict"]  , label:getSelectedValue("#licenseMode","nameStr") };
@@ -152,6 +152,8 @@ function ListPage() {
 		//value.positionDetail={ inputType:"button",value: $("#positionDetail").val()};
 		value.sourceId={ inputType:"select_box", value: getSelectedValue("#sourceId","value") ,fillBy:["source"]  , label:getSelectedValue("#sourceId","nameStr") };
 		value.purchaseDate={ inputType:"date_input", begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() ,matchType:"auto" };
+
+		value.status={ inputType:"select_box", value: ["complete"], label:"已完成" };
 
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };

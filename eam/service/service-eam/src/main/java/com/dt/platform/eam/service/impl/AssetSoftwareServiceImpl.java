@@ -154,6 +154,7 @@ public class AssetSoftwareServiceImpl extends SuperService<AssetSoftware> implem
 			as.setOwnerCode(AssetOwnerCodeEnum.ASSET_DATA_SELECTED.code());
 			as.setId(null);
 			as.setCtl(sid);
+			as.setAuthorizedAvailableNumber(1);
 			as.setCreateTime(new Date());
 			as.setSelectedCode(selectedCode);
 			super.insert(as,false);

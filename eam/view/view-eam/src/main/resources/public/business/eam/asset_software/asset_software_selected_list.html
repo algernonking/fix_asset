@@ -171,8 +171,8 @@
 <script type="text/html" id="tableOperationTemplate">
 
     <button  class="layui-btn layui-btn-primary layui-btn-xs ops-view-button " lay-event="view"  data-id="{{d.id}}"> <span th:text="${lang.translate('查看')}">查看</span></button>
-    <button  class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit"data-id="{{d.id}}"><span th:text="${lang.translate('修改')}">修改</span></button>
-    <button  class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
+    <button  class="layui-btn layui-btn-primary layui-btn-xs ops-selectNumber-button " lay-event="selectNumber" data-id="{{d.id}}"><span th:text="${lang.translate('修改数量')}">修改数量</span></button>
+    <!-- <button  class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>-->
 
 </script>
 

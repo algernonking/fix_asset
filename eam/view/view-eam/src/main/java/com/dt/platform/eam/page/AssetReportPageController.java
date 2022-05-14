@@ -94,6 +94,23 @@ public class AssetReportPageController extends ViewController {
 
 
 
+	/**
+	 * 资产对帐表
+	 */
+	@RequestMapping("/asset_insert_month.html")
+	public String searchList(Model model,HttpServletRequest request) {
+
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/asset_insert_month";
+	}
+
+
 
 
 }

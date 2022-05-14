@@ -41,10 +41,10 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px" extraParam="{}"></div>
-                    </div>
+<!--                    <div class="search-unit">-->
+<!--                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>-->
+<!--                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px" extraParam="{}"></div>-->
+<!--                    </div>-->
                     <!-- 软件分类 , categoryId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 软件编号 , code ,typeName=text_input, isHideInSearch=true -->
                     <!-- 软件版本 , softwareVersion ,typeName=text_input, isHideInSearch=true -->
@@ -97,16 +97,16 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('版权类型')}" class="search-label copyrightType-label">版权类型</span><span class="search-colon">:</span></div>
                         <div id="copyrightType" th:data="${'/service-system/sys-dict-item/query-list?dictCode=asset_software_copyright_type'}" style="width:150px" extraParam="{}"></div>
                     </div>
-
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('许可模式')}" class="search-label licenseMode-label">许可模式</span><span class="search-colon">:</span></div>
+                        <div id="licenseMode" th:data="${'/service-system/sys-dict-item/query-list?dictCode=asset_software_license_mode'}" style="width:150px" extraParam="{}"></div>
+                    </div>
 
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 许可模式 , licenseMode ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('许可模式')}" class="search-label licenseMode-label">许可模式</span><span class="search-colon">:</span></div>
-                        <div id="licenseMode" th:data="${'/service-system/sys-dict-item/query-list?dictCode=asset_software_license_mode'}" style="width:150px" extraParam="{}"></div>
-                    </div>
+
                     <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('供应商')}" class="search-label supplierId-label">供应商</span><span class="search-colon">:</span></div>

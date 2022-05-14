@@ -43,7 +43,6 @@ spring:
 #        url: jdbc:mysql://121.43.103.102:3306/eam?tinyInt1isBit=false&useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true
 #        username: root
 #        password: P@sswOracle1
-
         # 启动程序时，在连接池中初始化多少个连接
         initialSize: 16
         # 连接池中最多支持多少个活动会话

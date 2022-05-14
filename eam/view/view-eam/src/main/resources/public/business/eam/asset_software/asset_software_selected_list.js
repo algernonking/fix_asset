@@ -92,6 +92,7 @@ function ListPage() {
 					,{ field: 'authorizationExpirationUnlimit', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('永久授权'), templet:function (d){ return templet('authorizationExpirationUnlimit',fox.getEnumText(RADIO_AUTHORIZATIONEXPIRATIONUNLIMIT_DATA,d.authorizationExpirationUnlimit),d);}}
 				 //	,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 				//	,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","name"]),d);} }
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 
 				]],
 				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
@@ -151,7 +152,7 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
-		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
+		value.status={ inputType:"select_box", value: ["complete"], label:"已完成" };
 		value.name={ inputType:"button",value: $("#name").val()};
 		value.copyrightType={ inputType:"select_box", value: getSelectedValue("#copyrightType","value") ,fillBy:["copyrightTypeDict"]  , label:getSelectedValue("#copyrightType","nameStr") };
 		value.licenseMode={ inputType:"select_box", value: getSelectedValue("#licenseMode","value") ,fillBy:["licenseModeDict"]  , label:getSelectedValue("#licenseMode","nameStr") };
@@ -534,7 +535,12 @@ function ListPage() {
 			else if (layEvent === 'download-bill') { // 单据
 				window.pageExt.list.downloadBill(data);
 			}
-			
+			else if (layEvent === 'selectNumber') { // 单据
+				window.pageExt.list.selectNumber(data);
+
+
+			}
+
 		});
 
     };

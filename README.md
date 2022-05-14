@@ -3,8 +3,14 @@
 - EAM系统整体覆盖了基本的资产管理、合同管理、运维服务、运维服务、数据中心设备管理等多个模块。
 
 ### 系统DEMO
+- [Demo] 每天定时由阿里云效自动编译发布部署
 - [Demo] http://eam-demo.rainbooow.com:26788/index.html
 - [Demo] 账户:admin 密码:123456
+
+#### 最新EAM编译后的包下载
+- 1、存储过程:[下载SQL](http://foxnicweb.com/docs/chapters/base/1.1/NextVal.zip)
+- 2、SQL文件:(每日更新):http://eam-demo.rainbooow.com/upload/sql.tar.gz
+- 3、EAM编译包:(自动更新):http://eam-demo.rainbooow.com/upload/eam.tar.gz
 
 ### 联系方式
 - 1、QQ群:634770774 
@@ -56,9 +62,6 @@
 
 #### 二次开发方式
 - 1、二次开发说明，详见Git目录下的二次开发目录的Readme.txt 文件
-- 2、SQL文件:(每日更新):http://121.43.103.102/upload/sql.tar.gz
-- 3、存储过程:[下载SQL](http://foxnicweb.com/docs/chapters/base/1.1/NextVal.zip)
-
 
 
 #### 问题清单
@@ -75,11 +78,14 @@
 - 1、Docker部署:直接从docker拉镜像
 - 2、应用直接运行部署:应用JAR和SQL包来源:https://gitee.com/lank/eam/releases
 
-#### 系统部署的入门视频介绍
+#### 二次开发EAM系统部署的入门视频介绍(二次开发的环境部署)
 - 1、配置EAM项目源码 https://www.bilibili.com/video/BV1844y1377V?spm_id_from=333.999.0.0
 - 2、配置数据库 https://www.bilibili.com/video/BV1kR4y1P7Py?spm_id_from=333.999.0.0
 - 3、配置与启动应用 https://www.bilibili.com/video/BV1wu411r7xC?spm_id_from=333.999.0.0
-- 4、部署 https://www.bilibili.com/video/BV1Q34y1a7LR?spm_id_from=333.999.0.0
+- 4、EAM部署 https://www.bilibili.com/video/BV1Q34y1a7LR?spm_id_from=333.999.0.0
+
+#### EAM系统部署的视频介绍
+- 1、等待录制
 
 #### 方案一 Docker方式-建议作为体验使用
 - 注意点:docker 版本可用作体验版本，正式使用不推荐docker部署方式。

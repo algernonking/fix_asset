@@ -4,5 +4,6 @@ CREATE DATABASE eam_demo DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_c
 CREATE DATABASE eam_view DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 
+CREATE DATABASE eam_v3 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 utf8mb4_general_ci

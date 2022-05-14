@@ -1,7 +1,7 @@
 #!/bin/sh
 #####################################################################
 # Script Help:
-#     sh updateEAM.sh
+#     sh updateApp.sh
 #         include:backup application jar
 #         include(chose):database
 #
@@ -65,13 +65,13 @@ echo "start to copy lib"
 rm -rf $app_dir/lib/*
 cp lib/* $app_dir/lib/
 
-#eam.jar
-eamJAR="eam.jar"
-if [[ -f $eamJAR ]];then
-  echo "start to copy $eamJAR"
-  rm -rf  $app_dir/$eamJAR
-  cp $eamJAR $app_dir/
-  chmod +x $app_dir/$eamJAR
+#app.jar
+appJAR="app.jar"
+if [[ -f $appJAR ]];then
+  echo "start to copy $appJAR"
+  rm -rf  $app_dir/$appJAR
+  cp $appJAR $app_dir/
+  chmod +x $app_dir/$appJAR
 fi
 
 #application.yml
@@ -83,16 +83,16 @@ if [[ -f $confFile ]];then
   chmod +x $app_dir/$confFile
 fi
 
-#eam.sh
-eamActionScript="app.sh"
-if [[ -f $eamActionScript ]];then
-  echo "start to copy $eamActionScript"
-  rm -rf  $app_dir/bin/$eamActionScript
-  cp $eamActionScript $app_dir/bin/
-  chmod +x $app_dir/bin/$eamActionScript
+#app.sh
+appActionScript="app.sh"
+if [[ -f $appActionScript ]];then
+  echo "start to copy $appActionScript"
+  rm -rf  $app_dir/bin/$appActionScript
+  cp $appActionScript $app_dir/bin/
+  chmod +x $app_dir/bin/$appActionScript
 fi
 
-#eamUpdate.sh
+#updateApp.sh
 updateFileScript="updateApp.sh"
 if [[ -f $updateFileScript ]];then
     echo "start to copy $updateFileScript"
@@ -100,7 +100,7 @@ if [[ -f $updateFileScript ]];then
   cp $updateFileScript $app_dir/bin/
   chmod +x $app_dir/bin/$updateFileScript
 fi
-echo "eam update success!"
+echo "app update success!"
 
 
 if [[ -f "$app_dir/update/update/update.sql" ]];then

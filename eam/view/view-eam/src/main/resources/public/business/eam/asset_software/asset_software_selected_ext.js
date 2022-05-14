@@ -26,16 +26,23 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 列表页初始化前调用
          * */
         beforeInit:function () {
+
             if(PAGE_TYPE&&PAGE_TYPE=="view"){
                 var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
-                operHtml=operHtml.replace(/lay-event="edit"/i, "style=\"display:none\"")
-                operHtml=operHtml.replace(/lay-event="del"/i, "style=\"display:none\"")
-                operHtml=operHtml.replace(/lay-event="view"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="selectNumber"/i, "style=\"display:none\"")
                 document.getElementById("tableOperationTemplate").innerHTML=operHtml;
                 var toolHtml=document.getElementById("toolbarTemplate").innerHTML;
                 toolHtml=toolHtml.repeat(/lay-event="create"/i,"style=\"display:none\"")
                 document.getElementById("toolbarTemplate").innerHTML=toolHtml;
             }
+
+            if(OPER_TYPE=="eam_asset_software_maintenance"){
+                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
+                operHtml=operHtml.replace(/lay-event="selectNumber"/i, "style=\"display:none\"")
+                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
+            }
+
+
         },
         /**
          * 表格渲染前调用
@@ -198,6 +205,43 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
         revokeData:function (item){
             list.billOper("revoke-operation","revoke-data-button",{id:item.id},"已撤销");
+        },
+        selectNumber:function(item){
+            //修改数量
+            layer.open({
+                id:1,
+                type:1,
+                title:"请输入分配数量",
+                style:"width:50%:height:auto;",
+                content:"<div style='display:flex;justify-content:center;'><input id='area' type='number' style='width:100%;height:30px;margin-left:5px;margin-right:5px'></input></div>",
+                btn:['保存','取消'],
+                yes:function(index,layero){
+                    var closeContent=top.$("#area").val()||$("#area").val();
+                    if(closeContent){
+                        var param={};
+                        param.id=item.id;
+                        param.authorizedAvailableNumber=closeContent;
+                        var api="/service-eam/eam-asset-software/update";
+                        admin.post(api, param, function (data) {
+                            if (data.success) {
+                                layer.close(index);
+                                top.layer.msg("修改成功", {time: 1000});
+                                window.module.refreshTableData();
+                            } else {
+                                layer.msg(data.message, {icon: 2, time: 1500});
+                            }
+                        }, {delayLoading:1000,elms:[]});
+
+                    }else{
+                        alert("请输入分配数量");
+                    }
+                },
+                no:function(index,layer){
+                    layer.close(index);
+                }
+            })
+
+
         },
         /**
          * 末尾执行

@@ -1606,6 +1606,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		//装换成记录集
 		RcdSet rs=null;
 		try {
+			System.out.println("sheetIndex"+sheetIndex+","+es+"ind:"+es.getColumnReadEndIndex());
 			rs=er.read(sheetIndex,es);
 
 		} catch (Exception e) {
@@ -1763,6 +1764,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				Sheet sheet=workbook.getSheetAt(0);
 				Row firstRow=sheet.getRow(0);
 				Row secondRow=sheet.getRow(1);
+
 				lastNum=firstRow.getLastCellNum();
 				String charIndex="";
 				for(int i=0;i<secondRow.getLastCellNum();i++){
@@ -1782,7 +1784,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 							BeanNameUtil.instance().depart(asset_column):
 							EnumUtil.parseByCode(AssetDataExportColumnEnum.class,asset_column).text();
 
-				//	charIndex=ExcelStructure.toExcel26(i);
+					charIndex=ExcelUtil.toExcel26(i);
 					System.out.println(charIndex+","+secondRow.getCell(i)  +","+ firstRow.getCell(i)+","+asset_column+","+rAssetColumn);
 					es.addColumn(charIndex,rAssetColumn,firstRow.getCell(i).toString(), ExcelColumn.STRING_CELL_READER);
 				}
@@ -1803,11 +1805,12 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		String charIndex="";
 		for(int i=0;i<list.size();i++){
 			CatalogAttribute attribute=list.get(i);
-		//	charIndex=ExcelStructure.toExcel26(lastNum+i);
+			charIndex=ExcelUtil.toExcel26(lastNum+i);
 			System.out.println(charIndex+",自定义属性:"+attribute.getShortName()+","+ attribute.getField());
 			es.addColumn(charIndex,attribute.getField(),attribute.getShortName(), ExcelColumn.STRING_CELL_READER);
 
 		}
+
 
 		return es;
 	}

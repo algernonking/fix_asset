@@ -271,6 +271,7 @@ public class AssetPageController extends ViewController {
 	}
 
 
+
 	/**
 	 * 资产登记审批
 	 */
