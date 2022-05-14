@@ -37,7 +37,7 @@
 
 #### 开发环境
 - IDE:IntelliJ IDEA 2020.2以上
-- JDK:JDK 1.8
+- JDK:JDK 1.8.100 (小版本100以下,但仅支持1.8)
 - 数据库:Mysql 5.7.X
 - Redis:5.1(可选)
 
@@ -48,46 +48,44 @@
 - 1、EAM系统产品开源免费(协议:GPLv3)，并且将持续提供免费的社区技术支持，个人或企业内部可自由的接入和使用，但禁止任何单位或个人修改软件后再次发行或出售的行为
 - 2、EAM系统源代码已开源，软件介质以社区版形式供免费使用,在未授权情况下，禁止修改涉及版权信息的相关代码和名称
 
+
 ## EAM系统使用帮助
-#### 直接使用方式
-- 1、当前系统提供EAM版的完整可部署的应用包和完整的SQL文件。
-- 2、当前软件包以社区版本形式提供，参考《EAM安装部署维护手册.docx》部署方式即可。
-
-#### 帮助文档
-- EAM安装手册:在EAM项目的文档目录
-- EAM使用手册:登录系统后,选择公共服务下的公共资源菜单->EAM使用手册
-  或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
+### 帮助文档
+- EAM安装手册:在EAM项目的相关文档目录
+- EAM使用手册:在EAM项目的相关文档目录
 - 应用框架[Foxnic-Web](https://gitee.com/LeeFJ/foxnic-web) [开发文档](http://foxnicweb.com/docs/doc.html)
+- 问题清单:系统使用常见问题清单.txt
+- 二次开发说明:系统二次开发说明文档.txt
 
+## 二次开发说明
+### 二次开发相关文档
+- 1、本系统二次开发建议至少有1到2年JAVA开发经验
+     开发前请确保了解系统二次开发说明、系统使用常见问题清单、系统使用手册等相关文档
+- 2、问题清单或说明中已收录的问题，例如无法下载lib、启动报错CP、java版本不对在说明中已明确要求的不在做解答。
 
-#### 二次开发方式
-- 1、二次开发说明，详见Git目录下的二次开发目录的Readme.txt 文件
-
-
-#### 问题清单
-- 部署或使用上遇到的一些问题，详细请先看git目录下的问题清单列表
-
-
-## EAM系统安装部署
-#### 实施方案
-- 1、传统方式:传统单体架构方式打包部署
-- 2、微服务:拆分成独立微服务方式部署
-- 3、集群模式:拆分成独立服务各自独立启动部署
-
-#### 软件介质
-- 1、Docker部署:直接从docker拉镜像
-- 2、应用直接运行部署:应用JAR和SQL包来源:https://gitee.com/lank/eam/releases
-
-#### 二次开发EAM系统部署的入门视频介绍(二次开发的环境部署)
+### 二次开发EAM系统部署的入门视频介绍(二次开发的环境部署)
 - 1、配置EAM项目源码 https://www.bilibili.com/video/BV1844y1377V?spm_id_from=333.999.0.0
 - 2、配置数据库 https://www.bilibili.com/video/BV1kR4y1P7Py?spm_id_from=333.999.0.0
 - 3、配置与启动应用 https://www.bilibili.com/video/BV1wu411r7xC?spm_id_from=333.999.0.0
 - 4、EAM部署 https://www.bilibili.com/video/BV1Q34y1a7LR?spm_id_from=333.999.0.0
 
-#### EAM系统部署的视频介绍
-- 1、等待录制
 
-#### 方案一 Docker方式-建议作为体验使用
+## EAM系统安装部署
+### 实施方案
+- 1、传统方式:传统单体架构方式打包部署
+- 2、微服务:拆分成独立微服务方式部署
+- 3、集群模式:拆分成独立服务各自独立启动部署
+
+### 软件介质
+- 1、Docker部署:直接从docker拉镜像
+- 2、应用直接运行部署:应用JAR和SQL包来源:https://gitee.com/lank/eam/releases
+
+
+### EAM系统部署的视频介绍
+- 1、待录制
+
+
+### 方案一 Docker方式-建议作为体验使用
 - 注意点:docker 版本可用作体验版本，正式使用不推荐docker部署方式。
 - 注意点:建议第一次docker部署完后，在重启一次，可能第一次启动数据库初始化还没完成，会导致报错
 - 应用和移动端兼容列表
@@ -109,17 +107,17 @@
     --character-set-server=utf8
 ```
 
-#### 方案二 应用直接部署
+### 方案二 应用直接部署
 - 详细部署方式查询git目录下的文档说明
 - https://gitee.com/lank/eam/tree/master/%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3
 
 
 ## 项目结构说明
  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0610/145855_29614033_1470521.png "屏幕截图.png")
-#### 安装教程
+### 安装教程
  Maven项目，支持 Eclipse 和 IDEA 开发。
 
-#### 使用说明
+### 使用说明
  1. 新建表或表结构调整后(包括注释)，执行 generator 项目下的 EamDbMetaGenerator 类的 main 函数，将表结构映射到 java 代码。执行后，domain 项目的 EAMTables 类代码将被刷新。
  2. 必要时执行 generator 项目下的 EamEnumGenerator 类的 main 函数，该类用于生成字典枚举等，请按项目按需调整。执行后，在 domain 项目下 com.dt.eam.constants.enums 包下生成枚举类型的代码。
  3. 这里是列表文本执行 generator 项目下的 EamCodeGenerator 生成模块代码。执行后，
