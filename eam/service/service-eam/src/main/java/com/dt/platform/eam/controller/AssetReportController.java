@@ -36,9 +36,15 @@ public class AssetReportController extends SuperController {
         result.success(true).data(assetReportService.queryOrganizationData(sample));
         return result;
     }
-
-
-
+    @ApiOperation(value = "资产所属数据")
+    @ApiOperationSupport(order=1)
+    @SentinelResource(value = AssetReportServiceProxy.QUERY_OWN_COMPANY_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetReportServiceProxy.QUERY_OWN_COMPANY_DATA)
+    public Result<JSONArray> queryOwnCompanyData(Asset sample) {
+        Result<JSONArray> result=new Result<>();
+        result.success(true).data(assetReportService.queryOwnCompanyData(sample));
+        return result;
+    }
 
     @ApiOperation(value = "分类资产数据")
     @ApiOperationSupport(order=2)

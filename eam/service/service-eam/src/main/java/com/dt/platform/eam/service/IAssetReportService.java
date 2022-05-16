@@ -12,6 +12,8 @@ public interface IAssetReportService extends ISuperService<Asset> {
 
       JSONArray queryOrganizationData(Asset sample);
 
+      JSONArray queryOwnCompanyData(Asset sample);
+
       JSONArray queryCategoryData(Asset sample);
 
       JSONArray queryCategoryStatusData(Asset sample);

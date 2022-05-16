@@ -66,11 +66,22 @@ public class AssetReportPageController extends ViewController {
 	/**
 	 * 资产分类查询数据
 	 */
+	@RequestMapping("/company_status_report_list.html")
+	public String companyStatusReportList(Model model,HttpServletRequest request , String id) {
+
+		return prefix+"/company_status_report_list";
+	}
+
+
+	/**
+	 * 资产分类查询数据
+	 */
 	@RequestMapping("/category_status_report_list.html")
 	public String categoryStatusReportList(Model model,HttpServletRequest request , String id) {
 
 		return prefix+"/category_status_report_list";
 	}
+
 
 	/**
 	 * 资产组织查询数据

@@ -162,42 +162,101 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
 
     public JSONArray queryOrganizationData(Asset sample){
 
-        HashMap<String,String> org = assetDataService.queryUseOrganizationNodes();
-        //查询组织
-        String tenantId= SessionUser.getCurrent().getActivatedTenantId();
-        JSONArray data=new JSONArray();
-        String sql="SELECT '' AS name, t.*\n" +
-                " , (\n" +
-                "  SELECT hierarchy\n" +
-                "  FROM hrm_organization\n" +
-                "  WHERE id = use_organization_id\n" +
-                " ) AS hierarchy\n" +
-                "FROM (\n" +
-                " SELECT use_organization_id, COUNT(1) AS cnt\n" +
-                " FROM  (select ifnull(use_organization_id,'') use_organization_id ,i.id,i.status,i.owner_code ,i.tenant_id,i.deleted from eam_asset i) s\n" +
-                " WHERE s.deleted = '0'\n" +
-                "    AND s.tenant_id=?\n" +
-                "  AND s.owner_code = 'asset'\n" +
-                "  AND s.status  IN ('complete')\n" +
-                " GROUP BY s.use_organization_id\n" +
-                ") t order by hierarchy";
-        RcdSet rs=dao.query(sql,tenantId);
-        //id,org_id,name,count
-        for(int i=0;i<rs.size();i++){
-            String key=rs.getRcd(i).getString("use_organization_id");
-            if(StringUtil.isBlank(key))
-                rs.getRcd(i).setValue("name","资产未分配有使用组织结构");
-            if(org.containsKey(key)){
-                rs.getRcd(i).setValue("name",org.get(key));
-            }
-        }
-        data = rs.toJSONArrayWithJSONObject();
-        return data;
+//        HashMap<String,String> org = assetDataService.queryUseOrganizationNodes();
+//        //查询组织
+//        String tenantId= SessionUser.getCurrent().getActivatedTenantId();
+//        JSONArray data=new JSONArray();
+//        String sql="SELECT '' AS name, t.*\n" +
+//                " , (\n" +
+//                "  SELECT hierarchy\n" +
+//                "  FROM hrm_organization\n" +
+//                "  WHERE id = use_organization_id\n" +
+//                " ) AS hierarchy\n" +
+//                "FROM (\n" +
+//                " SELECT use_organization_id, COUNT(1) AS cnt\n" +
+//                " FROM  (select ifnull(use_organization_id,'') use_organization_id ,i.id,i.status,i.owner_code ,i.tenant_id,i.deleted from eam_asset i) s\n" +
+//                " WHERE s.deleted = '0'\n" +
+//                "    AND s.tenant_id=?\n" +
+//                "  AND s.owner_code = 'asset'\n" +
+//                "  AND s.status  IN ('complete')\n" +
+//                " GROUP BY s.use_organization_id\n" +
+//                ") t order by hierarchy";
+//        RcdSet rs=dao.query(sql,tenantId);
+//        //id,org_id,name,count
+//        for(int i=0;i<rs.size();i++){
+//            String key=rs.getRcd(i).getString("use_organization_id");
+//            if(StringUtil.isBlank(key))
+//                rs.getRcd(i).setValue("name","资产未分配有使用组织结构");
+//            if(org.containsKey(key)){
+//                rs.getRcd(i).setValue("name",org.get(key));
+//            }
+//        }
+//        data = rs.toJSONArrayWithJSONObject();
+
+        String sql="select hm.full_name name,hm.type,t2.*,t2.idle_cnt+t2.using_cnt+t2.borrow_cnt+t2.repair_cnt+t2.allocate_cnt+t2.scrap_cnt sum_cnt from (\n" +
+                "select ti.use_organization_id,\n" +
+                "sum(ti.idle_cnt) idle_cnt,\n" +
+                "sum(ti.using_cnt) using_cnt,\n" +
+                "sum(ti.borrow_cnt) borrow_cnt,\n" +
+                "sum(ti.repair_cnt) repair_cnt,\n" +
+                "sum(ti.allocate_cnt) allocate_cnt,\n" +
+                "sum(ti.scrap_cnt) scrap_cnt\n" +
+                "from (\n" +
+                "select t.use_organization_id,\n" +
+                "case t.asset_status when 'idle' then cnt else 0 end idle_cnt,\n" +
+                "case t.asset_status when 'using' then cnt else 0 end using_cnt,\n" +
+                "case t.asset_status when 'borrow' then cnt else 0 end borrow_cnt,\n" +
+                "case t.asset_status when 'repair' then cnt else 0 end repair_cnt,\n" +
+                "case t.asset_status when 'allocate' then cnt else 0 end allocate_cnt,\n" +
+                "case t.asset_status when 'scrap' then cnt else 0 end scrap_cnt\n" +
+                " from (\n" +
+                "select use_organization_id,asset_status,count(1) cnt from eam_asset where deleted=0 and status='complete' and owner_code='asset' and clean_out=0\n" +
+                "group by use_organization_id, asset_status\n" +
+                ")t)ti group by ti.use_organization_id\n" +
+                ")t2,hrm_organization hm where t2.use_organization_id=hm.id";
+        RcdSet rs=dao.query(sql);
+        return rs.toJSONArrayWithJSONObject();
+
+    }
+
+    @Override
+    public JSONArray queryOwnCompanyData(Asset sample) {
+        String sql="select hm.full_name name,hm.type,t2.*,t2.idle_cnt+t2.using_cnt+t2.borrow_cnt+t2.repair_cnt+t2.allocate_cnt+t2.scrap_cnt sum_cnt from (\n" +
+                "select ti.own_company_id,\n" +
+                "sum(ti.idle_cnt) idle_cnt,\n" +
+                "sum(ti.using_cnt) using_cnt,\n" +
+                "sum(ti.borrow_cnt) borrow_cnt,\n" +
+                "sum(ti.repair_cnt) repair_cnt,\n" +
+                "sum(ti.allocate_cnt) allocate_cnt,\n" +
+                "sum(ti.scrap_cnt) scrap_cnt\n" +
+                "from (\n" +
+                "select t.own_company_id,\n" +
+                "case t.asset_status when 'idle' then cnt else 0 end idle_cnt,\n" +
+                "case t.asset_status when 'using' then cnt else 0 end using_cnt,\n" +
+                "case t.asset_status when 'borrow' then cnt else 0 end borrow_cnt,\n" +
+                "case t.asset_status when 'repair' then cnt else 0 end repair_cnt,\n" +
+                "case t.asset_status when 'allocate' then cnt else 0 end allocate_cnt,\n" +
+                "case t.asset_status when 'scrap' then cnt else 0 end scrap_cnt\n" +
+                " from (\n" +
+                "select own_company_id,asset_status,count(1) cnt from eam_asset where deleted=0 and status='complete' and owner_code='asset' and clean_out=0\n" +
+                "group by own_company_id, asset_status\n" +
+                ")t)ti group by ti.own_company_id\n" +
+                ")t2,hrm_organization hm where t2.own_company_id=hm.id";
+        RcdSet rs=dao.query(sql);
+        return rs.toJSONArrayWithJSONObject();
     }
 
     public JSONArray queryCategoryStatusData(Asset sample){
         String sql="select pcm.name,pcm.code,t2.*,t2.idle_cnt+t2.using_cnt+t2.borrow_cnt+t2.repair_cnt+t2.allocate_cnt+t2.scrap_cnt sum_cnt from (\n" +
-                "select t.*,\n" +
+                "select ti.category_id,\n" +
+                "sum(ti.idle_cnt) idle_cnt,\n" +
+                "sum(ti.using_cnt) using_cnt,\n" +
+                "sum(ti.borrow_cnt) borrow_cnt,\n" +
+                "sum(ti.repair_cnt) repair_cnt,\n" +
+                "sum(ti.allocate_cnt) allocate_cnt,\n" +
+                "sum(ti.scrap_cnt) scrap_cnt\n" +
+                "from (\n" +
+                "select t.category_id,\n" +
                 "case t.asset_status when 'idle' then cnt else 0 end idle_cnt,\n" +
                 "case t.asset_status when 'using' then cnt else 0 end using_cnt,\n" +
                 "case t.asset_status when 'borrow' then cnt else 0 end borrow_cnt,\n" +
@@ -207,7 +266,7 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
                 " from (\n" +
                 "select category_id,asset_status,count(1) cnt from eam_asset where deleted=0 and status='complete' and owner_code='asset' and clean_out=0\n" +
                 "group by category_id, asset_status\n" +
-                ")t \n" +
+                ")t)ti group by ti.category_id\n" +
                 ")t2,pcm_catalog pcm where t2.category_id=pcm.id";
         RcdSet rs=dao.query(sql);
         return rs.toJSONArrayWithJSONObject();

@@ -61,7 +61,7 @@ function ListPage() {
                 elem: '#data-table',
                 toolbar: '#toolbarTemplate',
                 defaultToolbar: ['filter', 'print','exports',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
-                url: moduleURL +'/query-organization-data',
+                url: moduleURL +'/query-own-company-data',
                 height: 'full-'+(h+28),
                 limit: 50,
                 page:false,
@@ -70,7 +70,7 @@ function ListPage() {
                     { fixed: 'left',type: 'numbers' },
                     { fixed: 'left',type:'checkbox' }
                     ,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属公司') , templet: function (d) { return templet('name',d.name,d);}  }
-                    //    ,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类编码') , templet: function (d) { return templet('code',d.code,d);}  }
+                //    ,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类编码') , templet: function (d) { return templet('code',d.code,d);}  }
                     ,{ field: 'idleCnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('闲置数量') , templet: function (d) { return templet('idleCnt',d.idleCnt,d);}  }
                     ,{ field: 'usingCnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('在用数量') , templet: function (d) { return templet('usingCnt',d.usingCnt,d);}  }
                     ,{ field: 'borrowCnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借用数量') , templet: function (d) { return templet('borrowCnt',d.borrowCnt,d);}  }
@@ -79,7 +79,7 @@ function ListPage() {
                     ,{ field: 'scrapCnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报废数量') , templet: function (d) { return templet('scrapCnt',d.scrapCnt,d);}  }
                     ,{ field: 'sumCnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('合计') , templet: function (d) { return templet('sumCnt',d.sumCnt,d);}  }
                     ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-                    //   ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+                        //   ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
                 ]],
                 parseData:function(res){
                     console.log("parese res:",res);

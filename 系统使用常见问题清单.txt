@@ -21,6 +21,7 @@
     配置键(system.login.default):修改为{account:"",password:"",captcha:""}
     配置键(system.login.captcha.any):修改为0
 
+
 - 4、Redis服务问题，本应用最简化部署时可以不依赖Redis
 
 
@@ -77,7 +78,12 @@ java -noverify -Dfile.encoding=UTF-8 -Dloader.path=./lib/ -jar app.jar --Dspring
     在系统管理模块-->系统配置-->数据字典
 
 
-- 16、当新增资产报错，执行异常，导致该错误发生的重要原因是数据的生产序列的存储过程没有正确创建
+- 16、当新增资产报错，执行异常
+    导致该错误发生的重要原因是数据的生产序列的存储过程没有正确创建
+    也可能的原因是编码问题，确保数据库编码，序列表编码等相关编码正确
+    CREATE DATABASE eam DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+    相关表编码略
+
 
 
 
