@@ -69,6 +69,12 @@
 - 3、配置与启动应用 https://www.bilibili.com/video/BV1wu411r7xC?spm_id_from=333.999.0.0
 - 4、EAM部署 https://www.bilibili.com/video/BV1Q34y1a7LR?spm_id_from=333.999.0.0
 
+### 二次开发相关的视频与文档集合
+- 1、官网文档集合 http://foxnicweb.com/docs/doc.html
+- 2、B站资料集合 https://space.bilibili.com/1796475412
+- 3、知乎视频资料集合 https://www.zhihu.com/people/leefj/zvideos
+- 4、知乎文档集合 https://www.zhihu.com/people/leefj/posts
+
 
 ## EAM系统安装部署
 ### 实施方案
