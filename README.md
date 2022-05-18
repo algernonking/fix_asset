@@ -16,7 +16,7 @@
 - 1、QQ群:634770774 
 - 2、微信号:myxyjm
 - 3、微信群：      
-![微信群](https://gitee.com/LeeFJ/foxnic-web/raw/master/view/view-console/src/main/resources/static/assets/images/wx.png)
+![微信群](http://foxnicweb.com/docs/chapters/base/1.3/wx.png)
 
 ### 主要技术栈
 #### 后端技术栈
