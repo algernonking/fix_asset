@@ -3,10 +3,12 @@ package com.dt.platform.eam.controller;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.deepoove.poi.util.PoitlIOUtils;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetOwnerCodeEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.meta.AssetMeta;
@@ -16,12 +18,17 @@ import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.ITplFileService;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
 import com.dt.platform.proxy.eam.AssetDataServiceProxy;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
 import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.api.web.MimeUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
+import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.commons.io.StreamUtil;
+import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.springboot.web.DownloadUtil;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -29,12 +36,17 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
 import org.github.foxnic.web.framework.web.SuperController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -164,10 +176,84 @@ public class AssetDataController extends SuperController {
     @ApiOperationSupport(order=10)
     @SentinelResource(value = AssetDataServiceProxy.BATCH_IMPORT_ASSET , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetDataServiceProxy.BATCH_IMPORT_ASSET)
-    public Result batchImportAsset(){
-        return assetDataService.batchImportAsset();
+    public Result batchImportAsset(String content){
 
+
+
+
+        Workbook wb = null;
+        OutputStream out = null;
+        String path = System.getProperty("java.io.tmpdir");
+        File tempFile = new File(path + IDGenerator.getSnowflakeIdString()+".xls");
+        System.out.println("path######"+tempFile.getAbsolutePath());
+        try {
+            wb = new HSSFWorkbook();
+            Sheet sheet = wb.createSheet("asset");
+            sheet.setColumnWidth(0, 18 * 256);
+            sheet.setColumnWidth(1, 18 * 256);
+//            Row r = sheet.createRow(0);
+//            r.createCell(0).setCellValue("ip");
+            JSONArray ctArr=JSONArray.parseArray(content);
+            for(int i=0;i<ctArr.size();i++){
+                JSONArray valueArr=ctArr.getJSONArray(i);
+                //验证第二行是否输入
+                if(valueArr==null){
+                    break;
+                }
+                JSONObject vObj=valueArr.getJSONObject(1);
+                if(vObj==null||vObj.getString("m")==null||"".equals(vObj.getString("m"))){
+                    break;
+                }
+                Row r = sheet.createRow(i);
+                for(int j=0;j<valueArr.size();j++){
+                    JSONObject valueObj=valueArr.getJSONObject(j);
+                    if(valueObj!=null){
+                        r.createCell(j).setCellValue(valueObj.getString("m"));
+                        System.out.println("out:"+valueObj.getString("m"));
+                    }
+                }
+            }
+            out = new FileOutputStream(tempFile);
+            //获取inputStream
+            wb.write(out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(out!=null){
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        boolean dataFill=false;
+        Result dataFillResult= OperateServiceProxy.api().queryAssetDirectUpdateMode();
+        if(dataFillResult.isSuccess()){
+            dataFill=(boolean)dataFillResult.getData();
+        }
+        FileInputStream input=null;
+        try {
+            input=new FileInputStream(tempFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        List<ValidateResult> errors=assetService.importExcel(input,0,true, AssetOwnerCodeEnum.ASSET.code(), true);
+
+        if(errors==null || errors.isEmpty()) {
+            return ErrorDesc.success();
+        } else {
+            System.out.println("import Result:");
+            String msg="导入失败";
+            for(int i=0;i<errors.size();i++){
+                System.out.println(i+":"+errors.get(i).message);
+                msg=errors.get(i).message;
+            }
+            return ErrorDesc.failure().message(msg).data(errors);
+        }
     }
+
 
     /**
      * 查询在线Excel导入资产配置信息
