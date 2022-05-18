@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.Goods;
@@ -44,11 +45,14 @@ public interface IAssetDataService extends ISuperService<Asset> {
 
 	Result<CatalogData> verifyAssetExtColumnRecord(Rcd rcd, List<CatalogAttribute> attributeList, boolean filldata);
 
-	HashMap<String,String> queryAssetCategoryNodes();
+	HashMap<String,String> queryAssetCategoryNodes(String type);
+
+	HashMap<String,String> queryOrganizationNodes(String type);
 
 
-	HashMap<String,String> queryUseOrganizationNodes();
+	Result batchImportAsset();
 
+	Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper);
 
 	/**
 	 * 插入实体

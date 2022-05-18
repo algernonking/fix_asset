@@ -58,7 +58,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 title: "变更明细",
                 resize: false,
                 offset: [15,null],
-                area: ["95%","80%"],
+                area: ["98%","98%"],
                 type: 2,
                 id:"eam-asset-data-change-detail-form-data-win",
                 content: '/business/eam/asset_process_record/asset_process_record_list.html' + queryString,
@@ -69,17 +69,21 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             admin.putTempData('eam-asset-data-change-form-data-popup-index', index);
         },
         batchInsert:function(data,item){
+            var ps={}
+            admin.request("/service-eam/eam-asset-data/batch-import-asset", ps, function (attributeData) {
 
-            alert(2);
-            var queryString="?assetId="+data.id;
+            }, "POST");
+
+
+            var queryString=""
             var index=admin.popupCenter({
-                title: "变更明细",
+                title: "数据导入",
                 resize: false,
                 offset: [15,null],
                 area: ["95%","80%"],
                 type: 2,
                 id:"eam-asset-data-batch-insert-data-win",
-                content: '/business/eam/asset/asset_info_batch_form.html' + queryString,
+                content: '/business/eam/asset/asset_excel_oper.html' + queryString,
                 finish: function () {
                     refreshTableData();
                 }

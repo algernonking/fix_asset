@@ -10,7 +10,7 @@ public class BaseCodeGenerator {
 
     public static final String BASIC_DATA_MENU_ID="472025257461415936";
     public static final String BASIC_CODE_MENU_ID="476517102736375808";
-
+    public static final String SE="471986431431016449";
 
     //
     private String appId="service-common";

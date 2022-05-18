@@ -3,6 +3,7 @@ package com.dt.platform.eam.controller;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.fastjson.JSONObject;
 import com.deepoove.poi.util.PoitlIOUtils;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
@@ -19,6 +20,7 @@ import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.api.web.MimeUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
+import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.springboot.web.DownloadUtil;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
@@ -137,14 +139,12 @@ public class AssetDataController extends SuperController {
     @SentinelResource(value = AssetDataServiceProxy.EXPORT_ASSET , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetDataServiceProxy.EXPORT_ASSET)
     public Result exportAsset(AssetVO sample,HttpServletResponse response) throws Exception {
-
-
         return ErrorDesc.success();
 
     }
 
     /**
-     * 照资产ids批量导出资产数据
+     * 资产ids批量导出资产数据
      */
     @ApiOperation(value = "按照资产ids批量导出资产数据")
 
@@ -152,13 +152,33 @@ public class AssetDataController extends SuperController {
     @SentinelResource(value = AssetDataServiceProxy.EXPORT_ASSET_BY_IDS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetDataServiceProxy.EXPORT_ASSET_BY_IDS)
     public Result exportAssetByIds(List<String> ids, HttpServletResponse response) throws Exception {
-
-
-
         return ErrorDesc.success();
 
     }
 
+    /**
+     * 在线Excel导入资产
+     */
+    @ApiOperation(value = "在线Excel导入资产")
+
+    @ApiOperationSupport(order=10)
+    @SentinelResource(value = AssetDataServiceProxy.BATCH_IMPORT_ASSET , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetDataServiceProxy.BATCH_IMPORT_ASSET)
+    public Result batchImportAsset(){
+        return assetDataService.batchImportAsset();
+
+    }
+
+    /**
+     * 查询在线Excel导入资产配置信息
+     */
+    @ApiOperation(value = "查询在线Excel导入资产配置信息")
+    @ApiOperationSupport(order=12)
+    @SentinelResource(value = AssetDataServiceProxy.QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetDataServiceProxy.QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF)
+    public Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper){
+        return assetDataService.queryBatchImportAssetLuckysheetConf(oper);
+    }
 
 
 }

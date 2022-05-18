@@ -10,9 +10,7 @@ import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.meta.AssetRepairMeta;
 import com.dt.platform.eam.common.AssetCommonError;
-import com.dt.platform.eam.service.IAssetSelectedDataService;
-import com.dt.platform.eam.service.IAssetService;
-import com.dt.platform.eam.service.IOperateService;
+import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
 import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
@@ -50,7 +48,6 @@ import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import com.dt.platform.eam.service.IAssetRepairService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 
 /**
@@ -89,7 +86,8 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	@Autowired
 	private IOperateService operateService;
 
-
+	@Autowired
+	private IAssetProcessRecordService assetProcessRecordService;
 
 
 
@@ -207,6 +205,7 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	 * @return
 	 * */
 	private Result operateResult(String id,String result,String status,String message) {
+		AssetRepair repair=this.getById(id);
 		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
 			Result verifyResult= verifyBillData(id);
 			if(!verifyResult.isSuccess()) return verifyResult;
@@ -216,7 +215,24 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 			AssetRepair bill=new AssetRepair();
 			bill.setId(id);
 			bill.setStatus(status);
-			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
+
+			Result r=super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
+			if(r.isSuccess()){
+				this.join(repair,AssetRepairMeta.ASSET_LIST);
+				List<Asset> assetList=repair.getAssetList();
+				if(assetList!=null&&assetList.size()>0){
+					for(Asset asset:assetList){
+						AssetProcessRecord assetProcessRecord=new AssetProcessRecord();
+						assetProcessRecord.setContent("资产维修操作完成");
+						assetProcessRecord.setAssetId(asset.getId());
+						assetProcessRecord.setBusinessCode(repair.getBusinessCode());
+						assetProcessRecord.setProcessType(AssetOperateEnum.EAM_ASSET_REPAIR.code());
+						assetProcessRecord.setProcessdTime(new Date());
+						assetProcessRecordService.insert(assetProcessRecord);
+					}
+				}
+			}
+			return r;
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{

@@ -272,7 +272,7 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
         return rs.toJSONArrayWithJSONObject();
     }
     public JSONArray queryCategoryData(Asset sample){
-        HashMap<String,String> org = assetDataService.queryAssetCategoryNodes();
+        HashMap<String,String> org = assetDataService.queryAssetCategoryNodes("all");
         //查询分类
         String tenantId= SessionUser.getCurrent().getActivatedTenantId();
         JSONArray data=new JSONArray();

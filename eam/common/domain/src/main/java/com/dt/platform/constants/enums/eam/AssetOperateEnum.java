@@ -8,6 +8,8 @@ public enum AssetOperateEnum implements CodeTextEnum {
     //资产
     EAM_ASSET_INSERT("eam_asset_insert" , "EAM_资产-登记"),
     EAM_ASSET_IMPORT("eam_asset_import" , "EAM_资产-导入"),
+    EAM_BATCH_UPLOAD_ASSET("eam_batch_upload_asset" , "EAM_资产-批量导入"),
+
 
     //软件资产
     EAM_ASSET_SOFTWARE_INSERT(CodeModuleEnum.EAM_ASSET_SOFTWARE_INSERT.code(), "EAM_资产软件-登记"),

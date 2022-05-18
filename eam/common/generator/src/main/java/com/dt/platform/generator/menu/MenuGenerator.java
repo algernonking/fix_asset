@@ -262,6 +262,7 @@ MenuGenerator {
 		}
 		String prefix=(String)field.get(null);
 		prefix=StringUtil.removeFirst(prefix, "/");
+		//pageType.getName()
 
 		File file=(new MavenProject(pageType)).getSourceFile(pageType);
 		String source= FileUtil.readText(file);

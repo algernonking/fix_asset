@@ -1,15 +1,15 @@
 package com.dt.platform.eam.page;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.domain.eam.AssetAttributeItemVO;
 import com.dt.platform.domain.eam.meta.AssetAttributeItemMeta;
-import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
-import com.dt.platform.proxy.eam.AssetCategoryServiceProxy;
-import com.dt.platform.proxy.eam.OperateServiceProxy;
+import com.dt.platform.proxy.eam.*;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.eam.AssetServiceProxy;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -60,6 +60,18 @@ public class AssetPageController extends ViewController {
 			proxy=AssetServiceProxy.api();
 		}
 		return proxy;
+	}
+
+
+	/**
+	 * 资产
+	 */
+	@RequestMapping("/asset_excel_oper.html")
+	public String excelOper(Model model,HttpServletRequest request) {
+		Result r=AssetDataServiceProxy.api().queryBatchImportAssetLuckysheetConf("");
+		JSONObject conf= (JSONObject) r.getData();
+		model.addAttribute("sheetConfig", JSON.toJSONString(conf, SerializerFeature.DisableCircularReferenceDetect));
+		return prefix+"/asset_excel_oper";
 	}
 
 	/**

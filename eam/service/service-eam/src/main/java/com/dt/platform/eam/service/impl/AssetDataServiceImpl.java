@@ -7,10 +7,11 @@ import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.datacenter.Rack;
 import com.dt.platform.domain.datacenter.RackVO;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetLuckySheetColumnMeta;
 import com.dt.platform.domain.eam.meta.AssetMeta;
-import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.eam.service.*;
 
+import com.dt.platform.proxy.common.TplFileServiceProxy;
 import com.dt.platform.proxy.datacenter.RackServiceProxy;
 import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.api.error.ErrorDesc;
@@ -18,40 +19,40 @@ import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.busi.id.IDGenerator;
-import com.github.foxnic.commons.collection.CollectorUtil;
-import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.Rcd;
+import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.dao.entity.SuperService;
+import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.spec.DAO;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.OrganizationVO;
-import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.pcm.*;
-import org.github.foxnic.web.domain.system.Dict;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.DictItemVO;
-import org.github.foxnic.web.domain.system.DictVO;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.github.foxnic.web.misc.ztree.ZTreeNode;
 import org.github.foxnic.web.proxy.hrm.EmployeeServiceProxy;
 import org.github.foxnic.web.proxy.hrm.OrganizationServiceProxy;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
-import org.github.foxnic.web.proxy.system.DictServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import javax.print.attribute.standard.JobName;
 import java.io.*;
-import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.Logger;
 
 @Service("EamAssetDataService")
 public class AssetDataServiceImpl  extends SuperService<Asset> implements IAssetDataService {
@@ -115,8 +116,271 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     }
 
 
+
     @Override
-    public HashMap<String,String> queryUseOrganizationNodes(){
+    public Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper) {
+        int row=60;
+        List<AssetLuckySheetColumnMeta> list= getImportExcelMetaData(oper);
+        JSONObject dataVerification=importExcelDataDataVerification(list,row-1);
+        JSONObject configObj=parseImportExcelDataConfig(list);
+        Result<JSONObject> res=new Result<>();
+        JSONObject resData=new JSONObject();
+        resData.put("name","资产");
+        resData.put("index","Sheet_"+IDGenerator.getSnowflakeIdString());
+        resData.put("row",row);
+        resData.put("column","60");
+        JSONObject frozen=new JSONObject();
+        frozen.put("type","row");
+        resData.put("frozen",frozen);
+        resData.put("celldata",configObj.getJSONArray("celldata"));
+        resData.put("dataVerification",dataVerification);
+        System.out.println("resData\n"+resData);
+        res.data(resData);
+        return res;
+    }
+
+    private JSONObject importExcelDataDataVerification(List<AssetLuckySheetColumnMeta> list,int row){
+        JSONObject data=new JSONObject();
+        for(AssetLuckySheetColumnMeta assetLuckySheetColumnMeta:list){
+            int columnNumber=assetLuckySheetColumnMeta.getColNumber();
+            if(assetLuckySheetColumnMeta.getDataVerification()!=null){
+                for(int i=1;i<row;i++){
+                    String key=i+"_"+columnNumber;
+                    data.put(key,assetLuckySheetColumnMeta.getDataVerification());
+                }
+            }
+        }
+        return data;
+    }
+
+
+    private JSONObject parseImportExcelDataConfig(List<AssetLuckySheetColumnMeta> assetColumnMetaList){
+        JSONArray cellData=new JSONArray();
+        JSONObject res=new JSONObject();
+         for(int i=0;i<assetColumnMetaList.size();i++){
+             AssetLuckySheetColumnMeta assetColumnMeta=assetColumnMetaList.get(i);
+             JSONObject col=new JSONObject();
+             col.put("r",0);
+             col.put("c",i);
+             JSONObject value=new JSONObject();
+             value.put("bl",1);
+             value.put("m",assetColumnMeta.getColName());
+             value.put("v",assetColumnMeta.getColName());
+             //需要验证
+             if(assetColumnMeta.getDataVerification()!=null){
+                 value.put("fc","#ff00ff");
+             }
+             JSONObject ct=new JSONObject();
+             ct.put("fa",assetColumnMeta.getValueFormat());
+             ct.put("t",assetColumnMeta.getValueType());
+             value.put("ct",ct);
+             col.put("v",value);
+             cellData.add(col);
+         }
+         res.put("celldata",cellData);
+         System.out.println("parseImportExcelDataConfig:\b"+res.toJSONString());
+        return res;
+    }
+
+
+    public List<AssetLuckySheetColumnMeta> getImportExcelMetaData(String oper){
+        List<AssetLuckySheetColumnMeta> list=new ArrayList<>();
+        InputStream inputStream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_BATCH_UPLOAD_ASSET.code());
+        ExcelStructure es=new ExcelStructure();
+        //	es.setDataColumnBegin(0);
+        es.setDataRowBegin(2);
+
+        Short lastNum=0;
+        //从模板获取属性
+        Workbook workbook;
+        if ( inputStream != null) {
+            try {
+                workbook = WorkbookFactory.create(inputStream);
+                Sheet sheet=workbook.getSheetAt(0);
+                Row firstRow=sheet.getRow(0);
+                Row secondRow=sheet.getRow(1);
+                String charIndex="";
+                for(int i=0;i<secondRow.getLastCellNum();i++){
+                    AssetLuckySheetColumnMeta metaData=new AssetLuckySheetColumnMeta();
+                    String firstAssetColumn=firstRow.getCell(i).toString();
+                    String secondAssetColumn=secondRow.getCell(i).toString().replaceFirst("\\{\\{\\$fe:","")
+                            .replaceFirst("dataList","")
+                            .replaceFirst("}}","")
+                            .replaceFirst("t.","").trim();
+                    metaData.setRowNumber(0);
+                    metaData.setColNumber(i);
+                    metaData.setColName(firstAssetColumn);
+                    metaData.setCol(secondAssetColumn);
+
+                    //
+                    JSONObject dataVer=new JSONObject();
+                    JSONObject dataVerification=null;
+                    dataVer.put("type",null);
+                    dataVer.put("type2",null);
+                    dataVer.put("value1","");
+                    dataVer.put("value2",null);
+                    dataVer.put("checked",false);
+                    dataVer.put("remote",false);
+                    dataVer.put("prohibitInput",false);
+                    dataVer.put("hintShow",false);
+                    dataVer.put("hintText","");
+                    if("assetStatusName".equals(secondAssetColumn)){
+                        dataVer.put("type","dropdown");
+                        dataVer.put("value1", AssetStatusEnum.IDLE.text()+","+
+                                AssetStatusEnum.USING.text()+","+
+                                AssetStatusEnum.SCRAP.text()
+                        );
+                        dataVer.put("prohibitInput",true);
+                        dataVerification=dataVer;
+                    }else if("serviceLife".equals(secondAssetColumn)){
+                        dataVer.put("type","number");
+                        dataVer.put("type2","bw");
+                        dataVer.put("value1","1");
+                        dataVer.put("value2","1000");
+                        dataVer.put("prohibitInput",true);
+                        dataVerification=dataVer;
+                    }else if("equipmentCpu".equals(secondAssetColumn)){
+                        dataVer.put("type","number");
+                        dataVer.put("type2","bw");
+                        dataVer.put("value1","1");
+                        dataVer.put("value2","200");
+                        dataVer.put("prohibitInput",true);
+                        dataVerification=dataVer;
+                    }else if("assetNumber".equals(secondAssetColumn)){
+                        dataVer.put("type","number");
+                        dataVer.put("type2","bw");
+                        dataVer.put("value1","1");
+                        dataVer.put("value2","100000");
+                        dataVer.put("prohibitInput",true);
+                        dataVerification=dataVer;
+                    } else if("equipmentMemory".equals(secondAssetColumn)){
+                        dataVer.put("type","number");
+                        dataVer.put("type2","bw");
+                        dataVer.put("value1","1");
+                        dataVer.put("value2","2000");
+                        dataVer.put("prohibitInput",true);
+                        dataVerification=dataVer;
+                    }else if("rackUpNumber".equals(secondAssetColumn)||"rackDownNumber".equals(secondAssetColumn)){
+                        dataVer.put("type","number");
+                        dataVer.put("type2","bw");
+                        dataVer.put("value1","1");
+                        dataVer.put("value2","100");
+                        dataVer.put("prohibitInput",true);
+                        dataVerification=dataVer;
+                    }else if("productionDate".equals(secondAssetColumn)||
+                            "maintenanceStartDate".equals(secondAssetColumn)||
+                            "maintenanceEndDate".equals(secondAssetColumn)||
+                            "purchaseDate".equals(secondAssetColumn)||
+                            "registerDate".equals(secondAssetColumn)||
+                            "lastVerificationDate".equals(secondAssetColumn)
+                    ){
+                        dataVer.put("type","date");
+                        dataVer.put("type2","bw");
+                        dataVer.put("value1","1979-01-01");
+                        dataVer.put("value2","2100-01-01");
+                        dataVer.put("prohibitInput",true);
+                        dataVerification=dataVer;
+                    }else if("assetSourceName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        List<String> value=this.dao.query("select label from sys_dict_item where deleted=0 and dict_code='eam_source'" ).getValueList("label",String.class);
+                        dataVer.put("value1",  String.join(",", value));
+                        dataVerification=dataVer;
+                    }else if("assetPositionName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        List<String> value=this.dao.query("select name from eam_position where deleted=0" ).getValueList("name",String.class);
+                        dataVer.put("value1",  String.join(",", value));
+                        dataVerification=dataVer;
+                    }else if("assetSupplierName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        List<String> value=this.dao.query("select supplier_name from eam_supplier where deleted=0" ).getValueList("supplier_name",String.class);
+                        dataVer.put("value1",  String.join(",", value));
+                        dataVerification=dataVer;
+                    }else if("maintainerName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        List<String> value=this.dao.query("select maintainer_name from eam_maintainer where deleted=0" ).getValueList("maintainer_name",String.class);
+                        dataVer.put("value1",  String.join(",", value));
+                        dataVerification=dataVer;
+                    }else if("maintenanceStatusName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        List<String> value=this.dao.query("select label from sys_dict_item where deleted=0 and dict_code='eam_maintenance_status'" ).getValueList("label",String.class);
+                        dataVer.put("value1",  String.join(",", value));
+                        dataVerification=dataVer;
+                    }else if("equipmentEnvironmentName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        List<String> value=this.dao.query("select label from sys_dict_item where deleted=0 and dict_code='eam_equipment_environment'" ).getValueList("label",String.class);
+                        dataVer.put("value1",  String.join(",", value));
+                        dataVerification=dataVer;
+                    }else if("assetManufacturerName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        List<String> value=this.dao.query("select manufacturer_name from eam_manufacturer where deleted=0" ).getValueList("manufacturer_name",String.class);
+                        dataVer.put("value1",  String.join(",", value));
+                        dataVerification=dataVer;
+                    }else if("assetCategoryFinanceName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        List<String> value=this.dao.query("select hierarchy_name from eam_category_finance where deleted=0" ).getValueList("hierarchy_name",String.class);
+                        dataVer.put("value1",  String.join(",", value));
+                        dataVerification=dataVer;
+                    }else if("assetCategoryName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        HashMap<String,String> catalogMap = queryAssetCategoryNodes("all");
+                        List values = new ArrayList(catalogMap.values());
+                        dataVer.put("value1",  String.join(",", values));
+                        dataVerification=dataVer;
+                    }else if("ownCompanyName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        HashMap<String,String> compMap = queryOrganizationNodes("all");
+                        List values = new ArrayList(compMap.values());
+                        dataVer.put("value1",  String.join(",", values));
+                        dataVerification=dataVer;
+                    }else if("useOrganizationName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        HashMap<String,String> orgMap = queryOrganizationNodes("all");
+                        List values = new ArrayList(orgMap.values());
+                        dataVer.put("value1",  String.join(",", values));
+                        dataVerification=dataVer;
+                    }
+
+                    if(dataVerification!=null){
+                        metaData.setDataVerification(dataVerification);
+                    }
+
+
+                    list.add(metaData);
+                }
+                //追加自定义属性部分
+            } catch (Exception e) {
+                Logger.debug("Excel 读取错误", e);
+
+            }
+        }
+
+
+
+
+        return list;
+    }
+
+    @Override
+    public Result batchImportAsset() {
+
+        queryBatchImportAssetLuckysheetConf("");
+        return ErrorDesc.success();
+    }
+
+    //type:all,org,part,
+    @Override
+    public HashMap<String,String> queryOrganizationNodes(String type){
         //id name
         HashMap<String,String> map=new HashMap<String,String>();
         OrganizationVO vo=new OrganizationVO();
@@ -141,14 +405,16 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         return map;
     }
 
+
+    //all,ownerCode
     @Override
-    public HashMap<String,String> queryAssetCategoryNodes(){
+    public HashMap<String,String> queryAssetCategoryNodes(String type){
         //所有分类转换成  id + 全路径名称
         HashMap<String,String> map=new HashMap<>();
         CatalogVO vo=new CatalogVO();
         vo.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
-//        vo.setCode("asset");
         vo.setIsLoadAllDescendants(1);
+        vo.setRoot("486917609841758209");
        Result r= CatalogServiceProxy.api().queryNodesFlatten(vo);
         if(r.isSuccess()){
             List<ZTreeNode> list= (List<ZTreeNode> )r.getData();
@@ -165,6 +431,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 map.put(node.getId(),path);
             }
         }
+
         return map;
     }
 
@@ -499,8 +766,8 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
     @Override
     public Map<String, Object> queryAssetMap(PagedList<Asset> list,String categoryId) {
-        HashMap<String,String> orgMap=queryUseOrganizationNodes();
-        HashMap<String,String> categoryMap=queryAssetCategoryNodes();
+        HashMap<String,String> orgMap=queryOrganizationNodes("all");
+        HashMap<String,String> categoryMap=queryAssetCategoryNodes("all");
         Map<String,Object> map=new HashMap<>();
         assetService.joinData(list.getList());
 

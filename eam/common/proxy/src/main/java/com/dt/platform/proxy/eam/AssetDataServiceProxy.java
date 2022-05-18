@@ -1,5 +1,6 @@
 package com.dt.platform.proxy.eam;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.proxy.ServiceNames;
 import com.github.foxnic.api.transter.Result;
@@ -48,7 +49,24 @@ public interface AssetDataServiceProxy {
     /**
      * 导入资产
      */
-    public static final String IMPORT_ASSET = API_PREFIX + "import_asset";
+    public static final String IMPORT_ASSET = API_PREFIX + "import-asset";
+
+
+    /**
+     * 导入资产
+     */
+    public static final String QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF = API_PREFIX + "query-batch-import-asset-luckysheet-conf";
+
+    /**
+     * 导入资产
+     */
+    public static final String BATCH_IMPORT_ASSET = API_PREFIX + "batch-import-asset";
+
+    /**
+     * 配置数据
+     */
+    @RequestMapping(AssetDataServiceProxy.QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF)
+    Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper);
 
     /**
      * 导出资产
