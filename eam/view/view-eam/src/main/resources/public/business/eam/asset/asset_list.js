@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 08:06:04
+ * @since 2022-05-19 14:57:27
  */
 
 
@@ -44,6 +44,7 @@ function ListPage() {
 			fox.adjustSearchElement();
 		});
 		fox.adjustSearchElement();
+		$("#table-area").css("margin-top",$(".search-bar").height()+"px");
 		//
 		function renderTableInternal() {
 
@@ -161,6 +162,7 @@ function ListPage() {
 					,{ field: 'nextApproverIds', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('下一节点审批人') , templet: function (d) { return templet('nextApproverIds',d.nextApproverIds,d);}  }
 					,{ field: 'nextApproverNames', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('下一个审批节点审批人姓名') , templet: function (d) { return templet('nextApproverNames',d.nextApproverNames,d);}  }
 					,{ field: 'approvalOpinion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('审批意见') , templet: function (d) { return templet('approvalOpinion',d.approvalOpinion,d);}  }
+					,{ field: 'assetSelectedCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('选择') , templet: function (d) { return templet('assetSelectedCode',d.assetSelectedCode,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -203,12 +205,14 @@ function ListPage() {
 				if (r.success) {
 					data = r.data;
 					context.update(data);
+					fox.renderFormInputs(form);
 				} else {
 					fox.showMessage(data);
 				}
 			});
 		} else {
 			context.update(data);
+			fox.renderFormInputs(form);
 		}
 	}
 
@@ -218,99 +222,23 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.id={ inputType:"button",value: $("#id").val()};
-		value.categoryId={ inputType:"select_box", value: getSelectedValue("#categoryId","value") ,fillBy:["category"]  , label:getSelectedValue("#categoryId","nameStr") };
-		value.categoryCode={ inputType:"button",value: $("#categoryCode").val()};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.procId={ inputType:"button",value: $("#procId").val()};
 		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
-		value.batchCode={ inputType:"button",value: $("#batchCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.ownerCode={ inputType:"button",value: $("#ownerCode").val()};
 		value.assetCode={ inputType:"button",value: $("#assetCode").val()};
 		value.assetStatus={ inputType:"select_box", value: getSelectedValue("#assetStatus","value"), label:getSelectedValue("#assetStatus","nameStr") };
-		value.display={ inputType:"button",value: $("#display").val()};
-		value.cleanOut={ inputType:"button",value: $("#cleanOut").val()};
-		value.goodsId={ inputType:"select_box", value: getSelectedValue("#goodsId","value") ,fillBy:["goods"]  , label:getSelectedValue("#goodsId","nameStr") };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.manufacturerId={ inputType:"select_box", value: getSelectedValue("#manufacturerId","value") ,fillBy:["manufacturer"]  , label:getSelectedValue("#manufacturerId","nameStr") };
 		value.model={ inputType:"button",value: $("#model").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.pictureId={ inputType:"button",value: $("#pictureId").val()};
-		value.unit={ inputType:"button",value: $("#unit").val()};
-		value.serviceLife={ inputType:"number_input", value: $("#serviceLife").val() };
-		value.safetyLevelCode={ inputType:"select_box", value: getSelectedValue("#safetyLevelCode","value") ,fillBy:["safetyLevel"]  , label:getSelectedValue("#safetyLevelCode","nameStr") };
 		value.serialNumber={ inputType:"button",value: $("#serialNumber").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.ownCompanyId={ inputType:"button",value: $("#ownCompanyId").val(),fillBy:["ownerCompany","fullName"] ,label:$("#ownCompanyId-button").text() };
 		value.managerId={ inputType:"button",value: $("#managerId").val(),fillBy:["manager","name"] ,label:$("#managerId-button").text() };
 		value.useOrganizationId={ inputType:"button",value: $("#useOrganizationId").val(),fillBy:["useOrganization","fullName"] ,label:$("#useOrganizationId-button").text() };
 		value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text() };
 		value.positionId={ inputType:"select_box", value: getSelectedValue("#positionId","value") ,fillBy:["position"]  , label:getSelectedValue("#positionId","nameStr") };
-		value.positionDetail={ inputType:"button",value: $("#positionDetail").val()};
-		value.warehouseId={ inputType:"select_box", value: getSelectedValue("#warehouseId","value") ,fillBy:["warehouse"]  , label:getSelectedValue("#warehouseId","nameStr") };
-		value.goodsStockId={ inputType:"select_box", value: getSelectedValue("#goodsStockId","value") ,fillBy:["goodsStock"]  , label:getSelectedValue("#goodsStockId","nameStr") };
 		value.sourceId={ inputType:"select_box", value: getSelectedValue("#sourceId","value") ,fillBy:["source"]  , label:getSelectedValue("#sourceId","nameStr") };
-		value.assetNumber={ inputType:"number_input", value: $("#assetNumber").val() };
-		value.remainNumber={ inputType:"number_input", value: $("#remainNumber").val() };
 		value.purchaseDate={ inputType:"date_input", begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() ,matchType:"auto" };
-		value.productionDate={ inputType:"date_input", value: $("#productionDate").val() ,matchType:"auto"};
-		value.registerDate={ inputType:"date_input", value: $("#registerDate").val() ,matchType:"auto"};
-		value.rfid={ inputType:"button",value: $("#rfid").val()};
-		value.attach={ inputType:"button",value: $("#attach").val()};
-		value.lastVerificationDate={ inputType:"date_input", value: $("#lastVerificationDate").val() ,matchType:"auto"};
-		value.purpose={ inputType:"button",value: $("#purpose").val()};
 		value.assetNotes={ inputType:"button",value: $("#assetNotes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.maintainerId={ inputType:"select_box", value: getSelectedValue("#maintainerId","value") ,fillBy:["maintnainer"]  , label:getSelectedValue("#maintainerId","nameStr") };
-		value.maintainerName={ inputType:"button",value: $("#maintainerName").val()};
-		value.maintenanceStatus={ inputType:"select_box", value: getSelectedValue("#maintenanceStatus","value") ,fillBy:["assetMaintenanceStatus"]  , label:getSelectedValue("#maintenanceStatus","nameStr") };
-		value.contacts={ inputType:"button",value: $("#contacts").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.contactInformation={ inputType:"button",value: $("#contactInformation").val()};
-		value.director={ inputType:"button",value: $("#director").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.maintenanceStartDate={ inputType:"date_input", begin: $("#maintenanceStartDate-begin").val(), end: $("#maintenanceStartDate-end").val() ,matchType:"auto" };
-		value.maintenanceEndDate={ inputType:"date_input", begin: $("#maintenanceEndDate-begin").val(), end: $("#maintenanceEndDate-end").val() ,matchType:"auto" };
-		value.maintenanceNotes={ inputType:"button",value: $("#maintenanceNotes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.financialCategoryId={ inputType:"select_box", value: getSelectedValue("#financialCategoryId","value") ,fillBy:["categoryFinance"]  , label:getSelectedValue("#financialCategoryId","nameStr") };
-		value.financialCode={ inputType:"button",value: $("#financialCode").val()};
-		value.supplierId={ inputType:"select_box", value: getSelectedValue("#supplierId","value") ,fillBy:["supplier"]  , label:getSelectedValue("#supplierId","nameStr") };
-		value.taxAmountRate={ inputType:"number_input", value: $("#taxAmountRate").val() };
-		value.taxAmountPrice={ inputType:"number_input", value: $("#taxAmountPrice").val() };
-		value.totalAmountPrice={ inputType:"number_input", value: $("#totalAmountPrice").val() };
-		value.originalUnitPrice={ inputType:"number_input", value: $("#originalUnitPrice").val() };
-		value.accumulatedDepreciation={ inputType:"number_input", value: $("#accumulatedDepreciation").val() };
-		value.residualsRate={ inputType:"number_input", value: $("#residualsRate").val() };
-		value.navPrice={ inputType:"number_input", value: $("#navPrice").val() };
-		value.purchaseUnitPrice={ inputType:"number_input", value: $("#purchaseUnitPrice").val() };
-		value.entryTime={ inputType:"date_input", begin: $("#entryTime-begin").val(), end: $("#entryTime-end").val() ,matchType:"auto" };
-		value.financialNotes={ inputType:"button",value: $("#financialNotes").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.equipmentCode={ inputType:"button",value: $("#equipmentCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.equipmentStatus={ inputType:"select_box", value: getSelectedValue("#equipmentStatus","value"), label:getSelectedValue("#equipmentStatus","nameStr") };
-		value.equipmentIp={ inputType:"button",value: $("#equipmentIp").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.manageIp={ inputType:"button",value: $("#manageIp").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.equipmentCpu={ inputType:"button",value: $("#equipmentCpu").val()};
-		value.equipmentMemory={ inputType:"button",value: $("#equipmentMemory").val()};
-		value.equipmentLabel={ inputType:"button",value: $("#equipmentLabel").val()};
-		value.equipmentConf={ inputType:"button",value: $("#equipmentConf").val()};
-		value.equipmentEnvironmentCode={ inputType:"select_box", value: getSelectedValue("#equipmentEnvironmentCode","value") ,fillBy:["equipmentEnvironment"]  , label:getSelectedValue("#equipmentEnvironmentCode","nameStr") };
-		value.equipmentSerialNumber={ inputType:"button",value: $("#equipmentSerialNumber").val()};
-		value.rackId={ inputType:"select_box", value: getSelectedValue("#rackId","value") ,fillBy:["rack"]  , label:getSelectedValue("#rackId","nameStr") };
-		value.rackUpNumber={ inputType:"number_input", value: $("#rackUpNumber").val() };
-		value.rackDownNumber={ inputType:"number_input", value: $("#rackDownNumber").val() };
-		value.label={ inputType:"button",value: $("#label").val()};
-		value.label2={ inputType:"button",value: $("#label2").val()};
-		value.label3={ inputType:"button",value: $("#label3").val()};
-		value.label4={ inputType:"button",value: $("#label4").val()};
-		value.internalControlLabel={ inputType:"button",value: $("#internalControlLabel").val()};
-		value.billId={ inputType:"button",value: $("#billId").val()};
-		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
-		value.originatorId={ inputType:"button",value: $("#originatorId").val()};
-		value.chsType={ inputType:"button",value: $("#chsType").val()};
-		value.chsStatus={ inputType:"button",value: $("#chsStatus").val()};
-		value.chsVersion={ inputType:"button",value: $("#chsVersion").val()};
-		value.changeInstanceId={ inputType:"button",value: $("#changeInstanceId").val()};
-		value.summary={ inputType:"button",value: $("#summary").val()};
-		value.latestApproverId={ inputType:"button",value: $("#latestApproverId").val()};
-		value.latestApproverName={ inputType:"button",value: $("#latestApproverName").val()};
-		value.nextApproverIds={ inputType:"button",value: $("#nextApproverIds").val()};
-		value.nextApproverNames={ inputType:"button",value: $("#nextApproverNames").val()};
-		value.approvalOpinion={ inputType:"button",value: $("#approvalOpinion").val()};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

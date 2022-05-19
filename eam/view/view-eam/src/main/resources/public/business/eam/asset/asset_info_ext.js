@@ -80,7 +80,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 title: "数据导入",
                 resize: false,
                 offset: [15,null],
-                area: ["95%","80%"],
+                area: ["95%","95%"],
                 type: 2,
                 id:"eam-asset-data-batch-insert-data-win",
                 content: '/business/eam/asset/asset_excel_oper.html' + queryString,

@@ -1312,7 +1312,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 
-	public List<ValidateResult> importData(RcdSet rs,HashMap<String,List<CatalogAttribute>> attributeMap,boolean batch,String assetOwner,boolean dataType) {
+	public List<ValidateResult> importData(RcdSet rs,HashMap<String,List<CatalogAttribute>> attributeMap,boolean batch,String assetOwner,boolean dataType,String selectedCode) {
 		List<ValidateResult> errors=new ArrayList<>();
 		DBTableMeta tm=dao().getTableMeta(this.table());
 		DBTreaty dbTreaty= dao().getDBTreaty();
@@ -1408,8 +1408,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			String sql="";
 			if("insert".equals(actionType)){
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
-
-
+				insert.setIf("asset_selected_code",selectedCode);
 				//资产编号
 				String codeRule="";
 				String approvalRule="";
@@ -1446,17 +1445,14 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				}
 
 
-
-
-
-				//办理情况
-				if(operateService.approvalRequired(approvalRule) ){
-					insert.set("status",AssetHandleStatusEnum.INCOMPLETE.code());
-					//提交审批
-				}else{
-					insert.set("status",AssetHandleStatusEnum.COMPLETE.code());
-				}
-
+				//办理情况,新增不管是否需要审批，默认为未完成状态
+//				if(operateService.approvalRequired(approvalRule) ){
+//					insert.set("status",AssetHandleStatusEnum.INCOMPLETE.code());
+//					//提交审批
+//				}else{
+//					insert.set("status",AssetHandleStatusEnum.COMPLETE.code());
+//				}
+				insert.set("status",AssetHandleStatusEnum.INCOMPLETE.code());
 
 				//数量
 				if (StringUtil.isBlank(r.getString("asset_number"))){
@@ -1471,13 +1467,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 					insert.set("register_date",new Date());
 				}
 
-
 				insert.set(AssetDataExportColumnEnum.ASSET_ID.text(),assetId);
 				insert.set("tenant_id",SessionUser.getCurrent().getActivatedTenantId());
 				insert.set("owner_code",assetOwner);
 				//制单人
 				insert.set("originator_id",SessionUser.getCurrent().getUser().getActivatedEmployeeId());
-
 
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getCreateTimeField())!=null) {
@@ -1504,7 +1498,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.ASSET_CODE.text())){
 					//r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.ASSET_CODE.text());
 				}
+
 				Update update=SQLBuilder.buildUpdate(r,SaveMode.ALL_FIELDS,this.table(),this.dao());
+				update.setIf("asset_selected_code",selectedCode);
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getUpdateTimeField())!=null) {
 					update.set(dbTreaty.getUpdateTimeField(),new Date());
@@ -1588,9 +1584,18 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 
-
+	/**
+	 * 检查 角色 是否已经存在
+	 * @param input 资产数据输入留对象
+	 * @param sheetIndex sheet
+	 * @param batch 是否批量
+	 * @param assetOwner ownerCode
+	 * @param dataType dataType
+	 * @param code code
+	 * @return 判断结果
+	 */
 	@Override
-	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String assetOwner,boolean dataType) {
+	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String assetOwner,boolean dataType,String code,String selectedCode) {
 
 		List<ValidateResult> errors=new ArrayList<>();
 		ExcelReader er=null;
@@ -1601,7 +1606,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			return errors;
 		}
 		//构建 Excel 结构
-		ExcelStructure es=buildExcelStructure(input);
+		ExcelStructure es=buildExcelStructure(input,code);
 		HashMap<String,List<CatalogAttribute>> attributeMap=this.getPcmExtAttribute(input);
 		//装换成记录集
 		RcdSet rs=null;
@@ -1614,20 +1619,16 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			errors.add(new ValidateResult(null,-1,"Excel 读取失败"));
 			return errors;
 		}
-		return importData(rs, attributeMap,batch, assetOwner, dataType);
+		return importData(rs, attributeMap,batch, assetOwner, dataType,selectedCode);
 
 	}
 
 
 
-	public InputStream buildExcelTemplate(String categoryId){
-
+	public InputStream buildExcelTemplate(String categoryId,String code){
 		//categoryId="12";
-
-		String code=AssetOperateEnum.EAM_DOWNLOAD_ASSET.code();
 		InputStream inputStream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
 		Workbook workbook;
-
 		if(inputStream!=null){
 			try {
 				BufferedInputStream bufferInput = new ResetOnCloseInputStream(inputStream);
@@ -1746,11 +1747,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 	@Override
-	public ExcelStructure buildExcelStructure(InputStream dataInputStream) {
-
-		String code=AssetOperateEnum.EAM_DOWNLOAD_ASSET.code();
+	public ExcelStructure buildExcelStructure(InputStream dataInputStream,String code) {
 		InputStream inputStream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
-
 		ExcelStructure es=new ExcelStructure();
 	//	es.setDataColumnBegin(0);
 		es.setDataRowBegin(2);

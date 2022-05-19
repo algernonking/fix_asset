@@ -50,9 +50,9 @@ public interface IAssetDataService extends ISuperService<Asset> {
 	HashMap<String,String> queryOrganizationNodes(String type);
 
 
-	Result batchImportAsset();
+	Result batchImportAsset(String content,String selectedCode);
 
-	Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper);
+	Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper,int row);
 
 	/**
 	 * 插入实体

@@ -138,6 +138,11 @@ public interface AssetBillServiceProxy {
     /**
      * 查询转移单据
      */
+    public static final String QUERY_ASSET_STORAGE_BILL = API_PREFIX + "query-asset-storage-bill";
+
+    /**
+     * 查询转移单据
+     */
     public static final String QUERY_ASSET_TRANSFER_BILLS = API_PREFIX + "query-asset-transfer-bills";
 
 

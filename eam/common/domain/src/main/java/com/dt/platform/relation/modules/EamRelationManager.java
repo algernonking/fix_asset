@@ -35,6 +35,7 @@ public class EamRelationManager extends RelationManager {
         this.setupAssetCollectionReturn();
         this.setupAssetHandle();
         this.setupAssetRepair();
+        this.setupAssetStorage();
         this.setupAssetTranfer();
         this.setupScrap();
         this.setupAssetAttributeItem();
@@ -106,6 +107,8 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetSoftwareChangeDetailMeta.ASSET_SOFTWARE_AFTER_PROP)
                 .using(EAMTables.EAM_ASSET_SOFTWARE_CHANGE_DETAIL.AFTER_SOFTWARE_ID).join(EAMTables.EAM_ASSET_SOFTWARE.ID);
     }
+
+
 
     public void setupAssetSoftMaintenance() {
         //制单人
@@ -347,6 +350,34 @@ public class EamRelationManager extends RelationManager {
 
         this.property(AssetStockGoodsTranferMeta.GOODS_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_STOCK_GOODS_TRANFER.ID).join(EAMTables.EAM_GOODS_STOCK.OWNER_ID);
+
+    }
+
+
+    public void setupAssetStorage() {
+
+        //制单人
+        this.property(AssetStorageMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_STORAGE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //管理人
+        this.property(AssetStorageMeta.MANAGER_USER_PROP)
+                .using(EAMTables.EAM_ASSET_STORAGE.MANAGER_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
+        //关联 所属公司
+        this.property(AssetStorageMeta.OWNER_COMPANY_PROP)
+                .using(EAMTables.EAM_ASSET_STORAGE.OWN_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        //关联 供应商
+        this.property(AssetStorageMeta.SUPPLIER_PROP)
+                .using(EAMTables.EAM_ASSET_STORAGE.SUPPLIER_ID).join(EAMTables.EAM_SUPPLIER.ID);
+
+
+        //资产
+        this.property(AssetStorageMeta.ASSET_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_STORAGE.ID).join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET_ITEM.ASSET_ID).join(EAMTables.EAM_ASSET_ITEM.ID);
 
     }
 

@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 08:06:04
+ * @since 2022-05-19 14:57:27
  */
  -->
  <!DOCTYPE html>
@@ -118,6 +118,7 @@
                     <!-- 下一节点审批人 , nextApproverIds ,typeName=text_input, isHideInSearch=true -->
                     <!-- 下一个审批节点审批人姓名 , nextApproverNames ,typeName=text_input, isHideInSearch=true -->
                     <!-- 审批意见 , approvalOpinion ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 选择 , assetSelectedCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 资产状态 , assetStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('资产状态')}" class="search-label assetStatus-label">资产状态</span><span class="search-colon">:</span></div>
@@ -226,13 +227,13 @@
 
 
             <!-- 按钮区域 -->
-            <div class="layui-form toolbar search-buttons" style="opacity: 0">
+            <div id="search-area" class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
                 <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
             </div>
         </div>
 
-        <div style="margin-top: 84px ">
+        <div id="table-area" style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

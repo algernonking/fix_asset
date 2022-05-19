@@ -13,6 +13,7 @@ import com.dt.platform.eam.service.*;
 
 import com.dt.platform.proxy.common.TplFileServiceProxy;
 import com.dt.platform.proxy.datacenter.RackServiceProxy;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
 import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
@@ -27,7 +28,9 @@ import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.excel.ExcelStructure;
+import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.spec.DAO;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -118,8 +121,8 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
     @Override
-    public Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper) {
-        int row=60;
+    public Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper,int row) {
+
         List<AssetLuckySheetColumnMeta> list= getImportExcelMetaData(oper);
         JSONObject dataVerification=importExcelDataDataVerification(list,row-1);
         JSONObject configObj=parseImportExcelDataConfig(list);
@@ -335,6 +338,12 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                         List values = new ArrayList(catalogMap.values());
                         dataVer.put("value1",  String.join(",", values));
                         dataVerification=dataVer;
+//                        dataVer.put("prohibitInput",true);
+//                        dataVer.put("type","dropdown");
+//                        HashMap<String,String> compMap = queryOrganizationNodes("all");
+//                        List values = new ArrayList(compMap.values());
+//                        dataVer.put("value1",  String.join(",", values));
+//                        dataVerification=dataVer;
                     }else if("ownCompanyName".equals(secondAssetColumn)){
                         dataVer.put("prohibitInput",true);
                         dataVer.put("type","dropdown");
@@ -349,7 +358,15 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                         List values = new ArrayList(orgMap.values());
                         dataVer.put("value1",  String.join(",", values));
                         dataVerification=dataVer;
+                    }else if("safetyLevelName".equals(secondAssetColumn)){
+                        dataVer.put("prohibitInput",true);
+                        dataVer.put("type","dropdown");
+                        List<String> value=this.dao.query("select label from sys_dict_item where deleted=0 and dict_code='eam_safety_level'" ).getValueList("label",String.class);
+                        dataVer.put("value1",  String.join(",", value));
+                        dataVerification=dataVer;
                     }
+
+
 
                     if(dataVerification!=null){
                         metaData.setDataVerification(dataVerification);
@@ -372,10 +389,78 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     }
 
     @Override
-    public Result batchImportAsset() {
+    public Result batchImportAsset(String content,String selectedCode) {
+        Workbook wb = null;
+        OutputStream out = null;
+        String path = System.getProperty("java.io.tmpdir");
+        File tempFile = new File(path + IDGenerator.getSnowflakeIdString()+".xls");
+        System.out.println("path######"+tempFile.getAbsolutePath());
+        try {
+            wb = new HSSFWorkbook();
+            Sheet sheet = wb.createSheet("asset");
+            sheet.setColumnWidth(0, 18 * 256);
+            sheet.setColumnWidth(1, 18 * 256);
+//            Row r = sheet.createRow(0);
+//            r.createCell(0).setCellValue("ip");
+            JSONArray ctArr=JSONArray.parseArray(content);
+            for(int i=0;i<ctArr.size();i++){
+                JSONArray valueArr=ctArr.getJSONArray(i);
+                //验证第二行是否输入
+                if(valueArr==null){
+                    break;
+                }
+                JSONObject vObj=valueArr.getJSONObject(1);
+                if(vObj==null||vObj.getString("m")==null||"".equals(vObj.getString("m"))){
+                    break;
+                }
+                Row r = sheet.createRow(i);
+                for(int j=0;j<valueArr.size();j++){
+                    JSONObject valueObj=valueArr.getJSONObject(j);
+                    if(valueObj!=null){
+                        r.createCell(j).setCellValue(valueObj.getString("m"));
+                        System.out.println("out:"+valueObj.getString("m"));
+                    }
+                }
+            }
+            out = new FileOutputStream(tempFile);
+            //获取inputStream
+            wb.write(out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(out!=null){
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-        queryBatchImportAssetLuckysheetConf("");
-        return ErrorDesc.success();
+        boolean dataFill=false;
+        Result dataFillResult= OperateServiceProxy.api().queryAssetDirectUpdateMode();
+        if(dataFillResult.isSuccess()){
+            dataFill=(boolean)dataFillResult.getData();
+        }
+        FileInputStream input=null;
+        try {
+            input=new FileInputStream(tempFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        List<ValidateResult> errors=assetService.importExcel(input,0,true, AssetOwnerCodeEnum.ASSET.code(), true,AssetOperateEnum.EAM_BATCH_UPLOAD_ASSET.code(),selectedCode);
+
+        if(errors==null || errors.isEmpty()) {
+            return ErrorDesc.success();
+        } else {
+            System.out.println("import Result:");
+            String msg="导入失败";
+            for(int i=0;i<errors.size();i++){
+                System.out.println(i+":"+errors.get(i).message);
+                msg=errors.get(i).message;
+            }
+            return ErrorDesc.failure().message(msg).data(errors);
+        }
     }
 
     //type:all,org,part,

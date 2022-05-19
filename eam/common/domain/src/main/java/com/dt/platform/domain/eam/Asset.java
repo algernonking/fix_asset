@@ -27,8 +27,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-19 08:06:03
- * @sign A635559592B893DCAECD02C81A113D35
+ * @since 2022-05-19 14:57:25
+ * @sign FC9F09979145782D65E6D12A1981151A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -645,6 +645,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="审批意见" , notes = "审批意见")
 	private String approvalOpinion;
+	
+	/**
+	 * 选择：选择
+	*/
+	@ApiModelProperty(required = false,value="选择" , notes = "选择")
+	private String assetSelectedCode;
 	
 	/**
 	 * 扩展数据：扩展数据
@@ -2700,6 +2706,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setApprovalOpinion(String approvalOpinion) {
 		this.approvalOpinion=approvalOpinion;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择<br>
+	 * 选择
+	 * @return 选择
+	*/
+	public String getAssetSelectedCode() {
+		return assetSelectedCode;
+	}
+	
+	/**
+	 * 设置 选择
+	 * @param assetSelectedCode 选择
+	 * @return 当前对象
+	*/
+	public Asset setAssetSelectedCode(String assetSelectedCode) {
+		this.assetSelectedCode=assetSelectedCode;
 		return this;
 	}
 	

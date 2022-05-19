@@ -69,6 +69,9 @@ public class AssetBillController extends SuperController {
     private IAssetScrapService assetScrapService;
 
     @Autowired
+    private IAssetStorageService assetStorageService;
+
+    @Autowired
     private IAssetTranferService assetTranferService;
 
     @Autowired
@@ -285,6 +288,25 @@ public class AssetBillController extends SuperController {
         XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
         response.setContentType("application/msword");
         response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("借用单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+    }
+
+    @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_STORAGE_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_STORAGE_BILL)
+    public void queryAssetStorageBill(String id,HttpServletResponse response) throws Exception {
+
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_STORAGE_BILL.code());
+        Map<String,Object> map=assetStorageService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("入库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);
         template.write(bos);

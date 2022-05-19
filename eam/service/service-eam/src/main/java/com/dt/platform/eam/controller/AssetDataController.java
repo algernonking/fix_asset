@@ -172,86 +172,12 @@ public class AssetDataController extends SuperController {
      * 在线Excel导入资产
      */
     @ApiOperation(value = "在线Excel导入资产")
-
     @ApiOperationSupport(order=10)
     @SentinelResource(value = AssetDataServiceProxy.BATCH_IMPORT_ASSET , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetDataServiceProxy.BATCH_IMPORT_ASSET)
-    public Result batchImportAsset(String content){
-
-
-
-
-        Workbook wb = null;
-        OutputStream out = null;
-        String path = System.getProperty("java.io.tmpdir");
-        File tempFile = new File(path + IDGenerator.getSnowflakeIdString()+".xls");
-        System.out.println("path######"+tempFile.getAbsolutePath());
-        try {
-            wb = new HSSFWorkbook();
-            Sheet sheet = wb.createSheet("asset");
-            sheet.setColumnWidth(0, 18 * 256);
-            sheet.setColumnWidth(1, 18 * 256);
-//            Row r = sheet.createRow(0);
-//            r.createCell(0).setCellValue("ip");
-            JSONArray ctArr=JSONArray.parseArray(content);
-            for(int i=0;i<ctArr.size();i++){
-                JSONArray valueArr=ctArr.getJSONArray(i);
-                //验证第二行是否输入
-                if(valueArr==null){
-                    break;
-                }
-                JSONObject vObj=valueArr.getJSONObject(1);
-                if(vObj==null||vObj.getString("m")==null||"".equals(vObj.getString("m"))){
-                    break;
-                }
-                Row r = sheet.createRow(i);
-                for(int j=0;j<valueArr.size();j++){
-                    JSONObject valueObj=valueArr.getJSONObject(j);
-                    if(valueObj!=null){
-                        r.createCell(j).setCellValue(valueObj.getString("m"));
-                        System.out.println("out:"+valueObj.getString("m"));
-                    }
-                }
-            }
-            out = new FileOutputStream(tempFile);
-            //获取inputStream
-            wb.write(out);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(out!=null){
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        boolean dataFill=false;
-        Result dataFillResult= OperateServiceProxy.api().queryAssetDirectUpdateMode();
-        if(dataFillResult.isSuccess()){
-            dataFill=(boolean)dataFillResult.getData();
-        }
-        FileInputStream input=null;
-        try {
-            input=new FileInputStream(tempFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        List<ValidateResult> errors=assetService.importExcel(input,0,true, AssetOwnerCodeEnum.ASSET.code(), true);
-
-        if(errors==null || errors.isEmpty()) {
-            return ErrorDesc.success();
-        } else {
-            System.out.println("import Result:");
-            String msg="导入失败";
-            for(int i=0;i<errors.size();i++){
-                System.out.println(i+":"+errors.get(i).message);
-                msg=errors.get(i).message;
-            }
-            return ErrorDesc.failure().message(msg).data(errors);
-        }
+    public Result batchImportAsset(String content) {
+        //
+        return assetDataService.batchImportAsset(content,IDGenerator.getSnowflakeIdString());
     }
 
 
@@ -263,7 +189,7 @@ public class AssetDataController extends SuperController {
     @SentinelResource(value = AssetDataServiceProxy.QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetDataServiceProxy.QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF)
     public Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper){
-        return assetDataService.queryBatchImportAssetLuckysheetConf(oper);
+        return assetDataService.queryBatchImportAssetLuckysheetConf(oper,50);
     }
 
 

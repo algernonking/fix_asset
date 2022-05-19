@@ -81,49 +81,20 @@ function FormPage() {
 
     }
 
+
     /**
      * 保存数据，表单提交事件
      */
     function bindButtonEvent() {
-        form.on('submit(submit-button)', function (data) {
+    }
 
-            var ct=luckysheet.getLuckysheetfile()[0];
-            console.log(ct);
-            var ps={};
-            var api="/service-eam/eam-asset-data/batch-import-asset";
-            ps.content=JSON.stringify(ct.data);
-            var btn=$('.asset-submit-button');
-            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
-                top.layer.close(i);
-                admin.post(api, ps, function (r) {
-                    if (r.success) {
-                        top.layer.msg("保存成功", {time: 1000});
-                        admin.finishPopupCenterById('eam-asset-data-batch-insert-data-win');
-                    } else {
-                        var errs = [];
-                        if (r.errors) {
-                            for (var i = 0; i < r.errors.length; i++) {
-                                if (errs.indexOf(r.errors[i].message) == -1) {
-                                    errs.push(r.errors[i].message);
-                                }
-                            }
-                            top.layer.msg(errs.join("<br>"), {time: 2000});
-                        } else {
-                            top.layer.msg(r.message, {time: 2000});
-                        }
-                    }
-                }, {delayLoading: 1000, elms: [btn]});
-            });
-            console.log(data);
-
-        });
-
-        //关闭窗口
-        $("#cancel-button").click(function(){admin.finishPopupCenterById("eam-asset-item-form-data-win");});
-
+    function getContent() {
+        var ct=luckysheet.getLuckysheetfile()[0];
+        return JSON.stringify(ct.data);
     }
 
     window.module={
+        getContent: getContent,
         getFormData: getFormData,
         verifyForm: verifyForm,
         saveForm: saveForm,

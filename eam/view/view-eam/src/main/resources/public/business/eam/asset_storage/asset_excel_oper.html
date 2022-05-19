@@ -29,10 +29,7 @@
 <div id="luckysheet" style="margin:0px;padding:0px;position:absolute;width:100%;height:97%;left: 0px;top: 0px;"></div>
 
 
-<div class="model-form-footer">
-    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
-    <button class="layui-btn asset-submit-button" style="margin-right: 15px"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
-</div>
+
 
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
@@ -51,9 +48,15 @@
 
 
 <script th:inline="javascript">
+
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var VALIDATE_CONFIG={};
     var AUTH_PREFIX="eam_asset_excel";
+
+    var ID =  [[${id}]];
+    var PAGE_TYPE =  [[${pageType}]];
+    var SELECTED_CODE =  [[${selectedCode}]];
+
     var sheetConfigStr =  [[${sheetConfig}]];
     var sheetConfig =  JSON.parse(sheetConfigStr);
     console.log(sheetConfig);
@@ -130,6 +133,7 @@
             },
             data:[sheetConfig],
             sheetFormulaBar:false,
+
             showinfobar:false,
             enableAddRow:false,
             title:'资产表格',
@@ -142,8 +146,8 @@
 </script>
 
 
-<script th:src="'/business/eam/asset/asset_excel_oper_ext.js?'+${cacheKey}"></script>
-<script th:src="'/business/eam/asset/asset_excel_oper.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/asset_storage/asset_excel_oper_ext.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/asset_storage/asset_excel_oper.js?'+${cacheKey}"></script>
 
 </body>
 </html>

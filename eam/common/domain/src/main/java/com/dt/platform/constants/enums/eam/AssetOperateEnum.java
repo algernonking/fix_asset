@@ -8,6 +8,7 @@ public enum AssetOperateEnum implements CodeTextEnum {
     //资产
     EAM_ASSET_INSERT("eam_asset_insert" , "EAM_资产-登记"),
     EAM_ASSET_IMPORT("eam_asset_import" , "EAM_资产-导入"),
+    EAM_ASSET_STORAGE(CodeModuleEnum.EAM_ASSET_STORAGE.code(), "EAM_资产-入库单"),
     EAM_BATCH_UPLOAD_ASSET("eam_batch_upload_asset" , "EAM_资产-批量导入"),
 
 
@@ -91,6 +92,7 @@ public enum AssetOperateEnum implements CodeTextEnum {
 
     //单据下载
     EAM_DOWNLOAD_ASSET("eam_download_asset", "EAM_资产数据下载"),
+    EAM_DOWNLOAD_ASSET_STORAGE_BILL("eam_download_asset_storage_bill", "EAM_资产入库单据下载"),
     EAM_DOWNLOAD_ASSET_REGISTER_BILL("eam_download_asset_register_bill" , "EAM_资产登记单据"),
     EAM_DOWNLOAD_ASSET_CARD("eam_download_asset_card" , "EAM_资产卡片下载"),
     EAM_DOWNLOAD_ASSET_LABEl("eam_download_asset_label" , "EAM_资产标签下载"),

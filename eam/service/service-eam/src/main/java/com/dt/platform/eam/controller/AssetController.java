@@ -1039,7 +1039,7 @@ public class AssetController extends SuperController {
 
 		try{
             //生成 Excel 数据
-            InputStream inputstream= assetService.buildExcelTemplate(categoryId);
+            InputStream inputstream= assetService.buildExcelTemplate(categoryId,AssetOperateEnum.EAM_DOWNLOAD_ASSET.code());
             if(inputstream==null){
                 return;
             }
@@ -1080,7 +1080,7 @@ public class AssetController extends SuperController {
 		//生成 Excel 模版
 		//categoryId="497488128370540545";
 		try{
-			InputStream inputstream=assetService.buildExcelTemplate(categoryId);
+			InputStream inputstream=assetService.buildExcelTemplate(categoryId,AssetOperateEnum.EAM_DOWNLOAD_ASSET.code());
 			if(inputstream==null){
 
 			}
@@ -1126,7 +1126,7 @@ public class AssetController extends SuperController {
 				return ErrorDesc.failure().message("导入失败,未设置OwnerCode");
 			}
 
-			List<ValidateResult> errors=assetService.importExcel(input,0,true,ownerCode,dataFill);
+			List<ValidateResult> errors=assetService.importExcel(input,0,true,ownerCode,dataFill,AssetOperateEnum.EAM_DOWNLOAD_ASSET.code(),IDGenerator.getSnowflakeIdString());
 
 			if(errors==null || errors.isEmpty()) {
 				return ErrorDesc.success();
