@@ -85,7 +85,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 id:"eam-asset-data-batch-insert-data-win",
                 content: '/business/eam/asset/asset_excel_oper.html' + queryString,
                 finish: function () {
-                    refreshTableData();
+                    window.module.refreshTableData();
                 }
             });
             admin.putTempData('eam-asset-data-batch-insert-data-popup-index', index);

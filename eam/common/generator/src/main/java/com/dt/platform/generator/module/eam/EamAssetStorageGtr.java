@@ -35,7 +35,7 @@ public class EamAssetStorageGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
 
         cfg.view().field(EAMTables.EAM_ASSET_STORAGE.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
-        cfg.view().field(EAMTables.EAM_ASSET_STORAGE.MANAGER_USER_ID).table().fillBy("useUser","nameAndBadge");
+        cfg.view().field(EAMTables.EAM_ASSET_STORAGE.MANAGER_USER_ID).table().fillBy("managerUser","nameAndBadge");
         cfg.view().field(EAMTables.EAM_ASSET_STORAGE.MANAGER_USER_ID).form().validate().required().form()
                 .button().chooseEmployee(true);
 
@@ -79,7 +79,9 @@ public class EamAssetStorageGtr extends BaseCodeGenerator {
        // cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.NAME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_STORAGE.PROC_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_STORAGE.CONTENT).table().hidden();
-        cfg.view().field(EAMTables.EAM_ASSET_STORAGE.BUSINESS_DATE).table().hidden();
+
+        cfg.view().field(EAMTables.EAM_ASSET_STORAGE.CUSTOM_DATA).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_STORAGE.SELECTED_CODE).table().disable();
 
         cfg.view().field(EAMTables.EAM_ASSET_STORAGE.NAME).form().validate().required();
 

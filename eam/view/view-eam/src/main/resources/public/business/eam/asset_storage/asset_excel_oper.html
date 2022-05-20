@@ -60,10 +60,15 @@
     var sheetConfigStr =  [[${sheetConfig}]];
     var sheetConfig =  JSON.parse(sheetConfigStr);
     console.log(sheetConfig);
+    var allowEdit=true;
+    if(PAGE_TYPE=="view"){
+        allowEdit=false;
+    }
     $(function () {
         //配置项
         var options = {
             lang: 'zh',
+            allowEdit:allowEdit,
             frozen:{ type: 'row'},
             row:10,
             enableAddBackTop:false,

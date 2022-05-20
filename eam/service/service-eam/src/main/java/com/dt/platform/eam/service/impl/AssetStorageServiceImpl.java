@@ -3,12 +3,11 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
-import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
-import com.dt.platform.constants.enums.eam.AssetOperateEnum;
-import com.dt.platform.domain.eam.AssetItem;
-import com.dt.platform.domain.eam.AssetTranfer;
-import com.dt.platform.eam.service.IAssetDataService;
-import com.dt.platform.eam.service.IAssetItemService;
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetStorageMeta;
+import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.dao.data.Rcd;
@@ -20,8 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetStorage;
-import com.dt.platform.domain.eam.AssetStorageVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -40,7 +37,7 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IAssetStorageService;
+
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 import java.util.Map;
@@ -64,11 +61,16 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 	private DAO dao=null;
 
 	@Autowired
+	private IOperateService operateService;
+
+	@Autowired
 	private IAssetItemService assetItemService;
 
 	@Autowired
 	private IAssetDataService assetDataService;
 
+	@Autowired
+	private IAssetService assetService;
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -93,14 +95,15 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 
 		//插入
 		String selectedCode=assetStorage.getSelectedCode();
-		Result importR=assetDataService.batchImportAsset(assetStorage.getCustomData(),selectedCode);
+		Result importR=assetDataService.importAssetByLuckySheet(AssetOwnerCodeEnum.ASSET_STORAGE.code(),assetStorage.getCustomData(),selectedCode);
+		assetStorage.setCustomData("");
 		if(!importR.isSuccess()){
-			return ErrorDesc.failure("导入资产报错");
+			return ErrorDesc.failureMessage("导入资产报错");
 		}
-		String sql="select id from eam_asset where deleted=0 and selected_code=?";
+		String sql="select id from eam_asset where deleted=0 and asset_selected_code=?";
 		RcdSet importDataRs=dao.query(sql,selectedCode);
 		if(importDataRs.size()==0){
-			return ErrorDesc.failure("请选择资产");
+			return ErrorDesc.failureMessage("请选择资产");
 		}
 
 
@@ -136,6 +139,7 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 				AssetItem item=new AssetItem();
 				item.setAssetId(rs.getString("id"));
 				item.setHandleId(assetStorage.getId());
+				list.add(item);
 			}
 			assetItemService.insertList(list);
 		}
@@ -171,10 +175,52 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 	public Result forApproval(String id) {
 		return null;
 	}
+	/**
+	 * 操作
+	 * @param id  ID
+	 * @param result 结果
+	 * @return
+	 * */
+	private Result operateResult(String id,String result,String status,String message) {
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
+			AssetStorage bill=this.getById(id);
+			dao.fill(bill).with(AssetStorageMeta.ASSET_LIST)
+					.execute();
+			bill.setStatus(status);
+			List<Asset> list=bill.getAssetList();
+			if(list!=null&&list.size()>0){
+				for(Asset asset:list){
+					asset.setStatus(status);
+					asset.setOwnerCode(AssetOwnerCodeEnum.ASSET.code());
+					Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code()) ;
+					if(!codeResult.isSuccess()){
+						return codeResult;
+					}else{
+						asset.setAssetCode(codeResult.getData().toString());
+					}
+					assetService.update(asset,SaveMode.NOT_NULL_FIELDS,false);
+				}
+			}
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
+		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
+			return ErrorDesc.failureMessage(message);
+		}else{
+			return ErrorDesc.failureMessage("返回未知结果");
+		}
+	}
 
 	@Override
 	public Result confirmOperation(String id) {
-		return null;
+		AssetStorage billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_STORAGE.code()) ) {
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
+			}else{
+				return operateResult(id, AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
 	}
 
 	/**
@@ -265,30 +311,22 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 	public Result update(AssetStorage assetStorage , SaveMode mode,boolean throwsException) {
 		//插入
 		String selectedCode=assetStorage.getSelectedCode();
-		Result importR=assetDataService.batchImportAsset(assetStorage.getCustomData(),selectedCode);
+		Result importR=assetDataService.importAssetByLuckySheet(AssetOwnerCodeEnum.ASSET_STORAGE.code(),assetStorage.getCustomData(),selectedCode);
 		if(!importR.isSuccess()){
-			return ErrorDesc.failure("导入资产报错");
+			return ErrorDesc.failureMessage("导入资产报错");
 		}
-		String sql="select id from eam_asset where deleted=0 and selected_code=?";
+		String sql="select id from eam_asset where deleted=0 and asset_selected_code=?";
 		RcdSet importDataRs=dao.query(sql,selectedCode);
 		if(importDataRs.size()==0){
-			return ErrorDesc.failure("请选择资产");
+			return ErrorDesc.failureMessage("请选择资产");
 		}
 
+		assetStorage.setCustomData("");
 		//业务时间
 		if(StringUtil.isBlank(assetStorage.getBusinessDate())){
 			assetStorage.setBusinessDate(new Date());
 		}
 
-		//生成编码规则
-		if(StringUtil.isBlank(assetStorage.getBusinessCode())){
-			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_STORAGE.code());
-			if(!codeResult.isSuccess()){
-				return codeResult;
-			}else{
-				assetStorage.setBusinessCode(codeResult.getData().toString());
-			}
-		}
 
 		Result r=super.update(assetStorage , mode , throwsException);
 		if(r.isSuccess()){
@@ -297,12 +335,11 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 				AssetItem item=new AssetItem();
 				item.setAssetId(rs.getString("id"));
 				item.setHandleId(assetStorage.getId());
+				list.add(item);
 			}
-			dao.execute("delete from eam_asset where handle_id=? ",assetStorage.getId());
+			dao.execute("delete from eam_asset_item where handle_id=? ",assetStorage.getId());
 			assetItemService.insertList(list);
 		}
-
-
 		return r;
 	}
 

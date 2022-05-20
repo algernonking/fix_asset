@@ -55,18 +55,18 @@ public interface AssetDataServiceProxy {
     /**
      * 导入资产
      */
-    public static final String QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF = API_PREFIX + "query-batch-import-asset-luckysheet-conf";
+    public static final String QUERY_ASSET_LUCKY_SHEET = API_PREFIX + "query-asset-lucky-sheet";
 
     /**
      * 导入资产
      */
-    public static final String BATCH_IMPORT_ASSET = API_PREFIX + "batch-import-asset";
+    public static final String BATCT_IMPORT_ASSET_BY_LUCKY_SHEET = API_PREFIX + "batch-import-asset-by-lucky-sheet";
 
     /**
      * 配置数据
      */
-    @RequestMapping(AssetDataServiceProxy.QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF)
-    Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper);
+    @RequestMapping(AssetDataServiceProxy.QUERY_ASSET_LUCKY_SHEET)
+    Result<JSONObject> queryAssetLuckySheet(String oper,int row,String handleId);
 
     /**
      * 导出资产

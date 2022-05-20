@@ -68,7 +68,7 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_excel_oper.html")
 	public String excelOper(Model model,HttpServletRequest request) {
-		Result r=AssetDataServiceProxy.api().queryBatchImportAssetLuckysheetConf("");
+		Result r=AssetDataServiceProxy.api().queryAssetLuckySheet("",50,null);
 		JSONObject conf= (JSONObject) r.getData();
 		model.addAttribute("sheetConfig", JSON.toJSONString(conf, SerializerFeature.DisableCircularReferenceDetect));
 		return prefix+"/asset_excel_oper";

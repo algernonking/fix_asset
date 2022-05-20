@@ -25,11 +25,11 @@ import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.Rcd;
-import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.spec.DAO;
+import com.github.foxnic.sql.expr.ConditionExpr;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -50,7 +50,6 @@ import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import javax.print.attribute.standard.JobName;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -100,13 +99,21 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     @Override
     public PagedList<Asset> queryAssetPagedList(List<String> ids, AssetVO asset) {
         asset.setOwnerCode(AssetOwnerCodeEnum.ASSET.code());
-        return assetService.queryPagedList(asset,10000,1);
+        return assetService.queryPagedList(asset,asset.getPageSize(),asset.getPageIndex());
+
+    }
+
+    @Override
+    public List<Asset> queryAssetList(List<String> ids, AssetVO asset) {
+        asset.setOwnerCode(AssetOwnerCodeEnum.ASSET.code());
+        return assetService.queryList(asset);
 
     }
 
 
+
     @Override
-    public String getMapKey(HashMap<String,String> map,String value){
+    public String queryMapKeyByValue(HashMap<String,String> map, String value){
         String key = null;
         //Map,HashMap并没有实现Iteratable接口.不能用于增强for循环.
         for(String getKey: map.keySet()){
@@ -121,11 +128,31 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
     @Override
-    public Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper,int row) {
+    public Result<JSONObject> queryAssetLuckySheet(String oper,int row,String handleId) {
 
-        List<AssetLuckySheetColumnMeta> list= getImportExcelMetaData(oper);
-        JSONObject dataVerification=importExcelDataDataVerification(list,row-1);
-        JSONObject configObj=parseImportExcelDataConfig(list);
+        if(row<10){
+            row=50;
+        }
+        List<Map<String, Object>> mapList=null;
+        if(!StringUtil.isBlank(handleId)){
+            List<String> assetIdsList=dao.query("select * from eam_asset_item where deleted=0 and handle_id=?",handleId).getValueList("asset_id",String.class);
+            if(assetIdsList!=null&&assetIdsList.size()>0){
+                ConditionExpr expr=new ConditionExpr();
+                expr.andIn("id",assetIdsList);
+                List<Asset> assetList=assetService.queryList(expr);
+                if(assetList.size()>row){
+                    row=assetList.size()+1;
+                }
+                if(assetList!=null&&assetList.size()>0){
+                    Map<String,Object> map=queryAssetMap(assetList,null);
+                    mapList= (List<Map<String, Object>>) map.get("dataList");
+                }
+            }
+        }
+
+        List<AssetLuckySheetColumnMeta> list= queryExcelMetaData(oper);
+        JSONObject dataVerification=queryLuckyExcelDataDataVerification(list,row-1);
+        JSONObject configObj=fillExcelData(list,mapList);
         Result<JSONObject> res=new Result<>();
         JSONObject resData=new JSONObject();
         resData.put("name","资产");
@@ -142,7 +169,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         return res;
     }
 
-    private JSONObject importExcelDataDataVerification(List<AssetLuckySheetColumnMeta> list,int row){
+    private JSONObject queryLuckyExcelDataDataVerification(List<AssetLuckySheetColumnMeta> list,int row){
         JSONObject data=new JSONObject();
         for(AssetLuckySheetColumnMeta assetLuckySheetColumnMeta:list){
             int columnNumber=assetLuckySheetColumnMeta.getColNumber();
@@ -157,36 +184,74 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     }
 
 
-    private JSONObject parseImportExcelDataConfig(List<AssetLuckySheetColumnMeta> assetColumnMetaList){
-        JSONArray cellData=new JSONArray();
-        JSONObject res=new JSONObject();
-         for(int i=0;i<assetColumnMetaList.size();i++){
-             AssetLuckySheetColumnMeta assetColumnMeta=assetColumnMetaList.get(i);
-             JSONObject col=new JSONObject();
-             col.put("r",0);
-             col.put("c",i);
-             JSONObject value=new JSONObject();
-             value.put("bl",1);
-             value.put("m",assetColumnMeta.getColName());
-             value.put("v",assetColumnMeta.getColName());
-             //需要验证
-             if(assetColumnMeta.getDataVerification()!=null){
-                 value.put("fc","#ff00ff");
-             }
-             JSONObject ct=new JSONObject();
-             ct.put("fa",assetColumnMeta.getValueFormat());
-             ct.put("t",assetColumnMeta.getValueType());
-             value.put("ct",ct);
-             col.put("v",value);
-             cellData.add(col);
+    private JSONObject fillExcelData(List<AssetLuckySheetColumnMeta> assetColumnMetaList,List<Map<String, Object>> mapList){
+         JSONArray cellData=new JSONArray();
+         JSONObject res=new JSONObject();
+         boolean dataFill=false;
+         if(mapList!=null&&mapList.size()>0){
+             dataFill=true;
          }
+
+        for(int i=0;i<assetColumnMetaList.size();i++){
+            AssetLuckySheetColumnMeta assetColumnMeta=assetColumnMetaList.get(i);
+            JSONObject col=new JSONObject();
+            col.put("r",0);
+            col.put("c",i);
+            JSONObject value=new JSONObject();
+            value.put("bl",1);
+            value.put("m",assetColumnMeta.getColName());
+            value.put("v",assetColumnMeta.getColName());
+            //需要验证
+            if(assetColumnMeta.getDataVerification()!=null){
+                value.put("fc","#ff00ff");
+            }
+            JSONObject ct=new JSONObject();
+            ct.put("fa",assetColumnMeta.getValueFormat());
+            ct.put("t",assetColumnMeta.getValueType());
+            value.put("ct",ct);
+            col.put("v",value);
+            cellData.add(col);
+        }
+
+        if(dataFill){
+             for(int j=0;j<mapList.size();j++){
+                 Map<String, Object> map=mapList.get(j);
+                 for(int i=0;i<assetColumnMetaList.size();i++){
+                     JSONObject col=new JSONObject();
+                     AssetLuckySheetColumnMeta assetColumnMeta=assetColumnMetaList.get(i);
+                     col.put("r",j+1);
+                     col.put("c",i);
+                     JSONObject value=new JSONObject();
+                     value.put("bl",0);
+                     if(map.containsKey(assetColumnMeta.getCol())){
+                         value.put("m",map.get(assetColumnMeta.getCol()));
+                         value.put("v",map.get(assetColumnMeta.getCol()));
+                     }else{
+                         value.put("m","");
+                         value.put("v","");
+                     }
+                     //需要验证
+                     if(assetColumnMeta.getDataVerification()!=null){
+                         value.put("fc","#ff00ff");
+                     }
+                     JSONObject ct=new JSONObject();
+                     ct.put("fa",assetColumnMeta.getValueFormat());
+                     ct.put("t",assetColumnMeta.getValueType());
+                     value.put("ct",ct);
+                     col.put("v",value);
+                     cellData.add(col);
+                 }
+
+             }
+        }
+
          res.put("celldata",cellData);
          System.out.println("parseImportExcelDataConfig:\b"+res.toJSONString());
         return res;
     }
 
 
-    public List<AssetLuckySheetColumnMeta> getImportExcelMetaData(String oper){
+    public List<AssetLuckySheetColumnMeta> queryExcelMetaData(String oper){
         List<AssetLuckySheetColumnMeta> list=new ArrayList<>();
         InputStream inputStream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_BATCH_UPLOAD_ASSET.code());
         ExcelStructure es=new ExcelStructure();
@@ -338,12 +403,14 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                         List values = new ArrayList(catalogMap.values());
                         dataVer.put("value1",  String.join(",", values));
                         dataVerification=dataVer;
+
 //                        dataVer.put("prohibitInput",true);
 //                        dataVer.put("type","dropdown");
 //                        HashMap<String,String> compMap = queryOrganizationNodes("all");
 //                        List values = new ArrayList(compMap.values());
 //                        dataVer.put("value1",  String.join(",", values));
 //                        dataVerification=dataVer;
+
                     }else if("ownCompanyName".equals(secondAssetColumn)){
                         dataVer.put("prohibitInput",true);
                         dataVer.put("type","dropdown");
@@ -389,7 +456,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     }
 
     @Override
-    public Result batchImportAsset(String content,String selectedCode) {
+    public Result importAssetByLuckySheet(String ownerCode,String content,String selectedCode) {
         Workbook wb = null;
         OutputStream out = null;
         String path = System.getProperty("java.io.tmpdir");
@@ -448,7 +515,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        List<ValidateResult> errors=assetService.importExcel(input,0,true, AssetOwnerCodeEnum.ASSET.code(), true,AssetOperateEnum.EAM_BATCH_UPLOAD_ASSET.code(),selectedCode);
+        List<ValidateResult> errors=assetService.importExcel(input,0,true, ownerCode, true,AssetOperateEnum.EAM_BATCH_UPLOAD_ASSET.code(),selectedCode);
 
         if(errors==null || errors.isEmpty()) {
             return ErrorDesc.success();
@@ -576,7 +643,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 //        }
         if(!StringUtil.isBlank(valueCategory)){
             if(categoryMap.containsValue(valueCategory.trim())){
-                String key=getMapKey(categoryMap,valueCategory);
+                String key= queryMapKeyByValue(categoryMap,valueCategory);
                 rcd.setValue(category,key);
             }else{
                 //返回报错
@@ -604,7 +671,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             String valueCol=rcd.getString(col);
             if(!StringUtil.isBlank(valueCol)){
                 if(map.containsValue(valueCol)){
-                    rcd.setValue(valueCol,getMapKey(map,valueCol));
+                    rcd.setValue(valueCol, queryMapKeyByValue(map,valueCol));
                 }else{
                     return ErrorDesc.failureMessage(notes+":"+valueCol);
                 }
@@ -681,7 +748,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         String valueUseOrganization=rcd.getString(useOrganization);
         if(!StringUtil.isBlank(valueUseOrganization)){
             if(orgMap.containsValue(valueUseOrganization.trim())){
-                String key=getMapKey(orgMap,valueUseOrganization);
+                String key= queryMapKeyByValue(orgMap,valueUseOrganization);
                 rcd.setValue(useOrganization,key);
             }else{
                 //返回报错
@@ -694,7 +761,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         String valueOwnerCompany=rcd.getString(companyId);
         if(!StringUtil.isBlank(valueOwnerCompany)){
             if(orgMap.containsValue(valueOwnerCompany.trim())){
-                String key=getMapKey(orgMap,valueOwnerCompany);
+                String key= queryMapKeyByValue(orgMap,valueOwnerCompany);
                 rcd.setValue(companyId,key);
             }else{
                 //返回报错
@@ -849,19 +916,19 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
 
+    //将assetList转Map,保存dataList,categoryId 过滤条件
     @Override
-    public Map<String, Object> queryAssetMap(PagedList<Asset> list,String categoryId) {
+    public Map<String, Object> queryAssetMap(List<Asset> list,String categoryId) {
         HashMap<String,String> orgMap=queryOrganizationNodes("all");
         HashMap<String,String> categoryMap=queryAssetCategoryNodes("all");
         Map<String,Object> map=new HashMap<>();
-        assetService.joinData(list.getList());
+        assetService.joinData(list);
 
         String tenantId=SessionUser.getCurrent().getActivatedTenantId();
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
         for(int i=0;i<list.size();i++){
             Asset assetItem=list.get(i);
             System.out.println(categoryId+"map"+BeanUtil.toJSONObject(assetItem));
-
             if(!StringUtil.isBlank(categoryId)){
                 if(!categoryId.equals(assetItem.getCategoryId())){
                     continue;

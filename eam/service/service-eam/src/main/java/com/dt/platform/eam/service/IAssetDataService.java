@@ -36,12 +36,15 @@ import java.util.Map;
 public interface IAssetDataService extends ISuperService<Asset> {
 
 
+	Result importAssetByLuckySheet(String ownerCode,String content,String selectedCode);
+
+	Result<JSONObject> queryAssetLuckySheet(String oper,int row,String handleId);
+
 	HashMap<String,String> queryDictItemDataByDictCode(String dictCode);
 
-	String getMapKey(HashMap<String,String> map,String value);
+	String queryMapKeyByValue(HashMap<String,String> map, String value);
 
 	Result verifyAssetRecord(Rcd rcd,HashMap<String,HashMap<String,String>> matchMap, boolean filldata);
-
 
 	Result<CatalogData> verifyAssetExtColumnRecord(Rcd rcd, List<CatalogAttribute> attributeList, boolean filldata);
 
@@ -50,26 +53,19 @@ public interface IAssetDataService extends ISuperService<Asset> {
 	HashMap<String,String> queryOrganizationNodes(String type);
 
 
-	Result batchImportAsset(String content,String selectedCode);
 
-	Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper,int row);
 
-	/**
-	 * 插入实体
-	 * @param ids 资产数据
-	 * @param asset 资产实体
-	 * @return 结果
-	 * */
 	PagedList<Asset> queryAssetPagedList(List<String> ids,AssetVO asset);
 
 
+	List<Asset> queryAssetList(List<String> ids, AssetVO asset) ;
 
 	/**
 	 * 插入实体
 	 * @param list 资产数据
 	 * @return 结果
 	 * */
-	Map<String, Object> queryAssetMap(PagedList<Asset> list,String categoryId);
+	Map<String, Object> queryAssetMap(List<Asset> list,String categoryId);
 
 	/**
 	 * 插入实体

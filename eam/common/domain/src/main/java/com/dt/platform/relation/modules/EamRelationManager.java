@@ -377,7 +377,7 @@ public class EamRelationManager extends RelationManager {
         //资产
         this.property(AssetStorageMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_STORAGE.ID).join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET_ITEM.ASSET_ID).join(EAMTables.EAM_ASSET_ITEM.ID);
+                .using(EAMTables.EAM_ASSET_ITEM.ASSET_ID).join(EAMTables.EAM_ASSET.ID);
 
     }
 

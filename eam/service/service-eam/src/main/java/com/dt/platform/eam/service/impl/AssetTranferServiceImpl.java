@@ -116,19 +116,15 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 
 	@Override
 	public Map<String, Object> getBill(String id) {
-
 		AssetTranfer data= AssetTranferServiceProxy.api().getById(id).getData();
 		join(data, AssetTranferMeta.ASSET_LIST);
-
 		Map<String, Object> map= BeanUtil.toMap(data);
 		if(data.getStatus()!=null){
 			CodeTextEnum en= EnumUtil.parseByCode(AssetHandleStatusEnum.class,data.getStatus());
 			map.put("statusName", en==null?data.getStatus():en.text());
 		}
 		return map;
-
 	}
-
 
 
 	private void syncBill(String id, ChangeEvent event) {

@@ -14,7 +14,7 @@ import com.dt.platform.domain.eam.Supplier;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-19 21:15:06
+ * @since 2022-05-20 06:40:03
  * @sign 1A0905D818F4B74AC4900C5B81620709
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

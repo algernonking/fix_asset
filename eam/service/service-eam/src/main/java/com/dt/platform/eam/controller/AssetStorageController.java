@@ -215,7 +215,7 @@ public class AssetStorageController extends SuperController {
 			.with("originator")
 				.with("ownerCompany")
 				.with(AssetStorageMeta.SUPPLIER)
-			.with("useUser")
+			.with("managerUser")
 			.execute();
 
 		assetStorageService.dao().join(assetStorage.getOriginator(), Person.class);
@@ -310,7 +310,7 @@ public class AssetStorageController extends SuperController {
 				.with("ownerCompany")
 				.with(AssetStorageMeta.SUPPLIER)
 			.with("originator")
-			.with("useUser")
+			.with("managerUser")
 			.execute();
 
 

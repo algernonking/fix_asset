@@ -173,11 +173,11 @@ public class AssetDataController extends SuperController {
      */
     @ApiOperation(value = "在线Excel导入资产")
     @ApiOperationSupport(order=10)
-    @SentinelResource(value = AssetDataServiceProxy.BATCH_IMPORT_ASSET , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
-    @PostMapping(AssetDataServiceProxy.BATCH_IMPORT_ASSET)
+    @SentinelResource(value = AssetDataServiceProxy.BATCT_IMPORT_ASSET_BY_LUCKY_SHEET , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetDataServiceProxy.BATCT_IMPORT_ASSET_BY_LUCKY_SHEET)
     public Result batchImportAsset(String content) {
         //
-        return assetDataService.batchImportAsset(content,IDGenerator.getSnowflakeIdString());
+        return assetDataService.importAssetByLuckySheet(AssetOwnerCodeEnum.ASSET.code(),content,IDGenerator.getSnowflakeIdString());
     }
 
 
@@ -186,10 +186,10 @@ public class AssetDataController extends SuperController {
      */
     @ApiOperation(value = "查询在线Excel导入资产配置信息")
     @ApiOperationSupport(order=12)
-    @SentinelResource(value = AssetDataServiceProxy.QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
-    @PostMapping(AssetDataServiceProxy.QUERY_BATCH_IMPORT_ASSET_LUCKYSHEET_CONF)
-    public Result<JSONObject> queryBatchImportAssetLuckysheetConf(String oper){
-        return assetDataService.queryBatchImportAssetLuckysheetConf(oper,50);
+    @SentinelResource(value = AssetDataServiceProxy.QUERY_ASSET_LUCKY_SHEET , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetDataServiceProxy.QUERY_ASSET_LUCKY_SHEET)
+    public Result<JSONObject> queryAssetLuckySheet(String oper,int row,String id){
+        return assetDataService.queryAssetLuckySheet(oper,row,id);
     }
 
 

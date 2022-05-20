@@ -20,11 +20,12 @@ public enum AssetOwnerCodeEnum implements CodeTextEnum {
 	ASSET_CONSUMABLES("asset_consumables" , "耗材资产"),
 	ASSET_STOCK("asset_stock" , "资产库存"),
 
+	ASSET_STORAGE("asset_storage" , "资产批量入库"),
 	ASSET_PURCHASE_APPLY("asset_purchase_apply" , "资产采购申请"),
-
 	ASSET_UNCONFIRMED("asset_unconfirmed" , "资产新增未确认"),
 	ASSET_CHANGE_RECORD("asset_change_record" , "资产变更记录"),
 	ASSET_CLEAN_OUT("asset_clean_out" , "资产清理"),
+
 	ASSET_CONSUMABLES_COLLECTION(CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code() , "耗材资产领用"),
 	ASSET_STOCK_DISTRIBUTE(CodeModuleEnum.EAM_ASSET_STOCK_DISTRIBUTE.code() , "资产库存分配"),
 	ASSET_CHANGE_BASE_INFO(CodeModuleEnum.EAM_ASSET_CHANGE_BASE_INFO.code(), "EAM_资产变更-基本"),

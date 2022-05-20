@@ -90,7 +90,7 @@ function FormPage() {
             var ct=luckysheet.getLuckysheetfile()[0];
             console.log(ct);
             var ps={};
-            var api="/service-eam/eam-asset-data/batch-import-asset";
+            var api="/service-eam/eam-asset-data/batch-import-asset-by-lucky-sheet";
             ps.content=JSON.stringify(ct.data);
             var btn=$('.asset-submit-button');
             top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {

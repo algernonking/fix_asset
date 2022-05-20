@@ -1045,14 +1045,13 @@ public class AssetController extends SuperController {
             }
 
             File f=assetDataService.saveTempFile(inputstream,"TMP_download_asset_data.xls");
-            Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetPagedList(null,sample),categoryId);
+            Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetList(null,sample),categoryId);
             TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
             templateExportParams.setScanAllsheet(true);
             Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
             response.setCharacterEncoding("UTF-8");
             response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
             response.setContentType("application/vnd.ms-excel");
-
 
 			//下载
 			DownloadUtil.writeToOutput(response,workbook,"资产数据.xls");
