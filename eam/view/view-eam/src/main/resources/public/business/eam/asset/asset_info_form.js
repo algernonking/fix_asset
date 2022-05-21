@@ -213,15 +213,13 @@ function FormPage() {
 			tree: {
 				showFolderIcon: true,
 				show: true,
-				strict: true,
+				strict: false,
 				expandedKeys: [ -1],
 			},
 			//处理方式
 			on: function(data){
 				if(data.isAdd){
-					console.log(data);
 					var result=data.change.slice(0, 1);
-					console.log("result",result);
 					var task=setTimeout(function(){layer.load(2);},1000);
 					var ps={}
 					if(result.length==1){

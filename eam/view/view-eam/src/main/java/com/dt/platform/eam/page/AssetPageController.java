@@ -66,6 +66,14 @@ public class AssetPageController extends ViewController {
 	/**
 	 * 资产
 	 */
+	@RequestMapping("/asset_code_custom.html")
+	public String assetCodeCustom(Model model,HttpServletRequest request) {
+		return prefix+"/asset_code_custom";
+	}
+
+	/**
+	 * 资产
+	 */
 	@RequestMapping("/asset_excel_oper.html")
 	public String excelOper(Model model,HttpServletRequest request) {
 		Result r=AssetDataServiceProxy.api().queryAssetLuckySheet("",50,null);

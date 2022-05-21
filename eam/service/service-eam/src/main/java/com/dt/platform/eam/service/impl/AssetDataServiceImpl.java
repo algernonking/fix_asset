@@ -158,7 +158,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         resData.put("name","资产");
         resData.put("index","Sheet_"+IDGenerator.getSnowflakeIdString());
         resData.put("row",row);
-        resData.put("column","60");
+        resData.put("column",list.size());
         JSONObject frozen=new JSONObject();
         frozen.put("type","row");
         resData.put("frozen",frozen);

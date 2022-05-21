@@ -330,7 +330,7 @@ function FormPage() {
 			tree: {
 				showFolderIcon: true,
 				show: true,
-				strict: true,
+				strict: false,
 				expandedKeys: [],
 			},
 			//处理方式

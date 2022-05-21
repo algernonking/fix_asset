@@ -30,6 +30,9 @@ delete from eam_asset_collection where 1=1  and tenant_id='T001' ;
 delete from eam_asset_collection_return where 1=1  and tenant_id='T001' ;
 delete from eam_asset_handle where 1=1  and tenant_id='T001' ;
 delete from eam_asset_tranfer where 1=1  and tenant_id='T001' ;
+delete from eam_asset_depreciation_oper where 1=1  and tenant_id='T001' ;
+
+delete from eam_asset_storage where 1=1  and tenant_id='T001' ;
 
 delete from eam_purchase_apply  where 1=1  and tenant_id='T001' ;
 delete from eam_purchase_apply_item  where 1=1  and tenant_id='T001' ;

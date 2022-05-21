@@ -92,11 +92,19 @@
                 matrix: false, // 矩阵操作选区
                 sort: false, // 排序选区
                 filter: false, // 筛选选区
-             //   chart: false, // 图表生成
-             //   image: false, // 插入图片
-             //   link: false, // 插入链接
+                chart: false, // 图表生成
+                image: false, // 插入图片
+                link: false, // 插入链接
                 data: false, // 数据验证
-                cellFormat: false // 设置单元格格式
+               cellFormat: false // 设置单元格格式
+            },
+            sheetRightClickConfig:{
+                delete: false, // 删除
+                copy: false, // 复制
+                rename: false, //重命名
+                color: false, //更改颜色
+                hide: false, //隐藏，取消隐藏
+                move: false, //向左移，向右移
             },
             showtoolbarConfig:{
                // undoRedo: false, //撤销重做，注意撤消重做是两个按钮，由这一个配置决定显示还是隐藏
@@ -127,7 +135,7 @@
                // pivotTable: false,  //'数据透视表'
                 function: false, // '公式'
                 frozenMode: false, // '冻结方式'
-                sortAndFilter: false, // '排序和筛选'
+              //  sortAndFilter: false, // '排序和筛选'
                 //conditionalFormat: false, // '条件格式'
                 dataVerification: false, // '数据验证'
                 splitColumn: false, // '分列'
@@ -138,7 +146,6 @@
             },
             data:[sheetConfig],
             sheetFormulaBar:false,
-
             showinfobar:false,
             enableAddRow:false,
             title:'资产表格',

@@ -1,0 +1,284 @@
+<!--
+/**
+ * 资产标签 列表页 JS 脚本
+ * @author 金杰 , maillank@qq.com
+ * @since 2022-05-20 20:59:20
+ */
+ -->
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+    <title th:text="${lang.translate('标签模版设置')}">标签模版设置</title>
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+    <style>
+    </style>
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
+</head>
+
+<script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
+
+
+<style>
+    .op-block {
+        -webkit-box-shadow: 1px 1px 10px rgb(0 0 0 / 10%);
+        box-shadow: 1px 1px 10px rgb(0 0 0 / 10%);
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .cardList{
+        padding-top:50px;
+        padding-bottom:50px;
+        display: -webkit-flex; /* Safari */
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap:wrap;
+    }
+    .showCard{
+        width: 250px;
+        padding-top:15px;
+        padding-bottom:15px;
+        background: #fff;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+    .text-center {
+        text-align: center!important;
+    }
+    .showCard table  {
+      width:100% !important;
+    }
+    .showCard table th, td {
+        border: 1px solid #000;
+    }
+    .barcode-style {
+        width: 200px;
+        height: auto;
+        margin-top: 10px;
+    }
+    .color-primary {
+        color: #668eff!important;
+    }
+
+    .img-bottom-barcode {
+        margin-top: -2px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .add-custom-btn[data-v-882cb81c] {
+        border: 2px dashed #94aaff;
+        width: 150px;
+        margin: 0 auto;
+        color: #94aaff;
+    }
+    .customBtn{
+        width:100%;
+        display: -webkit-flex; /* Safari */
+        display: flex;
+        justify-content: center;
+
+    }
+    .selected-point {
+        position: absolute;
+        background: #fff;
+        border-radius: 20px;
+        line-height: 16px;
+        left: 10px;
+        top: 5px;
+        width: 19px;
+        text-align: center;
+        height: 19px;
+        font-size: 19px;
+    }
+    .delete-custom-button-style {
+        right: 0;
+        top: 0;
+        border-top-right-radius: 5px;
+        background: rgba(0,0,0,.3);
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+    }
+    .delete-custom-button-style {
+        right: 0;
+        top: 0;
+        border-top-right-radius: 5px;
+        background: rgba(0,0,0,.3);
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+    }
+    .absolute {
+        position: absolute!important;
+    }
+    .relative {
+        position: relative!important;
+    }
+
+    .card{
+        margin-bottom: 15px;
+    }
+    .area-hide{
+        display: none;
+    }
+</style>
+<body style="background-color: white">
+
+
+
+<form class="layui-form" action="" style="padding-top:35px;padding-bottom:35px">
+
+
+    <div class="layui-form-item"> <label class="layui-form-label">标签模版</label>
+        <div class="layui-input-block">
+            <div id="cardList" class="cardList">
+
+            </div>
+         </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="customBtn">
+            <div id="cust" data-v-882cb81c="" class="cursor-pointer add-custom-btn text-center p-2 mt-6"><span data-v-882cb81c="" class="feather-icon select-none relative" style="display: inline-block; vertical-align: middle;"><svg data-v-882cb81c="" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus w-4 h-4 mr-1 mt-1"><line data-v-882cb81c="" x1="12" y1="5" x2="12" y2="19"></line><line data-v-882cb81c="" x1="5" y1="12" x2="19" y2="12"></line></svg></span><span data-v-882cb81c="">自定义打印模板</span></div>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;"> <legend>打印纸设置</legend>
+    </fieldset>
+
+    <div class="layui-form-item">
+        <div class="layui-inline"> <label class="layui-form-label">标签宽度(cm)</label>
+            <div class="layui-input-inline">
+                <input id="labelWidth" type="number" name="labelWidth" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline"> <label class="layui-form-label">标签高度(cm)</label>
+            <div class="layui-input-inline">
+                <input id="labelHeight" type="number" name="labelHeight" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">纸张类型</label>
+        <div class="layui-input-block">
+            <input input-type="radio" type="radio" name="paperTypeId" lay-filter="paperTypeId" th:each="e,stat:${papertypeData}" th:value="${e.id}" th:title="${e.name}" th:checked="${(e.id=='' || stat.index==-1)?'yes':'no'}">
+<!--            <input type="radio" name="sex" value="男" title="专用" checked="">-->
+<!--            <input type="radio" name="sex" value="女" title="A4">-->
+<!--            <input type="radio" name="sex" value="禁" title="A4(2列)">-->
+        </div>
+    </div>
+
+    <button class="layui-btn" style="margin-top:15px;margin-left: 135px"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+
+
+
+</form>
+
+
+
+<script th:inline="javascript">
+    var AUTH_PREFIX="eam_asset_label";
+
+    var RADIO_PAPERTYPEID_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var PAPERTYPE_DATA = [[${papertypeData}]];
+
+    // layui.use(['form', 'layedit', 'laydate'], function(){
+    //     var admin = layui.admin;
+    //     var form = layui.form
+    //         ,layer = layui.layer
+    //         ,layedit = layui.layedit
+    //         ,laydate = layui.laydate;
+    //
+    //     //日期
+    //     laydate.render({
+    //         elem: '#date'
+    //     });
+    //     laydate.render({
+    //         elem: '#date1'
+    //     });
+    //
+    //
+    //     //创建一个编辑器
+    //     var editIndex = layedit.build('LAY_demo_editor');
+    //
+    //     //自定义验证规则
+    //     form.verify({
+    //         title: function(value){
+    //             if(value.length < 5){
+    //                 return '标题至少得5个字符啊';
+    //             }
+    //         }
+    //         ,pass: [
+    //             /^[\S]{6,12}$/
+    //             ,'密码必须6到12位，且不能出现空格'
+    //         ]
+    //         ,content: function(value){
+    //             layedit.sync(editIndex);
+    //         }
+    //     });
+    //
+    //     //监听指定开关
+    //     form.on('switch(switchTest)', function(data){
+    //         layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+    //             offset: '6px'
+    //         });
+    //         layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+    //     });
+    //
+    //     //监听提交
+    //     form.on('submit(demo1)', function(data){
+    //         layer.alert(JSON.stringify(data.field), {
+    //             title: '最终的提交信息'
+    //         })
+    //         return false;
+    //     });
+    //
+    //     //表单赋值
+    //     layui.$('#LAY-component-form-setval').on('click', function(){
+    //         form.val('example', {
+    //             "username": "贤心" // "name": "value"
+    //             ,"password": "123456"
+    //             ,"interest": 1
+    //             ,"like[write]": true //复选框选中状态
+    //             ,"close": true //开关状态
+    //             ,"sex": "女"
+    //             ,"desc": "我爱 layui"
+    //         });
+    //     });
+    //
+    //     //表单取值
+    //     layui.$('#LAY-component-form-getval').on('click', function(){
+    //         var data = form.val('example');
+    //         alert(JSON.stringify(data));
+    //     });
+    //
+    // });
+
+
+</script>
+<script th:src="'/business/eam/asset_label/asset_label_setting_ext.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/asset_label/asset_label_setting.js?'+${cacheKey}"></script>
+</body>
+</html>

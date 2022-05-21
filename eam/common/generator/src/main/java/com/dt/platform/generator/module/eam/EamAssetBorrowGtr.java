@@ -81,6 +81,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button","eam_asset_borrow:revoke");
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button","eam_asset_borrow:bill");
 
+
         //  cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
         cfg.view().list().operationColumn().width(350);
 

@@ -142,11 +142,6 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
-
-
-
-
-
 			//设置  盘点状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 

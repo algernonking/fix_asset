@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-05-19 20:32:37
+ * @since 2022-05-21 19:48:26
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2732,6 +2732,466 @@ public class EAMTables {
 			this.init($NAME,"资产" , ID , HANDLE_ID , ASSET_ID , BEFORE_USE_USER_ID , BEFORE_ASSET_STATUS , CRD , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_ITEM $TABLE=new EAM_ASSET_ITEM();
+	}
+	
+	/**
+	 * 资产标签
+	*/
+	public static class EAM_ASSET_LABEL extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_label";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 编码
+		*/
+		public static final DBField CODE = new DBField(DBDataType.STRING , "code","code","编码","编码",false,false,false);
+		
+		/**
+		 * 标签
+		*/
+		public static final DBField LABEL_TPL_ID = new DBField(DBDataType.STRING , "label_tpl_id","labelTplId","标签","标签",false,false,true);
+		
+		/**
+		 * 标签宽度
+		*/
+		public static final DBField LABEL_WIDTH = new DBField(DBDataType.DECIMAL , "label_width","labelWidth","标签宽度","标签宽度",false,false,true);
+		
+		/**
+		 * 标签高度
+		*/
+		public static final DBField LABEL_HEIGHT = new DBField(DBDataType.DECIMAL , "label_height","labelHeight","标签高度","标签高度",false,false,true);
+		
+		/**
+		 * 纸张类型
+		*/
+		public static final DBField PAPER_TYPE_ID = new DBField(DBDataType.STRING , "paper_type_id","paperTypeId","纸张类型","纸张类型",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
+		public EAM_ASSET_LABEL() {
+			this.init($NAME,"资产标签" , ID , CODE , LABEL_TPL_ID , LABEL_WIDTH , LABEL_HEIGHT , PAPER_TYPE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+		}
+		public static final EAM_ASSET_LABEL $TABLE=new EAM_ASSET_LABEL();
+	}
+	
+	/**
+	 * 标签字段
+	*/
+	public static class EAM_ASSET_LABEL_COL extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_label_col";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 字段
+		*/
+		public static final DBField COL_VALUE = new DBField(DBDataType.STRING , "col_value","colValue","字段","字段",false,false,true);
+		
+		/**
+		 * 字段名称
+		*/
+		public static final DBField COL_NAME = new DBField(DBDataType.STRING , "col_name","colName","字段名称","字段名称",false,false,true);
+		
+		/**
+		 * 是否图像
+		*/
+		public static final DBField IS_IMAGE = new DBField(DBDataType.STRING , "is_image","isImage","是否图像","是否图像",false,false,true);
+		
+		/**
+		 * 图像类型,rwm|txm
+		*/
+		public static final DBField IMAGE_TYPE = new DBField(DBDataType.STRING , "image_type","imageType","图像类型","rwm|txm",false,false,true);
+		
+		/**
+		 * 顺序
+		*/
+		public static final DBField SORT = new DBField(DBDataType.INTEGER , "sort","sort","顺序","顺序",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
+		public EAM_ASSET_LABEL_COL() {
+			this.init($NAME,"标签字段" , ID , COL_VALUE , COL_NAME , IS_IMAGE , IMAGE_TYPE , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+		}
+		public static final EAM_ASSET_LABEL_COL $TABLE=new EAM_ASSET_LABEL_COL();
+	}
+	
+	/**
+	 * 纸张类型
+	*/
+	public static class EAM_ASSET_LABEL_PAPER extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_label_paper";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 是否启用
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","是否启用","是否启用",false,false,true);
+		
+		/**
+		 * 类型,paper|special
+		*/
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","类型","paper|special",false,false,true);
+		
+		/**
+		 * 列数
+		*/
+		public static final DBField COLUMN_NUMBER = new DBField(DBDataType.INTEGER , "column_number","columnNumber","列数","列数",false,false,true);
+		
+		/**
+		 * 排序
+		*/
+		public static final DBField SORT = new DBField(DBDataType.INTEGER , "sort","sort","排序","排序",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
+		public EAM_ASSET_LABEL_PAPER() {
+			this.init($NAME,"纸张类型" , ID , NAME , STATUS , TYPE , COLUMN_NUMBER , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+		}
+		public static final EAM_ASSET_LABEL_PAPER $TABLE=new EAM_ASSET_LABEL_PAPER();
+	}
+	
+	/**
+	 * 标签模版
+	*/
+	public static class EAM_ASSET_LABEL_TPL extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_label_tpl";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 类型,默认为1
+		*/
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","类型","默认为1",false,false,true);
+		
+		/**
+		 * 是否自定义
+		*/
+		public static final DBField IS_CUSTOM = new DBField(DBDataType.STRING , "is_custom","isCustom","是否自定义","是否自定义",false,false,true);
+		
+		/**
+		 * 字段
+		*/
+		public static final DBField COL_IDS = new DBField(DBDataType.STRING , "col_ids","colIds","字段","字段",false,false,true);
+		
+		/**
+		 * 位置,u,d,l,r
+		*/
+		public static final DBField IMAGE_POSITION = new DBField(DBDataType.STRING , "image_position","imagePosition","位置","u,d,l,r",false,false,true);
+		
+		/**
+		 * 图像
+		*/
+		public static final DBField IMAGE_COL_ID = new DBField(DBDataType.STRING , "image_col_id","imageColId","图像","图像",false,false,true);
+		
+		/**
+		 * 图像显示
+		*/
+		public static final DBField IMAGE_SHOW = new DBField(DBDataType.STRING , "image_show","imageShow","图像显示","图像显示",false,false,true);
+		
+		/**
+		 * 图像label显示
+		*/
+		public static final DBField IMAGE_LABEL_SHOW = new DBField(DBDataType.STRING , "image_label_show","imageLabelShow","图像label显示","图像label显示",false,false,true);
+		
+		/**
+		 * 图像类型txm,rwm
+		*/
+		public static final DBField IMAGE_TYPE = new DBField(DBDataType.STRING , "image_type","imageType","图像类型txm","rwm",false,false,true);
+		
+		/**
+		 * 类型
+		*/
+		public static final DBField LABEL_FORMAT_CONTENT = new DBField(DBDataType.STRING , "label_format_content","labelFormatContent","类型","类型",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
+		public EAM_ASSET_LABEL_TPL() {
+			this.init($NAME,"标签模版" , ID , TYPE , IS_CUSTOM , COL_IDS , IMAGE_POSITION , IMAGE_COL_ID , IMAGE_SHOW , IMAGE_LABEL_SHOW , IMAGE_TYPE , LABEL_FORMAT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+		}
+		public static final EAM_ASSET_LABEL_TPL $TABLE=new EAM_ASSET_LABEL_TPL();
+	}
+	
+	/**
+	 * 标签模版
+	*/
+	public static class EAM_ASSET_LABEL_TPL_ITEM extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_label_tpl_item";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 模版
+		*/
+		public static final DBField TPL_ID = new DBField(DBDataType.STRING , "tpl_id","tplId","模版","模版",false,false,true);
+		
+		/**
+		 * 字段ID
+		*/
+		public static final DBField COL_ID = new DBField(DBDataType.STRING , "col_id","colId","字段ID","字段ID",false,false,true);
+		
+		/**
+		 * 顺序
+		*/
+		public static final DBField SORT = new DBField(DBDataType.INTEGER , "sort","sort","顺序","顺序",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		public EAM_ASSET_LABEL_TPL_ITEM() {
+			this.init($NAME,"标签模版" , ID , TPL_ID , COL_ID , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_ASSET_LABEL_TPL_ITEM $TABLE=new EAM_ASSET_LABEL_TPL_ITEM();
 	}
 	
 	/**
@@ -5864,8 +6324,9 @@ public class EAMTables {
 		public static final DBField CUSTOM_DATA = new DBField(DBDataType.STRING , "custom_data","customData","自定义数据","自定义数据",false,false,true);
 		
 		/**
+		 * 选择
 		*/
-		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","selected_code","selected_code",false,false,true);
+		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","选择","选择",false,false,true);
 		
 		public EAM_ASSET_STORAGE() {
 			this.init($NAME,"资产入库" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , SUPPLIER_ID , SUPPLIER_INFO , OWN_COMPANY_ID , MANAGER_USER_ID , LOCATION_NAME , CONTENT , BUSINESS_DATE , ATTACH , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , CUSTOM_DATA , SELECTED_CODE);

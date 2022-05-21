@@ -80,12 +80,41 @@ public class EamRelationManager extends RelationManager {
         this.setupAssetSoftChange();
         this.setupAssetSoftChangeDetail();
         this.setupAssetSoftMaintenance();
-
+        this.setupAssetLabel();
+        this.setupAssetLabelTpl();
+        this.setupAssetLabelTplItem();
     }
+
+
 
     public void setupProperties() {
 
     }
+
+    public void setupAssetLabel() {
+
+        this.property(AssetLabelMeta.ASSET_TPL_PROP)
+                .using(EAMTables.EAM_ASSET_LABEL.ID).join(EAMTables.EAM_ASSET_LABEL_TPL.ID);
+
+        this.property(AssetLabelMeta.ASSET_PAPER_PROP)
+                .using(EAMTables.EAM_ASSET_LABEL.PAPER_TYPE_ID).join(EAMTables.EAM_ASSET_LABEL_PAPER.ID);
+
+    }
+
+
+    public void setupAssetLabelTpl() {
+        this.property(AssetLabelTplMeta.ASSET_LABEL_ITEM_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_LABEL_TPL.ID).join(EAMTables.EAM_ASSET_LABEL_TPL_ITEM.TPL_ID);
+    }
+
+    public void setupAssetLabelTplItem() {
+        this.property(AssetLabelTplItemMeta.ASSET_LABEL_COL_PROP)
+                .using(EAMTables.EAM_ASSET_LABEL_TPL_ITEM.COL_ID).join(EAMTables.EAM_ASSET_LABEL_COL.ID);
+
+    }
+
+
+
 
     public void setupAssetSoftChange() {
         //制单人
