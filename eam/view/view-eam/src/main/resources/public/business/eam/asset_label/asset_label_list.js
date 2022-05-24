@@ -1,7 +1,7 @@
 /**
  * 资产标签 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-21 07:16:59
+ * @since 2022-05-24 08:10:28
  */
 
 
@@ -80,6 +80,12 @@ function ListPage() {
 					,{ field: 'labelTplId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签') , templet: function (d) { return templet('labelTplId',d.labelTplId,d);}  }
 					,{ field: 'labelWidth', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('标签宽度') , templet: function (d) { return templet('labelWidth',d.labelWidth,d);}  }
 					,{ field: 'labelHeight', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('标签高度') , templet: function (d) { return templet('labelHeight',d.labelHeight,d);}  }
+					,{ field: 'labelLayout', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签布局') , templet: function (d) { return templet('labelLayout',d.labelLayout,d);}  }
+					,{ field: 'labelTableMargin', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('标签间隔') , templet: function (d) { return templet('labelTableMargin',d.labelTableMargin,d);}  }
+					,{ field: 'labelKeyFontSize', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('字体大小') , templet: function (d) { return templet('labelKeyFontSize',d.labelKeyFontSize,d);}  }
+					,{ field: 'labelValueFontSize', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('字体大小') , templet: function (d) { return templet('labelValueFontSize',d.labelValueFontSize,d);}  }
+					,{ field: 'imageWidth', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('图形宽度') , templet: function (d) { return templet('imageWidth',d.imageWidth,d);}  }
+					,{ field: 'imageHeight', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('图形高度') , templet: function (d) { return templet('imageHeight',d.imageHeight,d);}  }
 					,{ field: 'paperTypeId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('纸张类型'), templet:function (d){ return templet('paperTypeId',fox.getEnumText(RADIO_PAPERTYPEID_DATA,d.paperTypeId),d);}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}

@@ -6,12 +6,13 @@ import java.util.List;
 import com.dt.platform.domain.eam.AssetLabelTpl;
 import java.util.Date;
 import com.dt.platform.domain.eam.AssetLabelTplItem;
+import com.dt.platform.domain.eam.AssetLabelCol;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-21 19:51:12
+ * @since 2022-05-24 08:08:21
  * @sign 2349A89FA9898FEE78C5BD4222B72031
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -319,9 +320,19 @@ public class AssetLabelTplVOMeta extends AssetLabelTplMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelTplVO,com.dt.platform.domain.eam.AssetLabelTplItem> ASSET_LABEL_ITEM_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelTplVO.class ,ASSET_LABEL_ITEM_LIST, java.util.List.class, "Item", "Item", com.dt.platform.domain.eam.AssetLabelTplItem.class, null);
 	
 	/**
+	 * Column , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetLabelCol
+	*/
+	public static final String ASSET_LABEL_COLUMNL_LIST="assetLabelColumnlList";
+	
+	/**
+	 * Column , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetLabelCol
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelTplVO,com.dt.platform.domain.eam.AssetLabelCol> ASSET_LABEL_COLUMNL_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelTplVO.class ,ASSET_LABEL_COLUMNL_LIST, java.util.List.class, "Column", "Column", com.dt.platform.domain.eam.AssetLabelCol.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , TYPE , IS_CUSTOM , COL_IDS , IMAGE_POSITION , IMAGE_COL_ID , IMAGE_SHOW , IMAGE_LABEL_SHOW , IMAGE_TYPE , LABEL_FORMAT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LABEL_ITEM_LIST };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , TYPE , IS_CUSTOM , COL_IDS , IMAGE_POSITION , IMAGE_COL_ID , IMAGE_SHOW , IMAGE_LABEL_SHOW , IMAGE_TYPE , LABEL_FORMAT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LABEL_ITEM_LIST , ASSET_LABEL_COLUMNL_LIST };
 	
 	/**
 	 * 代理类
@@ -658,6 +669,17 @@ public class AssetLabelTplVOMeta extends AssetLabelTplMeta {
 		public AssetLabelTpl setAssetLabelItemList(List<AssetLabelTplItem> assetLabelItemList) {
 			super.change(ASSET_LABEL_ITEM_LIST,super.getAssetLabelItemList(),assetLabelItemList);
 			super.setAssetLabelItemList(assetLabelItemList);
+			return this;
+		}
+		
+		/**
+		 * 设置 Column
+		 * @param assetLabelColumnlList Column
+		 * @return 当前对象
+		*/
+		public AssetLabelTpl setAssetLabelColumnlList(List<AssetLabelCol> assetLabelColumnlList) {
+			super.change(ASSET_LABEL_COLUMNL_LIST,super.getAssetLabelColumnlList(),assetLabelColumnlList);
+			super.setAssetLabelColumnlList(assetLabelColumnlList);
 			return this;
 		}
 	}

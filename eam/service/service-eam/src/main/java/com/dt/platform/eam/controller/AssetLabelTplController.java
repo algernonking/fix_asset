@@ -251,8 +251,6 @@ public class AssetLabelTplController extends SuperController {
 		List<AssetLabelTpl> list=assetLabelTplService.queryList(sample);
 		assetLabelTplService.dao().fill(list)
 				.with(AssetLabelTplMeta.ASSET_LABEL_ITEM_LIST).execute();
-
-
 		List<List<AssetLabelTplItem>> itemList= CollectorUtil.collectList(list, AssetLabelTpl::getAssetLabelItemList);
 		List<AssetLabelTplItem> items=itemList.stream().collect(ArrayList::new,ArrayList::addAll,ArrayList::addAll);
 		assetLabelTplItemService.dao().fill(items).with(AssetLabelTplItemMeta.ASSET_LABEL_COL).execute();

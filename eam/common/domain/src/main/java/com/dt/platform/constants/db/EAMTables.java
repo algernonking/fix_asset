@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-05-21 19:48:26
+ * @since 2022-05-24 08:08:15
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2770,6 +2770,36 @@ public class EAMTables {
 		public static final DBField LABEL_HEIGHT = new DBField(DBDataType.DECIMAL , "label_height","labelHeight","标签高度","标签高度",false,false,true);
 		
 		/**
+		 * 标签布局
+		*/
+		public static final DBField LABEL_LAYOUT = new DBField(DBDataType.STRING , "label_layout","labelLayout","标签布局","标签布局",false,false,true);
+		
+		/**
+		 * 标签间隔
+		*/
+		public static final DBField LABEL_TABLE_MARGIN = new DBField(DBDataType.DECIMAL , "label_table_margin","labelTableMargin","标签间隔","标签间隔",false,false,true);
+		
+		/**
+		 * 字体大小
+		*/
+		public static final DBField LABEL_KEY_FONT_SIZE = new DBField(DBDataType.INTEGER , "label_key_font_size","labelKeyFontSize","字体大小","字体大小",false,false,true);
+		
+		/**
+		 * 字体大小
+		*/
+		public static final DBField LABEL_VALUE_FONT_SIZE = new DBField(DBDataType.INTEGER , "label_value_font_size","labelValueFontSize","字体大小","字体大小",false,false,true);
+		
+		/**
+		 * 图形宽度
+		*/
+		public static final DBField IMAGE_WIDTH = new DBField(DBDataType.INTEGER , "image_width","imageWidth","图形宽度","图形宽度",false,false,true);
+		
+		/**
+		 * 图形高度
+		*/
+		public static final DBField IMAGE_HEIGHT = new DBField(DBDataType.INTEGER , "image_height","imageHeight","图形高度","图形高度",false,false,true);
+		
+		/**
 		 * 纸张类型
 		*/
 		public static final DBField PAPER_TYPE_ID = new DBField(DBDataType.STRING , "paper_type_id","paperTypeId","纸张类型","纸张类型",false,false,true);
@@ -2819,7 +2849,7 @@ public class EAMTables {
 		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
 		
 		public EAM_ASSET_LABEL() {
-			this.init($NAME,"资产标签" , ID , CODE , LABEL_TPL_ID , LABEL_WIDTH , LABEL_HEIGHT , PAPER_TYPE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+			this.init($NAME,"资产标签" , ID , CODE , LABEL_TPL_ID , LABEL_WIDTH , LABEL_HEIGHT , LABEL_LAYOUT , LABEL_TABLE_MARGIN , LABEL_KEY_FONT_SIZE , LABEL_VALUE_FONT_SIZE , IMAGE_WIDTH , IMAGE_HEIGHT , PAPER_TYPE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
 		}
 		public static final EAM_ASSET_LABEL $TABLE=new EAM_ASSET_LABEL();
 	}

@@ -30,6 +30,7 @@ import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.springboot.web.DownloadUtil;
+import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.Api;
@@ -49,6 +50,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
@@ -167,6 +169,66 @@ public class AssetDataController extends SuperController {
         return ErrorDesc.success();
 
     }
+
+    /**
+     * 资产ids批量导出资产数据
+     */
+    @ApiOperation(value = "按照资产ids批量导出资产数据")
+
+    @ApiOperationSupport(order=3)
+    @SentinelResource(value = AssetDataServiceProxy.PRINT_PDF , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetDataServiceProxy.PRINT_PDF)
+    public void printPdf(List<String> ids, HttpServletRequest request, HttpServletResponse response) throws Exception {
+       // ids=new ArrayList<>();
+      //  ids.add("580066766915371008");
+        ConditionExpr expr=new ConditionExpr();
+        expr.andIn("id",ids);
+        List<Asset> list=assetService.queryList(expr);
+        Result result=assetDataService.pdfPrint(list);
+        if(result.isSuccess()){
+            String path = System.getProperty("java.io.tmpdir");
+            String id= result.getData().toString();
+            System.out.println("pdf id:"+id);
+            String pdfFileName =path + id+".pdf";
+            response.setContentType("application/pdf");
+            File f=new File(pdfFileName);
+            if (!f.exists()) {
+                request.setAttribute("error", "PDF生产失败");
+            }
+            InputStream in = null;
+            OutputStream os = null;
+            try {
+                in = new FileInputStream(f);   //用该文件创建一个输入流
+                os = response.getOutputStream();  //创建输出流
+                byte[] b = new byte[1024];
+                while (in.read(b) != -1) {
+                    os.write(b);
+                }
+                in.close();
+                os.flush();
+                os.close();
+            }
+            catch (Exception e) {
+                try {
+                    if (null != in) {
+                        in.close();
+                    }
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                try {
+                    if (null != os) {
+                        os.close();
+                    }
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                }
+            }
+
+        }
+      //  return ErrorDesc.success();
+    }
+
 
     /**
      * 在线Excel导入资产

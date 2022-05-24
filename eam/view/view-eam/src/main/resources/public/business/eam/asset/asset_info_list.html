@@ -177,7 +177,8 @@
         <button th:if="${batchConfirmBtn}"   id="batchConfirm-button" class="layui-btn icon-btn  layui-btn-sm batch-confirm-button"               lay-event="batchConfirm"> <span th:text="${lang.translate('确认')}">确认</span></button>
         <button th:if="${batchRevokeBtn}"  id="batchRevoke-button" class="layui-btn icon-btn  layui-btn-sm batch-revoke-button"                   lay-event="batchRevoke"> <span th:text="${lang.translate('撤销')}">撤销</span></button>
         <button th:if="${cardBtn}"    id="bills-button" class="layui-btn icon-btn layui-btn-sm card-button"                                        lay-event="bills"> <span th:text="${lang.translate('资产卡片')}">资产卡片</span></button>
-        <button th:if="${labelBtn}"  id="label-button" class="layui-btn icon-btn layui-btn-sm label-button"                                       lay-event="assetLabel"><span th:text="${lang.translate('资产标签')}">资产标签</span></button>
+        <button th:if="${labelBtn}"  id="label-button" class="layui-btn icon-btn layui-btn-sm label-button"                                       lay-event="assetLabel"><span th:text="${lang.translate('资产标签(下载)')}">资产标签下载</span></button>
+        <button th:if="${printPdfBtn}"  id="printPdf-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm print-pdf-button"           lay-event="printPdf"><span th:text="${lang.translate('资产标签')}">资产标签</span></button>
         <button th:if="${highExportDataBtn}"   id="highExportData-button" class="layui-btn icon-btn layui-btn-sm high-export-data-button"        lay-event="highExportData"><span th:text="${lang.translate('数据导出')}">数据导出</span></button>
         <button th:if="${deleteByIdsBtn}"  id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button"       lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
 

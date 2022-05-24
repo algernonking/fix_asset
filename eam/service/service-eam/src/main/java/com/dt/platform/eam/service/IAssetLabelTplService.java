@@ -22,7 +22,7 @@ import java.util.Map;
  * 标签模版 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-21 19:51:12
+ * @since 2022-05-24 08:08:21
 */
 
 public interface IAssetLabelTplService extends ISuperService<AssetLabelTpl> {

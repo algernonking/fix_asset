@@ -62,6 +62,11 @@ public interface AssetDataServiceProxy {
      */
     public static final String BATCT_IMPORT_ASSET_BY_LUCKY_SHEET = API_PREFIX + "batch-import-asset-by-lucky-sheet";
 
+
+    /**
+     * 导入资产
+     */
+    public static final String PRINT_PDF = API_PREFIX + "print-pdf";
     /**
      * 配置数据
      */

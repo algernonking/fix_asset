@@ -534,6 +534,9 @@ function ListPage() {
 				case 'assetLabel':
 					window.pageExt.list.assetLabel && window.pageExt.list.assetLabel(selected,obj);
 					break;
+				case 'printPdf':
+					window.pageExt.list.printPdf && window.pageExt.list.printPdf(selected,obj);
+					break;
 
 
 

@@ -7,8 +7,8 @@ import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.datacenter.Rack;
 import com.dt.platform.domain.datacenter.RackVO;
 import com.dt.platform.domain.eam.*;
-import com.dt.platform.domain.eam.meta.AssetLuckySheetColumnMeta;
-import com.dt.platform.domain.eam.meta.AssetMeta;
+import com.dt.platform.domain.eam.meta.*;
+import com.dt.platform.eam.common.AssetLabelPrintUtil;
 import com.dt.platform.eam.service.*;
 
 import com.dt.platform.proxy.common.TplFileServiceProxy;
@@ -81,8 +81,11 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     @Autowired
     private ICategoryFinanceService categoryFinanceService;
 
+    @Autowired
+    private IAssetLabelService assetLabelService;
 
-
+    @Autowired
+    private IAssetLabelTplService assetLabelTplService;
 
     /**
      * 注入DAO对象
@@ -433,8 +436,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                         dataVerification=dataVer;
                     }
 
-
-
                     if(dataVerification!=null){
                         metaData.setDataVerification(dataVerification);
                     }
@@ -557,6 +558,38 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         return map;
     }
 
+    @Override
+    public Result pdfPrint(List<Asset> assetList) {
+
+        String uuid=IDGenerator.getSnowflakeIdString();
+        AssetLabel label=assetLabelService.queryAssetLabel();
+        // join 关联的对象
+        assetLabelService.dao().fill(label)
+                .with(AssetLabelMeta.ASSET_TPL)
+                .with(AssetLabelMeta.ASSET_PAPER)
+                .execute();
+        Map<String,Object> map=queryAssetMap(assetList,null);
+        List<Map<String, Object>> mapList= (List<Map<String, Object>>) map.get("dataList");
+
+        String tplId=label.getLabelTplId();
+        AssetLabelTpl tpl=assetLabelTplService.getById(tplId);
+        assetLabelTplService.dao().fill(tpl)
+                .with(AssetLabelTplMeta.ASSET_LABEL_COLUMNL_LIST).execute();
+
+        AssetLabelPrint printData=new AssetLabelPrint();
+        printData.setLabel(label);
+        printData.setUuid(uuid);
+        printData.setLabelTpl(tpl);
+        printData.setAssetColumnList(tpl.getAssetLabelColumnlList());
+        printData.setAssetData(mapList);
+        boolean res=AssetLabelPrintUtil.print(printData);
+
+        if(!res){
+            return ErrorDesc.failureMessage("生成PDF失败");
+        }
+        return  ErrorDesc.success().data(uuid);
+    }
+
 
     //all,ownerCode
     @Override
@@ -567,7 +600,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         vo.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
         vo.setIsLoadAllDescendants(1);
         vo.setRoot("486917609841758209");
-       Result r= CatalogServiceProxy.api().queryNodesFlatten(vo);
+        Result r= CatalogServiceProxy.api().queryNodesFlatten(vo);
         if(r.isSuccess()){
             List<ZTreeNode> list= (List<ZTreeNode> )r.getData();
             for( ZTreeNode node:list){
@@ -1063,12 +1096,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
         int BYTESIZE=1024;
         String path = System.getProperty("java.io.tmpdir");
-//        try {
-//            path = URLDecoder.decode(AssetDataServiceImpl.class.getClassLoader().getResource("../temp").getPath(), "utf-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(path);
         File temp = new File(path + fileName);
         BufferedInputStream bis = null;
         BufferedOutputStream bos = null;

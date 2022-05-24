@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 标签模版
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-21 19:51:12
- * @sign 35C8DB458C2917DE64596A5F315673B3
+ * @since 2022-05-24 08:08:21
+ * @sign 013863AE6D6932B3B4734023D1415FFF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -156,6 +156,12 @@ public class AssetLabelTpl extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="Item" , notes = "Item")
 	private List<AssetLabelTplItem> assetLabelItemList;
+	
+	/**
+	 * Column：Column
+	*/
+	@ApiModelProperty(required = false,value="Column" , notes = "Column")
+	private List<AssetLabelCol> assetLabelColumnlList;
 	
 	/**
 	 * 获得 主键<br>
@@ -564,6 +570,36 @@ public class AssetLabelTpl extends Entity {
 	public AssetLabelTpl addAssetLabelItem(AssetLabelTplItem assetLabelItem) {
 		if(this.assetLabelItemList==null) assetLabelItemList=new ArrayList<>();
 		this.assetLabelItemList.add(assetLabelItem);
+		return this;
+	}
+	
+	/**
+	 * 获得 Column<br>
+	 * Column
+	 * @return Column
+	*/
+	public List<AssetLabelCol> getAssetLabelColumnlList() {
+		return assetLabelColumnlList;
+	}
+	
+	/**
+	 * 设置 Column
+	 * @param assetLabelColumnlList Column
+	 * @return 当前对象
+	*/
+	public AssetLabelTpl setAssetLabelColumnlList(List<AssetLabelCol> assetLabelColumnlList) {
+		this.assetLabelColumnlList=assetLabelColumnlList;
+		return this;
+	}
+	
+	/**
+	 * 添加 Column
+	 * @param assetLabelColumnl Column
+	 * @return 当前对象
+	*/
+	public AssetLabelTpl addAssetLabelColumnl(AssetLabelCol assetLabelColumnl) {
+		if(this.assetLabelColumnlList==null) assetLabelColumnlList=new ArrayList<>();
+		this.assetLabelColumnlList.add(assetLabelColumnl);
 		return this;
 	}
 

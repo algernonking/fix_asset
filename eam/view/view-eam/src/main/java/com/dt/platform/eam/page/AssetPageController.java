@@ -366,6 +366,7 @@ public class AssetPageController extends ViewController {
 		model.addAttribute("queryBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":query") );
 		model.addAttribute("viewFormBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":view-form") );
 		model.addAttribute("batchInsertBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":view-form") );
+		model.addAttribute("printPdfBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":print-pdf") );
 
 
 

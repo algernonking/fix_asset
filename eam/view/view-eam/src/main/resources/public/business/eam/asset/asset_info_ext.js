@@ -43,12 +43,43 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             fox.submit(downloadUrl,{ids:data});
 
         },
+        printPdf:function(data){
+            function downloadFile(file) {
+                var a = document.createElement('a');
+                a.id = 'tempId';
+                document.body.appendChild(a);
+                a.download = "assetLabel-" + moment().format('L') + '.pdf';
+                a.href = URL.createObjectURL(file);
+                a.click();
+                const tempA = document.getElementById('tempId');
+                if (tempA) {
+                    tempA.parentNode.removeChild(tempA);
+                }
+            }
+
+            if(data.length==0){
+                top.layer.msg("请选择要操作的资产数据!");
+                return ;
+            }
+            var ps={ids:data}
+            var xhr = new XMLHttpRequest()
+            xhr.open('POST', "/service-eam/eam-asset-data/print-pdf")
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.responseType = 'arraybuffer'
+            xhr.onload = function (e) {
+                var ct = xhr.response
+                let blob = new Blob([ct], {type: 'application/pdf'});
+                let link = document.createElement('a')
+                link.href = window.URL.createObjectURL(blob)
+                window.open(link.href);
+            }
+            xhr.send(JSON.stringify(ps));
+        },
         assetLabel:function(data){
             if(data.length==0){
                 top.layer.msg("请选择要操作的资产数据!");
                 return ;
             }
-
             var downloadUrl="/service-eam/eam-asset-bill/query-asset-labels";
             fox.submit(downloadUrl,{ids:data});
         },

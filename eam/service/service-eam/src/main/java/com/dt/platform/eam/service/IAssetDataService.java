@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.Goods;
+import com.dt.platform.domain.eam.meta.AssetLabelPrint;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.Rcd;
@@ -52,8 +53,7 @@ public interface IAssetDataService extends ISuperService<Asset> {
 
 	HashMap<String,String> queryOrganizationNodes(String type);
 
-
-
+	Result pdfPrint(List<Asset> assetList);
 
 	PagedList<Asset> queryAssetPagedList(List<String> ids,AssetVO asset);
 

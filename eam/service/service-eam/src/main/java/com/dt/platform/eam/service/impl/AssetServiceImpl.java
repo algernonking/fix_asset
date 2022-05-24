@@ -646,7 +646,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @param type
 	 * @param data
 	 */
-	private BufferedImage createAssetsPic(String type, String data) {
+	private BufferedImage createAssetPic(String type, String data) {
 		BarcodeFormat format = BarcodeFormat.QR_CODE;
 		int w = 500;
 		int h = 500;
@@ -688,8 +688,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}
 
 			String assetCode=e.getAssetCode()==null?"null":e.getAssetCode();
-			map.put("assetTxm", Pictures.ofBufferedImage(createAssetsPic("txm", assetCode), PictureType.PNG).size(190,50).create());
-			map.put("assetEwm", Pictures.ofBufferedImage(createAssetsPic("ewm", assetCode), PictureType.PNG).size(80,100).create());
+			map.put("assetTxm", Pictures.ofBufferedImage(createAssetPic("txm", assetCode), PictureType.PNG).size(190,50).create());
+			map.put("assetRwm", Pictures.ofBufferedImage(createAssetPic("rwm", assetCode), PictureType.PNG).size(80,100).create());
 			data.add(map);
 		}
 		return data;

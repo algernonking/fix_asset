@@ -105,6 +105,10 @@ public class EamRelationManager extends RelationManager {
     public void setupAssetLabelTpl() {
         this.property(AssetLabelTplMeta.ASSET_LABEL_ITEM_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_LABEL_TPL.ID).join(EAMTables.EAM_ASSET_LABEL_TPL_ITEM.TPL_ID);
+
+        this.property(AssetLabelTplMeta.ASSET_LABEL_COLUMNL_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_LABEL_TPL.ID).join(EAMTables.EAM_ASSET_LABEL_TPL_ITEM.TPL_ID)
+         .using(EAMTables.EAM_ASSET_LABEL_TPL_ITEM.COL_ID).join(EAMTables.EAM_ASSET_LABEL_COL.ID);
     }
 
     public void setupAssetLabelTplItem() {

@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.eam.AssetLabelCol;
 import com.dt.platform.domain.eam.AssetLabelPaper;
 import com.dt.platform.domain.eam.AssetLabelTplItem;
 import com.dt.platform.eam.page.AssetLabelTplPageController;
@@ -19,6 +20,7 @@ public class LabelTplGtr extends BaseCodeGenerator{
         System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addListProperty(AssetLabelTplItem.class,"assetLabelItemList","Item","Item");
+        cfg.getPoClassFile().addListProperty(AssetLabelCol.class,"assetLabelColumnlList","Column","Column");
 
 
         cfg.view().field(EAMTables.EAM_ASSET_LABEL_TPL.ID).basic().hidden(true);

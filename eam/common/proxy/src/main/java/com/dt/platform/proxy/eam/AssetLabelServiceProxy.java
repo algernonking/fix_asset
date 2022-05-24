@@ -104,15 +104,14 @@ public interface AssetLabelServiceProxy {
 
     public static final String SAVE_ASSET_LABEL_CUSTOM_TPL = API_PREFIX + "save-asset-label-custom-tpl";
 
-
     @RequestMapping(AssetLabelServiceProxy.QUERY_ASSET_LABEL)
     Result<AssetLabel> queryAssetLabel();
 
     @RequestMapping(AssetLabelServiceProxy.SAVE_ASSET_LABEL)
-    Result saveAssetLabel(AssetLabel label);
+    Result saveAssetLabel(@RequestParam(name = "label") AssetLabel label);
 
     @RequestMapping(AssetLabelServiceProxy.SAVE_ASSET_LABEL_CUSTOM_TPL)
-    Result saveAssetLabelCustomTpl(AssetLabelTpl tpl);
+    Result saveAssetLabelCustomTpl(@RequestParam(name = "tpl") AssetLabelTpl tpl);
 
     /**
      * 添加资产标签

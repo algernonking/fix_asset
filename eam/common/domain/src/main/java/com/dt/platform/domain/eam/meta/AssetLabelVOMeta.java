@@ -13,7 +13,7 @@ import com.dt.platform.domain.eam.AssetLabelPaper;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-21 07:16:58
+ * @since 2022-05-24 08:10:27
  * @sign 3777C1ABA36FCC2A0A88C1F9E46AAAE1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -161,6 +161,66 @@ public class AssetLabelVOMeta extends AssetLabelMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelVO,java.math.BigDecimal> LABEL_HEIGHT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelVO.class ,LABEL_HEIGHT, java.math.BigDecimal.class, "标签高度", "标签高度", java.math.BigDecimal.class, null);
 	
 	/**
+	 * 标签布局 , 类型: java.lang.String
+	*/
+	public static final String LABEL_LAYOUT="labelLayout";
+	
+	/**
+	 * 标签布局 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelVO,java.lang.String> LABEL_LAYOUT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelVO.class ,LABEL_LAYOUT, java.lang.String.class, "标签布局", "标签布局", java.lang.String.class, null);
+	
+	/**
+	 * 标签间隔 , 类型: java.math.BigDecimal
+	*/
+	public static final String LABEL_TABLE_MARGIN="labelTableMargin";
+	
+	/**
+	 * 标签间隔 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelVO,java.math.BigDecimal> LABEL_TABLE_MARGIN_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelVO.class ,LABEL_TABLE_MARGIN, java.math.BigDecimal.class, "标签间隔", "标签间隔", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 字体大小 , 类型: java.lang.Integer
+	*/
+	public static final String LABEL_KEY_FONT_SIZE="labelKeyFontSize";
+	
+	/**
+	 * 字体大小 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelVO,java.lang.Integer> LABEL_KEY_FONT_SIZE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelVO.class ,LABEL_KEY_FONT_SIZE, java.lang.Integer.class, "字体大小", "字体大小", java.lang.Integer.class, null);
+	
+	/**
+	 * 字体大小 , 类型: java.lang.Integer
+	*/
+	public static final String LABEL_VALUE_FONT_SIZE="labelValueFontSize";
+	
+	/**
+	 * 字体大小 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelVO,java.lang.Integer> LABEL_VALUE_FONT_SIZE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelVO.class ,LABEL_VALUE_FONT_SIZE, java.lang.Integer.class, "字体大小", "字体大小", java.lang.Integer.class, null);
+	
+	/**
+	 * 图形宽度 , 类型: java.lang.Integer
+	*/
+	public static final String IMAGE_WIDTH="imageWidth";
+	
+	/**
+	 * 图形宽度 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelVO,java.lang.Integer> IMAGE_WIDTH_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelVO.class ,IMAGE_WIDTH, java.lang.Integer.class, "图形宽度", "图形宽度", java.lang.Integer.class, null);
+	
+	/**
+	 * 图形高度 , 类型: java.lang.Integer
+	*/
+	public static final String IMAGE_HEIGHT="imageHeight";
+	
+	/**
+	 * 图形高度 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelVO,java.lang.Integer> IMAGE_HEIGHT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelVO.class ,IMAGE_HEIGHT, java.lang.Integer.class, "图形高度", "图形高度", java.lang.Integer.class, null);
+	
+	/**
 	 * 纸张类型 , 类型: java.lang.String
 	*/
 	public static final String PAPER_TYPE_ID="paperTypeId";
@@ -283,7 +343,7 @@ public class AssetLabelVOMeta extends AssetLabelMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , CODE , LABEL_TPL_ID , LABEL_WIDTH , LABEL_HEIGHT , PAPER_TYPE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_TPL , ASSET_PAPER };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , CODE , LABEL_TPL_ID , LABEL_WIDTH , LABEL_HEIGHT , LABEL_LAYOUT , LABEL_TABLE_MARGIN , LABEL_KEY_FONT_SIZE , LABEL_VALUE_FONT_SIZE , IMAGE_WIDTH , IMAGE_HEIGHT , PAPER_TYPE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_TPL , ASSET_PAPER };
 	
 	/**
 	 * 代理类
@@ -444,6 +504,72 @@ public class AssetLabelVOMeta extends AssetLabelMeta {
 		public AssetLabel setLabelHeight(BigDecimal labelHeight) {
 			super.change(LABEL_HEIGHT,super.getLabelHeight(),labelHeight);
 			super.setLabelHeight(labelHeight);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签布局
+		 * @param labelLayout 标签布局
+		 * @return 当前对象
+		*/
+		public AssetLabel setLabelLayout(String labelLayout) {
+			super.change(LABEL_LAYOUT,super.getLabelLayout(),labelLayout);
+			super.setLabelLayout(labelLayout);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签间隔
+		 * @param labelTableMargin 标签间隔
+		 * @return 当前对象
+		*/
+		public AssetLabel setLabelTableMargin(BigDecimal labelTableMargin) {
+			super.change(LABEL_TABLE_MARGIN,super.getLabelTableMargin(),labelTableMargin);
+			super.setLabelTableMargin(labelTableMargin);
+			return this;
+		}
+		
+		/**
+		 * 设置 字体大小
+		 * @param labelKeyFontSize 字体大小
+		 * @return 当前对象
+		*/
+		public AssetLabel setLabelKeyFontSize(Integer labelKeyFontSize) {
+			super.change(LABEL_KEY_FONT_SIZE,super.getLabelKeyFontSize(),labelKeyFontSize);
+			super.setLabelKeyFontSize(labelKeyFontSize);
+			return this;
+		}
+		
+		/**
+		 * 设置 字体大小
+		 * @param labelValueFontSize 字体大小
+		 * @return 当前对象
+		*/
+		public AssetLabel setLabelValueFontSize(Integer labelValueFontSize) {
+			super.change(LABEL_VALUE_FONT_SIZE,super.getLabelValueFontSize(),labelValueFontSize);
+			super.setLabelValueFontSize(labelValueFontSize);
+			return this;
+		}
+		
+		/**
+		 * 设置 图形宽度
+		 * @param imageWidth 图形宽度
+		 * @return 当前对象
+		*/
+		public AssetLabel setImageWidth(Integer imageWidth) {
+			super.change(IMAGE_WIDTH,super.getImageWidth(),imageWidth);
+			super.setImageWidth(imageWidth);
+			return this;
+		}
+		
+		/**
+		 * 设置 图形高度
+		 * @param imageHeight 图形高度
+		 * @return 当前对象
+		*/
+		public AssetLabel setImageHeight(Integer imageHeight) {
+			super.change(IMAGE_HEIGHT,super.getImageHeight(),imageHeight);
+			super.setImageHeight(imageHeight);
 			return this;
 		}
 		

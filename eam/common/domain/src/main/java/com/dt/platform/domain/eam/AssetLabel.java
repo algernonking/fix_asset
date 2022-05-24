@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产标签
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-21 07:16:58
- * @sign 59348A79371E8876AE0B63ECD595B67D
+ * @since 2022-05-24 08:10:27
+ * @sign 3B81DCE673DA3427E50933492560C589
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -59,6 +59,42 @@ public class AssetLabel extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="标签高度" , notes = "标签高度")
 	private BigDecimal labelHeight;
+	
+	/**
+	 * 标签布局：标签布局
+	*/
+	@ApiModelProperty(required = false,value="标签布局" , notes = "标签布局")
+	private String labelLayout;
+	
+	/**
+	 * 标签间隔：标签间隔
+	*/
+	@ApiModelProperty(required = false,value="标签间隔" , notes = "标签间隔")
+	private BigDecimal labelTableMargin;
+	
+	/**
+	 * 字体大小：字体大小
+	*/
+	@ApiModelProperty(required = false,value="字体大小" , notes = "字体大小")
+	private Integer labelKeyFontSize;
+	
+	/**
+	 * 字体大小：字体大小
+	*/
+	@ApiModelProperty(required = false,value="字体大小" , notes = "字体大小")
+	private Integer labelValueFontSize;
+	
+	/**
+	 * 图形宽度：图形宽度
+	*/
+	@ApiModelProperty(required = false,value="图形宽度" , notes = "图形宽度")
+	private Integer imageWidth;
+	
+	/**
+	 * 图形高度：图形高度
+	*/
+	@ApiModelProperty(required = false,value="图形高度" , notes = "图形高度")
+	private Integer imageHeight;
 	
 	/**
 	 * 纸张类型：纸张类型
@@ -224,6 +260,120 @@ public class AssetLabel extends Entity {
 	*/
 	public AssetLabel setLabelHeight(BigDecimal labelHeight) {
 		this.labelHeight=labelHeight;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签布局<br>
+	 * 标签布局
+	 * @return 标签布局
+	*/
+	public String getLabelLayout() {
+		return labelLayout;
+	}
+	
+	/**
+	 * 设置 标签布局
+	 * @param labelLayout 标签布局
+	 * @return 当前对象
+	*/
+	public AssetLabel setLabelLayout(String labelLayout) {
+		this.labelLayout=labelLayout;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签间隔<br>
+	 * 标签间隔
+	 * @return 标签间隔
+	*/
+	public BigDecimal getLabelTableMargin() {
+		return labelTableMargin;
+	}
+	
+	/**
+	 * 设置 标签间隔
+	 * @param labelTableMargin 标签间隔
+	 * @return 当前对象
+	*/
+	public AssetLabel setLabelTableMargin(BigDecimal labelTableMargin) {
+		this.labelTableMargin=labelTableMargin;
+		return this;
+	}
+	
+	/**
+	 * 获得 字体大小<br>
+	 * 字体大小
+	 * @return 字体大小
+	*/
+	public Integer getLabelKeyFontSize() {
+		return labelKeyFontSize;
+	}
+	
+	/**
+	 * 设置 字体大小
+	 * @param labelKeyFontSize 字体大小
+	 * @return 当前对象
+	*/
+	public AssetLabel setLabelKeyFontSize(Integer labelKeyFontSize) {
+		this.labelKeyFontSize=labelKeyFontSize;
+		return this;
+	}
+	
+	/**
+	 * 获得 字体大小<br>
+	 * 字体大小
+	 * @return 字体大小
+	*/
+	public Integer getLabelValueFontSize() {
+		return labelValueFontSize;
+	}
+	
+	/**
+	 * 设置 字体大小
+	 * @param labelValueFontSize 字体大小
+	 * @return 当前对象
+	*/
+	public AssetLabel setLabelValueFontSize(Integer labelValueFontSize) {
+		this.labelValueFontSize=labelValueFontSize;
+		return this;
+	}
+	
+	/**
+	 * 获得 图形宽度<br>
+	 * 图形宽度
+	 * @return 图形宽度
+	*/
+	public Integer getImageWidth() {
+		return imageWidth;
+	}
+	
+	/**
+	 * 设置 图形宽度
+	 * @param imageWidth 图形宽度
+	 * @return 当前对象
+	*/
+	public AssetLabel setImageWidth(Integer imageWidth) {
+		this.imageWidth=imageWidth;
+		return this;
+	}
+	
+	/**
+	 * 获得 图形高度<br>
+	 * 图形高度
+	 * @return 图形高度
+	*/
+	public Integer getImageHeight() {
+		return imageHeight;
+	}
+	
+	/**
+	 * 设置 图形高度
+	 * @param imageHeight 图形高度
+	 * @return 当前对象
+	*/
+	public AssetLabel setImageHeight(Integer imageHeight) {
+		this.imageHeight=imageHeight;
 		return this;
 	}
 	
