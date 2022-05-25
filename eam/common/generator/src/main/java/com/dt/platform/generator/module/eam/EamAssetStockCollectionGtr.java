@@ -65,7 +65,7 @@ public class EamAssetStockCollectionGtr extends BaseCodeGenerator{
                         EAMTables.EAM_ASSET_STOCK_COLLECTION.COLLECTION_DATE,
                 }
         );
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().labelWidth(3,Config.searchLabelWidth);
         cfg.view().search().labelWidth(4,Config.searchLabelWidth);

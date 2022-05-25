@@ -39,7 +39,7 @@ public class MonitorTplGraphGtr extends BaseCodeGenerator{
                 }
         );
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 

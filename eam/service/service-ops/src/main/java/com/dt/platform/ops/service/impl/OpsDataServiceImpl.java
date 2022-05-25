@@ -670,7 +670,7 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 
 		int BYTESIZE=1024;
 		String path = System.getProperty("java.io.tmpdir");
-		File temp = new File(path + fileName);
+		File temp = new File(path + File.separator+fileName);
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
 		try{

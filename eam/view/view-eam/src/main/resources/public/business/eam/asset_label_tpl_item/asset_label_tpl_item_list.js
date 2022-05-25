@@ -1,7 +1,7 @@
 /**
  * 标签模版 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-20 21:21:12
+ * @since 2022-05-24 09:56:57
  */
 
 
@@ -343,6 +343,23 @@ function ListPage() {
 							fox.showMessage(data);
 						}
 					});
+				});
+			}
+			else if(obj.event === 'ops-more'){
+				//更多下拉菜单
+				dropdown.render({
+					elem: this
+					,show: true //外部事件触发即显示
+					,data: [{"id":"t1","title":"test1"},{"id":"t2","title":"test2"}]
+					,click: function(menu, othis){
+						if(menu.perm && !admin.checkAuth(menu.perm)) {
+							top.layer.msg(fox.translate('缺少操作权限'), {icon: 2, time: 1500});
+							return;
+						}
+						window.pageExt.list.moreAction && window.pageExt.list.moreAction(menu,data, othis);
+					}
+					,align: 'right'
+					,style: 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);'
 				});
 			}
 			

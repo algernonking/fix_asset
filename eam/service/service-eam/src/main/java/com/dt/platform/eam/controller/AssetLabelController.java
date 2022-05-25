@@ -4,7 +4,9 @@ package com.dt.platform.eam.controller;
 import java.util.List;
 
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetLabelTplMeta;
 import com.dt.platform.domain.eam.meta.AssetStockGoodsOutMeta;
+import com.dt.platform.eam.service.IAssetLabelTplService;
 import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +63,9 @@ public class AssetLabelController extends SuperController {
 
 	@Autowired
 	private IAssetLabelService assetLabelService;
+
+	@Autowired
+	private IAssetLabelTplService assetLabelTplService;
 
 
 	/**
@@ -263,13 +268,6 @@ public class AssetLabelController extends SuperController {
 	public Result<AssetLabel> queryAssetLabel() {
 		Result<AssetLabel> result=new Result<>();
 		AssetLabel assetLabel=assetLabelService.queryAssetLabel();
-		// join 关联的对象
-		assetLabelService.dao().fill(assetLabel)
-				.with(AssetLabelMeta.ASSET_TPL)
-				.with(AssetLabelMeta.ASSET_PAPER)
-				.execute();
-
-
 		return result.success(true).data(assetLabel);
 	}
 

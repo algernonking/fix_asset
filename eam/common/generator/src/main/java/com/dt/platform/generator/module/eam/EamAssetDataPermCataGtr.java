@@ -25,7 +25,7 @@ public class EamAssetDataPermCataGtr extends BaseCodeGenerator{
         cfg.setRelationField(AssetDataPermissions.class,EAMTables.EAM_ASSET_DATA_PERMISSIONS_CATALOG.PERMISSION_ID, Catalog.class, EAMTables.EAM_ASSET_DATA_PERMISSIONS_CATALOG.VALUE,true);
 
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().field(EAMTables.EAM_ASSET_DATA_PERMISSIONS_CATALOG.ID).form().validate().required();

@@ -11,6 +11,7 @@ import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.domain.ops.Voucher;
 import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.domain.ops.meta.InformationSystemMeta;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
 import org.github.foxnic.web.domain.hrm.meta.PersonMeta;
@@ -94,7 +95,7 @@ public class EamRelationManager extends RelationManager {
     public void setupAssetLabel() {
 
         this.property(AssetLabelMeta.ASSET_TPL_PROP)
-                .using(EAMTables.EAM_ASSET_LABEL.ID).join(EAMTables.EAM_ASSET_LABEL_TPL.ID);
+                .using(EAMTables.EAM_ASSET_LABEL.LABEL_TPL_ID).join(EAMTables.EAM_ASSET_LABEL_TPL.ID);
 
         this.property(AssetLabelMeta.ASSET_PAPER_PROP)
                 .using(EAMTables.EAM_ASSET_LABEL.PAPER_TYPE_ID).join(EAMTables.EAM_ASSET_LABEL_PAPER.ID);
@@ -108,7 +109,8 @@ public class EamRelationManager extends RelationManager {
 
         this.property(AssetLabelTplMeta.ASSET_LABEL_COLUMNL_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_LABEL_TPL.ID).join(EAMTables.EAM_ASSET_LABEL_TPL_ITEM.TPL_ID)
-         .using(EAMTables.EAM_ASSET_LABEL_TPL_ITEM.COL_ID).join(EAMTables.EAM_ASSET_LABEL_COL.ID);
+         .using(EAMTables.EAM_ASSET_LABEL_TPL_ITEM.COL_ID).join(EAMTables.EAM_ASSET_LABEL_COL.ID)
+      ;
     }
 
     public void setupAssetLabelTplItem() {

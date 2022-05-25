@@ -68,7 +68,7 @@ public class EamAssetDataPermGtr extends BaseCodeGenerator{
         );
 
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().field(EAMTables.EAM_ASSET_DATA_PERMISSIONS.NAME).form().validate().required();

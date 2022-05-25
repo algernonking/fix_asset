@@ -461,8 +461,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         Workbook wb = null;
         OutputStream out = null;
         String path = System.getProperty("java.io.tmpdir");
-        File tempFile = new File(path + IDGenerator.getSnowflakeIdString()+".xls");
-        System.out.println("path######"+tempFile.getAbsolutePath());
+        File tempFile = new File(path +File.separator+ IDGenerator.getSnowflakeIdString()+".xls");
         try {
             wb = new HSSFWorkbook();
             Sheet sheet = wb.createSheet("asset");
@@ -563,24 +562,13 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
         String uuid=IDGenerator.getSnowflakeIdString();
         AssetLabel label=assetLabelService.queryAssetLabel();
-        // join 关联的对象
-        assetLabelService.dao().fill(label)
-                .with(AssetLabelMeta.ASSET_TPL)
-                .with(AssetLabelMeta.ASSET_PAPER)
-                .execute();
         Map<String,Object> map=queryAssetMap(assetList,null);
         List<Map<String, Object>> mapList= (List<Map<String, Object>>) map.get("dataList");
-
-        String tplId=label.getLabelTplId();
-        AssetLabelTpl tpl=assetLabelTplService.getById(tplId);
-        assetLabelTplService.dao().fill(tpl)
-                .with(AssetLabelTplMeta.ASSET_LABEL_COLUMNL_LIST).execute();
-
         AssetLabelPrint printData=new AssetLabelPrint();
         printData.setLabel(label);
         printData.setUuid(uuid);
-        printData.setLabelTpl(tpl);
-        printData.setAssetColumnList(tpl.getAssetLabelColumnlList());
+        printData.setLabelTpl(label.getAssetTpl());
+        printData.setAssetColumnList(label.getAssetLabelColumnList());
         printData.setAssetData(mapList);
         boolean res=AssetLabelPrintUtil.print(printData);
 
@@ -1092,11 +1080,9 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
     public File saveTempFile(InputStream is, String fileName){
-
-
         int BYTESIZE=1024;
         String path = System.getProperty("java.io.tmpdir");
-        File temp = new File(path + fileName);
+        File temp = new File(path +File.separator+ fileName);
         BufferedInputStream bis = null;
         BufferedOutputStream bos = null;
         try{

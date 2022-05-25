@@ -6,17 +6,19 @@
 
 function FormPage() {
 
-	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
+	var settings,admin,form,table,layer,util,fox,upload,xmSelect,transfer,foxup;
 	const moduleURL="/service-eam/eam-asset-label";
 	// 表单执行操作类型：view，create，edit
 	var action=null;
 	var disableCreateNew=false;
 	var disableModify=false;
 	var dataBeforeEdit=null;
+	var tr=null;
 	/**
       * 入口函数，初始化
       */
 	this.init=function(layui) {
+		transfer=layui.transfer;
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
@@ -28,6 +30,21 @@ function FormPage() {
 		if(action=="view") {
 			disableModify=true;
 		}
+
+		console.log("ASSET_LABEL_COLUMN",ASSET_LABEL_COLUMN);
+		var data1 = []
+		for(var i=0;i<ASSET_LABEL_COLUMN.length;i++){
+			var e={};
+			e.value=ASSET_LABEL_COLUMN[i].id;
+			e.title=ASSET_LABEL_COLUMN[i].colName;
+			data1.push(e);
+		}
+		tr=transfer.render({
+			elem: '#col'
+			,title: ['未选择', '已选择']
+			,data: data1
+			,height: 450 //定义高度
+		})
 
 		if(window.pageExt.form.beforeInit) {
 			window.pageExt.form.beforeInit(action,admin.getTempData('eam-asset-label-form-data'));
@@ -84,7 +101,6 @@ function FormPage() {
       */
 	function renderFormFields() {
 		fox.renderFormInputs(form);
-
 		form.on('radio(paperTypeId)', function(data){
 			var checked=[];
 			$('input[type=radio][lay-filter=paperTypeId]:checked').each(function() {
@@ -114,12 +130,6 @@ function FormPage() {
 		if (hasData) {
 			fm[0].reset();
 			form.val('data-form', formData);
-
-
-
-
-
-
 
 			//处理fillBy
 
@@ -205,16 +215,21 @@ function FormPage() {
 
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
-			data.field = getFormData();
+			var ps=data.field;
+			ps.colIds=JSON.stringify(tr.config.value);
+			var api="/service-eam/eam-asset-label-tpl/insert";
+			top.layer.confirm(fox.translate('是否保存当前资产标签？'), function (i) {
+				top.layer.close(i);
+				admin.post(api, ps, function (r) {
+					if (r.success) {
+						admin.finishPopupCenterById('eam-asset-label-custom-win');
+						top.layer.msg("操作成功", {time: 1000});
+					} else {
+						top.layer.msg(r.message, {time: 1000});
+					}
+				}, {delayLoading: 1000, elms: []});
+			});
 
-			if(window.pageExt.form.beforeSubmit) {
-				var doNext=window.pageExt.form.beforeSubmit(data.field);
-				if(!doNext) return ;
-			}
-			//校验表单
-			if(!verifyForm(data.field)) return;
-
-			saveForm(data.field);
 	        return false;
 	    });
 
@@ -240,7 +255,7 @@ function FormPage() {
 
 }
 
-layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
+layui.use(['transfer','form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
 	var task=setInterval(function (){
 		if(!window["pageExt"]) return;
 		clearInterval(task);

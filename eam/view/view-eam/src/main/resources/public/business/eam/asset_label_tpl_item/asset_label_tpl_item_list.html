@@ -2,7 +2,7 @@
 /**
  * 标签模版 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-20 21:21:12
+ * @since 2022-05-24 09:56:57
  */
  -->
  <!DOCTYPE html>
@@ -84,6 +84,8 @@
 
     <button th:if="${perm.checkAuth('eam_asset_label_tpl_item:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
+
+    <button class="layui-btn layui-btn-xs layui-btn-primary layui-border-blue" lay-event="ops-more" data-id="{{d.id}}"><span th:text="${lang.translate('更多')}">更多</span><i class="layui-icon layui-icon-down"></i></button>
 
 </script>
 

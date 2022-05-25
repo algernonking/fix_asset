@@ -30,7 +30,7 @@ public class MonitorTplIndicatorTypeGtr extends BaseCodeGenerator{
 
         );
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().field(OpsTables.OPS_MONITOR_TPL_INDICATOR_TYPE.NAME).search().fuzzySearch();

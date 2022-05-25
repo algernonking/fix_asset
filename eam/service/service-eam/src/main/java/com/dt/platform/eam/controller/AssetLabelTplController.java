@@ -110,13 +110,11 @@ public class AssetLabelTplController extends SuperController {
 	@PostMapping(AssetLabelTplServiceProxy.DELETE)
 	public Result deleteById(String id) {
 		AssetLabel label=assetLabelService.queryAssetLabel();
-
 		if(label!=null&&label.getLabelTplId()!=null){
 			if(label.getLabelTplId().equals(id)){
 				return ErrorDesc.failureMessage("当前模版在使用中，不可删除");
 			}
 		}
-
 		Result result=assetLabelTplService.deleteByIdLogical(id);
 		return result;
 	}
@@ -251,6 +249,10 @@ public class AssetLabelTplController extends SuperController {
 		List<AssetLabelTpl> list=assetLabelTplService.queryList(sample);
 		assetLabelTplService.dao().fill(list)
 				.with(AssetLabelTplMeta.ASSET_LABEL_ITEM_LIST).execute();
+		for(int i=0;i<list.size();i++){
+			List<AssetLabelCol> colList=assetLabelService.assetTplJoinTplColumn(list.get(i).getId());
+			list.get(i).setAssetLabelColumnlList(colList);
+		}
 		List<List<AssetLabelTplItem>> itemList= CollectorUtil.collectList(list, AssetLabelTpl::getAssetLabelItemList);
 		List<AssetLabelTplItem> items=itemList.stream().collect(ArrayList::new,ArrayList::addAll,ArrayList::addAll);
 		assetLabelTplItemService.dao().fill(items).with(AssetLabelTplItemMeta.ASSET_LABEL_COL).execute();

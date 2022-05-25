@@ -25,9 +25,7 @@ import com.itextpdf.layout.borders.SolidBorder;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.properties.*;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
-import org.yaml.snakeyaml.Yaml;
+
 
 import javax.imageio.ImageIO;
 
@@ -154,19 +152,17 @@ public class AssetLabelPrintUtil {
     public static boolean print(AssetLabelPrint print){
         try {
 
-
-
             String path = System.getProperty("java.io.tmpdir");
             List<Map<String, Object>> assetList=print.getAssetData();
             List<AssetLabelCol> colList=print.getAssetColumnList();
-            String pdfFileName =path + print.getUuid()+".pdf";
+            String pdfFileName =path +File.separator+ print.getUuid()+".pdf";
             Logger.info("pdf out file path:"+pdfFileName);
             PdfDocument pdf = new PdfDocument(new PdfWriter(pdfFileName));
             //字体设置
             PdfFont KeyFont=null;
             PdfFont valueFont=null;
             String workDir=System.getProperty("user.dir");
-            String fontPath=workDir+"/"+"bin/simhei.ttf";
+            String fontPath=workDir+File.separator+"bin"+File.separator+"simhei.ttf";
             File file = new File(fontPath);
 
             if(file.exists()){

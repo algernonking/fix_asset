@@ -537,8 +537,53 @@ function ListPage() {
 				case 'printPdf':
 					window.pageExt.list.printPdf && window.pageExt.list.printPdf(selected,obj);
 					break;
-
-
+				case 'printMore':
+					//更多下拉菜单
+					dropdown.render({
+						elem: this
+						,show: true //外部事件触发即显示
+						,data: [
+							{"code":"card","id":"1","title":"打印资产卡片"},
+							{"code":"labelCard","id":"2","title":"打印资产标签"},
+							{"code":"labelDown","id":"3","title":"下载资产标签"}
+						]
+						,click: function(menu, othis){
+							// console.log("selected",selected);
+							// console.log(menu,othis);
+							// if(menu.perm && !admin.checkAuth(menu.perm)) {
+							// 	top.layer.msg(fox.translate('缺少操作权限'), {icon: 2, time: 1500});
+							// 	return;
+							// }
+							console.log(menu,selected);
+							window.pageExt.list.moreAction && window.pageExt.list.moreAction(menu,selected, othis);
+						}
+						,align: 'right'
+						,style: 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);'
+					});
+					break;
+				case 'exportMore':
+					//更多下拉菜单
+					dropdown.render({
+						elem: this
+						,show: true //外部事件触发即显示
+						,data: [
+							{"code":"batchInsert","id":"1","title":"资产批量入库"},
+							{"code":"highExportData","id":"2","title":"资产数据导出"},
+							{"code":"downloadAssetTpl","id":"3","title":"下载导入模版"}
+						]
+						,click: function(menu, othis){
+							console.log("selected",selected);
+							console.log(menu,othis);
+							// if(menu.perm && !admin.checkAuth(menu.perm)) {
+							// 	top.layer.msg(fox.translate('缺少操作权限'), {icon: 2, time: 1500});
+							// 	return;
+							// }
+							window.pageExt.list.moreAction && window.pageExt.list.moreAction(menu,selected, othis);
+						}
+						,align: 'right'
+						,style: 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);'
+					});
+					break;
 
 			};
 		});

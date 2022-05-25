@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
-	<title th:text="${lang.translate('资产标签')}">资产标签</title>
+	<title th:text="${lang.translate('自定义标签模版')}">自定义标签模版</title>
     <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
     <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -42,60 +42,40 @@
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+
             <div class="layui-col-xs6 form-column" >
-
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('标签宽度')}">标签宽度</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="labelWidth" id="labelWidth" name="labelWidth" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签宽度') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="false" step="1.0"   scale="1"  value="3.0" />
-                        </div>
-                    </div>
-
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：column 循环-->
-            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs6 form-column" >
-
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('标签高度')}">标签高度</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="labelHeight" id="labelHeight" name="labelHeight" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签高度') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="false" step="1.0"   scale="1"  value="3.0" />
-                        </div>
-                    </div>
-
-
-                <!--结束：栏次内字段循环-->
-            </div>
-            <!--结束：栏次输入框循环-->
-        </div>
-         <!--开始：group 循环-->
-
-
-
-        <div class="layui-row form-row" id="random-2021-content">
-
-             <!--开始：column 循环-->
-            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
-
-
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('纸张类型')}">纸张类型</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('显示图像')}">显示图像</div></div>
                     <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="paperTypeId" lay-filter="paperTypeId" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                        <input type="radio" name="imageShow" value="1" title="显示" checked="">
+                        <input type="radio" name="imageShow" value="0" title="不显示">
+                    </div>
+                </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('图像类型')}">图像类型</div></div>
+                    <div class="layui-input-block ">
+                        <input type="radio" name="imageType" value="txm" title="条形码" checked="">
+                        <input type="radio" name="imageType" value="rwm" title="二维码">
+                    </div>
+                </div>
+                <!--结束：栏次内字段循环-->
+            </div>
+
+            <div class="layui-col-xs6 form-column" >
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('标签字段')}">标签字段</div></div>
+                    <div class="layui-input-block ">
+                        <div id="col" class="demo-transfer"></div>
                     </div>
                 </div>
 
-
                 <!--结束：栏次内字段循环-->
             </div>
-            <!--结束：栏次输入框循环-->
+             <!--开始：column 循环-->
+
         </div>
-        <!--结束：group循环-->
+         <!--开始：group 循环-->
+
 
         <div style="height: 8px"></div>
         <div style="height: 20px"></div>
@@ -120,6 +100,8 @@
     var RADIO_PAPERTYPEID_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
     var VALIDATE_CONFIG={"code":{"labelInForm":"编码","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_asset_label";
+
+    var ASSET_LABEL_COLUMN = [[${assetLabelColumn}]];
 
 
 </script>

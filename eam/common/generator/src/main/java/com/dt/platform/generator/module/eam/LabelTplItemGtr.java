@@ -31,6 +31,9 @@ public class LabelTplItemGtr extends BaseCodeGenerator{
                 }
         );
 
+        cfg.view().list().operationColumn().addActionMenu("t1","test1");
+        cfg.view().list().operationColumn().addActionMenu("t2","test2");
+
         cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().labelWidth(3,Config.searchLabelWidth);

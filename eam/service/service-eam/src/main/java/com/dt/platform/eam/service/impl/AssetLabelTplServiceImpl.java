@@ -2,6 +2,10 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.alibaba.fastjson.JSONArray;
+import com.dt.platform.domain.eam.AssetLabelTplItem;
+import com.dt.platform.eam.service.IAssetLabelTplItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +47,9 @@ import java.util.Map;
 @Service("EamAssetLabelTplService")
 public class AssetLabelTplServiceImpl extends SuperService<AssetLabelTpl> implements IAssetLabelTplService {
 
+
+	@Autowired
+	private IAssetLabelTplItemService assetLabelTplItemService;
 	/**
 	 * 注入DAO对象
 	 * */
@@ -70,7 +77,23 @@ public class AssetLabelTplServiceImpl extends SuperService<AssetLabelTpl> implem
 	 */
 	@Override
 	public Result insert(AssetLabelTpl assetLabelTpl,boolean throwsException) {
+
+		String ids=assetLabelTpl.getColIds();
+		JSONArray idsArr=JSONArray.parseArray(ids);
+		if(idsArr==null||idsArr.size()==0){
+			return ErrorDesc.failureMessage("请选择标签字段");
+		}
+
 		Result r=super.insert(assetLabelTpl,throwsException);
+		if(r.isSuccess()){
+			for(int i=0;i<idsArr.size();i++){
+				AssetLabelTplItem item=new AssetLabelTplItem();
+				item.setColId(idsArr.getString(i));
+				item.setSort(i);
+				item.setTplId(assetLabelTpl.getId());
+				assetLabelTplItemService.insert(item,false);
+			}
+		}
 		return r;
 	}
 

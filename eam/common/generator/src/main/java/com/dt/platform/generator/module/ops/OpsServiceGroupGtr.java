@@ -32,7 +32,7 @@ public class OpsServiceGroupGtr extends BaseCodeGenerator{
                 }
         );
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //文件生成覆盖模式

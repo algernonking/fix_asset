@@ -1,7 +1,7 @@
 /**
  * 标签模版 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-20 21:21:11
+ * @since 2022-05-24 09:56:56
  */
 
 layui.config({

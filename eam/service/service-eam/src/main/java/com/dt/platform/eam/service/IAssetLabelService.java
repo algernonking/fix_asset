@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetLabelCol;
 import com.dt.platform.domain.eam.AssetLabelTpl;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
@@ -29,6 +30,7 @@ import java.util.Map;
 public interface IAssetLabelService extends ISuperService<AssetLabel> {
 
 
+	List<AssetLabelCol> assetTplJoinTplColumn(String tplId);
 
 	AssetLabel queryAssetLabel();
 

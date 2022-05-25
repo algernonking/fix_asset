@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
+import com.dt.platform.domain.eam.AssetLabelCol;
 import com.dt.platform.domain.eam.AssetLabelPaper;
 import com.dt.platform.domain.eam.AssetLabelTpl;
 import com.dt.platform.domain.eam.InspectionPlan;
@@ -22,6 +23,8 @@ public class LabelGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(AssetLabelTpl.class,"assetTpl","模版","模版");
         cfg.getPoClassFile().addSimpleProperty(AssetLabelPaper.class,"assetPaper","纸张类型","纸张类型");
 
+        cfg.getPoClassFile().addListProperty(AssetLabelCol.class,"assetLabelColumnList","ColumnList","ColumnList");
+
 
         cfg.view().field(EAMTables.EAM_ASSET_LABEL.ID).basic().hidden(true);
         cfg.view().search().inputLayout(
@@ -30,7 +33,7 @@ public class LabelGtr extends BaseCodeGenerator{
                 }
         );
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().labelWidth(3,Config.searchLabelWidth);
         cfg.view().search().labelWidth(4,Config.searchLabelWidth);

@@ -21,7 +21,60 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var formAction=admin.getTempData('eam-asset-form-data-form-action');
     //列表页的扩展
     var list={
+        /**
+         * 表格右侧操作列更多按钮事件
+         * */
+        moreAction:function (menu,data, it){
+            // {"code":"card","id":"1","title":"打印资产卡片"},
+            // {"code":"labelCard","id":"2","title":"打印资产标签"},
+            // {"code":"labelDown","id":"3","title":"下载资产标签"}
 
+            // {"code":"batchInsert","id":"1","title":"资产批量入库"},
+            // {"code":"highExportData","id":"2","title":"资产数据导出"}
+            console.log('moreAction',menu,data,it);
+            if(menu.code=="card"){
+                window.pageExt.list.downBills(data);
+            }else if(menu.code=="labelCard"){
+                window.pageExt.list.printPdf(data);
+            }else if(menu.code=="labelDown"){
+                window.pageExt.list.assetLabel(data);
+            }else if(menu.code=="batchInsert"){
+                window.pageExt.list.batchInsert(data,null);
+            }else if(menu.code=="highExportData"){
+                window.pageExt.list.highExportData(data,null);
+            }else if(menu.code=="downloadAssetTpl"){
+                window.pageExt.list.downloadAssetTpl(data,null);
+            }
+
+
+
+        },
+        downloadAssetTpl:function (data){
+            var categoryId;
+            var assetCategorySelect= xmSelect.get('#categoryId',true);
+            if(assetCategorySelect){
+                categoryValue= assetCategorySelect.getValue();
+                console.log("categoryValue:"+categoryValue);
+                if(categoryValue&&categoryValue.length>0){
+                    categoryId=categoryValue[0].id;
+                }
+            }
+            var value = {};
+            value.businessCode={ inputType:"button",value: "1234567890" ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+            var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+            var downloadUrl="/service-eam/eam-asset/export-excel";
+            if(categoryId){
+                ps.categoryId=categoryId;
+            }
+            ps.ownerCode="TPL";
+            ps.businessCode="123456789";
+            var task=setTimeout(function(){layer.load(2);},10);
+            fox.submit(downloadUrl,ps,"post",function(){
+                clearTimeout(task);
+                layer.closeAll('loading');
+                console.log("execute finish");
+            });
+        },
         assetVoucher:function (data){
             admin.putTempData("ownerId",data.id,true);
             var index = admin.popupCenter({
@@ -316,12 +369,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('beforeRowOperationEvent',data,obj);
             return true;
         },
-        /**
-         * 表格右侧操作列更多按钮事件
-         * */
-        moreAction:function (menu,data, it){
-            console.log('moreAction',menu,data,it);
-        },
+
 
         forBatchApproval:function(data,item){
             if(data.length==0){

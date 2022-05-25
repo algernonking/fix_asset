@@ -29,7 +29,7 @@ public class EamPositionGtr extends BaseCodeGenerator{
         );
 
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().field(EAMTables.EAM_POSITION.NAME).form().validate().required();

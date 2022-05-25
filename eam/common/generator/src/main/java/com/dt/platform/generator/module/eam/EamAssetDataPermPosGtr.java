@@ -23,7 +23,7 @@ public class EamAssetDataPermPosGtr extends BaseCodeGenerator{
 
         cfg.setRelationField(AssetDataPermissions.class,EAMTables.EAM_ASSET_DATA_PERMISSIONS_POSITION.PERMISSION_ID, Position.class, EAMTables.EAM_ASSET_DATA_PERMISSIONS_POSITION.VALUE,true);
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().field(EAMTables.EAM_ASSET_DATA_PERMISSIONS_POSITION.ID).form().validate().required();

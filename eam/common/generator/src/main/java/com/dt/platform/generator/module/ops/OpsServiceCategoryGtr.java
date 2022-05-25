@@ -53,7 +53,7 @@ public class OpsServiceCategoryGtr extends BaseCodeGenerator{
                         OpsTables.OPS_SERVICE_CATEGORY.NOTES
                 }
         );
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().labelWidth(3,Config.searchLabelWidth);
 

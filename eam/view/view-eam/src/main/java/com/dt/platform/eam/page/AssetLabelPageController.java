@@ -2,8 +2,8 @@ package com.dt.platform.eam.page;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.dt.platform.domain.eam.AssetLabelPaper;
-import com.dt.platform.domain.eam.AssetLabelPaperVO;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.proxy.eam.AssetLabelColServiceProxy;
 import com.dt.platform.proxy.eam.AssetLabelPaperServiceProxy;
 import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.dt.platform.proxy.eam.AssetLabelServiceProxy;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -53,7 +55,8 @@ public class AssetLabelPageController extends ViewController {
 
 		Result<List<AssetLabelPaper>>  result=AssetLabelPaperServiceProxy.api().queryList(new AssetLabelPaperVO());
 		List<AssetLabelPaper> list=result.getData();
-		model.addAttribute("papertypeData",list);
+
+		model.addAttribute("paperTypeData",list);
 		return prefix+"/asset_label_setting";
 	}
 
@@ -62,6 +65,10 @@ public class AssetLabelPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_label_custom.html")
 	public String labelCustom(Model model,HttpServletRequest request) {
+		Result<List<AssetLabelCol>>  result= AssetLabelColServiceProxy.api().queryList(new AssetLabelColVO());
+		List<AssetLabelCol> list=result.getData();
+		List<AssetLabelCol> list2 = list.stream().sorted(Comparator.comparing(a -> a.getSort())).collect(Collectors.toList());
+		model.addAttribute("assetLabelColumn",list2);
 		return prefix+"/asset_label_custom";
 	}
 

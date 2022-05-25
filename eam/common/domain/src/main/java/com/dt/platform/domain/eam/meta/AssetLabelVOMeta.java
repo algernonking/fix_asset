@@ -8,12 +8,13 @@ import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.eam.AssetLabelTpl;
 import com.dt.platform.domain.eam.AssetLabelPaper;
+import com.dt.platform.domain.eam.AssetLabelCol;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-24 08:10:27
+ * @since 2022-05-24 13:14:50
  * @sign 3777C1ABA36FCC2A0A88C1F9E46AAAE1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -341,9 +342,19 @@ public class AssetLabelVOMeta extends AssetLabelMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelVO,com.dt.platform.domain.eam.AssetLabelPaper> ASSET_PAPER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelVO.class ,ASSET_PAPER, com.dt.platform.domain.eam.AssetLabelPaper.class, "纸张类型", "纸张类型", com.dt.platform.domain.eam.AssetLabelPaper.class, null);
 	
 	/**
+	 * ColumnList , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetLabelCol
+	*/
+	public static final String ASSET_LABEL_COLUMN_LIST="assetLabelColumnList";
+	
+	/**
+	 * ColumnList , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetLabelCol
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetLabelVO,com.dt.platform.domain.eam.AssetLabelCol> ASSET_LABEL_COLUMN_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetLabelVO.class ,ASSET_LABEL_COLUMN_LIST, java.util.List.class, "ColumnList", "ColumnList", com.dt.platform.domain.eam.AssetLabelCol.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , CODE , LABEL_TPL_ID , LABEL_WIDTH , LABEL_HEIGHT , LABEL_LAYOUT , LABEL_TABLE_MARGIN , LABEL_KEY_FONT_SIZE , LABEL_VALUE_FONT_SIZE , IMAGE_WIDTH , IMAGE_HEIGHT , PAPER_TYPE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_TPL , ASSET_PAPER };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , CODE , LABEL_TPL_ID , LABEL_WIDTH , LABEL_HEIGHT , LABEL_LAYOUT , LABEL_TABLE_MARGIN , LABEL_KEY_FONT_SIZE , LABEL_VALUE_FONT_SIZE , IMAGE_WIDTH , IMAGE_HEIGHT , PAPER_TYPE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_TPL , ASSET_PAPER , ASSET_LABEL_COLUMN_LIST };
 	
 	/**
 	 * 代理类
@@ -702,6 +713,17 @@ public class AssetLabelVOMeta extends AssetLabelMeta {
 		public AssetLabel setAssetPaper(AssetLabelPaper assetPaper) {
 			super.change(ASSET_PAPER,super.getAssetPaper(),assetPaper);
 			super.setAssetPaper(assetPaper);
+			return this;
+		}
+		
+		/**
+		 * 设置 ColumnList
+		 * @param assetLabelColumnList ColumnList
+		 * @return 当前对象
+		*/
+		public AssetLabel setAssetLabelColumnList(List<AssetLabelCol> assetLabelColumnList) {
+			super.change(ASSET_LABEL_COLUMN_LIST,super.getAssetLabelColumnList(),assetLabelColumnList);
+			super.setAssetLabelColumnList(assetLabelColumnList);
 			return this;
 		}
 	}

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产标签
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-24 08:10:27
- * @sign 3B81DCE673DA3427E50933492560C589
+ * @since 2022-05-24 13:14:50
+ * @sign DA06D7AB218419507E702CF6F5EFC7DD
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -167,6 +169,12 @@ public class AssetLabel extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="纸张类型" , notes = "纸张类型")
 	private AssetLabelPaper assetPaper;
+	
+	/**
+	 * ColumnList：ColumnList
+	*/
+	@ApiModelProperty(required = false,value="ColumnList" , notes = "ColumnList")
+	private List<AssetLabelCol> assetLabelColumnList;
 	
 	/**
 	 * 获得 主键<br>
@@ -602,6 +610,36 @@ public class AssetLabel extends Entity {
 	*/
 	public AssetLabel setAssetPaper(AssetLabelPaper assetPaper) {
 		this.assetPaper=assetPaper;
+		return this;
+	}
+	
+	/**
+	 * 获得 ColumnList<br>
+	 * ColumnList
+	 * @return ColumnList
+	*/
+	public List<AssetLabelCol> getAssetLabelColumnList() {
+		return assetLabelColumnList;
+	}
+	
+	/**
+	 * 设置 ColumnList
+	 * @param assetLabelColumnList ColumnList
+	 * @return 当前对象
+	*/
+	public AssetLabel setAssetLabelColumnList(List<AssetLabelCol> assetLabelColumnList) {
+		this.assetLabelColumnList=assetLabelColumnList;
+		return this;
+	}
+	
+	/**
+	 * 添加 ColumnList
+	 * @param assetLabelColumn ColumnList
+	 * @return 当前对象
+	*/
+	public AssetLabel addAssetLabelColumn(AssetLabelCol assetLabelColumn) {
+		if(this.assetLabelColumnList==null) assetLabelColumnList=new ArrayList<>();
+		this.assetLabelColumnList.add(assetLabelColumn);
 		return this;
 	}
 

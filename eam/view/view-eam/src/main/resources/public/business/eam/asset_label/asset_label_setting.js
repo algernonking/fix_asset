@@ -41,8 +41,8 @@ function ListPage() {
 
 	$("#cust").click(function(){
 
-		alert("未正确配置");
-		return 1
+		// alert("未正确配置");
+		// return 1
 		var queryString=""
 		var index=admin.popupCenter({
 			title: "自定义标签",
@@ -51,8 +51,9 @@ function ListPage() {
 			area: ["98%","98%"],
 			type: 2,
 			id:"eam-asset-label-custom-win",
-			content: '/business/eam/asset_label/asset_label_setting.html' + queryString,
+			content: '/business/eam/asset_label/asset_label_custom.html' + queryString,
 			finish: function () {
+				renderTable();
 			}
 		});
 		admin.putTempData('eam-asset-label-custom-popup-index', index);
@@ -107,13 +108,13 @@ function ListPage() {
 		}
 
 		//填充中间图片
-		var list=obj.assetLabelItemList;
+		var list=obj.assetLabelColumnlList;
 		if(list&&list.length>0){
 			for(var i=0;i<list.length;i++){
 				var col=list[i];
 				var label=""
-				if(col&&col.assetLabelCol&&col.assetLabelCol.colName){
-					label=col.assetLabelCol.colName;
+				if(col&&col.colName){
+					label=col.colName;
 				}
 				trListHtml=trListHtml+"            <tr>\n" +
 					"                                        <td width=\"30\">"+label+"</td>\n" +
@@ -159,6 +160,7 @@ function ListPage() {
 			admin.post(api, {id:value}, function (r) {
 				if (r.success) {
 					top.layer.msg("操作成功", {time: 1000});
+					renderTable();
 				} else {
 					var errs = [];
 					if (r.errors) {
@@ -190,7 +192,6 @@ function ListPage() {
 				cardArr=data.data;
 				var html="";
 				for(var i=0;i<cardArr.length;i++){
-					console.log("####"+i)
 					var h="<div class=\"card\" style=\"margin-left: 0%; width: 33.3333%;\">"
 					var card=renderLabelHtml(cardArr[i]);
 					h=h+card+"</div>";
@@ -287,17 +288,7 @@ function ListPage() {
 					if (r.success) {
 						top.layer.msg("操作成功", {time: 1000});
 					} else {
-						var errs = [];
-						if (r.errors) {
-							for (var i = 0; i < r.errors.length; i++) {
-								if (errs.indexOf(r.errors[i].message) == -1) {
-									errs.push(r.errors[i].message);
-								}
-							}
-							top.layer.msg(errs.join("<br>"), {time: 2000});
-						} else {
-							top.layer.msg(r.message, {time: 2000});
-						}
+						top.layer.msg(r.message, {time: 1000});
 					}
 				}, {delayLoading: 1000, elms: []});
 			});

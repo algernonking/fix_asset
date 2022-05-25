@@ -25,7 +25,7 @@ public class EamAssetDataPermOrgGtr extends BaseCodeGenerator{
         cfg.setRelationField(AssetDataPermissions.class,EAMTables.EAM_ASSET_DATA_PERMISSIONS_ORG.PERMISSION_ID, Organization.class, EAMTables.EAM_ASSET_DATA_PERMISSIONS_ORG.VALUE,true);
 
 
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().field(EAMTables.EAM_ASSET_DATA_PERMISSIONS_ORG.ID).form().validate().required();

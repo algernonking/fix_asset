@@ -3,8 +3,12 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.domain.eam.AssetLabelCol;
 import com.dt.platform.domain.eam.AssetLabelTpl;
+import com.dt.platform.domain.eam.meta.AssetLabelMeta;
+import com.dt.platform.domain.eam.meta.AssetLabelTplMeta;
 import com.dt.platform.eam.service.IAssetLabelTplService;
+import com.github.foxnic.dao.data.RcdSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +68,31 @@ public class AssetLabelServiceImpl extends SuperService<AssetLabel> implements I
 
 	@Override
 	public AssetLabel queryAssetLabel() {
-		return this.getById(queryAssetLabelId());
+		AssetLabel label=this.getById(queryAssetLabelId());
+		// join 关联的对象
+		this.dao().fill(label)
+				.with(AssetLabelMeta.ASSET_TPL)
+				.with(AssetLabelMeta.ASSET_PAPER)
+				.execute();
+		List<AssetLabelCol> colList=assetTplJoinTplColumn(label.getLabelTplId());
+		label.setAssetLabelColumnList(colList);
+		return label;
+	}
+
+	@Override
+	public List<AssetLabelCol> assetTplJoinTplColumn(String tplId) {
+		String sql="select c.* from eam_asset_label_tpl a,eam_asset_label_tpl_item b,eam_asset_label_col c\n" +
+				"where a.id=? and a.id=b.tpl_id and b.col_id=c.id and a.deleted='0' and b.deleted='0' and c.deleted='0' order by b.sort";
+		RcdSet rs=dao.query(sql,tplId);
+		List<AssetLabelCol> colList=new ArrayList<>();
+		for(int i=0;i<rs.size();i++){
+			AssetLabelCol e=new AssetLabelCol();
+			e.setId(rs.getRcd(i).getString("id"));
+			e.setColName(rs.getRcd(i).getString("col_name"));
+			e.setColValue(rs.getRcd(i).getString("col_value"));
+			colList.add(e);
+		}
+		return colList;
 	}
 
 	@Override

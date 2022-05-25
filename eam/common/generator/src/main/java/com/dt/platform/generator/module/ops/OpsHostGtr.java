@@ -223,7 +223,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                         OpsTables.OPS_HOST.HOST_NOTES,
                 }
         );
-        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(1,Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().labelWidth(3,Config.searchLabelWidth);
         cfg.view().search().labelWidth(4,Config.searchLabelWidth);
