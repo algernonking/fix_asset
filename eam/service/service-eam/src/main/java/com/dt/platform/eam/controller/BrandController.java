@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 品牌 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:06:29
+ * @since 2022-05-27 04:48:15
 */
 
 @Api(tags = "品牌")
@@ -67,10 +67,10 @@ public class BrandController extends SuperController {
 	@ApiOperation(value = "添加品牌")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569145667469967360"),
-		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class , example = "1212"),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = BrandServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -122,10 +122,10 @@ public class BrandController extends SuperController {
 	@ApiOperation(value = "更新品牌")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569145667469967360"),
-		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class , example = "1212"),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.DIRTY_FIELDS , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } )
 	@NotNull(name = BrandVOMeta.ID)
@@ -143,10 +143,10 @@ public class BrandController extends SuperController {
 	@ApiOperation(value = "保存品牌")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569145667469967360"),
-		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class , example = "1212"),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.DIRTY_FIELDS , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } )
 	@NotNull(name = BrandVOMeta.ID)
@@ -191,7 +191,7 @@ public class BrandController extends SuperController {
 	@PostMapping(BrandServiceProxy.GET_BY_IDS)
 	public Result<List<Brand>> getByIds(List<String> ids) {
 		Result<List<Brand>> result=new Result<>();
-		List<Brand> list=brandService.getByIds(ids);
+		List<Brand> list=brandService.queryListByIds(ids);
 		result.success(true).data(list);
 		return result;
 	}
@@ -203,10 +203,10 @@ public class BrandController extends SuperController {
 	@ApiOperation(value = "查询品牌")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569145667469967360"),
-		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class , example = "1212"),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = BrandServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -225,10 +225,10 @@ public class BrandController extends SuperController {
 	@ApiOperation(value = "分页查询品牌")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "569145667469967360"),
-		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class , example = "1212"),
+		@ApiImplicitParam(name = BrandVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "联想"),
+		@ApiImplicitParam(name = BrandVOMeta.SORT , value = "排序" , required = false , dataTypeClass=BigDecimal.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = BrandServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

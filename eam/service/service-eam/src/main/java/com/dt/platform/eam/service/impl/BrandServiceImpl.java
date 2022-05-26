@@ -29,13 +29,14 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IBrandService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
  * 品牌 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:06:29
+ * @since 2022-05-27 04:48:15
 */
 
 
@@ -203,8 +204,13 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	}
 
 	@Override
-	public List<Brand> getByIds(List<String> ids) {
+	public List<Brand> queryListByIds(List<String> ids) {
 		return super.queryListByUKeys("id",ids);
+	}
+
+	@Override
+	public Map<String, Brand> queryMapByIds(List<String> ids) {
+		return super.queryMapByUKeys("id",ids, Brand::getId);
 	}
 
 

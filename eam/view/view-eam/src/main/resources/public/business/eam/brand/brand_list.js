@@ -1,7 +1,7 @@
 /**
  * 品牌 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:06:30
+ * @since 2022-05-27 04:48:16
  */
 
 
@@ -44,6 +44,7 @@ function ListPage() {
 			fox.adjustSearchElement();
 		});
 		fox.adjustSearchElement();
+		$("#table-area").css("margin-top",$(".search-bar").height()+"px");
 		//
 		function renderTableInternal() {
 

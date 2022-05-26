@@ -27,7 +27,7 @@
     <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 </head>
 
-<body style="overflow-y: hidden;">
+<body style="">
 <div class="form-container" >
 
     <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
@@ -43,7 +43,7 @@
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
 
-            <div class="layui-col-xs6 form-column" >
+            <div class="layui-col-xs4 form-column" >
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('显示图像')}">显示图像</div></div>
                     <div class="layui-input-block ">

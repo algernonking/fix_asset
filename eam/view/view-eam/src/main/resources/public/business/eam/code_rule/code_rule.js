@@ -43,7 +43,7 @@ function FormPage() {
 			elem: '#col'
 			,title: ['未选择', '已选择']
 			,data: data1
-			,height: 500 //定义高度
+			,height: 400 //定义高度
 		})
 
 
@@ -150,7 +150,7 @@ function FormPage() {
 				,title: ['未选择', '已选择']
 				,data: data1
 				,value: JSON.parse(formData.partIds)
-				,height: 500 //定义高度
+				,height: 400 //定义高度
 	})
 
 		console.log(formData);

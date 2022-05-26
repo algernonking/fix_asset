@@ -1,7 +1,7 @@
 /**
  * 品牌 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-20 13:06:29
+ * @since 2022-05-27 04:48:15
  */
 
 layui.config({
@@ -212,6 +212,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         onDatePickerChanged:function(id,value, date, endDate) {
             console.log('onDatePickerChanged',id,value, date, endDate);
+        },
+        onRadioBoxChanged:function(id,data,checked) {
+            console.log('onRadioChanged',id,data,checked);
+        },
+        onCheckBoxChanged:function(id,data,checked) {
+            console.log('onCheckBoxChanged',id,data,checked);
         },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
