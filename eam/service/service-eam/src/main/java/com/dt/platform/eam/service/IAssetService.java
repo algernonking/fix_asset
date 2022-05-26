@@ -93,7 +93,7 @@ public interface IAssetService extends ISuperService<Asset> {
 	 * @param ids 主键清单
 	 * @return 是否成功
 	 * */
-	Result batchConfirmOperation(List<String> ids );
+	Result batchConfirmOperation(List<String> ids ,String businessCode);
 
 	/**
 	 * 插入实体

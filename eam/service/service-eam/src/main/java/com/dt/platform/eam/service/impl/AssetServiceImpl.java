@@ -101,6 +101,10 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	private IAssetItemService assetItemService;
 
 
+	@Autowired
+	private IAssetProcessRecordService assetProcessRecordService;
+
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -795,7 +799,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @return 是否成功
 	 * */
 	@Override
-	public Result batchConfirmOperation(List<String> ids ){
+	public Result batchConfirmOperation(List<String> ids,String bussinessCode){
 		ConditionExpr expr=new ConditionExpr();
 		expr.andIn("id",ids);
 		expr.and("status=?",AssetHandleStatusEnum.INCOMPLETE.code());
@@ -806,14 +810,27 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()) ) {
 			return ErrorDesc.failureMessage("当前操作选用审核,请先送审");
 		}
-		List<Asset> updateAssets=new ArrayList<>();
+		List<Asset> updateAssetsList=new ArrayList<>();
+		List<AssetProcessRecord> insertAssetsDtl=new ArrayList<>();
 		for(String id:ids){
 			Asset e=new Asset();
 			e.setId(id);
 			e.setStatus(AssetHandleStatusEnum.COMPLETE.code());
-			updateAssets.add(e);
+			updateAssetsList.add(e);
+
+			//资产明显
+			AssetProcessRecord record=new AssetProcessRecord();
+			record.setAssetId(id);
+			record.setProcessdTime(new Date());
+			record.setBusinessCode(bussinessCode);
+			record.setContent("资产入库");
+			record.setProcessType(AssetOperateEnum.EAM_ASSET_INSERT.code());
+			insertAssetsDtl.add(record);
 		}
-		return updateList(updateAssets,SaveMode.NOT_NULL_FIELDS);
+
+		updateList(updateAssetsList,SaveMode.NOT_NULL_FIELDS);
+		assetProcessRecordService.insertList(insertAssetsDtl);
+		return ErrorDesc.success();
 	}
 
 
@@ -1196,7 +1213,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 	@Override
-	public PagedList<Asset> queryPagedListBySelect(AssetVO sample,String businessType,String assetOwnerId,String assetSelectedCode,String assetSearchContent) {
+	public PagedList<Asset> queryPagedListBySelect(AssetVO sample,String businessType,String assetOwnerId,String assetSelectData,String assetSearchContent) {
 
 		ConditionExpr queryCondition=new ConditionExpr();
 
@@ -1204,8 +1221,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		if(!StringUtil.isBlank(assetOwnerId)) {
 			queryCondition.andIf("id not in (select asset_id from eam_asset_item where deleted=0 and handle_id=?)" ,assetOwnerId);
 		}else{
-			if(!StringUtil.isBlank(assetSelectedCode)) {
-				queryCondition.andIf("id not in (select asset_id from eam_asset_selected_data where deleted=0 and asset_selected_code=?)" ,assetSelectedCode);
+			if(!StringUtil.isBlank(assetSelectData)) {
+				queryCondition.andIf("id not in (select asset_id from eam_asset_selected_data where deleted=0 and asset_selected_code=?)" ,assetSelectData);
 			}
 		}
 
@@ -1271,7 +1288,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 	@Override
-	public PagedList<Asset> queryPagedListBySelected(AssetVO sample,String assetSelectedCode,String assetOwnerId,String dataType){
+	public PagedList<Asset> queryPagedListBySelected(AssetVO sample,String assetSelectData,String assetOwnerId,String dataType){
 
 		ConditionExpr queryCondition=new ConditionExpr();
 		if(assetOwnerId!=null&&assetOwnerId.length()>0){
@@ -1282,8 +1299,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}
 			queryCondition.andIf("id in (select asset_id from eam_asset_item where crd in ('c','r') and deleted=0 and handle_id=?)" ,assetOwnerId);
 		}else{
-			if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
-				queryCondition.andIf("id  in (select asset_id from eam_asset_selected_data where deleted=0 and asset_selected_code=?)" ,assetSelectedCode);
+			if(assetSelectData!=null&&assetSelectData.length()>0){
+				queryCondition.andIf("id  in (select asset_id from eam_asset_selected_data where deleted=0 and asset_selected_code=?)" ,assetSelectData);
 			}
 		}
 		PagedList<Asset> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
@@ -1408,7 +1425,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			String sql="";
 			if("insert".equals(actionType)){
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
-				insert.setIf("asset_selected_code",selectedCode);
+				insert.setIf("asset_selected_data",selectedCode);
 				//资产编号
 				String codeRule="";
 				String approvalRule="";
@@ -1503,7 +1520,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				}
 
 				Update update=SQLBuilder.buildUpdate(r,SaveMode.ALL_FIELDS,this.table(),this.dao());
-				update.setIf("asset_selected_code",selectedCode);
+				update.setIf("asset_selected_data",selectedCode);
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getUpdateTimeField())!=null) {
 					update.set(dbTreaty.getUpdateTimeField(),new Date());

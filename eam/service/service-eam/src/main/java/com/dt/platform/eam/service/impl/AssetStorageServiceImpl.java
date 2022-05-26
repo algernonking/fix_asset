@@ -71,6 +71,10 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 
 	@Autowired
 	private IAssetService assetService;
+
+	@Autowired
+	private IAssetProcessRecordService assetProcessRecordService;
+
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -100,7 +104,7 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 		if(!importR.isSuccess()){
 			return ErrorDesc.failureMessage("导入资产报错");
 		}
-		String sql="select id from eam_asset where deleted=0 and asset_selected_code=?";
+		String sql="select id from eam_asset where deleted=0 and asset_selected_data=?";
 		RcdSet importDataRs=dao.query(sql,selectedCode);
 		if(importDataRs.size()==0){
 			return ErrorDesc.failureMessage("请选择资产");
@@ -188,8 +192,11 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 					.execute();
 			bill.setStatus(status);
 			List<Asset> list=bill.getAssetList();
+
 			if(list!=null&&list.size()>0){
+				List<AssetProcessRecord> insertRecordList=new ArrayList<>();
 				for(Asset asset:list){
+
 					asset.setStatus(status);
 					asset.setOwnerCode(AssetOwnerCodeEnum.ASSET.code());
 					Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code()) ;
@@ -199,7 +206,18 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 						asset.setAssetCode(codeResult.getData().toString());
 					}
 					assetService.update(asset,SaveMode.NOT_NULL_FIELDS,false);
+
+					//资产明细
+					AssetProcessRecord record=new AssetProcessRecord();
+					record.setAssetId(asset.getId());
+					record.setProcessdTime(new Date());
+					record.setBusinessCode(bill.getBusinessCode());
+					record.setContent("资产入库");
+					record.setProcessType(AssetOperateEnum.EAM_ASSET_STORAGE.code());
+					insertRecordList.add(record);
 				}
+				assetProcessRecordService.insertList(insertRecordList);
+
 			}
 			return super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
@@ -315,7 +333,7 @@ public class AssetStorageServiceImpl extends SuperService<AssetStorage> implemen
 		if(!importR.isSuccess()){
 			return ErrorDesc.failureMessage("导入资产报错");
 		}
-		String sql="select id from eam_asset where deleted=0 and asset_selected_code=?";
+		String sql="select id from eam_asset where deleted=0 and asset_selected_data=?";
 		RcdSet importDataRs=dao.query(sql,selectedCode);
 		if(importDataRs.size()==0){
 			return ErrorDesc.failureMessage("请选择资产");

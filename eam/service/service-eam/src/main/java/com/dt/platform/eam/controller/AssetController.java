@@ -916,7 +916,7 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.BATCH_CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AssetServiceProxy.BATCH_CONFIRM_OPERATION)
 	public Result batchConfirmOperation(List<String> ids)  {
-		return assetService.batchConfirmOperation(ids);
+		return assetService.batchConfirmOperation(ids,IDGenerator.getSnowflakeIdString());
 	}
 
 

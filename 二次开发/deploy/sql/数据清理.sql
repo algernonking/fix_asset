@@ -34,6 +34,7 @@ delete from eam_purchase_apply  where 1=1  and tenant_id='T001' ;
 delete from eam_purchase_apply_item  where 1=1  and tenant_id='T001' ;
 delete from eam_purchase_check  where 1=1  and tenant_id='T001' ;
 delete from eam_purchase_order_detail  where 1=1  and tenant_id='T001' ;
+delete from eam_asset_storage  where 1=1  and tenant_id='T001' ;
 delete from eam_asset_depreciation_oper  where 1=1  and tenant_id='T001' ;
 delete from eam_asset_depreciation_detail  where 1=1;
 -- software

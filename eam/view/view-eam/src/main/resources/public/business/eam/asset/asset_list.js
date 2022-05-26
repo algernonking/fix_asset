@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-19 14:57:27
+ * @since 2022-05-27 06:34:29
  */
 
 
@@ -162,7 +162,7 @@ function ListPage() {
 					,{ field: 'nextApproverIds', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('下一节点审批人') , templet: function (d) { return templet('nextApproverIds',d.nextApproverIds,d);}  }
 					,{ field: 'nextApproverNames', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('下一个审批节点审批人姓名') , templet: function (d) { return templet('nextApproverNames',d.nextApproverNames,d);}  }
 					,{ field: 'approvalOpinion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('审批意见') , templet: function (d) { return templet('approvalOpinion',d.approvalOpinion,d);}  }
-					,{ field: 'assetSelectedCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('选择') , templet: function (d) { return templet('assetSelectedCode',d.assetSelectedCode,d);}  }
+					,{ field: 'assetSelectedData', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('选择') , templet: function (d) { return templet('assetSelectedData',d.assetSelectedData,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

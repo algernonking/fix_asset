@@ -14,6 +14,7 @@ function ListPage() {
 	var dataTable=null;
 	var sort=null;
 	var categorySelect;
+	var menuSelect=[];
 	/**
 	 * 入口函数，初始化
 	 */
@@ -218,6 +219,7 @@ function ListPage() {
 	 * 获得已经选中行的数据,不传入 field 时，返回所有选中的记录，指定 field 时 返回指定的字段集合
 	 */
 	function getCheckedList(field) {
+		console.log("to get it ")
 		var checkStatus = table.checkStatus(TABLE_ID);
 		var data = checkStatus.data;
 		if(!field) return data;
@@ -500,6 +502,7 @@ function ListPage() {
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
 			var selected=getCheckedList("id");
+
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
@@ -539,6 +542,7 @@ function ListPage() {
 					break;
 				case 'printMore':
 					//更多下拉菜单
+					menuSelect=selected;
 					dropdown.render({
 						elem: this
 						,show: true //外部事件触发即显示
@@ -554,8 +558,7 @@ function ListPage() {
 							// 	top.layer.msg(fox.translate('缺少操作权限'), {icon: 2, time: 1500});
 							// 	return;
 							// }
-							console.log(menu,selected);
-							window.pageExt.list.moreAction && window.pageExt.list.moreAction(menu,selected, othis);
+							window.pageExt.list.moreAction && window.pageExt.list.moreAction(menu,menuSelect, othis);
 						}
 						,align: 'right'
 						,style: 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);'
@@ -563,6 +566,7 @@ function ListPage() {
 					break;
 				case 'exportMore':
 					//更多下拉菜单
+					menuSelect=selected;
 					dropdown.render({
 						elem: this
 						,show: true //外部事件触发即显示
@@ -572,13 +576,12 @@ function ListPage() {
 							{"code":"downloadAssetTpl","id":"3","title":"下载导入模版"}
 						]
 						,click: function(menu, othis){
-							console.log("selected",selected);
-							console.log(menu,othis);
+
 							// if(menu.perm && !admin.checkAuth(menu.perm)) {
 							// 	top.layer.msg(fox.translate('缺少操作权限'), {icon: 2, time: 1500});
 							// 	return;
 							// }
-							window.pageExt.list.moreAction && window.pageExt.list.moreAction(menu,selected, othis);
+							window.pageExt.list.moreAction && window.pageExt.list.moreAction(menu,menuSelect, othis);
 						}
 						,align: 'right'
 						,style: 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);'
