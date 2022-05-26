@@ -188,8 +188,7 @@ public class AssetDataController extends SuperController {
         if(result.isSuccess()){
             String path = System.getProperty("java.io.tmpdir");
             String id= result.getData().toString();
-            System.out.println("pdf id:"+id);
-            String pdfFileName =path + id+".pdf";
+            String pdfFileName =path +File.separator+ id+".pdf";
             response.setContentType("application/pdf");
             File f=new File(pdfFileName);
             if (!f.exists()) {
