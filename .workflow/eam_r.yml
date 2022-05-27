@@ -1,0 +1,45 @@
+version: '1.0'
+name: eam_r
+displayName: EAM
+triggers:
+  trigger: manual
+  push:
+    branches:
+      prefix:
+        - ''
+stages:
+  - name: stage-b60b8141
+    displayName: 未命名
+    strategy: naturally
+    trigger: auto
+    executor: []
+    steps:
+      - step: build@maven
+        name: build_maven
+        displayName: Maven 构建
+        jdkVersion: '8'
+        mavenVersion: 3.6.3
+        commands:
+          - '# maven build default command'
+          - cd eam
+          - mvn -B clean package -Dmaven.test.skip=true -Dautoconfig.skip
+          - cd ..
+          - find ./ -name "*.jar" >app_list.jar
+          - cd ./eam/wrapper/wrapper-all/target
+          - mv wrapper-all-0.0.2.RELEASE.jar app.jar
+          - tar zcvf eam.jar ./lib/* ./*.jar
+          - cd -
+          - mkdir target
+          - cp ./eam/wrapper/wrapper-all/target/eam.jar target/
+          - ls -rtl
+          - ' '
+        artifacts:
+          - name: EAM
+            path:
+              - ./target
+        settings: []
+        strategy:
+          retry: '0'
+permissions:
+  - role: admin
+    members: []
