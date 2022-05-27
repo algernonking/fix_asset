@@ -5,7 +5,7 @@
 ### 系统DEMO
 - [Demo] 每天定时由阿里云效自动编译发布部署
 - [Demo] http://eam-demo.rainbooow.com:26788/index.html
-- [Demo] 账户:admin 密码:123456
+- [Demo] 账户:admin 密码:123456；其它账户密码 为 fx9090
 
 #### 最新EAM编译后的包下载(为开发同步版本，并非发布版本)
 - 1、存储过程:[下载SQL](http://foxnicweb.com/docs/chapters/base/1.1/NextVal.zip)
@@ -29,7 +29,7 @@
 - 日志管理:Logback 1.2.3
 - 流程引擎:Camunda
 - 任务调度:Quartz 2.3.3
-- 项目管理框架: Maven 3.6
+- 项目管理框架: Maven 3.6、3.8
 - 运行容器:Undertow
 
 #### 前端技术栈
@@ -38,7 +38,7 @@
 #### 开发环境
 - IDE:IntelliJ IDEA 2020.2以上
 - JDK:JDK 1.8.100 (小版本100y以上,但仅支持1.8)
-- 数据库:Mysql 5.7.X
+- 数据库:Mysql 5.7.X、8.0
 - Redis:5.1(可选)
 
 #### 系统架构图
@@ -69,6 +69,7 @@
 - 3、配置与启动应用 https://www.bilibili.com/video/BV1wu411r7xC?spm_id_from=333.999.0.0
 - 4、EAM部署 https://www.bilibili.com/video/BV1Q34y1a7LR?spm_id_from=333.999.0.0
 - 5、EAM MAVEN设置 https://www.bilibili.com/video/BV1x34y1j7Ff?share_source=copy_web
+
 
 ### 二次开发相关的视频与文档集合
 - 1、官网文档集合 http://foxnicweb.com/docs/doc.html
