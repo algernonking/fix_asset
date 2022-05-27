@@ -26,7 +26,7 @@ import org.github.foxnic.web.constants.enums.changes.ApprovalAction;
 import org.github.foxnic.web.constants.enums.changes.ApprovalMode;
 import org.github.foxnic.web.constants.enums.changes.ApprovalStatus;
 import org.github.foxnic.web.constants.enums.changes.ChangeType;
-import org.github.foxnic.web.domain.bpm.Approver;
+import org.github.foxnic.web.domain.bpm.Assignee;
 import org.github.foxnic.web.domain.changes.*;
 import org.github.foxnic.web.framework.change.ChangesAssistant;
 import org.github.foxnic.web.proxy.changes.ChangeDefinitionServiceProxy;
@@ -173,17 +173,17 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 		//后续可按审批人对接待办体系
  		String simpleApprovers=dao.queryRecord("select simple_approvers from chs_change_definition where code=?",changeType).getString("simple_approvers");
 		if(!StringUtil.isBlank(simpleApprovers)){
-			List<Approver> appoverList=new ArrayList<>();
+			List<Assignee> appoverList=new ArrayList<>();
 			JSONArray sarr=JSONArray.parseArray(simpleApprovers);
 		 	for(int i=0;i<sarr.size();i++){
 		 		JSONObject e=sarr.getJSONObject(i);
 		 		String targetId=e.getString("targetId");
 				String targetType=e.getString("targetType");
 				if("busi_role".equals(targetType)){
-					List<Approver> bpmRoleApprovers1=assistant.getBpmRoleApproversById(targetId);
+					List<Assignee> bpmRoleApprovers1=assistant.getBpmRoleApproversById(targetId);
 					appoverList.addAll(bpmRoleApprovers1);
 				}else if("employee".equals(targetType)){
-					List<Approver> approvers1=assistant.getEmployeeApproversById(targetId);
+					List<Assignee> approvers1=assistant.getEmployeeApproversById(targetId);
 					appoverList.addAll(approvers1);
 				}
 			}

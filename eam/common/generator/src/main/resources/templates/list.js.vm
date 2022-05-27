@@ -49,7 +49,9 @@ function ListPage() {
 			fox.adjustSearchElement();
 		});
 		fox.adjustSearchElement();
-		$("#table-area").css("margin-top",$(".search-bar").height()+"px");
+		//
+		 var marginTop=$(".search-bar").height()+$(".search-bar").css("padding-top")+$(".search-bar").css("padding-bottom")
+		 $("#table-area").css("margin-top",marginTop+"px");
 		//
 		function renderTableInternal() {
 
@@ -740,7 +742,7 @@ function ListPage() {
 			}
 			#for(b:opColumnButtons)
 			else if (layEvent === '#(b.id)') { // #(b.label)
-				window.pageExt.list.#(b.functionName)(data);
+				window.pageExt.list.#(b.functionName)(data,this);
 			}
 			#end
 			#if(opColumnMenus!=null && opColumnMenus.size()>0)
@@ -820,7 +822,8 @@ function ListPage() {
 	window.module={
 		refreshTableData: refreshTableData,
 		refreshRowData: refreshRowData,
-		getCheckedList: getCheckedList
+		getCheckedList: getCheckedList,
+		showEditForm: showEditForm
 	};
 
 	window.pageExt.list.ending && window.pageExt.list.ending();

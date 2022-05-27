@@ -9,7 +9,6 @@
 		<artifactId>parent</artifactId>
 		<version>0.0.2.RELEASE</version>
 		<relativePath>../../pom.xml</relativePath>
-		<!-- lookup parent from repository -->
 	</parent>
 
 	<artifactId>wrapper-all</artifactId>
@@ -164,6 +163,8 @@
 			<version>${platform.version}</version>
 		</dependency>
 
+
+
 		<dependency>
 			<groupId>com.dt.platform</groupId>
 			<artifactId>view-eam</artifactId>
@@ -229,6 +230,12 @@
 		<dependency>
 			<groupId>com.github.foxnic.web</groupId>
 			<artifactId>view-console</artifactId>
+			<version>${foxnic-web.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.foxnic.web</groupId>
+			<artifactId>view-bpm</artifactId>
 			<version>${foxnic-web.version}</version>
 		</dependency>
 
