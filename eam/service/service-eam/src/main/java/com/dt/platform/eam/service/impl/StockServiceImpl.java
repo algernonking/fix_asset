@@ -198,7 +198,7 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 			return ErrorDesc.failure().message("请选择资产");
 		}
 
-		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_COLLECTION.code(),stock.getStockAssetIds());
+		Result ckResult=assetService.checkAssetDataForBusinessAction(AssetOperateEnum.EAM_ASSET_COLLECTION.code(),stock.getStockAssetIds());
 		if(!ckResult.isSuccess()){
 			return ckResult;
 		}

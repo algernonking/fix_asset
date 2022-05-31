@@ -11,7 +11,7 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:27:38
+ * @since 2022-05-30 14:11:13
  * @sign B7E251C4FA9EFDBD97FC79027D054918
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -149,16 +149,6 @@ public class InspectionGroupVOMeta extends InspectionGroupMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupVO,java.lang.String> LEADER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupVO.class ,LEADER_ID, java.lang.String.class, "负责人", "负责人", java.lang.String.class, null);
 	
 	/**
-	 * 成员 , 类型: java.lang.String
-	*/
-	public static final String OPER_USER="operUser";
-	
-	/**
-	 * 成员 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupVO,java.lang.String> OPER_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupVO.class ,OPER_USER, java.lang.String.class, "成员", "成员", java.lang.String.class, null);
-	
-	/**
 	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
@@ -271,27 +261,27 @@ public class InspectionGroupVOMeta extends InspectionGroupMeta {
 	/**
 	 * 巡检人 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final String INSPECTOR_LIST="inspectorList";
+	public static final String MEMBER_LIST="memberList";
 	
 	/**
 	 * 巡检人 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupVO,org.github.foxnic.web.domain.hrm.Employee> INSPECTOR_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupVO.class ,INSPECTOR_LIST, java.util.List.class, "巡检人", "巡检人", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupVO,org.github.foxnic.web.domain.hrm.Employee> MEMBER_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupVO.class ,MEMBER_LIST, java.util.List.class, "巡检人", "巡检人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
 	 * 巡检人 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String INSPECTOR_IDS="inspectorIds";
+	public static final String MEMBER_IDS="memberIds";
 	
 	/**
 	 * 巡检人 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupVO,java.lang.String> INSPECTOR_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupVO.class ,INSPECTOR_IDS, java.util.List.class, "巡检人", "巡检人", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupVO,java.lang.String> MEMBER_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupVO.class ,MEMBER_IDS, java.util.List.class, "巡检人", "巡检人", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NAME , STATUS , LEADER_ID , OPER_USER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , LEADER , INSPECTOR_LIST , INSPECTOR_IDS };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NAME , STATUS , LEADER_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , LEADER , MEMBER_LIST , MEMBER_IDS };
 	
 	/**
 	 * 代理类
@@ -445,17 +435,6 @@ public class InspectionGroupVOMeta extends InspectionGroupMeta {
 		}
 		
 		/**
-		 * 设置 成员
-		 * @param operUser 成员
-		 * @return 当前对象
-		*/
-		public InspectionGroup setOperUser(String operUser) {
-			super.change(OPER_USER,super.getOperUser(),operUser);
-			super.setOperUser(operUser);
-			return this;
-		}
-		
-		/**
 		 * 设置 备注
 		 * @param notes 备注
 		 * @return 当前对象
@@ -578,23 +557,23 @@ public class InspectionGroupVOMeta extends InspectionGroupMeta {
 		
 		/**
 		 * 设置 巡检人
-		 * @param inspectorList 巡检人
+		 * @param memberList 巡检人
 		 * @return 当前对象
 		*/
-		public InspectionGroup setInspectorList(List<Employee> inspectorList) {
-			super.change(INSPECTOR_LIST,super.getInspectorList(),inspectorList);
-			super.setInspectorList(inspectorList);
+		public InspectionGroup setMemberList(List<Employee> memberList) {
+			super.change(MEMBER_LIST,super.getMemberList(),memberList);
+			super.setMemberList(memberList);
 			return this;
 		}
 		
 		/**
 		 * 设置 巡检人
-		 * @param inspectorIds 巡检人
+		 * @param memberIds 巡检人
 		 * @return 当前对象
 		*/
-		public InspectionGroup setInspectorIds(List<String> inspectorIds) {
-			super.change(INSPECTOR_IDS,super.getInspectorIds(),inspectorIds);
-			super.setInspectorIds(inspectorIds);
+		public InspectionGroup setMemberIds(List<String> memberIds) {
+			super.change(MEMBER_IDS,super.getMemberIds(),memberIds);
+			super.setMemberIds(memberIds);
 			return this;
 		}
 	}

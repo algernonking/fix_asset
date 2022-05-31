@@ -101,7 +101,8 @@ public interface IAssetService extends ISuperService<Asset> {
 	 * @param assetIds 资产
 	 * @return 插入是否成功
 	 * */
-	Result checkAssetDataForBusiessAction(String businessType,List<String> assetIds);
+	Result checkAssetDataForBusinessAction(String businessType,List<String> assetIds);
+
 
 	/**
 	 * 插入实体

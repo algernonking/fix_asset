@@ -25,10 +25,11 @@ public class EamPurchaseCheckGtr extends BaseCodeGenerator {
 
 
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
-        cfg.getPoClassFile().addSimpleProperty(PurchaseApply.class,"purchaseApply","领用申请","领用申请");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"checkOrg","验收公司/部门","验收公司/部门");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
+
+        cfg.getPoClassFile().addSimpleProperty(PurchaseApply.class,"purchaseApply","领用申请","领用申请");
         cfg.getPoClassFile().addListProperty(PurchaseOrder.class,"orderList","订单","订单");
         cfg.getPoClassFile().addListProperty(String.class,"orderIds","订单列表","订单列表");
 

@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-26 21:48:24
- * @sign 1A8447629AC3D51F417571C3CEBAEF3F
+ * @since 2022-05-30 13:29:26
+ * @sign 8971727F15960C283C6BC63A0F6C9212
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -116,16 +116,6 @@ public class InspectionGroupUserMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupUser,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupUser.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
 	
 	/**
-	 * 租户 , 类型: java.lang.String
-	*/
-	public static final String TENANT_ID="tenantId";
-	
-	/**
-	 * 租户 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionGroupUser,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionGroupUser.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
-	
-	/**
 	 * version , 类型: java.lang.Integer
 	*/
 	public static final String VERSION="version";
@@ -138,7 +128,7 @@ public class InspectionGroupUserMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , GROUP_ID , USER_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION };
+	public static final String[] $PROPS={ ID , GROUP_ID , USER_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -255,17 +245,6 @@ public class InspectionGroupUserMeta {
 		public InspectionGroupUser setDeleteTime(Date deleteTime) {
 			super.change(DELETE_TIME,super.getDeleteTime(),deleteTime);
 			super.setDeleteTime(deleteTime);
-			return this;
-		}
-		
-		/**
-		 * 设置 租户
-		 * @param tenantId 租户
-		 * @return 当前对象
-		*/
-		public InspectionGroupUser setTenantId(String tenantId) {
-			super.change(TENANT_ID,super.getTenantId(),tenantId);
-			super.setTenantId(tenantId);
 			return this;
 		}
 		

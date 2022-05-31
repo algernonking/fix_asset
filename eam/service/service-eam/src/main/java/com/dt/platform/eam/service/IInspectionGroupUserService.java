@@ -15,13 +15,14 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import java.util.Map;
 
 /**
  * <p>
  * 班组人员 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-26 21:48:24
+ * @since 2022-05-30 13:29:26
 */
 
 public interface IInspectionGroupUserService extends ISuperService<InspectionGroupUser> {
@@ -165,7 +166,15 @@ public interface IInspectionGroupUserService extends ISuperService<InspectionGro
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
-	List<InspectionGroupUser> getByIds(List<String> ids);
+	List<InspectionGroupUser> queryListByIds(List<String> ids);
+
+	/**
+	 * 按 id 列表查询 Map
+	 * @param ids  主键清单
+	 * */
+	Map<String, InspectionGroupUser> queryMapByIds(List<String> ids);
+
+
 
 	/**
 	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在

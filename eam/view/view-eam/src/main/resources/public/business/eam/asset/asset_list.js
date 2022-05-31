@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-27 06:34:29
+ * @since 2022-05-30 19:14:55
  */
 
 
@@ -44,7 +44,9 @@ function ListPage() {
 			fox.adjustSearchElement();
 		});
 		fox.adjustSearchElement();
-		$("#table-area").css("margin-top",$(".search-bar").height()+"px");
+		//
+		 var marginTop=$(".search-bar").height()+$(".search-bar").css("padding-top")+$(".search-bar").css("padding-bottom")
+		 $("#table-area").css("margin-top",marginTop+"px");
 		//
 		function renderTableInternal() {
 
@@ -89,7 +91,7 @@ function ListPage() {
 					,{ field: 'manufacturerId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('厂商'), templet: function (d) { return templet('manufacturerId' ,fox.joinLabel(d.manufacturer,"manufacturerName"),d);}}
 					,{ field: 'model', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('规格型号') , templet: function (d) { return templet('model',d.model,d);}  }
 					,{ field: 'unit', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('计量单位') , templet: function (d) { return templet('unit',d.unit,d);}  }
-					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('使用期限') , templet: function (d) { return templet('serviceLife',d.serviceLife,d);}  }
+					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('使用期限(月)') , templet: function (d) { return templet('serviceLife',d.serviceLife,d);}  }
 					,{ field: 'safetyLevelCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('安全等级'), templet: function (d) { return templet('safetyLevelCode' ,fox.joinLabel(d.safetyLevel,"label"),d);}}
 					,{ field: 'serialNumber', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('序列号') , templet: function (d) { return templet('serialNumber',d.serialNumber,d);}  }
 					,{ field: 'ownCompanyId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('所属公司') , templet: function (d) { return templet('ownCompanyId',fox.getProperty(d,["ownerCompany","fullName"]),d);} }
@@ -106,7 +108,7 @@ function ListPage() {
 					,{ field: 'purchaseDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('购置日期') ,templet: function (d) { return templet('purchaseDate',fox.dateFormat(d.purchaseDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'productionDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('生产日期') ,templet: function (d) { return templet('productionDate',fox.dateFormat(d.productionDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'registerDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('登记时间') ,templet: function (d) { return templet('registerDate',fox.dateFormat(d.registerDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'rfid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('资产RFID') , templet: function (d) { return templet('rfid',d.rfid,d);}  }
+					,{ field: 'rfid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('RFID标签') , templet: function (d) { return templet('rfid',d.rfid,d);}  }
 					,{ field: 'lastVerificationDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('最近核对日期') ,templet: function (d) { return templet('lastVerificationDate',fox.dateFormat(d.lastVerificationDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'purpose', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('用途') , templet: function (d) { return templet('purpose',d.purpose,d);}  }
 					,{ field: 'assetNotes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('资产备注') , templet: function (d) { return templet('assetNotes',d.assetNotes,d);}  }
@@ -670,7 +672,7 @@ function ListPage() {
 				});
 			}
 			else if (layEvent === 'asset-data-change') { // 变更
-				window.pageExt.list.assetDataChange(data);
+				window.pageExt.list.assetDataChange(data,this);
 			}
 			
 		});
@@ -722,7 +724,8 @@ function ListPage() {
 	window.module={
 		refreshTableData: refreshTableData,
 		refreshRowData: refreshRowData,
-		getCheckedList: getCheckedList
+		getCheckedList: getCheckedList,
+		showEditForm: showEditForm
 	};
 
 	window.pageExt.list.ending && window.pageExt.list.ending();

@@ -1,0 +1,66 @@
+<!--
+/**
+ * 财务分类 列表页 JS 脚本
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-09-10 13:01:37
+ */
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+    <title th:text="${lang.translate('故障分类')}">故障分类</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/assets/css/admin.css"/>
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/libs/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <style>
+    </style>
+
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
+</head>
+
+<body style="overflow-y: hidden">
+
+
+<div class="layui-row">
+    <div class="layui-col-md3" style="background-color: #ffffff;" >
+        <div class="layui-form toolbar" style="padding:4px; border-bottom:1px #e6e6e6 solid; " id="toolbar">
+            <table style="width: 100%"><tr>
+                <td>
+                    <input id="search-input" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入关键字')}" style="width: 97%"/>
+                </td>
+                <td style="width: 54px;align-content: center">
+                    <button id="btn-add" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>
+                </td>
+            </tr></table>
+        </div>
+        <div id="tree-container" style="overflow:auto;height:800px">
+            <ul id="menu-tree" class="ztree"></ul>
+        </div>
+    </div>
+    <div class="layui-col-md9">
+        <iframe id="form-view" src="/business/eam/repair_category/repair_category_form.html" frameborder=0 width="100%" height="800px"></iframe>
+    </div>
+</div>
+
+
+<script th:inline="javascript">
+    var AUTH_PREFIX="eam_repair_category";
+</script>
+
+<script type="text/javascript" src="/module/global.js"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/assets/libs/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+<script src="/business/eam/repair_category/repair_category_list.js"></script>
+</body>
+</html>

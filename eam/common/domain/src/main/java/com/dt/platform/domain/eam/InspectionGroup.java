@@ -7,10 +7,12 @@ import com.dt.platform.constants.db.EAMTables.EAM_INSPECTION_GROUP;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import javax.persistence.Transient;
 import org.github.foxnic.web.domain.hrm.Employee;
 import java.util.List;
+import com.github.foxnic.commons.lang.DataParser;
 import java.util.ArrayList;
-import javax.persistence.Transient;
+import java.util.Arrays;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
 
@@ -19,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检班组
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:27:38
- * @sign 57773E7F8A23D1501BBA61FE2A473AC3
+ * @since 2022-05-30 14:11:13
+ * @sign 9837ABE14276378CD21FF190FA9A1950
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -57,12 +59,6 @@ public class InspectionGroup extends Entity {
 	private String leaderId;
 	
 	/**
-	 * 成员：成员
-	*/
-	@ApiModelProperty(required = false,value="成员" , notes = "成员")
-	private String operUser;
-	
-	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
@@ -97,6 +93,8 @@ public class InspectionGroup extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除")
 	private Integer deleted;
+	@Transient
+	private Boolean deletedBool;
 	
 	/**
 	 * 删除人ID：删除人ID
@@ -132,13 +130,13 @@ public class InspectionGroup extends Entity {
 	 * 巡检人：巡检人
 	*/
 	@ApiModelProperty(required = false,value="巡检人" , notes = "巡检人")
-	private List<Employee> inspectorList;
+	private List<Employee> memberList;
 	
 	/**
 	 * 巡检人：巡检人
 	*/
 	@ApiModelProperty(required = false,value="巡检人" , notes = "巡检人")
-	private List<String> inspectorIds;
+	private List<String> memberIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -213,25 +211,6 @@ public class InspectionGroup extends Entity {
 	*/
 	public InspectionGroup setLeaderId(String leaderId) {
 		this.leaderId=leaderId;
-		return this;
-	}
-	
-	/**
-	 * 获得 成员<br>
-	 * 成员
-	 * @return 成员
-	*/
-	public String getOperUser() {
-		return operUser;
-	}
-	
-	/**
-	 * 设置 成员
-	 * @param operUser 成员
-	 * @return 当前对象
-	*/
-	public InspectionGroup setOperUser(String operUser) {
-		this.operUser=operUser;
 		return this;
 	}
 	
@@ -340,12 +319,42 @@ public class InspectionGroup extends Entity {
 	}
 	
 	/**
+	 * 获得 是否已删除 的投影属性<br>
+	 * 等价于 getDeleted 方法，获得对应的枚举类型
+	 * @return 是否已删除
+	*/
+	@Transient
+	public Boolean isDeleted() {
+		if(this.deletedBool==null) {
+			this.deletedBool=DataParser.parseBoolean(deleted);
+		}
+		return this.deletedBool ;
+	}
+	
+	/**
 	 * 设置 是否已删除
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
 	public InspectionGroup setDeleted(Integer deleted) {
 		this.deleted=deleted;
+		this.deletedBool=DataParser.parseBoolean(deleted);
+		return this;
+	}
+	
+	/**
+	 * 设置 是否已删除的投影属性，等同于设置 是否已删除
+	 * @param deletedBool 是否已删除
+	 * @return 当前对象
+	*/
+	@Transient
+	public InspectionGroup setDeleted(Boolean deletedBool) {
+		if(deletedBool==null) {
+			this.deleted=null;
+		} else {
+			this.deleted=deletedBool?1:0;
+		}
+		this.deletedBool=deletedBool;
 		return this;
 	}
 	
@@ -449,28 +458,28 @@ public class InspectionGroup extends Entity {
 	 * 巡检人
 	 * @return 巡检人
 	*/
-	public List<Employee> getInspectorList() {
-		return inspectorList;
+	public List<Employee> getMemberList() {
+		return memberList;
 	}
 	
 	/**
 	 * 设置 巡检人
-	 * @param inspectorList 巡检人
+	 * @param memberList 巡检人
 	 * @return 当前对象
 	*/
-	public InspectionGroup setInspectorList(List<Employee> inspectorList) {
-		this.inspectorList=inspectorList;
+	public InspectionGroup setMemberList(List<Employee> memberList) {
+		this.memberList=memberList;
 		return this;
 	}
 	
 	/**
 	 * 添加 巡检人
-	 * @param inspector 巡检人
+	 * @param member 巡检人
 	 * @return 当前对象
 	*/
-	public InspectionGroup addInspector(Employee inspector) {
-		if(this.inspectorList==null) inspectorList=new ArrayList<>();
-		this.inspectorList.add(inspector);
+	public InspectionGroup addMember(Employee... member) {
+		if(this.memberList==null) memberList=new ArrayList<>();
+		this.memberList.addAll(Arrays.asList(member));
 		return this;
 	}
 	
@@ -479,28 +488,28 @@ public class InspectionGroup extends Entity {
 	 * 巡检人
 	 * @return 巡检人
 	*/
-	public List<String> getInspectorIds() {
-		return inspectorIds;
+	public List<String> getMemberIds() {
+		return memberIds;
 	}
 	
 	/**
 	 * 设置 巡检人
-	 * @param inspectorIds 巡检人
+	 * @param memberIds 巡检人
 	 * @return 当前对象
 	*/
-	public InspectionGroup setInspectorIds(List<String> inspectorIds) {
-		this.inspectorIds=inspectorIds;
+	public InspectionGroup setMemberIds(List<String> memberIds) {
+		this.memberIds=memberIds;
 		return this;
 	}
 	
 	/**
 	 * 添加 巡检人
-	 * @param inspectorId 巡检人
+	 * @param memberId 巡检人
 	 * @return 当前对象
 	*/
-	public InspectionGroup addInspectorId(String inspectorId) {
-		if(this.inspectorIds==null) inspectorIds=new ArrayList<>();
-		this.inspectorIds.add(inspectorId);
+	public InspectionGroup addMemberId(String... memberId) {
+		if(this.memberIds==null) memberIds=new ArrayList<>();
+		this.memberIds.addAll(Arrays.asList(memberId));
 		return this;
 	}
 

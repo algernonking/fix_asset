@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Transient;
 import java.util.Map;
 import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import java.util.List;
@@ -17,9 +18,10 @@ import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.DictItem;
 import com.dt.platform.domain.datacenter.Rack;
 import org.github.foxnic.web.domain.changes.ChangeInstance;
+import com.github.foxnic.commons.lang.DataParser;
 import java.util.HashMap;
 import java.util.ArrayList;
-import javax.persistence.Transient;
+import java.util.Arrays;
 import com.github.foxnic.dao.entity.EntityContext;
 
 
@@ -27,8 +29,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-27 06:34:28
- * @sign 6BE9F171891A96619D378EC61037F2B6
+ * @since 2022-05-30 19:14:53
+ * @sign 351B0F4F344E0584E161BEDDA5140943
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -149,9 +151,9 @@ public class Asset extends Entity {
 	private String unit;
 	
 	/**
-	 * 使用期限：使用期限
+	 * 使用期限(月)：使用期限(月)
 	*/
-	@ApiModelProperty(required = false,value="使用期限" , notes = "使用期限")
+	@ApiModelProperty(required = false,value="使用期限(月)" , notes = "使用期限(月)")
 	private BigDecimal serviceLife;
 	
 	/**
@@ -251,9 +253,9 @@ public class Asset extends Entity {
 	private Date registerDate;
 	
 	/**
-	 * 资产RFID：资产RFID
+	 * RFID标签：RFID标签
 	*/
-	@ApiModelProperty(required = false,value="资产RFID" , notes = "资产RFID")
+	@ApiModelProperty(required = false,value="RFID标签" , notes = "RFID标签")
 	private String rfid;
 	
 	/**
@@ -555,6 +557,8 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="是否已删除" , notes = "是否已删除")
 	private Integer deleted;
+	@Transient
+	private Boolean deletedBool;
 	
 	/**
 	 * 删除人ID：删除人ID
@@ -569,9 +573,9 @@ public class Asset extends Entity {
 	private Date deleteTime;
 	
 	/**
-	 * version：version
+	 * 版本：版本
 	*/
-	@ApiModelProperty(required = true,value="version" , notes = "version")
+	@ApiModelProperty(required = true,value="版本" , notes = "版本")
 	private Integer version;
 	
 	/**
@@ -1133,17 +1137,17 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 使用期限<br>
-	 * 使用期限
-	 * @return 使用期限
+	 * 获得 使用期限(月)<br>
+	 * 使用期限(月)
+	 * @return 使用期限(月)
 	*/
 	public BigDecimal getServiceLife() {
 		return serviceLife;
 	}
 	
 	/**
-	 * 设置 使用期限
-	 * @param serviceLife 使用期限
+	 * 设置 使用期限(月)
+	 * @param serviceLife 使用期限(月)
 	 * @return 当前对象
 	*/
 	public Asset setServiceLife(BigDecimal serviceLife) {
@@ -1456,17 +1460,17 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 资产RFID<br>
-	 * 资产RFID
-	 * @return 资产RFID
+	 * 获得 RFID标签<br>
+	 * RFID标签
+	 * @return RFID标签
 	*/
 	public String getRfid() {
 		return rfid;
 	}
 	
 	/**
-	 * 设置 资产RFID
-	 * @param rfid 资产RFID
+	 * 设置 RFID标签
+	 * @param rfid RFID标签
 	 * @return 当前对象
 	*/
 	public Asset setRfid(String rfid) {
@@ -2415,12 +2419,42 @@ public class Asset extends Entity {
 	}
 	
 	/**
+	 * 获得 是否已删除 的投影属性<br>
+	 * 等价于 getDeleted 方法，获得对应的枚举类型
+	 * @return 是否已删除
+	*/
+	@Transient
+	public Boolean isDeleted() {
+		if(this.deletedBool==null) {
+			this.deletedBool=DataParser.parseBoolean(deleted);
+		}
+		return this.deletedBool ;
+	}
+	
+	/**
 	 * 设置 是否已删除
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
 	public Asset setDeleted(Integer deleted) {
 		this.deleted=deleted;
+		this.deletedBool=DataParser.parseBoolean(deleted);
+		return this;
+	}
+	
+	/**
+	 * 设置 是否已删除的投影属性，等同于设置 是否已删除
+	 * @param deletedBool 是否已删除
+	 * @return 当前对象
+	*/
+	@Transient
+	public Asset setDeleted(Boolean deletedBool) {
+		if(deletedBool==null) {
+			this.deleted=null;
+		} else {
+			this.deleted=deletedBool?1:0;
+		}
+		this.deletedBool=deletedBool;
 		return this;
 	}
 	
@@ -2463,17 +2497,17 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 version<br>
-	 * version
-	 * @return version
+	 * 获得 版本<br>
+	 * 版本
+	 * @return 版本
 	*/
 	public Integer getVersion() {
 		return version;
 	}
 	
 	/**
-	 * 设置 version
-	 * @param version version
+	 * 设置 版本
+	 * @param version 版本
 	 * @return 当前对象
 	*/
 	public Asset setVersion(Integer version) {
@@ -2769,7 +2803,7 @@ public class Asset extends Entity {
 	/**
 	 * 添加 PCM数据
 	 * @param key 键
-	 * @param pn PCM数据
+	 * @param pcmData PCM数据
 	 * @return 当前对象
 	*/
 	public Asset putPcmData(String key,Object pcmData) {
@@ -2802,9 +2836,9 @@ public class Asset extends Entity {
 	 * @param entity 自定义数据属性字段
 	 * @return 当前对象
 	*/
-	public Asset addCatalogAttribute(CatalogAttribute entity) {
+	public Asset addCatalogAttribute(CatalogAttribute... entity) {
 		if(this.catalogAttribute==null) catalogAttribute=new ArrayList<>();
-		this.catalogAttribute.add(entity);
+		this.catalogAttribute.addAll(Arrays.asList(entity));
 		return this;
 	}
 	

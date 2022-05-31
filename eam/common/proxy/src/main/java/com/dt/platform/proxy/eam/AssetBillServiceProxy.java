@@ -64,6 +64,13 @@ public interface AssetBillServiceProxy {
      */
     public static final String QUERY_REAPIR_BILL = API_PREFIX + "query-repair-bill";
 
+
+    /**
+     * 查询资产单据
+     */
+    public static final String QUERY_REAPIR_ORDER_BILL = API_PREFIX + "query-repair-order-bill";
+
+
     /**
      * 查询资产单据
      */

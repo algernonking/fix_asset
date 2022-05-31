@@ -84,11 +84,124 @@ public class EamRelationManager extends RelationManager {
         this.setupAssetLabel();
         this.setupAssetLabelTpl();
         this.setupAssetLabelTplItem();
+
+
+        this.setupFailureRegistration();
+        this.setupRepairGroup();
+        this.setupRepairCategoryTpl();
+        this.setupRepairOrder();
+        this.setupRepairOrderAct();
+        this.setupRepairOrderAccept();
+    }
+
+
+    public void setupRepairOrderAccept() {
+        //制单人
+        this.property(RepairOrderAcceptanceMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACCEPTANCE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //验收人
+        this.property(RepairOrderAcceptanceMeta.ACCEPTER_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACCEPTANCE.ACCEPTER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
+        this.property(RepairOrderAcceptanceMeta.RESULT_TYPE_DICT_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACCEPTANCE.RESULT_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_repair_result_type'");
+
+
+        this.property(RepairOrderAcceptanceMeta.CATEGORY_TPL_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACCEPTANCE.CATEGORY_TPL_ID).join(EAMTables.EAM_REPAIR_CATEGORY_TPL.ID);
+
+    }
+
+
+    public void setupRepairOrderAct() {
+
+        this.property(RepairOrderActMeta.REPAIR_GROUP_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACT.GROUP_ID).join(EAMTables.EAM_REPAIR_GROUP.ID);
+
+        //制单人
+        this.property(RepairOrderActMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACT.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //执行人
+        this.property(RepairOrderActMeta.EXECUTOR_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACT.EXECUTOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
+
+    }
+
+    public void setupRepairOrder() {
+
+        //制单人
+        this.property(RepairOrderMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(RepairOrderMeta.REPAIR_URGENCY_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER.URGENCY_ID).join(EAMTables.EAM_REPAIR_URGENCY.ID);
+
+        this.property(RepairOrderMeta.REPORT_USER_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER.REPORT_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(RepairOrderMeta.ORGANIZATION_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER.REPORT_ORG_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        this.property(RepairOrderMeta.CATEGORY_TPL_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER.CATEGORY_TPL_ID).join(EAMTables.EAM_REPAIR_CATEGORY_TPL.ID);
+
+
+        this.property(RepairOrderMeta.ORDER_ACT_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER.ID).join(EAMTables.EAM_REPAIR_ORDER_ACT.ORDER_ID);
+
+        this.property(RepairOrderMeta.ORDER_ACCEPTANCE_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER.ID).join(EAMTables.EAM_REPAIR_ORDER_ACCEPTANCE.ORDER_ID);
+
+        // 关联资产
+        this.property(RepairOrderMeta.ASSET_LIST_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER.ID ).join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID).join( EAMTables.EAM_ASSET.ID);
+
+    }
+
+    public void setupRepairGroup() {
+
+        this.property(RepairGroupMeta.LEADER_PROP)
+                .using(EAMTables.EAM_REPAIR_GROUP.LEADER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(RepairGroupMeta.MEMBER_LIST_PROP)
+                .using(EAMTables.EAM_REPAIR_GROUP.ID).join(EAMTables.EAM_REPAIR_GROUP_USER.GROUP_ID)
+                .using(EAMTables.EAM_REPAIR_GROUP_USER.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
+    }
+
+    public void setupRepairCategoryTpl() {
+
+        this.property(RepairCategoryTplMeta.CATEGORY_PROP)
+                .using(EAMTables.EAM_REPAIR_CATEGORY_TPL.CATEGORY_ID).join(EAMTables.EAM_REPAIR_CATEGORY.ID);
     }
 
 
 
-    public void setupProperties() {
+    public void setupFailureRegistration() {
+
+        //制单人
+        this.property(FailureRegistrationMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_FAILURE_REGISTRATION.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(FailureRegistrationMeta.TYPE_DICT_PROP)
+                .using(EAMTables.EAM_FAILURE_REGISTRATION.TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_equipment_failure'");
+
+
+        // 关联资产
+        this.property(FailureRegistrationMeta.ASSET_LIST_PROP)
+                .using(EAMTables.EAM_FAILURE_REGISTRATION.ID ).join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID).join( EAMTables.EAM_ASSET.ID);
+
+
 
     }
 
@@ -295,12 +408,10 @@ public class EamRelationManager extends RelationManager {
         this.property(InspectionGroupMeta.LEADER_PROP)
                 .using(EAMTables.EAM_INSPECTION_GROUP.LEADER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
-        this.property(InspectionGroupMeta.INSPECTOR_LIST_PROP)
-                .using(EAMTables.EAM_INSPECTION_GROUP.ID).join(EAMTables.EAM_INSPECTION_GROUP_USER.GROUP_ID);
-
-//        this.property(InspectionGroupMeta.OPER_USER)
-//                .using(EAMTables.EAM_INSPECTION_GROUP.ID).join(EAMTables.EAM_INSPECTION_GROUP_USER.GROUP_ID);
-
+        //成员
+        this.property(InspectionGroupMeta.MEMBER_LIST_PROP)
+                .using(EAMTables.EAM_INSPECTION_GROUP.ID).join(EAMTables.EAM_INSPECTION_GROUP_USER.GROUP_ID)
+                .using(EAMTables.EAM_INSPECTION_GROUP_USER.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
     }
     public void setupInspectionPlan() {
@@ -798,6 +909,7 @@ public class EamRelationManager extends RelationManager {
     }
 
     public void setupInventory() {
+
         this.property(InventoryMeta.INVENTORY_ASSET_INFO_LIST_PROP)
                 .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_ASSET.INVENTORY_ID).after((tag,inventory,assets,map)->{
             HashMap<String,Integer> data= calculateInventoryAssetQuantityStatistics(assets);
@@ -1276,7 +1388,9 @@ public class EamRelationManager extends RelationManager {
     }
 
 
+    public void setupProperties() {
 
+    }
 
     private void setupGoods() {
 

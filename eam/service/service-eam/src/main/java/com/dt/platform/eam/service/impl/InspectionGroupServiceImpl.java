@@ -2,6 +2,9 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.domain.eam.InspectionGroupUser;
+import com.dt.platform.eam.service.IInspectionGroupUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,18 +32,23 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IInspectionGroupService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
  * 巡检班组 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:27:38
+ * @since 2022-05-30 12:57:13
 */
 
 
 @Service("EamInspectionGroupService")
 public class InspectionGroupServiceImpl extends SuperService<InspectionGroup> implements IInspectionGroupService {
+
+
+	@Autowired
+	private IInspectionGroupUserService inspectionGroupUserService;
 
 	/**
 	 * 注入DAO对象
@@ -69,7 +77,21 @@ public class InspectionGroupServiceImpl extends SuperService<InspectionGroup> im
 	 */
 	@Override
 	public Result insert(InspectionGroup inspectionGroup,boolean throwsException) {
+
+
 		Result r=super.insert(inspectionGroup,throwsException);
+		if(r.isSuccess()){
+			if(inspectionGroup.getMemberIds()!=null&&inspectionGroup.getMemberIds().size()>0){
+				List<InspectionGroupUser> list=new ArrayList<>();
+				for(String id:inspectionGroup.getMemberIds()){
+					InspectionGroupUser user=new InspectionGroupUser();
+					user.setUserId(id);
+					user.setGroupId(inspectionGroup.getId());
+					list.add(user);
+				}
+				inspectionGroupUserService.insertList(list);
+			}
+		}
 		return r;
 	}
 
@@ -125,7 +147,7 @@ public class InspectionGroupServiceImpl extends SuperService<InspectionGroup> im
 		InspectionGroup inspectionGroup = new InspectionGroup();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		inspectionGroup.setId(id);
-		inspectionGroup.setDeleted(dao.getDBTreaty().getTrueValue());
+		inspectionGroup.setDeleted(true);
 		inspectionGroup.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
 		inspectionGroup.setDeleteTime(new Date());
 		try {
@@ -160,6 +182,19 @@ public class InspectionGroupServiceImpl extends SuperService<InspectionGroup> im
 	@Override
 	public Result update(InspectionGroup inspectionGroup , SaveMode mode,boolean throwsException) {
 		Result r=super.update(inspectionGroup , mode , throwsException);
+		if(r.isSuccess()){
+			dao.execute("delete from eam_inspection_group_user where group_id=?",inspectionGroup.getId());
+			if(inspectionGroup.getMemberIds()!=null&&inspectionGroup.getMemberIds().size()>0){
+				List<InspectionGroupUser> list=new ArrayList<>();
+				for(String id:inspectionGroup.getMemberIds()){
+					InspectionGroupUser user=new InspectionGroupUser();
+					user.setUserId(id);
+					user.setGroupId(inspectionGroup.getId());
+					list.add(user);
+				}
+				inspectionGroupUserService.insertList(list);
+			}
+		}
 		return r;
 	}
 
@@ -203,8 +238,13 @@ public class InspectionGroupServiceImpl extends SuperService<InspectionGroup> im
 	}
 
 	@Override
-	public List<InspectionGroup> getByIds(List<String> ids) {
+	public List<InspectionGroup> queryListByIds(List<String> ids) {
 		return super.queryListByUKeys("id",ids);
+	}
+
+	@Override
+	public Map<String, InspectionGroup> queryMapByIds(List<String> ids) {
+		return super.queryMapByUKeys("id",ids, InspectionGroup::getId);
 	}
 
 

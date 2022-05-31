@@ -24,6 +24,11 @@ public class BaseCodeGenerator {
     public static final String BASIC_CY_MENU_ID="475955437510852608";
 
 
+    public static final String EQ_ID="568076619713875968";
+
+
+
+
     public static final String BASIC_DATA_MENU_ID="471620638545543168";
     public static final String BASIC_SETTING_MENU_ID="471986431431016449";
 

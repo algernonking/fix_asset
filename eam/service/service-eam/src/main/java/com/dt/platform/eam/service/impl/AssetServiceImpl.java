@@ -1011,7 +1011,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		Asset asset = new Asset();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		asset.setId(id);
-		asset.setDeleted(dao.getDBTreaty().getTrueValue());
+		asset.setDeleted(true);
 		asset.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
 		asset.setDeleteTime(new Date());
 		try {
@@ -1168,7 +1168,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}else if(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code().equals(businessType)){
 			//退库
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code());
-		}else if(AssetOperateEnum.EAM_ASSET_REPAIR.code().equals(businessType)){
+		}else if(AssetOperateEnum.EAM_ASSET_REPAIR_ORDER.code().equals(businessType)||AssetOperateEnum.EAM_ASSET_REPAIR.code().equals(businessType)||AssetOperateEnum.EAM_EQUIPMENT_FAILURE_REGISTRATION.code().equals(businessType)){
 			//报修
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
 		}else if(AssetOperateEnum.EAM_ASSET_SCRAP.code().equals(businessType)){
@@ -1183,7 +1183,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}else if(AssetOperateEnum.EAM_ASSET_CHANGE_BASE_INFO.code().equals(businessType)
 				||AssetOperateEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(businessType)
 				||AssetOperateEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(businessType)){
-			//转移
+			//
 		}else{
 			queryCondition.andIn("asset_status","unknow");
 			return ErrorDesc.failure().message("不支持当前业务类型操作");
@@ -1268,7 +1268,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result checkAssetDataForBusiessAction(String businessType,List<String> assetIds) {
+	public Result checkAssetDataForBusinessAction(String businessType,List<String> assetIds) {
 		Result result=new Result();
 		ConditionExpr queryCondition=new ConditionExpr();
 		queryCondition.andIn("id",assetIds);
