@@ -9,6 +9,7 @@ delete from eam_asset_repair where 1=1  and tenant_id='T001' ;
 delete from eam_asset_scrap where 1=1  and tenant_id='T001' ;
 delete from eam_asset_allocation where 1=1  and tenant_id='T001' ;
 delete from eam_asset_borrow where 1=1  and tenant_id='T001' ;
+delete from eam_failure_registration where 1=1  and tenant_id='T001' ;
 delete from eam_asset_borrow_return where 1=1;
 delete from eam_asset_collection where 1=1  and tenant_id='T001' ;
 delete from eam_asset_collection_return where 1=1  and tenant_id='T001' ;
@@ -23,7 +24,6 @@ delete from eam_asset_storage  where 1=1  and tenant_id='T001' ;
 delete from eam_asset_depreciation_oper  where 1=1  and tenant_id='T001' ;
 delete from eam_asset_depreciation_detail  where 1=1;
 delete from eam_purchase_order  where 1=1  and tenant_id='T001' ;
-
 -- software
 delete from eam_asset_software  where 1=1  and tenant_id='T001' ;
 delete from eam_asset_software_change  where 1=1  and tenant_id='T001' ;

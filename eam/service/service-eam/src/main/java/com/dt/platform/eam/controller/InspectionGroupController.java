@@ -1,8 +1,12 @@
 package com.dt.platform.eam.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.dt.platform.domain.eam.Inventory;
+import com.github.foxnic.commons.collection.CollectorUtil;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 巡检班组 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:27:38
+ * @since 2022-05-30 12:57:14
 */
 
 @Api(tags = "巡检班组")
@@ -70,7 +74,6 @@ public class InspectionGroupController extends SuperController {
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "班组1"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionGroupVOMeta.OPER_USER , value = "成员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "班组2"),
 	})
 	@ApiOperationSupport(order=1)
@@ -126,7 +129,6 @@ public class InspectionGroupController extends SuperController {
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "班组1"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionGroupVOMeta.OPER_USER , value = "成员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "班组2"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { InspectionGroupVOMeta.PAGE_INDEX , InspectionGroupVOMeta.PAGE_SIZE , InspectionGroupVOMeta.SEARCH_FIELD , InspectionGroupVOMeta.FUZZY_FIELD , InspectionGroupVOMeta.SEARCH_VALUE , InspectionGroupVOMeta.DIRTY_FIELDS , InspectionGroupVOMeta.SORT_FIELD , InspectionGroupVOMeta.SORT_TYPE , InspectionGroupVOMeta.IDS } )
@@ -148,7 +150,6 @@ public class InspectionGroupController extends SuperController {
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "班组1"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionGroupVOMeta.OPER_USER , value = "成员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "班组2"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { InspectionGroupVOMeta.PAGE_INDEX , InspectionGroupVOMeta.PAGE_SIZE , InspectionGroupVOMeta.SEARCH_FIELD , InspectionGroupVOMeta.FUZZY_FIELD , InspectionGroupVOMeta.SEARCH_VALUE , InspectionGroupVOMeta.DIRTY_FIELDS , InspectionGroupVOMeta.SORT_FIELD , InspectionGroupVOMeta.SORT_TYPE , InspectionGroupVOMeta.IDS } )
@@ -178,7 +179,10 @@ public class InspectionGroupController extends SuperController {
 		// join 关联的对象
 		inspectionGroupService.dao().fill(inspectionGroup)
 			.with("leader")
+				.with(InspectionGroupMeta.MEMBER_LIST)
 			.execute();
+		inspectionGroupService.dao().join(inspectionGroup.getLeader(), Person.class);
+		inspectionGroupService.dao().join(inspectionGroup.getMemberList(), Person.class);
 		result.success(true).data(inspectionGroup);
 		return result;
 	}
@@ -198,7 +202,7 @@ public class InspectionGroupController extends SuperController {
 	@PostMapping(InspectionGroupServiceProxy.GET_BY_IDS)
 	public Result<List<InspectionGroup>> getByIds(List<String> ids) {
 		Result<List<InspectionGroup>> result=new Result<>();
-		List<InspectionGroup> list=inspectionGroupService.getByIds(ids);
+		List<InspectionGroup> list=inspectionGroupService.queryListByIds(ids);
 		result.success(true).data(list);
 		return result;
 	}
@@ -213,7 +217,6 @@ public class InspectionGroupController extends SuperController {
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "班组1"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionGroupVOMeta.OPER_USER , value = "成员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "班组2"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { InspectionGroupVOMeta.PAGE_INDEX , InspectionGroupVOMeta.PAGE_SIZE } )
@@ -236,7 +239,6 @@ public class InspectionGroupController extends SuperController {
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "班组1"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionGroupVOMeta.OPER_USER , value = "成员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "班组2"),
 	})
 	@ApiOperationSupport(order=8)
@@ -248,7 +250,17 @@ public class InspectionGroupController extends SuperController {
 		// join 关联的对象
 		inspectionGroupService.dao().fill(list)
 			.with("leader")
+			.with(InspectionGroupMeta.MEMBER_LIST)
 			.execute();
+
+		List<Employee> leader= CollectorUtil.collectList(list.getList(), InspectionGroup::getLeader);
+		inspectionGroupService.dao().join(leader, Person.class);
+
+		List<List<Employee>>  memberList= CollectorUtil.collectList(list.getList(), InspectionGroup::getMemberList);
+		List<Employee> member=memberList.stream().collect(ArrayList::new,ArrayList::addAll,ArrayList::addAll);
+		inspectionGroupService.dao().join(member, Person.class);
+
+
 		result.success(true).data(list);
 		return result;
 	}

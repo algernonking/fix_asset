@@ -28,6 +28,7 @@ insert into sys_file(id,file_name,location,size,media_type,file_type)values('T00
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_23','eam_asset_part_goods_adjust.docx','/tpl/T001/eam_asset_part_goods_adjust.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_24','eam_batch_upload_asset.xls','/tpl/T001/eam_batch_upload_asset.xls',10000,'application/octet-stream','xls');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_25','eam_asset_storage.docx','/tpl/T001/eam_asset_storage.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_26','eam_asset_repair_order.docx','/tpl/T001/eam_asset_repair_order.docx',10000,'application/octet-stream','docx');
 
 
 delete from sys_tpl_file where tenant_id='T001' and type in ('eam_bill_docx','eam_asset_excel');
@@ -56,6 +57,7 @@ insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_22
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_23','eam_bill_docx','备件物品调整','eam_download_asset_part_goods_adjust_bill','T001_eam_23','T001');
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_24','eam_asset_excel','资产数据上传','eam_batch_upload_asset','T001_eam_24','T001');
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_25','eam_bill_docx','资产入库单据','eam_download_asset_storage_bill','T001_eam_25','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_26','eam_bill_docx','资产维修单据','eam_download_asset_repair_order_bill','T001_eam_26','T001');
 
 
 /* OPS */

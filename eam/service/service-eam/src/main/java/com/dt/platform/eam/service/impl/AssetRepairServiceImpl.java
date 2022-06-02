@@ -120,7 +120,6 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 
 		AssetRepair data= AssetRepairServiceProxy.api().getById(id).getData();
 		join(data, AssetRepairMeta.ASSET_LIST);
-
 		Map<String, Object> map= BeanUtil.toMap(data);
 		if(data.getStatus()!=null){
 			CodeTextEnum en= EnumUtil.parseByCode(AssetHandleStatusEnum.class,data.getStatus());
@@ -165,7 +164,6 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	public Result revokeOperation(String id) {
 		AssetRepair billData=getById(id);
 		if(AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())){
-
 		}else{
 			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
 		}
@@ -334,7 +332,7 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 		if(assetRepair.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
-		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_REPAIR.code(),assetRepair.getAssetIds());
+		Result ckResult=assetService.checkAssetDataForBusinessAction(AssetOperateEnum.EAM_ASSET_REPAIR.code(),assetRepair.getAssetIds());
 		if(!ckResult.isSuccess()){
 			return ckResult;
 		}
@@ -360,7 +358,6 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 		if(StringUtil.isBlank(assetRepair.getStatus())){
 			assetRepair.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
-
 		assetRepair.setRepairStatus(AssetRepairStatusEnum.WAIT_REPAIR.code());
 
 		//生成编码规则
@@ -451,7 +448,7 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 		if(ckDatalist.size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
-		return assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_REPAIR.code(),ckDatalist);
+		return assetService.checkAssetDataForBusinessAction(CodeModuleEnum.EAM_ASSET_REPAIR.code(),ckDatalist);
 	}
 
 
@@ -570,9 +567,6 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	 * @return 判断结果
 	 */
 	public Result<AssetRepair> checkExists(AssetRepair assetRepair) {
-		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(assetRepair, SYS_ROLE.NAME);
-		//return exists;
 		return ErrorDesc.success();
 	}
 

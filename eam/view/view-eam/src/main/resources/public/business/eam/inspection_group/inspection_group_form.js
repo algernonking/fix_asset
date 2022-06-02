@@ -1,7 +1,7 @@
 /**
  * 巡检班组 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:27:39
+ * @since 2022-05-30 14:11:15
  */
 
 function FormPage() {
@@ -13,6 +13,9 @@ function FormPage() {
 	var disableCreateNew=false;
 	var disableModify=false;
 	var dataBeforeEdit=null;
+	const bpmIntegrateMode="none";
+	var isInProcess=QueryString.get("isInProcess")
+
 	/**
       * 入口函数，初始化
       */
@@ -27,6 +30,10 @@ function FormPage() {
 		}
 		if(action=="view") {
 			disableModify=true;
+		}
+
+		if(bpmIntegrateMode=="front" && isInProcess==1) {
+			$(".model-form-footer").hide();
 		}
 
 		if(window.pageExt.form.beforeInit) {
@@ -55,6 +62,8 @@ function FormPage() {
 			var doNext=window.pageExt.form.beforeAdjustPopup();
 			if(!doNext) return;
 		}
+
+		if(bpmIntegrateMode=="front" && isInProcess==1) return;
 
 		clearTimeout(adjustPopupTask);
 		var scroll=$(".form-container").attr("scroll");
@@ -114,6 +123,30 @@ function FormPage() {
 	}
 
 	/**
+	 * 根据id填充表单
+	 * */
+	function fillFormDataByIds(ids) {
+		if(!ids) return;
+		if(ids.length==0) return;
+		var id=ids[0];
+		if(!id) return;
+		admin.post(moduleURL+"/get-by-id", { id : id }, function (r) {
+			if (r.success) {
+				fillFormData(r.data)
+			} else {
+				fox.showMessage(data);
+			}
+		});
+	}
+
+	/**
+	 * 在流程提交前处理表单数据
+	 * */
+	function processFormData4Bpm (processInstanceId,param,cb) {
+		window.pageExt.form.processFormData4Bpm && window.pageExt.form.processFormData4Bpm(processInstanceId,param,cb);
+	}
+
+	/**
       * 填充表单数据
       */
 	function fillFormData(formData) {
@@ -159,7 +192,8 @@ function FormPage() {
         setTimeout(function (){
             fm.animate({
                 opacity:'1.0'
-            },100);
+            },100,null,function (){
+				fm.css("opacity","1.0");});
         },1);
 
         //禁用编辑
@@ -201,18 +235,34 @@ function FormPage() {
 		return fox.formVerify("data-form",data,VALIDATE_CONFIG)
 	}
 
-	function saveForm(param) {
+	function saveForm(param,callback) {
 		param.dirtyFields=fox.compareDirtyFields(dataBeforeEdit,param);
+		var action=param.id?"edit":"create";
 		var api=moduleURL+"/"+(param.id?"update":"insert");
 		admin.post(api, param, function (data) {
 			if (data.success) {
 				var doNext=true;
+				var pkValues=data.data;
+				if(pkValues) {
+					for (var key in pkValues) {
+						$("#"+key).val(pkValues[key]);
+					}
+				}
 				if(window.pageExt.form.betweenFormSubmitAndClose) {
 					doNext=window.pageExt.form.betweenFormSubmitAndClose(param,data);
 				}
+
+				if(callback) {
+					doNext = callback(data,action);
+				}
+
 				if(doNext) {
 					admin.finishPopupCenterById('eam-inspection-group-form-data-win');
 				}
+
+				// 调整状态为编辑
+				action="edit";
+
 			} else {
 				fox.showMessage(data);
 			}
@@ -257,11 +307,11 @@ function FormPage() {
 			fox.chooseEmployee(leaderIdDialogOptions);
 		});
 		// 请选择人员对话框
-		$("#operUser-button").click(function(){
-				var operUserDialogOptions={
-				field:"operUser",
+		$("#memberIds-button").click(function(){
+				var memberIdsDialogOptions={
+				field:"memberIds",
 				formData:getFormData(),
-				inputEl:$("#operUser"),
+				inputEl:$("#memberIds"),
 				buttonEl:$(this),
 				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
@@ -270,11 +320,11 @@ function FormPage() {
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
 				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
-			fox.chooseEmployee(operUserDialogOptions);
+			fox.chooseEmployee(memberIdsDialogOptions);
 		});
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('eam-inspection-group-form-data-win'); });
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('eam-inspection-group-form-data-win',this); });
 
     }
 
@@ -283,6 +333,8 @@ function FormPage() {
 		verifyForm: verifyForm,
 		saveForm: saveForm,
 		fillFormData: fillFormData,
+		fillFormDataByIds:fillFormDataByIds,
+		processFormData4Bpm:processFormData4Bpm,
 		adjustPopup: adjustPopup,
 		action: action,
 		setAction: function (act) {

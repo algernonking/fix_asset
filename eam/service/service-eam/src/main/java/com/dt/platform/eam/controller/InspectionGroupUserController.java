@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 班组人员 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-26 21:48:24
+ * @since 2022-05-30 13:29:26
 */
 
 @Api(tags = "班组人员")
@@ -184,7 +184,7 @@ public class InspectionGroupUserController extends SuperController {
 	@PostMapping(InspectionGroupUserServiceProxy.GET_BY_IDS)
 	public Result<List<InspectionGroupUser>> getByIds(List<String> ids) {
 		Result<List<InspectionGroupUser>> result=new Result<>();
-		List<InspectionGroupUser> list=inspectionGroupUserService.getByIds(ids);
+		List<InspectionGroupUser> list=inspectionGroupUserService.queryListByIds(ids);
 		result.success(true).data(list);
 		return result;
 	}

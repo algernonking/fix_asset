@@ -1,7 +1,7 @@
 /**
  * 巡检班组 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:27:39
+ * @since 2022-05-30 14:11:14
  */
 
 
@@ -45,6 +45,9 @@ function ListPage() {
 		});
 		fox.adjustSearchElement();
 		//
+		 var marginTop=$(".search-bar").height()+$(".search-bar").css("padding-top")+$(".search-bar").css("padding-bottom")
+		 $("#table-area").css("margin-top",marginTop+"px");
+		//
 		function renderTableInternal() {
 
 			var ps={searchField: "$composite"};
@@ -78,7 +81,6 @@ function ListPage() {
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'leaderId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('负责人') , templet: function (d) { return templet('leaderId',fox.getProperty(d,["leader","nameAndBadge"]),d);} }
-					,{ field: 'operUser', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('成员') , templet: function (d) { return templet('operUser',d.operUser,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -420,7 +422,8 @@ function ListPage() {
 	window.module={
 		refreshTableData: refreshTableData,
 		refreshRowData: refreshRowData,
-		getCheckedList: getCheckedList
+		getCheckedList: getCheckedList,
+		showEditForm: showEditForm
 	};
 
 	window.pageExt.list.ending && window.pageExt.list.ending();

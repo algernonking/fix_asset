@@ -296,7 +296,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 		if(assetCollection.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
-		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_COLLECTION.code(),assetCollection.getAssetIds());
+		Result ckResult=assetService.checkAssetDataForBusinessAction(AssetOperateEnum.EAM_ASSET_COLLECTION.code(),assetCollection.getAssetIds());
 		if(!ckResult.isSuccess()){
 			return ckResult;
 		}
@@ -415,7 +415,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 		if(ckDatalist.size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
-		return assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_COLLECTION.code(),ckDatalist);
+		return assetService.checkAssetDataForBusinessAction(CodeModuleEnum.EAM_ASSET_COLLECTION.code(),ckDatalist);
 
 	}
 

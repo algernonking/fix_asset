@@ -1,0 +1,153 @@
+<!--
+/**
+ * 故障申请单 列表页 JS 脚本
+ * @author 金杰 , maillank@qq.com
+ * @since 2022-05-31 16:14:27
+ */
+ -->
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+    <title th:text="${lang.translate('故障申请单')}">故障申请单</title>
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+    <style>
+    </style>
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
+</head>
+
+<body style="overflow-y: hidden">
+
+<div class="layui-card">
+
+    <div class="layui-card-body" style="">
+
+        <div class="search-bar" style="">
+
+            <div class="search-input-rows" style="opacity: 0">
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 故障类型 , categoryTplId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 维修类型 , repairType ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 报修部门 , reportOrgId ,typeName=button, isHideInSearch=true -->
+                    <!-- 报修人 , reportUserId ,typeName=button, isHideInSearch=true -->
+                    <!-- 维修费用 , repairCost ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 计划完成日期 , planFinishDate ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 报修内容 , content ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 图片 , pictureId ,typeName=upload, isHideInSearch=true -->
+                    <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 维修状态 , repairStatus ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('维修状态')}" class="search-label repairStatus-label">维修状态</span><span class="search-colon">:</span></div>
+                        <div id="repairStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.RepairOrderStatusEnum')}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 紧急程度 , urgencyId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('紧急程度')}" class="search-label urgencyId-label">紧急程度</span><span class="search-colon">:</span></div>
+                        <div id="urgencyId" th:data="${'/service-eam/eam-repair-urgency/query-list'}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务日期')}" class="search-label businessDate-label">业务日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="businessDate-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="businessDate-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <!-- 按钮区域 -->
+            <div id="search-area" class="layui-form toolbar search-buttons" style="opacity: 0">
+                <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+            </div>
+        </div>
+
+        <div id="table-area" style="margin-top: 84px ">
+            <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
+
+<!-- 表格工具栏 -->
+<script type="text/html" id="toolbarTemplate">
+    <div class="layui-btn-container">
+        <button th:if="${perm.checkAuth('eam_repair_order:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button id="dispatch-order"  th:if="${perm.checkAuth('eam_repair_order:dispatch')}"class="layui-btn icon-btn layui-btn-sm   " lay-event="tool-dispatch-order"><span th:text="${lang.translate('派单')}">派单</span></button>
+    </div>
+</script>
+
+<!-- 表格操作列 -->
+<script type="text/html" id="tableOperationTemplate">
+
+    <button th:if="${perm.checkAuth('eam_repair_order:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button " lay-event="view"  data-id="{{d.id}}"> <span th:text="${lang.translate('查看')}">查看</span></button>
+    <button th:if="${perm.checkAnyAuth('eam_repair_order:update','eam_repair_order:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit"data-id="{{d.id}}"><span th:text="${lang.translate('修改')}">修改</span></button>
+
+
+    <button th:if="${perm.checkAuth('eam_repair_order:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
+
+    <button th:if="${perm.checkAuth('eam_repair_order:for-approval')}"class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" data-id="{{d.id}}"><span th:text="${lang.translate('送审')}">送审</span></button>
+    <button th:if="${perm.checkAuth('eam_repair_order:revoke')}"class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" data-id="{{d.id}}"><span th:text="${lang.translate('撤销')}">撤销</span></button>
+    <button th:if="${perm.checkAuth('eam_repair_order:finish')}"class="layui-btn layui-btn-xs  finish-data-button " lay-event="finish-data" data-id="{{d.id}}"><span th:text="${lang.translate('结束维修')}">结束维修</span></button>
+    <button th:if="${perm.checkAuth('eam_repair_order:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" data-id="{{d.id}}"><span th:text="${lang.translate('确认工单')}">确认工单</span></button>
+    <button th:if="${perm.checkAuth('eam_repair_order:bill')}"class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" data-id="{{d.id}}"><span th:text="${lang.translate('单据')}">单据</span></button>
+
+</script>
+
+
+<script th:inline="javascript">
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
+    var SELECT_REPAIRSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.RepairOrderStatusEnum')}]];
+    var SELECT_REPAIRTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.RepairOrderTypeEnum')}]];
+    var AUTH_PREFIX="eam_repair_order";
+
+    // 是否需要审批
+    var APPROVAL_REQUIRED = [[${approvalRequired}]] ;
+
+</script>
+
+<script th:src="'/business/eam/repair_order/repair_order_ext.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/repair_order/repair_order_list.js?'+${cacheKey}"></script>
+
+</body>
+</html>

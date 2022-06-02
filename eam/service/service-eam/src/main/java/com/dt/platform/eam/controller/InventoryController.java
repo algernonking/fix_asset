@@ -369,7 +369,6 @@ public class InventoryController extends SuperController {
 		inventoryService.dao().join(originator, Person.class);
 
 		List<List<Employee>> usersList= CollectorUtil.collectList(list.getList(), Inventory::getInventoryUser);
-
 		List<Employee> users=usersList.stream().collect(ArrayList::new,ArrayList::addAll,ArrayList::addAll);
 		inventoryService.dao().join(users, Person.class);
 

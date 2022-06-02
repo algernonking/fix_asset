@@ -240,6 +240,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
+            data.applyId=APPLY_ID;
             console.log("beforeSubmit",data);
             return true;
         },

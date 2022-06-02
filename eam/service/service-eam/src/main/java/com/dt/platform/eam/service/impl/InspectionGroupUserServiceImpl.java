@@ -29,13 +29,14 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IInspectionGroupUserService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
  * 班组人员 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-26 21:48:24
+ * @since 2022-05-30 13:29:26
 */
 
 
@@ -125,7 +126,7 @@ public class InspectionGroupUserServiceImpl extends SuperService<InspectionGroup
 		InspectionGroupUser inspectionGroupUser = new InspectionGroupUser();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		inspectionGroupUser.setId(id);
-		inspectionGroupUser.setDeleted(dao.getDBTreaty().getTrueValue());
+		inspectionGroupUser.setDeleted(true);
 		inspectionGroupUser.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
 		inspectionGroupUser.setDeleteTime(new Date());
 		try {
@@ -203,8 +204,13 @@ public class InspectionGroupUserServiceImpl extends SuperService<InspectionGroup
 	}
 
 	@Override
-	public List<InspectionGroupUser> getByIds(List<String> ids) {
+	public List<InspectionGroupUser> queryListByIds(List<String> ids) {
 		return super.queryListByUKeys("id",ids);
+	}
+
+	@Override
+	public Map<String, InspectionGroupUser> queryMapByIds(List<String> ids) {
+		return super.queryMapByUKeys("id",ids, InspectionGroupUser::getId);
 	}
 
 

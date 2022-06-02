@@ -30,15 +30,12 @@ public class StockGoodsOutGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addListProperty(String.class,"goodsIds","物品","物品");
 
 
-
-
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"stockTypeDict","出库类型","出库类型");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOwnCompany","所属公司","所属公司");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");
         cfg.getPoClassFile().addSimpleProperty(Warehouse.class,"warehouse","仓库","仓库");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","领用人","领用人");
-
 
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_GOODS_OUT.ID).basic().hidden(true);
 

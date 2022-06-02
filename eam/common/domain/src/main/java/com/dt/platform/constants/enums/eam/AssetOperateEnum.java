@@ -31,11 +31,14 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_BORROW(CodeModuleEnum.EAM_ASSET_BORROW.code() , "EAM_资产单据-借用"),
     EAM_ASSET_BORROW_RETURN(CodeModuleEnum.EAM_ASSET_BORROW_RETURN.code() , "EAM_资产单据-借用归还"),
     EAM_ASSET_REPAIR(CodeModuleEnum.EAM_ASSET_REPAIR.code() , "EAM_资产单据-报修"),
+    EAM_ASSET_REPAIR_ORDER(CodeModuleEnum.EAM_ASSET_REPAIR_ORDER.code() , "EAM_资产单据-故障报修申请"),
+    EAM_ASSET_REPAIR_ORDER_ACCEPTANCE(CodeModuleEnum.EAM_ASSET_REPAIR_ORDER_ACCEPTANCE.code() , "EAM_资产单据-维修验收"),
     EAM_ASSET_SCRAP(CodeModuleEnum.EAM_ASSET_SCRAP.code() , "EAM_资产单据-报废"),
     EAM_ASSET_ALLOCATE(CodeModuleEnum.EAM_ASSET_ALLOCATE.code() , "EAM_资产单据-调拨"),
     EAM_ASSET_TRANFER(CodeModuleEnum.EAM_ASSET_TRANFER.code() , "EAM_资产单据-转移"),
     EAM_ASSET_CLEAN(CodeModuleEnum.EAM_ASSET_CLEAN.code() , "EAM_资产单据-清理"),
     EAM_ASSET_INVENTORY(CodeModuleEnum.EAM_ASSET_INVENTORY.code() , "EAM_资产盘点"),
+    EAM_EQUIPMENT_FAILURE_REGISTRATION(CodeModuleEnum.EAM_EQUIPMENT_FAILURE_REGISTRATION.code(), "EAM_设备故障登记"),
 
     //资产变更
     EAM_ASSET_CHANGE_BASE_INFO(CodeModuleEnum.EAM_ASSET_CHANGE_BASE_INFO.code() , "EAM_资产变更-基本"),
@@ -102,6 +105,7 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_DOWNLOAD_ASSET_COLLECTION_RETURN_BILL("eam_download_asset_collection_return_bill" , "EAM_资产退库下载"),
     EAM_DOWNLOAD_ASSET_BORROW_BILL("eam_download_asset_borrow_bill" , "EAM_资产借用下载"),
     EAM_DOWNLOAD_ASSET_REPAIR_BILL("eam_download_asset_repair_bill" , "EAM_资产报修下载"),
+    EAM_DOWNLOAD_ASSET_REPAIR_ORDER_BILL("eam_download_asset_repair_order_bill" , "EAM_资产维修工单下载"),
     EAM_DOWNLOAD_ASSET_SCRAP_BILL("eam_download_asset_scrap_bill" , "EAM_资产报废下载"),
 
     //库存

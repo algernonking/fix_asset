@@ -21,6 +21,8 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_CONSUMABLES_CODE("eam_asset_consumables_code" , "EAM_资产耗材-编码"),
 
 
+
+
 	//
 	//软件资产
 	EAM_ASSET_SOFTWARE_INSERT("eam_asset_software_insert" , "EAM_资产软件-登记"),
@@ -35,13 +37,15 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_BORROW("eam_asset_borrow" , "EAM_资产单据-借用"),
 	EAM_ASSET_BORROW_RETURN("eam_asset_borrow_return" , "EAM_资产单据-借用归还"),
 	EAM_ASSET_REPAIR("eam_asset_repair" , "EAM_资产单据-报修"),
+	EAM_ASSET_REPAIR_ORDER("eam_asset_repair_order" , "EAM_资产单据-故障报修申请"),
+	EAM_ASSET_REPAIR_ORDER_ACT("eam_asset_repair_order_act" , "EAM_资产单据-维修工单"),
+	EAM_ASSET_REPAIR_ORDER_ACCEPTANCE("eam_asset_repair_order_acceptance" , "EAM_资产单据-维修验收"),
 	EAM_ASSET_SCRAP("eam_asset_scrap" , "EAM_资产单据-报废"),
 	EAM_ASSET_ALLOCATE("eam_asset_allocate" , "EAM_资产单据-调拨"),
 	EAM_ASSET_TRANFER("eam_asset_tranfer" , "EAM_资产单据-转移"),
 	EAM_ASSET_CLEAN("eam_asset_clean" , "EAM_资产单据-清理"),
 	EAM_ASSET_INVENTORY("eam_asset_inventory" , "EAM_资产数据-盘点"),
-
-
+	EAM_EQUIPMENT_FAILURE_REGISTRATION("eam_equipment_failure_registration" , "EAM_设备故障登记"),
 
 	//库存
 	EAM_ASSET_STOCK_IN("eam_asset_stock_in" , "EAM_资产库存-入库"),

@@ -502,7 +502,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 
 		assetScrap.setCleanStatus(AssetHandleStatusEnum.INCOMPLETE.code());
-		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_SCRAP.code(),assetScrap.getAssetIds());
+		Result ckResult=assetService.checkAssetDataForBusinessAction(AssetOperateEnum.EAM_ASSET_SCRAP.code(),assetScrap.getAssetIds());
 		if(!ckResult.isSuccess()){
 			return ckResult;
 		}
@@ -638,7 +638,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		if(ckDatalist.size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
-		return assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_SCRAP.code(),ckDatalist);
+		return assetService.checkAssetDataForBusinessAction(CodeModuleEnum.EAM_ASSET_SCRAP.code(),ckDatalist);
 	}
 
 	/**

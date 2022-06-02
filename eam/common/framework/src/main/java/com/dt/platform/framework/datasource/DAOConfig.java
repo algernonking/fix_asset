@@ -140,7 +140,6 @@ public class DAOConfig {
 
 		//设置获取当前用户的逻辑
 		if(SpringUtil.isReady()) {
-
 			dbTreaty.setSubjectHandler(()->{
 				SessionUser user=SessionUser.getCurrent();
 				return  user;

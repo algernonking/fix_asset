@@ -27,8 +27,8 @@ import com.dt.platform.domain.eam.GoodsStock;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-27 06:34:28
- * @sign 6BE9F171891A96619D378EC61037F2B6
+ * @since 2022-05-30 19:14:53
+ * @sign 351B0F4F344E0584E161BEDDA5140943
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -215,14 +215,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> UNIT_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,UNIT, java.lang.String.class, "标准型号计量单位", "标准型号计量单位", java.lang.String.class, null);
 	
 	/**
-	 * 使用期限 , 类型: java.math.BigDecimal
+	 * 使用期限(月) , 类型: java.math.BigDecimal
 	*/
 	public static final String SERVICE_LIFE="serviceLife";
 	
 	/**
-	 * 使用期限 , 类型: java.math.BigDecimal
+	 * 使用期限(月) , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限", "使用期限", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限(月)", "使用期限(月)", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 安全等级 , 类型: java.lang.String
@@ -385,14 +385,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.util.Date> REGISTER_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,REGISTER_DATE, java.util.Date.class, "登记时间", "登记时间", java.util.Date.class, null);
 	
 	/**
-	 * 资产RFID , 类型: java.lang.String
+	 * RFID标签 , 类型: java.lang.String
 	*/
 	public static final String RFID="rfid";
 	
 	/**
-	 * 资产RFID , 类型: java.lang.String
+	 * RFID标签 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> RFID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,RFID, java.lang.String.class, "资产RFID", "资产RFID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> RFID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,RFID, java.lang.String.class, "RFID标签", "RFID标签", java.lang.String.class, null);
 	
 	/**
 	 * 附件 , 类型: java.lang.String
@@ -915,14 +915,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
 	
 	/**
-	 * version , 类型: java.lang.Integer
+	 * 版本 , 类型: java.lang.Integer
 	*/
 	public static final String VERSION="version";
 	
 	/**
-	 * version , 类型: java.lang.Integer
+	 * 版本 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
 	
 	/**
 	 * 租户 , 类型: java.lang.String
@@ -1496,8 +1496,8 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 使用期限
-		 * @param serviceLife 使用期限
+		 * 设置 使用期限(月)
+		 * @param serviceLife 使用期限(月)
 		 * @return 当前对象
 		*/
 		public Asset setServiceLife(BigDecimal serviceLife) {
@@ -1683,8 +1683,8 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 资产RFID
-		 * @param rfid 资产RFID
+		 * 设置 RFID标签
+		 * @param rfid RFID标签
 		 * @return 当前对象
 		*/
 		public Asset setRfid(String rfid) {
@@ -2266,8 +2266,8 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 version
-		 * @param version version
+		 * 设置 版本
+		 * @param version 版本
 		 * @return 当前对象
 		*/
 		public Asset setVersion(Integer version) {
