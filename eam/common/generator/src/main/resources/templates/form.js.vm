@@ -256,7 +256,7 @@ function FormPage() {
 			if (r.success) {
 				fillFormData(r.data)
 			} else {
-				fox.showMessage(data);
+				fox.showMessage(r);
 			}
 		});
 	}
