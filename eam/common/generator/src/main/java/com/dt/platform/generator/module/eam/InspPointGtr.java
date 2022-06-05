@@ -2,9 +2,17 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
+import com.dt.platform.domain.eam.InspectionPoint;
+import com.dt.platform.domain.eam.InspectionRoute;
+import com.dt.platform.domain.eam.meta.InspectionPointMeta;
+import com.dt.platform.domain.eam.meta.InspectionRouteMeta;
+import com.dt.platform.domain.eam.meta.RepairCategoryMeta;
+import com.dt.platform.domain.eam.meta.RepairCategoryTplMeta;
 import com.dt.platform.eam.page.InspectionPointPageController;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.InspectionPointServiceProxy;
+import com.dt.platform.proxy.eam.InspectionRouteServiceProxy;
+import com.dt.platform.proxy.eam.RepairCategoryServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class InspPointGtr extends BaseCodeGenerator {
@@ -19,6 +27,9 @@ public class InspPointGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_INSPECTION_POINT.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.EAM_INSPECTION_POINT.CODE).search().fuzzySearch();
+
+
+        cfg.getPoClassFile().addSimpleProperty(InspectionRoute.class,"route","负责人","负责人");
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -36,7 +47,10 @@ public class InspPointGtr extends BaseCodeGenerator {
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
 
+        cfg.view().field(EAMTables.EAM_INSPECTION_POINT.PICTURE_ID).table().disable(true);
 
+
+        cfg.view().field(EAMTables.EAM_INSPECTION_POINT.STATUS).table().disable(true);
         cfg.view().field(EAMTables.EAM_INSPECTION_POINT.STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class);
         cfg.view().field(EAMTables.EAM_INSPECTION_POINT.NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_INSPECTION_POINT.CODE).form().validate().required();
@@ -50,6 +64,14 @@ public class InspPointGtr extends BaseCodeGenerator {
                 .form().label("附件").upload().acceptSingleFile().maxFileCount(1).displayFileName(false);
 
 
+        cfg.view().field(EAMTables.EAM_INSPECTION_POINT.ROUTE_ID)
+                .form().selectBox().queryApi(InspectionRouteServiceProxy.QUERY_LIST)
+                .paging(false).filter(true).toolbar(false)
+                .valueField(InspectionRouteMeta.ID).
+                textField(InspectionRouteMeta.NAME).
+                fillWith(InspectionPointMeta.ROUTE).muliti(false);
+
+
         cfg.view().formWindow().width("85%");
 
         cfg.view().list().disableBatchDelete();
@@ -58,10 +80,12 @@ public class InspPointGtr extends BaseCodeGenerator {
                 new Object[] {
                         EAMTables.EAM_INSPECTION_POINT.STATUS,
                         EAMTables.EAM_INSPECTION_POINT.NAME,
+                        EAMTables.EAM_INSPECTION_POINT.RFID,
                 },
                 new Object[] {
                         EAMTables.EAM_INSPECTION_POINT.CODE,
                         EAMTables.EAM_INSPECTION_POINT.POS,
+                        EAMTables.EAM_INSPECTION_POINT.ROUTE_ID,
                 },
                 new Object[] {
                         EAMTables.EAM_INSPECTION_POINT.POS_LONGITUDE,

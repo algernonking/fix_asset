@@ -1,16 +1,21 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-17 13:33:40
+ * @since 2022-06-02 05:32:26
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-asset-repair";
+	// 表单执行操作类型：view，create，edit
 	var action=null;
 	var disableCreateNew=false;
 	var disableModify=false;
+	var dataBeforeEdit=null;
+	const bpmIntegrateMode="none";
+	var isInProcess=QueryString.get("isInProcess")
+
 	/**
       * 入口函数，初始化
       */
@@ -27,8 +32,12 @@ function FormPage() {
 			disableModify=true;
 		}
 
+		if(bpmIntegrateMode=="front" && isInProcess==1) {
+			$(".model-form-footer").hide();
+		}
+
 		if(window.pageExt.form.beforeInit) {
-			window.pageExt.form.beforeInit();
+			window.pageExt.form.beforeInit(action,admin.getTempData('eam-asset-repair-form-data'));
 		}
 
 		//渲染表单组件
@@ -52,6 +61,8 @@ function FormPage() {
 			if(!doNext) return;
 		}
 
+		if(bpmIntegrateMode=="front" && isInProcess==1) return;
+
 		clearTimeout(adjustPopupTask);
 		var scroll=$(".form-container").attr("scroll");
 		if(scroll=='yes') return;
@@ -59,7 +70,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
-			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight,'eam-asset-repair-form-data-win');
 			if(area==null) return;
 			admin.putTempData('eam-asset-repair-form-area', area);
 			window.adjustPopup=adjustPopup;
@@ -86,6 +97,11 @@ function FormPage() {
 			el: "status",
 			radio: true,
 			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
@@ -97,7 +113,7 @@ function FormPage() {
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -107,6 +123,11 @@ function FormPage() {
 			el: "repairStatus",
 			radio: true,
 			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("repairStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
@@ -118,8 +139,7 @@ function FormPage() {
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -128,21 +148,27 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "type",
 			radio: true,
-			filterable: false,
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("type",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
+			searchField: "label", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
+					defaultIndexs = "0".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					console.log("push",data);
-					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -150,12 +176,19 @@ function FormPage() {
 		laydate.render({
 			elem: '#planFinishDate',
 			format:"yyyy-MM-dd",
-			trigger:"click"
+			value:$('#planFinishDate').val()?$('#planFinishDate').val():new Date(),
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("planFinishDate",value, date, endDate);
+			}
 		});
 		laydate.render({
 			elem: '#actualFinishDate',
 			format:"yyyy-MM-dd",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("actualFinishDate",value, date, endDate);
+			}
 		});
 	    //渲染图片字段
 		foxup.render({
@@ -163,25 +196,58 @@ function FormPage() {
 			maxFileCount: 6,
 			displayFileName: true,
 			accept: "image",
-			afterPreview:function(elId,index,fileId,upload){
+			afterPreview:function(elId,index,fileId,upload,fileName,fileType){
 				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterPreview",elId:elId,index:index,fileId:fileId,upload:upload,fileName:fileName,fileType:fileType});
 			},
-			afterUpload:function (result,index,upload) {
-				console.log("文件上传后回调")
+			afterUpload:function (elId,result,index,upload) {
+				console.log("文件上传后回调");
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterUpload",elId:elId,index:index,upload:upload});
 			},
 			beforeRemove:function (elId,fileId,index,upload) {
 				console.log("文件删除前回调");
+				if(window.pageExt.form.onUploadEvent) {
+					return window.pageExt.form.onUploadEvent({event:"beforeRemove",elId:elId,index:index,fileId:fileId,upload:upload});
+				}
 				return true;
 			},
 			afterRemove:function (elId,fileId,index,upload) {
 				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterRemove",elId:elId,index:index,upload:upload});
 			}
 	    });
 		laydate.render({
 			elem: '#businessDate',
 			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("businessDate",value, date, endDate);
+			}
 		});
+	}
+
+	/**
+	 * 根据id填充表单
+	 * */
+	function fillFormDataByIds(ids) {
+		if(!ids) return;
+		if(ids.length==0) return;
+		var id=ids[0];
+		if(!id) return;
+		admin.post(moduleURL+"/get-by-id", { id : id }, function (r) {
+			if (r.success) {
+				fillFormData(r.data)
+			} else {
+				fox.showMessage(data);
+			}
+		});
+	}
+
+	/**
+	 * 在流程提交前处理表单数据
+	 * */
+	function processFormData4Bpm (processInstanceId,param,cb) {
+		window.pageExt.form.processFormData4Bpm && window.pageExt.form.processFormData4Bpm(processInstanceId,param,cb);
 	}
 
 	/**
@@ -220,7 +286,7 @@ function FormPage() {
 			}
 
 
-			console.log("fox setting"+formData.repairType);
+			//设置  维修类型 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#type",formData.repairType);
 
 			//处理fillBy
@@ -240,7 +306,8 @@ function FormPage() {
         setTimeout(function (){
             fm.animate({
                 opacity:'1.0'
-            },100);
+            },100,null,function (){
+				fm.css("opacity","1.0");});
         },1);
 
         //禁用编辑
@@ -263,6 +330,8 @@ function FormPage() {
 			}
 		}
 
+		dataBeforeEdit=getFormData();
+
 	}
 
 	function getFormData() {
@@ -280,27 +349,39 @@ function FormPage() {
 		return fox.formVerify("data-form",data,VALIDATE_CONFIG)
 	}
 
-	function saveForm(param) {
+	function saveForm(param,callback) {
+		param.dirtyFields=fox.compareDirtyFields(dataBeforeEdit,param);
+		var action=param.id?"edit":"create";
 		var api=moduleURL+"/"+(param.id?"update":"insert");
-		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, param, function (data) {
-			clearTimeout(task);
-			layer.closeAll('loading');
+		admin.post(api, param, function (data) {
 			if (data.success) {
-				layer.msg(data.message, {icon: 1, time: 500});
-				var index=admin.getTempData('eam-asset-repair-form-data-popup-index');
 				var doNext=true;
+				var pkValues=data.data;
+				if(pkValues) {
+					for (var key in pkValues) {
+						$("#"+key).val(pkValues[key]);
+					}
+				}
 				if(window.pageExt.form.betweenFormSubmitAndClose) {
 					doNext=window.pageExt.form.betweenFormSubmitAndClose(param,data);
 				}
-				if(doNext) {
-					admin.finishPopupCenter(index);
+
+				if(callback) {
+					doNext = callback(data,action);
 				}
+
+				if(doNext) {
+					admin.finishPopupCenterById('eam-asset-repair-form-data-win');
+				}
+
+				// 调整状态为编辑
+				action="edit";
+
 			} else {
-				layer.msg(data.message, {icon: 2, time: 1000});
+				fox.showMessage(data);
 			}
 			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
-		}, "POST");
+		}, {delayLoading:1000,elms:[$("#submit-button")]});
 	}
 
 	/**
@@ -325,8 +406,7 @@ function FormPage() {
 
 
 	    //关闭窗口
-		$("#cancel-button").click(function(){admin.finishPopupCenterById("eam-asset-repair-form-data-win");});
-
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('eam-asset-repair-form-data-win',this); });
 
     }
 
@@ -335,7 +415,13 @@ function FormPage() {
 		verifyForm: verifyForm,
 		saveForm: saveForm,
 		fillFormData: fillFormData,
-		adjustPopup: adjustPopup
+		fillFormDataByIds:fillFormDataByIds,
+		processFormData4Bpm:processFormData4Bpm,
+		adjustPopup: adjustPopup,
+		action: action,
+		setAction: function (act) {
+			action = act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();

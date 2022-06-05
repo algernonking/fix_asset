@@ -246,6 +246,44 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         downloadBill:function (data){
             console.log('downloadBill',data);
         },
+         dispatchForm:function(data) {
+                admin.putTempData('eam-repair-order-act-form-data-form-action', "create",true);
+                var action="create";
+                var queryString="?orderId="+data.orderId;
+              //  var queryString=""
+                admin.putTempData('eam-repair-order-act-form-data', data);
+                var area=admin.getTempData('eam-repair-order-act-form-area');
+                var height= (area && area.height) ? area.height : ($(window).height()*0.6);
+                var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
+                var title = fox.translate('维修工单');
+                if(action=="create") title=fox.translate('添加')+title;
+                else if(action=="edit") title=fox.translate('修改')+title;
+                else if(action=="view") title=fox.translate('查看')+title;
+                admin.popupCenter({
+                    title: title,
+                    resize: false,
+                    offset: [top,null],
+                    area: ["85%",height+"px"],
+                    type: 2,
+                    id:"eam-repair-order-act-form-data-win",
+                    content: '/business/eam/repair_order_act/repair_order_act_form.html' + queryString,
+                    finish: function () {
+                        window.module.refreshTableData();
+                    }
+                });
+         },
+        dispatchOrder:function(selected,obj){
+            if(selected.length==0){
+                top.layer.msg("请选择工单进行派发", {time: 1000});
+                return 1
+            }
+            if(selected.length>1){
+                top.layer.msg("请选择一个工单进行派发", {time: 1000});
+                return 1
+            }
+            list.dispatchForm({orderId:selected[0]})
+            console.log(selected);
+        },
         /**
          * 末尾执行
          */

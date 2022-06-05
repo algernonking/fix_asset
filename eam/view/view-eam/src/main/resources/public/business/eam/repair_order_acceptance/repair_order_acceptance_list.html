@@ -2,7 +2,7 @@
 /**
  * 维修验收 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:15
+ * @since 2022-06-02 05:56:20
  */
  -->
  <!DOCTYPE html>
@@ -51,6 +51,8 @@
                     <!-- 图片 , pictureId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- orderBusinessCode , orderBusinessCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- orderName , orderName ,typeName=text_input, isHideInSearch=true -->
                     <!-- 维修结果 , resultType ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('维修结果')}" class="search-label resultType-label">维修结果</span><span class="search-colon">:</span></div>
@@ -61,9 +63,9 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
-                    <!-- 维修备注 , notes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 验收备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('维修备注')}" class="search-label notes-label">维修备注</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('验收备注')}" class="search-label notes-label">验收备注</span><span class="search-colon">:</span></div>
                         <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
@@ -117,8 +119,8 @@
     <button th:if="${perm.checkAnyAuth('eam_repair_order_acceptance:update','eam_repair_order_acceptance:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit"data-id="{{d.id}}"><span th:text="${lang.translate('修改')}">修改</span></button>
 
 
-    <button th:if="${perm.checkAuth('eam_repair_order_acceptance:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
+    <button th:if="${perm.checkAuth('eam_repair_order_acceptance:acceptance')}"class="layui-btn layui-btn-xs  acceptance-button " lay-event="acceptance" data-id="{{d.id}}"><span th:text="${lang.translate('确定验收')}">确定验收</span></button>
 
 </script>
 

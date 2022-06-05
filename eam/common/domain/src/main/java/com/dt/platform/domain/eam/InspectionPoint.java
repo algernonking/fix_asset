@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import javax.persistence.Transient;
+import com.github.foxnic.commons.lang.DataParser;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
 
@@ -16,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检点
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:28:38
- * @sign 718FC078F2A3BC4248DC0E962494291E
+ * @since 2022-06-02 14:00:01
+ * @sign 9ECEBB497492E2C17B15941F660ABADF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -58,6 +59,18 @@ public class InspectionPoint extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="巡检内容" , notes = "巡检内容")
 	private String content;
+	
+	/**
+	 * 巡检路线：巡检路线
+	*/
+	@ApiModelProperty(required = false,value="巡检路线" , notes = "巡检路线")
+	private String routeId;
+	
+	/**
+	 * RFID：RFID
+	*/
+	@ApiModelProperty(required = false,value="RFID" , notes = "RFID")
+	private String rfid;
 	
 	/**
 	 * 位置：位置
@@ -118,6 +131,8 @@ public class InspectionPoint extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除")
 	private Integer deleted;
+	@Transient
+	private Boolean deletedBool;
 	
 	/**
 	 * 删除人ID：删除人ID
@@ -142,6 +157,12 @@ public class InspectionPoint extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 负责人：负责人
+	*/
+	@ApiModelProperty(required = false,value="负责人" , notes = "负责人")
+	private InspectionRoute route;
 	
 	/**
 	 * 获得 主键<br>
@@ -235,6 +256,44 @@ public class InspectionPoint extends Entity {
 	*/
 	public InspectionPoint setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检路线<br>
+	 * 巡检路线
+	 * @return 巡检路线
+	*/
+	public String getRouteId() {
+		return routeId;
+	}
+	
+	/**
+	 * 设置 巡检路线
+	 * @param routeId 巡检路线
+	 * @return 当前对象
+	*/
+	public InspectionPoint setRouteId(String routeId) {
+		this.routeId=routeId;
+		return this;
+	}
+	
+	/**
+	 * 获得 RFID<br>
+	 * RFID
+	 * @return RFID
+	*/
+	public String getRfid() {
+		return rfid;
+	}
+	
+	/**
+	 * 设置 RFID
+	 * @param rfid RFID
+	 * @return 当前对象
+	*/
+	public InspectionPoint setRfid(String rfid) {
+		this.rfid=rfid;
 		return this;
 	}
 	
@@ -419,12 +478,42 @@ public class InspectionPoint extends Entity {
 	}
 	
 	/**
+	 * 获得 是否已删除 的投影属性<br>
+	 * 等价于 getDeleted 方法，获得对应的枚举类型
+	 * @return 是否已删除
+	*/
+	@Transient
+	public Boolean isDeleted() {
+		if(this.deletedBool==null) {
+			this.deletedBool=DataParser.parseBoolean(deleted);
+		}
+		return this.deletedBool ;
+	}
+	
+	/**
 	 * 设置 是否已删除
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
 	public InspectionPoint setDeleted(Integer deleted) {
 		this.deleted=deleted;
+		this.deletedBool=DataParser.parseBoolean(deleted);
+		return this;
+	}
+	
+	/**
+	 * 设置 是否已删除的投影属性，等同于设置 是否已删除
+	 * @param deletedBool 是否已删除
+	 * @return 当前对象
+	*/
+	@Transient
+	public InspectionPoint setDeleted(Boolean deletedBool) {
+		if(deletedBool==null) {
+			this.deleted=null;
+		} else {
+			this.deleted=deletedBool?1:0;
+		}
+		this.deletedBool=deletedBool;
 		return this;
 	}
 	
@@ -501,6 +590,25 @@ public class InspectionPoint extends Entity {
 	*/
 	public InspectionPoint setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 负责人<br>
+	 * 负责人
+	 * @return 负责人
+	*/
+	public InspectionRoute getRoute() {
+		return route;
+	}
+	
+	/**
+	 * 设置 负责人
+	 * @param route 负责人
+	 * @return 当前对象
+	*/
+	public InspectionPoint setRoute(InspectionRoute route) {
+		this.route=route;
 		return this;
 	}
 

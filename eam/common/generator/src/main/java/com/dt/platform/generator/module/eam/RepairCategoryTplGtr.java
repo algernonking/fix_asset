@@ -43,7 +43,7 @@ public class RepairCategoryTplGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_REPAIR_CATEGORY_TPL.ATTACH_ID).table().disable(true);
 
-        cfg.view().field(EAMTables.EAM_REPAIR_CATEGORY_TPL.STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class);
+        cfg.view().field(EAMTables.EAM_REPAIR_CATEGORY_TPL.STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class).defaultIndex(0);
         cfg.view().field(EAMTables.EAM_REPAIR_CATEGORY_TPL.CODE).form().validate().required();
         cfg.view().field(EAMTables.EAM_REPAIR_CATEGORY_TPL.NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_REPAIR_CATEGORY_TPL.COST_TIME).form().label("标准耗时(分)").numberInput();
@@ -53,10 +53,10 @@ public class RepairCategoryTplGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_REPAIR_CATEGORY_TPL.CATEGORY_ID)
         .basic().label("故障类型")
         .form().validate().required().form().selectBox().queryApi(RepairCategoryServiceProxy.QUERY_LIST)
-        .paging(false).filter(false).toolbar(false)
+        .paging(false).filter(true).toolbar(false)
         .valueField(RepairCategoryMeta.ID).
         textField(RepairCategoryMeta.HIERARCHY_NAME).
-        fillWith(RepairCategoryTplMeta.CATEGORY).muliti(false);
+        fillWith(RepairCategoryTplMeta.CATEGORY).muliti(false).defaultIndex(0);
 
 
         cfg.view().field(EAMTables.EAM_REPAIR_CATEGORY_TPL.ATTACH_ID).form().upload().acceptSingleFile().maxFileCount(1);

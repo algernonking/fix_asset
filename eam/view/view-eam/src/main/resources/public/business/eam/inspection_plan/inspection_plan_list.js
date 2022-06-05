@@ -1,7 +1,7 @@
 /**
  * 巡检计划 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:17:18
+ * @since 2022-06-02 12:17:57
  */
 
 
@@ -45,6 +45,9 @@ function ListPage() {
 		});
 		fox.adjustSearchElement();
 		//
+		 var marginTop=$(".search-bar").height()+$(".search-bar").css("padding-top")+$(".search-bar").css("padding-bottom")
+		 $("#table-area").css("margin-top",marginTop+"px");
+		//
 		function renderTableInternal() {
 
 			var ps={searchField: "$composite"};
@@ -82,9 +85,9 @@ function ListPage() {
 					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('班组'), templet: function (d) { return templet('groupId' ,fox.joinLabel(d.inspectionGroup,"name"),d);}}
 					,{ field: 'startDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('开始日期') ,templet: function (d) { return templet('startDate',fox.dateFormat(d.startDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'endDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('截止日期') ,templet: function (d) { return templet('endDate',fox.dateFormat(d.endDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'actionCycle', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('周期') , templet: function (d) { return templet('actionCycle',d.actionCycle,d);}  }
 					,{ field: 'inspectionMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检顺序'), templet:function (d){ return templet('inspectionMethod',fox.getEnumText(SELECT_INSPECTIONMETHOD_DATA,d.inspectionMethod),d);}}
-					,{ field: 'inspectionType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('计划类型'), templet: function (d) { return templet('inspectionType' ,fox.joinLabel(d.inspectionTypeDict,"label"),d);}}
-					,{ field: 'completionTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('时间要求') , templet: function (d) { return templet('completionTime',d.completionTime,d);}  }
+					,{ field: 'completionTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('时间要求'), templet: function (d) { return templet('completionTime' ,fox.joinLabel(d.timeDict,"label"),d);}}
 					,{ field: 'overtimeMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('超时处理'), templet:function (d){ return templet('overtimeMethod',fox.getEnumText(SELECT_OVERTIMEMETHOD_DATA,d.overtimeMethod),d);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
@@ -154,7 +157,6 @@ function ListPage() {
 		value.planType={ inputType:"select_box", value: getSelectedValue("#planType","value"), label:getSelectedValue("#planType","nameStr") };
 		value.groupId={ inputType:"select_box", value: getSelectedValue("#groupId","value") ,fillBy:["inspectionGroup"]  , label:getSelectedValue("#groupId","nameStr") };
 		value.inspectionMethod={ inputType:"select_box", value: getSelectedValue("#inspectionMethod","value"), label:getSelectedValue("#inspectionMethod","nameStr") };
-		value.inspectionType={ inputType:"select_box", value: getSelectedValue("#inspectionType","value") ,fillBy:["inspectionTypeDict"]  , label:getSelectedValue("#inspectionType","nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -313,33 +315,6 @@ function ListPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					opts.push({data:data[i],name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
-		//渲染 inspectionType 下拉字段
-		fox.renderSelectBox({
-			el: "inspectionType",
-			radio: true,
-			size: "small",
-			filterable: true,
-			on: function(data){
-				setTimeout(function () {
-					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("inspectionType",data.arr,data.change,data.isAdd);
-				},1);
-			},
-			paging: true,
-			pageRemote: true,
-			//转换数据
-			searchField: "label", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({data:data[i],name:data[i].label,value:data[i].code});
 				}
 				return opts;
 			}
@@ -553,7 +528,8 @@ function ListPage() {
 	window.module={
 		refreshTableData: refreshTableData,
 		refreshRowData: refreshRowData,
-		getCheckedList: getCheckedList
+		getCheckedList: getCheckedList,
+		showEditForm: showEditForm
 	};
 
 	window.pageExt.list.ending && window.pageExt.list.ending();

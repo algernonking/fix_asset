@@ -68,17 +68,17 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form()
                 .form().selectBox().enumType(AssetRepairStatusEnum.class).defaultValue(AssetRepairStatusEnum.REPAIRING.code());
 
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PLAN_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PLAN_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").defaultNow().search().range();
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ACTUAL_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.TYPE)
                 .basic().label("维修类型")
                 .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_repair_type")
-                .paging(false).filter(false).toolbar(false)
+                .paging(false).filter(true).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillWith(AssetRepairMeta.REPAIR_TYPE).muliti(false);
+                fillWith(AssetRepairMeta.REPAIR_TYPE).muliti(false).defaultIndex(0);
 
 //        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.TYPE)
 //                .form().selectBox().dict(DictEnum.EAM_REPAIR_TYPE).defaultValue(AssetRepairStatusEnum.REPAIRING.code());

@@ -1,7 +1,7 @@
 /**
  * 维修验收 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:15
+ * @since 2022-06-02 05:56:20
  */
 
 
@@ -78,21 +78,19 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'orderId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('申请单') , templet: function (d) { return templet('orderId',d.orderId,d);}  }
-					,{ field: 'orderActId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('维修单') , templet: function (d) { return templet('orderActId',d.orderActId,d);}  }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'resultType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('维修结果'), templet: function (d) { return templet('resultType' ,fox.joinLabel(d.resultTypeDict,"label"),d);}}
 					,{ field: 'accepterId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('验收人') , templet: function (d) { return templet('accepterId',fox.getProperty(d,["accepter","nameAndBadge"]),d);} }
 					,{ field: 'categoryTplId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('实际故障'), templet: function (d) { return templet('categoryTplId' ,fox.joinLabel(d.categoryTpl,"name"),d);}}
 					,{ field: 'actualCost', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('实际花费') , templet: function (d) { return templet('actualCost',d.actualCost,d);}  }
 					,{ field: 'finishTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('完成时间') ,templet: function (d) { return templet('finishTime',fox.dateFormat(d.finishTime,"yyyy-MM-dd"),d); }  }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('维修备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'pictureId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('图片') , templet: function (d) { return templet('pictureId',d.pictureId,d);}  }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('验收备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'selectedCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('选择数据') , templet: function (d) { return templet('selectedCode',d.selectedCode,d);}  }
+					,{ field: 'orderBusinessCode', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('订单编号') , templet: function (d) { return templet('orderBusinessCode',fox.getProperty(d,["order","businessCode"]),d);} }
+					,{ field: 'orderName', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('订单名称') , templet: function (d) { return templet('orderName',fox.getProperty(d,["order","name"]),d);} }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 30 }
 				]],
 				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
 				footer : {
@@ -207,13 +205,15 @@ function ListPage() {
 			el: "resultType",
 			radio: true,
 			size: "small",
-			filterable: false,
+			filterable: true,
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("resultType",data.arr,data.change,data.isAdd);
 				},1);
 			},
 			//转换数据
+			searchField: "label", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -230,13 +230,15 @@ function ListPage() {
 			el: "categoryTplId",
 			radio: true,
 			size: "small",
-			filterable: false,
+			filterable: true,
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("categoryTplId",data.arr,data.change,data.isAdd);
 				},1);
 			},
 			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -424,6 +426,9 @@ function ListPage() {
 						}
 					});
 				});
+			}
+			else if (layEvent === 'acceptance') { // 确定验收
+				window.pageExt.list.acceptance(data,this);
 			}
 			
 		});

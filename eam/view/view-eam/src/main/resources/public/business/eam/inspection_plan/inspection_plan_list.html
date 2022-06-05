@@ -2,7 +2,7 @@
 /**
  * 巡检计划 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:17:18
+ * @since 2022-06-02 12:17:56
  */
  -->
  <!DOCTYPE html>
@@ -47,7 +47,8 @@
                     <!-- 负责人 , leaderId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 开始日期 , startDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 截止日期 , endDate ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 时间要求 , completionTime ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 周期 , actionCycle ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 时间要求 , completionTime ,typeName=select_box, isHideInSearch=true -->
                     <!-- 超时处理 , overtimeMethod ,typeName=select_box, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
                     <!-- 状态 , planStatus ,typeName=select_box, isHideInSearch=false -->
@@ -80,11 +81,6 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('巡检顺序')}" class="search-label inspectionMethod-label">巡检顺序</span><span class="search-colon">:</span></div>
                         <div id="inspectionMethod" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.InspectionMethodEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 计划类型 , inspectionType ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('计划类型')}" class="search-label inspectionType-label">计划类型</span><span class="search-colon">:</span></div>
-                        <div id="inspectionType" th:data="${'/service-system/sys-dict-item/query-paged-list?dictCode=eam_inspection_type'}" style="width:150px" extraParam="{}"></div>
-                    </div>
                     <!-- 计划类型 , planType ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('计划类型')}" class="search-label planType-label">计划类型</span><span class="search-colon">:</span></div>
@@ -97,12 +93,12 @@
 
 
             <!-- 按钮区域 -->
-            <div class="layui-form toolbar search-buttons" style="opacity: 0">
+            <div id="search-area" class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
             </div>
         </div>
 
-        <div style="margin-top: 84px ">
+        <div id="table-area" style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

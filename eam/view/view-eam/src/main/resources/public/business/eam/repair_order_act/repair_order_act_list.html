@@ -2,7 +2,7 @@
 /**
  * 维修工单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 14:52:54
+ * @since 2022-06-01 20:29:20
  */
  -->
  <!DOCTYPE html>
@@ -40,22 +40,21 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 申请单 , orderId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 维修状态 , repairStatus ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 维修班组 , groupId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('维修状态')}" class="search-label repairStatus-label">维修状态</span><span class="search-colon">:</span></div>
-                        <div id="repairStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.RepairOrderStatusEnum')}" style="width:150px" extraParam="{}"></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('维修班组')}" class="search-label groupId-label">维修班组</span><span class="search-colon">:</span></div>
+                        <div id="groupId" th:data="${'/service-eam/eam-repair-group/query-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 执行人 , executorId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 维修费用 , repairCost ,typeName=number_input, isHideInSearch=true -->
                     <!-- 完成时间 , finishTime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 图片 , pictureId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 跟随验证 , withAcceptance ,typeName=text_input, isHideInSearch=true -->
                     <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 维修班组 , groupId ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('维修班组')}" class="search-label groupId-label">维修班组</span><span class="search-colon">:</span></div>
-                        <div id="groupId" th:data="${'/service-eam/eam-repair-group/query-list'}" style="width:150px" extraParam="{}"></div>
-                    </div>
+                    <!-- orderBusinessCode , orderBusinessCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- orderName , orderName ,typeName=text_input, isHideInSearch=true -->
+                    <!-- orderRepairStatus , orderRepairStatus ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
@@ -117,15 +116,18 @@
     <button th:if="${perm.checkAnyAuth('eam_repair_order_act:update','eam_repair_order_act:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit"data-id="{{d.id}}"><span th:text="${lang.translate('修改')}">修改</span></button>
 
 
-    <button th:if="${perm.checkAuth('eam_repair_order_act:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
+    <button th:if="${perm.checkAuth('eam_repair_order_act:start')}"class="layui-btn layui-btn-xs  start-button " lay-event="start" data-id="{{d.id}}"><span th:text="${lang.translate('开始维修')}">开始维修</span></button>
+    <button th:if="${perm.checkAuth('eam_repair_order_act:finish')}"class="layui-btn layui-btn-xs  finish-button " lay-event="finish" data-id="{{d.id}}"><span th:text="${lang.translate('结束维修')}">结束维修</span></button>
+    <button th:if="${perm.checkAuth('eam_repair_order_act:acceptance')}"class="layui-btn layui-btn-xs  acceptance-button " lay-event="acceptance" data-id="{{d.id}}"><span th:text="${lang.translate('验收')}">验收</span></button>
+    <button th:if="${perm.checkAuth('eam_repair_order_act:cancel')}"class="layui-btn layui-btn-xs  cancel-button " lay-event="cancel" data-id="{{d.id}}"><span th:text="${lang.translate('取消')}">取消</span></button>
 
 </script>
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_REPAIRSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.RepairOrderStatusEnum')}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var AUTH_PREFIX="eam_repair_order_act";
 
 

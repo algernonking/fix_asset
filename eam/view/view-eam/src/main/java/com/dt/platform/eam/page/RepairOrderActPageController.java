@@ -49,7 +49,9 @@ public class RepairOrderActPageController extends ViewController {
 	 * 维修工单 表单页面
 	 */
 	@RequestMapping("/repair_order_act_form.html")
-	public String form(Model model,HttpServletRequest request , String id) {
+	public String form(Model model,HttpServletRequest request , String id,String orderId) {
+
+		model.addAttribute("orderId",orderId);
 		return prefix+"/repair_order_act_form";
 	}
 }

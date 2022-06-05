@@ -23,8 +23,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 故障申请单
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:14:26
- * @sign 89069D0C0A4C1A24B07B54EBA5C0E6ED
+ * @since 2022-06-02 05:30:41
+ * @sign 6936FEF4BE90E7B4FB6F2E8CF68B66B1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -137,6 +137,18 @@ public class RepairOrder extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
 	private Date businessDate;
+	
+	/**
+	 * 维修单：维修单
+	*/
+	@ApiModelProperty(required = false,value="维修单" , notes = "维修单")
+	private String autoAct;
+	
+	/**
+	 * 创建规则：创建规则
+	*/
+	@ApiModelProperty(required = false,value="创建规则" , notes = "创建规则")
+	private String autoActRule;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -574,6 +586,44 @@ public class RepairOrder extends Entity {
 	*/
 	public RepairOrder setBusinessDate(Date businessDate) {
 		this.businessDate=businessDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 维修单<br>
+	 * 维修单
+	 * @return 维修单
+	*/
+	public String getAutoAct() {
+		return autoAct;
+	}
+	
+	/**
+	 * 设置 维修单
+	 * @param autoAct 维修单
+	 * @return 当前对象
+	*/
+	public RepairOrder setAutoAct(String autoAct) {
+		this.autoAct=autoAct;
+		return this;
+	}
+	
+	/**
+	 * 获得 创建规则<br>
+	 * 创建规则
+	 * @return 创建规则
+	*/
+	public String getAutoActRule() {
+		return autoActRule;
+	}
+	
+	/**
+	 * 设置 创建规则
+	 * @param autoActRule 创建规则
+	 * @return 当前对象
+	*/
+	public RepairOrder setAutoActRule(String autoActRule) {
+		this.autoActRule=autoActRule;
 		return this;
 	}
 	

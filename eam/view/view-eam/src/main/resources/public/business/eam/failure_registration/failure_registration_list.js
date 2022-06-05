@@ -1,7 +1,7 @@
 /**
  * 故障登记 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-28 20:22:15
+ * @since 2022-06-02 05:33:57
  */
 
 
@@ -221,13 +221,15 @@ function ListPage() {
 			el: "type",
 			radio: true,
 			size: "small",
-			filterable: false,
+			filterable: true,
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("type",data.arr,data.change,data.isAdd);
 				},1);
 			},
 			//转换数据
+			searchField: "label", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];

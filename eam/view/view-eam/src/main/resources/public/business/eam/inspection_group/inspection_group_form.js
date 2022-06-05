@@ -1,7 +1,7 @@
 /**
  * 巡检班组 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-30 14:11:15
+ * @since 2022-06-02 19:14:12
  */
 
 function FormPage() {
@@ -110,7 +110,7 @@ function FormPage() {
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
+					defaultIndexs = "0".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;

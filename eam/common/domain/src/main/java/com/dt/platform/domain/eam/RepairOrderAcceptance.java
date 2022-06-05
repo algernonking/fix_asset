@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 维修验收
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:14
- * @sign 8561855723446D3AA2EC984A07649BA9
+ * @since 2022-06-02 05:56:19
+ * @sign D0E5AB998802BFC4640D5FA59F004DD8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -88,9 +88,9 @@ public class RepairOrderAcceptance extends Entity {
 	private Date finishTime;
 	
 	/**
-	 * 维修备注：维修备注
+	 * 验收备注：验收备注
 	*/
-	@ApiModelProperty(required = false,value="维修备注" , notes = "维修备注")
+	@ApiModelProperty(required = false,value="验收备注" , notes = "验收备注")
 	private String notes;
 	
 	/**
@@ -202,6 +202,18 @@ public class RepairOrderAcceptance extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="报修故障" , notes = "报修故障")
 	private RepairCategoryTpl categoryTpl;
+	
+	/**
+	 * 订单名称：订单名称
+	*/
+	@ApiModelProperty(required = false,value="订单名称" , notes = "订单名称")
+	private String orderName;
+	
+	/**
+	 * 订单编号：订单编号
+	*/
+	@ApiModelProperty(required = false,value="订单编号" , notes = "订单编号")
+	private String orderBusinessCode;
 	
 	/**
 	 * 获得 主键<br>
@@ -375,17 +387,17 @@ public class RepairOrderAcceptance extends Entity {
 	}
 	
 	/**
-	 * 获得 维修备注<br>
-	 * 维修备注
-	 * @return 维修备注
+	 * 获得 验收备注<br>
+	 * 验收备注
+	 * @return 验收备注
 	*/
 	public String getNotes() {
 		return notes;
 	}
 	
 	/**
-	 * 设置 维修备注
-	 * @param notes 维修备注
+	 * 设置 验收备注
+	 * @param notes 验收备注
 	 * @return 当前对象
 	*/
 	public RepairOrderAcceptance setNotes(String notes) {
@@ -762,6 +774,44 @@ public class RepairOrderAcceptance extends Entity {
 	*/
 	public RepairOrderAcceptance setCategoryTpl(RepairCategoryTpl categoryTpl) {
 		this.categoryTpl=categoryTpl;
+		return this;
+	}
+	
+	/**
+	 * 获得 订单名称<br>
+	 * 订单名称
+	 * @return 订单名称
+	*/
+	public String getOrderName() {
+		return orderName;
+	}
+	
+	/**
+	 * 设置 订单名称
+	 * @param orderName 订单名称
+	 * @return 当前对象
+	*/
+	public RepairOrderAcceptance setOrderName(String orderName) {
+		this.orderName=orderName;
+		return this;
+	}
+	
+	/**
+	 * 获得 订单编号<br>
+	 * 订单编号
+	 * @return 订单编号
+	*/
+	public String getOrderBusinessCode() {
+		return orderBusinessCode;
+	}
+	
+	/**
+	 * 设置 订单编号
+	 * @param orderBusinessCode 订单编号
+	 * @return 当前对象
+	*/
+	public RepairOrderAcceptance setOrderBusinessCode(String orderBusinessCode) {
+		this.orderBusinessCode=orderBusinessCode;
 		return this;
 	}
 

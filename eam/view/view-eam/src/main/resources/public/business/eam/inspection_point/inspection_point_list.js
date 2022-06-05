@@ -1,7 +1,7 @@
 /**
  * 巡检点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:28:40
+ * @since 2022-06-02 14:00:02
  */
 
 
@@ -45,6 +45,9 @@ function ListPage() {
 		});
 		fox.adjustSearchElement();
 		//
+		 var marginTop=$(".search-bar").height()+$(".search-bar").css("padding-top")+$(".search-bar").css("padding-bottom")
+		 $("#table-area").css("margin-top",marginTop+"px");
+		//
 		function renderTableInternal() {
 
 			var ps={searchField: "$composite"};
@@ -79,11 +82,12 @@ function ListPage() {
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检内容') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'routeId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检路线'), templet: function (d) { return templet('routeId' ,fox.joinLabel(d.route,"name"),d);}}
+					,{ field: 'rfid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('RFID') , templet: function (d) { return templet('rfid',d.rfid,d);}  }
 					,{ field: 'pos', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('位置') , templet: function (d) { return templet('pos',d.pos,d);}  }
 					,{ field: 'posLongitude', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('位置经度') , templet: function (d) { return templet('posLongitude',d.posLongitude,d);}  }
 					,{ field: 'posLatitude', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('位置纬度') , templet: function (d) { return templet('posLatitude',d.posLatitude,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'pictureId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('图片') , templet: function (d) { return templet('pictureId',d.pictureId,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -425,7 +429,8 @@ function ListPage() {
 	window.module={
 		refreshTableData: refreshTableData,
 		refreshRowData: refreshRowData,
-		getCheckedList: getCheckedList
+		getCheckedList: getCheckedList,
+		showEditForm: showEditForm
 	};
 
 	window.pageExt.list.ending && window.pageExt.list.ending();

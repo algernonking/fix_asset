@@ -3,9 +3,10 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.domain.eam.GroupUser;
 import com.dt.platform.domain.eam.InspectionGroupUser;
-import com.dt.platform.domain.eam.RepairGroupUser;
-import com.dt.platform.eam.service.IRepairGroupUserService;
+
+import com.dt.platform.eam.service.IGroupUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,7 @@ import java.util.Map;
 public class RepairGroupServiceImpl extends SuperService<RepairGroup> implements IRepairGroupService {
 
 	@Autowired
-	private IRepairGroupUserService repairGroupUserService;
+	private IGroupUserService groupUserService;
 
 	/**
 	 * 注入DAO对象
@@ -80,14 +81,14 @@ public class RepairGroupServiceImpl extends SuperService<RepairGroup> implements
 		Result r=super.insert(repairGroup,throwsException);
 		if(r.isSuccess()){
 			if(repairGroup.getMemberIds()!=null&&repairGroup.getMemberIds().size()>0){
-				List<RepairGroupUser> list=new ArrayList<>();
+				List<GroupUser> list=new ArrayList<>();
 				for(String id:repairGroup.getMemberIds()){
-					RepairGroupUser user=new RepairGroupUser();
+					GroupUser user=new GroupUser();
 					user.setUserId(id);
 					user.setGroupId(repairGroup.getId());
 					list.add(user);
 				}
-				repairGroupUserService.insertList(list);
+				groupUserService.insertList(list);
 			}
 		}
 		return r;
@@ -181,16 +182,16 @@ public class RepairGroupServiceImpl extends SuperService<RepairGroup> implements
 	public Result update(RepairGroup repairGroup , SaveMode mode,boolean throwsException) {
 		Result r=super.update(repairGroup , mode , throwsException);
 		if(r.isSuccess()){
-			this.dao.execute("delete from eam_repair_group_user where group_id=?",repairGroup.getId());
+			this.dao.execute("delete from eam_group_user where group_id=?",repairGroup.getId());
 			if(repairGroup.getMemberIds()!=null&&repairGroup.getMemberIds().size()>0){
-				List<RepairGroupUser> list=new ArrayList<>();
+				List<GroupUser> list=new ArrayList<>();
 				for(String id:repairGroup.getMemberIds()){
-					RepairGroupUser user=new RepairGroupUser();
+					GroupUser user=new GroupUser();
 					user.setUserId(id);
 					user.setGroupId(repairGroup.getId());
 					list.add(user);
 				}
-				repairGroupUserService.insertList(list);
+				groupUserService.insertList(list);
 			}
 		}
 		return r;

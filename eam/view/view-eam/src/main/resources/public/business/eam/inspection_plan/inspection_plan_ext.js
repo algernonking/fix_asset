@@ -1,7 +1,7 @@
 /**
  * 巡检计划 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:17:18
+ * @since 2022-06-02 12:17:56
  */
 
 layui.config({
@@ -218,6 +218,16 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
         onCheckBoxChanged:function(id,data,checked) {
             console.log('onCheckBoxChanged',id,data,checked);
+        },
+
+        /**
+         * 在流程提交前处理表单数据
+         * */
+        processFormData4Bpm:function(processInstanceId,param,callback) {
+            // 设置流程变量，并通过回调返回
+            var variables={};
+            // 此回调是必须的，否则流程提交会被中断
+            callback(variables);
         },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行

@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 故障模版  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-30 17:42:23
+ * @since 2022-06-02 05:35:08
  */
 @FeignClient(value = ServiceNames.EAM, contextId = RepairCategoryTplServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface RepairCategoryTplServiceProxy {

@@ -92,8 +92,73 @@ public class EamRelationManager extends RelationManager {
         this.setupRepairOrder();
         this.setupRepairOrderAct();
         this.setupRepairOrderAccept();
+        this.setupRepairRule();
+
+        this.setupMaintainProject();
+        this.setupMaintainPlan();
+        this.setupMaintainGroup();
+
+        this.setupCrontab();
+
+
     }
 
+
+
+    public void setupCrontab() {
+        this.property(ActionCrontabMeta.ACTION_CRONTAB_LOG_PROP)
+                .using(EAMTables.EAM_ACTION_CRONTAB.ID).join(EAMTables.EAM_ACTION_CRONTAB_LOG.CRONTAB_ID);
+    }
+
+    public void setupMaintainPlan() {
+        this.property(MaintainPlanMeta.MAINTAIN_TYPE_DICT_PROP)
+                .using(EAMTables.EAM_MAINTAIN_PLAN.MAINTAIN_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_maintain_type'");
+
+        this.property(MaintainPlanMeta.ACTION_CRONTAB_PROP)
+                .using(EAMTables.EAM_MAINTAIN_PLAN.ACTION_CYCLE_ID).join(EAMTables.EAM_ACTION_CRONTAB.ID);
+
+        this.property(MaintainPlanMeta.MAINTAIN_GROUP_PROP)
+                .using(EAMTables.EAM_MAINTAIN_PLAN.GROUP_ID).join(EAMTables.EAM_MAINTAIN_GROUP.ID);
+
+        this.property(MaintainPlanMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_MAINTAIN_PLAN.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+    }
+
+
+    public void setupMaintainProject() {
+
+        this.property(MaintainProjectMeta.MAINTAIN_TYPE_DICT_PROP)
+                .using(EAMTables.EAM_MAINTAIN_PROJECT.MAINTAIN_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_maintain_type'");
+
+        this.property(MaintainProjectMeta.ACTION_CRONTAB_PROP)
+                .using(EAMTables.EAM_MAINTAIN_PROJECT.ACTION_CYCLE_ID).join(EAMTables.EAM_ACTION_CRONTAB.ID);
+
+
+    }
+    public void setupRepairRule() {
+        this.property(RepairRuleMeta.REPAIR_GROUP_PROP)
+                .using(EAMTables.EAM_REPAIR_RULE.GROUP_ID).join(EAMTables.EAM_REPAIR_GROUP.ID);
+
+        this.property(RepairRuleMeta.USER_PROP)
+                .using(EAMTables.EAM_REPAIR_RULE.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+    }
+
+
+    public void setupMaintainGroup() {
+
+        this.property(MaintainGroupMeta.LEADER_PROP)
+                .using(EAMTables.EAM_MAINTAIN_GROUP.LEADER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(MaintainGroupMeta.MEMBER_LIST_PROP)
+                .using(EAMTables.EAM_MAINTAIN_GROUP.ID).join(EAMTables.EAM_GROUP_USER.GROUP_ID)
+                .using(EAMTables.EAM_GROUP_USER.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
+    }
 
     public void setupRepairOrderAccept() {
         //制单人
@@ -113,6 +178,13 @@ public class EamRelationManager extends RelationManager {
         this.property(RepairOrderAcceptanceMeta.CATEGORY_TPL_PROP)
                 .using(EAMTables.EAM_REPAIR_ORDER_ACCEPTANCE.CATEGORY_TPL_ID).join(EAMTables.EAM_REPAIR_CATEGORY_TPL.ID);
 
+        //订单
+        this.property(RepairOrderAcceptanceMeta.ORDER_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACCEPTANCE.ORDER_ID).join(EAMTables.EAM_REPAIR_ORDER.ID);
+
+        //维修单
+        this.property(RepairOrderAcceptanceMeta.ORDER_ACT_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACCEPTANCE.ORDER_ACT_ID).join(EAMTables.EAM_REPAIR_ORDER_ACT.ID);
     }
 
 
@@ -129,7 +201,9 @@ public class EamRelationManager extends RelationManager {
         this.property(RepairOrderActMeta.EXECUTOR_PROP)
                 .using(EAMTables.EAM_REPAIR_ORDER_ACT.EXECUTOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
-
+        //订单
+        this.property(RepairOrderActMeta.ORDER_PROP)
+                .using(EAMTables.EAM_REPAIR_ORDER_ACT.ORDER_ID).join(EAMTables.EAM_REPAIR_ORDER.ID);
 
     }
 
@@ -171,8 +245,8 @@ public class EamRelationManager extends RelationManager {
                 .using(EAMTables.EAM_REPAIR_GROUP.LEADER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
         this.property(RepairGroupMeta.MEMBER_LIST_PROP)
-                .using(EAMTables.EAM_REPAIR_GROUP.ID).join(EAMTables.EAM_REPAIR_GROUP_USER.GROUP_ID)
-                .using(EAMTables.EAM_REPAIR_GROUP_USER.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+                .using(EAMTables.EAM_REPAIR_GROUP.ID).join(EAMTables.EAM_GROUP_USER.GROUP_ID)
+                .using(EAMTables.EAM_GROUP_USER.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
 
     }
@@ -422,13 +496,16 @@ public class EamRelationManager extends RelationManager {
         this.property(InspectionPlanMeta.INSPECTION_GROUP_PROP)
                 .using(EAMTables.EAM_INSPECTION_PLAN.GROUP_ID).join(EAMTables.EAM_INSPECTION_GROUP.ID);
 
-        this.property(InspectionPlanMeta.INSPECTION_TYPE_DICT_PROP)
-                .using(EAMTables.EAM_INSPECTION_PLAN.INSPECTION_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
-                .condition("dict_code='eam_source'");
+        this.property(InspectionPlanMeta.TIME_DICT_PROP)
+                .using(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_completion_time'");
 
 
     }
     public void setupInspectionPoint() {
+
+        this.property(InspectionPointMeta.ROUTE_PROP)
+                .using(EAMTables.EAM_INSPECTION_POINT.ROUTE_ID).join(EAMTables.EAM_INSPECTION_ROUTE.ID);
     }
     public void setupInspectionTask() {
         // 关联来源

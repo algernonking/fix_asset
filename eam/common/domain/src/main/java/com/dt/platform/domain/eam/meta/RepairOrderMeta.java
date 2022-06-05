@@ -17,8 +17,8 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:14:26
- * @sign 89069D0C0A4C1A24B07B54EBA5C0E6ED
+ * @since 2022-06-02 05:30:41
+ * @sign 6936FEF4BE90E7B4FB6F2E8CF68B66B1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -193,6 +193,26 @@ public class RepairOrderMeta {
 	 * 业务日期 , 类型: java.util.Date
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrder,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrder.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
+	
+	/**
+	 * 维修单 , 类型: java.lang.String
+	*/
+	public static final String AUTO_ACT="autoAct";
+	
+	/**
+	 * 维修单 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrder,java.lang.String> AUTO_ACT_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrder.class ,AUTO_ACT, java.lang.String.class, "维修单", "维修单", java.lang.String.class, null);
+	
+	/**
+	 * 创建规则 , 类型: java.lang.String
+	*/
+	public static final String AUTO_ACT_RULE="autoActRule";
+	
+	/**
+	 * 创建规则 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrder,java.lang.String> AUTO_ACT_RULE_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrder.class ,AUTO_ACT_RULE, java.lang.String.class, "创建规则", "创建规则", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -387,7 +407,7 @@ public class RepairOrderMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , CATEGORY_TPL_ID , REPAIR_TYPE , URGENCY_ID , REPORT_ORG_ID , REPORT_USER_ID , REPAIR_COST , PLAN_FINISH_DATE , CONTENT , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR , REPORT_USER , ORDER_ACT , ORDER_ACCEPTANCE , CATEGORY_TPL , REPAIR_URGENCY , ORGANIZATION };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , CATEGORY_TPL_ID , REPAIR_TYPE , URGENCY_ID , REPORT_ORG_ID , REPORT_USER_ID , REPAIR_COST , PLAN_FINISH_DATE , CONTENT , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , AUTO_ACT , AUTO_ACT_RULE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR , REPORT_USER , ORDER_ACT , ORDER_ACCEPTANCE , CATEGORY_TPL , REPAIR_URGENCY , ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -581,6 +601,28 @@ public class RepairOrderMeta {
 		public RepairOrder setBusinessDate(Date businessDate) {
 			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
 			super.setBusinessDate(businessDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 维修单
+		 * @param autoAct 维修单
+		 * @return 当前对象
+		*/
+		public RepairOrder setAutoAct(String autoAct) {
+			super.change(AUTO_ACT,super.getAutoAct(),autoAct);
+			super.setAutoAct(autoAct);
+			return this;
+		}
+		
+		/**
+		 * 设置 创建规则
+		 * @param autoActRule 创建规则
+		 * @return 当前对象
+		*/
+		public RepairOrder setAutoActRule(String autoActRule) {
+			super.change(AUTO_ACT_RULE,super.getAutoActRule(),autoActRule);
+			super.setAutoActRule(autoActRule);
 			return this;
 		}
 		

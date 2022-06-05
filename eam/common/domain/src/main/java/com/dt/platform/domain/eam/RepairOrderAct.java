@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 维修工单
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 14:52:53
- * @sign 31D0B9EF25AD5FCD05C3CD595902808D
+ * @since 2022-06-02 09:48:11
+ * @sign 5502269C139752A1A1931008A4D3DDF1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -49,12 +49,6 @@ public class RepairOrderAct extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
 	private String businessCode;
-	
-	/**
-	 * 维修状态：维修状态
-	*/
-	@ApiModelProperty(required = false,value="维修状态" , notes = "维修状态")
-	private String repairStatus;
 	
 	/**
 	 * 维修班组：维修班组
@@ -103,6 +97,12 @@ public class RepairOrderAct extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private String originatorId;
+	
+	/**
+	 * 跟随验证：跟随验证
+	*/
+	@ApiModelProperty(required = false,value="跟随验证" , notes = "跟随验证")
+	private String withAcceptance;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -191,6 +191,24 @@ public class RepairOrderAct extends Entity {
 	private RepairGroup repairGroup;
 	
 	/**
+	 * 订单名称：订单名称
+	*/
+	@ApiModelProperty(required = false,value="订单名称" , notes = "订单名称")
+	private String orderName;
+	
+	/**
+	 * 订单编号：订单编号
+	*/
+	@ApiModelProperty(required = false,value="订单编号" , notes = "订单编号")
+	private String orderBusinessCode;
+	
+	/**
+	 * 维修状态：维修状态
+	*/
+	@ApiModelProperty(required = false,value="维修状态" , notes = "维修状态")
+	private String orderRepairStatus;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -244,25 +262,6 @@ public class RepairOrderAct extends Entity {
 	*/
 	public RepairOrderAct setBusinessCode(String businessCode) {
 		this.businessCode=businessCode;
-		return this;
-	}
-	
-	/**
-	 * 获得 维修状态<br>
-	 * 维修状态
-	 * @return 维修状态
-	*/
-	public String getRepairStatus() {
-		return repairStatus;
-	}
-	
-	/**
-	 * 设置 维修状态
-	 * @param repairStatus 维修状态
-	 * @return 当前对象
-	*/
-	public RepairOrderAct setRepairStatus(String repairStatus) {
-		this.repairStatus=repairStatus;
 		return this;
 	}
 	
@@ -415,6 +414,25 @@ public class RepairOrderAct extends Entity {
 	*/
 	public RepairOrderAct setOriginatorId(String originatorId) {
 		this.originatorId=originatorId;
+		return this;
+	}
+	
+	/**
+	 * 获得 跟随验证<br>
+	 * 跟随验证
+	 * @return 跟随验证
+	*/
+	public String getWithAcceptance() {
+		return withAcceptance;
+	}
+	
+	/**
+	 * 设置 跟随验证
+	 * @param withAcceptance 跟随验证
+	 * @return 当前对象
+	*/
+	public RepairOrderAct setWithAcceptance(String withAcceptance) {
+		this.withAcceptance=withAcceptance;
 		return this;
 	}
 	
@@ -711,6 +729,63 @@ public class RepairOrderAct extends Entity {
 	*/
 	public RepairOrderAct setRepairGroup(RepairGroup repairGroup) {
 		this.repairGroup=repairGroup;
+		return this;
+	}
+	
+	/**
+	 * 获得 订单名称<br>
+	 * 订单名称
+	 * @return 订单名称
+	*/
+	public String getOrderName() {
+		return orderName;
+	}
+	
+	/**
+	 * 设置 订单名称
+	 * @param orderName 订单名称
+	 * @return 当前对象
+	*/
+	public RepairOrderAct setOrderName(String orderName) {
+		this.orderName=orderName;
+		return this;
+	}
+	
+	/**
+	 * 获得 订单编号<br>
+	 * 订单编号
+	 * @return 订单编号
+	*/
+	public String getOrderBusinessCode() {
+		return orderBusinessCode;
+	}
+	
+	/**
+	 * 设置 订单编号
+	 * @param orderBusinessCode 订单编号
+	 * @return 当前对象
+	*/
+	public RepairOrderAct setOrderBusinessCode(String orderBusinessCode) {
+		this.orderBusinessCode=orderBusinessCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 维修状态<br>
+	 * 维修状态
+	 * @return 维修状态
+	*/
+	public String getOrderRepairStatus() {
+		return orderRepairStatus;
+	}
+	
+	/**
+	 * 设置 维修状态
+	 * @param orderRepairStatus 维修状态
+	 * @return 当前对象
+	*/
+	public RepairOrderAct setOrderRepairStatus(String orderRepairStatus) {
+		this.orderRepairStatus=orderRepairStatus;
 		return this;
 	}
 

@@ -51,11 +51,11 @@ public class InspGroupUserGtr extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         InspGroupUserGtr g=new InspGroupUserGtr();
         //生成代码
-       g.generateCode();
+        g.generateCode();
 
-       // g.removeByBatchId("507635127677878272");
+        // g.removeByBatchId("507635127677878272");
         //移除之前生成的菜单，视情况执行
-     //g.generateMenu(BrandServiceProxy.class, BrandPageController.class);
+        //g.generateMenu(BrandServiceProxy.class, BrandPageController.class);
         //生成菜单
 
     }

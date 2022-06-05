@@ -27,6 +27,8 @@ public class InspGroupGtr extends BaseCodeGenerator {
       //  search.inputLayout(new Object[]{SYS_CODE_EXAMPLE_CAR.PLATE_NUMBER,SYS_CODE_EXAMPLE_CAR.ORG_ID,SYS_CODE_EXAMPLE_CAR.EMP_ID});
 //        context.view().list().disableMargin();
 
+
+
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"leader","负责人","负责人");
         cfg.getPoClassFile().addListProperty(Employee.class,"memberList","巡检人","巡检人");
         cfg.getPoClassFile().addListProperty(String.class,"memberIds","巡检人","巡检人");
@@ -49,7 +51,7 @@ public class InspGroupGtr extends BaseCodeGenerator {
         cfg.view().formWindow().bottomSpace(20);
 
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_GROUP.STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class);
+        cfg.view().field(EAMTables.EAM_INSPECTION_GROUP.STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class).defaultIndex(0);
 
 
 

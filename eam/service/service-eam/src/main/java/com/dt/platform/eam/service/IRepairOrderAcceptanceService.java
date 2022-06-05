@@ -22,10 +22,13 @@ import java.util.Map;
  * 维修验收 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:14
+ * @since 2022-06-01 07:17:16
 */
 
 public interface IRepairOrderAcceptanceService extends ISuperService<RepairOrderAcceptance> {
+
+
+	Result acceptance(String id);
 
 	/**
 	 * 添加，如果语句错误，则抛出异常

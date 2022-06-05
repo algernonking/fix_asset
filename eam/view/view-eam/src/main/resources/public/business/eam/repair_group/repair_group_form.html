@@ -2,7 +2,7 @@
 /**
  * 维修班组 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-30 14:18:33
+ * @since 2022-06-02 05:36:26
  */
  -->
  <!DOCTYPE html>
@@ -38,13 +38,20 @@
 
 
 
-        <div class="layui-row form-row" id="random-3722-content">
+        <div class="layui-row form-row" id="random-6143-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs6 form-column" >
 
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
+                    </div>
 
+                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
@@ -52,13 +59,6 @@
                         </div>
                     </div>
 
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
-                    </div>
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -90,7 +90,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-0730-content">
+        <div class="layui-row form-row" id="random-6139-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->

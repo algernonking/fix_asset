@@ -2,7 +2,7 @@
 /**
  * 巡检点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:28:40
+ * @since 2022-06-02 14:00:02
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-8697-content">
+        <div class="layui-row form-row" id="random-6326-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -57,6 +57,13 @@
                         <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('RFID')}">RFID</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="rfid" id="rfid" name="rfid" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('RFID') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
@@ -79,6 +86,15 @@
                             <input lay-filter="pos" id="pos" name="pos" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('位置') }" type="text" class="layui-input"  />
                         </div>
                     </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('巡检路线')}">巡检路线</div></div>
+                        <div class="layui-input-block ">
+                            <div id="routeId" input-type="select" th:data="${'/service-eam/eam-inspection-route/query-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -112,7 +128,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-0943-content">
+        <div class="layui-row form-row" id="random-3971-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->

@@ -62,10 +62,10 @@ public class FailureRegistrationGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_FAILURE_REGISTRATION.TYPE)
                 .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_equipment_failure")
-                .paging(false).filter(false).toolbar(false)
+                .paging(false).filter(true).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillWith(FailureRegistrationMeta.TYPE_DICT).muliti(false);
+                fillWith(FailureRegistrationMeta.TYPE_DICT).muliti(false).defaultIndex(0);
 
         cfg.view().field(EAMTables.EAM_FAILURE_REGISTRATION.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
         cfg.view().field(EAMTables.EAM_FAILURE_REGISTRATION.ORIGINATOR_ID).form()

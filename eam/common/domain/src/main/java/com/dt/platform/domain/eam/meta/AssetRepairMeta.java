@@ -12,8 +12,8 @@ import org.github.foxnic.web.domain.system.DictItem;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-17 13:33:28
- * @sign AA6A744003ED3DEDED6476E5163EF764
+ * @since 2022-06-02 05:32:25
+ * @sign E6879E0A8257F983234DA85923D95213
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -128,6 +128,16 @@ public class AssetRepairMeta {
 	 * 报修人 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> REPORT_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,REPORT_USER_ID, java.lang.String.class, "报修人", "报修人", java.lang.String.class, null);
+	
+	/**
+	 * 报修人 , 类型: java.lang.String
+	*/
+	public static final String REPORT_USER_NAME="reportUserName";
+	
+	/**
+	 * 报修人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> REPORT_USER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,REPORT_USER_NAME, java.lang.String.class, "报修人", "报修人", java.lang.String.class, null);
 	
 	/**
 	 * 图片 , 类型: java.lang.String
@@ -312,7 +322,7 @@ public class AssetRepairMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , REPORT_USER_ID , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR , REPORT_USER , REPAIR_TYPE };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , REPORT_USER_ID , REPORT_USER_NAME , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR , REPORT_USER , REPAIR_TYPE };
 	
 	/**
 	 * 代理类
@@ -440,6 +450,17 @@ public class AssetRepairMeta {
 		public AssetRepair setReportUserId(String reportUserId) {
 			super.change(REPORT_USER_ID,super.getReportUserId(),reportUserId);
 			super.setReportUserId(reportUserId);
+			return this;
+		}
+		
+		/**
+		 * 设置 报修人
+		 * @param reportUserName 报修人
+		 * @return 当前对象
+		*/
+		public AssetRepair setReportUserName(String reportUserName) {
+			super.change(REPORT_USER_NAME,super.getReportUserName(),reportUserName);
+			super.setReportUserName(reportUserName);
 			return this;
 		}
 		

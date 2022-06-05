@@ -32,7 +32,12 @@ public class InspPlanGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NAME).search().fuzzySearch();
 
         cfg.getPoClassFile().addSimpleProperty(InspectionGroup.class,"inspectionGroup","班组","班组");
+      //  cfg.getPoClassFile().addSimpleProperty(DictItem.class,"inspectionTypeDict","类型","类型");
+
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"timeDict","时间","时间");
+
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"inspectionTypeDict","类型","类型");
+
 
         cfg.getPoClassFile().addListProperty(InspectionPlanPoint.class,"inspectionPlanPointList","巡检点","巡检点");
         cfg.getPoClassFile().addListProperty(String.class,"inspectionPlanPointIds","巡检点","巡检点");
@@ -48,7 +53,6 @@ public class InspPlanGtr extends BaseCodeGenerator {
                 new Object[]{
                         EAMTables.EAM_INSPECTION_PLAN.GROUP_ID,
                         EAMTables.EAM_INSPECTION_PLAN.INSPECTION_METHOD,
-                        EAMTables.EAM_INSPECTION_PLAN.INSPECTION_TYPE,
                         EAMTables.EAM_INSPECTION_PLAN.PLAN_TYPE,
                 }
         );
@@ -68,16 +72,17 @@ public class InspPlanGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.END_DATE).form().validate().required().form().dateInput().defaultNow().format("yyyy-MM-dd").search().range();
 
 
-
+//         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.LAST_EXECUTION_TIME).table().disable(true);
+//         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NEXT_EXECUTION_TIME).table().disable(true);
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.LEADER_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.STATUS).table().disable(true);
 
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.STATUS).form()
-        .selectBox().enumType(AssetHandleStatusEnum.class);
+        .selectBox().enumType(AssetHandleStatusEnum.class).defaultIndex(0);
 
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.PLAN_STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class);
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.PLAN_STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class).defaultIndex(0);
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD).form().validate().required().form().selectBox()
                 .enumType(InspectionOvertimeMethodEnum.class).defaultIndex(0);
@@ -85,7 +90,15 @@ public class InspPlanGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.PLAN_CODE).form().validate().required().form();
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NAME).form().validate().required().form();
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME).form().validate().required().form().numberInput();
+//        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME).form().validate().required().form().numberInput();
+
+
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME)
+                .form().validate().required().form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_completion_time")
+                .paging(false).filter(true).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillWith(InspectionPlanMeta.TIME_DICT).muliti(false).defaultIndex(0);
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.GROUP_ID)
                 .form().validate().required()
@@ -95,44 +108,34 @@ public class InspPlanGtr extends BaseCodeGenerator {
                 .fillWith(InspectionPlanMeta.INSPECTION_GROUP).muliti(false).defaultIndex(0);
 
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.INSPECTION_TYPE)
-                .basic().label("计划类型")
-                .form().validate().required().form().selectBox().queryApi(DictItemServiceProxy.QUERY_PAGED_LIST+"?dictCode=eam_inspection_type")
-                .paging(true).filter(true).toolbar(false)
-                .valueField(DictItemMeta.CODE).
-                textField(DictItemMeta.LABEL).
-                fillWith(InspectionPlanMeta.INSPECTION_TYPE_DICT).muliti(false).defaultIndex(0);
-
-
-
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.INSPECTION_METHOD).form().validate().required().form()
                 .selectBox().enumType(InspectionMethodEnum.class).defaultIndex(0);
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.PLAN_TYPE).form().validate().required().form()
                 .selectBox().enumType(InspectionPlanTypeEnum.class).defaultIndex(0);
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NOTES).form().textArea().height(60);
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NOTES).form().textArea().height(80);
 
         cfg.view().list().disableBatchDelete();
 
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_INSPECTION_PLAN.PLAN_STATUS,
-                        EAMTables.EAM_INSPECTION_PLAN.NAME,
                         EAMTables.EAM_INSPECTION_PLAN.PLAN_CODE,
+                        EAMTables.EAM_INSPECTION_PLAN.NAME,
+                        EAMTables.EAM_INSPECTION_PLAN.PLAN_STATUS,
                         EAMTables.EAM_INSPECTION_PLAN.PLAN_TYPE,
                 },
-
                 new Object[] {
                         EAMTables.EAM_INSPECTION_PLAN.GROUP_ID,
+                        EAMTables.EAM_INSPECTION_PLAN.INSPECTION_METHOD,
+//                        EAMTables.EAM_INSPECTION_PLAN.INSPECTION_TYPE,
+                        EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD,
+                },
+                new Object[] {
+
                         EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME,
                         EAMTables.EAM_INSPECTION_PLAN.START_DATE,
                         EAMTables.EAM_INSPECTION_PLAN.END_DATE,
-                },
-                new Object[] {
-                        EAMTables.EAM_INSPECTION_PLAN.INSPECTION_METHOD,
-                        EAMTables.EAM_INSPECTION_PLAN.INSPECTION_TYPE,
-                        EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD,
                 }
         );
         cfg.view().form().addGroup(null,

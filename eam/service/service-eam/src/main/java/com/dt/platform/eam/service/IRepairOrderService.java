@@ -31,6 +31,8 @@ import java.util.Map;
 
 public interface IRepairOrderService extends ISuperService<RepairOrder> {
 
+	Result changeRepairOrderStatus(String id,String repairStatus);
+
 	Result validateDispatchOrder(List<String> ids);
 
 	Result dispatchOrder(List<String> ids,String actId);

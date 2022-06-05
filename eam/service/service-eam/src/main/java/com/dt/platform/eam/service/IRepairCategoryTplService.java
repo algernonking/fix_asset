@@ -22,7 +22,7 @@ import java.util.Map;
  * 故障模版 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-30 17:42:23
+ * @since 2022-06-02 05:35:08
 */
 
 public interface IRepairCategoryTplService extends ISuperService<RepairCategoryTpl> {

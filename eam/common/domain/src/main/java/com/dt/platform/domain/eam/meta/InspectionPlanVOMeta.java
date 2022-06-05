@@ -14,7 +14,7 @@ import com.dt.platform.domain.eam.InspectionPlanPoint;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:17:17
+ * @since 2022-06-02 12:17:56
  * @sign C12E698818D76C7C0BE49CF3827624B6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -212,6 +212,16 @@ public class InspectionPlanVOMeta extends InspectionPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlanVO,java.util.Date> END_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlanVO.class ,END_DATE, java.util.Date.class, "截止日期", "截止日期", java.util.Date.class, null);
 	
 	/**
+	 * 周期 , 类型: java.lang.String
+	*/
+	public static final String ACTION_CYCLE="actionCycle";
+	
+	/**
+	 * 周期 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlanVO,java.lang.String> ACTION_CYCLE_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlanVO.class ,ACTION_CYCLE, java.lang.String.class, "周期", "周期", java.lang.String.class, null);
+	
+	/**
 	 * 巡检顺序 , 类型: java.lang.String
 	*/
 	public static final String INSPECTION_METHOD="inspectionMethod";
@@ -220,16 +230,6 @@ public class InspectionPlanVOMeta extends InspectionPlanMeta {
 	 * 巡检顺序 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlanVO,java.lang.String> INSPECTION_METHOD_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlanVO.class ,INSPECTION_METHOD, java.lang.String.class, "巡检顺序", "巡检顺序", java.lang.String.class, null);
-	
-	/**
-	 * 巡检类型 , 类型: java.lang.String
-	*/
-	public static final String INSPECTION_TYPE="inspectionType";
-	
-	/**
-	 * 巡检类型 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlanVO,java.lang.String> INSPECTION_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlanVO.class ,INSPECTION_TYPE, java.lang.String.class, "巡检类型", "巡检类型", java.lang.String.class, null);
 	
 	/**
 	 * 时间要求 , 类型: java.math.BigDecimal
@@ -362,6 +362,16 @@ public class InspectionPlanVOMeta extends InspectionPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlanVO,com.dt.platform.domain.eam.InspectionGroup> INSPECTION_GROUP_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlanVO.class ,INSPECTION_GROUP, com.dt.platform.domain.eam.InspectionGroup.class, "班组", "班组", com.dt.platform.domain.eam.InspectionGroup.class, null);
 	
 	/**
+	 * 时间 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String TIME_DICT="timeDict";
+	
+	/**
+	 * 时间 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlanVO,org.github.foxnic.web.domain.system.DictItem> TIME_DICT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlanVO.class ,TIME_DICT, org.github.foxnic.web.domain.system.DictItem.class, "时间", "时间", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
 	 * 类型 , 类型: org.github.foxnic.web.domain.system.DictItem
 	*/
 	public static final String INSPECTION_TYPE_DICT="inspectionTypeDict";
@@ -394,7 +404,7 @@ public class InspectionPlanVOMeta extends InspectionPlanMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PLAN_CODE , NAME , STATUS , PLAN_STATUS , PLAN_TYPE , LEADER_ID , GROUP_ID , START_DATE , END_DATE , INSPECTION_METHOD , INSPECTION_TYPE , COMPLETION_TIME , OVERTIME_METHOD , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , INSPECTION_GROUP , INSPECTION_TYPE_DICT , INSPECTION_PLAN_POINT_LIST , INSPECTION_PLAN_POINT_IDS };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PLAN_CODE , NAME , STATUS , PLAN_STATUS , PLAN_TYPE , LEADER_ID , GROUP_ID , START_DATE , END_DATE , ACTION_CYCLE , INSPECTION_METHOD , COMPLETION_TIME , OVERTIME_METHOD , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , INSPECTION_GROUP , TIME_DICT , INSPECTION_TYPE_DICT , INSPECTION_PLAN_POINT_LIST , INSPECTION_PLAN_POINT_IDS };
 	
 	/**
 	 * 代理类
@@ -614,6 +624,17 @@ public class InspectionPlanVOMeta extends InspectionPlanMeta {
 		}
 		
 		/**
+		 * 设置 周期
+		 * @param actionCycle 周期
+		 * @return 当前对象
+		*/
+		public InspectionPlan setActionCycle(String actionCycle) {
+			super.change(ACTION_CYCLE,super.getActionCycle(),actionCycle);
+			super.setActionCycle(actionCycle);
+			return this;
+		}
+		
+		/**
 		 * 设置 巡检顺序
 		 * @param inspectionMethod 巡检顺序
 		 * @return 当前对象
@@ -621,17 +642,6 @@ public class InspectionPlanVOMeta extends InspectionPlanMeta {
 		public InspectionPlan setInspectionMethod(String inspectionMethod) {
 			super.change(INSPECTION_METHOD,super.getInspectionMethod(),inspectionMethod);
 			super.setInspectionMethod(inspectionMethod);
-			return this;
-		}
-		
-		/**
-		 * 设置 巡检类型
-		 * @param inspectionType 巡检类型
-		 * @return 当前对象
-		*/
-		public InspectionPlan setInspectionType(String inspectionType) {
-			super.change(INSPECTION_TYPE,super.getInspectionType(),inspectionType);
-			super.setInspectionType(inspectionType);
 			return this;
 		}
 		
@@ -775,6 +785,17 @@ public class InspectionPlanVOMeta extends InspectionPlanMeta {
 		public InspectionPlan setInspectionGroup(InspectionGroup inspectionGroup) {
 			super.change(INSPECTION_GROUP,super.getInspectionGroup(),inspectionGroup);
 			super.setInspectionGroup(inspectionGroup);
+			return this;
+		}
+		
+		/**
+		 * 设置 时间
+		 * @param timeDict 时间
+		 * @return 当前对象
+		*/
+		public InspectionPlan setTimeDict(DictItem timeDict) {
+			super.change(TIME_DICT,super.getTimeDict(),timeDict);
+			super.setTimeDict(timeDict);
 			return this;
 		}
 		

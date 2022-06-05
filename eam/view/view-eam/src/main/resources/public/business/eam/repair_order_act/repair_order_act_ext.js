@@ -1,7 +1,7 @@
 /**
  * 维修工单 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 14:52:54
+ * @since 2022-05-31 21:56:16
  */
 
 layui.config({
@@ -27,6 +27,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeInit:function () {
             console.log("list:beforeInit");
+            var operHtml=document.getElementById("toolbarTemplate").innerHTML;
+            operHtml=operHtml.replace(/lay-event="create"/i, "style=\"display:none\"")
+            document.getElementById("toolbarTemplate").innerHTML=operHtml;
         },
         /**
          * 表格渲染前调用
@@ -61,7 +64,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 当下拉框别选择后触发
          * */
         onSelectBoxChanged:function(id,selected,changes,isAdd) {
-            console.log('onSelectBoxChanged',id,selected,changes,isAdd);
+
+
         },
         /**
          * 当日期选择组件选择后触发
@@ -83,6 +87,47 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
+
+
+            for (var i = 0; i < data.length; i++) {
+                //如果审批中或审批通过的不允许编辑
+                console.log(data[i]);
+                if(data[i].order&&data[i].order.repairStatus){
+                    var status=data[i].order.repairStatus;
+                    console.log("####",status);
+                    if(status=="finish") {
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.start-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+                    }else if(status=="cancel"){
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.start-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+                    }else if(status=="dispatched"){
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        // fox.disableButton($('.start-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                        //   fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+                    }else if(status=="repairing"){
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.start-button').filter("[data-id='" + data[i].id + "']"), true);
+                     //   fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+                    }else if(status=="wait_acceptance"){
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.start-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                      //  fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+                    }
+                }
+            }
 
         },
         /**
@@ -150,6 +195,66 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
+        billOper:function(url,btnClass,ps,successMessage){
+            var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
+            var api=moduleURL+"/"+url;
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, ps, function (r) {
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+        },
+        start:function(item,it){
+            list.billOper("start","start-button",{id:item.id},"开始维修");
+        },
+        finish:function(item,it){
+            list.billOper("finish","finish-button",{id:item.id},"结束维修");
+        },
+        cancel:function(item,it){
+            list.billOper("cancel","cancel-button",{id:item.id},"取消成功");
+        },
+        acceptance:function(data,it){
+            admin.putTempData('eam-repair-order-acceptance-form-data-form-action', "create",true);
+            var action="create";
+            var queryString="?orderActId="+data.id;
+            //  var queryString=""
+            admin.putTempData('eam-repair-order-acceptance-form-data-form-action', data);
+            var area=admin.getTempData('eam-repair-order-acceptance-form-area');
+            var height= (area && area.height) ? area.height : ($(window).height()*0.6);
+            var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
+            var title = fox.translate('维修工单');
+            if(action=="create") title=fox.translate('添加')+title;
+            else if(action=="edit") title=fox.translate('修改')+title;
+            else if(action=="view") title=fox.translate('查看')+title;
+            admin.popupCenter({
+                title: title,
+                resize: false,
+                offset: [top,null],
+                area: ["85%",height+"px"],
+                type: 2,
+                id:"eam-repair-order-acceptance-form-data-win",
+                content: '/business/eam/repair_order_acceptance/repair_order_acceptance_form.html' + queryString,
+                finish: function () {
+                    window.module.refreshTableData();
+                }
+            });
+        },
         /**
          * 末尾执行
          */
@@ -206,6 +311,27 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         onSelectBoxChanged:function(id,selected,changes,isAdd) {
             console.log('onSelectBoxChanged',id,selected,changes,isAdd);
+            //isAdd, 此次操作是新增还是删除
+            if(id=="groupId"){
+                if(isAdd&&changes.length>0){
+                    var userSelect= xmSelect.get('#executorId',true);
+                    console.log("userSelect",userSelect);
+                    var item=changes[0];
+                    admin.post("/service-eam/eam-group-user/query-employee-person", { groupId : item.data.id }, function (r) {
+                        if (r.success) {
+                            var d=[];
+                            for (var i = 0; i < r.data.length; i++) {
+                                d.push({name:r.data[i].name,value:r.data[i].employeeId});
+                            }
+                            userSelect.update({data:d})
+                        } else {
+                            fox.showMessage(r);
+                        }
+                    });
+                }
+            }
+
+
         },
         /**
          * 当日期选择组件选择后触发
@@ -233,6 +359,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
+            data.orderId=ORDER_ID;
             console.log("beforeSubmit",data);
             return true;
         },
@@ -249,7 +376,17 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         afterSubmit:function (param,result) {
             console.log("afterSubmitt",param,result);
         },
+        /**
+         *  加载 资产列表
+         */
+        repairOrderApply:function (ifr,win,data) {
+            console.log("repairOrderApply",ifr,data);
+            //设置 iframe 高度
+            ifr.height("450px");
+            //设置地址
 
+            win.location="/business/eam/repair_order/repair_order_form.html?id="+data.orderId;
+        },
         /**
          * 文件上传组件回调
          *  event 类型包括：

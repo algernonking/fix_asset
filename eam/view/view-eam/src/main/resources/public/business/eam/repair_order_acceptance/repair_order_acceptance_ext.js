@@ -1,7 +1,7 @@
 /**
  * 维修验收 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:15
+ * @since 2022-06-01 21:58:42
  */
 
 layui.config({
@@ -27,6 +27,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeInit:function () {
             console.log("list:beforeInit");
+            var operHtml=document.getElementById("toolbarTemplate").innerHTML;
+            operHtml=operHtml.replace(/lay-event="create"/i, "style=\"display:none\"")
+            document.getElementById("toolbarTemplate").innerHTML=operHtml;
         },
         /**
          * 表格渲染前调用
@@ -83,6 +86,39 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
+
+            for (var i = 0; i < data.length; i++) {
+                //如果审批中或审批通过的不允许编辑
+                console.log(data[i]);
+                if(data[i].order&&data[i].order.repairStatus){
+                    var status=data[i].order.repairStatus;
+                    console.log("####",status);
+                    if(status=="finish") {
+
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+
+                    }else if(status=="cancel"){
+
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+
+                    }else if(status=="dispatched"){
+
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+
+                    }else if(status=="repairing"){
+
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+                    }else if(status=="wait_acceptance"){
+
+                        fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                        //  fox.disableButton($('.acceptance-button').filter("[data-id='" + data[i].id + "']"), true);
+                    }
+                }
+            }
 
         },
         /**
@@ -149,6 +185,34 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
+        },
+        billOper:function(url,btnClass,ps,successMessage){
+            var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
+            var api=moduleURL+"/"+url;
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, ps, function (r) {
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+        },
+        acceptance:function (data){
+            list.billOper("acceptance","acceptance-button",{id:data.id},"维修验收成功");
         },
         /**
          * 末尾执行
@@ -233,6 +297,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
+            data.orderActId=ORDER_ACT_ID;
             console.log("beforeSubmit",data);
             return true;
         },

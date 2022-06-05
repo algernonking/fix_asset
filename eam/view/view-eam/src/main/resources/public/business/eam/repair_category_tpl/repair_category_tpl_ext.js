@@ -1,7 +1,7 @@
 /**
  * 故障模版 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-30 17:42:24
+ * @since 2022-06-02 05:35:09
  */
 
 layui.config({

@@ -12,8 +12,8 @@ import com.dt.platform.domain.eam.RepairGroup;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 14:52:53
- * @sign 31D0B9EF25AD5FCD05C3CD595902808D
+ * @since 2022-06-02 09:48:11
+ * @sign 5502269C139752A1A1931008A4D3DDF1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,16 +48,6 @@ public class RepairOrderActMeta {
 	 * 业务编号 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAct,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAct.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
-	
-	/**
-	 * 维修状态 , 类型: java.lang.String
-	*/
-	public static final String REPAIR_STATUS="repairStatus";
-	
-	/**
-	 * 维修状态 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAct,java.lang.String> REPAIR_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAct.class ,REPAIR_STATUS, java.lang.String.class, "维修状态", "维修状态", java.lang.String.class, null);
 	
 	/**
 	 * 维修班组 , 类型: java.lang.String
@@ -138,6 +128,16 @@ public class RepairOrderActMeta {
 	 * 制单人 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAct,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAct.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
+	
+	/**
+	 * 跟随验证 , 类型: java.lang.String
+	*/
+	public static final String WITH_ACCEPTANCE="withAcceptance";
+	
+	/**
+	 * 跟随验证 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAct,java.lang.String> WITH_ACCEPTANCE_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAct.class ,WITH_ACCEPTANCE, java.lang.String.class, "跟随验证", "跟随验证", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -280,9 +280,39 @@ public class RepairOrderActMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAct,com.dt.platform.domain.eam.RepairGroup> REPAIR_GROUP_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAct.class ,REPAIR_GROUP, com.dt.platform.domain.eam.RepairGroup.class, "维修班组", "维修班组", com.dt.platform.domain.eam.RepairGroup.class, null);
 	
 	/**
+	 * 订单名称 , 类型: java.lang.String
+	*/
+	public static final String ORDER_NAME="orderName";
+	
+	/**
+	 * 订单名称 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAct,java.lang.String> ORDER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAct.class ,ORDER_NAME, java.lang.String.class, "订单名称", "订单名称", java.lang.String.class, null);
+	
+	/**
+	 * 订单编号 , 类型: java.lang.String
+	*/
+	public static final String ORDER_BUSINESS_CODE="orderBusinessCode";
+	
+	/**
+	 * 订单编号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAct,java.lang.String> ORDER_BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAct.class ,ORDER_BUSINESS_CODE, java.lang.String.class, "订单编号", "订单编号", java.lang.String.class, null);
+	
+	/**
+	 * 维修状态 , 类型: java.lang.String
+	*/
+	public static final String ORDER_REPAIR_STATUS="orderRepairStatus";
+	
+	/**
+	 * 维修状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAct,java.lang.String> ORDER_REPAIR_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAct.class ,ORDER_REPAIR_STATUS, java.lang.String.class, "维修状态", "维修状态", java.lang.String.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ORDER_ID , BUSINESS_CODE , REPAIR_STATUS , GROUP_ID , EXECUTOR_ID , REPAIR_COST , START_TIME , FINISH_TIME , NOTES , PICTURE_ID , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ORDER , ORIGINATOR , EXECUTOR , REPAIR_GROUP };
+	public static final String[] $PROPS={ ID , ORDER_ID , BUSINESS_CODE , GROUP_ID , EXECUTOR_ID , REPAIR_COST , START_TIME , FINISH_TIME , NOTES , PICTURE_ID , ORIGINATOR_ID , WITH_ACCEPTANCE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ORDER , ORIGINATOR , EXECUTOR , REPAIR_GROUP , ORDER_NAME , ORDER_BUSINESS_CODE , ORDER_REPAIR_STATUS };
 	
 	/**
 	 * 代理类
@@ -322,17 +352,6 @@ public class RepairOrderActMeta {
 		public RepairOrderAct setBusinessCode(String businessCode) {
 			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
 			super.setBusinessCode(businessCode);
-			return this;
-		}
-		
-		/**
-		 * 设置 维修状态
-		 * @param repairStatus 维修状态
-		 * @return 当前对象
-		*/
-		public RepairOrderAct setRepairStatus(String repairStatus) {
-			super.change(REPAIR_STATUS,super.getRepairStatus(),repairStatus);
-			super.setRepairStatus(repairStatus);
 			return this;
 		}
 		
@@ -421,6 +440,17 @@ public class RepairOrderActMeta {
 		public RepairOrderAct setOriginatorId(String originatorId) {
 			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
 			super.setOriginatorId(originatorId);
+			return this;
+		}
+		
+		/**
+		 * 设置 跟随验证
+		 * @param withAcceptance 跟随验证
+		 * @return 当前对象
+		*/
+		public RepairOrderAct setWithAcceptance(String withAcceptance) {
+			super.change(WITH_ACCEPTANCE,super.getWithAcceptance(),withAcceptance);
+			super.setWithAcceptance(withAcceptance);
 			return this;
 		}
 		
@@ -575,6 +605,39 @@ public class RepairOrderActMeta {
 		public RepairOrderAct setRepairGroup(RepairGroup repairGroup) {
 			super.change(REPAIR_GROUP,super.getRepairGroup(),repairGroup);
 			super.setRepairGroup(repairGroup);
+			return this;
+		}
+		
+		/**
+		 * 设置 订单名称
+		 * @param orderName 订单名称
+		 * @return 当前对象
+		*/
+		public RepairOrderAct setOrderName(String orderName) {
+			super.change(ORDER_NAME,super.getOrderName(),orderName);
+			super.setOrderName(orderName);
+			return this;
+		}
+		
+		/**
+		 * 设置 订单编号
+		 * @param orderBusinessCode 订单编号
+		 * @return 当前对象
+		*/
+		public RepairOrderAct setOrderBusinessCode(String orderBusinessCode) {
+			super.change(ORDER_BUSINESS_CODE,super.getOrderBusinessCode(),orderBusinessCode);
+			super.setOrderBusinessCode(orderBusinessCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 维修状态
+		 * @param orderRepairStatus 维修状态
+		 * @return 当前对象
+		*/
+		public RepairOrderAct setOrderRepairStatus(String orderRepairStatus) {
+			super.change(ORDER_REPAIR_STATUS,super.getOrderRepairStatus(),orderRepairStatus);
+			super.setOrderRepairStatus(orderRepairStatus);
 			return this;
 		}
 	}

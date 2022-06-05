@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 维修工单  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 14:52:53
+ * @since 2022-05-31 21:56:15
  */
 @FeignClient(value = ServiceNames.EAM, contextId = RepairOrderActServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface RepairOrderActServiceProxy {
@@ -97,6 +97,14 @@ public interface RepairOrderActServiceProxy {
      */
     public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
 
+    /**
+     *
+     */
+    public static final String START = API_PREFIX + "start";
+
+    public static final String FINISH = API_PREFIX + "finish";
+
+    public static final String CANCEL = API_PREFIX + "cancel";
     /**
      * 添加维修工单
      */

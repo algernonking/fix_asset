@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.InspectionPointMeta;
+import com.dt.platform.domain.eam.InspectionRoute;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 巡检点 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:28:39
+ * @since 2022-06-02 14:00:01
 */
 
 @Api(tags = "巡检点")
@@ -66,10 +67,12 @@ public class InspectionPointController extends SuperController {
 	@ApiOperation(value = "添加巡检点")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = InspectionPointVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571598323383795712"),
-		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.CONTENT , value = "巡检内容" , required = false , dataTypeClass=String.class , example = "巡检1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.ROUTE_ID , value = "巡检路线" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPointVOMeta.RFID , value = "RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS , value = "位置" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LONGITUDE , value = "位置经度" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LATITUDE , value = "位置纬度" , required = false , dataTypeClass=String.class , example = "1"),
@@ -126,10 +129,12 @@ public class InspectionPointController extends SuperController {
 	@ApiOperation(value = "更新巡检点")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = InspectionPointVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571598323383795712"),
-		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.CONTENT , value = "巡检内容" , required = false , dataTypeClass=String.class , example = "巡检1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.ROUTE_ID , value = "巡检路线" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPointVOMeta.RFID , value = "RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS , value = "位置" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LONGITUDE , value = "位置经度" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LATITUDE , value = "位置纬度" , required = false , dataTypeClass=String.class , example = "1"),
@@ -152,10 +157,12 @@ public class InspectionPointController extends SuperController {
 	@ApiOperation(value = "保存巡检点")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = InspectionPointVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571598323383795712"),
-		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.CONTENT , value = "巡检内容" , required = false , dataTypeClass=String.class , example = "巡检1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.ROUTE_ID , value = "巡检路线" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPointVOMeta.RFID , value = "RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS , value = "位置" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LONGITUDE , value = "位置经度" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LATITUDE , value = "位置纬度" , required = false , dataTypeClass=String.class , example = "1"),
@@ -186,6 +193,10 @@ public class InspectionPointController extends SuperController {
 	public Result<InspectionPoint> getById(String id) {
 		Result<InspectionPoint> result=new Result<>();
 		InspectionPoint inspectionPoint=inspectionPointService.getById(id);
+		// join 关联的对象
+		inspectionPointService.dao().fill(inspectionPoint)
+			.with(InspectionPointMeta.ROUTE)
+			.execute();
 		result.success(true).data(inspectionPoint);
 		return result;
 	}
@@ -205,7 +216,7 @@ public class InspectionPointController extends SuperController {
 	@PostMapping(InspectionPointServiceProxy.GET_BY_IDS)
 	public Result<List<InspectionPoint>> getByIds(List<String> ids) {
 		Result<List<InspectionPoint>> result=new Result<>();
-		List<InspectionPoint> list=inspectionPointService.getByIds(ids);
+		List<InspectionPoint> list=inspectionPointService.queryListByIds(ids);
 		result.success(true).data(list);
 		return result;
 	}
@@ -217,10 +228,12 @@ public class InspectionPointController extends SuperController {
 	@ApiOperation(value = "查询巡检点")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = InspectionPointVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571598323383795712"),
-		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.CONTENT , value = "巡检内容" , required = false , dataTypeClass=String.class , example = "巡检1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.ROUTE_ID , value = "巡检路线" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPointVOMeta.RFID , value = "RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS , value = "位置" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LONGITUDE , value = "位置经度" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LATITUDE , value = "位置纬度" , required = false , dataTypeClass=String.class , example = "1"),
@@ -244,10 +257,12 @@ public class InspectionPointController extends SuperController {
 	@ApiOperation(value = "分页查询巡检点")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = InspectionPointVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "571598323383795712"),
-		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "巡检点1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.CONTENT , value = "巡检内容" , required = false , dataTypeClass=String.class , example = "巡检1"),
+		@ApiImplicitParam(name = InspectionPointVOMeta.ROUTE_ID , value = "巡检路线" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InspectionPointVOMeta.RFID , value = "RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS , value = "位置" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LONGITUDE , value = "位置经度" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPointVOMeta.POS_LATITUDE , value = "位置纬度" , required = false , dataTypeClass=String.class , example = "1"),
@@ -260,6 +275,10 @@ public class InspectionPointController extends SuperController {
 	public Result<PagedList<InspectionPoint>> queryPagedList(InspectionPointVO sample) {
 		Result<PagedList<InspectionPoint>> result=new Result<>();
 		PagedList<InspectionPoint> list=inspectionPointService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// join 关联的对象
+		inspectionPointService.dao().fill(list)
+			.with(InspectionPointMeta.ROUTE)
+			.execute();
 		result.success(true).data(list);
 		return result;
 	}

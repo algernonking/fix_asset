@@ -43,6 +43,7 @@ public class RepairOrderGtr extends BaseCodeGenerator{
 
 
 
+
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.SELECTED_CODE).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.NAME).search().fuzzySearch();
@@ -55,6 +56,8 @@ public class RepairOrderGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.PICTURE_ID).table().disable();
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.REPORT_USER_ID).table().disable();
+        cfg.view().field(EAMTables.EAM_REPAIR_ORDER.AUTO_ACT).table().disable();
+        cfg.view().field(EAMTables.EAM_REPAIR_ORDER.AUTO_ACT_RULE).table().disable();
 
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.CONTENT).search()
                 .form().validate().required().
@@ -66,25 +69,25 @@ public class RepairOrderGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.REPAIR_STATUS).form()
                 .form().selectBox().enumType(RepairOrderStatusEnum.class);
 
-        cfg.view().field(EAMTables.EAM_REPAIR_ORDER.PLAN_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(EAMTables.EAM_REPAIR_ORDER.PLAN_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").defaultNow().search().range();
       //  cfg.view().field(EAMTables.EAM_REPAIR_ORDER.ACTUAL_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.BUSINESS_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
 
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.CATEGORY_TPL_ID)
                 .form().validate().required().form().selectBox().queryApi(RepairCategoryTplServiceProxy.QUERY_LIST)
-                .paging(false).filter(false).toolbar(false)
+                .paging(false).filter(true).toolbar(false)
                 .valueField(RepairCategoryTplMeta.ID).
                 textField(RepairCategoryTplMeta.NAME).
-                fillWith(RepairOrderMeta.CATEGORY_TPL).muliti(false);
+                fillWith(RepairOrderMeta.CATEGORY_TPL).muliti(false).defaultIndex(0);
 
 //
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.URGENCY_ID)
                 .form().validate().required().form().selectBox().queryApi(RepairUrgencyServiceProxy.QUERY_LIST)
-                .paging(false).filter(false).toolbar(false)
+                .paging(false).filter(true).toolbar(false)
                 .valueField(RepairUrgencyMeta.ID).
                 textField(RepairUrgencyMeta.NAME).
-                fillWith(RepairOrderMeta.REPAIR_URGENCY).muliti(false);
+                fillWith(RepairOrderMeta.REPAIR_URGENCY).muliti(false).defaultIndex(0);
 
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER.REPAIR_TYPE).form().validate().required().form().selectBox().enumType(RepairOrderTypeEnum.class);
 
@@ -141,7 +144,7 @@ public class RepairOrderGtr extends BaseCodeGenerator{
         cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");
 
 
-
+        cfg.view().list().operationColumn().width(300);
 
         cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,

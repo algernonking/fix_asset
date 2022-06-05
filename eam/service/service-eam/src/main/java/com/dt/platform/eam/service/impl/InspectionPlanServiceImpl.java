@@ -29,13 +29,14 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IInspectionPlanService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
  * 巡检计划 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:17:17
+ * @since 2022-06-02 12:17:56
 */
 
 
@@ -125,7 +126,7 @@ public class InspectionPlanServiceImpl extends SuperService<InspectionPlan> impl
 		InspectionPlan inspectionPlan = new InspectionPlan();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		inspectionPlan.setId(id);
-		inspectionPlan.setDeleted(dao.getDBTreaty().getTrueValue());
+		inspectionPlan.setDeleted(true);
 		inspectionPlan.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
 		inspectionPlan.setDeleteTime(new Date());
 		try {
@@ -203,8 +204,13 @@ public class InspectionPlanServiceImpl extends SuperService<InspectionPlan> impl
 	}
 
 	@Override
-	public List<InspectionPlan> getByIds(List<String> ids) {
+	public List<InspectionPlan> queryListByIds(List<String> ids) {
 		return super.queryListByUKeys("id",ids);
+	}
+
+	@Override
+	public Map<String, InspectionPlan> queryMapByIds(List<String> ids) {
+		return super.queryMapByUKeys("id",ids, InspectionPlan::getId);
 	}
 
 

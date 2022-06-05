@@ -14,8 +14,8 @@ import com.dt.platform.domain.eam.RepairCategoryTpl;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:14
- * @sign 8561855723446D3AA2EC984A07649BA9
+ * @since 2022-06-02 05:56:19
+ * @sign D0E5AB998802BFC4640D5FA59F004DD8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -112,14 +112,14 @@ public class RepairOrderAcceptanceMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAcceptance,java.util.Date> FINISH_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAcceptance.class ,FINISH_TIME, java.util.Date.class, "完成时间", "完成时间", java.util.Date.class, null);
 	
 	/**
-	 * 维修备注 , 类型: java.lang.String
+	 * 验收备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
 	
 	/**
-	 * 维修备注 , 类型: java.lang.String
+	 * 验收备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAcceptance,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAcceptance.class ,NOTES, java.lang.String.class, "维修备注", "维修备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAcceptance,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAcceptance.class ,NOTES, java.lang.String.class, "验收备注", "验收备注", java.lang.String.class, null);
 	
 	/**
 	 * 图片 , 类型: java.lang.String
@@ -302,9 +302,29 @@ public class RepairOrderAcceptanceMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAcceptance,com.dt.platform.domain.eam.RepairCategoryTpl> CATEGORY_TPL_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAcceptance.class ,CATEGORY_TPL, com.dt.platform.domain.eam.RepairCategoryTpl.class, "报修故障", "报修故障", com.dt.platform.domain.eam.RepairCategoryTpl.class, null);
 	
 	/**
+	 * 订单名称 , 类型: java.lang.String
+	*/
+	public static final String ORDER_NAME="orderName";
+	
+	/**
+	 * 订单名称 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAcceptance,java.lang.String> ORDER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAcceptance.class ,ORDER_NAME, java.lang.String.class, "订单名称", "订单名称", java.lang.String.class, null);
+	
+	/**
+	 * 订单编号 , 类型: java.lang.String
+	*/
+	public static final String ORDER_BUSINESS_CODE="orderBusinessCode";
+	
+	/**
+	 * 订单编号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.RepairOrderAcceptance,java.lang.String> ORDER_BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.RepairOrderAcceptance.class ,ORDER_BUSINESS_CODE, java.lang.String.class, "订单编号", "订单编号", java.lang.String.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ORDER_ID , ORDER_ACT_ID , BUSINESS_CODE , RESULT_TYPE , ACCEPTER_ID , CATEGORY_TPL_ID , ACTUAL_COST , FINISH_TIME , NOTES , PICTURE_ID , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ORDER , ORDER_ACT , ORIGINATOR , ACCEPTER , RESULT_TYPE_DICT , CATEGORY_TPL };
+	public static final String[] $PROPS={ ID , ORDER_ID , ORDER_ACT_ID , BUSINESS_CODE , RESULT_TYPE , ACCEPTER_ID , CATEGORY_TPL_ID , ACTUAL_COST , FINISH_TIME , NOTES , PICTURE_ID , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ORDER , ORDER_ACT , ORIGINATOR , ACCEPTER , RESULT_TYPE_DICT , CATEGORY_TPL , ORDER_NAME , ORDER_BUSINESS_CODE };
 	
 	/**
 	 * 代理类
@@ -414,8 +434,8 @@ public class RepairOrderAcceptanceMeta {
 		}
 		
 		/**
-		 * 设置 维修备注
-		 * @param notes 维修备注
+		 * 设置 验收备注
+		 * @param notes 验收备注
 		 * @return 当前对象
 		*/
 		public RepairOrderAcceptance setNotes(String notes) {
@@ -619,6 +639,28 @@ public class RepairOrderAcceptanceMeta {
 		public RepairOrderAcceptance setCategoryTpl(RepairCategoryTpl categoryTpl) {
 			super.change(CATEGORY_TPL,super.getCategoryTpl(),categoryTpl);
 			super.setCategoryTpl(categoryTpl);
+			return this;
+		}
+		
+		/**
+		 * 设置 订单名称
+		 * @param orderName 订单名称
+		 * @return 当前对象
+		*/
+		public RepairOrderAcceptance setOrderName(String orderName) {
+			super.change(ORDER_NAME,super.getOrderName(),orderName);
+			super.setOrderName(orderName);
+			return this;
+		}
+		
+		/**
+		 * 设置 订单编号
+		 * @param orderBusinessCode 订单编号
+		 * @return 当前对象
+		*/
+		public RepairOrderAcceptance setOrderBusinessCode(String orderBusinessCode) {
+			super.change(ORDER_BUSINESS_CODE,super.getOrderBusinessCode(),orderBusinessCode);
+			super.setOrderBusinessCode(orderBusinessCode);
 			return this;
 		}
 	}

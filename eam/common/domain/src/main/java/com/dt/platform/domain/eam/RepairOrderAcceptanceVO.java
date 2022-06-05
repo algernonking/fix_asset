@@ -13,7 +13,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 维修验收
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:14
+ * @since 2022-06-02 05:56:19
  * @sign 5A1E021892D703C9753E036F4681E679
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

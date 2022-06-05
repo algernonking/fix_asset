@@ -2,12 +2,19 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.RepairOrderStatusEnum;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.RepairOrderMeta;
+import com.dt.platform.eam.service.*;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.RepairOrderAcceptance;
-import com.dt.platform.domain.eam.RepairOrderAcceptanceVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,7 +33,7 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IRepairOrderAcceptanceService;
+
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 import java.util.Map;
@@ -36,12 +43,25 @@ import java.util.Map;
  * 维修验收 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:14
+ * @since 2022-06-01 07:17:16
 */
 
 
 @Service("EamRepairOrderAcceptanceService")
 public class RepairOrderAcceptanceServiceImpl extends SuperService<RepairOrderAcceptance> implements IRepairOrderAcceptanceService {
+
+
+	@Autowired
+	private IRepairOrderActService repairOrderActService;
+
+	@Autowired
+	private IRepairOrderService repairOrderService;
+
+	@Autowired
+	private IOperateService operateService;
+
+	@Autowired
+	private IAssetProcessRecordService assetProcessRecordService;
 
 	/**
 	 * 注入DAO对象
@@ -53,6 +73,38 @@ public class RepairOrderAcceptanceServiceImpl extends SuperService<RepairOrderAc
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
+
+	@Override
+	public Result acceptance(String id) {
+		RepairOrderAcceptance accept=this.getById(id);
+		RepairOrder order=repairOrderService.getById(accept.getOrderId());
+		if(RepairOrderStatusEnum.WAIT_ACCEPTANCE.code().equals(order.getRepairStatus())){
+			Result r=repairOrderService.changeRepairOrderStatus(order.getId(),RepairOrderStatusEnum.FINISH.code());
+			if(r.isSuccess()){
+				//维修操作完成，登记记录
+				repairOrderService.join(order, RepairOrderMeta.ASSET_LIST);
+				List<Asset> assetList=order.getAssetList();
+				if(assetList!=null&&assetList.size()>0){
+					for(Asset asset:assetList){
+						AssetProcessRecord assetProcessRecord=new AssetProcessRecord();
+						assetProcessRecord.setContent("资产维修验证完成");
+						assetProcessRecord.setAssetId(asset.getId());
+						assetProcessRecord.setBusinessCode(accept.getBusinessCode());
+						assetProcessRecord.setProcessType(AssetOperateEnum.EAM_ASSET_REPAIR_ORDER_ACCEPTANCE.code());
+						assetProcessRecord.setProcessdTime(new Date());
+						assetProcessRecordService.insert(assetProcessRecord);
+					}
+				}
+			}else{
+				return r;
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前维修状态异常，不能进行验收工作");
+		}
+		return ErrorDesc.success();
+	}
 
 
 
@@ -70,6 +122,28 @@ public class RepairOrderAcceptanceServiceImpl extends SuperService<RepairOrderAc
 	 */
 	@Override
 	public Result insert(RepairOrderAcceptance repairOrderAcceptance,boolean throwsException) {
+
+		if(StringUtil.isBlank(repairOrderAcceptance.getOrderActId())){
+			return ErrorDesc.failureMessage("维修工单不存在");
+		}
+		RepairOrderAct act=repairOrderActService.getById(repairOrderAcceptance.getOrderActId());
+		repairOrderAcceptance.setOrderId(act.getOrderId());
+
+		//制单人
+		if(StringUtil.isBlank(repairOrderAcceptance.getOriginatorId())){
+			repairOrderAcceptance.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		//编码
+		if(StringUtil.isBlank(repairOrderAcceptance.getBusinessCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_REPAIR_ORDER_ACCEPTANCE.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				repairOrderAcceptance.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
 		Result r=super.insert(repairOrderAcceptance,throwsException);
 		return r;
 	}

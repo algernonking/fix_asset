@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 故障模版 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-30 17:42:23
+ * @since 2022-06-02 05:35:09
 */
 
 @Api(tags = "故障模版")
@@ -70,8 +70,8 @@ public class RepairCategoryTplController extends SuperController {
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CATEGORY_ID , value = "故障类型" , required = false , dataTypeClass=String.class , example = "583677634362212353"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CODE , value = "故障编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "坏了"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "请第三方维修"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.COST_TIME , value = "标准耗时" , required = false , dataTypeClass=Integer.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
@@ -129,8 +129,8 @@ public class RepairCategoryTplController extends SuperController {
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CATEGORY_ID , value = "故障类型" , required = false , dataTypeClass=String.class , example = "583677634362212353"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CODE , value = "故障编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "坏了"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "请第三方维修"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.COST_TIME , value = "标准耗时" , required = false , dataTypeClass=Integer.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
@@ -154,8 +154,8 @@ public class RepairCategoryTplController extends SuperController {
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CATEGORY_ID , value = "故障类型" , required = false , dataTypeClass=String.class , example = "583677634362212353"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CODE , value = "故障编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "坏了"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "请第三方维修"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.COST_TIME , value = "标准耗时" , required = false , dataTypeClass=Integer.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
@@ -222,8 +222,8 @@ public class RepairCategoryTplController extends SuperController {
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CATEGORY_ID , value = "故障类型" , required = false , dataTypeClass=String.class , example = "583677634362212353"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CODE , value = "故障编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "坏了"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "请第三方维修"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.COST_TIME , value = "标准耗时" , required = false , dataTypeClass=Integer.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
@@ -248,8 +248,8 @@ public class RepairCategoryTplController extends SuperController {
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CATEGORY_ID , value = "故障类型" , required = false , dataTypeClass=String.class , example = "583677634362212353"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.CODE , value = "故障编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NAME , value = "故障内容" , required = false , dataTypeClass=String.class , example = "坏了"),
+		@ApiImplicitParam(name = RepairCategoryTplVOMeta.REPAIR_SOLUTION , value = "故障方案" , required = false , dataTypeClass=String.class , example = "请第三方维修"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.COST_TIME , value = "标准耗时" , required = false , dataTypeClass=Integer.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.ATTACH_ID , value = "附件" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RepairCategoryTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),

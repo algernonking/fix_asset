@@ -91,6 +91,14 @@ public class RepairOrderServiceImpl extends SuperService<RepairOrder> implements
 
 
 	@Override
+	public Result changeRepairOrderStatus(String id, String repairStatus) {
+		RepairOrder order=new RepairOrder();
+		order.setId(id);
+		order.setRepairStatus(repairStatus);
+		return super.update(order,SaveMode.NOT_NULL_FIELDS,false);
+	}
+
+	@Override
 	public Result validateDispatchOrder(List<String> ids) {
 		ConditionExpr expr=new ConditionExpr();
 		expr.andIn("id",ids);
@@ -181,21 +189,21 @@ public class RepairOrderServiceImpl extends SuperService<RepairOrder> implements
 			bill.setId(id);
 			bill.setStatus(status);
 			Result r=super.update(bill,SaveMode.NOT_NULL_FIELDS,false);
-			if(r.isSuccess()){
-				this.join(repair, AssetRepairMeta.ASSET_LIST);
-				List<Asset> assetList=repair.getAssetList();
-				if(assetList!=null&&assetList.size()>0){
-					for(Asset asset:assetList){
-						AssetProcessRecord assetProcessRecord=new AssetProcessRecord();
-						assetProcessRecord.setContent("资产维修操作完成");
-						assetProcessRecord.setAssetId(asset.getId());
-						assetProcessRecord.setBusinessCode(repair.getBusinessCode());
-						assetProcessRecord.setProcessType(AssetOperateEnum.EAM_ASSET_REPAIR_ORDER.code());
-						assetProcessRecord.setProcessdTime(new Date());
-						assetProcessRecordService.insert(assetProcessRecord);
-					}
-				}
-			}
+//			if(r.isSuccess()){
+//				this.join(repair, AssetRepairMeta.ASSET_LIST);
+//				List<Asset> assetList=repair.getAssetList();
+//				if(assetList!=null&&assetList.size()>0){
+//					for(Asset asset:assetList){
+//						AssetProcessRecord assetProcessRecord=new AssetProcessRecord();
+//						assetProcessRecord.setContent("资产维修操作完成");
+//						assetProcessRecord.setAssetId(asset.getId());
+//						assetProcessRecord.setBusinessCode(repair.getBusinessCode());
+//						assetProcessRecord.setProcessType(AssetOperateEnum.EAM_ASSET_REPAIR_ORDER.code());
+//						assetProcessRecord.setProcessdTime(new Date());
+//						assetProcessRecordService.insert(assetProcessRecord);
+//					}
+//				}
+//			}
 			return r;
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);

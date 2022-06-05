@@ -3,6 +3,7 @@ package com.dt.platform.domain.eam;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import com.github.foxnic.api.model.CompositeParameter;
 import javax.persistence.Transient;
 import com.github.foxnic.commons.bean.BeanUtil;
@@ -12,7 +13,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 巡检计划
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:17:17
+ * @since 2022-06-02 12:17:56
  * @sign C12E698818D76C7C0BE49CF3827624B6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -188,9 +189,9 @@ public class InspectionPlanVO extends InspectionPlan {
 	 * @param dirtyField 已修改字段
 	 * @return 当前对象
 	*/
-	public InspectionPlanVO addDirtyField(String dirtyField) {
+	public InspectionPlanVO addDirtyField(String... dirtyField) {
 		if(this.dirtyFields==null) dirtyFields=new ArrayList<>();
-		this.dirtyFields.add(dirtyField);
+		this.dirtyFields.addAll(Arrays.asList(dirtyField));
 		return this;
 	}
 	
@@ -254,9 +255,9 @@ public class InspectionPlanVO extends InspectionPlan {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public InspectionPlanVO addId(String id) {
+	public InspectionPlanVO addId(String... id) {
 		if(this.ids==null) ids=new ArrayList<>();
-		this.ids.add(id);
+		this.ids.addAll(Arrays.asList(id));
 		return this;
 	}
 	@Transient

@@ -2,13 +2,24 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetHandleMeta;
+import com.dt.platform.domain.eam.meta.AssetRepairMeta;
+import com.dt.platform.domain.eam.meta.RepairOrderMeta;
+import com.dt.platform.eam.service.*;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.dao.data.Rcd;
+import com.github.foxnic.sql.expr.SQL;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.RepairOrderAct;
-import com.dt.platform.domain.eam.RepairOrderActVO;
-import java.util.List;
+import java.util.*;
+
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.entity.SuperService;
@@ -25,23 +36,31 @@ import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
-import java.util.ArrayList;
-import com.dt.platform.eam.service.IRepairOrderActService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * <p>
  * 维修工单 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 14:52:53
+ * @since 2022-05-31 21:56:15
 */
 
 
 @Service("EamRepairOrderActService")
 public class RepairOrderActServiceImpl extends SuperService<RepairOrderAct> implements IRepairOrderActService {
+
+	@Autowired
+	private IAssetService assetService;
+
+	@Autowired
+	private IRepairOrderService repairOrderService;
+
+	@Autowired
+	private IOperateService operateService;
+
+	@Autowired
+	private IAssetProcessRecordService assetProcessRecordService;
 
 	/**
 	 * 注入DAO对象
@@ -54,6 +73,128 @@ public class RepairOrderActServiceImpl extends SuperService<RepairOrderAct> impl
 	 * */
 	public DAO dao() { return dao; }
 
+	private Result applyChange(String orderId){
+		RepairOrder billData=repairOrderService.getById(orderId);
+		repairOrderService.join(billData, RepairOrderMeta.ASSET_LIST);
+		//维修前状态
+		dao.execute("update eam_asset_item a,eam_asset b set a.before_asset_status=b.asset_status where a.asset_id=b.id and a.handle_id=?",orderId);
+		HashMap<String,Object> map=new HashMap<>();
+		map.put("asset_status", AssetStatusEnum.REPAIR.code());
+		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_REPAIR_ORDER_ACT.code(),"维修中");
+		for(String key:resultMap.keySet()){
+			List<SQL> sqls=resultMap.get(key);
+			if(sqls.size()>0){
+				dao.batchExecute(sqls);
+			}
+		}
+		return ErrorDesc.success();
+	}
+
+	@Override
+	public Result start(String id) {
+		RepairOrderAct act=this.getById(id);
+		String curUserId=SessionUser.getCurrent().getUser().getActivatedEmployeeId();
+		String userId=act.getExecutorId();
+		RepairOrder order=repairOrderService.getById(act.getOrderId());
+		if(RepairOrderStatusEnum.DISPATCHED.code().equals(order.getRepairStatus())){
+			if(StringUtil.isBlank(userId)){
+				if(dao.query("select 1 from eam_group_user where deleted='0' and group_id=? and user_id=?",act.getGroupId(),curUserId).size()==0){
+					ErrorDesc.failureMessage("当前操作人没有在班组中，操作失败");
+				}
+				//根据班组
+			}else{
+				if(!curUserId.equals(userId)){
+					ErrorDesc.failureMessage("当前操作人非工单指派人，操作失败");
+				}
+			}
+			repairOrderService.changeRepairOrderStatus(act.getOrderId(),RepairOrderStatusEnum.REPAIRING.code());
+			act.setExecutorId(curUserId);
+			act.setStartTime(new Date());
+			Result r=super.update(act,SaveMode.NOT_NULL_FIELDS,false);
+			if(r.isSuccess()){
+				return applyChange(act.getOrderId());
+			}else{
+				return r;
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前订单状态异常,不能启动维修工作");
+		}
+
+	}
+
+	@Override
+	public Result finish(String id) {
+		RepairOrderAct act=this.getById(id);
+		String curUserId=SessionUser.getCurrent().getUser().getActivatedEmployeeId();
+		String userId=act.getExecutorId();
+		RepairOrder order=repairOrderService.getById(act.getOrderId());
+		if(RepairOrderStatusEnum.REPAIRING.code().equals(order.getRepairStatus())){
+			if(StringUtil.isBlank(userId)){
+				if(dao.query("select 1 from eam_group_user where deleted='0' and group_id=? and user_id=?",act.getGroupId(),curUserId).size()==0){
+					ErrorDesc.failureMessage("当前操作人没有在班组中，操作失败");
+				}
+				//根据班组
+			}else{
+				if(!curUserId.equals(userId)){
+					ErrorDesc.failureMessage("当前操作人非工单指派人，操作失败");
+				}
+			}
+			repairOrderService.changeRepairOrderStatus(act.getOrderId(),RepairOrderStatusEnum.WAIT_ACCEPTANCE.code());
+			act.setExecutorId(curUserId);
+			act.setFinishTime(new Date());
+			Result r= super.update(act,SaveMode.NOT_NULL_FIELDS,false);
+			if(r.isSuccess()){
+				//维修操作完成，登记记录
+				repairOrderService.join(order, RepairOrderMeta.ASSET_LIST);
+				List<Asset> assetList=order.getAssetList();
+				if(assetList!=null&&assetList.size()>0){
+					HashMap<String,Object> map=new HashMap<>();
+					for(Asset asset:assetList){
+						AssetProcessRecord assetProcessRecord=new AssetProcessRecord();
+						assetProcessRecord.setContent("资产维修操作完成");
+						assetProcessRecord.setAssetId(asset.getId());
+						assetProcessRecord.setBusinessCode(act.getBusinessCode());
+						assetProcessRecord.setProcessType(AssetOperateEnum.EAM_ASSET_REPAIR_ORDER_ACT.code());
+						assetProcessRecord.setProcessdTime(new Date());
+						assetProcessRecordService.insert(assetProcessRecord);
+						//修改维修状态
+						List<Asset> list=new ArrayList<>();
+						list.add(asset);
+						Rcd rs=dao.queryRecord("select * from eam_asset_item where deleted='0'and crd='r' and handle_id=? and asset_id=?",act.getOrderId(),asset.getId());
+						map.put("asset_status",rs.getString("before_asset_status"));
+						HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(list,map,act.getBusinessCode(),AssetOperateEnum.EAM_ASSET_REPAIR_ORDER_ACT.code(),"维修结束");
+						for(String key:resultMap.keySet()){
+							List<SQL> sqls=resultMap.get(key);
+							if(sqls.size()>0){
+								dao.batchExecute(sqls);
+							}
+						}
+					}
+				}
+			}else{
+				return r;
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前订单状态异常,不能结束维修工作");
+		}
+		return ErrorDesc.success();
+
+	}
+
+	@Override
+	public Result cancel(String id) {
+		RepairOrderAct act=this.getById(id);
+		RepairOrder order=repairOrderService.getById(act.getOrderId());
+		if(RepairOrderStatusEnum.REPAIRING.code().equals(order.getRepairStatus())
+				||RepairOrderStatusEnum.DISPATCHED.code().equals(order.getRepairStatus())
+				||RepairOrderStatusEnum.NOT_DISPATCH.code().equals(order.getRepairStatus())
+		){
+			repairOrderService.changeRepairOrderStatus(act.getOrderId(),RepairOrderStatusEnum.CANCEL.code());
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能取消");
+		}
+		return ErrorDesc.success();
+	}
 
 
 	@Override
@@ -70,9 +211,43 @@ public class RepairOrderActServiceImpl extends SuperService<RepairOrderAct> impl
 	 */
 	@Override
 	public Result insert(RepairOrderAct repairOrderAct,boolean throwsException) {
+		RepairOrder order=repairOrderService.getById(repairOrderAct.getOrderId());
+		if (order == null) {
+			return ErrorDesc.failureMessage("申请工单不存在,orderId:"+repairOrderAct.getOrderId());
+		}
+		if(!AssetHandleStatusEnum.COMPLETE.code().equals(order.getStatus())){
+			return ErrorDesc.failureMessage("申请工单状态未完成,当前不可进行维修操作");
+		}
+
+		if(!RepairOrderStatusEnum.NOT_DISPATCH.code().equals(order.getRepairStatus())){
+			return ErrorDesc.failureMessage("申请工单维修状态未完成,当前不可进行维修操作");
+		}
+
+
+		//制单人
+		if(StringUtil.isBlank(repairOrderAct.getOriginatorId())){
+			repairOrderAct.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+
+		//编码
+		if(StringUtil.isBlank(repairOrderAct.getBusinessCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_REPAIR_ORDER_ACT.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				repairOrderAct.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
 		Result r=super.insert(repairOrderAct,throwsException);
+		if(r.isSuccess()){
+			repairOrderService.changeRepairOrderStatus(repairOrderAct.getOrderId(),RepairOrderStatusEnum.DISPATCHED.code());
+		}
 		return r;
 	}
+
+
 
 	/**
 	 * 添加，如果语句错误，则抛出异常

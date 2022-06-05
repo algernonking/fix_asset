@@ -2,7 +2,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-17 13:33:38
+ * @since 2022-06-02 05:32:26
  */
  -->
  <!DOCTYPE html>
@@ -12,16 +12,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
 	<title th:text="${lang.translate('资产报修')}">资产报修</title>
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
-    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
-    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon"> <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
-    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
     <style>
     </style>
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 </head>
 
 <body style="overflow-y: hidden;">
@@ -35,10 +38,11 @@
 
 
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="random-6206-content">
 
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div><div class="layui-required">*</div></div>
@@ -58,8 +62,9 @@
 
                 <!--结束：栏次内字段循环-->
             </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
 
 
                     <div class="layui-form-item" >
@@ -71,8 +76,9 @@
 
                 <!--结束：栏次内字段循环-->
             </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('报修人')}">报修人</div></div>
@@ -89,10 +95,11 @@
 
 
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="random-8717-content">
 
-             <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
 
 
                     <div class="layui-form-item" >
@@ -121,10 +128,10 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-6012-fieldset">
         <legend>资产列表</legend>
         </fieldset>
-        <div class="layui-row form-row" style="text-align: center;">
+        <div class="layui-row form-row" style="text-align: center;" id="random-6012-content">
             <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
             <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
             </div>
@@ -155,6 +162,8 @@
     var VALIDATE_CONFIG={"actualFinishDate":{"date":true,"labelInForm":"实际完成日期","inputType":"date_input"},"name":{"labelInForm":"业务名称","inputType":"text_input","required":true},"planFinishDate":{"date":true,"labelInForm":"计划完成日期","inputType":"date_input"},"content":{"labelInForm":"报修内容","inputType":"text_area","required":true}};
     var AUTH_PREFIX="eam_asset_repair";
 
+    //  
+    var ASSET_DEFAULT_OWN_COMPANY = [[${assetDefaultOwnCompany}]] ;
     // 单据ID
     var BILL_ID = [[${billId}]] ;
     // 单据类型

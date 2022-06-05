@@ -1,7 +1,7 @@
 /**
  * 维修班组 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-30 14:18:33
+ * @since 2022-06-02 05:36:26
  */
 
 function FormPage() {
@@ -110,7 +110,7 @@ function FormPage() {
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
+					defaultIndexs = "0".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;

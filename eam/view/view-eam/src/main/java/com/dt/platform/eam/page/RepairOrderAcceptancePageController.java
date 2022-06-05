@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 维修验收 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:15
+ * @since 2022-06-01 07:17:17
 */
 
 @Controller("EamRepairOrderAcceptancePageController")
@@ -49,7 +49,9 @@ public class RepairOrderAcceptancePageController extends ViewController {
 	 * 维修验收 表单页面
 	 */
 	@RequestMapping("/repair_order_acceptance_form.html")
-	public String form(Model model,HttpServletRequest request , String id) {
+	public String form(Model model,HttpServletRequest request , String id,String orderActId) {
+
+		model.addAttribute("orderActId",orderActId);
 		return prefix+"/repair_order_acceptance_form";
 	}
 }

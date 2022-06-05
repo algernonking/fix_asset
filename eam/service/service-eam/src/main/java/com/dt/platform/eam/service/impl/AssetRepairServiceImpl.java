@@ -424,7 +424,7 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 		AssetRepair assetRepair = new AssetRepair();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		assetRepair.setId(id);
-		assetRepair.setDeleted(dao.getDBTreaty().getTrueValue());
+		assetRepair.setDeleted(true);
 		assetRepair.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
 		assetRepair.setDeleteTime(new Date());
 		try {

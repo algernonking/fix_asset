@@ -29,13 +29,14 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IInspectionPointService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
  * 巡检点 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:28:39
+ * @since 2022-06-02 14:00:01
 */
 
 
@@ -45,7 +46,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO)
+	@Resource(name=DBConfigs.PRIMARY_DAO) 
 	private DAO dao=null;
 
 	/**
@@ -93,7 +94,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 		return super.insertList(inspectionPointList);
 	}
 
-
+	
 	/**
 	 * 按主键删除 巡检点
 	 *
@@ -114,7 +115,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 			return r;
 		}
 	}
-
+	
 	/**
 	 * 按主键删除 巡检点
 	 *
@@ -125,7 +126,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 		InspectionPoint inspectionPoint = new InspectionPoint();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		inspectionPoint.setId(id);
-		inspectionPoint.setDeleted(dao.getDBTreaty().getTrueValue());
+		inspectionPoint.setDeleted(true);
 		inspectionPoint.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
 		inspectionPoint.setDeleteTime(new Date());
 		try {
@@ -174,7 +175,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 		return super.updateList(inspectionPointList , mode);
 	}
 
-
+	
 	/**
 	 * 按主键更新字段 巡检点
 	 *
@@ -188,7 +189,7 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 		return suc>0;
 	}
 
-
+	
 	/**
 	 * 按主键获取 巡检点
 	 *
@@ -203,8 +204,13 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 	}
 
 	@Override
-	public List<InspectionPoint> getByIds(List<String> ids) {
+	public List<InspectionPoint> queryListByIds(List<String> ids) {
 		return super.queryListByUKeys("id",ids);
+	}
+
+	@Override
+	public Map<String, InspectionPoint> queryMapByIds(List<String> ids) {
+		return super.queryMapByUKeys("id",ids, InspectionPoint::getId);
 	}
 
 

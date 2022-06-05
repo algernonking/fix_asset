@@ -3,13 +3,14 @@ package com.dt.platform.domain.eam.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.InspectionPoint;
 import java.util.Date;
+import com.dt.platform.domain.eam.InspectionRoute;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:28:38
- * @sign 718FC078F2A3BC4248DC0E962494291E
+ * @since 2022-06-02 14:00:01
+ * @sign 9ECEBB497492E2C17B15941F660ABADF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -64,6 +65,26 @@ public class InspectionPointMeta {
 	 * 巡检内容 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPoint,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPoint.class ,CONTENT, java.lang.String.class, "巡检内容", "巡检内容", java.lang.String.class, null);
+	
+	/**
+	 * 巡检路线 , 类型: java.lang.String
+	*/
+	public static final String ROUTE_ID="routeId";
+	
+	/**
+	 * 巡检路线 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPoint,java.lang.String> ROUTE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPoint.class ,ROUTE_ID, java.lang.String.class, "巡检路线", "巡检路线", java.lang.String.class, null);
+	
+	/**
+	 * RFID , 类型: java.lang.String
+	*/
+	public static final String RFID="rfid";
+	
+	/**
+	 * RFID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPoint,java.lang.String> RFID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPoint.class ,RFID, java.lang.String.class, "RFID", "RFID", java.lang.String.class, null);
 	
 	/**
 	 * 位置 , 类型: java.lang.String
@@ -206,9 +227,19 @@ public class InspectionPointMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPoint,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPoint.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 负责人 , 类型: com.dt.platform.domain.eam.InspectionRoute
+	*/
+	public static final String ROUTE="route";
+	
+	/**
+	 * 负责人 , 类型: com.dt.platform.domain.eam.InspectionRoute
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPoint,com.dt.platform.domain.eam.InspectionRoute> ROUTE_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPoint.class ,ROUTE, com.dt.platform.domain.eam.InspectionRoute.class, "负责人", "负责人", com.dt.platform.domain.eam.InspectionRoute.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , NAME , STATUS , CONTENT , POS , POS_LONGITUDE , POS_LATITUDE , NOTES , PICTURE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION };
+	public static final String[] $PROPS={ ID , CODE , NAME , STATUS , CONTENT , ROUTE_ID , RFID , POS , POS_LONGITUDE , POS_LATITUDE , NOTES , PICTURE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , ROUTE };
 	
 	/**
 	 * 代理类
@@ -270,6 +301,28 @@ public class InspectionPointMeta {
 		public InspectionPoint setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 巡检路线
+		 * @param routeId 巡检路线
+		 * @return 当前对象
+		*/
+		public InspectionPoint setRouteId(String routeId) {
+			super.change(ROUTE_ID,super.getRouteId(),routeId);
+			super.setRouteId(routeId);
+			return this;
+		}
+		
+		/**
+		 * 设置 RFID
+		 * @param rfid RFID
+		 * @return 当前对象
+		*/
+		public InspectionPoint setRfid(String rfid) {
+			super.change(RFID,super.getRfid(),rfid);
+			super.setRfid(rfid);
 			return this;
 		}
 		
@@ -424,6 +477,17 @@ public class InspectionPointMeta {
 		public InspectionPoint setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 负责人
+		 * @param route 负责人
+		 * @return 当前对象
+		*/
+		public InspectionPoint setRoute(InspectionRoute route) {
+			super.change(ROUTE,super.getRoute(),route);
+			super.setRoute(route);
 			return this;
 		}
 	}

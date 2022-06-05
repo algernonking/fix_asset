@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 维修验收  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-05-31 16:44:14
+ * @since 2022-06-01 07:17:16
  */
 @FeignClient(value = ServiceNames.EAM, contextId = RepairOrderAcceptanceServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface RepairOrderAcceptanceServiceProxy {
@@ -96,6 +96,9 @@ public interface RepairOrderAcceptanceServiceProxy {
      * 导入维修验收数据(Excel)
      */
     public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+    public static final String ACCEPTANCE = API_PREFIX + "acceptance";
+
 
     /**
      * 添加维修验收

@@ -8,10 +8,12 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.math.BigDecimal;
+import javax.persistence.Transient;
 import org.github.foxnic.web.domain.system.DictItem;
 import java.util.List;
+import com.github.foxnic.commons.lang.DataParser;
 import java.util.ArrayList;
-import javax.persistence.Transient;
+import java.util.Arrays;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
 
@@ -20,8 +22,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检计划
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 21:17:17
- * @sign 3F41951CBAA2615933DF23041749BAD7
+ * @since 2022-06-02 12:17:56
+ * @sign 93ED77E11FB1CD2FB41A0FDA575B4665
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -94,16 +96,16 @@ public class InspectionPlan extends Entity {
 	private Date endDate;
 	
 	/**
+	 * 周期：周期
+	*/
+	@ApiModelProperty(required = false,value="周期" , notes = "周期")
+	private String actionCycle;
+	
+	/**
 	 * 巡检顺序：巡检顺序
 	*/
 	@ApiModelProperty(required = false,value="巡检顺序" , notes = "巡检顺序")
 	private String inspectionMethod;
-	
-	/**
-	 * 巡检类型：巡检类型
-	*/
-	@ApiModelProperty(required = false,value="巡检类型" , notes = "巡检类型")
-	private String inspectionType;
 	
 	/**
 	 * 时间要求：时间要求
@@ -152,6 +154,8 @@ public class InspectionPlan extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除")
 	private Integer deleted;
+	@Transient
+	private Boolean deletedBool;
 	
 	/**
 	 * 删除人ID：删除人ID
@@ -182,6 +186,12 @@ public class InspectionPlan extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="班组" , notes = "班组")
 	private InspectionGroup inspectionGroup;
+	
+	/**
+	 * 时间：时间
+	*/
+	@ApiModelProperty(required = false,value="时间" , notes = "时间")
+	private DictItem timeDict;
 	
 	/**
 	 * 类型：类型
@@ -392,6 +402,25 @@ public class InspectionPlan extends Entity {
 	}
 	
 	/**
+	 * 获得 周期<br>
+	 * 周期
+	 * @return 周期
+	*/
+	public String getActionCycle() {
+		return actionCycle;
+	}
+	
+	/**
+	 * 设置 周期
+	 * @param actionCycle 周期
+	 * @return 当前对象
+	*/
+	public InspectionPlan setActionCycle(String actionCycle) {
+		this.actionCycle=actionCycle;
+		return this;
+	}
+	
+	/**
 	 * 获得 巡检顺序<br>
 	 * 巡检顺序
 	 * @return 巡检顺序
@@ -407,25 +436,6 @@ public class InspectionPlan extends Entity {
 	*/
 	public InspectionPlan setInspectionMethod(String inspectionMethod) {
 		this.inspectionMethod=inspectionMethod;
-		return this;
-	}
-	
-	/**
-	 * 获得 巡检类型<br>
-	 * 巡检类型
-	 * @return 巡检类型
-	*/
-	public String getInspectionType() {
-		return inspectionType;
-	}
-	
-	/**
-	 * 设置 巡检类型
-	 * @param inspectionType 巡检类型
-	 * @return 当前对象
-	*/
-	public InspectionPlan setInspectionType(String inspectionType) {
-		this.inspectionType=inspectionType;
 		return this;
 	}
 	
@@ -572,12 +582,42 @@ public class InspectionPlan extends Entity {
 	}
 	
 	/**
+	 * 获得 是否已删除 的投影属性<br>
+	 * 等价于 getDeleted 方法，获得对应的枚举类型
+	 * @return 是否已删除
+	*/
+	@Transient
+	public Boolean isDeleted() {
+		if(this.deletedBool==null) {
+			this.deletedBool=DataParser.parseBoolean(deleted);
+		}
+		return this.deletedBool ;
+	}
+	
+	/**
 	 * 设置 是否已删除
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
 	public InspectionPlan setDeleted(Integer deleted) {
 		this.deleted=deleted;
+		this.deletedBool=DataParser.parseBoolean(deleted);
+		return this;
+	}
+	
+	/**
+	 * 设置 是否已删除的投影属性，等同于设置 是否已删除
+	 * @param deletedBool 是否已删除
+	 * @return 当前对象
+	*/
+	@Transient
+	public InspectionPlan setDeleted(Boolean deletedBool) {
+		if(deletedBool==null) {
+			this.deleted=null;
+		} else {
+			this.deleted=deletedBool?1:0;
+		}
+		this.deletedBool=deletedBool;
 		return this;
 	}
 	
@@ -677,6 +717,25 @@ public class InspectionPlan extends Entity {
 	}
 	
 	/**
+	 * 获得 时间<br>
+	 * 时间
+	 * @return 时间
+	*/
+	public DictItem getTimeDict() {
+		return timeDict;
+	}
+	
+	/**
+	 * 设置 时间
+	 * @param timeDict 时间
+	 * @return 当前对象
+	*/
+	public InspectionPlan setTimeDict(DictItem timeDict) {
+		this.timeDict=timeDict;
+		return this;
+	}
+	
+	/**
 	 * 获得 类型<br>
 	 * 类型
 	 * @return 类型
@@ -719,9 +778,9 @@ public class InspectionPlan extends Entity {
 	 * @param inspectionPlanPoint 巡检点
 	 * @return 当前对象
 	*/
-	public InspectionPlan addInspectionPlanPoint(InspectionPlanPoint inspectionPlanPoint) {
+	public InspectionPlan addInspectionPlanPoint(InspectionPlanPoint... inspectionPlanPoint) {
 		if(this.inspectionPlanPointList==null) inspectionPlanPointList=new ArrayList<>();
-		this.inspectionPlanPointList.add(inspectionPlanPoint);
+		this.inspectionPlanPointList.addAll(Arrays.asList(inspectionPlanPoint));
 		return this;
 	}
 	
@@ -749,9 +808,9 @@ public class InspectionPlan extends Entity {
 	 * @param inspectionPlanPointId 巡检点
 	 * @return 当前对象
 	*/
-	public InspectionPlan addInspectionPlanPointId(String inspectionPlanPointId) {
+	public InspectionPlan addInspectionPlanPointId(String... inspectionPlanPointId) {
 		if(this.inspectionPlanPointIds==null) inspectionPlanPointIds=new ArrayList<>();
-		this.inspectionPlanPointIds.add(inspectionPlanPointId);
+		this.inspectionPlanPointIds.addAll(Arrays.asList(inspectionPlanPointId));
 		return this;
 	}
 

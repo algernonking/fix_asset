@@ -72,7 +72,7 @@ public class BrandGtr extends BaseCodeGenerator {
 
      //   g.removeByBatchId("582429214846746624");
         //移除之前生成的菜单，视情况执行
-      g.generateMenu(BrandServiceProxy.class, BrandPageController.class);
+    //  g.generateMenu(BrandServiceProxy.class, BrandPageController.class);
         //生成菜单
 
     }

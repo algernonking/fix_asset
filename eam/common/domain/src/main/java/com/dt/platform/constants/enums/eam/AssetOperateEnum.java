@@ -32,6 +32,7 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_BORROW_RETURN(CodeModuleEnum.EAM_ASSET_BORROW_RETURN.code() , "EAM_资产单据-借用归还"),
     EAM_ASSET_REPAIR(CodeModuleEnum.EAM_ASSET_REPAIR.code() , "EAM_资产单据-报修"),
     EAM_ASSET_REPAIR_ORDER(CodeModuleEnum.EAM_ASSET_REPAIR_ORDER.code() , "EAM_资产单据-故障报修申请"),
+    EAM_ASSET_REPAIR_ORDER_ACT(CodeModuleEnum.EAM_ASSET_REPAIR_ORDER_ACT.code() , "EAM_资产单据-故障报修申请"),
     EAM_ASSET_REPAIR_ORDER_ACCEPTANCE(CodeModuleEnum.EAM_ASSET_REPAIR_ORDER_ACCEPTANCE.code() , "EAM_资产单据-维修验收"),
     EAM_ASSET_SCRAP(CodeModuleEnum.EAM_ASSET_SCRAP.code() , "EAM_资产单据-报废"),
     EAM_ASSET_ALLOCATE(CodeModuleEnum.EAM_ASSET_ALLOCATE.code() , "EAM_资产单据-调拨"),

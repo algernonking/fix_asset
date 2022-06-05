@@ -147,7 +147,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 id:"eam-asset-data-change-detail-form-data-win",
                 content: '/business/eam/asset_process_record/asset_process_record_list.html' + queryString,
                 finish: function () {
-                    refreshTableData();
+                    window.module.refreshTableData();
                 }
             });
             admin.putTempData('eam-asset-data-change-form-data-popup-index', index);
