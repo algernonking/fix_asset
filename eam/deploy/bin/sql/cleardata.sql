@@ -43,13 +43,30 @@ delete from eam_asset_stock_goods_out  where 1=1 and tenant_id='T001' ;
 delete from eam_asset_stock_goods_tranfer  where 1=1 and tenant_id='T001' ;
 delete from eam_goods_stock where owner_code<>'goods';
 -- inventory
-
 delete from eam_inventory where 1=1 and tenant_id='T001' ;
 delete from eam_inventory_asset where 1=1 ;
 delete from eam_inventory_director where 1=1 ;
 delete from eam_inventory_manager where 1=1 ;
 delete from eam_inventory_user where 1=1 ;
 delete from eam_inventory_plan where 1=1 and tenant_id='T001' ;
+delete from eam_group_user;
+-- eam_maintain
+delete from eam_maintain_plan where tenant_id='T001';
+delete from eam_maintain_group where tenant_id='T001';
+delete from eam_maintain_project where tenant_id='T001';
+delete from eam_maintain_project_select;
+delete from eam_maintain_task where tenant_id='T001';
+-- repair
+-- delete from eam_repair_category where tenant_id='T001';
+-- delete from eam_repair_category_tpl where tenant_id='T001';
+delete from eam_repair_group  where tenant_id='T001';
+delete from eam_repair_order  where tenant_id='T001';
+delete from eam_repair_order_acceptance  where tenant_id='T001';
+delete from eam_repair_order_act  where tenant_id='T001';
+delete from eam_repair_rule  where tenant_id='T001';
+delete from eam_repair_rule_item;
+-- inspection
+
 -- stock
 delete from eam_stock where 1=1 and tenant_id='T001' ;
 delete from eam_asset_stock_collection where 1=1;

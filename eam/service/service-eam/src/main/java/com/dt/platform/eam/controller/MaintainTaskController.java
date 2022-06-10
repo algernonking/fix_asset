@@ -3,6 +3,9 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.*;
+import com.github.foxnic.commons.collection.CollectorUtil;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +21,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.MaintainTaskServiceProxy;
 import com.dt.platform.domain.eam.meta.MaintainTaskVOMeta;
-import com.dt.platform.domain.eam.MaintainTask;
-import com.dt.platform.domain.eam.MaintainTaskVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -33,6 +34,10 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.MaintainTaskMeta;
+import java.math.BigDecimal;
+
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 保养任务 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 20:23:22
+ * @since 2022-06-06 21:41:15
 */
 
 @Api(tags = "保养任务")
@@ -65,11 +70,32 @@ public class MaintainTaskController extends SuperController {
 	*/
 	@ApiOperation(value = "添加保养任务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "586286133193740288"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.OVERDUE , value = "逾期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.BUSINESS_CODE , value = "任务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_ID , value = "方案" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NAME , value = "方案名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_INFO , value = "方案说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NOTES , value = "方案备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_MAINTAIN_TYPE , value = "保养类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_CYCLE_METHOD , value = "循环方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_TOTAL_COST , value = "计划工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "584133248423034880"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_ID , value = "设备" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_NAME , value = "设备名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_MODEL , value = "设备型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_CODE , value = "设备编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_SN , value = "设备序列号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.EXECUTOR_ID , value = "执行人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_START_TIME , value = "应开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_START_TIME , value = "实际开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_FINISH_TIME , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_TOTAL_COST , value = "实际工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = MaintainTaskServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -86,7 +112,7 @@ public class MaintainTaskController extends SuperController {
 	*/
 	@ApiOperation(value = "删除保养任务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "586286133193740288")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MaintainTaskVOMeta.ID)
@@ -120,11 +146,32 @@ public class MaintainTaskController extends SuperController {
 	*/
 	@ApiOperation(value = "更新保养任务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "586286133193740288"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.OVERDUE , value = "逾期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.BUSINESS_CODE , value = "任务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_ID , value = "方案" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NAME , value = "方案名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_INFO , value = "方案说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NOTES , value = "方案备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_MAINTAIN_TYPE , value = "保养类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_CYCLE_METHOD , value = "循环方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_TOTAL_COST , value = "计划工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "584133248423034880"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_ID , value = "设备" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_NAME , value = "设备名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_MODEL , value = "设备型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_CODE , value = "设备编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_SN , value = "设备序列号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.EXECUTOR_ID , value = "执行人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_START_TIME , value = "应开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_START_TIME , value = "实际开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_FINISH_TIME , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_TOTAL_COST , value = "实际工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MaintainTaskVOMeta.PAGE_INDEX , MaintainTaskVOMeta.PAGE_SIZE , MaintainTaskVOMeta.SEARCH_FIELD , MaintainTaskVOMeta.FUZZY_FIELD , MaintainTaskVOMeta.SEARCH_VALUE , MaintainTaskVOMeta.DIRTY_FIELDS , MaintainTaskVOMeta.SORT_FIELD , MaintainTaskVOMeta.SORT_TYPE , MaintainTaskVOMeta.IDS } )
 	@NotNull(name = MaintainTaskVOMeta.ID)
@@ -141,11 +188,32 @@ public class MaintainTaskController extends SuperController {
 	*/
 	@ApiOperation(value = "保存保养任务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "586286133193740288"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.OVERDUE , value = "逾期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.BUSINESS_CODE , value = "任务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_ID , value = "方案" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NAME , value = "方案名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_INFO , value = "方案说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NOTES , value = "方案备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_MAINTAIN_TYPE , value = "保养类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_CYCLE_METHOD , value = "循环方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_TOTAL_COST , value = "计划工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "584133248423034880"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_ID , value = "设备" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_NAME , value = "设备名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_MODEL , value = "设备型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_CODE , value = "设备编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_SN , value = "设备序列号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.EXECUTOR_ID , value = "执行人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_START_TIME , value = "应开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_START_TIME , value = "实际开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_FINISH_TIME , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_TOTAL_COST , value = "实际工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MaintainTaskVOMeta.PAGE_INDEX , MaintainTaskVOMeta.PAGE_SIZE , MaintainTaskVOMeta.SEARCH_FIELD , MaintainTaskVOMeta.FUZZY_FIELD , MaintainTaskVOMeta.SEARCH_VALUE , MaintainTaskVOMeta.DIRTY_FIELDS , MaintainTaskVOMeta.SORT_FIELD , MaintainTaskVOMeta.SORT_TYPE , MaintainTaskVOMeta.IDS } )
 	@NotNull(name = MaintainTaskVOMeta.ID)
@@ -171,6 +239,17 @@ public class MaintainTaskController extends SuperController {
 	public Result<MaintainTask> getById(String id) {
 		Result<MaintainTask> result=new Result<>();
 		MaintainTask maintainTask=maintainTaskService.getById(id);
+		// join 关联的对象
+		maintainTaskService.dao().fill(maintainTask)
+			.with("originator")
+			.with("executor")
+			.with(MaintainTaskMeta.MAINTAIN_GROUP)
+			.with(MaintainTaskMeta.MAINTAIN_TYPE_DICT)
+			.execute();
+
+		maintainTaskService.dao().join(maintainTask.getExecutor(), Person.class);
+		maintainTaskService.dao().join(maintainTask.getOriginator(), Person.class);
+
 		result.success(true).data(maintainTask);
 		return result;
 	}
@@ -201,11 +280,32 @@ public class MaintainTaskController extends SuperController {
 	*/
 	@ApiOperation(value = "查询保养任务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "586286133193740288"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.OVERDUE , value = "逾期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.BUSINESS_CODE , value = "任务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_ID , value = "方案" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NAME , value = "方案名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_INFO , value = "方案说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NOTES , value = "方案备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_MAINTAIN_TYPE , value = "保养类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_CYCLE_METHOD , value = "循环方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_TOTAL_COST , value = "计划工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "584133248423034880"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_ID , value = "设备" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_NAME , value = "设备名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_MODEL , value = "设备型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_CODE , value = "设备编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_SN , value = "设备序列号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.EXECUTOR_ID , value = "执行人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_START_TIME , value = "应开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_START_TIME , value = "实际开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_FINISH_TIME , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_TOTAL_COST , value = "实际工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MaintainTaskVOMeta.PAGE_INDEX , MaintainTaskVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = MaintainTaskServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -223,11 +323,32 @@ public class MaintainTaskController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询保养任务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "586286133193740288"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MaintainTaskVOMeta.LEADER_ID , value = "负责人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.OVERDUE , value = "逾期" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.BUSINESS_CODE , value = "任务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_ID , value = "方案" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NAME , value = "方案名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_INFO , value = "方案说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_NOTES , value = "方案备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_MAINTAIN_TYPE , value = "保养类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_CYCLE_METHOD , value = "循环方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_TOTAL_COST , value = "计划工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.GROUP_ID , value = "班组" , required = false , dataTypeClass=String.class , example = "584133248423034880"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_ID , value = "设备" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_NAME , value = "设备名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_MODEL , value = "设备型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_CODE , value = "设备编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ASSET_SN , value = "设备序列号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.EXECUTOR_ID , value = "执行人" , required = false , dataTypeClass=String.class , example = "558321538131034112"),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.PLAN_START_TIME , value = "应开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_START_TIME , value = "实际开始时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_FINISH_TIME , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ACT_TOTAL_COST , value = "实际工时" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = MaintainTaskVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.SELECTED_CODE , value = "选择" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainTaskVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = MaintainTaskServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -235,10 +356,56 @@ public class MaintainTaskController extends SuperController {
 	public Result<PagedList<MaintainTask>> queryPagedList(MaintainTaskVO sample) {
 		Result<PagedList<MaintainTask>> result=new Result<>();
 		PagedList<MaintainTask> list=maintainTaskService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// join 关联的对象
+		maintainTaskService.dao().fill(list)
+			.with("originator")
+			.with("executor")
+			.with(MaintainTaskMeta.MAINTAIN_GROUP)
+			.with(MaintainTaskMeta.MAINTAIN_TYPE_DICT)
+			.execute();
+
+
+		List<Employee> originator= CollectorUtil.collectList(list.getList(), MaintainTask::getOriginator);
+		maintainTaskService.dao().join(originator, Person.class);
+
+		List<Employee> executorUser= CollectorUtil.collectList(list.getList(),MaintainTask::getExecutor);
+		maintainTaskService.dao().join(executorUser, Person.class);
+
+
 		result.success(true).data(list);
 		return result;
 	}
 
+
+	/**
+	 */
+	@ApiOperation(value = "")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = MaintainTaskVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
+	})
+	@ApiOperationSupport(order=9)
+	@NotNull(name = MaintainTaskVOMeta.IDS)
+	@SentinelResource(value = MaintainTaskServiceProxy.CANCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(MaintainTaskServiceProxy.CANCEL)
+	public Result cancel(List<String> ids) {
+		return maintainTaskService.cancel(ids);
+
+	}
+
+
+	/**
+	 */
+	@ApiOperation(value = "")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
+	})
+	@ApiOperationSupport(order=10)
+	@NotNull(name = MaintainTaskVOMeta.ID)
+	@SentinelResource(value = MaintainTaskServiceProxy.EXECUTE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(MaintainTaskServiceProxy.EXECUTE)
+	public Result execute(String id) {
+		return maintainTaskService.execute(id);
+	}
 
 
 	/**

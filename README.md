@@ -92,9 +92,17 @@
 
 ### EAM系统部署的视频介绍
 - 1、待录制
-
-
 ### 方案一 Docker方式-建议作为体验使用
+- 一键安装Foxnic-EAM
+- 安全环境先觉确认：RedHat 7.9 纯洁的系统，yum 能安装本地基本包，共有云一般yum默认就没问题
+- 安装后:mysql5.7 端口3306，密码root_pwd
+- 安装为:/app目录
+```
+ curl -L http://resource.rainbooow.com/appInstallFull.sh>/tmp/i.sh;sh /tmp/i.sh 2.0.12
+```
+
+
+### 方案二 Docker方式-建议作为体验使用
 - 注意点:docker 版本可用作体验版本，正式使用不推荐docker部署方式。
 - 注意点:建议第一次docker部署完后，在重启一次，可能第一次启动数据库初始化还没完成，会导致报错
 - 应用和移动端兼容列表
@@ -116,9 +124,11 @@
     --character-set-server=utf8
 ```
 
-### 方案二 应用直接部署
+### 方案三 应用直接部署
 - 详细部署方式查询git目录下的文档说明
 - https://gitee.com/lank/eam/tree/master/%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3
+
+
 
 
 ## 项目结构说明

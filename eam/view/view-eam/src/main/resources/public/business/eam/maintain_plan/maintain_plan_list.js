@@ -1,7 +1,7 @@
 /**
  * 保养方案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-05 21:12:41
+ * @since 2022-06-09 19:37:08
  */
 
 
@@ -87,6 +87,7 @@ function ListPage() {
 					,{ field: 'startTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('开始时间') ,templet: function (d) { return templet('startTime',fox.dateFormat(d.startTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'endTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('结束时间') ,templet: function (d) { return templet('endTime',fox.dateFormat(d.endTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'totalCost', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('总工时') , templet: function (d) { return templet('totalCost',d.totalCost,d);}  }
+					,{ field: 'timeout', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('超时时间') , templet: function (d) { return templet('timeout',d.timeout,d);}  }
 					,{ field: 'info', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('方案说明') , templet: function (d) { return templet('info',d.info,d);}  }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
@@ -154,6 +155,7 @@ function ListPage() {
 		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		value.groupId={ inputType:"select_box", value: getSelectedValue("#groupId","value") ,fillBy:["maintainGroup"]  , label:getSelectedValue("#groupId","nameStr") };
 		value.maintainType={ inputType:"select_box", value: getSelectedValue("#maintainType","value") ,fillBy:["maintainTypeDict"]  , label:getSelectedValue("#maintainType","nameStr") };
+		value.cycleMethod={ inputType:"select_box", value: getSelectedValue("#cycleMethod","value"), label:getSelectedValue("#cycleMethod","nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -269,6 +271,28 @@ function ListPage() {
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
 					opts.push({data:data[i],name:data[i].label,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 cycleMethod 下拉字段
+		fox.renderSelectBox({
+			el: "cycleMethod",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("cycleMethod",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
 				}
 				return opts;
 			}

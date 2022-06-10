@@ -2,7 +2,7 @@
 /**
  * 保养方案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-05 21:12:41
+ * @since 2022-06-09 19:37:08
  */
  -->
  <!DOCTYPE html>
@@ -38,20 +38,13 @@
 
 
 
-        <div class="layui-row form-row" id="random-3375-content">
+        <div class="layui-row form-row" id="random-5605-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs4 form-column" >
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('编号')}">编号</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编号') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('方案名称')}">方案名称</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('方案名称') }" type="text" class="layui-input"    lay-verify="|required"  />
@@ -65,10 +58,19 @@
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('循环方式')}">循环方式</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
+                            <div id="cycleMethod" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.MaintainCycleMethodEnum')}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('保养周期')}">保养周期</div></div>
+                        <div class="layui-input-block ">
+                            <input  readonly lay-filter="actionCycleId" id="actionCycleId" name="actionCycleId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('保养周期') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
@@ -105,6 +107,15 @@
                     </div>
 
 
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('超时时间')}">超时时间</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="timeout" id="timeout" name="timeout" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('超时时间') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"  value="2.0" />
+                        </div>
+                    </div>
+
+
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：column 循环-->
@@ -113,25 +124,9 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('循环方式')}">循环方式</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('开始时间')}">开始时间</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="cycleMethod" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.MaintainCycleMethodEnum')}" extraParam="{}"></div>
-                        </div>
-                    </div>
-
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('保养周期')}">保养周期</div></div>
-                        <div class="layui-input-block ">
-                            <input  readonly lay-filter="actionCycleId" id="actionCycleId" name="actionCycleId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('保养周期') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('开始时间')}">开始时间</div></div>
-                        <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="startTime" id="startTime" name="startTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('开始时间') }" type="text" class="layui-input"    lay-verify=""   />
+                            <input input-type="date" lay-filter="startTime" id="startTime" name="startTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('开始时间') }" type="text" class="layui-input"    lay-verify="|required"   />
                         </div>
                     </div>
 
@@ -149,20 +144,41 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-7098-fieldset">
+
+
+        <div class="layui-row form-row" id="random-5303-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-6964-fieldset">
         <legend>设备范围</legend>
         </fieldset>
-        <div class="layui-row form-row" style="text-align: center;" id="random-7098-content">
+        <div class="layui-row form-row" style="text-align: center;" id="random-6964-content">
             <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
             <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
             </div>
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-5993-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-7615-fieldset">
         <legend>保养项目</legend>
         </fieldset>
-        <div class="layui-row form-row" style="text-align: center;" id="random-5993-content">
+        <div class="layui-row form-row" style="text-align: center;" id="random-7615-content">
             <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
             <iframe js-fn="maintainSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
             </div>
@@ -191,9 +207,13 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.EamPlanStatusEnum')}]];
     var SELECT_CYCLEMETHOD_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.MaintainCycleMethodEnum')}]];
-    var VALIDATE_CONFIG={"groupId":{"labelInForm":"执行班组","inputType":"select_box","required":true},"name":{"labelInForm":"方案名称","inputType":"text_input","required":true},"cycleMethod":{"labelInForm":"循环方式","inputType":"select_box","required":true},"startTime":{"date":true,"labelInForm":"开始时间","inputType":"date_input"},"endTime":{"date":true,"labelInForm":"结束时间","inputType":"date_input"},"maintainType":{"labelInForm":"保养类型","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"groupId":{"labelInForm":"执行班组","inputType":"select_box","required":true},"name":{"labelInForm":"方案名称","inputType":"text_input","required":true},"cycleMethod":{"labelInForm":"循环方式","inputType":"select_box","required":true},"startTime":{"date":true,"labelInForm":"开始时间","inputType":"date_input","required":true},"endTime":{"date":true,"labelInForm":"结束时间","inputType":"date_input"},"maintainType":{"labelInForm":"保养类型","inputType":"select_box","required":true},"timeout":{"labelInForm":"超时时间","inputType":"number_input","required":true}};
     var AUTH_PREFIX="eam_maintain_plan";
 
+    // 单据ID
+    var BILL_ID = [[${billId}]] ;
+    // 单据类型
+    var BILL_TYPE = [[${billType}]] ;
 
 </script>
 

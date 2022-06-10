@@ -13,8 +13,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 12:17:56
- * @sign 93ED77E11FB1CD2FB41A0FDA575B4665
+ * @since 2022-06-10 06:15:12
+ * @sign E39A2459DECFD01BD94E55E66E46146F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -123,12 +123,12 @@ public class InspectionPlanMeta {
 	/**
 	 * 周期 , 类型: java.lang.String
 	*/
-	public static final String ACTION_CYCLE="actionCycle";
+	public static final String ACTION_CYCLE_ID="actionCycleId";
 	
 	/**
 	 * 周期 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.lang.String> ACTION_CYCLE_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,ACTION_CYCLE, java.lang.String.class, "周期", "周期", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.lang.String> ACTION_CYCLE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,ACTION_CYCLE_ID, java.lang.String.class, "周期", "周期", java.lang.String.class, null);
 	
 	/**
 	 * 巡检顺序 , 类型: java.lang.String
@@ -159,6 +159,16 @@ public class InspectionPlanMeta {
 	 * 超时处理 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.lang.String> OVERTIME_METHOD_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,OVERTIME_METHOD, java.lang.String.class, "超时处理", "超时处理", java.lang.String.class, null);
+	
+	/**
+	 * 超时(小时) , 类型: java.math.BigDecimal
+	*/
+	public static final String TIMEOUT="timeout";
+	
+	/**
+	 * 超时(小时) , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.math.BigDecimal> TIMEOUT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,TIMEOUT, java.math.BigDecimal.class, "超时(小时)", "超时(小时)", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -313,7 +323,7 @@ public class InspectionPlanMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , PLAN_CODE , NAME , STATUS , PLAN_STATUS , PLAN_TYPE , LEADER_ID , GROUP_ID , START_DATE , END_DATE , ACTION_CYCLE , INSPECTION_METHOD , COMPLETION_TIME , OVERTIME_METHOD , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , INSPECTION_GROUP , TIME_DICT , INSPECTION_TYPE_DICT , INSPECTION_PLAN_POINT_LIST , INSPECTION_PLAN_POINT_IDS };
+	public static final String[] $PROPS={ ID , PLAN_CODE , NAME , STATUS , PLAN_STATUS , PLAN_TYPE , LEADER_ID , GROUP_ID , START_DATE , END_DATE , ACTION_CYCLE_ID , INSPECTION_METHOD , COMPLETION_TIME , OVERTIME_METHOD , TIMEOUT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , INSPECTION_GROUP , TIME_DICT , INSPECTION_TYPE_DICT , INSPECTION_PLAN_POINT_LIST , INSPECTION_PLAN_POINT_IDS };
 	
 	/**
 	 * 代理类
@@ -435,12 +445,12 @@ public class InspectionPlanMeta {
 		
 		/**
 		 * 设置 周期
-		 * @param actionCycle 周期
+		 * @param actionCycleId 周期
 		 * @return 当前对象
 		*/
-		public InspectionPlan setActionCycle(String actionCycle) {
-			super.change(ACTION_CYCLE,super.getActionCycle(),actionCycle);
-			super.setActionCycle(actionCycle);
+		public InspectionPlan setActionCycleId(String actionCycleId) {
+			super.change(ACTION_CYCLE_ID,super.getActionCycleId(),actionCycleId);
+			super.setActionCycleId(actionCycleId);
 			return this;
 		}
 		
@@ -474,6 +484,17 @@ public class InspectionPlanMeta {
 		public InspectionPlan setOvertimeMethod(String overtimeMethod) {
 			super.change(OVERTIME_METHOD,super.getOvertimeMethod(),overtimeMethod);
 			super.setOvertimeMethod(overtimeMethod);
+			return this;
+		}
+		
+		/**
+		 * 设置 超时(小时)
+		 * @param timeout 超时(小时)
+		 * @return 当前对象
+		*/
+		public InspectionPlan setTimeout(BigDecimal timeout) {
+			super.change(TIMEOUT,super.getTimeout(),timeout);
+			super.setTimeout(timeout);
 			return this;
 		}
 		

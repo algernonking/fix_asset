@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 保养任务  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 20:23:22
+ * @since 2022-06-06 21:41:15
  */
 @FeignClient(value = ServiceNames.EAM, contextId = MaintainTaskServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface MaintainTaskServiceProxy {
@@ -96,6 +96,13 @@ public interface MaintainTaskServiceProxy {
      * 导入保养任务数据(Excel)
      */
     public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+
+    public static final String CANCEL = API_PREFIX + "cancel";
+
+    public static final String EXECUTE = API_PREFIX + "execute";
+
+
 
     /**
      * 添加保养任务

@@ -2,7 +2,7 @@
 /**
  * 巡检任务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:23:26
+ * @since 2022-06-10 07:34:06
  */
  -->
  <!DOCTYPE html>
@@ -40,24 +40,44 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 巡检计划 , planId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 执行结果 , resultStatus ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 任务状态 , taskStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('执行结果')}" class="search-label resultStatus-label">执行结果</span><span class="search-colon">:</span></div>
-                        <input id="resultStatus" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('任务状态')}" class="search-label taskStatus-label">任务状态</span><span class="search-colon">:</span></div>
+                        <div id="taskStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.InspectionTaskStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 完成时间 , completeTime ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 应开始时间 , planTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 巡检顺序 , planInspectionMethod ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 时间要求 , planCompletionTime ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 巡检备注 , planNotes ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 执行人 , executorId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 应开始时间 , planStartTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 实际完成时间 , actFinishTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 实际工时 , actTotalCost ,typeName=number_input, isHideInSearch=true -->
                     <!-- 任务反馈 , content ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 开始时间 , startTime ,typeName=date_input, isHideInSearch=false -->
+                    <!-- 巡检班组 , groupId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('开始时间')}" class="search-label startTime-label">开始时间</span><span class="search-colon">:</span></div>
-                            <input type="text" id="startTime"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('巡检班组')}" class="search-label groupId-label">巡检班组</span><span class="search-colon">:</span></div>
+                        <div id="groupId" th:data="${'/service-eam/eam-inspection-group/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 巡检编码 , planCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('巡检编码')}" class="search-label planCode-label">巡检编码</span><span class="search-colon">:</span></div>
+                        <input id="planCode" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 巡检名称 , planName ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('巡检名称')}" class="search-label planName-label">巡检名称</span><span class="search-colon">:</span></div>
+                        <input id="planName" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 实际开始时间 , actStartTime ,typeName=date_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('实际开始时间')}" class="search-label actStartTime-label">实际开始时间</span><span class="search-colon">:</span></div>
+                            <input type="text" id="actStartTime"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
 
 
@@ -66,12 +86,12 @@
 
 
             <!-- 按钮区域 -->
-            <div class="layui-form toolbar search-buttons" style="opacity: 0">
+            <div id="search-area" class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div id="table-area" style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 
@@ -106,6 +126,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_TASKSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.InspectionTaskStatusEnum')}]];
+    var SELECT_PLANINSPECTIONMETHOD_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.InspectionMethodEnum')}]];
     var AUTH_PREFIX="eam_inspection_task";
 
 

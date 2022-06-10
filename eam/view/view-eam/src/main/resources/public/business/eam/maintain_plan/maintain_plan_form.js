@@ -1,7 +1,7 @@
 /**
  * 保养方案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-05 21:12:41
+ * @since 2022-06-09 19:37:08
  */
 
 function FormPage() {
@@ -235,7 +235,7 @@ function FormPage() {
 			if (r.success) {
 				fillFormData(r.data)
 			} else {
-				fox.showMessage(data);
+				fox.showMessage(r);
 			}
 		});
 	}

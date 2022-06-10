@@ -4,14 +4,19 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.InspectionTaskVO;
 import java.util.List;
 import com.dt.platform.domain.eam.InspectionTask;
+import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.eam.InspectionPlan;
+import com.dt.platform.domain.eam.InspectionPoint;
+import com.dt.platform.domain.eam.InspectionTaskPoint;
+import org.github.foxnic.web.domain.system.DictItem;
+import com.dt.platform.domain.eam.InspectionGroup;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:23:26
+ * @since 2022-06-10 07:34:05
  * @sign D2CF2B4F4AE8F3605D993E8E9A963E50
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -119,16 +124,6 @@ public class InspectionTaskVOMeta extends InspectionTaskMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 名称 , 类型: java.lang.String
-	*/
-	public static final String NAME="name";
-	
-	/**
-	 * 名称 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
-	
-	/**
 	 * 巡检计划 , 类型: java.lang.String
 	*/
 	public static final String PLAN_ID="planId";
@@ -139,44 +134,124 @@ public class InspectionTaskVOMeta extends InspectionTaskMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> PLAN_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,PLAN_ID, java.lang.String.class, "巡检计划", "巡检计划", java.lang.String.class, null);
 	
 	/**
-	 * 执行结果 , 类型: java.lang.String
+	 * 任务状态 , 类型: java.lang.String
 	*/
-	public static final String RESULT_STATUS="resultStatus";
+	public static final String TASK_STATUS="taskStatus";
 	
 	/**
-	 * 执行结果 , 类型: java.lang.String
+	 * 任务状态 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> RESULT_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,RESULT_STATUS, java.lang.String.class, "执行结果", "执行结果", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> TASK_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,TASK_STATUS, java.lang.String.class, "任务状态", "任务状态", java.lang.String.class, null);
 	
 	/**
-	 * 开始时间 , 类型: java.util.Date
+	 * 巡检编码 , 类型: java.lang.String
 	*/
-	public static final String START_TIME="startTime";
+	public static final String PLAN_CODE="planCode";
 	
 	/**
-	 * 开始时间 , 类型: java.util.Date
+	 * 巡检编码 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.util.Date> START_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,START_TIME, java.util.Date.class, "开始时间", "开始时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> PLAN_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,PLAN_CODE, java.lang.String.class, "巡检编码", "巡检编码", java.lang.String.class, null);
 	
 	/**
-	 * 完成时间 , 类型: java.util.Date
+	 * 巡检名称 , 类型: java.lang.String
 	*/
-	public static final String COMPLETE_TIME="completeTime";
+	public static final String PLAN_NAME="planName";
 	
 	/**
-	 * 完成时间 , 类型: java.util.Date
+	 * 巡检名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.util.Date> COMPLETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,COMPLETE_TIME, java.util.Date.class, "完成时间", "完成时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> PLAN_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,PLAN_NAME, java.lang.String.class, "巡检名称", "巡检名称", java.lang.String.class, null);
+	
+	/**
+	 * 巡检顺序 , 类型: java.lang.String
+	*/
+	public static final String PLAN_INSPECTION_METHOD="planInspectionMethod";
+	
+	/**
+	 * 巡检顺序 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> PLAN_INSPECTION_METHOD_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,PLAN_INSPECTION_METHOD, java.lang.String.class, "巡检顺序", "巡检顺序", java.lang.String.class, null);
+	
+	/**
+	 * 时间要求 , 类型: java.math.BigDecimal
+	*/
+	public static final String PLAN_COMPLETION_TIME="planCompletionTime";
+	
+	/**
+	 * 时间要求 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.math.BigDecimal> PLAN_COMPLETION_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,PLAN_COMPLETION_TIME, java.math.BigDecimal.class, "时间要求", "时间要求", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 巡检备注 , 类型: java.lang.String
+	*/
+	public static final String PLAN_NOTES="planNotes";
+	
+	/**
+	 * 巡检备注 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> PLAN_NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,PLAN_NOTES, java.lang.String.class, "巡检备注", "巡检备注", java.lang.String.class, null);
+	
+	/**
+	 * 巡检班组 , 类型: java.lang.String
+	*/
+	public static final String GROUP_ID="groupId";
+	
+	/**
+	 * 巡检班组 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> GROUP_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,GROUP_ID, java.lang.String.class, "巡检班组", "巡检班组", java.lang.String.class, null);
+	
+	/**
+	 * 执行人 , 类型: java.lang.String
+	*/
+	public static final String EXECUTOR_ID="executorId";
+	
+	/**
+	 * 执行人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> EXECUTOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,EXECUTOR_ID, java.lang.String.class, "执行人", "执行人", java.lang.String.class, null);
 	
 	/**
 	 * 应开始时间 , 类型: java.util.Date
 	*/
-	public static final String PLAN_TIME="planTime";
+	public static final String PLAN_START_TIME="planStartTime";
 	
 	/**
 	 * 应开始时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.util.Date> PLAN_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,PLAN_TIME, java.util.Date.class, "应开始时间", "应开始时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.util.Date> PLAN_START_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,PLAN_START_TIME, java.util.Date.class, "应开始时间", "应开始时间", java.util.Date.class, null);
+	
+	/**
+	 * 实际开始时间 , 类型: java.util.Date
+	*/
+	public static final String ACT_START_TIME="actStartTime";
+	
+	/**
+	 * 实际开始时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.util.Date> ACT_START_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,ACT_START_TIME, java.util.Date.class, "实际开始时间", "实际开始时间", java.util.Date.class, null);
+	
+	/**
+	 * 实际完成时间 , 类型: java.util.Date
+	*/
+	public static final String ACT_FINISH_TIME="actFinishTime";
+	
+	/**
+	 * 实际完成时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.util.Date> ACT_FINISH_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,ACT_FINISH_TIME, java.util.Date.class, "实际完成时间", "实际完成时间", java.util.Date.class, null);
+	
+	/**
+	 * 实际工时 , 类型: java.math.BigDecimal
+	*/
+	public static final String ACT_TOTAL_COST="actTotalCost";
+	
+	/**
+	 * 实际工时 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.math.BigDecimal> ACT_TOTAL_COST_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,ACT_TOTAL_COST, java.math.BigDecimal.class, "实际工时", "实际工时", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 任务反馈 , 类型: java.lang.String
@@ -299,9 +374,79 @@ public class InspectionTaskVOMeta extends InspectionTaskMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,com.dt.platform.domain.eam.InspectionPlan> INSPECTION_PLAN_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,INSPECTION_PLAN, com.dt.platform.domain.eam.InspectionPlan.class, "计划", "计划", com.dt.platform.domain.eam.InspectionPlan.class, null);
 	
 	/**
+	 * 巡检点 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InspectionPoint
+	*/
+	public static final String INSPECTION_POINT="inspectionPoint";
+	
+	/**
+	 * 巡检点 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InspectionPoint
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,com.dt.platform.domain.eam.InspectionPoint> INSPECTION_POINT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,INSPECTION_POINT, java.util.List.class, "巡检点", "巡检点", com.dt.platform.domain.eam.InspectionPoint.class, null);
+	
+	/**
+	 * 巡检点 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String INSPECTION_POINT_IDS="inspectionPointIds";
+	
+	/**
+	 * 巡检点 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,java.lang.String> INSPECTION_POINT_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,INSPECTION_POINT_IDS, java.util.List.class, "巡检点", "巡检点", java.lang.String.class, null);
+	
+	/**
+	 * 任务巡检点 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InspectionTaskPoint
+	*/
+	public static final String INSPECTION_TASK_POINT="inspectionTaskPoint";
+	
+	/**
+	 * 任务巡检点 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InspectionTaskPoint
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,com.dt.platform.domain.eam.InspectionTaskPoint> INSPECTION_TASK_POINT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,INSPECTION_TASK_POINT, java.util.List.class, "任务巡检点", "任务巡检点", com.dt.platform.domain.eam.InspectionTaskPoint.class, null);
+	
+	/**
+	 * 任务巡检点 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InspectionTaskPoint
+	*/
+	public static final String INSPECTION_TASK_POINT_IDS="inspectionTaskPointIds";
+	
+	/**
+	 * 任务巡检点 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InspectionTaskPoint
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,com.dt.platform.domain.eam.InspectionTaskPoint> INSPECTION_TASK_POINT_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,INSPECTION_TASK_POINT_IDS, java.util.List.class, "任务巡检点", "任务巡检点", com.dt.platform.domain.eam.InspectionTaskPoint.class, null);
+	
+	/**
+	 * 时间 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String TIME_DICT="timeDict";
+	
+	/**
+	 * 时间 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,org.github.foxnic.web.domain.system.DictItem> TIME_DICT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,TIME_DICT, org.github.foxnic.web.domain.system.DictItem.class, "时间", "时间", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * 类型 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String INSPECTION_TYPE_DICT="inspectionTypeDict";
+	
+	/**
+	 * 类型 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,org.github.foxnic.web.domain.system.DictItem> INSPECTION_TYPE_DICT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,INSPECTION_TYPE_DICT, org.github.foxnic.web.domain.system.DictItem.class, "类型", "类型", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * 班组 , 类型: com.dt.platform.domain.eam.InspectionGroup
+	*/
+	public static final String INSPECTION_GROUP="inspectionGroup";
+	
+	/**
+	 * 班组 , 类型: com.dt.platform.domain.eam.InspectionGroup
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionTaskVO,com.dt.platform.domain.eam.InspectionGroup> INSPECTION_GROUP_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionTaskVO.class ,INSPECTION_GROUP, com.dt.platform.domain.eam.InspectionGroup.class, "班组", "班组", com.dt.platform.domain.eam.InspectionGroup.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NAME , PLAN_ID , RESULT_STATUS , START_TIME , COMPLETE_TIME , PLAN_TIME , CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , INSPECTION_PLAN };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PLAN_ID , TASK_STATUS , PLAN_CODE , PLAN_NAME , PLAN_INSPECTION_METHOD , PLAN_COMPLETION_TIME , PLAN_NOTES , GROUP_ID , EXECUTOR_ID , PLAN_START_TIME , ACT_START_TIME , ACT_FINISH_TIME , ACT_TOTAL_COST , CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , INSPECTION_PLAN , INSPECTION_POINT , INSPECTION_POINT_IDS , INSPECTION_TASK_POINT , INSPECTION_TASK_POINT_IDS , TIME_DICT , INSPECTION_TYPE_DICT , INSPECTION_GROUP };
 	
 	/**
 	 * 代理类
@@ -422,17 +567,6 @@ public class InspectionTaskVOMeta extends InspectionTaskMeta {
 		}
 		
 		/**
-		 * 设置 名称
-		 * @param name 名称
-		 * @return 当前对象
-		*/
-		public InspectionTask setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
-			return this;
-		}
-		
-		/**
 		 * 设置 巡检计划
 		 * @param planId 巡检计划
 		 * @return 当前对象
@@ -444,46 +578,134 @@ public class InspectionTaskVOMeta extends InspectionTaskMeta {
 		}
 		
 		/**
-		 * 设置 执行结果
-		 * @param resultStatus 执行结果
+		 * 设置 任务状态
+		 * @param taskStatus 任务状态
 		 * @return 当前对象
 		*/
-		public InspectionTask setResultStatus(String resultStatus) {
-			super.change(RESULT_STATUS,super.getResultStatus(),resultStatus);
-			super.setResultStatus(resultStatus);
+		public InspectionTask setTaskStatus(String taskStatus) {
+			super.change(TASK_STATUS,super.getTaskStatus(),taskStatus);
+			super.setTaskStatus(taskStatus);
 			return this;
 		}
 		
 		/**
-		 * 设置 开始时间
-		 * @param startTime 开始时间
+		 * 设置 巡检编码
+		 * @param planCode 巡检编码
 		 * @return 当前对象
 		*/
-		public InspectionTask setStartTime(Date startTime) {
-			super.change(START_TIME,super.getStartTime(),startTime);
-			super.setStartTime(startTime);
+		public InspectionTask setPlanCode(String planCode) {
+			super.change(PLAN_CODE,super.getPlanCode(),planCode);
+			super.setPlanCode(planCode);
 			return this;
 		}
 		
 		/**
-		 * 设置 完成时间
-		 * @param completeTime 完成时间
+		 * 设置 巡检名称
+		 * @param planName 巡检名称
 		 * @return 当前对象
 		*/
-		public InspectionTask setCompleteTime(Date completeTime) {
-			super.change(COMPLETE_TIME,super.getCompleteTime(),completeTime);
-			super.setCompleteTime(completeTime);
+		public InspectionTask setPlanName(String planName) {
+			super.change(PLAN_NAME,super.getPlanName(),planName);
+			super.setPlanName(planName);
+			return this;
+		}
+		
+		/**
+		 * 设置 巡检顺序
+		 * @param planInspectionMethod 巡检顺序
+		 * @return 当前对象
+		*/
+		public InspectionTask setPlanInspectionMethod(String planInspectionMethod) {
+			super.change(PLAN_INSPECTION_METHOD,super.getPlanInspectionMethod(),planInspectionMethod);
+			super.setPlanInspectionMethod(planInspectionMethod);
+			return this;
+		}
+		
+		/**
+		 * 设置 时间要求
+		 * @param planCompletionTime 时间要求
+		 * @return 当前对象
+		*/
+		public InspectionTask setPlanCompletionTime(BigDecimal planCompletionTime) {
+			super.change(PLAN_COMPLETION_TIME,super.getPlanCompletionTime(),planCompletionTime);
+			super.setPlanCompletionTime(planCompletionTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 巡检备注
+		 * @param planNotes 巡检备注
+		 * @return 当前对象
+		*/
+		public InspectionTask setPlanNotes(String planNotes) {
+			super.change(PLAN_NOTES,super.getPlanNotes(),planNotes);
+			super.setPlanNotes(planNotes);
+			return this;
+		}
+		
+		/**
+		 * 设置 巡检班组
+		 * @param groupId 巡检班组
+		 * @return 当前对象
+		*/
+		public InspectionTask setGroupId(String groupId) {
+			super.change(GROUP_ID,super.getGroupId(),groupId);
+			super.setGroupId(groupId);
+			return this;
+		}
+		
+		/**
+		 * 设置 执行人
+		 * @param executorId 执行人
+		 * @return 当前对象
+		*/
+		public InspectionTask setExecutorId(String executorId) {
+			super.change(EXECUTOR_ID,super.getExecutorId(),executorId);
+			super.setExecutorId(executorId);
 			return this;
 		}
 		
 		/**
 		 * 设置 应开始时间
-		 * @param planTime 应开始时间
+		 * @param planStartTime 应开始时间
 		 * @return 当前对象
 		*/
-		public InspectionTask setPlanTime(Date planTime) {
-			super.change(PLAN_TIME,super.getPlanTime(),planTime);
-			super.setPlanTime(planTime);
+		public InspectionTask setPlanStartTime(Date planStartTime) {
+			super.change(PLAN_START_TIME,super.getPlanStartTime(),planStartTime);
+			super.setPlanStartTime(planStartTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 实际开始时间
+		 * @param actStartTime 实际开始时间
+		 * @return 当前对象
+		*/
+		public InspectionTask setActStartTime(Date actStartTime) {
+			super.change(ACT_START_TIME,super.getActStartTime(),actStartTime);
+			super.setActStartTime(actStartTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 实际完成时间
+		 * @param actFinishTime 实际完成时间
+		 * @return 当前对象
+		*/
+		public InspectionTask setActFinishTime(Date actFinishTime) {
+			super.change(ACT_FINISH_TIME,super.getActFinishTime(),actFinishTime);
+			super.setActFinishTime(actFinishTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 实际工时
+		 * @param actTotalCost 实际工时
+		 * @return 当前对象
+		*/
+		public InspectionTask setActTotalCost(BigDecimal actTotalCost) {
+			super.change(ACT_TOTAL_COST,super.getActTotalCost(),actTotalCost);
+			super.setActTotalCost(actTotalCost);
 			return this;
 		}
 		
@@ -616,6 +838,83 @@ public class InspectionTaskVOMeta extends InspectionTaskMeta {
 		public InspectionTask setInspectionPlan(InspectionPlan inspectionPlan) {
 			super.change(INSPECTION_PLAN,super.getInspectionPlan(),inspectionPlan);
 			super.setInspectionPlan(inspectionPlan);
+			return this;
+		}
+		
+		/**
+		 * 设置 巡检点
+		 * @param inspectionPoint 巡检点
+		 * @return 当前对象
+		*/
+		public InspectionTask setInspectionPoint(List<InspectionPoint> inspectionPoint) {
+			super.change(INSPECTION_POINT,super.getInspectionPoint(),inspectionPoint);
+			super.setInspectionPoint(inspectionPoint);
+			return this;
+		}
+		
+		/**
+		 * 设置 巡检点
+		 * @param inspectionPointIds 巡检点
+		 * @return 当前对象
+		*/
+		public InspectionTask setInspectionPointIds(List<String> inspectionPointIds) {
+			super.change(INSPECTION_POINT_IDS,super.getInspectionPointIds(),inspectionPointIds);
+			super.setInspectionPointIds(inspectionPointIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 任务巡检点
+		 * @param inspectionTaskPoint 任务巡检点
+		 * @return 当前对象
+		*/
+		public InspectionTask setInspectionTaskPoint(List<InspectionTaskPoint> inspectionTaskPoint) {
+			super.change(INSPECTION_TASK_POINT,super.getInspectionTaskPoint(),inspectionTaskPoint);
+			super.setInspectionTaskPoint(inspectionTaskPoint);
+			return this;
+		}
+		
+		/**
+		 * 设置 任务巡检点
+		 * @param inspectionTaskPointIds 任务巡检点
+		 * @return 当前对象
+		*/
+		public InspectionTask setInspectionTaskPointIds(List<InspectionTaskPoint> inspectionTaskPointIds) {
+			super.change(INSPECTION_TASK_POINT_IDS,super.getInspectionTaskPointIds(),inspectionTaskPointIds);
+			super.setInspectionTaskPointIds(inspectionTaskPointIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 时间
+		 * @param timeDict 时间
+		 * @return 当前对象
+		*/
+		public InspectionTask setTimeDict(DictItem timeDict) {
+			super.change(TIME_DICT,super.getTimeDict(),timeDict);
+			super.setTimeDict(timeDict);
+			return this;
+		}
+		
+		/**
+		 * 设置 类型
+		 * @param inspectionTypeDict 类型
+		 * @return 当前对象
+		*/
+		public InspectionTask setInspectionTypeDict(DictItem inspectionTypeDict) {
+			super.change(INSPECTION_TYPE_DICT,super.getInspectionTypeDict(),inspectionTypeDict);
+			super.setInspectionTypeDict(inspectionTypeDict);
+			return this;
+		}
+		
+		/**
+		 * 设置 班组
+		 * @param inspectionGroup 班组
+		 * @return 当前对象
+		*/
+		public InspectionTask setInspectionGroup(InspectionGroup inspectionGroup) {
+			super.change(INSPECTION_GROUP,super.getInspectionGroup(),inspectionGroup);
+			super.setInspectionGroup(inspectionGroup);
 			return this;
 		}
 	}

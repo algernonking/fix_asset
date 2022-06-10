@@ -1184,6 +1184,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				||AssetOperateEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(businessType)
 				||AssetOperateEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(businessType)){
 			//
+		}else if(AssetOperateEnum.EAM_ASSET_MAINTAIN_PLAN.code().equals(businessType)){
+			//保养
 		}else{
 			queryCondition.andIn("asset_status","unknow");
 			return ErrorDesc.failure().message("不支持当前业务类型操作");

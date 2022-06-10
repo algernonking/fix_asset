@@ -299,15 +299,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 末尾执行
          */
         ending:function() {
-
         }
         ,
         /**
          *  加载 资产列表
          */
         assetSelectList:function (ifr,win,data) {
-
-
             console.log("assetSelectList",ifr,data);
             //设置 iframe 高度
             ifr.height("450px");
@@ -322,7 +319,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             data.assetOwnerId=BILL_ID;
             admin.putTempData('eam-asset-selected-data'+timestamp,data,true);
             admin.putTempData('eam-asset-selected-action'+timestamp,formAction,true);
-            win.location="/business/eam/asset/asset_selected_list.html?assetSelectedCode="+timestamp;
+            win.location="/business/eam/asset/asset_selected_list.html?assetSelectedCode="+timestamp+"&pageType="+formAction;
 
         }
     }

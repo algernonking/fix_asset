@@ -6,8 +6,14 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.EAMTables.EAM_INSPECTION_TASK;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
+import java.util.List;
+import org.github.foxnic.web.domain.system.DictItem;
+import com.github.foxnic.commons.lang.DataParser;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
 
@@ -16,8 +22,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检任务
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:23:26
- * @sign FBD3B2BE964F792E15DBC8062D4771F9
+ * @since 2022-06-10 07:34:05
+ * @sign E8B6CF07F758B92375C6B03577FC29BA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,40 +42,82 @@ public class InspectionTask extends Entity {
 	private String id;
 	
 	/**
-	 * 名称：名称
-	*/
-	@ApiModelProperty(required = false,value="名称" , notes = "名称")
-	private String name;
-	
-	/**
 	 * 巡检计划：巡检计划
 	*/
 	@ApiModelProperty(required = false,value="巡检计划" , notes = "巡检计划")
 	private String planId;
 	
 	/**
-	 * 执行结果：执行结果
+	 * 任务状态：任务状态
 	*/
-	@ApiModelProperty(required = false,value="执行结果" , notes = "执行结果")
-	private String resultStatus;
+	@ApiModelProperty(required = false,value="任务状态" , notes = "任务状态")
+	private String taskStatus;
 	
 	/**
-	 * 开始时间：开始时间
+	 * 巡检编码：巡检编码
 	*/
-	@ApiModelProperty(required = false,value="开始时间" , notes = "开始时间")
-	private Date startTime;
+	@ApiModelProperty(required = false,value="巡检编码" , notes = "巡检编码")
+	private String planCode;
 	
 	/**
-	 * 完成时间：完成时间
+	 * 巡检名称：巡检名称
 	*/
-	@ApiModelProperty(required = false,value="完成时间" , notes = "完成时间")
-	private Date completeTime;
+	@ApiModelProperty(required = false,value="巡检名称" , notes = "巡检名称")
+	private String planName;
+	
+	/**
+	 * 巡检顺序：巡检顺序
+	*/
+	@ApiModelProperty(required = false,value="巡检顺序" , notes = "巡检顺序")
+	private String planInspectionMethod;
+	
+	/**
+	 * 时间要求：时间要求
+	*/
+	@ApiModelProperty(required = false,value="时间要求" , notes = "时间要求")
+	private BigDecimal planCompletionTime;
+	
+	/**
+	 * 巡检备注：巡检备注
+	*/
+	@ApiModelProperty(required = false,value="巡检备注" , notes = "巡检备注")
+	private String planNotes;
+	
+	/**
+	 * 巡检班组：巡检班组
+	*/
+	@ApiModelProperty(required = false,value="巡检班组" , notes = "巡检班组")
+	private String groupId;
+	
+	/**
+	 * 执行人：执行人
+	*/
+	@ApiModelProperty(required = false,value="执行人" , notes = "执行人")
+	private String executorId;
 	
 	/**
 	 * 应开始时间：应开始时间
 	*/
 	@ApiModelProperty(required = false,value="应开始时间" , notes = "应开始时间")
-	private Date planTime;
+	private Date planStartTime;
+	
+	/**
+	 * 实际开始时间：实际开始时间
+	*/
+	@ApiModelProperty(required = false,value="实际开始时间" , notes = "实际开始时间")
+	private Date actStartTime;
+	
+	/**
+	 * 实际完成时间：实际完成时间
+	*/
+	@ApiModelProperty(required = false,value="实际完成时间" , notes = "实际完成时间")
+	private Date actFinishTime;
+	
+	/**
+	 * 实际工时：实际工时
+	*/
+	@ApiModelProperty(required = false,value="实际工时" , notes = "实际工时")
+	private BigDecimal actTotalCost;
 	
 	/**
 	 * 任务反馈：任务反馈
@@ -112,6 +160,8 @@ public class InspectionTask extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除")
 	private Integer deleted;
+	@Transient
+	private Boolean deletedBool;
 	
 	/**
 	 * 删除人ID：删除人ID
@@ -144,6 +194,48 @@ public class InspectionTask extends Entity {
 	private InspectionPlan inspectionPlan;
 	
 	/**
+	 * 巡检点：巡检点
+	*/
+	@ApiModelProperty(required = false,value="巡检点" , notes = "巡检点")
+	private List<InspectionPoint> inspectionPoint;
+	
+	/**
+	 * 巡检点：巡检点
+	*/
+	@ApiModelProperty(required = false,value="巡检点" , notes = "巡检点")
+	private List<String> inspectionPointIds;
+	
+	/**
+	 * 任务巡检点：任务巡检点
+	*/
+	@ApiModelProperty(required = false,value="任务巡检点" , notes = "任务巡检点")
+	private List<InspectionTaskPoint> inspectionTaskPoint;
+	
+	/**
+	 * 任务巡检点：任务巡检点
+	*/
+	@ApiModelProperty(required = false,value="任务巡检点" , notes = "任务巡检点")
+	private List<InspectionTaskPoint> inspectionTaskPointIds;
+	
+	/**
+	 * 时间：时间
+	*/
+	@ApiModelProperty(required = false,value="时间" , notes = "时间")
+	private DictItem timeDict;
+	
+	/**
+	 * 类型：类型
+	*/
+	@ApiModelProperty(required = false,value="类型" , notes = "类型")
+	private DictItem inspectionTypeDict;
+	
+	/**
+	 * 班组：班组
+	*/
+	@ApiModelProperty(required = false,value="班组" , notes = "班组")
+	private InspectionGroup inspectionGroup;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -159,25 +251,6 @@ public class InspectionTask extends Entity {
 	*/
 	public InspectionTask setId(String id) {
 		this.id=id;
-		return this;
-	}
-	
-	/**
-	 * 获得 名称<br>
-	 * 名称
-	 * @return 名称
-	*/
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * 设置 名称
-	 * @param name 名称
-	 * @return 当前对象
-	*/
-	public InspectionTask setName(String name) {
-		this.name=name;
 		return this;
 	}
 	
@@ -201,59 +274,154 @@ public class InspectionTask extends Entity {
 	}
 	
 	/**
-	 * 获得 执行结果<br>
-	 * 执行结果
-	 * @return 执行结果
+	 * 获得 任务状态<br>
+	 * 任务状态
+	 * @return 任务状态
 	*/
-	public String getResultStatus() {
-		return resultStatus;
+	public String getTaskStatus() {
+		return taskStatus;
 	}
 	
 	/**
-	 * 设置 执行结果
-	 * @param resultStatus 执行结果
+	 * 设置 任务状态
+	 * @param taskStatus 任务状态
 	 * @return 当前对象
 	*/
-	public InspectionTask setResultStatus(String resultStatus) {
-		this.resultStatus=resultStatus;
+	public InspectionTask setTaskStatus(String taskStatus) {
+		this.taskStatus=taskStatus;
 		return this;
 	}
 	
 	/**
-	 * 获得 开始时间<br>
-	 * 开始时间
-	 * @return 开始时间
+	 * 获得 巡检编码<br>
+	 * 巡检编码
+	 * @return 巡检编码
 	*/
-	public Date getStartTime() {
-		return startTime;
+	public String getPlanCode() {
+		return planCode;
 	}
 	
 	/**
-	 * 设置 开始时间
-	 * @param startTime 开始时间
+	 * 设置 巡检编码
+	 * @param planCode 巡检编码
 	 * @return 当前对象
 	*/
-	public InspectionTask setStartTime(Date startTime) {
-		this.startTime=startTime;
+	public InspectionTask setPlanCode(String planCode) {
+		this.planCode=planCode;
 		return this;
 	}
 	
 	/**
-	 * 获得 完成时间<br>
-	 * 完成时间
-	 * @return 完成时间
+	 * 获得 巡检名称<br>
+	 * 巡检名称
+	 * @return 巡检名称
 	*/
-	public Date getCompleteTime() {
-		return completeTime;
+	public String getPlanName() {
+		return planName;
 	}
 	
 	/**
-	 * 设置 完成时间
-	 * @param completeTime 完成时间
+	 * 设置 巡检名称
+	 * @param planName 巡检名称
 	 * @return 当前对象
 	*/
-	public InspectionTask setCompleteTime(Date completeTime) {
-		this.completeTime=completeTime;
+	public InspectionTask setPlanName(String planName) {
+		this.planName=planName;
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检顺序<br>
+	 * 巡检顺序
+	 * @return 巡检顺序
+	*/
+	public String getPlanInspectionMethod() {
+		return planInspectionMethod;
+	}
+	
+	/**
+	 * 设置 巡检顺序
+	 * @param planInspectionMethod 巡检顺序
+	 * @return 当前对象
+	*/
+	public InspectionTask setPlanInspectionMethod(String planInspectionMethod) {
+		this.planInspectionMethod=planInspectionMethod;
+		return this;
+	}
+	
+	/**
+	 * 获得 时间要求<br>
+	 * 时间要求
+	 * @return 时间要求
+	*/
+	public BigDecimal getPlanCompletionTime() {
+		return planCompletionTime;
+	}
+	
+	/**
+	 * 设置 时间要求
+	 * @param planCompletionTime 时间要求
+	 * @return 当前对象
+	*/
+	public InspectionTask setPlanCompletionTime(BigDecimal planCompletionTime) {
+		this.planCompletionTime=planCompletionTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检备注<br>
+	 * 巡检备注
+	 * @return 巡检备注
+	*/
+	public String getPlanNotes() {
+		return planNotes;
+	}
+	
+	/**
+	 * 设置 巡检备注
+	 * @param planNotes 巡检备注
+	 * @return 当前对象
+	*/
+	public InspectionTask setPlanNotes(String planNotes) {
+		this.planNotes=planNotes;
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检班组<br>
+	 * 巡检班组
+	 * @return 巡检班组
+	*/
+	public String getGroupId() {
+		return groupId;
+	}
+	
+	/**
+	 * 设置 巡检班组
+	 * @param groupId 巡检班组
+	 * @return 当前对象
+	*/
+	public InspectionTask setGroupId(String groupId) {
+		this.groupId=groupId;
+		return this;
+	}
+	
+	/**
+	 * 获得 执行人<br>
+	 * 执行人
+	 * @return 执行人
+	*/
+	public String getExecutorId() {
+		return executorId;
+	}
+	
+	/**
+	 * 设置 执行人
+	 * @param executorId 执行人
+	 * @return 当前对象
+	*/
+	public InspectionTask setExecutorId(String executorId) {
+		this.executorId=executorId;
 		return this;
 	}
 	
@@ -262,17 +430,74 @@ public class InspectionTask extends Entity {
 	 * 应开始时间
 	 * @return 应开始时间
 	*/
-	public Date getPlanTime() {
-		return planTime;
+	public Date getPlanStartTime() {
+		return planStartTime;
 	}
 	
 	/**
 	 * 设置 应开始时间
-	 * @param planTime 应开始时间
+	 * @param planStartTime 应开始时间
 	 * @return 当前对象
 	*/
-	public InspectionTask setPlanTime(Date planTime) {
-		this.planTime=planTime;
+	public InspectionTask setPlanStartTime(Date planStartTime) {
+		this.planStartTime=planStartTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 实际开始时间<br>
+	 * 实际开始时间
+	 * @return 实际开始时间
+	*/
+	public Date getActStartTime() {
+		return actStartTime;
+	}
+	
+	/**
+	 * 设置 实际开始时间
+	 * @param actStartTime 实际开始时间
+	 * @return 当前对象
+	*/
+	public InspectionTask setActStartTime(Date actStartTime) {
+		this.actStartTime=actStartTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 实际完成时间<br>
+	 * 实际完成时间
+	 * @return 实际完成时间
+	*/
+	public Date getActFinishTime() {
+		return actFinishTime;
+	}
+	
+	/**
+	 * 设置 实际完成时间
+	 * @param actFinishTime 实际完成时间
+	 * @return 当前对象
+	*/
+	public InspectionTask setActFinishTime(Date actFinishTime) {
+		this.actFinishTime=actFinishTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 实际工时<br>
+	 * 实际工时
+	 * @return 实际工时
+	*/
+	public BigDecimal getActTotalCost() {
+		return actTotalCost;
+	}
+	
+	/**
+	 * 设置 实际工时
+	 * @param actTotalCost 实际工时
+	 * @return 当前对象
+	*/
+	public InspectionTask setActTotalCost(BigDecimal actTotalCost) {
+		this.actTotalCost=actTotalCost;
 		return this;
 	}
 	
@@ -400,12 +625,42 @@ public class InspectionTask extends Entity {
 	}
 	
 	/**
+	 * 获得 是否已删除 的投影属性<br>
+	 * 等价于 getDeleted 方法，获得对应的枚举类型
+	 * @return 是否已删除
+	*/
+	@Transient
+	public Boolean isDeleted() {
+		if(this.deletedBool==null) {
+			this.deletedBool=DataParser.parseBoolean(deleted);
+		}
+		return this.deletedBool ;
+	}
+	
+	/**
 	 * 设置 是否已删除
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
 	public InspectionTask setDeleted(Integer deleted) {
 		this.deleted=deleted;
+		this.deletedBool=DataParser.parseBoolean(deleted);
+		return this;
+	}
+	
+	/**
+	 * 设置 是否已删除的投影属性，等同于设置 是否已删除
+	 * @param deletedBool 是否已删除
+	 * @return 当前对象
+	*/
+	@Transient
+	public InspectionTask setDeleted(Boolean deletedBool) {
+		if(deletedBool==null) {
+			this.deleted=null;
+		} else {
+			this.deleted=deletedBool?1:0;
+		}
+		this.deletedBool=deletedBool;
 		return this;
 	}
 	
@@ -501,6 +756,183 @@ public class InspectionTask extends Entity {
 	*/
 	public InspectionTask setInspectionPlan(InspectionPlan inspectionPlan) {
 		this.inspectionPlan=inspectionPlan;
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检点<br>
+	 * 巡检点
+	 * @return 巡检点
+	*/
+	public List<InspectionPoint> getInspectionPoint() {
+		return inspectionPoint;
+	}
+	
+	/**
+	 * 设置 巡检点
+	 * @param inspectionPoint 巡检点
+	 * @return 当前对象
+	*/
+	public InspectionTask setInspectionPoint(List<InspectionPoint> inspectionPoint) {
+		this.inspectionPoint=inspectionPoint;
+		return this;
+	}
+	
+	/**
+	 * 添加 巡检点
+	 * @param entity 巡检点
+	 * @return 当前对象
+	*/
+	public InspectionTask addInspectionPoint(InspectionPoint... entity) {
+		if(this.inspectionPoint==null) inspectionPoint=new ArrayList<>();
+		this.inspectionPoint.addAll(Arrays.asList(entity));
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检点<br>
+	 * 巡检点
+	 * @return 巡检点
+	*/
+	public List<String> getInspectionPointIds() {
+		return inspectionPointIds;
+	}
+	
+	/**
+	 * 设置 巡检点
+	 * @param inspectionPointIds 巡检点
+	 * @return 当前对象
+	*/
+	public InspectionTask setInspectionPointIds(List<String> inspectionPointIds) {
+		this.inspectionPointIds=inspectionPointIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 巡检点
+	 * @param inspectionPointId 巡检点
+	 * @return 当前对象
+	*/
+	public InspectionTask addInspectionPointId(String... inspectionPointId) {
+		if(this.inspectionPointIds==null) inspectionPointIds=new ArrayList<>();
+		this.inspectionPointIds.addAll(Arrays.asList(inspectionPointId));
+		return this;
+	}
+	
+	/**
+	 * 获得 任务巡检点<br>
+	 * 任务巡检点
+	 * @return 任务巡检点
+	*/
+	public List<InspectionTaskPoint> getInspectionTaskPoint() {
+		return inspectionTaskPoint;
+	}
+	
+	/**
+	 * 设置 任务巡检点
+	 * @param inspectionTaskPoint 任务巡检点
+	 * @return 当前对象
+	*/
+	public InspectionTask setInspectionTaskPoint(List<InspectionTaskPoint> inspectionTaskPoint) {
+		this.inspectionTaskPoint=inspectionTaskPoint;
+		return this;
+	}
+	
+	/**
+	 * 添加 任务巡检点
+	 * @param entity 任务巡检点
+	 * @return 当前对象
+	*/
+	public InspectionTask addInspectionTaskPoint(InspectionTaskPoint... entity) {
+		if(this.inspectionTaskPoint==null) inspectionTaskPoint=new ArrayList<>();
+		this.inspectionTaskPoint.addAll(Arrays.asList(entity));
+		return this;
+	}
+	
+	/**
+	 * 获得 任务巡检点<br>
+	 * 任务巡检点
+	 * @return 任务巡检点
+	*/
+	public List<InspectionTaskPoint> getInspectionTaskPointIds() {
+		return inspectionTaskPointIds;
+	}
+	
+	/**
+	 * 设置 任务巡检点
+	 * @param inspectionTaskPointIds 任务巡检点
+	 * @return 当前对象
+	*/
+	public InspectionTask setInspectionTaskPointIds(List<InspectionTaskPoint> inspectionTaskPointIds) {
+		this.inspectionTaskPointIds=inspectionTaskPointIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 任务巡检点
+	 * @param inspectionTaskPointId 任务巡检点
+	 * @return 当前对象
+	*/
+	public InspectionTask addInspectionTaskPointId(InspectionTaskPoint... inspectionTaskPointId) {
+		if(this.inspectionTaskPointIds==null) inspectionTaskPointIds=new ArrayList<>();
+		this.inspectionTaskPointIds.addAll(Arrays.asList(inspectionTaskPointId));
+		return this;
+	}
+	
+	/**
+	 * 获得 时间<br>
+	 * 时间
+	 * @return 时间
+	*/
+	public DictItem getTimeDict() {
+		return timeDict;
+	}
+	
+	/**
+	 * 设置 时间
+	 * @param timeDict 时间
+	 * @return 当前对象
+	*/
+	public InspectionTask setTimeDict(DictItem timeDict) {
+		this.timeDict=timeDict;
+		return this;
+	}
+	
+	/**
+	 * 获得 类型<br>
+	 * 类型
+	 * @return 类型
+	*/
+	public DictItem getInspectionTypeDict() {
+		return inspectionTypeDict;
+	}
+	
+	/**
+	 * 设置 类型
+	 * @param inspectionTypeDict 类型
+	 * @return 当前对象
+	*/
+	public InspectionTask setInspectionTypeDict(DictItem inspectionTypeDict) {
+		this.inspectionTypeDict=inspectionTypeDict;
+		return this;
+	}
+	
+	/**
+	 * 获得 班组<br>
+	 * 班组
+	 * @return 班组
+	*/
+	public InspectionGroup getInspectionGroup() {
+		return inspectionGroup;
+	}
+	
+	/**
+	 * 设置 班组
+	 * @param inspectionGroup 班组
+	 * @return 当前对象
+	*/
+	public InspectionTask setInspectionGroup(InspectionGroup inspectionGroup) {
+		this.inspectionGroup=inspectionGroup;
 		return this;
 	}
 

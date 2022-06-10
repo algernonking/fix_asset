@@ -9,9 +9,12 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.math.BigDecimal;
 import javax.persistence.Transient;
+import java.util.List;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.hrm.Employee;
 import com.github.foxnic.commons.lang.DataParser;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
 
@@ -20,8 +23,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 保养方案
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-05 21:12:40
- * @sign 5C6459B2F1D92C80C51AB22205F2900B
+ * @since 2022-06-09 19:37:07
+ * @sign A2D67335CD49A0AD722AB0833791F1F8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -100,6 +103,12 @@ public class MaintainPlan extends Entity {
 	private BigDecimal totalCost;
 	
 	/**
+	 * 超时时间：超时时间
+	*/
+	@ApiModelProperty(required = false,value="超时时间" , notes = "超时时间")
+	private BigDecimal timeout;
+	
+	/**
 	 * 方案说明：方案说明
 	*/
 	@ApiModelProperty(required = false,value="方案说明" , notes = "方案说明")
@@ -116,6 +125,12 @@ public class MaintainPlan extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private String originatorId;
+	
+	/**
+	 * 选择：选择
+	*/
+	@ApiModelProperty(required = false,value="选择" , notes = "选择")
+	private String selectedCode;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -174,22 +189,46 @@ public class MaintainPlan extends Entity {
 	private Integer version;
 	
 	/**
+	 * 资产：资产
+	*/
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
+	private List<Asset> assetList;
+	
+	/**
+	 * 资产列表：资产列表
+	*/
+	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
+	private List<String> assetIds;
+	
+	/**
+	 * 项目：项目
+	*/
+	@ApiModelProperty(required = false,value="项目" , notes = "项目")
+	private List<MaintainProject> projectList;
+	
+	/**
+	 * 项目：项目
+	*/
+	@ApiModelProperty(required = false,value="项目" , notes = "项目")
+	private List<String> projectIds;
+	
+	/**
 	 * 类型：类型
 	*/
 	@ApiModelProperty(required = false,value="类型" , notes = "类型")
 	private DictItem maintainTypeDict;
 	
 	/**
-	 * 周期：周期
-	*/
-	@ApiModelProperty(required = false,value="周期" , notes = "周期")
-	private ActionCrontab actionCrontab;
-	
-	/**
 	 * 执行班组：执行班组
 	*/
 	@ApiModelProperty(required = false,value="执行班组" , notes = "执行班组")
 	private MaintainGroup maintainGroup;
+	
+	/**
+	 * 周期：周期
+	*/
+	@ApiModelProperty(required = false,value="周期" , notes = "周期")
+	private ActionCrontab actionCrontab;
 	
 	/**
 	 * 制单人：制单人
@@ -407,6 +446,25 @@ public class MaintainPlan extends Entity {
 	}
 	
 	/**
+	 * 获得 超时时间<br>
+	 * 超时时间
+	 * @return 超时时间
+	*/
+	public BigDecimal getTimeout() {
+		return timeout;
+	}
+	
+	/**
+	 * 设置 超时时间
+	 * @param timeout 超时时间
+	 * @return 当前对象
+	*/
+	public MaintainPlan setTimeout(BigDecimal timeout) {
+		this.timeout=timeout;
+		return this;
+	}
+	
+	/**
 	 * 获得 方案说明<br>
 	 * 方案说明
 	 * @return 方案说明
@@ -460,6 +518,25 @@ public class MaintainPlan extends Entity {
 	*/
 	public MaintainPlan setOriginatorId(String originatorId) {
 		this.originatorId=originatorId;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择<br>
+	 * 选择
+	 * @return 选择
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择
+	 * @param selectedCode 选择
+	 * @return 当前对象
+	*/
+	public MaintainPlan setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 	
@@ -665,6 +742,126 @@ public class MaintainPlan extends Entity {
 	}
 	
 	/**
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
+	*/
+	public List<Asset> getAssetList() {
+		return assetList;
+	}
+	
+	/**
+	 * 设置 资产
+	 * @param assetList 资产
+	 * @return 当前对象
+	*/
+	public MaintainPlan setAssetList(List<Asset> assetList) {
+		this.assetList=assetList;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产
+	 * @param asset 资产
+	 * @return 当前对象
+	*/
+	public MaintainPlan addAsset(Asset... asset) {
+		if(this.assetList==null) assetList=new ArrayList<>();
+		this.assetList.addAll(Arrays.asList(asset));
+		return this;
+	}
+	
+	/**
+	 * 获得 资产列表<br>
+	 * 资产列表
+	 * @return 资产列表
+	*/
+	public List<String> getAssetIds() {
+		return assetIds;
+	}
+	
+	/**
+	 * 设置 资产列表
+	 * @param assetIds 资产列表
+	 * @return 当前对象
+	*/
+	public MaintainPlan setAssetIds(List<String> assetIds) {
+		this.assetIds=assetIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产列表
+	 * @param assetId 资产列表
+	 * @return 当前对象
+	*/
+	public MaintainPlan addAssetId(String... assetId) {
+		if(this.assetIds==null) assetIds=new ArrayList<>();
+		this.assetIds.addAll(Arrays.asList(assetId));
+		return this;
+	}
+	
+	/**
+	 * 获得 项目<br>
+	 * 项目
+	 * @return 项目
+	*/
+	public List<MaintainProject> getProjectList() {
+		return projectList;
+	}
+	
+	/**
+	 * 设置 项目
+	 * @param projectList 项目
+	 * @return 当前对象
+	*/
+	public MaintainPlan setProjectList(List<MaintainProject> projectList) {
+		this.projectList=projectList;
+		return this;
+	}
+	
+	/**
+	 * 添加 项目
+	 * @param project 项目
+	 * @return 当前对象
+	*/
+	public MaintainPlan addProject(MaintainProject... project) {
+		if(this.projectList==null) projectList=new ArrayList<>();
+		this.projectList.addAll(Arrays.asList(project));
+		return this;
+	}
+	
+	/**
+	 * 获得 项目<br>
+	 * 项目
+	 * @return 项目
+	*/
+	public List<String> getProjectIds() {
+		return projectIds;
+	}
+	
+	/**
+	 * 设置 项目
+	 * @param projectIds 项目
+	 * @return 当前对象
+	*/
+	public MaintainPlan setProjectIds(List<String> projectIds) {
+		this.projectIds=projectIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 项目
+	 * @param projectId 项目
+	 * @return 当前对象
+	*/
+	public MaintainPlan addProjectId(String... projectId) {
+		if(this.projectIds==null) projectIds=new ArrayList<>();
+		this.projectIds.addAll(Arrays.asList(projectId));
+		return this;
+	}
+	
+	/**
 	 * 获得 类型<br>
 	 * 类型
 	 * @return 类型
@@ -684,25 +881,6 @@ public class MaintainPlan extends Entity {
 	}
 	
 	/**
-	 * 获得 周期<br>
-	 * 周期
-	 * @return 周期
-	*/
-	public ActionCrontab getActionCrontab() {
-		return actionCrontab;
-	}
-	
-	/**
-	 * 设置 周期
-	 * @param actionCrontab 周期
-	 * @return 当前对象
-	*/
-	public MaintainPlan setActionCrontab(ActionCrontab actionCrontab) {
-		this.actionCrontab=actionCrontab;
-		return this;
-	}
-	
-	/**
 	 * 获得 执行班组<br>
 	 * 执行班组
 	 * @return 执行班组
@@ -718,6 +896,25 @@ public class MaintainPlan extends Entity {
 	*/
 	public MaintainPlan setMaintainGroup(MaintainGroup maintainGroup) {
 		this.maintainGroup=maintainGroup;
+		return this;
+	}
+	
+	/**
+	 * 获得 周期<br>
+	 * 周期
+	 * @return 周期
+	*/
+	public ActionCrontab getActionCrontab() {
+		return actionCrontab;
+	}
+	
+	/**
+	 * 设置 周期
+	 * @param actionCrontab 周期
+	 * @return 当前对象
+	*/
+	public MaintainPlan setActionCrontab(ActionCrontab actionCrontab) {
+		this.actionCrontab=actionCrontab;
 		return this;
 	}
 	

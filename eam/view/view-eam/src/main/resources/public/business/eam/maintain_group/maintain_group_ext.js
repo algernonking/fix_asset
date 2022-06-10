@@ -181,6 +181,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
+            var memberIds="";
+            if(data&&data.leader){
+                for(var i=0;i<data.memberList.length;i++){
+                    if(i==0){
+                        memberIds=data.memberList[i].id;
+                    }else{
+                        memberIds=memberIds+","+data.memberList[i].id;
+                    }
+                }
+                data.memberIds=memberIds;
+            }else{
+                data.memberIds="";
+            }
+            console.log('beforeDataFill',data);
         },
         /**
          * 表单数据填充后

@@ -255,6 +255,7 @@ public class RepairOrderServiceImpl extends SuperService<RepairOrder> implements
 		if(repairOrder.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
+
 		Result ckResult=assetService.checkAssetDataForBusinessAction(AssetOperateEnum.EAM_ASSET_REPAIR_ORDER.code(),repairOrder.getAssetIds());
 		if(!ckResult.isSuccess()){
 			return ckResult;

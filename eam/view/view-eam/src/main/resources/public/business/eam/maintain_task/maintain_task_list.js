@@ -1,7 +1,7 @@
 /**
  * 保养任务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 20:23:23
+ * @since 2022-06-09 07:09:02
  */
 
 
@@ -78,10 +78,25 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
-					,{ field: 'leaderId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('负责人') , templet: function (d) { return templet('leaderId',d.leaderId,d);}  }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'overdue', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('逾期'), templet:function (d){ return templet('overdue',fox.getEnumText(SELECT_OVERDUE_DATA,d.overdue),d);}}
+					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('任务编码') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
+					,{ field: 'planName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('方案名称') , templet: function (d) { return templet('planName',d.planName,d);}  }
+					,{ field: 'planInfo', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('方案说明') , templet: function (d) { return templet('planInfo',d.planInfo,d);}  }
+					,{ field: 'planMaintainType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('保养类型'), templet: function (d) { return templet('planMaintainType' ,fox.joinLabel(d.maintainTypeDict,"label"),d);}}
+					,{ field: 'planCycleMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('循环方式'), templet:function (d){ return templet('planCycleMethod',fox.getEnumText(SELECT_PLANCYCLEMETHOD_DATA,d.planCycleMethod),d);}}
+					,{ field: 'planTotalCost', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('计划工时') , templet: function (d) { return templet('planTotalCost',d.planTotalCost,d);}  }
+					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('班组'), templet: function (d) { return templet('groupId' ,fox.joinLabel(d.maintainGroup,"name"),d);}}
+					,{ field: 'assetName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备名称') , templet: function (d) { return templet('assetName',d.assetName,d);}  }
+					,{ field: 'assetModel', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备型号') , templet: function (d) { return templet('assetModel',d.assetModel,d);}  }
+					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备状态'), templet:function (d){ return templet('assetStatus',fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.assetStatus),d);}}
+					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备编码') , templet: function (d) { return templet('assetCode',d.assetCode,d);}  }
+					,{ field: 'assetSn', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('设备序列号') , templet: function (d) { return templet('assetSn',d.assetSn,d);}  }
+					,{ field: 'executorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('执行人'), templet: function (d) { return templet('executorId' ,fox.joinLabel(d.executor,"name"),d);}}
+					,{ field: 'planStartTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('应开始时间') ,templet: function (d) { return templet('planStartTime',fox.dateFormat(d.planStartTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'actStartTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('实际开始时间') ,templet: function (d) { return templet('actStartTime',fox.dateFormat(d.actStartTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'actFinishTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('实际完成时间') ,templet: function (d) { return templet('actFinishTime',fox.dateFormat(d.actFinishTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'actTotalCost', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('实际工时') , templet: function (d) { return templet('actTotalCost',d.actTotalCost,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -143,6 +158,14 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
+		value.overdue={ inputType:"select_box", value: getSelectedValue("#overdue","value"), label:getSelectedValue("#overdue","nameStr") };
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.planName={ inputType:"button",value: $("#planName").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.groupId={ inputType:"select_box", value: getSelectedValue("#groupId","value") ,fillBy:["maintainGroup"]  , label:getSelectedValue("#groupId","nameStr") };
+		value.assetModel={ inputType:"button",value: $("#assetModel").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.assetCode={ inputType:"button",value: $("#assetCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.assetSn={ inputType:"button",value: $("#assetSn").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.actStartTime={ inputType:"date_input", begin: $("#actStartTime-begin").val(), end: $("#actStartTime-end").val() ,matchType:"auto" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -188,7 +211,7 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(1);
+		fox.switchSearchRow(2);
 
 		//渲染 status 下拉字段
 		fox.renderSelectBox({
@@ -212,6 +235,71 @@ function ListPage() {
 				return opts;
 			}
 		});
+		//渲染 overdue 下拉字段
+		fox.renderSelectBox({
+			el: "overdue",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("overdue",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 groupId 下拉字段
+		fox.renderSelectBox({
+			el: "groupId",
+			radio: true,
+			size: "small",
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("groupId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#actStartTime-begin',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("actStartTime",value, date, endDate);
+				},1);
+			}
+		});
+		laydate.render({
+			elem: '#actStartTime-end',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("actStartTime",value, date, endDate);
+				},1);
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -233,7 +321,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(1,function (ex){
+			fox.switchSearchRow(2,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -263,6 +351,9 @@ function ListPage() {
 					break;
 				case 'batch-del':
 					batchDelete(selected);
+					break;
+				case 'tool-task-cancel':
+					window.pageExt.list.taskCancel && window.pageExt.list.taskCancel(selected,obj);
 					break;
 				case 'refresh-data':
 					refreshTableData();

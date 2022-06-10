@@ -1,5 +1,6 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,8 @@ public class MaintainPlanPageController extends ViewController {
 	 */
 	@RequestMapping("/maintain_plan_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
+		model.addAttribute("billId",id);
+		model.addAttribute("billType", AssetOperateEnum.EAM_ASSET_MAINTAIN_PLAN.code());
 		return prefix+"/maintain_plan_form";
 	}
 }

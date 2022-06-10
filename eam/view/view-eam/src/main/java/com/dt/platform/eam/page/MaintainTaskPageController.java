@@ -2,6 +2,7 @@ package com.dt.platform.eam.page;
 
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * 保养任务 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 20:23:22
+ * @since 2022-06-06 21:41:15
 */
 
 @Controller("EamMaintainTaskPageController")
@@ -50,6 +51,11 @@ public class MaintainTaskPageController extends ViewController {
 	 */
 	@RequestMapping("/maintain_task_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
+
+		String employeeId= SessionUser.getCurrent().getActivatedEmployeeId();
+		model.addAttribute("employeeId",employeeId);
+
+		model.addAttribute("groupEmployee",employeeId);
 		return prefix+"/maintain_task_form";
 	}
 }

@@ -98,6 +98,21 @@ public interface MaintainProjectServiceProxy {
     public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
 
     /**
+     *
+     */
+
+    public static final String QUERY_PAGED_LIST_BY_SELECTED = API_PREFIX + "query-paged-list-by-selected";
+    /**
+     *
+     */
+    public static final String QUERY_PAGED_LIST_BY_SELECT = API_PREFIX + "query-paged-list-by-select";
+
+
+    public static final String SELECTED = API_PREFIX + "selected";
+
+
+
+    /**
      * 添加保养项目
      */
     @RequestMapping(MaintainProjectServiceProxy.INSERT)

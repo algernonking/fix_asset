@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 保养项目
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-04 06:14:43
- * @sign A4396143BA6C31A07562E82796E9D992
+ * @since 2022-06-08 06:19:52
+ * @sign 2FEEFB0579133A813A96349FD92BC56B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -66,7 +66,7 @@ public class MaintainProject extends Entity {
 	 * 标准工时(小时)：标准工时(小时)
 	*/
 	@ApiModelProperty(required = false,value="标准工时(小时)" , notes = "标准工时(小时)")
-	private BigDecimal baseCose;
+	private BigDecimal baseCost;
 	
 	/**
 	 * 保养周期：保养周期
@@ -260,17 +260,17 @@ public class MaintainProject extends Entity {
 	 * 标准工时(小时)
 	 * @return 标准工时(小时)
 	*/
-	public BigDecimal getBaseCose() {
-		return baseCose;
+	public BigDecimal getBaseCost() {
+		return baseCost;
 	}
 	
 	/**
 	 * 设置 标准工时(小时)
-	 * @param baseCose 标准工时(小时)
+	 * @param baseCost 标准工时(小时)
 	 * @return 当前对象
 	*/
-	public MaintainProject setBaseCose(BigDecimal baseCose) {
-		this.baseCose=baseCose;
+	public MaintainProject setBaseCost(BigDecimal baseCost) {
+		this.baseCost=baseCost;
 		return this;
 	}
 	

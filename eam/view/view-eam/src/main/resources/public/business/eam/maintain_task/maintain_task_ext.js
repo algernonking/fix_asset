@@ -1,7 +1,7 @@
 /**
  * 保养任务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 20:23:22
+ * @since 2022-06-06 19:49:26
  */
 
 layui.config({
@@ -19,7 +19,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //模块基础路径
     const moduleURL="/service-eam/eam-maintain-task";
-
+    var timestamp = Date.parse(new Date());
+    var formAction=admin.getTempData('eam-maintain-task-form-data-form-action');
     //列表页的扩展
     var list={
         /**
@@ -27,6 +28,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeInit:function () {
             console.log("list:beforeInit");
+            var operHtml=document.getElementById("toolbarTemplate").innerHTML;
+            operHtml=operHtml.replace(/lay-event="create"/i, "style=\"display:none\"")
+            document.getElementById("toolbarTemplate").innerHTML=operHtml;
         },
         /**
          * 表格渲染前调用
@@ -83,6 +87,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
+            for (var i = 0; i < data.length; i++) {
+                //如果审批中或审批通过的不允许编辑
+                console.log(data[i]);
+                if(data[i].status=="finish"||data[i].status=="cancel") {
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+            }
 
         },
         /**
@@ -150,6 +161,22 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
+        taskCancel:function(selected,obj){
+            //调用批量删除接口
+            top.layer.confirm(fox.translate('确定取消已选中的')+fox.translate('保养任务')+fox.translate('吗？'), function (i) {
+                admin.post(moduleURL+"/cancel", { ids: selected }, function (data) {
+                    if (data.success) {
+                        fox.showMessage(data);
+                        window.module.refreshTableData();
+
+                      //  refreshTableData();
+                    } else {
+                        fox.showMessage(data);
+                    }
+                });
+            });
+            console.log(selected,obj);
+        },
         /**
          * 末尾执行
          */
@@ -168,6 +195,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
             console.log("form:beforeInit")
+            $("#planName").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#planInfo").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#planNotes").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#planStartTime").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#planTotalCost").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#assetCode").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#assetName").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#assetModel").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#assetSn").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#actTotalCost").attr("disabled","disabled").css("background-color","#e6e6e6");
+
+
         },
         /**
          * 窗口调节前
@@ -186,6 +225,36 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
+            var d=[];
+            var e={};
+            e.data={};
+            e.data.id=data.groupId;
+            d.push(e);
+            setTimeout(function(){
+                form.onSelectBoxChanged("groupId",d,d,true);
+                },200);
+
+            $("#assetStatus").find("xm-select").css("background-color","#e6e6e6");
+            $("#planMaintainType").find("xm-select").css("background-color","#e6e6e6");
+            $("#planCycleMethod").find("xm-select").css("background-color","#e6e6e6");
+            var assetStatusSelect= xmSelect.get('#assetStatus',true);
+            if(assetStatusSelect){
+                assetStatusSelect.update({disabled:true})
+            }
+            var planMaintainTypeSelect= xmSelect.get('#planMaintainType',true);
+            if(planMaintainTypeSelect){
+                planMaintainTypeSelect.update({disabled:true})
+            }
+            var planCycleMethodSelect= xmSelect.get('#planCycleMethod',true);
+            if(planCycleMethodSelect){
+                planCycleMethodSelect.update({disabled:true})
+            }
+            var groupIdSelect= xmSelect.get('#groupId',true);
+            if(groupIdSelect){
+                groupIdSelect.update({disabled:true})
+            }
+
+
             console.log('afterDataFill',data);
         },
         /**
@@ -206,6 +275,25 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         onSelectBoxChanged:function(id,selected,changes,isAdd) {
             console.log('onSelectBoxChanged',id,selected,changes,isAdd);
+            //isAdd, 此次操作是新增还是删除
+            if(id=="groupId"){
+                if(isAdd&&changes.length>0){
+                    var userSelect= xmSelect.get('#executorId',true);
+                    console.log("userSelect",userSelect);
+                    var item=changes[0];
+                    admin.post("/service-eam/eam-group-user/query-employee-person", { groupId : item.data.id }, function (r) {
+                        if (r.success) {
+                            var d=[];
+                            for (var i = 0; i < r.data.length; i++) {
+                                d.push({name:r.data[i].name,value:r.data[i].employeeId});
+                            }
+                            userSelect.update({data:d})
+                        } else {
+                            fox.showMessage(r);
+                        }
+                    });
+                }
+            }
         },
         /**
          * 当日期选择组件选择后触发
@@ -234,6 +322,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
+
+
             return true;
         },
         /**
@@ -250,6 +340,24 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
+        /**
+         *  加载 保养项目
+         */
+        maintainSelectList:function (ifr,win,data) {
+            // debugger
+            console.log("goodsSelectList",ifr,data);
+            //设置 iframe 高度
+            ifr.height("450px");
+            var ownerId="";
+            if(data&&data.id){
+                ownerId=data.id;
+            }
+            var ownerType="eam_asset_maintain_task"
+            var queryString="?pageType="+formAction+"&selectedCode="+timestamp+"&ownerId="+ownerId+"&ownerType="+ownerType;
+            //设置地址
+            win.location="/business/eam/maintain_task_project/maintain_task_project_selected_list.html"+queryString
+
+        },
         /**
          * 文件上传组件回调
          *  event 类型包括：

@@ -68,8 +68,9 @@ public class MaintainProjectGtr extends BaseCodeGenerator {
                 fillWith(MaintainProjectMeta.MAINTAIN_TYPE_DICT).muliti(false).defaultIndex(0);
 
 
-        cfg.view().field(EAMTables.EAM_MAINTAIN_PROJECT.BASE_COSE).form().validate().required();
+        cfg.view().field(EAMTables.EAM_MAINTAIN_PROJECT.BASE_COST).form().validate().required().form().numberInput().defaultValue(1.0);
         cfg.view().field(EAMTables.EAM_MAINTAIN_PROJECT.ACTION_CYCLE_ID).form().validate().required().form().readOnly();
+
 
         cfg.view().field(EAMTables.EAM_MAINTAIN_PROJECT.ACTION_CYCLE_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_MAINTAIN_PROJECT.ATTACH_ID).table().disable(true);
@@ -80,21 +81,22 @@ public class MaintainProjectGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_MAINTAIN_PROJECT.NOTES).form().textArea().height(60);
-
+        cfg.view().list().disableBatchDelete();
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().formWindow().width("85%");
         cfg.view().formWindow().bottomSpace(80);
 
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_MAINTAIN_PROJECT.CODE,
+                    //    EAMTables.EAM_MAINTAIN_PROJECT.CODE,
                         EAMTables.EAM_MAINTAIN_PROJECT.NAME,
                         EAMTables.EAM_MAINTAIN_PROJECT.STATUS,
+                        EAMTables.EAM_MAINTAIN_PROJECT.BASE_COST,
                 },
                 new Object[] {
                         EAMTables.EAM_MAINTAIN_PROJECT.MAINTAIN_TYPE,
                         EAMTables.EAM_MAINTAIN_PROJECT.ACTION_CYCLE_ID,
-                        EAMTables.EAM_MAINTAIN_PROJECT.BASE_COSE,
+
                 }
         );
 
@@ -113,7 +115,7 @@ public class MaintainProjectGtr extends BaseCodeGenerator {
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
                 .setControllerAndAgent(WriteMode.IGNORE) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
+                .setPageController(WriteMode.IGNORE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)
                 .setExtendJsFile(WriteMode.IGNORE); //列表HTML页

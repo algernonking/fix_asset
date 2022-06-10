@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 保养项目 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-04 06:14:44
+ * @since 2022-06-06 21:12:01
 */
 
 @Controller("EamMaintainProjectPageController")
@@ -45,6 +45,42 @@ public class MaintainProjectPageController extends ViewController {
 		return prefix+"/maintain_project_list";
 	}
 
+	/**
+	 * 保养项目 功能主页面
+	 */
+	@RequestMapping("/maintain_project_selected_exec_list.html")
+	public String selectedExecList(Model model,HttpServletRequest request,String selectedCode,String ownerId,String ownerType,String pageType) {
+		model.addAttribute("ownerId",ownerId);
+		model.addAttribute("ownerType",ownerType);
+		model.addAttribute("selectedCode",selectedCode);
+		model.addAttribute("pageType",pageType);
+		return prefix+"/maintain_project_selected_exec_list";
+	}
+
+
+
+	/**
+	 * 保养项目 功能主页面
+	 */
+	@RequestMapping("/maintain_project_selected_list.html")
+	public String selectedList(Model model,HttpServletRequest request,String selectedCode,String ownerId,String ownerType,String pageType) {
+		model.addAttribute("ownerId",ownerId);
+		model.addAttribute("ownerType",ownerType);
+		model.addAttribute("selectedCode",selectedCode);
+		model.addAttribute("pageType",pageType);
+		return prefix+"/maintain_project_selected_list";
+	}
+
+	/**
+	 * 保养项目 功能主页面
+	 */
+	@RequestMapping("/maintain_project_select_list.html")
+	public String selectList(Model model,HttpServletRequest request,String selectedCode,String ownerId,String ownerType) {
+		model.addAttribute("ownerId",ownerId);
+		model.addAttribute("ownerType",ownerType);
+		model.addAttribute("selectedCode",selectedCode);
+		return prefix+"/maintain_project_select_list";
+	}
 	/**
 	 * 保养项目 表单页面
 	 */

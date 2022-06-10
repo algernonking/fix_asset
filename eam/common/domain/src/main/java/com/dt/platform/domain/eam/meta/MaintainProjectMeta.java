@@ -11,8 +11,8 @@ import com.dt.platform.domain.eam.ActionCrontab;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-04 06:14:43
- * @sign A4396143BA6C31A07562E82796E9D992
+ * @since 2022-06-08 06:19:52
+ * @sign 2FEEFB0579133A813A96349FD92BC56B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -71,12 +71,12 @@ public class MaintainProjectMeta {
 	/**
 	 * 标准工时(小时) , 类型: java.math.BigDecimal
 	*/
-	public static final String BASE_COSE="baseCose";
+	public static final String BASE_COST="baseCost";
 	
 	/**
 	 * 标准工时(小时) , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.MaintainProject,java.math.BigDecimal> BASE_COSE_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainProject.class ,BASE_COSE, java.math.BigDecimal.class, "标准工时(小时)", "标准工时(小时)", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.MaintainProject,java.math.BigDecimal> BASE_COST_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainProject.class ,BASE_COST, java.math.BigDecimal.class, "标准工时(小时)", "标准工时(小时)", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 保养周期 , 类型: java.lang.String
@@ -231,7 +231,7 @@ public class MaintainProjectMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , STATUS , NAME , MAINTAIN_TYPE , BASE_COSE , ACTION_CYCLE_ID , ATTACH_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , SELECTED_CODE , VERSION , MAINTAIN_TYPE_DICT , ACTION_CRONTAB };
+	public static final String[] $PROPS={ ID , CODE , STATUS , NAME , MAINTAIN_TYPE , BASE_COST , ACTION_CYCLE_ID , ATTACH_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , SELECTED_CODE , VERSION , MAINTAIN_TYPE_DICT , ACTION_CRONTAB };
 	
 	/**
 	 * 代理类
@@ -298,12 +298,12 @@ public class MaintainProjectMeta {
 		
 		/**
 		 * 设置 标准工时(小时)
-		 * @param baseCose 标准工时(小时)
+		 * @param baseCost 标准工时(小时)
 		 * @return 当前对象
 		*/
-		public MaintainProject setBaseCose(BigDecimal baseCose) {
-			super.change(BASE_COSE,super.getBaseCose(),baseCose);
-			super.setBaseCose(baseCose);
+		public MaintainProject setBaseCost(BigDecimal baseCost) {
+			super.change(BASE_COST,super.getBaseCost(),baseCost);
+			super.setBaseCost(baseCost);
 			return this;
 		}
 		

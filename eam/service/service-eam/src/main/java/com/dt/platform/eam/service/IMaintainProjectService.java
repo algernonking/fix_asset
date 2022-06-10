@@ -1,6 +1,8 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.AssetVO;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.MaintainProject;
@@ -26,6 +28,13 @@ import java.util.Map;
 */
 
 public interface IMaintainProjectService extends ISuperService<MaintainProject> {
+
+
+	PagedList<MaintainProject> queryPagedListBySelected(MaintainProjectVO sample, String ownerId, String ownerType);
+
+	PagedList<MaintainProject> queryPagedListBySelect(MaintainProjectVO sample,String ownerId,String ownerType);
+
+	Result selected(List<String> ids,String ownerId,String selectedCode);
 
 	/**
 	 * 添加，如果语句错误，则抛出异常

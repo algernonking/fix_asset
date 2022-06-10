@@ -2,7 +2,7 @@
 /**
  * 保养项目 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-04 06:14:44
+ * @since 2022-06-08 06:19:53
  */
  -->
  <!DOCTYPE html>
@@ -38,20 +38,13 @@
 
 
 
-        <div class="layui-row form-row" id="random-2850-content">
+        <div class="layui-row form-row" id="random-5654-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs6 form-column" >
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('项目编号')}">项目编号</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('项目编号') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('项目名称')}">项目名称</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('项目名称') }" type="text" class="layui-input"    lay-verify="|required"  />
@@ -63,6 +56,15 @@
                         <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <div id="status" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('标准工时(小时)')}">标准工时(小时)</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="baseCost" id="baseCost" name="baseCost" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准工时(小时)') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"  value="1.0" />
                         </div>
                     </div>
 
@@ -89,15 +91,6 @@
                         </div>
                     </div>
 
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('标准工时(小时)')}">标准工时(小时)</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="baseCose" id="baseCose" name="baseCose" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准工时(小时)') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
-                        </div>
-                    </div>
-
-
                 <!--结束：栏次内字段循环-->
             </div>
             <!--结束：栏次输入框循环-->
@@ -106,7 +99,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-1275-content">
+        <div class="layui-row form-row" id="random-7804-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -160,7 +153,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
-    var VALIDATE_CONFIG={"baseCose":{"labelInForm":"标准工时(小时)","inputType":"number_input","required":true},"name":{"labelInForm":"项目名称","inputType":"text_input","required":true},"maintainType":{"labelInForm":"保养类型","inputType":"select_box","required":true},"actionCycleId":{"labelInForm":"保养周期","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"baseCost":{"labelInForm":"标准工时(小时)","inputType":"number_input","required":true},"name":{"labelInForm":"项目名称","inputType":"text_input","required":true},"maintainType":{"labelInForm":"保养类型","inputType":"select_box","required":true},"actionCycleId":{"labelInForm":"保养周期","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
     var AUTH_PREFIX="eam_maintain_project";
 
 

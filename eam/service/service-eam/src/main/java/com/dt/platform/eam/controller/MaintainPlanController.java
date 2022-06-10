@@ -3,6 +3,10 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.eam.service.IMaintainProjectSelectService;
+import com.github.foxnic.commons.collection.CollectorUtil;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +22,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.MaintainPlanServiceProxy;
 import com.dt.platform.domain.eam.meta.MaintainPlanVOMeta;
-import com.dt.platform.domain.eam.MaintainPlan;
-import com.dt.platform.domain.eam.MaintainPlanVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -35,8 +37,6 @@ import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.MaintainPlanMeta;
 import java.math.BigDecimal;
 import org.github.foxnic.web.domain.system.DictItem;
-import com.dt.platform.domain.eam.ActionCrontab;
-import com.dt.platform.domain.eam.MaintainGroup;
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -298,6 +298,10 @@ public class MaintainPlanController extends SuperController {
 			.with(MaintainPlanMeta.MAINTAIN_TYPE_DICT)
 			.with(MaintainPlanMeta.MAINTAIN_GROUP)
 			.execute();
+
+		List<Employee> originator= CollectorUtil.collectList(list.getList(), MaintainPlan::getOriginator);
+		maintainPlanService.dao().join(originator, Person.class);
+
 		result.success(true).data(list);
 		return result;
 	}

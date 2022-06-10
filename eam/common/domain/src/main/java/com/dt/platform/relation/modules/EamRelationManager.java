@@ -97,12 +97,19 @@ public class EamRelationManager extends RelationManager {
         this.setupMaintainProject();
         this.setupMaintainPlan();
         this.setupMaintainGroup();
-
+        this.setupMaintainTask();
+        this.setupMaintainTaskProject();
         this.setupCrontab();
-
 
     }
 
+
+    public void setupMaintainTaskProject() {
+        this.property(MaintainTaskProjectMeta.MAINTAIN_TYPE_DICT_PROP)
+                .using(EAMTables.EAM_MAINTAIN_TASK_PROJECT.PROJECT_MAINTAIN_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_maintain_type'");
+
+    }
 
 
     public void setupCrontab() {
@@ -110,7 +117,59 @@ public class EamRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ACTION_CRONTAB.ID).join(EAMTables.EAM_ACTION_CRONTAB_LOG.CRONTAB_ID);
     }
 
+
+
+
+    public void setupMaintainTask() {
+        this.property(MaintainTaskMeta.ASSET_PROP)
+                .using(EAMTables.EAM_MAINTAIN_TASK.ASSET_ID ).join( EAMTables.EAM_ASSET.ID);
+
+        this.property(MaintainTaskMeta.TASK_PROJECT_LIST_PROP)
+                .using(EAMTables.EAM_MAINTAIN_TASK.ID).join(EAMTables.EAM_MAINTAIN_TASK_PROJECT.TASK_ID);
+
+
+        this.property(MaintainTaskMeta.PROJECT_LIST_PROP)
+                .using(EAMTables.EAM_MAINTAIN_TASK.PLAN_ID ).join(EAMTables.EAM_MAINTAIN_PROJECT_SELECT.OWNER_ID)
+                .using( EAMTables.EAM_MAINTAIN_PROJECT_SELECT.PROJECT_ID).join( EAMTables.EAM_MAINTAIN_PROJECT.ID);
+
+
+        this.property(MaintainTaskMeta.MAINTAIN_TYPE_DICT_PROP)
+                .using(EAMTables.EAM_MAINTAIN_TASK.PLAN_MAINTAIN_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_maintain_type'");
+
+
+        //制单人
+        this.property(MaintainTaskMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_MAINTAIN_TASK.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //验收人
+        this.property(MaintainTaskMeta.EXECUTOR_PROP)
+                .using(EAMTables.EAM_MAINTAIN_TASK.EXECUTOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
+        this.property(MaintainTaskMeta.MAINTAIN_GROUP_PROP)
+                .using(EAMTables.EAM_MAINTAIN_TASK.GROUP_ID).join(EAMTables.EAM_MAINTAIN_GROUP.ID);
+
+
+
+    }
+
+
     public void setupMaintainPlan() {
+
+
+        // 关联资产
+        this.property(MaintainPlanMeta.ASSET_LIST_PROP)
+                .using(EAMTables.EAM_MAINTAIN_PLAN.ID ).join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID).join( EAMTables.EAM_ASSET.ID);
+
+        //项目
+        this.property(MaintainPlanMeta.PROJECT_LIST_PROP)
+                .using(EAMTables.EAM_MAINTAIN_PLAN.ID ).join(EAMTables.EAM_MAINTAIN_PROJECT_SELECT.OWNER_ID)
+                .using( EAMTables.EAM_MAINTAIN_PROJECT_SELECT.PROJECT_ID).join( EAMTables.EAM_MAINTAIN_PROJECT.ID);
+
+
+
         this.property(MaintainPlanMeta.MAINTAIN_TYPE_DICT_PROP)
                 .using(EAMTables.EAM_MAINTAIN_PLAN.MAINTAIN_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
                 .condition("dict_code='eam_maintain_type'");

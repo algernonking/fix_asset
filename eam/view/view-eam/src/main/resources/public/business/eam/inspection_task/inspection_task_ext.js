@@ -1,7 +1,7 @@
 /**
  * 巡检任务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-04-27 07:23:26
+ * @since 2022-06-10 07:32:09
  */
 
 layui.config({
@@ -219,6 +219,16 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         onCheckBoxChanged:function(id,data,checked) {
             console.log('onCheckBoxChanged',id,data,checked);
         },
+
+        /**
+         * 在流程提交前处理表单数据
+         * */
+        processFormData4Bpm:function(processInstanceId,param,callback) {
+            // 设置流程变量，并通过回调返回
+            var variables={};
+            // 此回调是必须的，否则流程提交会被中断
+            callback(variables);
+        },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
@@ -240,6 +250,17 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
+        /**
+         *  加载 巡检点
+         */
+        pointSelectList:function (ifr,win,data) {
+            // debugger
+            console.log("pointSelectList",ifr,data);
+            //设置 iframe 高度
+            ifr.height("400px");
+            //设置地址
+            win.location="/business/system/node/node_list.html?id="+data.id;
+        },
         /**
          * 文件上传组件回调
          *  event 类型包括：

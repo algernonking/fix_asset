@@ -2,7 +2,7 @@
 /**
  * 保养方案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-05 21:12:41
+ * @since 2022-06-09 19:37:08
  */
  -->
  <!DOCTYPE html>
@@ -44,14 +44,15 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.EamPlanStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 循环方式 , cycleMethod ,typeName=select_box, isHideInSearch=true -->
                     <!-- 保养周期 , actionCycleId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 开始时间 , startTime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 结束时间 , endTime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 总工时 , totalCost ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 超时时间 , timeout ,typeName=number_input, isHideInSearch=true -->
                     <!-- 方案说明 , info ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 选择 , selectedCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 保养类型 , maintainType ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('保养类型')}" class="search-label maintainType-label">保养类型</span><span class="search-colon">:</span></div>
@@ -72,6 +73,11 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 循环方式 , cycleMethod ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('循环方式')}" class="search-label cycleMethod-label">循环方式</span><span class="search-colon">:</span></div>
+                        <div id="cycleMethod" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.MaintainCycleMethodEnum')}" style="width:150px" extraParam="{}"></div>
+                    </div>
                     <!-- 执行班组 , groupId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('执行班组')}" class="search-label groupId-label">执行班组</span><span class="search-colon">:</span></div>
@@ -106,7 +112,6 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('eam_maintain_plan:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('eam_maintain_plan:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 

@@ -41,6 +41,12 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_INVENTORY(CodeModuleEnum.EAM_ASSET_INVENTORY.code() , "EAM_资产盘点"),
     EAM_EQUIPMENT_FAILURE_REGISTRATION(CodeModuleEnum.EAM_EQUIPMENT_FAILURE_REGISTRATION.code(), "EAM_设备故障登记"),
 
+    EAM_ASSET_MAINTAIN_PLAN(CodeModuleEnum.EAM_ASSET_MAINTAIN_PLAN.code(), "EAM_资产保养方案"),
+    EAM_ASSET_MAINTAIN_TASK(CodeModuleEnum.EAM_ASSET_MAINTAIN_TASK.code(), "EAM_资产保养任务"),
+    EAM_ASSET_INSPECTION_PLAN(CodeModuleEnum.EAM_ASSET_INSPECTION_PLAN.code(), "EAM_巡检方案"),
+    EAM_ASSET_INSPECTION_TASK(CodeModuleEnum.EAM_ASSET_INSPECTION_TASK.code(), "EAM_巡检任务"),
+    EAM_ASSET_MAINTAIN_PROJECT(CodeModuleEnum.EAM_ASSET_MAINTAIN_PROJECT.code() , "EAM_资产保养项目"),
+
     //资产变更
     EAM_ASSET_CHANGE_BASE_INFO(CodeModuleEnum.EAM_ASSET_CHANGE_BASE_INFO.code() , "EAM_资产变更-基本"),
     EAM_ASSET_CHANGE_MAINTENANCE(CodeModuleEnum.EAM_ASSET_CHANGE_MAINTENANCE.code() , "EAM_资产变更-维保"),

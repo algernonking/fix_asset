@@ -1,7 +1,7 @@
 /**
  * 执行动作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-03 21:55:45
+ * @since 2022-06-06 21:09:26
  */
 
 
@@ -78,7 +78,6 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'crontab', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('表达式') , templet: function (d) { return templet('crontab',d.crontab,d);}  }
 					,{ field: 'startExecutionTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('开始时间') ,templet: function (d) { return templet('startExecutionTime',fox.dateFormat(d.startExecutionTime,"yyyy-MM-dd"),d); }  }
 					,{ field: 'finishExecutionTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('结束时间') ,templet: function (d) { return templet('finishExecutionTime',fox.dateFormat(d.finishExecutionTime,"yyyy-MM-dd HH:mm:ss"),d); }  }

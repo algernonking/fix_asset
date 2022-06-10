@@ -47,6 +47,17 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_INVENTORY("eam_asset_inventory" , "EAM_资产数据-盘点"),
 	EAM_EQUIPMENT_FAILURE_REGISTRATION("eam_equipment_failure_registration" , "EAM_设备故障登记"),
 
+
+	EAM_ASSET_MAINTAIN_PLAN("eam_asset_maintain_plan" , "EAM_资产保养方案"),
+	EAM_ASSET_MAINTAIN_PROJECT("eam_asset_maintain_project" , "EAM_资产保养项目"),
+	EAM_ASSET_MAINTAIN_TASK("eam_asset_maintain_task" , "EAM_资产保养任务"),
+
+	EAM_ASSET_INSPECTION_PLAN("eam_asset_inspection_plan" , "EAM_巡检方案"),
+	EAM_ASSET_INSPECTION_TASK("eam_asset_inspection_task" , "EAM_巡检任务"),
+
+
+
+
 	//库存
 	EAM_ASSET_STOCK_IN("eam_asset_stock_in" , "EAM_资产库存-入库"),
 	EAM_ASSET_STOCK_DELIVER("eam_asset_stock_deliver" , "EAM_资产库存-出库"),

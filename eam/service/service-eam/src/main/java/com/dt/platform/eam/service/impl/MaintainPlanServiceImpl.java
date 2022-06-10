@@ -3,16 +3,22 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
-import com.dt.platform.constants.enums.eam.EamPlanStatusEnum;
-import com.dt.platform.constants.enums.eam.MaintainCycleMethodEnum;
+import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.MaintainPlanMeta;
+import com.dt.platform.domain.eam.meta.MaintainProjectMeta;
+import com.dt.platform.eam.service.*;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.log.Logger;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.MaintainPlan;
-import com.dt.platform.domain.eam.MaintainPlanVO;
-import java.util.List;
+import java.util.*;
+
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.entity.SuperService;
@@ -29,11 +35,7 @@ import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
-import java.util.ArrayList;
-import com.dt.platform.eam.service.IMaintainPlanService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * <p>
@@ -46,6 +48,35 @@ import java.util.Map;
 
 @Service("EamMaintainPlanService")
 public class MaintainPlanServiceImpl extends SuperService<MaintainPlan> implements IMaintainPlanService {
+
+	@Autowired
+	private IMaintainTaskService maintainTaskService;
+
+
+	@Autowired
+	private AssetItemServiceImpl assetItemService;
+
+	@Autowired
+	private IAssetService assetService;
+
+	@Autowired
+	private IMaintainProjectSelectService maintainProjectSelectService;
+
+
+	@Autowired
+	private IAssetSelectedDataService assetSelectedDataService;
+
+
+
+	@Autowired
+	private IMaintainTaskProjectService maintainTaskProjectService;
+
+
+	@Autowired
+	private IOperateService operateService;
+
+	@Autowired
+	private IAssetProcessRecordService assetProcessRecordService;
 
 	/**
 	 * 注入DAO对象
@@ -95,8 +126,16 @@ public class MaintainPlanServiceImpl extends SuperService<MaintainPlan> implemen
 		String status=plan.getStatus();
 		boolean run=false;
 		if(MaintainCycleMethodEnum.ONCE.code().equals(plan.getCycleMethod())){
+			if(MaintainTaskStatusEnum.FINISH.code().equals(status)
+					||MaintainTaskStatusEnum.CANCEL.code().equals(status)
+			){
+				return ErrorDesc.failureMessage("当前状态无法执行");
+			}
 			run=true;
 		}else if(MaintainCycleMethodEnum.CYCLE.code().equals(plan.getCycleMethod())){
+			if(!MaintainTaskStatusEnum.ACTING.code().equals(status)){
+				return ErrorDesc.failureMessage("当前状态无法执行");
+			}
 			if(EamPlanStatusEnum.ACTING.code().equals(status)){
 				run=true;
 			}else{
@@ -107,15 +146,65 @@ public class MaintainPlanServiceImpl extends SuperService<MaintainPlan> implemen
 		}
 
 		if(run){
-			Logger.info("########## plan start ###########");
+			Logger.info("########## plan execute ###########");
 			Logger.info("########## plan id:"+plan.getId()+" ###########");
 			Logger.info("########## plan code:"+plan.getCode()+" ###########");
 			Logger.info("########## plan name:"+plan.getName()+" ###########");
+			Logger.info("########## plan trigger end ###########");
+			this.dao().fill(plan)
+					.with(MaintainPlanMeta.ASSET_LIST)
+					.with(MaintainPlanMeta.PROJECT_LIST)
+					.execute();
+			List<Asset> assetList=plan.getAssetList();
+		 	List<MaintainProject> projectList=plan.getProjectList();
 
-
-
-
-
+			if(assetList==null||assetList.size()==0){
+				return ErrorDesc.failureMessage("请选择保养设备");
+			}
+			//生产任务
+			for(int i=0;i<assetList.size();i++){
+				Asset asset=assetList.get(i);
+				MaintainTask task=new MaintainTask();
+				String taskId=IDGenerator.getSnowflakeIdString();
+				task.setId(taskId);
+				task.setPlanStartTime(new Date());
+				task.setPlanId(plan.getId());
+				task.setPlanInfo(plan.getInfo());
+				task.setPlanName(plan.getName());
+				task.setPlanNotes(plan.getNotes());
+				task.setPlanMaintainType(plan.getMaintainType());
+				task.setPlanCycleMethod(plan.getCycleMethod());
+				task.setPlanTotalCost(plan.getTotalCost());
+				task.setGroupId(plan.getGroupId());
+				task.setAssetId(asset.getId());
+				task.setAssetName(asset.getName());
+				task.setAssetModel(asset.getModel());
+				task.setAssetStatus(asset.getAssetStatus());
+				task.setAssetCode(asset.getSerialNumber());
+				//生产项目
+				for(int j=0;j<projectList.size();j++){
+					MaintainProject project=projectList.get(j);
+					MaintainProjectSelect sel=new MaintainProjectSelect();
+					sel.setOwnerId(taskId);
+					sel.setProjectId(project.getId());
+					maintainProjectSelectService.insert(sel);
+					MaintainTaskProject taskProject=new MaintainTaskProject();
+					taskProject.setTaskId(taskId);
+					taskProject.setProjectId(project.getId());
+					taskProject.setStatus(MaintainTaskProjectStatusEnum.UNEXECUTED.code());
+					taskProject.setProjectCode(project.getCode());
+					taskProject.setProjectName(project.getName());
+					taskProject.setProjectMaintainType(project.getMaintainType());
+					taskProject.setProjectNotes(project.getNotes());
+					taskProject.setProjectAttachId(project.getAttachId());
+					taskProject.setProjectBaseCost(project.getBaseCost());
+					maintainTaskProjectService.insert(taskProject);
+				}
+				maintainTaskService.insert(task);
+			}
+		}else{
+			Logger.info("########## plan not execute ###########");
+			return ErrorDesc.failureMessage("当前执行失败");
 		}
 		return ErrorDesc.success();
 	}
@@ -130,7 +219,90 @@ public class MaintainPlanServiceImpl extends SuperService<MaintainPlan> implemen
 	 */
 	@Override
 	public Result insert(MaintainPlan maintainPlan,boolean throwsException) {
+
+		String selectedCode=maintainPlan.getSelectedCode();
+		if(maintainPlan.getAssetIds()==null||maintainPlan.getAssetIds().size()==0){
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",selectedCode==null?"":selectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
+			maintainPlan.setAssetIds(list);
+		}
+
+		if(maintainPlan.getAssetIds()==null||maintainPlan.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage("请选择要保养的设备");
+		}
+
+		if(maintainPlan.getProjectIds()==null||maintainPlan.getProjectIds().size()==0){
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("selected_code",selectedCode==null?"":selectedCode);
+			List<String> list=maintainProjectSelectService.queryValues(EAMTables.EAM_MAINTAIN_PROJECT_SELECT.PROJECT_ID,String.class,condition);
+			maintainPlan.setProjectIds(list);
+		}
+
+		if(maintainPlan.getProjectIds()==null||maintainPlan.getProjectIds().size()==0){
+			return ErrorDesc.failureMessage("请选择要保养的项目");
+		}
+
+
+
+
+		if(maintainPlan.getEndTime()!=null){
+			Calendar c = Calendar.getInstance();
+			Date now = new Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH));
+			if(maintainPlan.getEndTime().after(now)){
+				maintainPlan.setStatus(EamPlanStatusEnum.EXPIRED.code());
+			}
+		}
+
+		if(StringUtil.isBlank(maintainPlan.getStatus())){
+			maintainPlan.setStatus(EamPlanStatusEnum.STOP.code());
+		}
+
+
+		//制单人
+		if(StringUtil.isBlank(maintainPlan.getOriginatorId())){
+			maintainPlan.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+
+		//循环周期
+		if(MaintainCycleMethodEnum.CYCLE.code().equals(maintainPlan.getCycleMethod())){
+			if(StringUtil.isBlank(maintainPlan.getActionCycleId())){
+				return ErrorDesc.failureMessage("请设置循环周期");
+			}
+		}
+
+
+
+		//生成编码规则
+		//编码
+		if(StringUtil.isBlank(maintainPlan.getCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_MAINTAIN_PLAN.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				maintainPlan.setCode(codeResult.getData().toString());
+			}
+		}
+
+
 		Result r=super.insert(maintainPlan,throwsException);
+		if(r.isSuccess()){
+			//保存表单数据
+			List<AssetItem> saveList=new ArrayList<AssetItem>();
+			for(int i=0;i<maintainPlan.getAssetIds().size();i++){
+				AssetItem asset=new AssetItem();
+				asset.setId(IDGenerator.getSnowflakeIdString());
+				asset.setHandleId(maintainPlan.getId());
+				asset.setAssetId(maintainPlan.getAssetIds().get(i));
+				saveList.add(asset);
+			}
+			Result batchInsertReuslt= assetItemService.insertList(saveList);
+			if(!batchInsertReuslt.isSuccess()){
+				return batchInsertReuslt;
+			}
+			dao.execute("update eam_maintain_project_select set owner_id=? where selected_code=?",maintainPlan.getId(),selectedCode);
+		}
 		return r;
 	}
 
@@ -221,7 +393,37 @@ public class MaintainPlanServiceImpl extends SuperService<MaintainPlan> implemen
 	 * */
 	@Override
 	public Result update(MaintainPlan maintainPlan , SaveMode mode,boolean throwsException) {
+
+		if(maintainPlan.getEndTime()!=null){
+			Calendar c = Calendar.getInstance();
+			Date now = new Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH));
+			if(maintainPlan.getEndTime().after(now)){
+				maintainPlan.setStatus(EamPlanStatusEnum.EXPIRED.code());
+			}
+		}
+
+		if(StringUtil.isBlank(maintainPlan.getStatus())){
+			maintainPlan.setStatus(EamPlanStatusEnum.STOP.code());
+		}
+
+
+		//制单人
+		if(StringUtil.isBlank(maintainPlan.getOriginatorId())){
+			maintainPlan.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		//循环周期
+		if(MaintainCycleMethodEnum.CYCLE.code().equals(maintainPlan.getCycleMethod())){
+			if(StringUtil.isBlank(maintainPlan.getActionCycleId())){
+				return ErrorDesc.failureMessage("请设置循环周期");
+			}
+		}
 		Result r=super.update(maintainPlan , mode , throwsException);
+		if(r.isSuccess()){
+			//保存表单数据
+			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",maintainPlan.getId());
+			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",maintainPlan.getId());
+		}
 		return r;
 	}
 

@@ -19,6 +19,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //模块基础路径
     const moduleURL="/service-eam/eam-maintain-plan";
+    var timestamp = Date.parse(new Date());
 
     var actionCycleId="";
     var url="";
@@ -159,7 +160,15 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
-
+            for (var i = 0; i < data.length; i++) {
+                //如果审批中或审批通过的不允许编辑
+                console.log(data[i]);
+                if(data[i].cycleMethod=="once") {
+                    fox.disableButton($('.start-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.stop-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].cycleMethod=="cycle"){
+                }
+            }
         },
         /**
          * 进一步转换 list 数据
@@ -226,7 +235,43 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
-        /**
+        billOper:function(url,btnClass,ps,successMessage){
+            var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
+            var api=moduleURL+"/"+url;
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, ps, function (r) {
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+        },
+        start:function (item){
+            list.billOper("start","start-button",{id:item.id},"已启动");
+        },
+        stop:function (item){
+             list.billOper("stop","stop-button",{id:item.id},"已停止");
+        },
+        execute:function (item){
+             list.billOper("execute","execute-button",{id:item.id},"操作成功");
+        },
+
+
+    /**
          * 末尾执行
          */
         ending:function() {
@@ -319,6 +364,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
             data.actionCycleId=actionCycleId;
+            data.selectedCode=timestamp;
             return true;
         },
         /**
@@ -339,23 +385,39 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          *  加载 设备范围
          */
         assetSelectList:function (ifr,win,data) {
-            // debugger
             console.log("assetSelectList",ifr,data);
             //设置 iframe 高度
-            ifr.height("400px");
+            ifr.height("450px");
             //设置地址
-            win.location="/business/system/node/node_list.html?id="+data.id;
+
+            var data={};
+            data.searchContent={};
+            data.assetSelectedCode=timestamp;
+            data.assetBusinessType=BILL_TYPE
+            data.action=formAction;
+            data.ownerCode="asset";
+            if(BILL_ID==null)BILL_ID="";
+            data.assetOwnerId=BILL_ID;
+            admin.putTempData('eam-asset-selected-data'+timestamp,data,true);
+            admin.putTempData('eam-asset-selected-action'+timestamp,formAction,true);
+            win.location="/business/eam/asset/asset_selected_list.html?pageType="+formAction+"&assetSelectedCode="+timestamp+"&pageType="+formAction;
         },
         /**
          *  加载 保养项目
          */
         maintainSelectList:function (ifr,win,data) {
-            // debugger
-            console.log("maintainSelectList",ifr,data);
+            console.log("goodsSelectList",ifr,data);
             //设置 iframe 高度
-            ifr.height("400px");
+            ifr.height("450px");
+            var ownerId="";
+            if(data&&data.id){
+                ownerId=data.id;
+            }
+            var ownerType="eam_asset_maintain_project"
+            var queryString="?pageType="+formAction+"&selectedCode="+timestamp+"&ownerId="+ownerId+"&ownerType="+ownerType;
             //设置地址
-            win.location="/business/system/node/node_list.html?id="+data.id;
+            win.location="/business/eam/maintain_project/maintain_project_selected_list.html"+queryString
+
         },
         /**
          * 文件上传组件回调

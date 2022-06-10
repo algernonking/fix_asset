@@ -2,7 +2,7 @@
 /**
  * 保养项目 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-04 06:14:44
+ * @since 2022-06-08 06:19:53
  */
  -->
  <!DOCTYPE html>
@@ -44,7 +44,7 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 标准工时(小时) , baseCose ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 标准工时(小时) , baseCost ,typeName=number_input, isHideInSearch=true -->
                     <!-- 保养周期 , actionCycleId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 保养手册 , attachId ,typeName=upload, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
@@ -93,7 +93,6 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('eam_maintain_project:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('eam_maintain_project:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 

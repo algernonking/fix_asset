@@ -3,7 +3,9 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.domain.eam.GroupUser;
 import com.dt.platform.domain.eam.InspectionGroupUser;
+import com.dt.platform.eam.service.IGroupUserService;
 import com.dt.platform.eam.service.IInspectionGroupUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,9 @@ import java.util.Map;
 @Service("EamMaintainGroupService")
 public class MaintainGroupServiceImpl extends SuperService<MaintainGroup> implements IMaintainGroupService {
 
+	@Autowired
+	private IGroupUserService groupUserService;
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -80,14 +85,14 @@ public class MaintainGroupServiceImpl extends SuperService<MaintainGroup> implem
 		Result r=super.insert(maintainGroup,throwsException);
 		if(r.isSuccess()){
 			if(maintainGroup.getMemberIds()!=null&&maintainGroup.getMemberIds().size()>0){
-				List<InspectionGroupUser> list=new ArrayList<>();
+				List<GroupUser> list=new ArrayList<>();
 				for(String id:maintainGroup.getMemberIds()){
-					InspectionGroupUser user=new InspectionGroupUser();
+					GroupUser user=new GroupUser();
 					user.setUserId(id);
 					user.setGroupId(maintainGroup.getId());
 					list.add(user);
 				}
-				inspectionGroupUserService.insertList(list);
+				groupUserService.insertList(list);
 			}
 		}
 		return r;
@@ -184,14 +189,14 @@ public class MaintainGroupServiceImpl extends SuperService<MaintainGroup> implem
 		if(r.isSuccess()){
 			dao.execute("delete from eam_inspection_group_user where group_id=?",maintainGroup.getId());
 			if(maintainGroup.getMemberIds()!=null&&maintainGroup.getMemberIds().size()>0){
-				List<InspectionGroupUser> list=new ArrayList<>();
+				List<GroupUser> list=new ArrayList<>();
 				for(String id:maintainGroup.getMemberIds()){
-					InspectionGroupUser user=new InspectionGroupUser();
+					GroupUser user=new GroupUser();
 					user.setUserId(id);
 					user.setGroupId(maintainGroup.getId());
 					list.add(user);
 				}
-				inspectionGroupUserService.insertList(list);
+				groupUserService.insertList(list);
 			}
 		}
 		return r;

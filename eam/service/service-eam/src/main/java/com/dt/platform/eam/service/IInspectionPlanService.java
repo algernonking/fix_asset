@@ -22,7 +22,7 @@ import java.util.Map;
  * 巡检计划 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 12:17:56
+ * @since 2022-06-10 06:15:12
 */
 
 public interface IInspectionPlanService extends ISuperService<InspectionPlan> {

@@ -159,6 +159,7 @@ public class WarehouseServiceImpl extends SuperService<Warehouse> implements IWa
 	 * */
 	@Override
 	public Result update(Warehouse warehouse , SaveMode mode,boolean throwsException) {
+
 		Result r=super.update(warehouse , mode , throwsException);
 		return r;
 	}

@@ -3,10 +3,7 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
 import com.dt.platform.constants.enums.eam.*;
-import com.dt.platform.domain.eam.GoodsStock;
-import com.dt.platform.domain.eam.InspectionGroup;
-import com.dt.platform.domain.eam.InspectionPlanPoint;
-import com.dt.platform.domain.eam.InspectionPoint;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.eam.page.InspectionPlanPageController;
 import com.dt.platform.eam.service.impl.InspectionPlanServiceImpl;
@@ -35,12 +32,13 @@ public class InspPlanGtr extends BaseCodeGenerator {
       //  cfg.getPoClassFile().addSimpleProperty(DictItem.class,"inspectionTypeDict","类型","类型");
 
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"timeDict","时间","时间");
-
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"inspectionTypeDict","类型","类型");
 
-
+        cfg.getPoClassFile().addSimpleProperty(ActionCrontab.class,"actionCrontab","周期","周期");
         cfg.getPoClassFile().addListProperty(InspectionPlanPoint.class,"inspectionPlanPointList","巡检点","巡检点");
         cfg.getPoClassFile().addListProperty(String.class,"inspectionPlanPointIds","巡检点","巡检点");
+
+
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -87,7 +85,6 @@ public class InspPlanGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD).form().validate().required().form().selectBox()
                 .enumType(InspectionOvertimeMethodEnum.class).defaultIndex(0);
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.PLAN_CODE).form().validate().required().form();
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NAME).form().validate().required().form();
 
 //        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME).form().validate().required().form().numberInput();
@@ -116,26 +113,27 @@ public class InspPlanGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NOTES).form().textArea().height(80);
 
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.REMIND_TIME).form().validate().required().form().numberInput().defaultValue(2.0);
+
         cfg.view().list().disableBatchDelete();
 
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_INSPECTION_PLAN.PLAN_CODE,
                         EAMTables.EAM_INSPECTION_PLAN.NAME,
                         EAMTables.EAM_INSPECTION_PLAN.PLAN_STATUS,
                         EAMTables.EAM_INSPECTION_PLAN.PLAN_TYPE,
                 },
                 new Object[] {
-                        EAMTables.EAM_INSPECTION_PLAN.GROUP_ID,
-                        EAMTables.EAM_INSPECTION_PLAN.INSPECTION_METHOD,
-//                        EAMTables.EAM_INSPECTION_PLAN.INSPECTION_TYPE,
-                        EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD,
-                },
-                new Object[] {
-
-                        EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME,
                         EAMTables.EAM_INSPECTION_PLAN.START_DATE,
                         EAMTables.EAM_INSPECTION_PLAN.END_DATE,
+                        EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME,
+                        EAMTables.EAM_INSPECTION_PLAN.REMIND_TIME,
+                },
+                new Object[] {
+                        EAMTables.EAM_INSPECTION_PLAN.ACTION_CYCLE_ID,
+                        EAMTables.EAM_INSPECTION_PLAN.GROUP_ID,
+                        EAMTables.EAM_INSPECTION_PLAN.INSPECTION_METHOD,
+                        EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD,
                 }
         );
         cfg.view().form().addGroup(null,
@@ -153,7 +151,7 @@ public class InspPlanGtr extends BaseCodeGenerator {
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页
         ; //列表HTML页
         //生成代码
         cfg.buildAll();

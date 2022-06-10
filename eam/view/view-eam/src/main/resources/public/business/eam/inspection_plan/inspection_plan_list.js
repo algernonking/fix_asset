@@ -1,7 +1,7 @@
 /**
  * 巡检计划 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 12:17:57
+ * @since 2022-06-10 06:15:13
  */
 
 
@@ -85,10 +85,11 @@ function ListPage() {
 					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('班组'), templet: function (d) { return templet('groupId' ,fox.joinLabel(d.inspectionGroup,"name"),d);}}
 					,{ field: 'startDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('开始日期') ,templet: function (d) { return templet('startDate',fox.dateFormat(d.startDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'endDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('截止日期') ,templet: function (d) { return templet('endDate',fox.dateFormat(d.endDate,"yyyy-MM-dd"),d); }  }
-					,{ field: 'actionCycle', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('周期') , templet: function (d) { return templet('actionCycle',d.actionCycle,d);}  }
+					,{ field: 'actionCycleId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('周期') , templet: function (d) { return templet('actionCycleId',d.actionCycleId,d);}  }
 					,{ field: 'inspectionMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检顺序'), templet:function (d){ return templet('inspectionMethod',fox.getEnumText(SELECT_INSPECTIONMETHOD_DATA,d.inspectionMethod),d);}}
 					,{ field: 'completionTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('时间要求'), templet: function (d) { return templet('completionTime' ,fox.joinLabel(d.timeDict,"label"),d);}}
 					,{ field: 'overtimeMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('超时处理'), templet:function (d){ return templet('overtimeMethod',fox.getEnumText(SELECT_OVERTIMEMETHOD_DATA,d.overtimeMethod),d);}}
+					,{ field: 'timeout', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('超时(小时)') , templet: function (d) { return templet('timeout',d.timeout,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}

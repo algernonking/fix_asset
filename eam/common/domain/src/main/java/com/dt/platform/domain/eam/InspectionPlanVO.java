@@ -13,7 +13,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 巡检计划
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 12:17:56
+ * @since 2022-06-10 06:15:12
  * @sign C12E698818D76C7C0BE49CF3827624B6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

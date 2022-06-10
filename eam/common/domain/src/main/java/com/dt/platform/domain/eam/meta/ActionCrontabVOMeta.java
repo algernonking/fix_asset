@@ -11,7 +11,7 @@ import com.dt.platform.domain.eam.ActionCrontabLog;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-03 21:55:44
+ * @since 2022-06-06 21:09:25
  * @sign FF74DDAC6436E72D8FC2225FC4387868
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

@@ -6,16 +6,18 @@ import java.util.List;
 import com.dt.platform.domain.eam.MaintainPlan;
 import java.util.Date;
 import java.math.BigDecimal;
+import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.MaintainProject;
 import org.github.foxnic.web.domain.system.DictItem;
-import com.dt.platform.domain.eam.ActionCrontab;
 import com.dt.platform.domain.eam.MaintainGroup;
+import com.dt.platform.domain.eam.ActionCrontab;
 import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-05 21:12:40
+ * @since 2022-06-09 19:37:07
  * @sign 0F738379C5B161CE0CFAC51041C6BF17
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -223,6 +225,16 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,java.math.BigDecimal> TOTAL_COST_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,TOTAL_COST, java.math.BigDecimal.class, "总工时", "总工时", java.math.BigDecimal.class, null);
 	
 	/**
+	 * 超时时间 , 类型: java.math.BigDecimal
+	*/
+	public static final String TIMEOUT="timeout";
+	
+	/**
+	 * 超时时间 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,java.math.BigDecimal> TIMEOUT_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,TIMEOUT, java.math.BigDecimal.class, "超时时间", "超时时间", java.math.BigDecimal.class, null);
+	
+	/**
 	 * 方案说明 , 类型: java.lang.String
 	*/
 	public static final String INFO="info";
@@ -251,6 +263,16 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 	 * 制单人 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
+	
+	/**
+	 * 选择 , 类型: java.lang.String
+	*/
+	public static final String SELECTED_CODE="selectedCode";
+	
+	/**
+	 * 选择 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,SELECTED_CODE, java.lang.String.class, "选择", "选择", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -343,6 +365,46 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final String ASSET_LIST="assetList";
+	
+	/**
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,com.dt.platform.domain.eam.Asset> ASSET_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,ASSET_LIST, java.util.List.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String ASSET_IDS="assetIds";
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
+	
+	/**
+	 * 项目 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.MaintainProject
+	*/
+	public static final String PROJECT_LIST="projectList";
+	
+	/**
+	 * 项目 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.MaintainProject
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,com.dt.platform.domain.eam.MaintainProject> PROJECT_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,PROJECT_LIST, java.util.List.class, "项目", "项目", com.dt.platform.domain.eam.MaintainProject.class, null);
+	
+	/**
+	 * 项目 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String PROJECT_IDS="projectIds";
+	
+	/**
+	 * 项目 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,java.lang.String> PROJECT_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,PROJECT_IDS, java.util.List.class, "项目", "项目", java.lang.String.class, null);
+	
+	/**
 	 * 类型 , 类型: org.github.foxnic.web.domain.system.DictItem
 	*/
 	public static final String MAINTAIN_TYPE_DICT="maintainTypeDict";
@@ -353,16 +415,6 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,org.github.foxnic.web.domain.system.DictItem> MAINTAIN_TYPE_DICT_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,MAINTAIN_TYPE_DICT, org.github.foxnic.web.domain.system.DictItem.class, "类型", "类型", org.github.foxnic.web.domain.system.DictItem.class, null);
 	
 	/**
-	 * 周期 , 类型: com.dt.platform.domain.eam.ActionCrontab
-	*/
-	public static final String ACTION_CRONTAB="actionCrontab";
-	
-	/**
-	 * 周期 , 类型: com.dt.platform.domain.eam.ActionCrontab
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,com.dt.platform.domain.eam.ActionCrontab> ACTION_CRONTAB_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,ACTION_CRONTAB, com.dt.platform.domain.eam.ActionCrontab.class, "周期", "周期", com.dt.platform.domain.eam.ActionCrontab.class, null);
-	
-	/**
 	 * 执行班组 , 类型: com.dt.platform.domain.eam.MaintainGroup
 	*/
 	public static final String MAINTAIN_GROUP="maintainGroup";
@@ -371,6 +423,16 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 	 * 执行班组 , 类型: com.dt.platform.domain.eam.MaintainGroup
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,com.dt.platform.domain.eam.MaintainGroup> MAINTAIN_GROUP_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,MAINTAIN_GROUP, com.dt.platform.domain.eam.MaintainGroup.class, "执行班组", "执行班组", com.dt.platform.domain.eam.MaintainGroup.class, null);
+	
+	/**
+	 * 周期 , 类型: com.dt.platform.domain.eam.ActionCrontab
+	*/
+	public static final String ACTION_CRONTAB="actionCrontab";
+	
+	/**
+	 * 周期 , 类型: com.dt.platform.domain.eam.ActionCrontab
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.MaintainPlanVO,com.dt.platform.domain.eam.ActionCrontab> ACTION_CRONTAB_PROP = new BeanProperty(com.dt.platform.domain.eam.MaintainPlanVO.class ,ACTION_CRONTAB, com.dt.platform.domain.eam.ActionCrontab.class, "周期", "周期", com.dt.platform.domain.eam.ActionCrontab.class, null);
 	
 	/**
 	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
@@ -385,7 +447,7 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , CODE , NAME , STATUS , GROUP_ID , MAINTAIN_TYPE , CYCLE_METHOD , ACTION_CYCLE_ID , START_TIME , END_TIME , TOTAL_COST , INFO , NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , MAINTAIN_TYPE_DICT , ACTION_CRONTAB , MAINTAIN_GROUP , ORIGINATOR };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , CODE , NAME , STATUS , GROUP_ID , MAINTAIN_TYPE , CYCLE_METHOD , ACTION_CYCLE_ID , START_TIME , END_TIME , TOTAL_COST , TIMEOUT , INFO , NOTES , ORIGINATOR_ID , SELECTED_CODE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , ASSET_LIST , ASSET_IDS , PROJECT_LIST , PROJECT_IDS , MAINTAIN_TYPE_DICT , MAINTAIN_GROUP , ACTION_CRONTAB , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -616,6 +678,17 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 		}
 		
 		/**
+		 * 设置 超时时间
+		 * @param timeout 超时时间
+		 * @return 当前对象
+		*/
+		public MaintainPlan setTimeout(BigDecimal timeout) {
+			super.change(TIMEOUT,super.getTimeout(),timeout);
+			super.setTimeout(timeout);
+			return this;
+		}
+		
+		/**
 		 * 设置 方案说明
 		 * @param info 方案说明
 		 * @return 当前对象
@@ -645,6 +718,17 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 		public MaintainPlan setOriginatorId(String originatorId) {
 			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
 			super.setOriginatorId(originatorId);
+			return this;
+		}
+		
+		/**
+		 * 设置 选择
+		 * @param selectedCode 选择
+		 * @return 当前对象
+		*/
+		public MaintainPlan setSelectedCode(String selectedCode) {
+			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
+			super.setSelectedCode(selectedCode);
 			return this;
 		}
 		
@@ -748,6 +832,50 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 		}
 		
 		/**
+		 * 设置 资产
+		 * @param assetList 资产
+		 * @return 当前对象
+		*/
+		public MaintainPlan setAssetList(List<Asset> assetList) {
+			super.change(ASSET_LIST,super.getAssetList(),assetList);
+			super.setAssetList(assetList);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产列表
+		 * @param assetIds 资产列表
+		 * @return 当前对象
+		*/
+		public MaintainPlan setAssetIds(List<String> assetIds) {
+			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
+			super.setAssetIds(assetIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 项目
+		 * @param projectList 项目
+		 * @return 当前对象
+		*/
+		public MaintainPlan setProjectList(List<MaintainProject> projectList) {
+			super.change(PROJECT_LIST,super.getProjectList(),projectList);
+			super.setProjectList(projectList);
+			return this;
+		}
+		
+		/**
+		 * 设置 项目
+		 * @param projectIds 项目
+		 * @return 当前对象
+		*/
+		public MaintainPlan setProjectIds(List<String> projectIds) {
+			super.change(PROJECT_IDS,super.getProjectIds(),projectIds);
+			super.setProjectIds(projectIds);
+			return this;
+		}
+		
+		/**
 		 * 设置 类型
 		 * @param maintainTypeDict 类型
 		 * @return 当前对象
@@ -759,17 +887,6 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 		}
 		
 		/**
-		 * 设置 周期
-		 * @param actionCrontab 周期
-		 * @return 当前对象
-		*/
-		public MaintainPlan setActionCrontab(ActionCrontab actionCrontab) {
-			super.change(ACTION_CRONTAB,super.getActionCrontab(),actionCrontab);
-			super.setActionCrontab(actionCrontab);
-			return this;
-		}
-		
-		/**
 		 * 设置 执行班组
 		 * @param maintainGroup 执行班组
 		 * @return 当前对象
@@ -777,6 +894,17 @@ public class MaintainPlanVOMeta extends MaintainPlanMeta {
 		public MaintainPlan setMaintainGroup(MaintainGroup maintainGroup) {
 			super.change(MAINTAIN_GROUP,super.getMaintainGroup(),maintainGroup);
 			super.setMaintainGroup(maintainGroup);
+			return this;
+		}
+		
+		/**
+		 * 设置 周期
+		 * @param actionCrontab 周期
+		 * @return 当前对象
+		*/
+		public MaintainPlan setActionCrontab(ActionCrontab actionCrontab) {
+			super.change(ACTION_CRONTAB,super.getActionCrontab(),actionCrontab);
+			super.setActionCrontab(actionCrontab);
 			return this;
 		}
 		

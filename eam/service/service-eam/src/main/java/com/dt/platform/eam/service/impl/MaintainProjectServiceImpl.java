@@ -3,7 +3,12 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.domain.eam.MaintainProjectSelect;
+import com.dt.platform.eam.service.IMaintainProjectSelectService;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.dao.data.RcdSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +50,9 @@ import java.util.Map;
 @Service("EamMaintainProjectService")
 public class MaintainProjectServiceImpl extends SuperService<MaintainProject> implements IMaintainProjectService {
 
+	@Autowired
+	private IMaintainProjectSelectService maintainProjectSelectService;
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -73,11 +81,83 @@ public class MaintainProjectServiceImpl extends SuperService<MaintainProject> im
 	@Override
 	public Result insert(MaintainProject maintainProject,boolean throwsException) {
 
+		//生成编码规则
+		//编码
 		if(StringUtil.isBlank(maintainProject.getCode())){
-			maintainProject.setCode(IDGenerator.getSnowflakeIdString());
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_MAINTAIN_PROJECT.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				maintainProject.setCode(codeResult.getData().toString());
+			}
 		}
 		Result r=super.insert(maintainProject,throwsException);
 		return r;
+	}
+
+	@Override
+	public PagedList<MaintainProject> queryPagedListBySelected(MaintainProjectVO sample, String ownerId, String ownerType) {
+		ConditionExpr expr=new ConditionExpr();
+		List<String> idsList=new ArrayList<>();
+		String selectedCode=sample.getSelectedCode();
+		sample.setSelectedCode(null);
+		RcdSet rs=null;
+		if(StringUtil.isBlank(ownerId)){
+			rs=dao.query("select project_id from eam_maintain_project_select where deleted=0 and selected_code=?",selectedCode);
+		 }else{
+			rs=dao.query("select project_id from eam_maintain_project_select where deleted=0 and owner_id=?",ownerId);
+		}
+		if(rs.size()>0){
+			idsList=rs.getValueList("projectId",String.class);
+		}
+		if(idsList.size()==0){
+			idsList.add("-1");
+		}
+		expr.andIn("id",idsList);
+
+		return super.queryPagedList(sample,expr,sample.getPageSize(),sample.getPageIndex());
+	}
+
+	@Override
+	public PagedList<MaintainProject> queryPagedListBySelect(MaintainProjectVO sample, String ownerId, String ownerType) {
+		ConditionExpr expr=new ConditionExpr();
+		expr.and("1=1");
+		List<String> idsList=new ArrayList<>();
+
+		String selectedCode=sample.getSelectedCode();
+		sample.setSelectedCode(null);
+		RcdSet rs=null;
+		if(StringUtil.isBlank(ownerId)){
+			rs=dao.query("select project_id from eam_maintain_project_select where deleted=0 and selected_code=?",selectedCode);
+		}else{
+			rs=dao.query("select project_id from eam_maintain_project_select where deleted=0 and owner_id=?",ownerId);
+		}
+		if(rs.size()>0){
+			idsList=rs.getValueList("projectId",String.class);
+			expr.andNotIn("id",idsList.toArray());
+		}
+		return super.queryPagedList(sample,expr,sample.getPageSize(),sample.getPageIndex());
+	}
+
+	@Override
+	public Result selected(List<String> ids, String ownerId, String selectedCode) {
+		List<MaintainProjectSelect> list=new ArrayList<>();
+		if(ids.size()==0){
+			return ErrorDesc.failureMessage("请选择保养项目");
+		}
+		for(int i=0;i<ids.size();i++){
+			MaintainProjectSelect project=new MaintainProjectSelect();
+			project.setProjectId(ids.get(i));
+			project.setSelectedCode(selectedCode);
+			if(!StringUtil.isBlank(ownerId)){
+				project.setOwnerId(ownerId);
+			}
+			list.add(project);
+		}
+		if(list.size()>0){
+			maintainProjectSelectService.insertList(list);
+		}
+		return ErrorDesc.success();
 	}
 
 	/**
@@ -166,6 +246,8 @@ public class MaintainProjectServiceImpl extends SuperService<MaintainProject> im
 	 * */
 	@Override
 	public Result update(MaintainProject maintainProject , SaveMode mode,boolean throwsException) {
+
+
 		Result r=super.update(maintainProject , mode , throwsException);
 		return r;
 	}

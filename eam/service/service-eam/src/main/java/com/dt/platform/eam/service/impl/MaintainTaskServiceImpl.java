@@ -2,12 +2,25 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.MaintainTaskOverdueEnum;
+import com.dt.platform.constants.enums.eam.MaintainTaskProjectStatusEnum;
+import com.dt.platform.constants.enums.eam.MaintainTaskStatusEnum;
+import com.dt.platform.domain.eam.MaintainTaskProject;
+import com.dt.platform.domain.eam.meta.MaintainPlanMeta;
+import com.dt.platform.domain.eam.meta.MaintainTaskMeta;
+import com.dt.platform.eam.service.IMaintainTaskProjectService;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import com.dt.platform.domain.eam.MaintainTask;
 import com.dt.platform.domain.eam.MaintainTaskVO;
+
+import java.math.BigDecimal;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -36,12 +49,15 @@ import java.util.Map;
  * 保养任务 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 20:23:22
+ * @since 2022-06-06 21:41:15
 */
 
 
 @Service("EamMaintainTaskService")
 public class MaintainTaskServiceImpl extends SuperService<MaintainTask> implements IMaintainTaskService {
+
+	@Autowired
+	private IMaintainTaskProjectService maintainTaskProjectService;
 
 	/**
 	 * 注入DAO对象
@@ -54,6 +70,33 @@ public class MaintainTaskServiceImpl extends SuperService<MaintainTask> implemen
 	 * */
 	public DAO dao() { return dao; }
 
+
+	@Override
+	public Result cancel(List<String> ids) {
+		if(ids==null||ids.size()==0){
+			return ErrorDesc.failureMessage("请选择任务");
+		}
+		ConditionExpr expr=new ConditionExpr();
+		expr.andIn("status","not_start");
+		expr.andIn("id",ids);
+		List<MaintainTask> list=this.queryList(expr);
+
+		if(list.size()!=ids.size()){
+			return ErrorDesc.failureMessage("选中的任务部分不符合要求");
+		}
+
+		for(int i=0;i<list.size();i++){
+			list.get(i).setStatus("cancel");
+			super.update(list.get(i),SaveMode.NOT_NULL_FIELDS,false);
+		}
+		return ErrorDesc.success();
+	}
+
+	@Override
+	public Result execute(String id) {
+
+		return null;
+	}
 
 
 	@Override
@@ -70,9 +113,42 @@ public class MaintainTaskServiceImpl extends SuperService<MaintainTask> implemen
 	 */
 	@Override
 	public Result insert(MaintainTask maintainTask,boolean throwsException) {
+
+
+		if(StringUtil.isBlank(maintainTask.getAssetId())){
+			return ErrorDesc.failureMessage("资产未选择");
+		}
+
+		if(StringUtil.isBlank(maintainTask.getPlanId())){
+			return ErrorDesc.failureMessage("方案未选择");
+		}
+
+		if(StringUtil.isBlank(maintainTask.getStatus())){
+			maintainTask.setStatus(MaintainTaskStatusEnum.NOT_START.code());
+		}
+
+		if(StringUtil.isBlank(maintainTask.getOverdue())){
+			maintainTask.setOverdue(MaintainTaskOverdueEnum.NORMAL.code());
+		}
+
+
+		//生成编码规则
+		//编码
+		if(StringUtil.isBlank(maintainTask.getBusinessCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_MAINTAIN_TASK.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				maintainTask.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
+
 		Result r=super.insert(maintainTask,throwsException);
 		return r;
 	}
+
+
 
 	/**
 	 * 添加，如果语句错误，则抛出异常
@@ -160,6 +236,61 @@ public class MaintainTaskServiceImpl extends SuperService<MaintainTask> implemen
 	 * */
 	@Override
 	public Result update(MaintainTask maintainTask , SaveMode mode,boolean throwsException) {
+
+		if(MaintainTaskStatusEnum.CANCEL.code().equals(maintainTask.getStatus())
+		|| MaintainTaskStatusEnum.FINISH.code().equals(maintainTask.getStatus())
+		){
+			return ErrorDesc.failureMessage("当前状态操作异常");
+		}
+
+		//maintainTask
+		this.dao().fill(maintainTask)
+				.with(MaintainTaskMeta.PROJECT_LIST)
+				.with(MaintainTaskMeta.TASK_PROJECT_LIST)
+				.execute();
+		List<MaintainTaskProject> list=maintainTask.getTaskProjectList();
+		double sumDiffTime=0.0;
+		Date minDate=null;
+		Date maxDate=null;;
+		if(list!=null&&list.size()>0){
+			for(int i=0;i<list.size();i++){
+				MaintainTaskProject maintainTaskProject=list.get(i);
+				if(maintainTaskProject.getStartTime()==null||maintainTaskProject.getEndTime()==null){
+					return ErrorDesc.failureMessage("维保项目编号:"+maintainTaskProject.getProjectCode()+"未选择时间");
+				}else{
+					if(minDate==null){
+						minDate=maintainTaskProject.getStartTime();
+					}
+					if(maxDate==null){
+						maxDate=maintainTaskProject.getEndTime();
+					}
+					if(maintainTaskProject.getStartTime().getTime()<minDate.getTime()){
+						minDate=maintainTaskProject.getStartTime();
+					}
+					if(maintainTaskProject.getEndTime().getTime()>maxDate.getTime()){
+						maxDate=maintainTaskProject.getEndTime();
+					}
+					long times = maintainTaskProject.getEndTime().getTime() - maintainTaskProject.getStartTime().getTime();
+					if(times<0){
+						return ErrorDesc.failureMessage("请确保结束时间大于开始时间");
+					}
+					double hours = (double) times/(60*60*1000);
+					BigDecimal a= BigDecimal.valueOf(hours);
+					double diffTime = a.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					sumDiffTime=sumDiffTime+diffTime;
+
+					list.get(i).setBaseCost(new BigDecimal(diffTime));
+					list.get(i).setStatus(MaintainTaskProjectStatusEnum.EXECUTED.code());
+				}
+			}
+			maintainTaskProjectService.updateList(list,SaveMode.NOT_NULL_FIELDS);
+		}else{
+			return ErrorDesc.failureMessage("没有需要的保养项目");
+		}
+		maintainTask.setActStartTime(minDate);
+		maintainTask.setActFinishTime(maxDate);
+		maintainTask.setStatus(MaintainTaskStatusEnum.FINISH.code());
+		maintainTask.setActTotalCost(new BigDecimal(sumDiffTime));
 		Result r=super.update(maintainTask , mode , throwsException);
 		return r;
 	}

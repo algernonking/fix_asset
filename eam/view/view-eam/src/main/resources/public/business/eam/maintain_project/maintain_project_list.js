@@ -1,7 +1,7 @@
 /**
  * 保养项目 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-04 06:14:44
+ * @since 2022-06-08 06:19:53
  */
 
 
@@ -82,7 +82,7 @@ function ListPage() {
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('项目名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'maintainType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('保养类型'), templet: function (d) { return templet('maintainType' ,fox.joinLabel(d.maintainTypeDict,"label"),d);}}
-					,{ field: 'baseCose', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('标准工时(小时)') , templet: function (d) { return templet('baseCose',d.baseCose,d);}  }
+					,{ field: 'baseCost', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('标准工时(小时)') , templet: function (d) { return templet('baseCost',d.baseCost,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }

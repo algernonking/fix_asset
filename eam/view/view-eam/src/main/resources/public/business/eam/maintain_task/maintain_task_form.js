@@ -1,7 +1,7 @@
 /**
  * 保养任务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 20:23:23
+ * @since 2022-06-09 07:09:03
  */
 
 function FormPage() {
@@ -110,7 +110,7 @@ function FormPage() {
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "0".split(",");
+					defaultIndexs = "".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;
@@ -118,6 +118,193 @@ function FormPage() {
 					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
+			}
+		});
+		//渲染 overdue 下拉字段
+		fox.renderSelectBox({
+			el: "overdue",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("overdue",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 planMaintainType 下拉字段
+		fox.renderSelectBox({
+			el: "planMaintainType",
+			radio: true,
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("planMaintainType",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "label", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 planCycleMethod 下拉字段
+		fox.renderSelectBox({
+			el: "planCycleMethod",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("planCycleMethod",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 groupId 下拉字段
+		fox.renderSelectBox({
+			el: "groupId",
+			radio: true,
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("groupId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 assetStatus 下拉字段
+		fox.renderSelectBox({
+			el: "assetStatus",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("assetStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 executorId 下拉字段
+		fox.renderSelectBox({
+			el: "executorId",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("executorId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].employeeId,selected:(defaultValues.indexOf(data[i].employeeId)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#planStartTime',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("planStartTime",value, date, endDate);
+			}
+		});
+		laydate.render({
+			elem: '#actStartTime',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("actStartTime",value, date, endDate);
+			}
+		});
+		laydate.render({
+			elem: '#actFinishTime',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("actFinishTime",value, date, endDate);
 			}
 		});
 	}
@@ -134,7 +321,7 @@ function FormPage() {
 			if (r.success) {
 				fillFormData(r.data)
 			} else {
-				fox.showMessage(data);
+				fox.showMessage(r);
 			}
 		});
 	}
@@ -170,10 +357,30 @@ function FormPage() {
 
 
 
+			//设置 应开始时间 显示复选框勾选
+			if(formData["planStartTime"]) {
+				$("#planStartTime").val(fox.dateFormat(formData["planStartTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
+			//设置 实际开始时间 显示复选框勾选
+			if(formData["actStartTime"]) {
+				$("#actStartTime").val(fox.dateFormat(formData["actStartTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
+			//设置 实际完成时间 显示复选框勾选
+			if(formData["actFinishTime"]) {
+				$("#actFinishTime").val(fox.dateFormat(formData["actFinishTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
 
 
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  保养类型 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#planMaintainType",formData.maintainTypeDict);
+			//设置  循环方式 设置下拉框勾选
+			fox.setSelectValue4Enum("#planCycleMethod",formData.planCycleMethod,SELECT_PLANCYCLEMETHOD_DATA);
+			//设置  班组 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#groupId",formData.maintainGroup);
+			//设置  设备状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+			//设置  执行人 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#executorId",formData.executor);
 
 			//处理fillBy
 
@@ -225,8 +432,16 @@ function FormPage() {
 
 
 
-		//获取 状态 下拉框的值
-		data["status"]=fox.getSelectedValue("status",false);
+		//获取 保养类型 下拉框的值
+		data["planMaintainType"]=fox.getSelectedValue("planMaintainType",false);
+		//获取 循环方式 下拉框的值
+		data["planCycleMethod"]=fox.getSelectedValue("planCycleMethod",false);
+		//获取 班组 下拉框的值
+		data["groupId"]=fox.getSelectedValue("groupId",false);
+		//获取 设备状态 下拉框的值
+		data["assetStatus"]=fox.getSelectedValue("assetStatus",false);
+		//获取 执行人 下拉框的值
+		data["executorId"]=fox.getSelectedValue("executorId",false);
 
 		return data;
 	}

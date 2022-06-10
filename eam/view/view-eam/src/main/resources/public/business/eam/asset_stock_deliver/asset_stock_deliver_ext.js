@@ -359,8 +359,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             data.assetOwnerId=BILL_ID;
             admin.putTempData('eam-asset-selected-data'+timestamp,data,true);
             admin.putTempData('eam-asset-selected-action'+timestamp,formAction,true);
-            //win.location="/business/eam/asset/asset_selected_list.html?assetSelectedCode="+timestamp;
-            win.location="/business/eam/stock/asset_stock_selected_list.html?ownerCode="+OWNER_CODE+"&assetSelectedCode="+timestamp;
+            //win.location="/business/eam/asset/asset_selected_list.html?assetSelectedCode="+timestamp+"&pageType="+formAction;
+            win.location="/business/eam/stock/asset_stock_selected_list.html?ownerCode="+OWNER_CODE+"&assetSelectedCode="+timestamp+"&pageType="+formAction;
 
         },
         /**

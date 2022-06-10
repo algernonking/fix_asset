@@ -22,10 +22,14 @@ import java.util.Map;
  * 保养任务 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 20:23:22
+ * @since 2022-06-06 21:41:15
 */
 
 public interface IMaintainTaskService extends ISuperService<MaintainTask> {
+
+	Result cancel(List<String> ids);
+
+	Result execute(String id);
 
 	/**
 	 * 添加，如果语句错误，则抛出异常

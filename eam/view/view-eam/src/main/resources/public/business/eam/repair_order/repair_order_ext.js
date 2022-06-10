@@ -405,9 +405,10 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             data.ownerCode="asset";
             if(BILL_ID==null)BILL_ID="";
             data.assetOwnerId=BILL_ID;
+          //  console.log("DATA:",data);
             admin.putTempData('eam-asset-selected-data'+timestamp,data,true);
             admin.putTempData('eam-asset-selected-action'+timestamp,formAction,true);
-            win.location="/business/eam/asset/asset_selected_list.html?assetSelectedCode="+timestamp;
+            win.location="/business/eam/asset/asset_selected_list.html?pageType="+formAction+"&assetSelectedCode="+timestamp+"&pageType="+formAction;
         },
         /**
          * 文件上传组件回调

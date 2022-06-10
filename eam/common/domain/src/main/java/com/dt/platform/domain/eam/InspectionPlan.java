@@ -22,8 +22,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检计划
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 12:17:56
- * @sign 93ED77E11FB1CD2FB41A0FDA575B4665
+ * @since 2022-06-10 06:15:12
+ * @sign E39A2459DECFD01BD94E55E66E46146F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -99,7 +99,7 @@ public class InspectionPlan extends Entity {
 	 * 周期：周期
 	*/
 	@ApiModelProperty(required = false,value="周期" , notes = "周期")
-	private String actionCycle;
+	private String actionCycleId;
 	
 	/**
 	 * 巡检顺序：巡检顺序
@@ -118,6 +118,12 @@ public class InspectionPlan extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="超时处理" , notes = "超时处理")
 	private String overtimeMethod;
+	
+	/**
+	 * 超时(小时)：超时(小时)
+	*/
+	@ApiModelProperty(required = false,value="超时(小时)" , notes = "超时(小时)")
+	private BigDecimal timeout;
 	
 	/**
 	 * 备注：备注
@@ -406,17 +412,17 @@ public class InspectionPlan extends Entity {
 	 * 周期
 	 * @return 周期
 	*/
-	public String getActionCycle() {
-		return actionCycle;
+	public String getActionCycleId() {
+		return actionCycleId;
 	}
 	
 	/**
 	 * 设置 周期
-	 * @param actionCycle 周期
+	 * @param actionCycleId 周期
 	 * @return 当前对象
 	*/
-	public InspectionPlan setActionCycle(String actionCycle) {
-		this.actionCycle=actionCycle;
+	public InspectionPlan setActionCycleId(String actionCycleId) {
+		this.actionCycleId=actionCycleId;
 		return this;
 	}
 	
@@ -474,6 +480,25 @@ public class InspectionPlan extends Entity {
 	*/
 	public InspectionPlan setOvertimeMethod(String overtimeMethod) {
 		this.overtimeMethod=overtimeMethod;
+		return this;
+	}
+	
+	/**
+	 * 获得 超时(小时)<br>
+	 * 超时(小时)
+	 * @return 超时(小时)
+	*/
+	public BigDecimal getTimeout() {
+		return timeout;
+	}
+	
+	/**
+	 * 设置 超时(小时)
+	 * @param timeout 超时(小时)
+	 * @return 当前对象
+	*/
+	public InspectionPlan setTimeout(BigDecimal timeout) {
+		this.timeout=timeout;
 		return this;
 	}
 	

@@ -1,7 +1,7 @@
 /**
  * 执行动作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-03 21:55:45
+ * @since 2022-06-06 21:09:26
  */
 
 function FormPage() {
@@ -141,7 +141,7 @@ function FormPage() {
 			if (r.success) {
 				fillFormData(r.data)
 			} else {
-				fox.showMessage(data);
+				fox.showMessage(r);
 			}
 		});
 	}

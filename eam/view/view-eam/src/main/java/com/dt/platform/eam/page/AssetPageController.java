@@ -103,7 +103,7 @@ public class AssetPageController extends ViewController {
 	 * 资产
 	 */
 	@RequestMapping("/asset_selected_list.html")
-	public String selectedList(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode) {
+	public String selectedList(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode,String pageType) {
 
 		String itemOwner=AssetAttributeItemOwnerEnum.ASSET_BILL.code();
 		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(itemOwner,null);
@@ -112,6 +112,7 @@ public class AssetPageController extends ViewController {
 			List<AssetAttributeItem> list=data.get("attributeListData");
 			model.addAttribute("attributeListData",list);
 		}
+		model.addAttribute("pageType",pageType);
 		model.addAttribute("assetSelectedCode",assetSelectedCode);
 		model.addAttribute("ownerCode",StringUtil.isBlank(ownerCode)?AssetOwnerCodeEnum.ASSET:ownerCode);
 		return prefix+"/asset_selected_list";

@@ -2,7 +2,7 @@
 /**
  * 执行动作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-03 21:55:45
+ * @since 2022-06-06 21:09:26
  */
  -->
  <!DOCTYPE html>
@@ -38,28 +38,8 @@
 
 
 
-        <div class="layui-row form-row" id="random-0324-content">
+        <div class="layui-row form-row" id="random-5092-content">
 
-             <!--开始：column 循环-->
-            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs6 form-column" >
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('表达式')}">表达式</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input  readonly lay-filter="crontab" id="crontab" name="crontab" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('表达式') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
-                    </div>
-
-                <!--结束：栏次内字段循环-->
-            </div>
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs6 form-column" >
@@ -82,13 +62,26 @@
 
                 <!--结束：栏次内字段循环-->
             </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs6 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('表达式')}">表达式</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input  readonly lay-filter="crontab" id="crontab" name="crontab" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('表达式') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
             <!--结束：栏次输入框循环-->
         </div>
          <!--开始：group 循环-->
 
 
 
-        <div class="layui-row form-row" id="random-2770-content">
+        <div class="layui-row form-row" id="random-1830-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -110,7 +103,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
-        <div style="height: 220px"></div>
+        <div style="height: 300px"></div>
 
 
     </form>
@@ -129,7 +122,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"crontab":{"labelInForm":"表达式","inputType":"text_input","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"startExecutionTime":{"date":true,"labelInForm":"开始时间","inputType":"date_input","required":true}};
+    var VALIDATE_CONFIG={"crontab":{"labelInForm":"表达式","inputType":"text_input","required":true},"startExecutionTime":{"date":true,"labelInForm":"开始时间","inputType":"date_input","required":true}};
     var AUTH_PREFIX="eam_action_crontab";
 
     // OWNER_ID
