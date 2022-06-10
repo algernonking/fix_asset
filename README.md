@@ -102,8 +102,20 @@
 - 安装:EAM web端口8089，访问地址为:http://ip:8089
 - 安装目录:/app目录
 ```
- curl -L http://resource.rainbooow.com/appInstallFull.sh>/tmp/i.sh;sh /tmp/i.sh 2.0.12
+#安装命令
+curl -L http://resource.rainbooow.com/appInstallFull.sh>/tmp/i.sh;sh /tmp/i.sh 2.0.12
 ```
+
+- 清理重新安装
+```
+#清理命令，会删除java 和mysql 进程。操作前请确保没有其他对应程序的业务在运行而导致误操作
+rm -rf /app/java
+rm -rf /app/db
+rm -rf /app/eam
+ps -ef|grep java |grep -v grep |awk '{print $2}'|xargs kill -9
+ps -ef|grep mysql |grep -v grep |awk '{print $2}'|xargs kill -9
+```
+
 
 
 ### 方案二 Docker方式-建议作为体验使用
