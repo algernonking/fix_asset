@@ -1,6 +1,6 @@
 #!/bin/sh
-#
-#sh appInstallFull.sh
+# modify at 20220610
+#sh appInstallFull.sh 1.0.12
 # test on RedHat 7.9 ,need to yum source before
 #	mysql_soft:/tmp/mysql5.7.tar.gz
 #	java_soft:/tmp/jdk-8u333-linux-x64.tar.gz
@@ -23,7 +23,7 @@ mysql_soft_md5=423915249cc67bbfa75223d9753cde77
 
 ## directory
 java_dir="/app/java"
-app_dir="/app/eam"
+app_dir="/app/app"
 mysql_dir="/app/db"
 
 ############################################
@@ -77,6 +77,8 @@ function clearTips(){
 	echo "rm -rf $java_dir"
 	echo "rm -rf $mysql_dir"
 	echo "rm -rf $app_dir"
+	echo "ps -ef|grep java |grep -v grep |awk '{print \$2}'|xargs kill -9"
+  echo "ps -ef|grep mysql |grep -v grep |awk '{print \$2}'|xargs kill -9"
 }
 
 function installJava(){
@@ -240,10 +242,10 @@ function installApp(){
 	echo "DB_USER=root"                                 >>$appConf
 	echo "DB_PWD=$MYSQL_ROOT_PWD"                       >>$appConf
 
-
 	db_create_db_file=$app_dir/bin/sql/createdb.sql
 	db_sql_file=$app_dir/bin/sql/db.sql
 	db_procedure_file=$app_dir/bin/sql/nextVal.sql
+	db_clear_data_file=$app_dir/bin/sql/cleardata.sql
 	application_tpl_yml=$app_dir/application_tpl.yml
 	application_yml=$app_dir/application.yml
 
@@ -281,21 +283,19 @@ function installApp(){
 	tab_cnt=`$MYSQL -u$db_user -p$db_pwd $db_name -e 'show tables' 2>/dev/null |wc -l`
 	echo "create database success,table count:$tab_cnt"
 
-
-
 	echo "#########start to backup db"
 	$MYSQL_DUMP -u$db_user -p$db_pwd -h$db_host $db_name  > /tmp/db.sql  2>/dev/null
-
 
 	echo "#########start to load data"
 	$MYSQL -u$db_user -p$db_pwd -h$db_host $db_name < $db_sql_file  2>/dev/null
 	tab_cnt=`$MYSQL -u$db_user -p$db_pwd $db_name -e 'show tables' 2>/dev/null |wc -l`
 	echo "load tables success,table count:$tab_cnt"
 
-
 	echo "#########start to create procedure"
 	$MYSQL -u$db_user -p$db_pwd -h$db_host $db_name < $db_procedure_file  2>/dev/null
 
+	echo "#########start to clear data "
+	$MYSQL -u$db_user -p$db_pwd -h$db_host $db_name < $db_clear_data_file  2>/dev/null
 
 	echo "#########start to create application.yml from $application_tpl_yml"
 	cat $application_tpl_yml>$application_yml
@@ -306,6 +306,15 @@ function installApp(){
 	sed -i "s/APP_DB_USERNAME/$db_user/g"           $application_yml
 	sed -i "s/APP_DB_PASSWORD/$db_pwd/g"            $application_yml
 	echo "#############install app success#############"
+}
+
+function stopFirewalld(){
+  btcnt=`ps -ef|grep python|grep BT|grep -v grep|wc -l`
+ if [[ $btcnt -gt 0 ]];then
+    echo "firewalld don't stop it"
+    return 1
+  fi
+  systemctl disable firewalld.service;systemctl stop firewalld.service
 }
 
 
@@ -324,7 +333,7 @@ if [[ -f $mysql_soft ]];then
 fi
 if [[ $mysql_download -eq 1 ]];then
 	echo "start to download mysql"
-	wget https://cdn.mysql.com/archives/mysql-5.7/mysql-5.7.36-linux-glibc2.12-x86_64.tar.gz
+	wget https://cdn.mysql.com/archives/mysql-5.7/mysql-5.7.37-linux-glibc2.12-x86_64.tar.gz
 fi
 
 
@@ -373,7 +382,6 @@ if [[ $java_soft_VR -eq 1 ]];then
 	exit 1
 fi
 
-
 ## install java
 installJava
 which $JAVA>/dev/null
@@ -393,7 +401,6 @@ if [[ $mysql_command -eq 1 ]];then
 	clearTips
 	exit 1
 fi
-
 db_port_cnt=`netstat -ant|grep LISTEN|grep ":$db_port"|wc -l`
 if [[ $db_port_cnt -eq 0 ]];then
 	echo "install check error,db_port:$db_port not exist"
@@ -402,18 +409,16 @@ if [[ $db_port_cnt -eq 0 ]];then
 else
 	echo "mysql install success,password:$MYSQL_ROOT_PWD"
 fi
-
-
 ## install app
 installApp
 
+## stop Firewalld
+stopFirewalld
+
 cd $app_dir
 sh appStart.sh
-
-
-
 exit 0
-/app/db/mysql/bin/mysql -uroot -proot_pwd
+
 
 
 

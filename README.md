@@ -102,7 +102,7 @@
 - 安装目录:/app目录
 ```
 #安装命令
-curl -L http://resource.rainbooow.com/appInstallFull.sh>/tmp/i.sh;sh /tmp/i.sh 2.0.12
+curl -L http://resource.rainbooow.com/appInstallFull.sh>/tmp/i.sh;sh /tmp/i.sh
 ```
 
 - 清理重新安装
