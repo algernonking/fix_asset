@@ -92,11 +92,15 @@
 
 ### EAM系统部署的视频介绍
 - 1、待录制
+
+
 ### 方案一 Docker方式-建议作为体验使用
 - 一键安装Foxnic-EAM
-- 安全环境先觉确认：RedHat 7.9 纯洁的系统，yum 能安装本地基本包，共有云一般yum默认就没问题
-- 安装后:mysql5.7 端口3306，密码root_pwd
-- 安装为:/app目录
+- 自动安装Mysql,Java,EAM应用，Mysql从官方下载，因此整体安装速度会慢些
+- 安全环境先前确认：RedHat 7.9 纯洁的系统，yum需能安装本地系统包(unzip,wget,zip,等)，公有云的默认yum配置一般没问题
+- 安装:Mysql5.7 端口3306，密码root_pwd
+- 安装:EAM web端口8089，访问地址为:http://ip:8089
+- 安装目录:/app目录
 ```
  curl -L http://resource.rainbooow.com/appInstallFull.sh>/tmp/i.sh;sh /tmp/i.sh 2.0.12
 ```
