@@ -3,6 +3,9 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.MaintainProjectMeta;
+import com.dt.platform.proxy.eam.MaintainProjectServiceProxy;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +21,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.InspectionPointServiceProxy;
 import com.dt.platform.domain.eam.meta.InspectionPointVOMeta;
-import com.dt.platform.domain.eam.InspectionPoint;
-import com.dt.platform.domain.eam.InspectionPointVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -33,7 +34,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.InspectionPointMeta;
-import com.dt.platform.domain.eam.InspectionRoute;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 巡检点 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 14:00:01
+ * @since 2022-06-11 08:31:05
 */
 
 @Api(tags = "巡检点")
@@ -284,6 +284,59 @@ public class InspectionPointController extends SuperController {
 	}
 
 
+
+	/**
+	 * 分页查询保养项目
+	 */
+	@ApiOperation(value = "分页查询项目")
+	@ApiImplicitParams({
+	})
+	@ApiOperationSupport(order=10)
+	@SentinelResource(value = InspectionPointServiceProxy.QUERY_PAGED_LIST_BY_SELECT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(InspectionPointServiceProxy.QUERY_PAGED_LIST_BY_SELECT)
+	public Result<PagedList<InspectionPoint>> queryPagedList(InspectionPointVO sample, String ownerId, String ownerType) {
+		Result<PagedList<InspectionPoint>> result=new Result<>();
+		PagedList<InspectionPoint> list=inspectionPointService.queryPagedListBySelect(sample,ownerId,ownerType);
+		// join 关联的对象
+		inspectionPointService.dao().fill(list)
+				.with(InspectionPointMeta.ROUTE)
+				.execute();
+		result.success(true).data(list);
+		return result;
+	}
+
+	/**
+	 * 分页查询保养项目
+	 */
+	@ApiOperation(value = "分页查询项目")
+	@ApiImplicitParams({
+	})
+	@ApiOperationSupport(order=11)
+	@SentinelResource(value = InspectionPointServiceProxy.QUERY_PAGED_LIST_BY_SELECTED , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(InspectionPointServiceProxy.QUERY_PAGED_LIST_BY_SELECTED)
+	public Result<PagedList<InspectionPoint>> queryPagedListBySelected(InspectionPointVO sample,String ownerId,String ownerType) {
+		Result<PagedList<InspectionPoint>> result=new Result<>();
+		PagedList<InspectionPoint> list=inspectionPointService.queryPagedListBySelected(sample,ownerId,ownerType);
+		// join 关联的对象
+		inspectionPointService.dao().fill(list)
+				.with(InspectionPointMeta.ROUTE)
+				.execute();
+		result.success(true).data(list);
+		return result;
+	}
+
+	/**
+	 * 分页查询保养项目
+	 */
+	@ApiOperation(value = "选择")
+	@ApiImplicitParams({
+	})
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = InspectionPointServiceProxy.SELECTED , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(InspectionPointServiceProxy.SELECTED)
+	public Result selected(List<String> ids,String ownerId,String selectedCode) {
+		return inspectionPointService.selected(ids,ownerId,selectedCode);
+	}
 
 	/**
 	 * 导出 Excel

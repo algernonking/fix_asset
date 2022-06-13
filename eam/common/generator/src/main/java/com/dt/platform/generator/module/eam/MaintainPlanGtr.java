@@ -33,25 +33,17 @@ public class MaintainPlanGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
-
         cfg.getPoClassFile().addListProperty(MaintainProject.class,"projectList","项目","项目");
         cfg.getPoClassFile().addListProperty(String.class,"projectIds","项目","项目");
-
 
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"maintainTypeDict","类型","类型");
         cfg.getPoClassFile().addSimpleProperty(MaintainGroup.class,"maintainGroup","执行班组","执行班组");
 
-
-
         cfg.getPoClassFile().addSimpleProperty(ActionCrontab.class,"actionCrontab","周期","周期");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
-
-
-
         cfg.view().field(EAMTables.EAM_MAINTAIN_PLAN.CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_MAINTAIN_PLAN.NAME).search().fuzzySearch();
-
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_MAINTAIN_PLAN.STATUS,
@@ -149,6 +141,7 @@ public class MaintainPlanGtr extends BaseCodeGenerator {
         cfg.view().list().operationColumn().addActionButton("启动","start","start-button","eam_maintain_plan:start");
         cfg.view().list().operationColumn().addActionButton("停用","stop","stop-button","eam_maintain_plan:stop");
         cfg.view().list().operationColumn().addActionButton("执行","execute","execute-button","eam_maintain_plan:execute");
+
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
 

@@ -1,7 +1,7 @@
 /**
  * 巡检任务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:34:06
+ * @since 2022-06-13 21:10:49
  */
 
 
@@ -77,14 +77,14 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'taskStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('任务状态'), templet:function (d){ return templet('taskStatus',fox.getEnumText(SELECT_TASKSTATUS_DATA,d.taskStatus),d);}}
+					,{ field: 'taskCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('任务编号') , templet: function (d) { return templet('taskCode',d.taskCode,d);}  }
 					,{ field: 'planCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检编码') , templet: function (d) { return templet('planCode',d.planCode,d);}  }
 					,{ field: 'planName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检名称') , templet: function (d) { return templet('planName',d.planName,d);}  }
 					,{ field: 'planInspectionMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检顺序'), templet:function (d){ return templet('planInspectionMethod',fox.getEnumText(SELECT_PLANINSPECTIONMETHOD_DATA,d.planInspectionMethod),d);}}
 					,{ field: 'planCompletionTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('时间要求') , templet: function (d) { return templet('planCompletionTime',d.planCompletionTime,d);}  }
 					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检班组'), templet: function (d) { return templet('groupId' ,fox.joinLabel(d.inspectionGroup,"name"),d);}}
-					,{ field: 'executorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('执行人') , templet: function (d) { return templet('executorId',d.executorId,d);}  }
+					,{ field: 'executorId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('执行人'), templet: function (d) { return templet('executorId' ,fox.joinLabel(d.executor,"name"),d);}}
 					,{ field: 'planStartTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('应开始时间') ,templet: function (d) { return templet('planStartTime',fox.dateFormat(d.planStartTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'actStartTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('实际开始时间') ,templet: function (d) { return templet('actStartTime',fox.dateFormat(d.actStartTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'actFinishTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('实际完成时间') ,templet: function (d) { return templet('actFinishTime',fox.dateFormat(d.actFinishTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
@@ -153,7 +153,7 @@ function ListPage() {
 		value.planCode={ inputType:"button",value: $("#planCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.planName={ inputType:"button",value: $("#planName").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.groupId={ inputType:"select_box", value: getSelectedValue("#groupId","value") ,fillBy:["inspectionGroup"]  , label:getSelectedValue("#groupId","nameStr") };
-		value.actStartTime={ inputType:"date_input", value: $("#actStartTime").val() ,matchType:"auto"};
+		value.actStartTime={ inputType:"date_input", begin: $("#actStartTime-begin").val(), end: $("#actStartTime-end").val() ,matchType:"auto" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -251,7 +251,16 @@ function ListPage() {
 			}
 		});
 		laydate.render({
-			elem: '#actStartTime',
+			elem: '#actStartTime-begin',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("actStartTime",value, date, endDate);
+				},1);
+			}
+		});
+		laydate.render({
+			elem: '#actStartTime-end',
 			trigger:"click",
 			done: function(value, date, endDate) {
 				setTimeout(function () {
@@ -417,6 +426,15 @@ function ListPage() {
 						}
 					});
 				});
+			}
+			else if (layEvent === 'execute') { // 执行
+				window.pageExt.list.execute(data,this);
+			}
+			else if (layEvent === 'finish') { // 完成
+				window.pageExt.list.finish(data,this);
+			}
+			else if (layEvent === 'cancel') { // 取消
+				window.pageExt.list.cancel(data,this);
 			}
 			
 		});

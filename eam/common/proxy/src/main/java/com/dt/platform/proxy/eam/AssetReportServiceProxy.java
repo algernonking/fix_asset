@@ -66,6 +66,12 @@ public interface AssetReportServiceProxy {
 	public static final String DASHBOARD = API_PREFIX + "dashboard";
 
 	/**
+	 * 资产dashboard
+	 */
+	public static final String DASHBOARD_MRO = API_PREFIX + "dashboard-mro";
+
+
+	/**
 	 * 控制器类名
 	 * */
 	public static final String CONTROLLER_CLASS_NAME="com.dt.platform.eam.controller.AssetReportController";

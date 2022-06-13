@@ -101,17 +101,13 @@ public class MaintainTaskGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_MAINTAIN_TASK.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
 
         cfg.view().field(EAMTables.EAM_MAINTAIN_TASK.EXECUTOR_ID)
-                .form().validate().required().form().selectBox().queryApi(GroupUserServiceProxy.QUERY_EMPLOYEE_PERSON)
+                .form().selectBox().queryApi(GroupUserServiceProxy.QUERY_EMPLOYEE_PERSON)
                 .paging(false).filter(false).toolbar(false)
                 .valueField("employeeId").
                 textField(PersonMeta.NAME).
                 fillWith(MaintainTaskMeta.EXECUTOR).muliti(false);
 
         cfg.view().field(EAMTables.EAM_REPAIR_ORDER_ACT.NOTES).form().textArea().height(80);
-
-//        cfg.view().field(EAMTables.EAM_MAINTAIN_TASK.EXECUTOR_ID).table().fillBy("executor","nameAndBadge");
-//        cfg.view().field(EAMTables.EAM_MAINTAIN_TASK.EXECUTOR_ID).form().validate().required().form()
-//                .button().chooseEmployee(true);
 
         cfg.view().field(EAMTables.EAM_MAINTAIN_TASK.NOTES).form().textArea().height(60);
 
@@ -167,15 +163,14 @@ public class MaintainTaskGtr extends BaseCodeGenerator {
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_MAINTAIN_TASK.GROUP_ID,
-                        EAMTables.EAM_MAINTAIN_TASK.EXECUTOR_ID,
+                        EAMTables.EAM_MAINTAIN_TASK.ACT_TOTAL_COST,
+//                        EAMTables.EAM_MAINTAIN_TASK.EXECUTOR_ID,
                 },
                 new Object[] {
                         EAMTables.EAM_MAINTAIN_TASK.ACT_START_TIME,
                         EAMTables.EAM_MAINTAIN_TASK.ACT_FINISH_TIME,
-                },
-                new Object[] {
-                        EAMTables.EAM_MAINTAIN_TASK.ACT_TOTAL_COST,
                 }
+
         );
         cfg.view().form().addGroup(null,
                 new Object[] {
@@ -213,7 +208,9 @@ public class MaintainTaskGtr extends BaseCodeGenerator {
                 }
         );
         cfg.view().form().addPage("保养项目","maintainSelectList");
-     //   cfg.view().list().operationColumn().addActionButton("执行","execute","execute-button","eam_maintain_task:execute");
+        cfg.view().list().operationColumn().addActionButton("执行","execute","execute-button","eam_maintain_task:execute");
+        cfg.view().list().operationColumn().addActionButton("完成","finish","finish-button","eam_maintain_task:finish");
+
         cfg.view().list().addToolButton("取消","taskCancel","","eam_maintain_task:cancel");
         cfg.view().form().addJsVariable("GROUP_EMPLOYEE","[[${groupEmployee}]]","groupEmployee");
 

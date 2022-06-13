@@ -385,10 +385,39 @@ public class MaintainTaskController extends SuperController {
 	})
 	@ApiOperationSupport(order=9)
 	@NotNull(name = MaintainTaskVOMeta.IDS)
+	@SentinelResource(value = MaintainTaskServiceProxy.BATCH_CANCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(MaintainTaskServiceProxy.BATCH_CANCEL)
+	public Result batchCancel(List<String> ids) {
+		return maintainTaskService.batchCancel(ids);
+
+	}
+
+
+	@ApiOperation(value = "")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
+	})
+	@ApiOperationSupport(order=9)
+	@NotNull(name = MaintainTaskVOMeta.ID)
 	@SentinelResource(value = MaintainTaskServiceProxy.CANCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(MaintainTaskServiceProxy.CANCEL)
-	public Result cancel(List<String> ids) {
-		return maintainTaskService.cancel(ids);
+	public Result cancel(String id) {
+		return maintainTaskService.cancel(id);
+
+	}
+
+
+
+	@ApiOperation(value = "")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = MaintainTaskVOMeta.ID , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
+	})
+	@ApiOperationSupport(order=9)
+	@NotNull(name = MaintainTaskVOMeta.ID)
+	@SentinelResource(value = MaintainTaskServiceProxy.FINISH , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(MaintainTaskServiceProxy.FINISH)
+	public Result finish(String id) {
+		return maintainTaskService.finish(id);
 
 	}
 

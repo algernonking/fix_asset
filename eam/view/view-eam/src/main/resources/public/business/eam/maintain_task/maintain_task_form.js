@@ -1,7 +1,7 @@
 /**
  * 保养任务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-09 07:09:03
+ * @since 2022-06-13 20:22:30
  */
 
 function FormPage() {
@@ -379,8 +379,6 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#groupId",formData.maintainGroup);
 			//设置  设备状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
-			//设置  执行人 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#executorId",formData.executor);
 
 			//处理fillBy
 
@@ -440,8 +438,6 @@ function FormPage() {
 		data["groupId"]=fox.getSelectedValue("groupId",false);
 		//获取 设备状态 下拉框的值
 		data["assetStatus"]=fox.getSelectedValue("assetStatus",false);
-		//获取 执行人 下拉框的值
-		data["executorId"]=fox.getSelectedValue("executorId",false);
 
 		return data;
 	}

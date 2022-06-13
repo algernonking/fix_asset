@@ -22,11 +22,16 @@ import java.util.Map;
  * 巡检任务 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:34:05
+ * @since 2022-06-13 10:28:04
 */
 
 public interface IInspectionTaskService extends ISuperService<InspectionTask> {
 
+	Result execute(String id);
+
+	Result cancel(String id);
+
+	Result finish(String id);
 	/**
 	 * 添加，如果语句错误，则抛出异常
 	 * @param inspectionTask 数据对象

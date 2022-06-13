@@ -1,6 +1,8 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.MaintainProject;
+import com.dt.platform.domain.eam.MaintainProjectVO;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.InspectionPoint;
@@ -22,11 +24,18 @@ import java.util.Map;
  * 巡检点 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 14:00:01
+ * @since 2022-06-11 08:31:05
 */
 
 public interface IInspectionPointService extends ISuperService<InspectionPoint> {
 
+
+
+	PagedList<InspectionPoint> queryPagedListBySelected(InspectionPointVO sample,String ownerId,String ownerType);
+
+	PagedList<InspectionPoint> queryPagedListBySelect(InspectionPointVO sample,String ownerId,String ownerType);
+
+	Result selected(List<String> ids,String ownerId,String selectedCode);
 	/**
 	 * 添加，如果语句错误，则抛出异常
 	 * @param inspectionPoint 数据对象

@@ -13,6 +13,7 @@ import com.dt.platform.domain.eam.meta.MaintainTaskMeta;
 import com.dt.platform.eam.service.IMaintainTaskProjectService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +73,89 @@ public class MaintainTaskServiceImpl extends SuperService<MaintainTask> implemen
 
 
 	@Override
-	public Result cancel(List<String> ids) {
+	public Result execute(String id) {
+		return ErrorDesc.success();
+	}
+
+	@Override
+	public Result cancel(String id) {
+		MaintainTask maintainTask=this.getById(id);
+		if(MaintainTaskStatusEnum.CANCEL.code().equals(maintainTask.getStatus())||
+				MaintainTaskStatusEnum.FINISH.code().equals(maintainTask.getStatus())
+		){
+			return ErrorDesc.failureMessage("当前保养任务状态异常，不能进行完成任务操作");
+		}
+		maintainTask.setStatus(MaintainTaskStatusEnum.CANCEL.code());
+		super.update(maintainTask,SaveMode.NOT_NULL_FIELDS,false);
+		return ErrorDesc.success();
+	}
+
+	@Override
+	public Result finish(String id) {
+		MaintainTask maintainTask=this.getById(id);
+		if(!MaintainTaskStatusEnum.ACTING.code().equals(maintainTask.getStatus())){
+			return ErrorDesc.failureMessage("当前保养任务状态异常，不能进行完成任务操作");
+		}
+		//maintainTask
+		this.dao().fill(maintainTask)
+				.with(MaintainTaskMeta.PROJECT_LIST)
+				.with(MaintainTaskMeta.TASK_PROJECT_LIST)
+				.execute();
+		List<MaintainTaskProject> list=maintainTask.getTaskProjectList();
+
+
+
+		double sumDiffTime=0.0;
+		Date minDate=null;
+		Date maxDate=null;;
+		if(list!=null&&list.size()>0){
+			for(int i=0;i<list.size();i++){
+				MaintainTaskProject maintainTaskProject=list.get(i);
+				if(maintainTaskProject.getStartTime()==null||maintainTaskProject.getEndTime()==null){
+					return ErrorDesc.failureMessage("维保项目编号:"+maintainTaskProject.getProjectCode()+"未选择时间");
+				}else{
+					if(minDate==null){
+						minDate=maintainTaskProject.getStartTime();
+					}
+					if(maxDate==null){
+						maxDate=maintainTaskProject.getEndTime();
+					}
+					if(maintainTaskProject.getStartTime().getTime()<minDate.getTime()){
+						minDate=maintainTaskProject.getStartTime();
+					}
+					if(maintainTaskProject.getEndTime().getTime()>maxDate.getTime()){
+						maxDate=maintainTaskProject.getEndTime();
+					}
+					long times = maintainTaskProject.getEndTime().getTime() - maintainTaskProject.getStartTime().getTime();
+					if(times<0){
+						return ErrorDesc.failureMessage("请确保结束时间大于开始时间");
+					}
+					double hours = (double) times/(60*60*1000);
+					BigDecimal a= BigDecimal.valueOf(hours);
+					double diffTime = a.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					sumDiffTime=sumDiffTime+diffTime;
+
+					list.get(i).setBaseCost(new BigDecimal(diffTime));
+					list.get(i).setStatus(MaintainTaskProjectStatusEnum.EXECUTED.code());
+				}
+			}
+			maintainTaskProjectService.updateList(list,SaveMode.NOT_NULL_FIELDS);
+		}else{
+			return ErrorDesc.failureMessage("没有需要的保养项目");
+		}
+		maintainTask.setActStartTime(minDate);
+		maintainTask.setActFinishTime(maxDate);
+		maintainTask.setStatus(MaintainTaskStatusEnum.FINISH.code());
+		maintainTask.setExecutorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		maintainTask.setActTotalCost(new BigDecimal(sumDiffTime));
+		Result r=super.update(maintainTask , SaveMode.NOT_NULL_FIELDS , false);
+		return ErrorDesc.success();
+	}
+
+
+
+	@Override
+	public Result batchCancel(List<String> ids) {
 		if(ids==null||ids.size()==0){
 			return ErrorDesc.failureMessage("请选择任务");
 		}
@@ -86,16 +169,10 @@ public class MaintainTaskServiceImpl extends SuperService<MaintainTask> implemen
 		}
 
 		for(int i=0;i<list.size();i++){
-			list.get(i).setStatus("cancel");
+			list.get(i).setStatus(MaintainTaskStatusEnum.CANCEL.code());
 			super.update(list.get(i),SaveMode.NOT_NULL_FIELDS,false);
 		}
 		return ErrorDesc.success();
-	}
-
-	@Override
-	public Result execute(String id) {
-
-		return null;
 	}
 
 
@@ -236,61 +313,62 @@ public class MaintainTaskServiceImpl extends SuperService<MaintainTask> implemen
 	 * */
 	@Override
 	public Result update(MaintainTask maintainTask , SaveMode mode,boolean throwsException) {
-
 		if(MaintainTaskStatusEnum.CANCEL.code().equals(maintainTask.getStatus())
 		|| MaintainTaskStatusEnum.FINISH.code().equals(maintainTask.getStatus())
 		){
 			return ErrorDesc.failureMessage("当前状态操作异常");
 		}
-
-		//maintainTask
-		this.dao().fill(maintainTask)
-				.with(MaintainTaskMeta.PROJECT_LIST)
-				.with(MaintainTaskMeta.TASK_PROJECT_LIST)
-				.execute();
-		List<MaintainTaskProject> list=maintainTask.getTaskProjectList();
-		double sumDiffTime=0.0;
-		Date minDate=null;
-		Date maxDate=null;;
-		if(list!=null&&list.size()>0){
-			for(int i=0;i<list.size();i++){
-				MaintainTaskProject maintainTaskProject=list.get(i);
-				if(maintainTaskProject.getStartTime()==null||maintainTaskProject.getEndTime()==null){
-					return ErrorDesc.failureMessage("维保项目编号:"+maintainTaskProject.getProjectCode()+"未选择时间");
-				}else{
-					if(minDate==null){
-						minDate=maintainTaskProject.getStartTime();
-					}
-					if(maxDate==null){
-						maxDate=maintainTaskProject.getEndTime();
-					}
-					if(maintainTaskProject.getStartTime().getTime()<minDate.getTime()){
-						minDate=maintainTaskProject.getStartTime();
-					}
-					if(maintainTaskProject.getEndTime().getTime()>maxDate.getTime()){
-						maxDate=maintainTaskProject.getEndTime();
-					}
-					long times = maintainTaskProject.getEndTime().getTime() - maintainTaskProject.getStartTime().getTime();
-					if(times<0){
-						return ErrorDesc.failureMessage("请确保结束时间大于开始时间");
-					}
-					double hours = (double) times/(60*60*1000);
-					BigDecimal a= BigDecimal.valueOf(hours);
-					double diffTime = a.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-					sumDiffTime=sumDiffTime+diffTime;
-
-					list.get(i).setBaseCost(new BigDecimal(diffTime));
-					list.get(i).setStatus(MaintainTaskProjectStatusEnum.EXECUTED.code());
-				}
-			}
-			maintainTaskProjectService.updateList(list,SaveMode.NOT_NULL_FIELDS);
-		}else{
-			return ErrorDesc.failureMessage("没有需要的保养项目");
-		}
-		maintainTask.setActStartTime(minDate);
-		maintainTask.setActFinishTime(maxDate);
-		maintainTask.setStatus(MaintainTaskStatusEnum.FINISH.code());
-		maintainTask.setActTotalCost(new BigDecimal(sumDiffTime));
+//maintainTask
+//		this.dao().fill(maintainTask)
+//				.with(MaintainTaskMeta.PROJECT_LIST)
+//				.with(MaintainTaskMeta.TASK_PROJECT_LIST)
+//				.execute();
+//		List<MaintainTaskProject> list=maintainTask.getTaskProjectList();
+//
+//
+//
+//		double sumDiffTime=0.0;
+//		Date minDate=null;
+//		Date maxDate=null;;
+//		if(list!=null&&list.size()>0){
+//			for(int i=0;i<list.size();i++){
+//				MaintainTaskProject maintainTaskProject=list.get(i);
+//				if(maintainTaskProject.getStartTime()==null||maintainTaskProject.getEndTime()==null){
+//					return ErrorDesc.failureMessage("维保项目编号:"+maintainTaskProject.getProjectCode()+"未选择时间");
+//				}else{
+//					if(minDate==null){
+//						minDate=maintainTaskProject.getStartTime();
+//					}
+//					if(maxDate==null){
+//						maxDate=maintainTaskProject.getEndTime();
+//					}
+//					if(maintainTaskProject.getStartTime().getTime()<minDate.getTime()){
+//						minDate=maintainTaskProject.getStartTime();
+//					}
+//					if(maintainTaskProject.getEndTime().getTime()>maxDate.getTime()){
+//						maxDate=maintainTaskProject.getEndTime();
+//					}
+//					long times = maintainTaskProject.getEndTime().getTime() - maintainTaskProject.getStartTime().getTime();
+//					if(times<0){
+//						return ErrorDesc.failureMessage("请确保结束时间大于开始时间");
+//					}
+//					double hours = (double) times/(60*60*1000);
+//					BigDecimal a= BigDecimal.valueOf(hours);
+//					double diffTime = a.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+//					sumDiffTime=sumDiffTime+diffTime;
+//
+//					list.get(i).setBaseCost(new BigDecimal(diffTime));
+//					list.get(i).setStatus(MaintainTaskProjectStatusEnum.EXECUTED.code());
+//				}
+//			}
+//			maintainTaskProjectService.updateList(list,SaveMode.NOT_NULL_FIELDS);
+//		}else{
+//			return ErrorDesc.failureMessage("没有需要的保养项目");
+//		}
+//		maintainTask.setActStartTime(minDate);
+//		maintainTask.setActFinishTime(maxDate);
+		maintainTask.setStatus(MaintainTaskStatusEnum.ACTING.code());
+	//	maintainTask.setActTotalCost(new BigDecimal(sumDiffTime));
 		Result r=super.update(maintainTask , mode , throwsException);
 		return r;
 	}

@@ -20,6 +20,10 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     //模块基础路径
     const moduleURL="/service-eam/eam-inspection-task";
 
+    var timestamp = Date.parse(new Date());
+    var formAction=admin.getTempData('eam-maintain-task-form-data-form-action');
+
+
     //列表页的扩展
     var list={
         /**
@@ -27,6 +31,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeInit:function () {
             console.log("list:beforeInit");
+            var operHtml=document.getElementById("toolbarTemplate").innerHTML;
+            operHtml=operHtml.replace(/lay-event="create"/i, "style=\"display:none\"")
+            document.getElementById("toolbarTemplate").innerHTML=operHtml;
         },
         /**
          * 表格渲染前调用
@@ -83,7 +90,29 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
-
+            for (var i = 0; i < data.length; i++) {
+                //如果审批中或审批通过的不允许编辑
+                console.log(data[i]);
+                if(data[i].taskStatus=="finish") {
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].taskStatus=="cancel"){
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].taskStatus=="not_start"){
+                    //    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                    //    fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].taskStatus=="acting"){
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    //  fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    //  fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                    //  fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+            }
         },
         /**
          * 进一步转换 list 数据
@@ -150,6 +179,27 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
+        billOper:function(url,btnClass,ps,successMessage){
+            var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
+            var api=moduleURL+"/"+url;
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, ps, function (r) {
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        top.layer.msg(r.message, {time: 2000});
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+        },
+        finish:function(item,it){
+            list.billOper("finish","finish-button",{id:item.id},"已完成");
+        },
+        cancel:function(item,it){
+            list.billOper("cancel","cancel-button",{id:item.id},"已取消");
+        },
         /**
          * 末尾执行
          */
@@ -168,6 +218,14 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
             console.log("form:beforeInit")
+
+            $("#planCode").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#planName").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#planCompletionTime").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#planStartTime").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#planNotes").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#actTotalCost").attr("disabled","disabled").css("background-color","#e6e6e6");
+
         },
         /**
          * 窗口调节前
@@ -187,6 +245,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
+
+            $("#planInspectionMethod").find("xm-select").css("background-color","#e6e6e6");
+            var planInspectionMethodSel= xmSelect.get('#planInspectionMethod',true);
+            if(planInspectionMethodSel){
+                planInspectionMethodSel.update({disabled:true})
+            }
+
+            $("#groupId").find("xm-select").css("background-color","#e6e6e6");
+            var groupIdSel= xmSelect.get('#groupId',true);
+            if(groupIdSel){
+                groupIdSel.update({disabled:true})
+            }
+
+
         },
         /**
          * 对话框打开之前调用，如果返回 null 则不打开对话框
@@ -206,6 +278,25 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         onSelectBoxChanged:function(id,selected,changes,isAdd) {
             console.log('onSelectBoxChanged',id,selected,changes,isAdd);
+            //isAdd, 此次操作是新增还是删除
+            if(id=="groupId"){
+                if(isAdd&&changes.length>0){
+                    var userSelect= xmSelect.get('#executorId',true);
+                    console.log("userSelect",userSelect);
+                    var item=changes[0];
+                    admin.post("/service-eam/eam-group-user/query-employee-person", { groupId : item.data.id }, function (r) {
+                        if (r.success) {
+                            var d=[];
+                            for (var i = 0; i < r.data.length; i++) {
+                                d.push({name:r.data[i].name,value:r.data[i].employeeId});
+                            }
+                            userSelect.update({data:d})
+                        } else {
+                            fox.showMessage(r);
+                        }
+                    });
+                }
+            }
         },
         /**
          * 当日期选择组件选择后触发
@@ -255,11 +346,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          */
         pointSelectList:function (ifr,win,data) {
             // debugger
-            console.log("pointSelectList",ifr,data);
+            console.log("goodsSelectList",ifr,data);
             //设置 iframe 高度
-            ifr.height("400px");
+            ifr.height("450px");
+            var ownerId="";
+            if(data&&data.id){
+                ownerId=data.id;
+            }
+            var ownerType="eam_asset_insepection_task"
+            var queryString="?pageType="+formAction+"&selectedCode="+timestamp+"&taskId="+ownerId+"&ownerType="+ownerType;
             //设置地址
-            win.location="/business/system/node/node_list.html?id="+data.id;
+            win.location="/business/eam/inspection_task_point/inspection_task_point_selected_list.html"+queryString
+
         },
         /**
          * 文件上传组件回调

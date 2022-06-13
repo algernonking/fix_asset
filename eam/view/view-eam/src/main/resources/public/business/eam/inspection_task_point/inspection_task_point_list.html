@@ -2,7 +2,7 @@
 /**
  * 巡检点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:20:13
+ * @since 2022-06-14 06:28:15
  */
  -->
  <!DOCTYPE html>
@@ -39,14 +39,32 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 任务 , taskId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 任务 , taskId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 状态 , status ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 巡检状态 , pointStatus ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 操作时间 , operTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 巡检结果 , content ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 编码 , pointCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('任务')}" class="search-label taskId-label">任务</span><span class="search-colon">:</span></div>
-                        <input id="taskId" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('编码')}" class="search-label pointCode-label">编码</span><span class="search-colon">:</span></div>
+                        <input id="pointCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
+                    <!-- 巡检内容 , pointContent ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 巡检路线 , pointRouteId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- RFID , pointRfid ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 位置 , pointPos ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 位置经度 , pointPosLongitude ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 位置纬度 , pointPosLatitude ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 备注 , pointNotes ,typeName=text_input, isHideInSearch=true -->
                     <!-- 排序 , sort ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 操作人 , operId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
-                    <!-- code , code ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 选择 , selectedCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 名称 , pointName ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label pointName-label">名称</span><span class="search-colon">:</span></div>
+                        <input id="pointName" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
 
 
                 </div>
@@ -94,6 +112,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.InspectionTaskStatusEnum')}]];
+    var SELECT_POINTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.InspectionTaskPointStatusEnum')}]];
     var AUTH_PREFIX="eam_inspection_task_point";
 
 

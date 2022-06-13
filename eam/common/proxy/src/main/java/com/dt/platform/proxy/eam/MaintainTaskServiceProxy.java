@@ -98,10 +98,12 @@ public interface MaintainTaskServiceProxy {
     public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
 
 
-    public static final String CANCEL = API_PREFIX + "cancel";
+    public static final String BATCH_CANCEL = API_PREFIX + "batch-cancel";
 
     public static final String EXECUTE = API_PREFIX + "execute";
 
+    public static final String CANCEL = API_PREFIX + "cancel";
+    public static final String FINISH = API_PREFIX + "finish";
 
 
     /**

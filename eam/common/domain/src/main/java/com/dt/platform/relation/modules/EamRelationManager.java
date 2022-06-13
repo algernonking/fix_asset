@@ -71,6 +71,7 @@ public class EamRelationManager extends RelationManager {
         this.setupInspectionPlan();
         this.setupInspectionPoint();
         this.setupInspectionTask();
+        this.setupInspectionTaskPoint();
 
         this.setupAssetDepreciationDetail();
         this.setupAssetDepreciationOper();
@@ -549,15 +550,23 @@ public class EamRelationManager extends RelationManager {
     }
     public void setupInspectionPlan() {
 
+        this.property(InspectionPlanMeta.ACTION_CRONTAB_PROP)
+                .using(EAMTables.EAM_INSPECTION_PLAN.ACTION_CYCLE_ID).join(EAMTables.EAM_ACTION_CRONTAB.ID);
+
+
         this.property(InspectionPlanMeta.INSPECTION_PLAN_POINT_LIST_PROP)
-                .using(EAMTables.EAM_INSPECTION_PLAN.ID).join(EAMTables.EAM_INSPECTION_PLAN_POINT.ID);
+                .using(EAMTables.EAM_INSPECTION_PLAN.ID).join(EAMTables.EAM_INSPECTION_POINT_OWNER.OWNER_ID)
+                .using(EAMTables.EAM_INSPECTION_POINT_OWNER.POINT_ID).join(EAMTables.EAM_INSPECTION_POINT.ID);
+
+        this.property(InspectionPlanMeta.INSPECTION_POINT_OWNER_LIST_PROP)
+                .using(EAMTables.EAM_INSPECTION_PLAN.ID).join(EAMTables.EAM_INSPECTION_POINT_OWNER.OWNER_ID);
 
         this.property(InspectionPlanMeta.INSPECTION_GROUP_PROP)
                 .using(EAMTables.EAM_INSPECTION_PLAN.GROUP_ID).join(EAMTables.EAM_INSPECTION_GROUP.ID);
-
-        this.property(InspectionPlanMeta.TIME_DICT_PROP)
-                .using(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
-                .condition("dict_code='eam_completion_time'");
+//
+//        this.property(InspectionPlanMeta.TIME_DICT_PROP)
+//                .using(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+//                .condition("dict_code='eam_completion_time'");
 
 
     }
@@ -566,10 +575,37 @@ public class EamRelationManager extends RelationManager {
         this.property(InspectionPointMeta.ROUTE_PROP)
                 .using(EAMTables.EAM_INSPECTION_POINT.ROUTE_ID).join(EAMTables.EAM_INSPECTION_ROUTE.ID);
     }
+
+    public void setupInspectionTaskPoint() {
+        this.property(InspectionTaskPointMeta.ROUTE_PROP)
+                .using(EAMTables.EAM_INSPECTION_TASK_POINT.POINT_ROUTE_ID).join(EAMTables.EAM_INSPECTION_ROUTE.ID);
+
+        this.property(InspectionTaskPointMeta.TASK_PROP)
+                .using(EAMTables.EAM_INSPECTION_TASK_POINT.TASK_ID).join(EAMTables.EAM_INSPECTION_TASK.ID);
+
+    }
+
+
+
     public void setupInspectionTask() {
         // 关联来源
         this.property(InspectionTaskMeta.INSPECTION_PLAN_PROP)
                 .using(EAMTables.EAM_INSPECTION_TASK.PLAN_ID).join(EAMTables.EAM_INSPECTION_PLAN.ID);
+
+        //制单人
+        this.property(InspectionTaskMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_INSPECTION_TASK.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //制单人
+        this.property(InspectionTaskMeta.EXECUTOR_PROP)
+                .using(EAMTables.EAM_INSPECTION_TASK.EXECUTOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(InspectionTaskMeta.INSPECTION_TASK_POINT_LIST_PROP)
+                .using(EAMTables.EAM_INSPECTION_TASK.ID).join(EAMTables.EAM_INSPECTION_TASK_POINT.TASK_ID);
+
+
+        this.property(InspectionTaskMeta.INSPECTION_GROUP_PROP)
+                .using(EAMTables.EAM_INSPECTION_TASK.GROUP_ID).join(EAMTables.EAM_INSPECTION_GROUP.ID);
 
 
     }

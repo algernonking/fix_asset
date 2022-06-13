@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检点
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 14:00:01
- * @sign 9ECEBB497492E2C17B15941F660ABADF
+ * @since 2022-06-11 22:18:07
+ * @sign F1B99459E0D0D88A2DB1118A5F6A1DA9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -151,6 +151,12 @@ public class InspectionPoint extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
+	
+	/**
+	 * 选择：选择
+	*/
+	@ApiModelProperty(required = false,value="选择" , notes = "选择")
+	private String selectedCode;
 	
 	/**
 	 * version：version
@@ -571,6 +577,25 @@ public class InspectionPoint extends Entity {
 	*/
 	public InspectionPoint setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择<br>
+	 * 选择
+	 * @return 选择
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择
+	 * @param selectedCode 选择
+	 * @return 当前对象
+	*/
+	public InspectionPoint setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 	

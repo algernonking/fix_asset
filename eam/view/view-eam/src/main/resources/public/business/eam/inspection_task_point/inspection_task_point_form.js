@@ -1,7 +1,7 @@
 /**
  * 巡检点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:20:14
+ * @since 2022-06-14 06:28:15
  */
 
 function FormPage() {
@@ -94,6 +94,96 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 pointStatus 下拉字段
+		fox.renderSelectBox({
+			el: "pointStatus",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("pointStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "0".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#operTime',
+			format:"yyyy-MM-dd HH:mm:ss",
+			value:$('#operTime').val()?$('#operTime').val():new Date(),
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("operTime",value, date, endDate);
+			}
+		});
+		//渲染 pointRouteId 下拉字段
+		fox.renderSelectBox({
+			el: "pointRouteId",
+			radio: true,
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("pointRouteId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "0".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 	}
 
 	/**
@@ -144,8 +234,16 @@ function FormPage() {
 
 
 
+			//设置 操作时间 显示复选框勾选
+			if(formData["operTime"]) {
+				$("#operTime").val(fox.dateFormat(formData["operTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
 
 
+			//设置  巡检状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#pointStatus",formData.pointStatus,SELECT_POINTSTATUS_DATA);
+			//设置  巡检路线 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#pointRouteId",formData.route);
 
 			//处理fillBy
 
@@ -197,6 +295,10 @@ function FormPage() {
 
 
 
+		//获取 巡检状态 下拉框的值
+		data["pointStatus"]=fox.getSelectedValue("pointStatus",false);
+		//获取 巡检路线 下拉框的值
+		data["pointRouteId"]=fox.getSelectedValue("pointRouteId",false);
 
 		return data;
 	}

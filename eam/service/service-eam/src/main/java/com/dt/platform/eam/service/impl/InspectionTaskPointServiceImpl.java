@@ -2,6 +2,8 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.eam.InspectionTaskStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +38,7 @@ import java.util.Map;
  * 巡检点 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:20:12
+ * @since 2022-06-12 21:07:10
 */
 
 
@@ -160,6 +162,8 @@ public class InspectionTaskPointServiceImpl extends SuperService<InspectionTaskP
 	 * */
 	@Override
 	public Result update(InspectionTaskPoint inspectionTaskPoint , SaveMode mode,boolean throwsException) {
+
+		inspectionTaskPoint.setStatus(InspectionTaskStatusEnum.FINISH.code());
 		Result r=super.update(inspectionTaskPoint , mode , throwsException);
 		return r;
 	}

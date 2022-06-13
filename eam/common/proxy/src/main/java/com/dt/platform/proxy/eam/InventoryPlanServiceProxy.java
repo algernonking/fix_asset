@@ -102,6 +102,7 @@ public interface InventoryPlanServiceProxy {
      */
     public static final String APPLY_TPL = API_PREFIX + "apply-tpl";
 
+
     /**
      * 添加盘点计划
      */

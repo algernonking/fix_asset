@@ -1,7 +1,7 @@
 /**
  * 巡检点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 14:00:03
+ * @since 2022-06-11 22:18:09
  */
 
 function FormPage() {
@@ -108,7 +108,7 @@ function FormPage() {
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
+					defaultIndexs = "0".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;
@@ -136,7 +136,7 @@ function FormPage() {
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
+					defaultIndexs = "0".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;
@@ -152,7 +152,9 @@ function FormPage() {
 			el:"pictureId",
 			maxFileCount: 1,
 			displayFileName: false,
-			accept: "file",
+			accept: "image",
+			acceptMime:'image/*',
+			exts:'png|jpg|bmp|gif|jpeg',
 			afterPreview:function(elId,index,fileId,upload,fileName,fileType){
 				adjustPopup();
 				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterPreview",elId:elId,index:index,fileId:fileId,upload:upload,fileName:fileName,fileType:fileType});
@@ -187,7 +189,7 @@ function FormPage() {
 			if (r.success) {
 				fillFormData(r.data)
 			} else {
-				fox.showMessage(data);
+				fox.showMessage(r);
 			}
 		});
 	}
@@ -220,7 +222,7 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
-			//设置 附件 显示附件
+			//设置 图片 显示附件
 		    if($("#pictureId").val()) {
 				foxup.fill("pictureId",$("#pictureId").val());
 		    } else {

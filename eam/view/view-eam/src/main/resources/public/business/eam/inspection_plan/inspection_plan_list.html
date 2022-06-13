@@ -2,7 +2,7 @@
 /**
  * 巡检计划 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 06:15:13
+ * @since 2022-06-12 20:23:59
  */
  -->
  <!DOCTYPE html>
@@ -48,14 +48,15 @@
                     <!-- 开始日期 , startDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 截止日期 , endDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 周期 , actionCycleId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 时间要求 , completionTime ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 时间要求(小时) , completionTime ,typeName=number_input, isHideInSearch=true -->
                     <!-- 超时处理 , overtimeMethod ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 超时(小时) , timeout ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 提醒时间(小时) , remindTime ,typeName=number_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 选择 , selectedCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 状态 , planStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('状态')}" class="search-label planStatus-label">状态</span><span class="search-colon">:</span></div>
-                        <div id="planStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" style="width:150px" extraParam="{}"></div>
+                        <div id="planStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.EamPlanStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -128,6 +129,9 @@
 
     <button th:if="${perm.checkAuth('eam_inspection_plan:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate('删除')}">删除</span></button>
 
+    <button th:if="${perm.checkAuth('eam_inspection_plan:start')}"class="layui-btn layui-btn-xs  start-button " lay-event="start" data-id="{{d.id}}"><span th:text="${lang.translate('启动')}">启动</span></button>
+    <button th:if="${perm.checkAuth('eam_inspection_plan:stop')}"class="layui-btn layui-btn-xs  stop-button " lay-event="stop" data-id="{{d.id}}"><span th:text="${lang.translate('停用')}">停用</span></button>
+    <button th:if="${perm.checkAuth('eam_inspection_plan:execute')}"class="layui-btn layui-btn-xs  execute-button " lay-event="execute" data-id="{{d.id}}"><span th:text="${lang.translate('执行')}">执行</span></button>
 
 </script>
 
@@ -135,10 +139,10 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var SELECT_PLANSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var SELECT_PLANSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.EamPlanStatusEnum')}]];
     var SELECT_PLANTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.InspectionPlanTypeEnum')}]];
     var SELECT_INSPECTIONMETHOD_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.InspectionMethodEnum')}]];
-    var SELECT_OVERTIMEMETHOD_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.InspectionOvertimeMethodEnum')}]];
+    var SELECT_OVERTIMEMETHOD_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.InspectionTimeoutHandleEnum')}]];
     var AUTH_PREFIX="eam_inspection_plan";
 
 

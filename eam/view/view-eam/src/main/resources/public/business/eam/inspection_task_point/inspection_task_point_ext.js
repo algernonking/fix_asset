@@ -1,7 +1,7 @@
 /**
  * 巡检点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:20:13
+ * @since 2022-06-12 21:07:10
  */
 
 layui.config({
@@ -168,6 +168,14 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
             console.log("form:beforeInit")
+            $("#pointCode").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#pointName").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#pointNotes").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#pointPosLongitude").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#pointPosLatitude").attr("disabled","disabled").css("background-color","#e6e6e6");
+            $("#pointPos").attr("disabled","disabled").css("background-color","#e6e6e6");
+
+
         },
         /**
          * 窗口调节前
@@ -187,6 +195,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
+            $("#pointRouteId").find("xm-select").css("background-color","#e6e6e6");
+            var pointRouteIdSel= xmSelect.get('#pointRouteId',true);
+            if(pointRouteIdSel){
+                pointRouteIdSel.update({disabled:true})
+            }
+
         },
         /**
          * 对话框打开之前调用，如果返回 null 则不打开对话框

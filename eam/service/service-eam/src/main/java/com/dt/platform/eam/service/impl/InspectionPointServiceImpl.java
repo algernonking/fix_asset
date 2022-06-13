@@ -2,6 +2,12 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.domain.eam.InspectionPointOwner;
+import com.dt.platform.domain.eam.MaintainProjectSelect;
+import com.dt.platform.eam.service.IInspectionPointOwnerService;
+import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.dao.data.RcdSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,12 +42,15 @@ import java.util.Map;
  * 巡检点 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 14:00:01
+ * @since 2022-06-11 08:31:05
 */
 
 
 @Service("EamInspectionPointService")
 public class InspectionPointServiceImpl extends SuperService<InspectionPoint> implements IInspectionPointService {
+
+	@Autowired
+	private IInspectionPointOwnerService inspectionPointOwnerService;
 
 	/**
 	 * 注入DAO对象
@@ -72,6 +81,70 @@ public class InspectionPointServiceImpl extends SuperService<InspectionPoint> im
 	public Result insert(InspectionPoint inspectionPoint,boolean throwsException) {
 		Result r=super.insert(inspectionPoint,throwsException);
 		return r;
+	}
+
+	@Override
+	public PagedList<InspectionPoint> queryPagedListBySelected(InspectionPointVO sample, String ownerId, String ownerType) {
+		ConditionExpr expr=new ConditionExpr();
+		List<String> idsList=new ArrayList<>();
+		String selectedCode=sample.getSelectedCode();
+		sample.setSelectedCode(null);
+		RcdSet rs=null;
+		if(StringUtil.isBlank(ownerId)){
+			rs=dao.query("select point_id from eam_inspection_point_owner where deleted=0 and selected_code=?",selectedCode);
+		}else{
+			rs=dao.query("select point_id from eam_inspection_point_owner where deleted=0 and owner_id=?",ownerId);
+		}
+		if(rs.size()>0){
+			idsList=rs.getValueList("pointId",String.class);
+		}
+		if(idsList.size()==0){
+			idsList.add("-1");
+		}
+		expr.andIn("id",idsList);
+		return super.queryPagedList(sample,expr,sample.getPageSize(),sample.getPageIndex());
+	}
+
+	@Override
+	public PagedList<InspectionPoint> queryPagedListBySelect(InspectionPointVO sample, String ownerId, String ownerType) {
+		ConditionExpr expr=new ConditionExpr();
+		expr.and("1=1");
+		List<String> idsList=new ArrayList<>();
+
+		String selectedCode=sample.getSelectedCode();
+		sample.setSelectedCode(null);
+		RcdSet rs=null;
+		if(StringUtil.isBlank(ownerId)){
+			rs=dao.query("select point_id from eam_inspection_point_owner where deleted=0 and selected_code=?",selectedCode);
+		}else{
+			rs=dao.query("select point_id from eam_inspection_point_owner where deleted=0 and owner_id=?",ownerId);
+		}
+		if(rs.size()>0){
+			idsList=rs.getValueList("pointId",String.class);
+			expr.andNotIn("id",idsList.toArray());
+		}
+		return super.queryPagedList(sample,expr,sample.getPageSize(),sample.getPageIndex());
+	}
+
+	@Override
+	public Result selected(List<String> ids, String ownerId, String selectedCode) {
+		List<InspectionPointOwner> list=new ArrayList<>();
+		if(ids.size()==0){
+			return ErrorDesc.failureMessage("请选择巡检点");
+		}
+		for(int i=0;i<ids.size();i++){
+			InspectionPointOwner pointOwner=new InspectionPointOwner();
+			pointOwner.setPointId(ids.get(i));
+			pointOwner.setSelectedCode(selectedCode);
+			if(!StringUtil.isBlank(ownerId)){
+				pointOwner.setOwnerId(ownerId);
+			}
+			list.add(pointOwner);
+		}
+		if(list.size()>0){
+			inspectionPointOwnerService.insertList(list);
+		}
+		return ErrorDesc.success();
 	}
 
 	/**

@@ -2,12 +2,20 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.InspectionTaskMeta;
+import com.dt.platform.domain.eam.meta.MaintainTaskMeta;
+import com.dt.platform.eam.service.IInspectionTaskPointService;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.InspectionTask;
-import com.dt.platform.domain.eam.InspectionTaskVO;
+import java.math.BigDecimal;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -36,12 +44,16 @@ import java.util.Map;
  * 巡检任务 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:34:05
+ * @since 2022-06-13 10:28:04
 */
 
 
 @Service("EamInspectionTaskService")
 public class InspectionTaskServiceImpl extends SuperService<InspectionTask> implements IInspectionTaskService {
+
+
+	@Autowired
+	private IInspectionTaskPointService inspectionTaskPointService;
 
 	/**
 	 * 注入DAO对象
@@ -70,8 +82,97 @@ public class InspectionTaskServiceImpl extends SuperService<InspectionTask> impl
 	 */
 	@Override
 	public Result insert(InspectionTask inspectionTask,boolean throwsException) {
+
+		if(StringUtil.isBlank(inspectionTask.getPlanId())){
+			return ErrorDesc.failureMessage("方案未选择");
+		}
+
+		if(StringUtil.isBlank(inspectionTask.getTaskStatus())){
+			inspectionTask.setTaskStatus(MaintainTaskStatusEnum.NOT_START.code());
+		}
+
+		//生成编码规则
+		//编码
+		if(StringUtil.isBlank(inspectionTask.getTaskCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_INSPECTION_TASK.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				inspectionTask.setTaskCode(codeResult.getData().toString());
+			}
+		}
 		Result r=super.insert(inspectionTask,throwsException);
 		return r;
+	}
+
+	@Override
+	public Result execute(String id) {
+		return ErrorDesc.success();
+	}
+
+	@Override
+	public Result cancel(String id) {
+		InspectionTask task=this.getById(id);
+		if(InspectionTaskStatusEnum.CANCEL.code().equals(task.getTaskStatus())||
+				InspectionTaskStatusEnum.FINISH.code().equals(task.getTaskStatus())
+		){
+			return ErrorDesc.failureMessage("当前保养任务状态异常，不能进行完成任务操作");
+		}
+		task.setTaskStatus(InspectionTaskStatusEnum.CANCEL.code());
+		super.update(task,SaveMode.NOT_NULL_FIELDS,false);
+		return ErrorDesc.success();
+	}
+
+	@Override
+	public Result finish(String id) {
+
+		InspectionTask inspectionTask=this.getById(id);
+		this.dao().fill(inspectionTask)
+				.with(InspectionTaskMeta.INSPECTION_TASK_POINT_LIST)
+				.execute();
+		List<InspectionTaskPoint> list=inspectionTask.getInspectionTaskPointList();
+
+		if(list==null||list.size()==0){
+			return ErrorDesc.failureMessage("当前没有巡检点需要巡检");
+		}
+
+		double sumDiffTime=0.0;
+		Date minDate=null;
+		Date maxDate=null;;
+
+		for(int i=0;i<list.size();i++){
+			InspectionTaskPoint inspectionTaskPoint=list.get(i);
+			if(!InspectionTaskStatusEnum.FINISH.code().equals(inspectionTaskPoint.getStatus())){
+				return ErrorDesc.failureMessage("巡检点:"+inspectionTaskPoint.getPointName()+"未做巡检");
+			}
+			if(inspectionTaskPoint.getOperTime()==null){
+				return ErrorDesc.failureMessage("巡检点:"+inspectionTaskPoint.getPointName()+"未做巡检");
+			}else{
+				if(minDate==null){
+					minDate=inspectionTaskPoint.getOperTime();
+				}
+				if(maxDate==null){
+					maxDate=inspectionTaskPoint.getOperTime();
+				}
+				if(inspectionTaskPoint.getOperTime().getTime()<minDate.getTime()){
+					minDate=inspectionTaskPoint.getOperTime();
+				}
+				if(inspectionTaskPoint.getOperTime().getTime()>maxDate.getTime()){
+					maxDate=inspectionTaskPoint.getOperTime();
+				}
+			}
+		}
+		inspectionTask.setActStartTime(minDate);
+		inspectionTask.setActFinishTime(maxDate);
+		inspectionTask.setTaskStatus(InspectionTaskStatusEnum.FINISH.code());
+		inspectionTask.setExecutorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		long times = maxDate.getTime() - minDate.getTime();
+		double hours = (double) times/(60*60*1000);
+		BigDecimal a= BigDecimal.valueOf(hours);
+		double diffTime = a.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		inspectionTask.setActTotalCost(new BigDecimal(sumDiffTime));
+		super.update(inspectionTask,SaveMode.NOT_NULL_FIELDS,false);
+		return ErrorDesc.success();
 	}
 
 	/**
@@ -160,8 +261,10 @@ public class InspectionTaskServiceImpl extends SuperService<InspectionTask> impl
 	 * */
 	@Override
 	public Result update(InspectionTask inspectionTask , SaveMode mode,boolean throwsException) {
+		inspectionTask.setTaskStatus(InspectionTaskStatusEnum.ACTING.code());
 		Result r=super.update(inspectionTask , mode , throwsException);
 		return r;
+
 	}
 
 	/**

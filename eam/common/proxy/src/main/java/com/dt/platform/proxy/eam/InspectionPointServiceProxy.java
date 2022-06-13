@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 巡检点  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 14:00:01
+ * @since 2022-06-11 08:31:05
  */
 @FeignClient(value = ServiceNames.EAM, contextId = InspectionPointServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface InspectionPointServiceProxy {
@@ -96,6 +96,21 @@ public interface InspectionPointServiceProxy {
      * 导入巡检点数据(Excel)
      */
     public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+    /**
+     *
+     */
+
+    public static final String QUERY_PAGED_LIST_BY_SELECTED = API_PREFIX + "query-paged-list-by-selected";
+    /**
+     *
+     */
+    public static final String QUERY_PAGED_LIST_BY_SELECT = API_PREFIX + "query-paged-list-by-select";
+
+
+    public static final String SELECTED = API_PREFIX + "selected";
+
+
 
     /**
      * 添加巡检点

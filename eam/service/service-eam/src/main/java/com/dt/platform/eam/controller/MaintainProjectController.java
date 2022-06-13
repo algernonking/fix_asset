@@ -325,7 +325,7 @@ public class MaintainProjectController extends SuperController {
 	@ApiOperationSupport(order=12)
 	@SentinelResource(value = MaintainProjectServiceProxy.SELECTED , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(MaintainProjectServiceProxy.SELECTED)
-	public Result se(List<String> ids,String ownerId,String selectedCode) {
+	public Result selected(List<String> ids,String ownerId,String selectedCode) {
 		return maintainProjectService.selected(ids,ownerId,selectedCode);
 	}
 

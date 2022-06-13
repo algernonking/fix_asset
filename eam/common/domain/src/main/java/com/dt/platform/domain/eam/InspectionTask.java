@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.persistence.Transient;
 import java.util.List;
 import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.hrm.Employee;
 import com.github.foxnic.commons.lang.DataParser;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,8 +23,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检任务
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:34:05
- * @sign E8B6CF07F758B92375C6B03577FC29BA
+ * @since 2022-06-13 21:10:48
+ * @sign 576594AC61DEAF1440557F74233FD239
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -52,6 +53,12 @@ public class InspectionTask extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="任务状态" , notes = "任务状态")
 	private String taskStatus;
+	
+	/**
+	 * 任务编号：任务编号
+	*/
+	@ApiModelProperty(required = false,value="任务编号" , notes = "任务编号")
+	private String taskCode;
 	
 	/**
 	 * 巡检编码：巡检编码
@@ -132,6 +139,12 @@ public class InspectionTask extends Entity {
 	private String notes;
 	
 	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
+	
+	/**
 	 * 创建人ID：创建人ID
 	*/
 	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID")
@@ -188,6 +201,12 @@ public class InspectionTask extends Entity {
 	private Integer version;
 	
 	/**
+	 * 选择：选择
+	*/
+	@ApiModelProperty(required = false,value="选择" , notes = "选择")
+	private String selectedCode;
+	
+	/**
 	 * 计划：计划
 	*/
 	@ApiModelProperty(required = false,value="计划" , notes = "计划")
@@ -197,7 +216,7 @@ public class InspectionTask extends Entity {
 	 * 巡检点：巡检点
 	*/
 	@ApiModelProperty(required = false,value="巡检点" , notes = "巡检点")
-	private List<InspectionPoint> inspectionPoint;
+	private List<InspectionPoint> inspectionPointList;
 	
 	/**
 	 * 巡检点：巡检点
@@ -209,13 +228,13 @@ public class InspectionTask extends Entity {
 	 * 任务巡检点：任务巡检点
 	*/
 	@ApiModelProperty(required = false,value="任务巡检点" , notes = "任务巡检点")
-	private List<InspectionTaskPoint> inspectionTaskPoint;
+	private List<InspectionTaskPoint> inspectionTaskPointList;
 	
 	/**
 	 * 任务巡检点：任务巡检点
 	*/
 	@ApiModelProperty(required = false,value="任务巡检点" , notes = "任务巡检点")
-	private List<InspectionTaskPoint> inspectionTaskPointIds;
+	private List<String> inspectionTaskPointIds;
 	
 	/**
 	 * 时间：时间
@@ -234,6 +253,18 @@ public class InspectionTask extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="班组" , notes = "班组")
 	private InspectionGroup inspectionGroup;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
+	
+	/**
+	 * 执行人：执行人
+	*/
+	@ApiModelProperty(required = false,value="执行人" , notes = "执行人")
+	private Employee executor;
 	
 	/**
 	 * 获得 主键<br>
@@ -289,6 +320,25 @@ public class InspectionTask extends Entity {
 	*/
 	public InspectionTask setTaskStatus(String taskStatus) {
 		this.taskStatus=taskStatus;
+		return this;
+	}
+	
+	/**
+	 * 获得 任务编号<br>
+	 * 任务编号
+	 * @return 任务编号
+	*/
+	public String getTaskCode() {
+		return taskCode;
+	}
+	
+	/**
+	 * 设置 任务编号
+	 * @param taskCode 任务编号
+	 * @return 当前对象
+	*/
+	public InspectionTask setTaskCode(String taskCode) {
+		this.taskCode=taskCode;
 		return this;
 	}
 	
@@ -540,6 +590,25 @@ public class InspectionTask extends Entity {
 	}
 	
 	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public InspectionTask setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
+		return this;
+	}
+	
+	/**
 	 * 获得 创建人ID<br>
 	 * 创建人ID
 	 * @return 创建人ID
@@ -741,6 +810,25 @@ public class InspectionTask extends Entity {
 	}
 	
 	/**
+	 * 获得 选择<br>
+	 * 选择
+	 * @return 选择
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择
+	 * @param selectedCode 选择
+	 * @return 当前对象
+	*/
+	public InspectionTask setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
+		return this;
+	}
+	
+	/**
 	 * 获得 计划<br>
 	 * 计划
 	 * @return 计划
@@ -764,28 +852,28 @@ public class InspectionTask extends Entity {
 	 * 巡检点
 	 * @return 巡检点
 	*/
-	public List<InspectionPoint> getInspectionPoint() {
-		return inspectionPoint;
+	public List<InspectionPoint> getInspectionPointList() {
+		return inspectionPointList;
 	}
 	
 	/**
 	 * 设置 巡检点
-	 * @param inspectionPoint 巡检点
+	 * @param inspectionPointList 巡检点
 	 * @return 当前对象
 	*/
-	public InspectionTask setInspectionPoint(List<InspectionPoint> inspectionPoint) {
-		this.inspectionPoint=inspectionPoint;
+	public InspectionTask setInspectionPointList(List<InspectionPoint> inspectionPointList) {
+		this.inspectionPointList=inspectionPointList;
 		return this;
 	}
 	
 	/**
 	 * 添加 巡检点
-	 * @param entity 巡检点
+	 * @param inspectionPoint 巡检点
 	 * @return 当前对象
 	*/
-	public InspectionTask addInspectionPoint(InspectionPoint... entity) {
-		if(this.inspectionPoint==null) inspectionPoint=new ArrayList<>();
-		this.inspectionPoint.addAll(Arrays.asList(entity));
+	public InspectionTask addInspectionPoint(InspectionPoint... inspectionPoint) {
+		if(this.inspectionPointList==null) inspectionPointList=new ArrayList<>();
+		this.inspectionPointList.addAll(Arrays.asList(inspectionPoint));
 		return this;
 	}
 	
@@ -824,28 +912,28 @@ public class InspectionTask extends Entity {
 	 * 任务巡检点
 	 * @return 任务巡检点
 	*/
-	public List<InspectionTaskPoint> getInspectionTaskPoint() {
-		return inspectionTaskPoint;
+	public List<InspectionTaskPoint> getInspectionTaskPointList() {
+		return inspectionTaskPointList;
 	}
 	
 	/**
 	 * 设置 任务巡检点
-	 * @param inspectionTaskPoint 任务巡检点
+	 * @param inspectionTaskPointList 任务巡检点
 	 * @return 当前对象
 	*/
-	public InspectionTask setInspectionTaskPoint(List<InspectionTaskPoint> inspectionTaskPoint) {
-		this.inspectionTaskPoint=inspectionTaskPoint;
+	public InspectionTask setInspectionTaskPointList(List<InspectionTaskPoint> inspectionTaskPointList) {
+		this.inspectionTaskPointList=inspectionTaskPointList;
 		return this;
 	}
 	
 	/**
 	 * 添加 任务巡检点
-	 * @param entity 任务巡检点
+	 * @param inspectionTaskPoint 任务巡检点
 	 * @return 当前对象
 	*/
-	public InspectionTask addInspectionTaskPoint(InspectionTaskPoint... entity) {
-		if(this.inspectionTaskPoint==null) inspectionTaskPoint=new ArrayList<>();
-		this.inspectionTaskPoint.addAll(Arrays.asList(entity));
+	public InspectionTask addInspectionTaskPoint(InspectionTaskPoint... inspectionTaskPoint) {
+		if(this.inspectionTaskPointList==null) inspectionTaskPointList=new ArrayList<>();
+		this.inspectionTaskPointList.addAll(Arrays.asList(inspectionTaskPoint));
 		return this;
 	}
 	
@@ -854,7 +942,7 @@ public class InspectionTask extends Entity {
 	 * 任务巡检点
 	 * @return 任务巡检点
 	*/
-	public List<InspectionTaskPoint> getInspectionTaskPointIds() {
+	public List<String> getInspectionTaskPointIds() {
 		return inspectionTaskPointIds;
 	}
 	
@@ -863,7 +951,7 @@ public class InspectionTask extends Entity {
 	 * @param inspectionTaskPointIds 任务巡检点
 	 * @return 当前对象
 	*/
-	public InspectionTask setInspectionTaskPointIds(List<InspectionTaskPoint> inspectionTaskPointIds) {
+	public InspectionTask setInspectionTaskPointIds(List<String> inspectionTaskPointIds) {
 		this.inspectionTaskPointIds=inspectionTaskPointIds;
 		return this;
 	}
@@ -873,7 +961,7 @@ public class InspectionTask extends Entity {
 	 * @param inspectionTaskPointId 任务巡检点
 	 * @return 当前对象
 	*/
-	public InspectionTask addInspectionTaskPointId(InspectionTaskPoint... inspectionTaskPointId) {
+	public InspectionTask addInspectionTaskPointId(String... inspectionTaskPointId) {
 		if(this.inspectionTaskPointIds==null) inspectionTaskPointIds=new ArrayList<>();
 		this.inspectionTaskPointIds.addAll(Arrays.asList(inspectionTaskPointId));
 		return this;
@@ -933,6 +1021,44 @@ public class InspectionTask extends Entity {
 	*/
 	public InspectionTask setInspectionGroup(InspectionGroup inspectionGroup) {
 		this.inspectionGroup=inspectionGroup;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Employee getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public InspectionTask setOriginator(Employee originator) {
+		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 执行人<br>
+	 * 执行人
+	 * @return 执行人
+	*/
+	public Employee getExecutor() {
+		return executor;
+	}
+	
+	/**
+	 * 设置 执行人
+	 * @param executor 执行人
+	 * @return 当前对象
+	*/
+	public InspectionTask setExecutor(Employee executor) {
+		this.executor=executor;
 		return this;
 	}
 

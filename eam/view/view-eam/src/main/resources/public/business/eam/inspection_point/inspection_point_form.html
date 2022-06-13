@@ -2,7 +2,7 @@
 /**
  * 巡检点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 14:00:02
+ * @since 2022-06-11 22:18:08
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-6326-content">
+        <div class="layui-row form-row" id="random-8484-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -54,11 +54,33 @@
 
 
                                     <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('编码')}">编码</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编码') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('巡检路线')}">巡检路线</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="routeId" input-type="select" th:data="${'/service-eam/eam-inspection-route/query-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
 
                                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('RFID')}">RFID</div></div>
@@ -74,13 +96,6 @@
             <div class="layui-col-xs4 form-column" >
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('编码')}">编码</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编码') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('位置')}">位置</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="pos" id="pos" name="pos" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('位置') }" type="text" class="layui-input"  />
@@ -88,21 +103,6 @@
                     </div>
 
                 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('巡检路线')}">巡检路线</div></div>
-                        <div class="layui-input-block ">
-                            <div id="routeId" input-type="select" th:data="${'/service-eam/eam-inspection-route/query-list'}" extraParam="{}"></div>
-                        </div>
-                    </div>
-
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：column 循环-->
-            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs4 form-column" >
-
-
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('位置经度')}">位置经度</div></div>
                         <div class="layui-input-block ">
@@ -128,7 +128,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-3971-content">
+        <div class="layui-row form-row" id="random-4558-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -154,10 +154,10 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('附件')}">附件</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('图片')}">图片</div></div>
                     <div class="layui-upload layui-input-block ">
                         <input input-type="upload" id="pictureId"  name="pictureId" lay-filter="pictureId" style="display: none">
-                        <button type="button" class="layui-btn" id="pictureId-button" th:text="${lang.translate('选择附件')}">选择附件</button>
+                        <button type="button" class="layui-btn" id="pictureId-button" th:text="${lang.translate('选择图片')}">选择图片</button>
                         <div class="layui-upload-list" id="pictureId-file-list"></div>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
-    var VALIDATE_CONFIG={"code":{"labelInForm":"编码","inputType":"text_input","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"code":{"labelInForm":"编码","inputType":"text_input","required":true},"routeId":{"labelInForm":"巡检路线","inputType":"select_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
     var AUTH_PREFIX="eam_inspection_point";
 
 

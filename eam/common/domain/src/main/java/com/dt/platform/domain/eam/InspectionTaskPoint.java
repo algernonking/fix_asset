@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检点
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:20:12
- * @sign 15304EC562B49435FCBC071FE00D68B1
+ * @since 2022-06-14 06:28:14
+ * @sign 60EBB7903698DDDA12764F1264B2A7D8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -43,10 +43,94 @@ public class InspectionTaskPoint extends Entity {
 	private String taskId;
 	
 	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private String status;
+	
+	/**
+	 * 巡检状态：巡检状态
+	*/
+	@ApiModelProperty(required = false,value="巡检状态" , notes = "巡检状态")
+	private String pointStatus;
+	
+	/**
+	 * 操作时间：操作时间
+	*/
+	@ApiModelProperty(required = false,value="操作时间" , notes = "操作时间")
+	private Date operTime;
+	
+	/**
+	 * 巡检结果：巡检结果
+	*/
+	@ApiModelProperty(required = false,value="巡检结果" , notes = "巡检结果")
+	private String content;
+	
+	/**
+	 * 编码：编码
+	*/
+	@ApiModelProperty(required = false,value="编码" , notes = "编码")
+	private String pointCode;
+	
+	/**
+	 * 名称：名称
+	*/
+	@ApiModelProperty(required = false,value="名称" , notes = "名称")
+	private String pointName;
+	
+	/**
+	 * 巡检内容：巡检内容
+	*/
+	@ApiModelProperty(required = false,value="巡检内容" , notes = "巡检内容")
+	private String pointContent;
+	
+	/**
+	 * 巡检路线：巡检路线
+	*/
+	@ApiModelProperty(required = false,value="巡检路线" , notes = "巡检路线")
+	private String pointRouteId;
+	
+	/**
+	 * RFID：RFID
+	*/
+	@ApiModelProperty(required = false,value="RFID" , notes = "RFID")
+	private String pointRfid;
+	
+	/**
+	 * 位置：位置
+	*/
+	@ApiModelProperty(required = false,value="位置" , notes = "位置")
+	private String pointPos;
+	
+	/**
+	 * 位置经度：位置经度
+	*/
+	@ApiModelProperty(required = false,value="位置经度" , notes = "位置经度")
+	private String pointPosLongitude;
+	
+	/**
+	 * 位置纬度：位置纬度
+	*/
+	@ApiModelProperty(required = false,value="位置纬度" , notes = "位置纬度")
+	private String pointPosLatitude;
+	
+	/**
+	 * 备注：备注
+	*/
+	@ApiModelProperty(required = false,value="备注" , notes = "备注")
+	private String pointNotes;
+	
+	/**
 	 * 排序：排序
 	*/
 	@ApiModelProperty(required = false,value="排序" , notes = "排序")
 	private Integer sort;
+	
+	/**
+	 * 操作人：操作人
+	*/
+	@ApiModelProperty(required = false,value="操作人" , notes = "操作人")
+	private String operId;
 	
 	/**
 	 * 备注：备注
@@ -105,10 +189,28 @@ public class InspectionTaskPoint extends Entity {
 	private String tenantId;
 	
 	/**
+	 * 选择：选择
+	*/
+	@ApiModelProperty(required = false,value="选择" , notes = "选择")
+	private String selectedCode;
+	
+	/**
 	 * version：version
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * route：route
+	*/
+	@ApiModelProperty(required = false,value="route" , notes = "route")
+	private InspectionRoute route;
+	
+	/**
+	 * task：task
+	*/
+	@ApiModelProperty(required = false,value="task" , notes = "task")
+	private InspectionTask task;
 	
 	/**
 	 * 获得 主键<br>
@@ -149,6 +251,253 @@ public class InspectionTaskPoint extends Entity {
 	}
 	
 	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param status 状态
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setStatus(String status) {
+		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检状态<br>
+	 * 巡检状态
+	 * @return 巡检状态
+	*/
+	public String getPointStatus() {
+		return pointStatus;
+	}
+	
+	/**
+	 * 设置 巡检状态
+	 * @param pointStatus 巡检状态
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointStatus(String pointStatus) {
+		this.pointStatus=pointStatus;
+		return this;
+	}
+	
+	/**
+	 * 获得 操作时间<br>
+	 * 操作时间
+	 * @return 操作时间
+	*/
+	public Date getOperTime() {
+		return operTime;
+	}
+	
+	/**
+	 * 设置 操作时间
+	 * @param operTime 操作时间
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setOperTime(Date operTime) {
+		this.operTime=operTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检结果<br>
+	 * 巡检结果
+	 * @return 巡检结果
+	*/
+	public String getContent() {
+		return content;
+	}
+	
+	/**
+	 * 设置 巡检结果
+	 * @param content 巡检结果
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setContent(String content) {
+		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码<br>
+	 * 编码
+	 * @return 编码
+	*/
+	public String getPointCode() {
+		return pointCode;
+	}
+	
+	/**
+	 * 设置 编码
+	 * @param pointCode 编码
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointCode(String pointCode) {
+		this.pointCode=pointCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 名称<br>
+	 * 名称
+	 * @return 名称
+	*/
+	public String getPointName() {
+		return pointName;
+	}
+	
+	/**
+	 * 设置 名称
+	 * @param pointName 名称
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointName(String pointName) {
+		this.pointName=pointName;
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检内容<br>
+	 * 巡检内容
+	 * @return 巡检内容
+	*/
+	public String getPointContent() {
+		return pointContent;
+	}
+	
+	/**
+	 * 设置 巡检内容
+	 * @param pointContent 巡检内容
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointContent(String pointContent) {
+		this.pointContent=pointContent;
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检路线<br>
+	 * 巡检路线
+	 * @return 巡检路线
+	*/
+	public String getPointRouteId() {
+		return pointRouteId;
+	}
+	
+	/**
+	 * 设置 巡检路线
+	 * @param pointRouteId 巡检路线
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointRouteId(String pointRouteId) {
+		this.pointRouteId=pointRouteId;
+		return this;
+	}
+	
+	/**
+	 * 获得 RFID<br>
+	 * RFID
+	 * @return RFID
+	*/
+	public String getPointRfid() {
+		return pointRfid;
+	}
+	
+	/**
+	 * 设置 RFID
+	 * @param pointRfid RFID
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointRfid(String pointRfid) {
+		this.pointRfid=pointRfid;
+		return this;
+	}
+	
+	/**
+	 * 获得 位置<br>
+	 * 位置
+	 * @return 位置
+	*/
+	public String getPointPos() {
+		return pointPos;
+	}
+	
+	/**
+	 * 设置 位置
+	 * @param pointPos 位置
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointPos(String pointPos) {
+		this.pointPos=pointPos;
+		return this;
+	}
+	
+	/**
+	 * 获得 位置经度<br>
+	 * 位置经度
+	 * @return 位置经度
+	*/
+	public String getPointPosLongitude() {
+		return pointPosLongitude;
+	}
+	
+	/**
+	 * 设置 位置经度
+	 * @param pointPosLongitude 位置经度
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointPosLongitude(String pointPosLongitude) {
+		this.pointPosLongitude=pointPosLongitude;
+		return this;
+	}
+	
+	/**
+	 * 获得 位置纬度<br>
+	 * 位置纬度
+	 * @return 位置纬度
+	*/
+	public String getPointPosLatitude() {
+		return pointPosLatitude;
+	}
+	
+	/**
+	 * 设置 位置纬度
+	 * @param pointPosLatitude 位置纬度
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointPosLatitude(String pointPosLatitude) {
+		this.pointPosLatitude=pointPosLatitude;
+		return this;
+	}
+	
+	/**
+	 * 获得 备注<br>
+	 * 备注
+	 * @return 备注
+	*/
+	public String getPointNotes() {
+		return pointNotes;
+	}
+	
+	/**
+	 * 设置 备注
+	 * @param pointNotes 备注
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setPointNotes(String pointNotes) {
+		this.pointNotes=pointNotes;
+		return this;
+	}
+	
+	/**
 	 * 获得 排序<br>
 	 * 排序
 	 * @return 排序
@@ -164,6 +513,25 @@ public class InspectionTaskPoint extends Entity {
 	*/
 	public InspectionTaskPoint setSort(Integer sort) {
 		this.sort=sort;
+		return this;
+	}
+	
+	/**
+	 * 获得 操作人<br>
+	 * 操作人
+	 * @return 操作人
+	*/
+	public String getOperId() {
+		return operId;
+	}
+	
+	/**
+	 * 设置 操作人
+	 * @param operId 操作人
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setOperId(String operId) {
+		this.operId=operId;
 		return this;
 	}
 	
@@ -369,6 +737,25 @@ public class InspectionTaskPoint extends Entity {
 	}
 	
 	/**
+	 * 获得 选择<br>
+	 * 选择
+	 * @return 选择
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择
+	 * @param selectedCode 选择
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
+		return this;
+	}
+	
+	/**
 	 * 获得 version<br>
 	 * version
 	 * @return version
@@ -384,6 +771,44 @@ public class InspectionTaskPoint extends Entity {
 	*/
 	public InspectionTaskPoint setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 route<br>
+	 * route
+	 * @return route
+	*/
+	public InspectionRoute getRoute() {
+		return route;
+	}
+	
+	/**
+	 * 设置 route
+	 * @param route route
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setRoute(InspectionRoute route) {
+		this.route=route;
+		return this;
+	}
+	
+	/**
+	 * 获得 task<br>
+	 * task
+	 * @return task
+	*/
+	public InspectionTask getTask() {
+		return task;
+	}
+	
+	/**
+	 * 设置 task
+	 * @param task task
+	 * @return 当前对象
+	*/
+	public InspectionTaskPoint setTask(InspectionTask task) {
+		this.task=task;
 		return this;
 	}
 

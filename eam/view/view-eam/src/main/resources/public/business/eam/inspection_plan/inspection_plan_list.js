@@ -1,7 +1,7 @@
 /**
  * 巡检计划 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 06:15:13
+ * @since 2022-06-12 20:23:59
  */
 
 
@@ -85,15 +85,14 @@ function ListPage() {
 					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('班组'), templet: function (d) { return templet('groupId' ,fox.joinLabel(d.inspectionGroup,"name"),d);}}
 					,{ field: 'startDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('开始日期') ,templet: function (d) { return templet('startDate',fox.dateFormat(d.startDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'endDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('截止日期') ,templet: function (d) { return templet('endDate',fox.dateFormat(d.endDate,"yyyy-MM-dd"),d); }  }
-					,{ field: 'actionCycleId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('周期') , templet: function (d) { return templet('actionCycleId',d.actionCycleId,d);}  }
 					,{ field: 'inspectionMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检顺序'), templet:function (d){ return templet('inspectionMethod',fox.getEnumText(SELECT_INSPECTIONMETHOD_DATA,d.inspectionMethod),d);}}
-					,{ field: 'completionTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('时间要求'), templet: function (d) { return templet('completionTime' ,fox.joinLabel(d.timeDict,"label"),d);}}
+					,{ field: 'completionTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('时间要求(小时)') , templet: function (d) { return templet('completionTime',d.completionTime,d);}  }
 					,{ field: 'overtimeMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('超时处理'), templet:function (d){ return templet('overtimeMethod',fox.getEnumText(SELECT_OVERTIMEMETHOD_DATA,d.overtimeMethod),d);}}
-					,{ field: 'timeout', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('超时(小时)') , templet: function (d) { return templet('timeout',d.timeout,d);}  }
+					,{ field: 'remindTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('提醒时间(小时)') , templet: function (d) { return templet('remindTime',d.remindTime,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 300 }
 				]],
 				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
 				footer : {
@@ -151,7 +150,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.planCode={ inputType:"button",value: $("#planCode").val()};
+		value.planCode={ inputType:"button",value: $("#planCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		value.planStatus={ inputType:"select_box", value: getSelectedValue("#planStatus","value"), label:getSelectedValue("#planStatus","nameStr") };
@@ -478,6 +477,15 @@ function ListPage() {
 						}
 					});
 				});
+			}
+			else if (layEvent === 'start') { // 启动
+				window.pageExt.list.start(data,this);
+			}
+			else if (layEvent === 'stop') { // 停用
+				window.pageExt.list.stop(data,this);
+			}
+			else if (layEvent === 'execute') { // 执行
+				window.pageExt.list.execute(data,this);
 			}
 			
 		});

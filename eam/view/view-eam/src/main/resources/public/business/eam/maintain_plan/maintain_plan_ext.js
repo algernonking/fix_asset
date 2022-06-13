@@ -168,6 +168,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     fox.disableButton($('.stop-button').filter("[data-id='" + data[i].id + "']"), true);
                 }else if(data[i].cycleMethod=="cycle"){
                 }
+
+
+
             }
         },
         /**

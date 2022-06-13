@@ -1,7 +1,7 @@
 /**
  * 巡检计划 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 06:15:13
+ * @since 2022-06-12 20:24:00
  */
 
 function FormPage() {
@@ -247,35 +247,6 @@ function FormPage() {
 				return opts;
 			}
 		});
-		//渲染 completionTime 下拉字段
-		fox.renderSelectBox({
-			el: "completionTime",
-			radio: true,
-			filterable: true,
-			on: function(data){
-				setTimeout(function () {
-					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("completionTime",data.arr,data.change,data.isAdd);
-				},1);
-			},
-			//转换数据
-			searchField: "label", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues=[],defaultIndexs=[];
-				if(action=="create") {
-					defaultValues = "".split(",");
-					defaultIndexs = "0".split(",");
-				}
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
 		//渲染 overtimeMethod 下拉字段
 		fox.renderSelectBox({
 			el: "overtimeMethod",
@@ -370,8 +341,6 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#groupId",formData.inspectionGroup);
 			//设置  巡检顺序 设置下拉框勾选
 			fox.setSelectValue4Enum("#inspectionMethod",formData.inspectionMethod,SELECT_INSPECTIONMETHOD_DATA);
-			//设置  时间要求 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#completionTime",formData.timeDict);
 			//设置  超时处理 设置下拉框勾选
 			fox.setSelectValue4Enum("#overtimeMethod",formData.overtimeMethod,SELECT_OVERTIMEMETHOD_DATA);
 
@@ -433,8 +402,6 @@ function FormPage() {
 		data["groupId"]=fox.getSelectedValue("groupId",false);
 		//获取 巡检顺序 下拉框的值
 		data["inspectionMethod"]=fox.getSelectedValue("inspectionMethod",false);
-		//获取 时间要求 下拉框的值
-		data["completionTime"]=fox.getSelectedValue("completionTime",false);
 		//获取 超时处理 下拉框的值
 		data["overtimeMethod"]=fox.getSelectedValue("overtimeMethod",false);
 

@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 巡检计划  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 06:15:12
+ * @since 2022-06-11 08:12:42
  */
 @FeignClient(value = ServiceNames.EAM, contextId = InspectionPlanServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface InspectionPlanServiceProxy {
@@ -96,6 +96,14 @@ public interface InspectionPlanServiceProxy {
      * 导入巡检计划数据(Excel)
      */
     public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+
+    public static final String START = API_PREFIX + "start";
+
+    public static final String STOP = API_PREFIX + "stop";
+
+    public static final String EXECUTE = API_PREFIX + "execute";
+
 
     /**
      * 添加巡检计划

@@ -90,11 +90,26 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             for (var i = 0; i < data.length; i++) {
                 //如果审批中或审批通过的不允许编辑
                 console.log(data[i]);
-                if(data[i].status=="finish"||data[i].status=="cancel") {
+                if(data[i].status=="finish") {
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="cancel"){
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="not_start"){
+                //    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                //    fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="acting"){
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                  //  fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                  //  fox.disableButton($('.finish-button').filter("[data-id='" + data[i].id + "']"), true);
+                  //  fox.disableButton($('.cancel-button').filter("[data-id='" + data[i].id + "']"), true);
                 }
             }
-
         },
         /**
          * 进一步转换 list 数据
@@ -168,7 +183,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     if (data.success) {
                         fox.showMessage(data);
                         window.module.refreshTableData();
-
                       //  refreshTableData();
                     } else {
                         fox.showMessage(data);
@@ -176,6 +190,27 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 });
             });
             console.log(selected,obj);
+        },
+        billOper:function(url,btnClass,ps,successMessage){
+            var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
+            var api=moduleURL+"/"+url;
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, ps, function (r) {
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        top.layer.msg(r.message, {time: 2000});
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+        },
+        finish:function(item,it){
+            list.billOper("finish","finish-button",{id:item.id},"已完成");
+        },
+        cancel:function(item,it){
+            list.billOper("cancel","cancel-button",{id:item.id},"已取消");
         },
         /**
          * 末尾执行

@@ -437,6 +437,15 @@ function ListPage() {
 					}
 				});
 			}
+			else if (layEvent === 'execute') { // 执行
+				window.pageExt.list.execute(data,this);
+			}
+			else if (layEvent === 'finish') { // 结束
+				window.pageExt.list.finish(data,this);
+			}
+			else if (layEvent === 'cancel') { // 取消
+				window.pageExt.list.cancel(data,this);
+			}
 			else if (layEvent === 'del') { // 删除
 
 				if(window.pageExt.list.beforeSingleDelete) {

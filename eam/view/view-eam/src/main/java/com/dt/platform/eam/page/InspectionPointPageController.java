@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 巡检点 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 14:00:02
+ * @since 2022-06-11 08:31:05
 */
 
 @Controller("EamInspectionPointPageController")
@@ -36,7 +36,32 @@ public class InspectionPointPageController extends ViewController {
 		}
 		return proxy;
 	}
-	
+
+	/**
+	 * 巡检点 功能主页面
+	 */
+	@RequestMapping("/inspection_point_selected_list.html")
+	public String selectedlist(Model model,HttpServletRequest request,
+							   String ownerId,String ownerType,String selectedCode,String pageType) {
+		model.addAttribute("ownerId",ownerId);
+		model.addAttribute("ownerType",ownerType);
+		model.addAttribute("selectedCode",selectedCode);
+		model.addAttribute("pageType",pageType);
+		return prefix+"/inspection_point_selected_list";
+	}
+
+	/**
+	 * 巡检点 功能主页面
+	 */
+	@RequestMapping("/inspection_point_select_list.html")
+	public String selectlist(Model model,HttpServletRequest request, String ownerId,String ownerType,String selectedCode) {
+		model.addAttribute("ownerId",ownerId);
+		model.addAttribute("ownerType",ownerType);
+		model.addAttribute("selectedCode",selectedCode);
+		return prefix+"/inspection_point_select_list";
+	}
+
+
 	/**
 	 * 巡检点 功能主页面
 	 */

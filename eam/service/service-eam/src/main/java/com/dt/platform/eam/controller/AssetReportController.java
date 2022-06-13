@@ -76,5 +76,15 @@ public class AssetReportController extends SuperController {
         return assetReportService.dashboard();
     }
 
+    @ApiOperation(value = "面板数据")
+    @ApiOperationSupport(order=4)
+    @SentinelResource(value = AssetReportServiceProxy.DASHBOARD_MRO , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetReportServiceProxy.DASHBOARD_MRO)
+    public  Result<JSONObject> dashBoardMro() {
+        Result<JSONObject> result=new Result<>();
+        return assetReportService.dashboardMro();
+    }
+
+
 
 }

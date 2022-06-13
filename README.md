@@ -96,7 +96,8 @@
 
 ### 方案一 一键安装Foxnic-EAM
 - 自动安装Mysql,Java,EAM应用，Mysql从官方下载，因此整体安装速度会慢些
-- 安装环境前先确认：RedHat 7.9 较为干净的系统，yum需能安装本地系统包(unzip,wget,zip,等)，公有云的默认yum配置一般没问题
+- 安装环境前先确认： 
+- 操作系统支持:RedHat 7.9 、RedHat 8.0、RedHat 8.2 较为干净的系统。yum源配置需正确(unzip,wget,zip等包需要安装)，公有云的默认yum配置一般没问题
 - 安装:Mysql5.7 端口3306，密码root_pwd
 - 安装:EAM web端口8089，访问地址为:http://ip:8089
 - 安装目录:/app目录

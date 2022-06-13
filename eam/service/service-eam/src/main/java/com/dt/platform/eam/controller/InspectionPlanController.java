@@ -3,6 +3,8 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.meta.MaintainPlanVOMeta;
+import com.dt.platform.proxy.eam.MaintainPlanServiceProxy;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +38,7 @@ import com.dt.platform.domain.eam.meta.InspectionPlanMeta;
 import java.math.BigDecimal;
 import com.dt.platform.domain.eam.InspectionGroup;
 import org.github.foxnic.web.domain.system.DictItem;
+import com.dt.platform.domain.eam.ActionCrontab;
 import com.dt.platform.domain.eam.InspectionPlanPoint;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -52,7 +55,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 巡检计划 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 06:15:12
+ * @since 2022-06-11 08:12:42
 */
 
 @Api(tags = "巡检计划")
@@ -83,7 +86,7 @@ public class InspectionPlanController extends SuperController {
 		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.TIMEOUT , value = "超时(小时)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.REMIND_TIME , value = "提醒时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -149,7 +152,7 @@ public class InspectionPlanController extends SuperController {
 		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.TIMEOUT , value = "超时(小时)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.REMIND_TIME , value = "提醒时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { InspectionPlanVOMeta.PAGE_INDEX , InspectionPlanVOMeta.PAGE_SIZE , InspectionPlanVOMeta.SEARCH_FIELD , InspectionPlanVOMeta.FUZZY_FIELD , InspectionPlanVOMeta.SEARCH_VALUE , InspectionPlanVOMeta.DIRTY_FIELDS , InspectionPlanVOMeta.SORT_FIELD , InspectionPlanVOMeta.SORT_TYPE , InspectionPlanVOMeta.IDS } )
@@ -181,7 +184,7 @@ public class InspectionPlanController extends SuperController {
 		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.TIMEOUT , value = "超时(小时)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.REMIND_TIME , value = "提醒时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { InspectionPlanVOMeta.PAGE_INDEX , InspectionPlanVOMeta.PAGE_SIZE , InspectionPlanVOMeta.SEARCH_FIELD , InspectionPlanVOMeta.FUZZY_FIELD , InspectionPlanVOMeta.SEARCH_VALUE , InspectionPlanVOMeta.DIRTY_FIELDS , InspectionPlanVOMeta.SORT_FIELD , InspectionPlanVOMeta.SORT_TYPE , InspectionPlanVOMeta.IDS } )
@@ -210,7 +213,7 @@ public class InspectionPlanController extends SuperController {
 		InspectionPlan inspectionPlan=inspectionPlanService.getById(id);
 		// join 关联的对象
 		inspectionPlanService.dao().fill(inspectionPlan)
-			.with(InspectionPlanMeta.TIME_DICT)
+				.with(InspectionPlanMeta.ACTION_CRONTAB)
 			.with(InspectionPlanMeta.INSPECTION_GROUP)
 			.execute();
 		result.success(true).data(inspectionPlan);
@@ -257,7 +260,7 @@ public class InspectionPlanController extends SuperController {
 		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.TIMEOUT , value = "超时(小时)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.REMIND_TIME , value = "提醒时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { InspectionPlanVOMeta.PAGE_INDEX , InspectionPlanVOMeta.PAGE_SIZE } )
@@ -290,7 +293,7 @@ public class InspectionPlanController extends SuperController {
 		@ApiImplicitParam(name = InspectionPlanVOMeta.INSPECTION_METHOD , value = "巡检顺序" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.COMPLETION_TIME , value = "时间要求" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.OVERTIME_METHOD , value = "超时处理" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InspectionPlanVOMeta.TIMEOUT , value = "超时(小时)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = InspectionPlanVOMeta.REMIND_TIME , value = "提醒时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = InspectionPlanVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
@@ -301,12 +304,60 @@ public class InspectionPlanController extends SuperController {
 		PagedList<InspectionPlan> list=inspectionPlanService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// join 关联的对象
 		inspectionPlanService.dao().fill(list)
-			.with(InspectionPlanMeta.TIME_DICT)
 			.with(InspectionPlanMeta.INSPECTION_GROUP)
 			.execute();
 		result.success(true).data(list);
 		return result;
 	}
+
+
+
+	/**
+	 *启动
+	 */
+	@ApiOperation(value = "启动")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@ApiOperationSupport(order=9)
+	@NotNull(name = InspectionPlanVOMeta.ID)
+	@SentinelResource(value = InspectionPlanServiceProxy.START , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(InspectionPlanServiceProxy.START)
+	public Result start(String id) {
+		return inspectionPlanService.start(id);
+	}
+
+
+	/**
+	 *停止
+	 */
+	@ApiOperation(value = "停止")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@ApiOperationSupport(order=10)
+	@NotNull(name = InspectionPlanVOMeta.ID)
+	@SentinelResource(value = InspectionPlanServiceProxy.STOP , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(InspectionPlanServiceProxy.STOP)
+	public Result stop(String id) {
+		return inspectionPlanService.stop(id);
+	}
+
+	/**
+	 *执行
+	 */
+	@ApiOperation(value = "执行")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = InspectionPlanVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@ApiOperationSupport(order=11)
+	@NotNull(name = InspectionPlanVOMeta.ID)
+	@SentinelResource(value = InspectionPlanServiceProxy.EXECUTE, blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(InspectionPlanServiceProxy.EXECUTE)
+	public Result execute(String id) {
+		return inspectionPlanService.execute(id);
+	}
+
 
 
 

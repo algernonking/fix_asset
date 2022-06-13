@@ -22,10 +22,33 @@ import java.util.Map;
  * 巡检计划 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 06:15:12
+ * @since 2022-06-11 08:12:42
 */
 
 public interface IInspectionPlanService extends ISuperService<InspectionPlan> {
+
+	/**
+	 * 添加，如果语句错误，则抛出异常
+	 * @param id id
+	 * @return 启动
+	 * */
+	Result start(String id);
+
+
+	/**
+	 * 添加，如果语句错误，则抛出异常
+	 * @param id id
+	 * @return 停止
+	 * */
+	Result stop(String id);
+
+	/**
+	 * 添加，如果语句错误，则抛出异常
+	 * @param id id
+	 * @return 执行
+	 * */
+	Result execute(String id);
+
 
 	/**
 	 * 添加，如果语句错误，则抛出异常

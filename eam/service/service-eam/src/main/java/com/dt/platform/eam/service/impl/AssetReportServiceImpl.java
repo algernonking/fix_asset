@@ -160,6 +160,11 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
         return resJson;
     }
 
+    @Override
+    public Result<JSONObject> dashboardMro() {
+        return null;
+    }
+
     public JSONArray queryOrganizationData(Asset sample){
 
 //        HashMap<String,String> org = assetDataService.queryUseOrganizationNodes();

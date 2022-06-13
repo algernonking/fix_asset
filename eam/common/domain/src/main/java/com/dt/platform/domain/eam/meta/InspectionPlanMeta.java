@@ -6,15 +6,17 @@ import java.util.Date;
 import java.math.BigDecimal;
 import com.dt.platform.domain.eam.InspectionGroup;
 import org.github.foxnic.web.domain.system.DictItem;
+import com.dt.platform.domain.eam.ActionCrontab;
 import com.dt.platform.domain.eam.InspectionPlanPoint;
 import java.util.List;
+import com.dt.platform.domain.eam.InspectionPointOwner;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 06:15:12
- * @sign E39A2459DECFD01BD94E55E66E46146F
+ * @since 2022-06-12 20:23:58
+ * @sign 2DFC692ACE2A56985C00FA3812309A79
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -141,14 +143,14 @@ public class InspectionPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.lang.String> INSPECTION_METHOD_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,INSPECTION_METHOD, java.lang.String.class, "巡检顺序", "巡检顺序", java.lang.String.class, null);
 	
 	/**
-	 * 时间要求 , 类型: java.math.BigDecimal
+	 * 时间要求(小时) , 类型: java.math.BigDecimal
 	*/
 	public static final String COMPLETION_TIME="completionTime";
 	
 	/**
-	 * 时间要求 , 类型: java.math.BigDecimal
+	 * 时间要求(小时) , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.math.BigDecimal> COMPLETION_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,COMPLETION_TIME, java.math.BigDecimal.class, "时间要求", "时间要求", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.math.BigDecimal> COMPLETION_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,COMPLETION_TIME, java.math.BigDecimal.class, "时间要求(小时)", "时间要求(小时)", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 超时处理 , 类型: java.lang.String
@@ -161,14 +163,14 @@ public class InspectionPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.lang.String> OVERTIME_METHOD_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,OVERTIME_METHOD, java.lang.String.class, "超时处理", "超时处理", java.lang.String.class, null);
 	
 	/**
-	 * 超时(小时) , 类型: java.math.BigDecimal
+	 * 提醒时间(小时) , 类型: java.math.BigDecimal
 	*/
-	public static final String TIMEOUT="timeout";
+	public static final String REMIND_TIME="remindTime";
 	
 	/**
-	 * 超时(小时) , 类型: java.math.BigDecimal
+	 * 提醒时间(小时) , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.math.BigDecimal> TIMEOUT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,TIMEOUT, java.math.BigDecimal.class, "超时(小时)", "超时(小时)", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.math.BigDecimal> REMIND_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,REMIND_TIME, java.math.BigDecimal.class, "提醒时间(小时)", "提醒时间(小时)", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -271,6 +273,16 @@ public class InspectionPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 选择 , 类型: java.lang.String
+	*/
+	public static final String SELECTED_CODE="selectedCode";
+	
+	/**
+	 * 选择 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,SELECTED_CODE, java.lang.String.class, "选择", "选择", java.lang.String.class, null);
+	
+	/**
 	 * 班组 , 类型: com.dt.platform.domain.eam.InspectionGroup
 	*/
 	public static final String INSPECTION_GROUP="inspectionGroup";
@@ -281,16 +293,6 @@ public class InspectionPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,com.dt.platform.domain.eam.InspectionGroup> INSPECTION_GROUP_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,INSPECTION_GROUP, com.dt.platform.domain.eam.InspectionGroup.class, "班组", "班组", com.dt.platform.domain.eam.InspectionGroup.class, null);
 	
 	/**
-	 * 时间 , 类型: org.github.foxnic.web.domain.system.DictItem
-	*/
-	public static final String TIME_DICT="timeDict";
-	
-	/**
-	 * 时间 , 类型: org.github.foxnic.web.domain.system.DictItem
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,org.github.foxnic.web.domain.system.DictItem> TIME_DICT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,TIME_DICT, org.github.foxnic.web.domain.system.DictItem.class, "时间", "时间", org.github.foxnic.web.domain.system.DictItem.class, null);
-	
-	/**
 	 * 类型 , 类型: org.github.foxnic.web.domain.system.DictItem
 	*/
 	public static final String INSPECTION_TYPE_DICT="inspectionTypeDict";
@@ -299,6 +301,16 @@ public class InspectionPlanMeta {
 	 * 类型 , 类型: org.github.foxnic.web.domain.system.DictItem
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,org.github.foxnic.web.domain.system.DictItem> INSPECTION_TYPE_DICT_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,INSPECTION_TYPE_DICT, org.github.foxnic.web.domain.system.DictItem.class, "类型", "类型", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * 周期 , 类型: com.dt.platform.domain.eam.ActionCrontab
+	*/
+	public static final String ACTION_CRONTAB="actionCrontab";
+	
+	/**
+	 * 周期 , 类型: com.dt.platform.domain.eam.ActionCrontab
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,com.dt.platform.domain.eam.ActionCrontab> ACTION_CRONTAB_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,ACTION_CRONTAB, com.dt.platform.domain.eam.ActionCrontab.class, "周期", "周期", com.dt.platform.domain.eam.ActionCrontab.class, null);
 	
 	/**
 	 * 巡检点 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InspectionPlanPoint
@@ -321,9 +333,29 @@ public class InspectionPlanMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.lang.String> INSPECTION_PLAN_POINT_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,INSPECTION_PLAN_POINT_IDS, java.util.List.class, "巡检点", "巡检点", java.lang.String.class, null);
 	
 	/**
+	 * 巡检点 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InspectionPointOwner
+	*/
+	public static final String INSPECTION_POINT_OWNER_LIST="inspectionPointOwnerList";
+	
+	/**
+	 * 巡检点 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InspectionPointOwner
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,com.dt.platform.domain.eam.InspectionPointOwner> INSPECTION_POINT_OWNER_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,INSPECTION_POINT_OWNER_LIST, java.util.List.class, "巡检点", "巡检点", com.dt.platform.domain.eam.InspectionPointOwner.class, null);
+	
+	/**
+	 * 巡检点 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String INSPECTION_POINT_OWNER_IDS="inspectionPointOwnerIds";
+	
+	/**
+	 * 巡检点 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InspectionPlan,java.lang.String> INSPECTION_POINT_OWNER_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.InspectionPlan.class ,INSPECTION_POINT_OWNER_IDS, java.util.List.class, "巡检点", "巡检点", java.lang.String.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , PLAN_CODE , NAME , STATUS , PLAN_STATUS , PLAN_TYPE , LEADER_ID , GROUP_ID , START_DATE , END_DATE , ACTION_CYCLE_ID , INSPECTION_METHOD , COMPLETION_TIME , OVERTIME_METHOD , TIMEOUT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , INSPECTION_GROUP , TIME_DICT , INSPECTION_TYPE_DICT , INSPECTION_PLAN_POINT_LIST , INSPECTION_PLAN_POINT_IDS };
+	public static final String[] $PROPS={ ID , PLAN_CODE , NAME , STATUS , PLAN_STATUS , PLAN_TYPE , LEADER_ID , GROUP_ID , START_DATE , END_DATE , ACTION_CYCLE_ID , INSPECTION_METHOD , COMPLETION_TIME , OVERTIME_METHOD , REMIND_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , TENANT_ID , VERSION , SELECTED_CODE , INSPECTION_GROUP , INSPECTION_TYPE_DICT , ACTION_CRONTAB , INSPECTION_PLAN_POINT_LIST , INSPECTION_PLAN_POINT_IDS , INSPECTION_POINT_OWNER_LIST , INSPECTION_POINT_OWNER_IDS };
 	
 	/**
 	 * 代理类
@@ -466,8 +498,8 @@ public class InspectionPlanMeta {
 		}
 		
 		/**
-		 * 设置 时间要求
-		 * @param completionTime 时间要求
+		 * 设置 时间要求(小时)
+		 * @param completionTime 时间要求(小时)
 		 * @return 当前对象
 		*/
 		public InspectionPlan setCompletionTime(BigDecimal completionTime) {
@@ -488,13 +520,13 @@ public class InspectionPlanMeta {
 		}
 		
 		/**
-		 * 设置 超时(小时)
-		 * @param timeout 超时(小时)
+		 * 设置 提醒时间(小时)
+		 * @param remindTime 提醒时间(小时)
 		 * @return 当前对象
 		*/
-		public InspectionPlan setTimeout(BigDecimal timeout) {
-			super.change(TIMEOUT,super.getTimeout(),timeout);
-			super.setTimeout(timeout);
+		public InspectionPlan setRemindTime(BigDecimal remindTime) {
+			super.change(REMIND_TIME,super.getRemindTime(),remindTime);
+			super.setRemindTime(remindTime);
 			return this;
 		}
 		
@@ -609,6 +641,17 @@ public class InspectionPlanMeta {
 		}
 		
 		/**
+		 * 设置 选择
+		 * @param selectedCode 选择
+		 * @return 当前对象
+		*/
+		public InspectionPlan setSelectedCode(String selectedCode) {
+			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
+			super.setSelectedCode(selectedCode);
+			return this;
+		}
+		
+		/**
 		 * 设置 班组
 		 * @param inspectionGroup 班组
 		 * @return 当前对象
@@ -620,17 +663,6 @@ public class InspectionPlanMeta {
 		}
 		
 		/**
-		 * 设置 时间
-		 * @param timeDict 时间
-		 * @return 当前对象
-		*/
-		public InspectionPlan setTimeDict(DictItem timeDict) {
-			super.change(TIME_DICT,super.getTimeDict(),timeDict);
-			super.setTimeDict(timeDict);
-			return this;
-		}
-		
-		/**
 		 * 设置 类型
 		 * @param inspectionTypeDict 类型
 		 * @return 当前对象
@@ -638,6 +670,17 @@ public class InspectionPlanMeta {
 		public InspectionPlan setInspectionTypeDict(DictItem inspectionTypeDict) {
 			super.change(INSPECTION_TYPE_DICT,super.getInspectionTypeDict(),inspectionTypeDict);
 			super.setInspectionTypeDict(inspectionTypeDict);
+			return this;
+		}
+		
+		/**
+		 * 设置 周期
+		 * @param actionCrontab 周期
+		 * @return 当前对象
+		*/
+		public InspectionPlan setActionCrontab(ActionCrontab actionCrontab) {
+			super.change(ACTION_CRONTAB,super.getActionCrontab(),actionCrontab);
+			super.setActionCrontab(actionCrontab);
 			return this;
 		}
 		
@@ -660,6 +703,28 @@ public class InspectionPlanMeta {
 		public InspectionPlan setInspectionPlanPointIds(List<String> inspectionPlanPointIds) {
 			super.change(INSPECTION_PLAN_POINT_IDS,super.getInspectionPlanPointIds(),inspectionPlanPointIds);
 			super.setInspectionPlanPointIds(inspectionPlanPointIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 巡检点
+		 * @param inspectionPointOwnerList 巡检点
+		 * @return 当前对象
+		*/
+		public InspectionPlan setInspectionPointOwnerList(List<InspectionPointOwner> inspectionPointOwnerList) {
+			super.change(INSPECTION_POINT_OWNER_LIST,super.getInspectionPointOwnerList(),inspectionPointOwnerList);
+			super.setInspectionPointOwnerList(inspectionPointOwnerList);
+			return this;
+		}
+		
+		/**
+		 * 设置 巡检点
+		 * @param inspectionPointOwnerIds 巡检点
+		 * @return 当前对象
+		*/
+		public InspectionPlan setInspectionPointOwnerIds(List<String> inspectionPointOwnerIds) {
+			super.change(INSPECTION_POINT_OWNER_IDS,super.getInspectionPointOwnerIds(),inspectionPointOwnerIds);
+			super.setInspectionPointOwnerIds(inspectionPointOwnerIds);
 			return this;
 		}
 	}

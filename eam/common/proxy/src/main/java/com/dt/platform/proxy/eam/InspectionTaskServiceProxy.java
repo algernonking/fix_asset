@@ -17,7 +17,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 巡检任务  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:34:05
+ * @since 2022-06-13 10:28:04
  */
 @FeignClient(value = ServiceNames.EAM, contextId = InspectionTaskServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface InspectionTaskServiceProxy {
@@ -66,6 +66,11 @@ public interface InspectionTaskServiceProxy {
      * 获取单个巡检任务
      */
     public static final String GET_BY_ID = API_PREFIX + "get-by-id";
+
+
+    public static final String EXECUTE = API_PREFIX + "execute";
+    public static final String CANCEL = API_PREFIX + "cancel";
+    public static final String FINISH = API_PREFIX + "finish";
 
     /**
      * 获取多个巡检任务

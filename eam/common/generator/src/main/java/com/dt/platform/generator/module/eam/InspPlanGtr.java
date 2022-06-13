@@ -29,16 +29,19 @@ public class InspPlanGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NAME).search().fuzzySearch();
 
         cfg.getPoClassFile().addSimpleProperty(InspectionGroup.class,"inspectionGroup","班组","班组");
-      //  cfg.getPoClassFile().addSimpleProperty(DictItem.class,"inspectionTypeDict","类型","类型");
-
-        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"timeDict","时间","时间");
+        //cfg.getPoClassFile().addSimpleProperty(DictItem.class,"timeDict","时间","时间");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"inspectionTypeDict","类型","类型");
-
         cfg.getPoClassFile().addSimpleProperty(ActionCrontab.class,"actionCrontab","周期","周期");
+
         cfg.getPoClassFile().addListProperty(InspectionPlanPoint.class,"inspectionPlanPointList","巡检点","巡检点");
         cfg.getPoClassFile().addListProperty(String.class,"inspectionPlanPointIds","巡检点","巡检点");
 
+        cfg.getPoClassFile().addListProperty(InspectionPointOwner.class,"inspectionPointOwnerList","巡检点","巡检点");
+        cfg.getPoClassFile().addListProperty(String.class,"inspectionPointOwnerIds","巡检点","巡检点");
 
+
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.PLAN_CODE).search().fuzzySearch();
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -62,7 +65,7 @@ public class InspPlanGtr extends BaseCodeGenerator {
         cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().formWindow().width("85%");
         cfg.view().formWindow().bottomSpace(20);
-
+        cfg.view().list().operationColumn().width(300);
 
 
 
@@ -74,28 +77,30 @@ public class InspPlanGtr extends BaseCodeGenerator {
 //         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NEXT_EXECUTION_TIME).table().disable(true);
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.LEADER_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.STATUS).table().disable(true);
-
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.SELECTED_CODE).table().disable(true);
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.ACTION_CYCLE_ID).table().disable(true);
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.STATUS).form()
         .selectBox().enumType(AssetHandleStatusEnum.class).defaultIndex(0);
 
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.PLAN_STATUS).form().validate().required().form().selectBox().enumType(StatusEnableEnum.class).defaultIndex(0);
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.PLAN_STATUS).form().validate().required().form().selectBox().enumType(EamPlanStatusEnum.class).defaultIndex(0);
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD).form().validate().required().form().selectBox()
-                .enumType(InspectionOvertimeMethodEnum.class).defaultIndex(0);
+//        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD).form().validate().required().form().numberInput().defaultValue(2.0);
+
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD).form().validate().required().form().selectBox().enumType(InspectionTimeoutHandleEnum.class).defaultIndex(0);
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.NAME).form().validate().required().form();
 
-//        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME).form().validate().required().form().numberInput();
+        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME).form().validate().required().form().numberInput().defaultValue(2.0);
 
 
-        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME)
-                .form().validate().required().form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_completion_time")
-                .paging(false).filter(true).toolbar(false)
-                .valueField(DictItemMeta.CODE).
-                textField(DictItemMeta.LABEL).
-                fillWith(InspectionPlanMeta.TIME_DICT).muliti(false).defaultIndex(0);
+//        cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME)
+//                .form().validate().required().form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_completion_time")
+//                .paging(false).filter(true).toolbar(false)
+//                .valueField(DictItemMeta.CODE).
+//                textField(DictItemMeta.LABEL).
+//                fillWith(InspectionPlanMeta.TIME_DICT).muliti(false).defaultIndex(0);
 
         cfg.view().field(EAMTables.EAM_INSPECTION_PLAN.GROUP_ID)
                 .form().validate().required()
@@ -122,16 +127,17 @@ public class InspPlanGtr extends BaseCodeGenerator {
                         EAMTables.EAM_INSPECTION_PLAN.NAME,
                         EAMTables.EAM_INSPECTION_PLAN.PLAN_STATUS,
                         EAMTables.EAM_INSPECTION_PLAN.PLAN_TYPE,
+                        EAMTables.EAM_INSPECTION_PLAN.GROUP_ID,
                 },
                 new Object[] {
+                 //       EAMTables.EAM_INSPECTION_PLAN.ACTION_CYCLE_ID,
                         EAMTables.EAM_INSPECTION_PLAN.START_DATE,
                         EAMTables.EAM_INSPECTION_PLAN.END_DATE,
                         EAMTables.EAM_INSPECTION_PLAN.COMPLETION_TIME,
-                        EAMTables.EAM_INSPECTION_PLAN.REMIND_TIME,
                 },
                 new Object[] {
                         EAMTables.EAM_INSPECTION_PLAN.ACTION_CYCLE_ID,
-                        EAMTables.EAM_INSPECTION_PLAN.GROUP_ID,
+                        EAMTables.EAM_INSPECTION_PLAN.REMIND_TIME,
                         EAMTables.EAM_INSPECTION_PLAN.INSPECTION_METHOD,
                         EAMTables.EAM_INSPECTION_PLAN.OVERTIME_METHOD,
                 }
@@ -141,14 +147,20 @@ public class InspPlanGtr extends BaseCodeGenerator {
                         EAMTables.EAM_INSPECTION_PLAN.NOTES,
                 }
         );
+
+
+        cfg.view().list().operationColumn().addActionButton("启动","start","start-button","eam_inspection_plan:start");
+        cfg.view().list().operationColumn().addActionButton("停用","stop","stop-button","eam_inspection_plan:stop");
+        cfg.view().list().operationColumn().addActionButton("执行","execute","execute-button","eam_inspection_plan:execute");
+
         cfg.view().form().addPage("巡检点","pointSelectList");
 
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
+                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
+                .setPageController(WriteMode.IGNORE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)
                 .setExtendJsFile(WriteMode.IGNORE); //列表HTML页

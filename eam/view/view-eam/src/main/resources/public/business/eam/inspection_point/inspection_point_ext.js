@@ -1,7 +1,7 @@
 /**
  * 巡检点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-02 14:00:02
+ * @since 2022-06-11 22:18:07
  */
 
 layui.config({

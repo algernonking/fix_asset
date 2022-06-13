@@ -142,7 +142,7 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('eam_maintain_task:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button id="task-cancel"  th:if="${perm.checkAuth('eam_maintain_task:cancel')}"class="layui-btn icon-btn layui-btn-sm   " lay-event="tool-task-cancel"><span th:text="${lang.translate('取消')}">取消</span></button>
+        <button id="task-cancel"  th:if="${perm.checkAuth('eam_maintain_task:batch-cancel')}"class="layui-btn icon-btn layui-btn-sm   " lay-event="tool-task-cancel"><span th:text="${lang.translate('取消')}">取消</span></button>
     </div>
 </script>
 
@@ -151,9 +151,8 @@
 
     <button th:if="${perm.checkAuth('eam_maintain_task:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button " lay-event="view"  data-id="{{d.id}}"> <span th:text="${lang.translate('查看')}">查看</span></button>
     <button th:if="${perm.checkAnyAuth('eam_maintain_task:update','eam_maintain_task:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit"data-id="{{d.id}}"><span th:text="${lang.translate('执行')}">执行</span></button>
-
-
-
+    <button th:if="${perm.checkAuth('eam_maintain_task:finish')}"class="layui-btn layui-btn-xs  finish-button " lay-event="finish" data-id="{{d.id}}"><span th:text="${lang.translate('完成')}">完成</span></button>
+    <button th:if="${perm.checkAuth('eam_maintain_task:cancel')}"class="layui-btn layui-btn-xs  cancel-button " lay-event="cancel" data-id="{{d.id}}"><span th:text="${lang.translate('取消')}">取消</span></button>
 
 </script>
 

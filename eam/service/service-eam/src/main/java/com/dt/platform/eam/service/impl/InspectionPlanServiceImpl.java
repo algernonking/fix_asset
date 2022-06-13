@@ -2,12 +2,23 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.StatusEnableEnum;
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.InspectionPlanMeta;
+import com.dt.platform.domain.eam.meta.MaintainPlanMeta;
+import com.dt.platform.eam.service.IInspectionPointService;
+import com.dt.platform.eam.service.IInspectionTaskPointService;
+import com.dt.platform.eam.service.IInspectionTaskService;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.log.Logger;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.InspectionPlan;
-import com.dt.platform.domain.eam.InspectionPlanVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -36,13 +47,23 @@ import java.util.Map;
  * 巡检计划 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 06:15:12
+ * @since 2022-06-11 08:12:42
 */
 
 
 @Service("EamInspectionPlanService")
 public class InspectionPlanServiceImpl extends SuperService<InspectionPlan> implements IInspectionPlanService {
 
+
+	@Autowired
+	private IInspectionPointService inspectionPointService;
+
+	@Autowired
+	private IInspectionTaskPointService inspectionTaskPointService;
+
+
+	@Autowired
+	private IInspectionTaskService inspectionTaskService;
 	/**
 	 * 注入DAO对象
 	 * */
@@ -54,6 +75,91 @@ public class InspectionPlanServiceImpl extends SuperService<InspectionPlan> impl
 	 * */
 	public DAO dao() { return dao; }
 
+
+	@Override
+	public Result start(String id) {
+		InspectionPlan plan=this.getById(id);
+		if(EamPlanStatusEnum.STOP.code().equals(plan.getPlanStatus())){
+			plan.setPlanStatus(EamPlanStatusEnum.ACTING.code());
+			super.update(plan,SaveMode.NOT_NULL_FIELDS,false);
+		}else{
+			return ErrorDesc.failureMessage("当前状态操作异常!");
+		}
+		return ErrorDesc.success();
+	}
+
+	@Override
+	public Result stop(String id) {
+		InspectionPlan plan=this.getById(id);
+		if(EamPlanStatusEnum.ACTING.code().equals(plan.getPlanStatus())){
+			plan.setPlanStatus(EamPlanStatusEnum.STOP.code());
+			super.update(plan,SaveMode.NOT_NULL_FIELDS,false);
+		}else{
+			return ErrorDesc.failureMessage("当前状态操作异常!");
+		}
+		return ErrorDesc.success();
+	}
+
+	@Override
+	public Result execute(String id) {
+
+		InspectionPlan plan=this.getById(id);
+		String status=plan.getPlanStatus();
+		if(EamPlanStatusEnum.ACTING.code().equals(status)){
+			Logger.info("########## plan execute ###########");
+			Logger.info("########## plan id:"+plan.getId()+" ###########");
+			Logger.info("########## plan code:"+plan.getPlanCode()+" ###########");
+			Logger.info("########## plan name:"+plan.getName()+" ###########");
+			Logger.info("########## plan trigger end ###########");
+			this.dao().fill(plan)
+					.with(InspectionPlanMeta.INSPECTION_PLAN_POINT_LIST)
+					.with(InspectionPlanMeta.INSPECTION_POINT_OWNER_LIST)
+					.execute();
+			List<InspectionPointOwner> pointOwnerList=plan.getInspectionPointOwnerList();
+			if(pointOwnerList==null&&pointOwnerList.size()==0){
+				return ErrorDesc.failureMessage("当前巡检计划未设置巡检点");
+			}
+
+			//生成计划
+			InspectionTask task=new InspectionTask();
+			String taskId=IDGenerator.getSnowflakeIdString();
+			task.setId(taskId);
+			task.setPlanId(plan.getId());
+			task.setPlanName(plan.getName());
+			task.setPlanStartTime(new Date());
+			task.setPlanCode(plan.getPlanCode());
+			task.setPlanNotes(plan.getNotes());
+			task.setPlanInspectionMethod(plan.getInspectionMethod());
+			task.setPlanCompletionTime(plan.getCompletionTime());
+			task.setGroupId(plan.getGroupId());
+			inspectionTaskService.insert(task,false);
+			//生成巡检点
+			for(int i=0;i<pointOwnerList.size();i++){
+				InspectionPointOwner pointOwner=pointOwnerList.get(i);
+				InspectionPoint point=inspectionPointService.getById(pointOwner.getPointId());
+				InspectionTaskPoint taskPoint=new InspectionTaskPoint();
+				taskPoint.setTaskId(taskId);
+				taskPoint.setStatus(InspectionTaskStatusEnum.NOT_START.code());
+				taskPoint.setPointStatus(InspectionTaskPointStatusEnum.NORMAL.code());
+				taskPoint.setPointCode(point.getCode());
+				taskPoint.setPointName(point.getName());
+				taskPoint.setPointContent(point.getContent());
+				taskPoint.setPointRouteId(point.getRouteId());
+				taskPoint.setPointRfid(point.getRfid());
+				taskPoint.setPointPos(point.getPos());
+				taskPoint.setPointPosLatitude(point.getPosLatitude());
+				taskPoint.setPointPosLongitude(point.getPosLongitude());
+				taskPoint.setNotes(point.getNotes());
+				taskPoint.setSort(pointOwner.getSort());
+				inspectionTaskPointService.insert(taskPoint,false);
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前巡检计划状态不能生成巡检任务");
+		}
+
+
+		return ErrorDesc.success();
+	}
 
 
 	@Override
@@ -70,7 +176,28 @@ public class InspectionPlanServiceImpl extends SuperService<InspectionPlan> impl
 	 */
 	@Override
 	public Result insert(InspectionPlan inspectionPlan,boolean throwsException) {
+
+		String selectedCode=inspectionPlan.getSelectedCode();
+
+		if(StringUtil.isBlank(inspectionPlan.getStatus())){
+			inspectionPlan.setStatus(EamPlanStatusEnum.STOP.code());
+		}
+
+		//生成编码规则
+		//编码
+		if(StringUtil.isBlank(inspectionPlan.getPlanCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_INSPECTION_PLAN.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				inspectionPlan.setPlanCode(codeResult.getData().toString());
+			}
+		}
 		Result r=super.insert(inspectionPlan,throwsException);
+		if(r.isSuccess()){
+
+			dao.execute("update eam_inspection_point_owner set owner_id=? where selected_code=?",inspectionPlan.getId(),selectedCode);
+		}
 		return r;
 	}
 
@@ -160,7 +287,10 @@ public class InspectionPlanServiceImpl extends SuperService<InspectionPlan> impl
 	 * */
 	@Override
 	public Result update(InspectionPlan inspectionPlan , SaveMode mode,boolean throwsException) {
+
 		Result r=super.update(inspectionPlan , mode , throwsException);
+		if(r.isSuccess()){
+		}
 		return r;
 	}
 

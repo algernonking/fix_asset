@@ -27,7 +27,12 @@ import java.util.Map;
 
 public interface IMaintainTaskService extends ISuperService<MaintainTask> {
 
-	Result cancel(List<String> ids);
+
+	/**
+	 * @param ids
+	 * @return
+	 */
+	Result batchCancel(List<String> ids);
 
 	Result execute(String id);
 
@@ -37,6 +42,12 @@ public interface IMaintainTaskService extends ISuperService<MaintainTask> {
 	 * @return 插入是否成功
 	 * */
 	Result insert(MaintainTask maintainTask);
+
+
+	Result cancel(String id);
+
+	Result finish(String id);
+
 
 	/**
 	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象

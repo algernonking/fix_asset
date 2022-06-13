@@ -1,7 +1,7 @@
 /**
  * 巡检点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 07:20:13
+ * @since 2022-06-14 06:28:15
  */
 
 
@@ -78,11 +78,17 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'taskId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('任务') , templet: function (d) { return templet('taskId',d.taskId,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+					,{ field: 'pointStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检状态'), templet:function (d){ return templet('pointStatus',fox.getEnumText(SELECT_POINTSTATUS_DATA,d.pointStatus),d);}}
+					,{ field: 'operTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('操作时间') ,templet: function (d) { return templet('operTime',fox.dateFormat(d.operTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检结果') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'pointCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('编码') , templet: function (d) { return templet('pointCode',d.pointCode,d);}  }
+					,{ field: 'pointName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('pointName',d.pointName,d);}  }
+					,{ field: 'pointRouteId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('巡检路线'), templet: function (d) { return templet('pointRouteId' ,fox.joinLabel(d.route,"name"),d);}}
+					,{ field: 'pointNotes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('pointNotes',d.pointNotes,d);}  }
 					,{ field: 'sort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('排序') , templet: function (d) { return templet('sort',d.sort,d);}  }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'operId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('操作人') , templet: function (d) { return templet('operId',d.operId,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'code', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('code') , templet: function (d) { return templet('code',d.code,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -142,7 +148,8 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.taskId={ inputType:"button",value: $("#taskId").val()};
+		value.pointCode={ inputType:"button",value: $("#pointCode").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
+		value.pointName={ inputType:"button",value: $("#pointName").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

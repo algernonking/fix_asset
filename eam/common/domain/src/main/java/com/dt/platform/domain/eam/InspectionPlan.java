@@ -22,8 +22,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 巡检计划
  * @author 金杰 , maillank@qq.com
- * @since 2022-06-10 06:15:12
- * @sign E39A2459DECFD01BD94E55E66E46146F
+ * @since 2022-06-12 20:23:58
+ * @sign 2DFC692ACE2A56985C00FA3812309A79
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -108,9 +108,9 @@ public class InspectionPlan extends Entity {
 	private String inspectionMethod;
 	
 	/**
-	 * 时间要求：时间要求
+	 * 时间要求(小时)：时间要求(小时)
 	*/
-	@ApiModelProperty(required = false,value="时间要求" , notes = "时间要求")
+	@ApiModelProperty(required = false,value="时间要求(小时)" , notes = "时间要求(小时)")
 	private BigDecimal completionTime;
 	
 	/**
@@ -120,10 +120,10 @@ public class InspectionPlan extends Entity {
 	private String overtimeMethod;
 	
 	/**
-	 * 超时(小时)：超时(小时)
+	 * 提醒时间(小时)：提醒时间(小时)
 	*/
-	@ApiModelProperty(required = false,value="超时(小时)" , notes = "超时(小时)")
-	private BigDecimal timeout;
+	@ApiModelProperty(required = false,value="提醒时间(小时)" , notes = "提醒时间(小时)")
+	private BigDecimal remindTime;
 	
 	/**
 	 * 备注：备注
@@ -188,22 +188,28 @@ public class InspectionPlan extends Entity {
 	private Integer version;
 	
 	/**
+	 * 选择：选择
+	*/
+	@ApiModelProperty(required = false,value="选择" , notes = "选择")
+	private String selectedCode;
+	
+	/**
 	 * 班组：班组
 	*/
 	@ApiModelProperty(required = false,value="班组" , notes = "班组")
 	private InspectionGroup inspectionGroup;
 	
 	/**
-	 * 时间：时间
-	*/
-	@ApiModelProperty(required = false,value="时间" , notes = "时间")
-	private DictItem timeDict;
-	
-	/**
 	 * 类型：类型
 	*/
 	@ApiModelProperty(required = false,value="类型" , notes = "类型")
 	private DictItem inspectionTypeDict;
+	
+	/**
+	 * 周期：周期
+	*/
+	@ApiModelProperty(required = false,value="周期" , notes = "周期")
+	private ActionCrontab actionCrontab;
 	
 	/**
 	 * 巡检点：巡检点
@@ -216,6 +222,18 @@ public class InspectionPlan extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="巡检点" , notes = "巡检点")
 	private List<String> inspectionPlanPointIds;
+	
+	/**
+	 * 巡检点：巡检点
+	*/
+	@ApiModelProperty(required = false,value="巡检点" , notes = "巡检点")
+	private List<InspectionPointOwner> inspectionPointOwnerList;
+	
+	/**
+	 * 巡检点：巡检点
+	*/
+	@ApiModelProperty(required = false,value="巡检点" , notes = "巡检点")
+	private List<String> inspectionPointOwnerIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -446,17 +464,17 @@ public class InspectionPlan extends Entity {
 	}
 	
 	/**
-	 * 获得 时间要求<br>
-	 * 时间要求
-	 * @return 时间要求
+	 * 获得 时间要求(小时)<br>
+	 * 时间要求(小时)
+	 * @return 时间要求(小时)
 	*/
 	public BigDecimal getCompletionTime() {
 		return completionTime;
 	}
 	
 	/**
-	 * 设置 时间要求
-	 * @param completionTime 时间要求
+	 * 设置 时间要求(小时)
+	 * @param completionTime 时间要求(小时)
 	 * @return 当前对象
 	*/
 	public InspectionPlan setCompletionTime(BigDecimal completionTime) {
@@ -484,21 +502,21 @@ public class InspectionPlan extends Entity {
 	}
 	
 	/**
-	 * 获得 超时(小时)<br>
-	 * 超时(小时)
-	 * @return 超时(小时)
+	 * 获得 提醒时间(小时)<br>
+	 * 提醒时间(小时)
+	 * @return 提醒时间(小时)
 	*/
-	public BigDecimal getTimeout() {
-		return timeout;
+	public BigDecimal getRemindTime() {
+		return remindTime;
 	}
 	
 	/**
-	 * 设置 超时(小时)
-	 * @param timeout 超时(小时)
+	 * 设置 提醒时间(小时)
+	 * @param remindTime 提醒时间(小时)
 	 * @return 当前对象
 	*/
-	public InspectionPlan setTimeout(BigDecimal timeout) {
-		this.timeout=timeout;
+	public InspectionPlan setRemindTime(BigDecimal remindTime) {
+		this.remindTime=remindTime;
 		return this;
 	}
 	
@@ -723,6 +741,25 @@ public class InspectionPlan extends Entity {
 	}
 	
 	/**
+	 * 获得 选择<br>
+	 * 选择
+	 * @return 选择
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择
+	 * @param selectedCode 选择
+	 * @return 当前对象
+	*/
+	public InspectionPlan setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
+		return this;
+	}
+	
+	/**
 	 * 获得 班组<br>
 	 * 班组
 	 * @return 班组
@@ -742,25 +779,6 @@ public class InspectionPlan extends Entity {
 	}
 	
 	/**
-	 * 获得 时间<br>
-	 * 时间
-	 * @return 时间
-	*/
-	public DictItem getTimeDict() {
-		return timeDict;
-	}
-	
-	/**
-	 * 设置 时间
-	 * @param timeDict 时间
-	 * @return 当前对象
-	*/
-	public InspectionPlan setTimeDict(DictItem timeDict) {
-		this.timeDict=timeDict;
-		return this;
-	}
-	
-	/**
 	 * 获得 类型<br>
 	 * 类型
 	 * @return 类型
@@ -776,6 +794,25 @@ public class InspectionPlan extends Entity {
 	*/
 	public InspectionPlan setInspectionTypeDict(DictItem inspectionTypeDict) {
 		this.inspectionTypeDict=inspectionTypeDict;
+		return this;
+	}
+	
+	/**
+	 * 获得 周期<br>
+	 * 周期
+	 * @return 周期
+	*/
+	public ActionCrontab getActionCrontab() {
+		return actionCrontab;
+	}
+	
+	/**
+	 * 设置 周期
+	 * @param actionCrontab 周期
+	 * @return 当前对象
+	*/
+	public InspectionPlan setActionCrontab(ActionCrontab actionCrontab) {
+		this.actionCrontab=actionCrontab;
 		return this;
 	}
 	
@@ -836,6 +873,66 @@ public class InspectionPlan extends Entity {
 	public InspectionPlan addInspectionPlanPointId(String... inspectionPlanPointId) {
 		if(this.inspectionPlanPointIds==null) inspectionPlanPointIds=new ArrayList<>();
 		this.inspectionPlanPointIds.addAll(Arrays.asList(inspectionPlanPointId));
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检点<br>
+	 * 巡检点
+	 * @return 巡检点
+	*/
+	public List<InspectionPointOwner> getInspectionPointOwnerList() {
+		return inspectionPointOwnerList;
+	}
+	
+	/**
+	 * 设置 巡检点
+	 * @param inspectionPointOwnerList 巡检点
+	 * @return 当前对象
+	*/
+	public InspectionPlan setInspectionPointOwnerList(List<InspectionPointOwner> inspectionPointOwnerList) {
+		this.inspectionPointOwnerList=inspectionPointOwnerList;
+		return this;
+	}
+	
+	/**
+	 * 添加 巡检点
+	 * @param inspectionPointOwner 巡检点
+	 * @return 当前对象
+	*/
+	public InspectionPlan addInspectionPointOwner(InspectionPointOwner... inspectionPointOwner) {
+		if(this.inspectionPointOwnerList==null) inspectionPointOwnerList=new ArrayList<>();
+		this.inspectionPointOwnerList.addAll(Arrays.asList(inspectionPointOwner));
+		return this;
+	}
+	
+	/**
+	 * 获得 巡检点<br>
+	 * 巡检点
+	 * @return 巡检点
+	*/
+	public List<String> getInspectionPointOwnerIds() {
+		return inspectionPointOwnerIds;
+	}
+	
+	/**
+	 * 设置 巡检点
+	 * @param inspectionPointOwnerIds 巡检点
+	 * @return 当前对象
+	*/
+	public InspectionPlan setInspectionPointOwnerIds(List<String> inspectionPointOwnerIds) {
+		this.inspectionPointOwnerIds=inspectionPointOwnerIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 巡检点
+	 * @param inspectionPointOwnerId 巡检点
+	 * @return 当前对象
+	*/
+	public InspectionPlan addInspectionPointOwnerId(String... inspectionPointOwnerId) {
+		if(this.inspectionPointOwnerIds==null) inspectionPointOwnerIds=new ArrayList<>();
+		this.inspectionPointOwnerIds.addAll(Arrays.asList(inspectionPointOwnerId));
 		return this;
 	}
 
