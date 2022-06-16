@@ -16,38 +16,43 @@ function ListPage() {
         admin = layui.admin,settings = layui.settings,upload = layui.upload,laydate= layui.laydate;
         table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
         echarts=layui.echarts;
-        var assetCata = echarts.init(document.getElementById('assetCata'));
-        var assetStatusPie = echarts.init(document.getElementById('assetStatusPie'));
-        var ownerAssetPie = echarts.init(document.getElementById('ownerAssetPie'));
-        var posAssetPie = echarts.init(document.getElementById('posAssetPie'));
+        // var assetCata = echarts.init(document.getElementById('assetCata'));
+        // var assetStatusPie = echarts.init(document.getElementById('assetStatusPie'));
+        // var ownerAssetPie = echarts.init(document.getElementById('ownerAssetPie'));
+        // var posAssetPie = echarts.init(document.getElementById('posAssetPie'));
+        var assetMaintainProject = echarts.init(document.getElementById('assetMaintainProject'));
+        var inspectionPie = echarts.init(document.getElementById('inspectionPie'));
+        var repairPie = echarts.init(document.getElementById('repairPie'));
         var task=setTimeout(function(){layer.load(2);},1000);
-        admin.request(moduleURL+"/dashboard", {}, function (data) {
+        admin.request(moduleURL+"/dashboard-mro", {}, function (data) {
             clearTimeout(task);
             layer.closeAll('loading');
             if(data.success){
                 var assetData=data.data;
-                $("#assetOriginalUnitPrice").html(assetData.assetData.assetOriginalUnitPrice);
-                $("#assetCnt").html(assetData.assetData.assetCnt);
-                $("#assetCleanCnt").html(assetData.assetData.assetCleanCnt);
-                $("#assetRepairCnt").html(assetData.assetData.assetRepairCnt);
-                $("#maintenanceEndCnt").html(assetData.assetData.maintenanceEndCnt);
-                var html="<tr>\n" +
-                    "<th>资产状态</th>\n" +
-                    "<th>数量</th>\n" +
-                    "<th>金额</th>\n" +
-                    "</tr>";
-                for(var i=0;i<assetData.assetStatusData.length;i++){
-                    html=html+" <tr>\n" +
-                        "    <td>"+assetData.assetStatusData[i].name+"</td>\n" +
-                        "    <td>"+assetData.assetStatusData[i].cnt+"</td>\n" +
-                        "    <td>"+assetData.assetStatusData[i].assetOriginalUnitPrice+"</td>\n" +
-                        "  </tr>"
-                }
-                $("#assetStatus").html(html);
+                $("#repairOrderNotDispatchCnt").html(assetData.repairOrderNotDispatchCnt);
+                $("#maintainProjectCnt").html(assetData.maintainProjectCnt);
+                $("#inspectionTaskPointCnt").html(assetData.inspectionTaskPointCnt);
+                $("#repairingAssetCnt").html(assetData.repairingAssetCnt);
+                $("#inspectionTaskCnt").html(assetData.inspectionTaskCnt);
+                $("#repairAssetCnt").html(assetData.repairAssetCnt);
+
+                // var html="<tr>\n" +
+                //     "<th>资产状态</th>\n" +
+                //     "<th>数量</th>\n" +
+                //     "<th>金额</th>\n" +
+                //     "</tr>";
+                // for(var i=0;i<assetData.assetStatusData.length;i++){
+                //     html=html+" <tr>\n" +
+                //         "    <td>"+assetData.assetStatusData[i].name+"</td>\n" +
+                //         "    <td>"+assetData.assetStatusData[i].cnt+"</td>\n" +
+                //         "    <td>"+assetData.assetStatusData[i].assetOriginalUnitPrice+"</td>\n" +
+                //         "  </tr>"
+                // }
+                // $("#assetStatus").html(html);
 
                 var defColor=['#8095FE','#D9E0E3','#7DD699','#F8CE52','#EF9590'];
-                //分类
-                var optionchart = {
+
+                var assetMaintainProjectChartOption = {
                     color: defColor,
                     title: {
                         text: ''
@@ -57,7 +62,7 @@ function ListPage() {
                         data: ['数量']
                     },
                     xAxis: {
-                        data: assetData.catalogNameData
+                        data: assetData.assetMaintainProjectName
                     },
                     yAxis: {
                         type: 'value'
@@ -65,7 +70,7 @@ function ListPage() {
                     series: [{
                         name: '数量',
                         type: 'bar', //柱状
-                        data:assetData.catalogCountData,
+                        data:assetData.assetMaintainProjectCount,
                         label:{
                             normal:{
                                 show:true,
@@ -79,9 +84,12 @@ function ListPage() {
                         },
                     }]
                 };
-                assetCata.setOption(optionchart, true);
 
-                assetStatusPie.setOption({
+                assetMaintainProject.setOption(assetMaintainProjectChartOption, true);
+
+
+
+                repairPie.setOption({
                     color: defColor,
                     series : [
                         {
@@ -94,24 +102,16 @@ function ListPage() {
                                     formatter:'{b}:{c}({d}%)'
                                 }
                             },
-                            data:assetData.assetStatusPieData
+                            data:assetData.repairData
                         }
                     ]
                 })
 
-                //所属
-                ownerAssetPie.setOption({
+                inspectionPie.setOption({
                     color: defColor,
-                    title:{
-                        text:"",
-                        show:true,
-                        textStyle:{
-                            fontSize:20
-                        }
-                    },
                     series : [
                         {
-                            name: '',
+                            name: '资产状态占比',
                             type: 'pie',    // 设置图表类型为饼图
                             radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
                             label:{
@@ -120,35 +120,11 @@ function ListPage() {
                                     formatter:'{b}:{c}({d}%)'
                                 }
                             },
-                            data:assetData.ownerAssetPieData
+                            data:assetData.inspectionData
                         }
                     ]
                 })
-                //位置
-                posAssetPie.setOption({
-                    color: defColor,
-                    title:{
-                        text:"",
-                        show:true,
-                        textStyle:{
-                            fontSize:20
-                        }
-                    },
-                    series : [
-                        {
-                            name: '',
-                            type: 'pie',    // 设置图表类型为饼图
-                            radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
-                            label:{
-                                normal:{
-                                    show:true,
-                                    formatter:'{b}:{c}({d}%)'
-                                }
-                            },
-                            data:assetData.posAssetPieData
-                        }
-                    ]
-                })
+
 
 
 

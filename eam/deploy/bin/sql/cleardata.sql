@@ -54,8 +54,9 @@ delete from eam_group_user;
 delete from eam_maintain_plan where tenant_id='T001';
 delete from eam_maintain_group where tenant_id='T001';
 delete from eam_maintain_project where tenant_id='T001';
-delete from eam_maintain_project_select;
+delete from eam_maintain_project_select where 1=1;
 delete from eam_maintain_task where tenant_id='T001';
+delete from eam_maintain_task_project where tenant_id='T001';
 -- repair
 -- delete from eam_repair_category where tenant_id='T001';
 -- delete from eam_repair_category_tpl where tenant_id='T001';
@@ -66,7 +67,15 @@ delete from eam_repair_order_act  where tenant_id='T001';
 delete from eam_repair_rule  where tenant_id='T001';
 delete from eam_repair_rule_item;
 -- inspection
-
+-- delete from eam_inspection_group where tenant_id='T001';
+delete from eam_inspection_group_user where 1=1;
+delete from eam_inspection_plan  where tenant_id='T001';
+delete from eam_inspection_plan_point  where tenant_id='T001';
+delete from eam_inspection_point  where tenant_id='T001';
+delete from eam_inspection_point_owner  where tenant_id='T001';
+delete from eam_inspection_route  where tenant_id='T001';
+delete from eam_inspection_task  where tenant_id='T001';
+delete from eam_inspection_task_point  where tenant_id='T001';
 -- stock
 delete from eam_stock where 1=1 and tenant_id='T001' ;
 delete from eam_asset_stock_collection where 1=1;

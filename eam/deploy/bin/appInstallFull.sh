@@ -238,6 +238,7 @@ function installApp(){
 	db_sql_file=$app_dir/bin/sql/db.sql
 	db_procedure_file=$app_dir/bin/sql/nextVal.sql
 	db_clear_data_file=$app_dir/bin/sql/cleardata.sql
+	db_app_setting_file=$app_dir/bin/sql/settingapp.sql
 	application_tpl_yml=$app_dir/application_tpl.yml
 	application_yml=$app_dir/application.yml
 	if [[ ! -f "$db_sql_file" ]];then
@@ -281,6 +282,8 @@ function installApp(){
 	$MYSQL -u$db_user -p$db_pwd -h$db_host $db_name < $db_procedure_file  2>/dev/null
 	echo "#########start to clear data "
 	$MYSQL -u$db_user -p$db_pwd -h$db_host $db_name < $db_clear_data_file  2>/dev/null
+	echo "#########start to app setting data "
+	$MYSQL -u$db_user -p$db_pwd -h$db_host $db_name < $db_app_setting_file  2>/dev/null
 	echo "#########start to create application.yml from $application_tpl_yml"
 	cat $application_tpl_yml>$application_yml
 	sed -i "s@APP_UPLOAD_DIR@$app_upload_dir@g"     $application_yml
@@ -439,5 +442,7 @@ echo "Mysql info:port=$db_port";
 echo "Mysql info:username=root";
 echo "Mysql info:password=$MYSQL_ROOT_PWD";
 echo "Access Address:http://ip:$app_port"
+echo "Login username:admin"
+echo "Login password:123456"
 echo "################## install end #######################"
 exit 0

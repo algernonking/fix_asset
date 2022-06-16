@@ -7,6 +7,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.db.OpsTables;
 import com.dt.platform.domain.eam.meta.AssetCollectionReturnMeta;
 import com.dt.platform.domain.eam.meta.AssetMeta;
+import com.dt.platform.domain.eam.meta.MaintainTaskMeta;
 import com.dt.platform.domain.eam.meta.TplFileMeta;
 import com.dt.platform.domain.ops.Voucher;
 import com.dt.platform.domain.ops.VoucherPriv;
@@ -33,10 +34,30 @@ public class OpsRelationManager extends RelationManager {
         this.setupInfoSystem();
         this.setupTplFile();
 
+        this.setupCertificate();
+        this.setupCertificateItem();
+
     }
 
 
 
+
+    public void setupCertificate() {
+        this.property(CertificateMeta.ORIGINATOR_PROP)
+                .using(OpsTables.OPS_CERTIFICATE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(CertificateMeta.CERTIFICATE_TYPE_PROP)
+                .using(OpsTables.OPS_CERTIFICATE.TYPE).join(OpsTables.OPS_CERTIFICATE_TYPE.ID);
+
+        this.property(CertificateMeta.CERTIFICATE_POSITION_PROP)
+                .using(OpsTables.OPS_CERTIFICATE.POSITION_ID).join(OpsTables.OPS_CERTIFICATE_POSITION.ID);
+
+    }
+
+    public void setupCertificateItem() {
+        this.property(CertificateItemMeta.OPER_USER_PROP)
+                .using(OpsTables.OPS_CERTIFICATE_ITEM.OPER_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+    }
 
 
     public void setupTplFile() {
